@@ -1,0 +1,6 @@
+include *.txt
+recursive-include docs *.txt
+
+recursive-include sys_src *.h
+
+recursive-include gssapi *.pxd
