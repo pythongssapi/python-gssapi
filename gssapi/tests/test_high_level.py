@@ -1,9 +1,11 @@
 import copy
 import os
 import socket
+import sys
 import pickle
 
 import should_be.all  # noqa
+import six
 from nose_parameterized import parameterized
 
 from gssapi import creds as gsscreds
@@ -261,3 +263,87 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
                           "by your GSSAPI implementation")
         else:
             self.skipTest("Not Yet Implemented")
+
+
+class NamesTestCase(_GSSAPIKerberosTestCase):
+    def test_create_from_other(self):
+        self.skipTest("Not Yet Implemented")
+
+    def test_create_from_name_no_type(self):
+        name = gssnames.Name(SERVICE_PRINCIPAL)
+
+        name.shouldnt_be_none()
+
+    def test_create_from_name_and_type(self):
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+
+        name.shouldnt_be_none()
+        name.name_type.should_be(gb.NameType.principal)
+
+    def test_create_from_token(self):
+        name1 = gssnames.Name(TARGET_SERVICE_NAME,
+                              gb.NameType.hostbased_service)
+        exported_name = name1.canonicalize(gb.MechType.kerberos).export()
+        name2 = gssnames.Name(token=exported_name)
+
+        name2.shouldnt_be_none()
+        name2.name_type.should_be(gb.NameType.principal)
+
+    def test_to_str(self):
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+
+        name_str = str(name)
+
+        name_str.should_be_a(str)
+        if sys.version_info[0] == 2:
+            target_val = SERVICE_PRINCIPAL
+        else:
+            target_val = SERVICE_PRINCIPAL.encode(gssnames.STRING_ENCODING)
+
+        name_str.should_be(target_val)
+
+    def test_to_unicode(self):
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+
+        name_str = six.text_type(name)
+
+        name_str.should_be_a(six.text_type)
+        name_str.should_be(SERVICE_PRINCIPAL.encode(gssnames.STRING_ENCODING))
+
+    def test_to_bytes(self):
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+
+        # NB(directxman12): bytes only calles __bytes__ on Python 3+
+        name_bytes = name.__bytes__()
+
+        name_bytes.should_be_a(bytes)
+        name_bytes.should_be(SERVICE_PRINCIPAL)
+
+    def test_compare(self):
+        name1 = gssnames.Name(SERVICE_PRINCIPAL)
+        name2 = gssnames.Name(SERVICE_PRINCIPAL)
+        name3 = gssnames.Name(TARGET_SERVICE_NAME,
+                             gb.NameType.hostbased_service)
+
+        name1.should_be(name2)
+        name1.shouldnt_be(name3)
+
+    def test_canoncialize_and_export(self):
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+        canonical_name = name.canonicalize(gb.MechType.kerberos)
+        exported_name = canonical_name.export()
+
+        exported_name.should_be_a(bytes)
+
+    def test_canonicalize(self):
+        name = gssnames.Name(TARGET_SERVICE_NAME, gb.NameType.hostbased_service)
+
+        canonicalized_name = name.canonicalize(gb.MechType.kerberos)
+        canonicalized_name.should_be_a(gssnames.Name)
+        str(canonicalized_name).should_be(SERVICE_PRINCIPAL + '@')
+
+    def test_copy(self):
+        name1 = gssnames.Name(SERVICE_PRINCIPAL)
+        name2 = copy.copy(name1)
+
+        name1.should_be(name2)
