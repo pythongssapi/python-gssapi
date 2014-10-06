@@ -21,49 +21,6 @@ cdef gss_OID_set c_get_mech_oid_set(object mechs):
     return res_set
 
 
-cdef gss_OID c_get_name_type_oid(object name_type):
-    """Get a GSS name type OID from a NameType."""
-
-    if name_type is NameType.hostbased_service:
-        return GSS_C_NT_HOSTBASED_SERVICE
-    elif name_type is NameType.principal:
-        return GSS_KRB5_NT_PRINCIPAL_NAME
-    elif name_type is NameType.user:
-        return GSS_C_NT_USER_NAME
-    elif name_type is NameType.anonymous:
-        return GSS_C_NT_ANONYMOUS
-    elif name_type is NameType.machine_uid:
-        return GSS_C_NT_MACHINE_UID_NAME
-    elif name_type is NameType.string_uid:
-        return GSS_C_NT_STRING_UID_NAME
-    elif name_type is NameType.export:
-        return GSS_C_NT_EXPORT_NAME
-    else:
-        # TODO(sross): raise exception?
-        return GSS_C_NO_OID
-
-
-cdef object c_create_name_type(gss_OID name_type):
-    """Convert a GSSAPI name type OID into a NameType."""
-
-    if c_compare_oids(name_type, GSS_C_NT_HOSTBASED_SERVICE):
-        return NameType.hostbased_service
-    elif c_compare_oids(name_type, GSS_KRB5_NT_PRINCIPAL_NAME):
-        return NameType.principal
-    elif c_compare_oids(name_type, GSS_C_NT_USER_NAME):
-        return NameType.user
-    elif c_compare_oids(name_type, GSS_C_NT_ANONYMOUS):
-        return NameType.anonymous
-    elif c_compare_oids(name_type, GSS_C_NT_MACHINE_UID_NAME):
-        return NameType.machine_uid
-    elif c_compare_oids(name_type, GSS_C_NT_STRING_UID_NAME):
-        return NameType.string_uid
-    elif c_compare_oids(name_type, GSS_C_NT_EXPORT_NAME):
-        return NameType.export
-    else:
-        return None
-
-
 cdef inline bint c_compare_oids(gss_OID a, gss_OID b):
     """Compare two OIDs to see if they are the same."""
 
