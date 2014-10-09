@@ -1,3 +1,4 @@
+import collections
 import copy
 import os
 import socket
@@ -214,7 +215,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         mech_type.should_be(gb.MechType.kerberos)
 
         flags.shouldnt_be_none()
-        flags.should_be_a(list)
+        flags.should_be_a(collections.Set)
         flags.shouldnt_be_empty()
 
         local_est.should_be_a(bool)
@@ -326,7 +327,7 @@ class TestInitContext(_GSSAPIKerberosTestCase):
 
         out_mech_type.should_be(gb.MechType.kerberos)
 
-        out_req_flags.should_be_a(list)
+        out_req_flags.should_be_a(collections.Set)
         out_req_flags.should_be_at_least_length(2)
 
         out_token.shouldnt_be_empty()
@@ -382,7 +383,7 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
 
         out_token.shouldnt_be_empty()
 
-        out_req_flags.should_be_a(list)
+        out_req_flags.should_be_a(collections.Set)
         out_req_flags.should_be_at_least_length(2)
 
         out_ttl.should_be_greater_than(0)
@@ -423,16 +424,11 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         gb.deleteSecContext(self.server_ctx)
 
     def test_import_export_sec_context(self):
-        export_resp = gb.exportSecContext(self.client_ctx)
-        export_resp.shouldnt_be_none()
+        tok = gb.exportSecContext(self.client_ctx)
 
-        (tok, inactive_ctx) = export_resp
-
+        tok.shouldnt_be_none()
         tok.should_be_a(bytes)
         tok.shouldnt_be_empty()
-
-        inactive_ctx.should_be_a(gb.SecurityContext)
-        inactive_ctx.should_be_exactly(self.client_ctx)
 
         imported_ctx = gb.importSecContext(tok)
         imported_ctx.shouldnt_be_none()

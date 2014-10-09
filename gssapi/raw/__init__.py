@@ -3,6 +3,7 @@ from gssapi.raw.message import *  # noqa
 from gssapi.raw.misc import *  # noqa
 from gssapi.raw.names import *  # noqa
 from gssapi.raw.sec_contexts import *  # noqa
+from gssapi.raw.oids import *  # noqa
 from gssapi.raw.types import *  # noqa
 
 # optional S4U support

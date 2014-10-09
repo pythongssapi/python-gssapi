@@ -104,6 +104,7 @@ cdef extern from "gssapi.h":
     OM_uint32 GSS_C_INTEG_FLAG
     OM_uint32 GSS_C_ANON_FLAG
     OM_uint32 GSS_C_TRANS_FLAG
+    OM_uint32 GSS_C_PROT_READY_FLAG
 
 
 cdef extern from "gssapi/gssapi_krb5.h":

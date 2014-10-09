@@ -10,6 +10,7 @@ from nose_parameterized import parameterized
 
 from gssapi import creds as gsscreds
 from gssapi import names as gssnames
+from gssapi import sec_contexts as gssctx
 from gssapi import raw as gb
 from gssapi.tests import k5test as kt
 from gssapi._utils import import_gssapi_extension
@@ -81,7 +82,7 @@ def _perms_cycle(elem, rest, old_d):
 
 
 def exist_perms(**kwargs):
-    all_elems = kwargs.keys()
+    all_elems = list(kwargs.keys())
     curr_elems = copy.deepcopy(all_elems)
 
     perms = _perms_cycle(curr_elems.pop(), curr_elems, {})
@@ -323,7 +324,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name1 = gssnames.Name(SERVICE_PRINCIPAL)
         name2 = gssnames.Name(SERVICE_PRINCIPAL)
         name3 = gssnames.Name(TARGET_SERVICE_NAME,
-                             gb.NameType.hostbased_service)
+                              gb.NameType.hostbased_service)
 
         name1.should_be(name2)
         name1.shouldnt_be(name3)
@@ -336,7 +337,8 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         exported_name.should_be_a(bytes)
 
     def test_canonicalize(self):
-        name = gssnames.Name(TARGET_SERVICE_NAME, gb.NameType.hostbased_service)
+        name = gssnames.Name(TARGET_SERVICE_NAME,
+                             gb.NameType.hostbased_service)
 
         canonicalized_name = name.canonicalize(gb.MechType.kerberos)
         canonicalized_name.should_be_a(gssnames.Name)
@@ -347,3 +349,150 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name2 = copy.copy(name1)
 
         name1.should_be(name2)
+
+
+class SecurityContextTestCase(_GSSAPIKerberosTestCase):
+    def setUp(self):
+        super(SecurityContextTestCase, self).setUp()
+        self.client_name = gssnames.Name(self.USER_PRINC)
+        self.client_creds = gsscreds.Credentials(desired_name=None,
+                                                 usage='initiate')
+
+        self.target_name = gssnames.Name(TARGET_SERVICE_NAME,
+                                         gb.NameType.hostbased_service)
+
+        self.server_name = gssnames.Name(SERVICE_PRINCIPAL)
+        self.server_creds = gsscreds.Credentials(desired_name=self.server_name,
+                                                 usage='accept')
+
+    def _create_client_ctx(self, **kwargs):
+        return gssctx.SecurityContext(name=self.target_name, **kwargs)
+
+    def test_process_token(self):
+        self.skipTest("Not Yet Implemented")
+
+    def test_create_from_other(self):
+        self.skipTest("Not Yet Implemented")
+
+    @exist_perms(desired_lifetime=30, flags=[],
+                 mech_type=gb.MechType.kerberos,
+                 channel_bindings=None)
+    def test_create_new_init(self, str_name, kwargs):
+        client_ctx = gssctx.SecurityContext(name=self.target_name,
+                                            creds=self.client_creds,
+                                            **kwargs)
+        client_ctx.usage.should_be('initiate')
+
+        client_ctx = self._create_client_ctx(**kwargs)
+        client_ctx.usage.should_be('initiate')
+
+    def test_create_new_accept(self):
+        server_ctx = gssctx.SecurityContext(creds=self.server_creds)
+        server_ctx.usage.should_be('accept')
+
+    def test_init_throws_error_on_invalid_args(self):
+        def create_sec_context():
+            gssctx.SecurityContext(usage='accept', name=self.target_name)
+
+        create_sec_context.should_raise(TypeError)
+
+    def _create_completed_contexts(self):
+        client_ctx = self._create_client_ctx(desired_lifetime=400)
+
+        client_token = client_ctx.step()
+        client_token.should_be_a(bytes)
+
+        server_ctx = gssctx.SecurityContext(creds=self.server_creds)
+        server_token = server_ctx.step(client_token)
+        server_token.should_be_a(bytes)
+
+        client_ctx.step(server_token)
+
+        return (client_ctx, server_ctx)
+
+    def test_initiate_accept_steps(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+
+        server_ctx.lifetime.should_be_at_most(400)
+        server_ctx.initiator_name.should_be(client_ctx.initiator_name)
+        server_ctx.mech_type.should_be_a(gb.OID)
+        server_ctx.actual_flags.should_be_a(gb.IntEnumFlagSet)
+        server_ctx.locally_initiated.should_be_false()
+        server_ctx.complete.should_be_true()
+
+        client_ctx.lifetime.should_be_at_most(400)
+        client_ctx.target_name.should_be(self.target_name)
+        client_ctx.mech_type.should_be_a(gb.OID)
+        client_ctx.actual_flags.should_be_a(gb.IntEnumFlagSet)
+        client_ctx.locally_initiated.should_be_true()
+        client_ctx.complete.should_be_true()
+
+    def test_export_create_from_token(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+        token = client_ctx.export()
+
+        token.should_be_a(bytes)
+
+        imported_ctx = gssctx.SecurityContext(token=token)
+
+        imported_ctx.usage.should_be('initiate')
+        imported_ctx.target_name.should_be(self.target_name)
+
+    def test_pickle_unpickle(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+        pickled_ctx = pickle.dumps(client_ctx)
+
+        unpickled_ctx = pickle.loads(pickled_ctx)
+
+        unpickled_ctx.should_be_a(gssctx.SecurityContext)
+        unpickled_ctx.usage.should_be('initiate')
+        unpickled_ctx.target_name.should_be(self.target_name)
+
+    def test_wrap_unwrap(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+
+        wrapped_message = client_ctx.wrap(b'test message')
+        wrapped_message.should_be_a(bytes)
+
+        unwrapped_message = server_ctx.unwrap(wrapped_message)
+        unwrapped_message.should_be_a(bytes)
+        unwrapped_message.should_be(b'test message')
+
+    def test_get_wrap_size_limit(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+
+        with_conf = client_ctx.get_wrap_size_limit(100)
+        without_conf = client_ctx.get_wrap_size_limit(100, encrypted=True)
+
+        with_conf.should_be_an_integer()
+        without_conf.should_be_an_integer()
+
+        with_conf.should_be_at_most(100)
+        without_conf.should_be_at_most(100)
+
+    def test_get_mic(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+        mic_token = client_ctx.get_mic(b'some message')
+
+        mic_token.should_be_a(bytes)
+        mic_token.shouldnt_be_empty()
+
+    def test_verify_mic_raise(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+        mic_token = client_ctx.get_mic(b'some message')
+
+        server_ctx.verify_mic(b'some message', mic_token)
+
+        server_ctx.verify_mic.should_raise(gb.GSSError,
+                                           b'other message', mic_token)
+
+    def test_verify_mic_bool(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+        mic_token = client_ctx.get_mic(b'some message')
+
+        server_ctx.verify_mic(b'some message',
+                              mic_token,
+                              return_bool=True).valid.should_be_true()
+        server_ctx.verify_mic(b'other message',
+                              mic_token,
+                              return_bool=True).valid.should_be_false()

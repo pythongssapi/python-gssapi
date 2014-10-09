@@ -6,8 +6,11 @@ from gssapi.raw.creds cimport Creds
 from gssapi.raw.names cimport Name
 from gssapi.raw.oids cimport OID
 
-from gssapi.raw.types import MechType, RequirementFlag
+from gssapi.raw.types import MechType, RequirementFlag, IntEnumFlagSet
 from gssapi.raw.misc import GSSError
+from gssapi.raw.named_tuples import AcceptSecContextResult
+from gssapi.raw.named_tuples import InitSecContextResult
+from gssapi.raw.named_tuples import InquireContextResult
 
 
 cdef extern from "gssapi.h":
@@ -79,8 +82,16 @@ cdef class SecurityContext:
         if cpy is not None:
             self.raw_ctx = cpy.raw_ctx
             cpy._free_on_dealloc = False  # prevent deletion of the context
+        else:
+            self.raw_ctx = GSS_C_NO_CONTEXT
 
         self._free_on_dealloc = True
+
+    property _started:
+        """Whether the underlying context is NULL."""
+
+        def __get__(self):
+            return self.raw_ctx is not NULL
 
     def __dealloc__(self):
         # basically just deleteSecContext, but we are not
@@ -94,23 +105,6 @@ cdef class SecurityContext:
                 raise GSSError(maj_stat, min_stat)
 
             self.raw_ctx = NULL
-
-
-cdef inline object c_create_flags_list(OM_uint32 flags):
-    """Convert an int to a list of RequirementFlag values."""
-
-    return [flag for flag in RequirementFlag if int(flag) & flags > 0]
-
-
-cdef OM_uint32 c_parse_flags(object flags):
-    """Convert a list of RequirementFlag values to an int."""
-
-    cdef OM_uint32 res = 0
-
-    for flag in flags:
-        res = res | int(flag)
-
-    return res
 
 
 # TODO(sross): add support for channel bindings
@@ -169,7 +163,8 @@ def initSecContext(Name target_name not None, Creds cred=None,
     else:
         mech_oid = GSS_C_NO_OID
 
-    cdef OM_uint32 req_flags = c_parse_flags(flags or [
+    # TODO(directxman12): should we default to this?
+    cdef OM_uint32 req_flags = IntEnumFlagSet(RequirementFlag, flags or [
         RequirementFlag.mutual_authentication,
         RequirementFlag.out_of_sequence_detection])
 
@@ -179,11 +174,9 @@ def initSecContext(Name target_name not None, Creds cred=None,
 
     cdef OM_uint32 input_ttl = c_py_ttl_to_c(ttl)
 
-    cdef gss_ctx_id_t act_ctx
-    if context is not None:
-        act_ctx = context.raw_ctx
-    else:
-        act_ctx = GSS_C_NO_CONTEXT
+    cdef SecurityContext output_context = context
+    if output_context is None:
+        output_context = SecurityContext()
 
     cdef gss_cred_id_t act_cred
     if cred is not None:
@@ -205,7 +198,7 @@ def initSecContext(Name target_name not None, Creds cred=None,
 
     with nogil:
         maj_stat = gss_init_sec_context(&min_stat, act_cred,
-                                        &act_ctx,
+                                        &output_context.raw_ctx,
                                         target_name.raw_name,
                                         mech_oid, req_flags, input_ttl,
                                         bdng, &input_token_buffer,
@@ -216,14 +209,12 @@ def initSecContext(Name target_name not None, Creds cred=None,
     cdef OID output_mech_type = OID()
     if maj_stat == GSS_S_COMPLETE or maj_stat == GSS_S_CONTINUE_NEEDED:
         output_mech_type.raw_oid = actual_mech_type[0]
-        output_context = context  # we just used a pointer, so reuse it
-        if output_context is None:
-            output_context = SecurityContext()
-            output_context.raw_ctx = act_ctx
         output_token = output_token_buffer.value[:output_token_buffer.length]
-        res = (output_context, output_mech_type,
-               c_create_flags_list(ret_flags), output_token,
-               c_c_ttl_to_py(output_ttl), maj_stat == GSS_S_CONTINUE_NEEDED)
+        res = InitSecContextResult(output_context, output_mech_type,
+                                   IntEnumFlagSet(RequirementFlag, ret_flags),
+                                   output_token,
+                                   c_c_ttl_to_py(output_ttl),
+                                   maj_stat == GSS_S_CONTINUE_NEEDED)
         gss_release_buffer(&min_stat, &output_token_buffer)
         return res
     else:
@@ -272,11 +263,10 @@ def acceptSecContext(input_token not None, Creds acceptor_cred=None,
     cdef gss_channel_bindings_t bdng = GSS_C_NO_CHANNEL_BINDINGS
     cdef gss_buffer_desc input_token_buffer = gss_buffer_desc(len(input_token),
                                                               input_token)
-    cdef gss_ctx_id_t act_ctx
-    if context is not None:
-        act_ctx = context.raw_ctx
-    else:
-        act_ctx = GSS_C_NO_CONTEXT
+
+    cdef SecurityContext output_context = context
+    if output_context is None:
+        output_context = SecurityContext()
 
     cdef gss_cred_id_t act_acceptor_cred
     if acceptor_cred is None:
@@ -295,7 +285,7 @@ def acceptSecContext(input_token not None, Creds acceptor_cred=None,
     cdef OM_uint32 maj_stat, min_stat
 
     with nogil:
-        maj_stat = gss_accept_sec_context(&min_stat, &act_ctx,
+        maj_stat = gss_accept_sec_context(&min_stat, &output_context.raw_ctx,
                                           act_acceptor_cred,
                                           &input_token_buffer, bdng,
                                           &initiator_name,
@@ -312,10 +302,6 @@ def acceptSecContext(input_token not None, Creds acceptor_cred=None,
         else:
             output_ttl_py = output_ttl
 
-        output_context = context
-        if output_context is None:
-            output_context = SecurityContext()
-            output_context.raw_ctx = act_ctx
         output_token = output_token_buffer.value[:output_token_buffer.length]
         on.raw_name = initiator_name
         oc.raw_creds = delegated_cred
@@ -325,17 +311,21 @@ def acceptSecContext(input_token not None, Creds acceptor_cred=None,
         else:
             py_mech_type = None
 
-        res = (output_context, on, py_mech_type,
-               output_token, c_create_flags_list(ret_flags),
-               output_ttl_py, oc,
-               maj_stat == GSS_S_CONTINUE_NEEDED)
+        res = AcceptSecContextResult(output_context, on, py_mech_type,
+                                     output_token,
+                                     IntEnumFlagSet(RequirementFlag,
+                                                    ret_flags),
+                                     output_ttl_py, oc,
+                                     maj_stat == GSS_S_CONTINUE_NEEDED)
         gss_release_buffer(&min_stat, &output_token_buffer)
         return res
     else:
         raise GSSError(maj_stat, min_stat)
 
 
-def inquireContext(SecurityContext context not None):
+def inquireContext(SecurityContext context not None, initiator_name=True,
+                   target_name=True, lifetime=True, mech_type=True, flags=True,
+                   locally_init=True, complete=True):
     """
     inquireContext(context) -> (Name, Name, int, MechType, [RequirementFlag],
                                 bool, bool)
@@ -361,39 +351,92 @@ def inquireContext(SecurityContext context not None):
         GSSError
     """
 
-    cdef gss_name_t src_name, target_name
+    cdef gss_name_t output_init_name
+    cdef gss_name_t *init_name_ptr = NULL
+    if initiator_name:
+        init_name_ptr = &output_init_name
+
+    cdef gss_name_t output_target_name
+    cdef gss_name_t *target_name_ptr = NULL
+    if target_name:
+        target_name_ptr = &output_target_name
+
     cdef OM_uint32 ttl
-    cdef gss_OID mech_type
-    cdef OM_uint32 flags,
-    cdef int locally_init, is_complete
+    cdef OM_uint32 *ttl_ptr = NULL
+    if lifetime:
+        ttl_ptr = &ttl
+
+    cdef gss_OID output_mech_type
+    cdef gss_OID *mech_type_ptr = NULL
+    if mech_type:
+        mech_type_ptr = &output_mech_type
+
+    cdef OM_uint32 output_flags
+    cdef OM_uint32 *flags_ptr = NULL
+    if flags:
+        flags_ptr = &output_flags
+
+    cdef int output_locally_init
+    cdef int *locally_init_ptr = NULL
+    if locally_init:
+        locally_init_ptr = &output_locally_init
+
+    cdef int is_complete
+    cdef int *is_complete_ptr = NULL
+    if complete:
+        is_complete_ptr = &is_complete
 
     cdef OM_uint32 maj_stat, min_stat
 
-    maj_stat = gss_inquire_context(&min_stat, context.raw_ctx, &src_name,
-                                   &target_name, &ttl, &mech_type, &flags,
-                                   &locally_init, &is_complete)
+    maj_stat = gss_inquire_context(&min_stat, context.raw_ctx, init_name_ptr,
+                                   target_name_ptr, ttl_ptr, mech_type_ptr,
+                                   flags_ptr, locally_init_ptr,
+                                   is_complete_ptr)
 
-    cdef Name sn = Name()
-    cdef OID output_mech_type = OID()
+    cdef Name sn
+    cdef OID py_mech_type
     cdef Name tn
     if maj_stat == GSS_S_COMPLETE:
-        sn.raw_name = src_name
-        output_mech_type.raw_oid = mech_type[0]
-
-        if target_name == GSS_C_NO_NAME:
-            tn = None
+        if initiator_name:
+            sn = Name()
+            sn.raw_name = output_init_name
         else:
+            sn = None
+
+        if target_name and output_target_name != GSS_C_NO_NAME:
             tn = Name()
-            tn.raw_name = target_name
-
-        if ttl == GSS_C_INDEFINITE:
-            output_ttl = None
+            tn.raw_name = output_target_name
         else:
-            output_ttl = ttl
+            tn = None
 
-        return (sn, tn, output_ttl, output_mech_type,
-                c_create_flags_list(flags), <bint>locally_init,
-                <bint>is_complete)
+        if mech_type:
+            py_mech_type = OID()
+            py_mech_type.raw_oid = output_mech_type[0]
+        else:
+            py_mech_type = None
+
+        if lifetime and ttl != GSS_C_INDEFINITE:
+            py_ttl = ttl
+        else:
+            py_ttl = None
+
+        if flags:
+            py_flags = IntEnumFlagSet(RequirementFlag, output_flags)
+        else:
+            py_flags = None
+
+        if locally_init:
+            py_locally_init = <bint>output_locally_init
+        else:
+            py_locally_init = None
+
+        if complete:
+            py_complete = <bint>is_complete
+        else:
+            py_complete = None
+
+        return InquireContextResult(sn, tn, py_ttl, py_mech_type, py_flags,
+                                    py_locally_init, py_complete)
     else:
         raise GSSError(maj_stat, min_stat)
 
@@ -490,7 +533,7 @@ def importSecContext(token not None):
 
 def exportSecContext(SecurityContext context not None):
     """
-    exportSecContext(context) -> (bytes, SecurityContext)
+    exportSecContext(context) -> bytes
     Export a context for use in another process
 
     This method exports a security context, deactivating in the current process
@@ -503,8 +546,7 @@ def exportSecContext(SecurityContext context not None):
         context (SecurityContext): the context to send to another process
 
     Returns:
-        (bytes, SecurityContext): the output token to be imported, and the
-            input security token (now deactivated, same as input context)
+        bytes: the output token to be imported
 
     Raises:
         GSSError
@@ -521,7 +563,7 @@ def exportSecContext(SecurityContext context not None):
     if maj_stat == GSS_S_COMPLETE:
         res_token = output_token.value[:output_token.length]
         gss_release_buffer(&min_stat, &output_token)
-        return (res_token, context)
+        return res_token
     else:
         raise GSSError(maj_stat, min_stat)
 

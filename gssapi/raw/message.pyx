@@ -4,6 +4,7 @@ from gssapi.raw.cython_types cimport *
 from gssapi.raw.sec_contexts cimport SecurityContext
 
 from gssapi.raw.misc import GSSError
+from gssapi.raw.named_tuples import VerifyMICResult, WrapResult, UnwrapResult
 
 
 cdef extern from "gssapi.h":
@@ -136,12 +137,12 @@ def verifyMIC(SecurityContext context not None, message, token,
 
     if maj_stat == GSS_S_COMPLETE or maj_stat == GSS_S_DUPLICATE_TOKEN:
         if return_bool:
-            return (True, qop_state, maj_stat, min_stat)
+            return VerifyMICResult(True, qop_state, maj_stat, min_stat)
         else:
             return qop_state
     else:
         if return_bool:
-            return (False, qop_state, maj_stat, min_stat)
+            return VerifyMICResult(False, qop_state, maj_stat, min_stat)
         else:
             raise GSSError(maj_stat, min_stat)
 
@@ -229,7 +230,7 @@ def wrap(SecurityContext context not None, message, confidential=True,
     if maj_stat == GSS_S_COMPLETE:
         output_message = output_buffer.value[:output_buffer.length]
         gss_release_buffer(&min_stat, &output_buffer)
-        return (output_message, <bint>conf_used)
+        return WrapResult(output_message, <bint>conf_used)
 
 
 def unwrap(SecurityContext context not None, message):
@@ -269,6 +270,6 @@ def unwrap(SecurityContext context not None, message):
     if maj_stat == GSS_S_COMPLETE:
         output_message = output_buffer.value[:output_buffer.length]
         gss_release_buffer(&min_stat, &output_buffer)
-        return (output_message, <bint>conf_state, qop_state)
+        return UnwrapResult(output_message, <bint>conf_state, qop_state)
     else:
         raise GSSError(maj_stat, min_stat)
