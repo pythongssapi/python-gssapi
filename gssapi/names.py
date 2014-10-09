@@ -21,7 +21,7 @@ class Name(rname.Name):
     def __str__(self):
         if issubclass(str, six.text_type):
             # Python 3 -- we should return unicode
-            return bytes(self).encode(STRING_ENCODING)
+            return bytes(self).decode(STRING_ENCODING)
         else:
             # Python 2 -- we should return a string
             return self.__bytes__()

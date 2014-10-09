@@ -299,7 +299,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         if sys.version_info[0] == 2:
             target_val = SERVICE_PRINCIPAL
         else:
-            target_val = SERVICE_PRINCIPAL.encode(gssnames.STRING_ENCODING)
+            target_val = SERVICE_PRINCIPAL.decode(gssnames.STRING_ENCODING)
 
         name_str.should_be(target_val)
 
@@ -309,7 +309,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name_str = six.text_type(name)
 
         name_str.should_be_a(six.text_type)
-        name_str.should_be(SERVICE_PRINCIPAL.encode(gssnames.STRING_ENCODING))
+        name_str.should_be(SERVICE_PRINCIPAL.decode(gssnames.STRING_ENCODING))
 
     def test_to_bytes(self):
         name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
@@ -342,7 +342,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
 
         canonicalized_name = name.canonicalize(gb.MechType.kerberos)
         canonicalized_name.should_be_a(gssnames.Name)
-        str(canonicalized_name).should_be(SERVICE_PRINCIPAL + '@')
+        bytes(canonicalized_name).should_be(SERVICE_PRINCIPAL + b'@')
 
     def test_copy(self):
         name1 = gssnames.Name(SERVICE_PRINCIPAL)
