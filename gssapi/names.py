@@ -2,7 +2,7 @@ import six
 
 from gssapi.raw import names as rname
 from gssapi.raw import NameType
-from gssapi import STRING_ENCODING
+from gssapi import _utils
 
 
 class Name(rname.Name):
@@ -21,14 +21,14 @@ class Name(rname.Name):
     def __str__(self):
         if issubclass(str, six.text_type):
             # Python 3 -- we should return unicode
-            return bytes(self).decode(STRING_ENCODING)
+            return bytes(self).decode(_utils._get_encoding())
         else:
             # Python 2 -- we should return a string
             return self.__bytes__()
 
     def __unicode__(self):
         # Python 2 -- someone asked for unicode
-        return self.__bytes__().encode(STRING_ENCODING)
+        return self.__bytes__().encode(_utils._get_encoding())
 
     def __bytes__(self):
         # Python 3 -- someone asked for bytes

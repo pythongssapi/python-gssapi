@@ -33,3 +33,16 @@ def inquire_property(name):
         return getattr(self._inquire(**{name: True}), name)
 
     return property(inquire_property)
+
+
+# use UTF-8 as the default encoding, like Python 3
+_ENCODING = 'UTF-8'
+
+
+def _get_encoding():
+    return _ENCODING
+
+
+def set_encoding(enc):
+    global _ENCODING
+    _ENCODING = enc

@@ -6,7 +6,7 @@ from gssapi.raw import named_tuples as tuples
 from gssapi.raw.types import RequirementFlag, IntEnumFlagSet
 
 import gssapi.exceptions as excs
-from gssapi._utils import inquire_property
+from gssapi import _utils
 from gssapi.names import Name
 from gssapi.creds import Credentials
 
@@ -157,11 +157,11 @@ class SecurityContext(rsec_contexts.SecurityContext):
         #                     returned by inquire?
         return rsec_contexts.contextTime(self)
 
-    initiator_name = inquire_property('initiator_name')
-    target_name = inquire_property('target_name')
-    mech_type = inquire_property('mech_type')
-    actual_flags = inquire_property('flags')
-    locally_initiated = inquire_property('locally_init')
+    initiator_name = _utils.inquire_property('initiator_name')
+    target_name = _utils.inquire_property('target_name')
+    mech_type = _utils.inquire_property('mech_type')
+    actual_flags = _utils.inquire_property('flags')
+    locally_initiated = _utils.inquire_property('locally_init')
 
     @property
     def complete(self):

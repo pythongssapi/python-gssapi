@@ -12,6 +12,7 @@ from gssapi import creds as gsscreds
 from gssapi import names as gssnames
 from gssapi import sec_contexts as gssctx
 from gssapi import raw as gb
+from gssapi import _utils as gssutils
 from gssapi.tests import k5test as kt
 from gssapi._utils import import_gssapi_extension
 
@@ -299,7 +300,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         if sys.version_info[0] == 2:
             target_val = SERVICE_PRINCIPAL
         else:
-            target_val = SERVICE_PRINCIPAL.decode(gssnames.STRING_ENCODING)
+            target_val = SERVICE_PRINCIPAL.decode(gssutils._get_encoding())
 
         name_str.should_be(target_val)
 
@@ -309,7 +310,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name_str = six.text_type(name)
 
         name_str.should_be_a(six.text_type)
-        name_str.should_be(SERVICE_PRINCIPAL.decode(gssnames.STRING_ENCODING))
+        name_str.should_be(SERVICE_PRINCIPAL.decode(gssutils._get_encoding()))
 
     def test_to_bytes(self):
         name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
