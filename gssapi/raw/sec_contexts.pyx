@@ -109,11 +109,11 @@ cdef class SecurityContext:
 
 # TODO(sross): add support for channel bindings
 # TODO(sross): figure out whether GSS_C_NO_NAME can be passed in here
-def initSecContext(Name target_name not None, Creds cred=None,
-                   SecurityContext context=None,
-                   OID mech_type=None,
-                   flags=None, ttl=None, channel_bindings=None,
-                   input_token=None):
+def init_sec_context(Name target_name not None, Creds cred=None,
+                     SecurityContext context=None,
+                     OID mech_type=None,
+                     flags=None, ttl=None, channel_bindings=None,
+                     input_token=None):
     """
     initSecContext(target_name, cred=None, context=None, mech_type=None,
                    flags=None, tll=None, channel_bindings=None,
@@ -221,8 +221,8 @@ def initSecContext(Name target_name not None, Creds cred=None,
         raise GSSError(maj_stat, min_stat)
 
 
-def acceptSecContext(input_token not None, Creds acceptor_cred=None,
-                     SecurityContext context=None, channel_bindings=None):
+def accept_sec_context(input_token not None, Creds acceptor_cred=None,
+                       SecurityContext context=None, channel_bindings=None):
     """
     acceptSecContext(input_token, acceptor_cred=None, context=None,
                      channel_bindings=None) -> (SecurityContext, Name,
@@ -323,9 +323,9 @@ def acceptSecContext(input_token not None, Creds acceptor_cred=None,
         raise GSSError(maj_stat, min_stat)
 
 
-def inquireContext(SecurityContext context not None, initiator_name=True,
-                   target_name=True, lifetime=True, mech_type=True, flags=True,
-                   locally_init=True, complete=True):
+def inquire_context(SecurityContext context not None, initiator_name=True,
+                    target_name=True, lifetime=True, mech_type=True,
+                    flags=True, locally_init=True, complete=True):
     """
     inquireContext(context) -> (Name, Name, int, MechType, [RequirementFlag],
                                 bool, bool)
@@ -441,7 +441,7 @@ def inquireContext(SecurityContext context not None, initiator_name=True,
         raise GSSError(maj_stat, min_stat)
 
 
-def contextTime(SecurityContext context not None):
+def context_time(SecurityContext context not None):
     """
     contextTime(context) -> int
     Get the amount of time for which the given context will remain valid.
@@ -472,7 +472,7 @@ def contextTime(SecurityContext context not None):
         raise GSSError(maj_stat, min_stat)
 
 
-def processContextToken(SecurityContext context not None, token):
+def process_context_token(SecurityContext context not None, token):
     """
     processContextToken(context, token)
     Process a token asynchronously
@@ -505,7 +505,7 @@ def processContextToken(SecurityContext context not None, token):
         raise GSSError(maj_stat, min_stat)
 
 
-def importSecContext(token not None):
+def import_sec_context(token not None):
     """
     importSecContext(token) -> SecurityContext
     Import a context from another process
@@ -531,7 +531,7 @@ def importSecContext(token not None):
         raise GSSError(maj_stat, min_stat)
 
 
-def exportSecContext(SecurityContext context not None):
+def export_sec_context(SecurityContext context not None):
     """
     exportSecContext(context) -> bytes
     Export a context for use in another process
@@ -568,7 +568,7 @@ def exportSecContext(SecurityContext context not None):
         raise GSSError(maj_stat, min_stat)
 
 
-def deleteSecContext(SecurityContext context not None, local_only=True):
+def delete_sec_context(SecurityContext context not None, local_only=True):
     """
     deleteSecContext(context) -> bytes or None
     Delete a GSSAPI Security Context.

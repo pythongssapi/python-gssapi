@@ -80,7 +80,7 @@ cdef class Creds:
             self.raw_creds = NULL
 
 
-def acquireCred(Name name, ttl=None, mechs=None, cred_usage='both'):
+def acquire_cred(Name name, ttl=None, mechs=None, cred_usage='both'):
     """
     acquireCred(name, ttl=None, mechs=None, cred_usage='both') -> (Creds,
                                                                    [MechType],
@@ -155,7 +155,7 @@ def acquireCred(Name name, ttl=None, mechs=None, cred_usage='both'):
         raise GSSError(maj_stat, min_stat)
 
 
-def releaseCred(Creds creds not None):
+def release_cred(Creds creds not None):
     """
     releaseCred(creds)
     Release GSSAPI Credentials.
@@ -176,8 +176,8 @@ def releaseCred(Creds creds not None):
     creds.raw_creds = NULL
 
 
-def inquireCred(Creds creds not None, name=True, ttl=True,
-                usage=True, mechs=True):
+def inquire_cred(Creds creds not None, name=True, ttl=True,
+                 usage=True, mechs=True):
     # TODO(directxman12): add docs
     cdef gss_name_t res_name
     cdef gss_name_t *res_name_ptr = NULL
@@ -233,9 +233,9 @@ def inquireCred(Creds creds not None, name=True, ttl=True,
         raise GSSError(maj_stat, min_stat)
 
 
-def inquireCredByMech(Creds creds not None, OID mech not None,
-                      name=True, initiator_ttl=True,
-                      acceptor_ttl=True, usage=True):
+def inquire_cred_by_mech(Creds creds not None, OID mech not None,
+                         name=True, initiator_ttl=True,
+                         acceptor_ttl=True, usage=True):
     # TODO(directxman12): add docs
     cdef gss_name_t res_name
     cdef gss_name_t *res_name_ptr = NULL

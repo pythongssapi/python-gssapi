@@ -37,9 +37,9 @@ cdef extern from "gssapi.h":
                                             OM_uint32 *actual_accept_ttl) nogil
 
 
-def acquireCredImpersonateName(Creds impersonator_cred not None,
-                               Name name not None, ttl=None, mechs=None,
-                               cred_usage='initiate'):
+def acquire_cred_impersonate_name(Creds impersonator_cred not None,
+                                  Name name not None, ttl=None, mechs=None,
+                                  cred_usage='initiate'):
     """
     acquireCredImpersonateName(impersonator_cred, name, ttl=None, mechs=None,
                                cred_usage='initiate') -> (Creds, [MechType],
@@ -112,11 +112,11 @@ def acquireCredImpersonateName(Creds impersonator_cred not None,
         raise GSSError(maj_stat, min_stat)
 
 
-def addCredImpersonateName(Creds input_cred not None,
-                           Creds impersonator_cred not None,
-                           Name name not None, OID mech not None,
-                           cred_usage='initiate', initiator_ttl=None,
-                           acceptor_ttl=None):
+def add_cred_impersonate_name(Creds input_cred not None,
+                              Creds impersonator_cred not None,
+                              Name name not None, OID mech not None,
+                              cred_usage='initiate', initiator_ttl=None,
+                              acceptor_ttl=None):
     """
     addCredImpersonateName(input_cred, impersonator_cred, name, mech=None,
                            cred_usage='initiate', initiator_ttl=None,

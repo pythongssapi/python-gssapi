@@ -19,7 +19,7 @@ cdef extern from "gssapi.h":
                                  gss_OID_set *mech_set)
 
 
-def indicateMechs():
+def indicate_mechs():
     """
     indicateMechs() -> [MechType]
     Get the currently supported mechanisms.
@@ -40,8 +40,8 @@ def indicateMechs():
         raise GSSError(maj_stat, min_stat)
 
 
-def displayStatus(unsigned int error_code, bint is_major_code,
-                  OID mech_type=None, unsigned int message_context=0):
+def display_status(unsigned int error_code, bint is_major_code,
+                   OID mech_type=None, unsigned int message_context=0):
     """
     displayStatus(error_code, is_major_code, mech_type=None,
                   message_context=0) -> (bytes, int, bool)
@@ -151,7 +151,7 @@ class GSSError(Exception):
 
         res = []
         try:
-            msg, ctx, cont = displayStatus(code, is_maj)
+            msg, ctx, cont = display_status(code, is_maj)
             res.append(msg)
         except GSSError:
             res.append('issue decoding code: {0}'.format(code).encode('utf-8'))
@@ -159,8 +159,8 @@ class GSSError(Exception):
 
         while cont:
             try:
-                msg, ctx, cont = displayStatus(code, is_maj,
-                                               message_context=ctx)
+                msg, ctx, cont = display_status(code, is_maj,
+                                                message_context=ctx)
                 res.append(msg)
             except GSSError:
                 res.append('issue decoding '

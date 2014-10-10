@@ -25,7 +25,7 @@ class Credentials(rcreds.Creds):
                                      "have support for importing and "
                                      "exporting creditials")
 
-            base_creds = rcred_imp_exp.importCred(token)
+            base_creds = rcred_imp_exp.import_cred(token)
         else:
             res = cls.acquire(desired_name, lifetime, desired_mechs, usage)
             base_creds = res.creds
@@ -55,7 +55,7 @@ class Credentials(rcreds.Creds):
     @classmethod
     def acquire(cls, desired_name=None, lifetime=None,
                 desired_mechs=None, usage='both'):
-        res = rcreds.acquireCred(desired_name, lifetime, desired_mechs, usage)
+        res = rcreds.acquire_cred(desired_name, lifetime, desired_mechs, usage)
 
         return tuples.AcquireCredResult(cls(base=res.creds), res.mechs,
                                         res.lifetime)
@@ -66,14 +66,14 @@ class Credentials(rcreds.Creds):
             raise AttributeError("Your GSSAPI implementation does not "
                                  "have support for S4U")
 
-        res = rcred_s4u.acquireCredImpersonateName(self, desired_name,
-                                                   lifetime, desired_mechs,
-                                                   usage)
+        res = rcred_s4u.acquire_cred_impersonate_name(self, desired_name,
+                                                      lifetime, desired_mechs,
+                                                      usage)
 
         return type(self)(base=res.creds)
 
     def inquire(self, name=True, lifetime=True, usage=True, mechs=True):
-        res = rcreds.inquireCred(self, name, lifetime, usage, mechs)
+        res = rcreds.inquire_cred(self, name, lifetime, usage, mechs)
 
         if res.name is not None:
             res_name = names.Name(res.name)
@@ -85,8 +85,8 @@ class Credentials(rcreds.Creds):
 
     def inquire_by_mech(self, mech, name=True, init_lifetime=True,
                         accept_lifetime=True, usage=True):
-        res = rcreds.inquireCredByMech(self, mech, name, init_lifetime,
-                                       accept_lifetime, usage)
+        res = rcreds.inquire_cred_by_mech(self, mech, name, init_lifetime,
+                                          accept_lifetime, usage)
 
         if res.name is not None:
             res_name = names.Name(res.name)
@@ -104,13 +104,14 @@ class Credentials(rcreds.Creds):
             if rcred_s4u is None:
                 raise AttributeError("Your GSSAPI implementation does not "
                                      "have support for S4U")
-            return rcred_s4u.addCredImpersonateName(self, impersonator,
-                                                    desired_name, desired_mech,
-                                                    usage, init_lifetime,
-                                                    accept_lifetime)
+            return rcred_s4u.add_cred_impersonate_name(self, impersonator,
+                                                       desired_name,
+                                                       desired_mech,
+                                                       usage, init_lifetime,
+                                                       accept_lifetime)
         else:
-            return rcreds.addCred(self, desired_name, desired_mech, usage,
-                                  init_lifetime, accept_lifetime)
+            return rcreds.add_cred(self, desired_name, desired_mech, usage,
+                                   init_lifetime, accept_lifetime)
 
     def export(self):
         if rcred_imp_exp is None:
@@ -118,7 +119,7 @@ class Credentials(rcreds.Creds):
                                  "have support for importing and exporting "
                                  "creditials")
 
-        return rcred_imp_exp.exportCred(self)
+        return rcred_imp_exp.export_cred(self)
 
     # pickle protocol support
     def __reduce__(self):

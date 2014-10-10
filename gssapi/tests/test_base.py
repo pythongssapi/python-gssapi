@@ -51,7 +51,7 @@ class _GSSAPIKerberosTestCase(kt.KerberosTestCase):
 
 class TestBaseUtilities(_GSSAPIKerberosTestCase):
     def test_indicate_mechs(self):
-        mechs = gb.indicateMechs()
+        mechs = gb.indicate_mechs()
 
         mechs.shouldnt_be_none()
         mechs.should_be_a(list)
@@ -60,40 +60,40 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         mechs.should_include(gb.MechType.kerberos)
 
     def test_import_name(self):
-        imported_name = gb.importName(TARGET_SERVICE_NAME)
+        imported_name = gb.import_name(TARGET_SERVICE_NAME)
 
         imported_name.shouldnt_be_none()
         imported_name.should_be_a(gb.Name)
 
-        gb.releaseName(imported_name)
+        gb.release_name(imported_name)
 
     def test_canonicalize_export_name(self):
-        imported_name = gb.importName(self.ADMIN_PRINC,
-                                      gb.NameType.principal)
+        imported_name = gb.import_name(self.ADMIN_PRINC,
+                                       gb.NameType.principal)
 
-        canonicalized_name = gb.canonicalizeName(imported_name,
-                                                 gb.MechType.kerberos)
+        canonicalized_name = gb.canonicalize_name(imported_name,
+                                                  gb.MechType.kerberos)
 
         canonicalized_name.shouldnt_be_none()
         canonicalized_name.should_be_a(gb.Name)
 
-        exported_name = gb.exportName(canonicalized_name)
+        exported_name = gb.export_name(canonicalized_name)
 
         exported_name.shouldnt_be_none()
         exported_name.should_be_a(bytes)
         exported_name.shouldnt_be_empty()
 
     def test_duplicate_name(self):
-        orig_name = gb.importName(TARGET_SERVICE_NAME)
-        new_name = gb.duplicateName(orig_name)
+        orig_name = gb.import_name(TARGET_SERVICE_NAME)
+        new_name = gb.duplicate_name(orig_name)
 
         new_name.shouldnt_be_none()
-        gb.compareName(orig_name, new_name).should_be_true()
+        gb.compare_name(orig_name, new_name).should_be_true()
 
     def test_display_name(self):
-        imported_name = gb.importName(TARGET_SERVICE_NAME,
-                                      gb.NameType.hostbased_service)
-        displ_resp = gb.displayName(imported_name)
+        imported_name = gb.import_name(TARGET_SERVICE_NAME,
+                                       gb.NameType.hostbased_service)
+        displ_resp = gb.display_name(imported_name)
 
         displ_resp.shouldnt_be_none()
 
@@ -107,22 +107,22 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         out_type.should_be(gb.NameType.hostbased_service)
 
     def test_compare_name(self):
-        service_name1 = gb.importName(TARGET_SERVICE_NAME)
-        service_name2 = gb.importName(TARGET_SERVICE_NAME)
-        init_name = gb.importName(self.ADMIN_PRINC,
-                                  gb.NameType.principal)
+        service_name1 = gb.import_name(TARGET_SERVICE_NAME)
+        service_name2 = gb.import_name(TARGET_SERVICE_NAME)
+        init_name = gb.import_name(self.ADMIN_PRINC,
+                                   gb.NameType.principal)
 
-        gb.compareName(service_name1, service_name2).should_be_true()
-        gb.compareName(service_name2, service_name1).should_be_true()
+        gb.compare_name(service_name1, service_name2).should_be_true()
+        gb.compare_name(service_name2, service_name1).should_be_true()
 
-        gb.compareName(service_name1, init_name).should_be_false()
+        gb.compare_name(service_name1, init_name).should_be_false()
 
-        gb.releaseName(service_name1)
-        gb.releaseName(service_name2)
-        gb.releaseName(init_name)
+        gb.release_name(service_name1)
+        gb.release_name(service_name2)
+        gb.release_name(init_name)
 
     def test_display_status(self):
-        status_resp = gb.displayStatus(0, False)
+        status_resp = gb.display_status(0, False)
         status_resp.shouldnt_be_none()
 
         (status, ctx, cont) = status_resp
@@ -136,9 +136,9 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         cont.should_be_false()
 
     def test_acquire_creds(self):
-        name = gb.importName(SERVICE_PRINCIPAL,
-                             gb.NameType.principal)
-        cred_resp = gb.acquireCred(name)
+        name = gb.import_name(SERVICE_PRINCIPAL,
+                              gb.NameType.principal)
+        cred_resp = gb.acquire_cred(name)
         cred_resp.shouldnt_be_none()
 
         (creds, actual_mechs, ttl) = cred_resp
@@ -151,53 +151,53 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         ttl.should_be_an_integer()
 
-        gb.releaseName(name)
-        gb.releaseCred(creds)
+        gb.release_name(name)
+        gb.release_cred(creds)
 
     def test_context_time(self):
-        target_name = gb.importName(TARGET_SERVICE_NAME,
-                                    gb.NameType.hostbased_service)
-        ctx_resp = gb.initSecContext(target_name)
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        ctx_resp = gb.init_sec_context(target_name)
 
         client_token1 = ctx_resp[3]
         client_ctx = ctx_resp[0]
-        server_name = gb.importName(SERVICE_PRINCIPAL,
-                                    gb.NameType.principal)
-        server_creds = gb.acquireCred(server_name)[0]
-        server_resp = gb.acceptSecContext(client_token1,
-                                          acceptor_cred=server_creds)
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_resp = gb.accept_sec_context(client_token1,
+                                            acceptor_cred=server_creds)
         server_tok = server_resp[3]
 
-        client_resp2 = gb.initSecContext(target_name,
-                                         context=client_ctx,
-                                         input_token=server_tok)
+        client_resp2 = gb.init_sec_context(target_name,
+                                           context=client_ctx,
+                                           input_token=server_tok)
         ctx = client_resp2[0]
 
-        ttl = gb.contextTime(ctx)
+        ttl = gb.context_time(ctx)
 
         ttl.should_be_an_integer()
         ttl.should_be_greater_than(0)
 
     def test_inquire_context(self):
-        target_name = gb.importName(TARGET_SERVICE_NAME,
-                                    gb.NameType.hostbased_service)
-        ctx_resp = gb.initSecContext(target_name)
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        ctx_resp = gb.init_sec_context(target_name)
 
         client_token1 = ctx_resp[3]
         client_ctx = ctx_resp[0]
-        server_name = gb.importName(SERVICE_PRINCIPAL,
-                                    gb.NameType.principal)
-        server_creds = gb.acquireCred(server_name)[0]
-        server_resp = gb.acceptSecContext(client_token1,
-                                          acceptor_cred=server_creds)
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_resp = gb.accept_sec_context(client_token1,
+                                            acceptor_cred=server_creds)
         server_tok = server_resp[3]
 
-        client_resp2 = gb.initSecContext(target_name,
-                                         context=client_ctx,
-                                         input_token=server_tok)
+        client_resp2 = gb.init_sec_context(target_name,
+                                           context=client_ctx,
+                                           input_token=server_tok)
         ctx = client_resp2[0]
 
-        inq_resp = gb.inquireContext(ctx)
+        inq_resp = gb.inquire_context(ctx)
         inq_resp.shouldnt_be_none()
 
         (src_name, target_name, ttl, mech_type,
@@ -229,23 +229,23 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         pass
 
     def test_add_cred_impersonate_name(self):
-        target_name = gb.importName(TARGET_SERVICE_NAME,
-                                    gb.NameType.hostbased_service)
-        client_ctx_resp = gb.initSecContext(target_name)
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        client_ctx_resp = gb.init_sec_context(target_name)
         client_token = client_ctx_resp[3]
         del client_ctx_resp  # free all the things (except the token)!
 
-        server_name = gb.importName(SERVICE_PRINCIPAL,
-                                    gb.NameType.principal)
-        server_creds = gb.acquireCred(server_name, cred_usage='both')[0]
-        server_ctx_resp = gb.acceptSecContext(client_token,
-                                              acceptor_cred=server_creds)
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.principal)
+        server_creds = gb.acquire_cred(server_name, cred_usage='both')[0]
+        server_ctx_resp = gb.accept_sec_context(client_token,
+                                                acceptor_cred=server_creds)
 
         input_creds = gb.Creds()
-        imp_resp = gb.addCredImpersonateName(input_creds,
-                                             server_creds,
-                                             server_ctx_resp[1],
-                                             gb.MechType.kerberos)
+        imp_resp = gb.add_cred_impersonate_name(input_creds,
+                                                server_creds,
+                                                server_ctx_resp[1],
+                                                gb.MechType.kerberos)
 
         imp_resp.shouldnt_be_none()
 
@@ -258,20 +258,20 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         output_accept_ttl.should_be_a(int)
 
     def test_acquire_creds_impersonate_name(self):
-        target_name = gb.importName(TARGET_SERVICE_NAME,
-                                    gb.NameType.hostbased_service)
-        client_ctx_resp = gb.initSecContext(target_name)
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        client_ctx_resp = gb.init_sec_context(target_name)
         client_token = client_ctx_resp[3]
         del client_ctx_resp  # free all the things (except the token)!
 
-        server_name = gb.importName(SERVICE_PRINCIPAL,
-                                    gb.NameType.principal)
-        server_creds = gb.acquireCred(server_name, cred_usage='both')[0]
-        server_ctx_resp = gb.acceptSecContext(client_token,
-                                              acceptor_cred=server_creds)
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.principal)
+        server_creds = gb.acquire_cred(server_name, cred_usage='both')[0]
+        server_ctx_resp = gb.accept_sec_context(client_token,
+                                                acceptor_cred=server_creds)
 
-        imp_resp = gb.acquireCredImpersonateName(server_creds,
-                                                 server_ctx_resp[1])
+        imp_resp = gb.acquire_cred_impersonate_name(server_creds,
+                                                    server_ctx_resp[1])
 
         imp_resp.shouldnt_be_none()
 
@@ -288,16 +288,16 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         # __dealloc__ (b/c cython)
 
     def test_inquire_creds(self):
-        name = gb.importName(SERVICE_PRINCIPAL,
-                             gb.NameType.principal)
-        cred = gb.acquireCred(name).creds
+        name = gb.import_name(SERVICE_PRINCIPAL,
+                              gb.NameType.principal)
+        cred = gb.acquire_cred(name).creds
 
-        inq_resp = gb.inquireCred(cred)
+        inq_resp = gb.inquire_cred(cred)
 
         inq_resp.shouldnt_be_none()
 
         inq_resp.name.should_be_a(gb.Name)
-        assert gb.compareName(name, inq_resp.name)
+        assert gb.compare_name(name, inq_resp.name)
 
         inq_resp.lifetime.should_be_an_integer()
 
@@ -317,14 +317,14 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
 class TestInitContext(_GSSAPIKerberosTestCase):
     def setUp(self):
-        self.target_name = gb.importName(TARGET_SERVICE_NAME,
-                                         gb.NameType.hostbased_service)
+        self.target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                          gb.NameType.hostbased_service)
 
     def tearDown(self):
-        gb.releaseName(self.target_name)
+        gb.release_name(self.target_name)
 
     def test_basic_init_default_ctx(self):
-        ctx_resp = gb.initSecContext(self.target_name)
+        ctx_resp = gb.init_sec_context(self.target_name)
         ctx_resp.shouldnt_be_none()
 
         (ctx, out_mech_type,
@@ -344,38 +344,38 @@ class TestInitContext(_GSSAPIKerberosTestCase):
 
         cont_needed.should_be_a(bool)
 
-        gb.deleteSecContext(ctx)
+        gb.delete_sec_context(ctx)
 
 
 class TestAcceptContext(_GSSAPIKerberosTestCase):
 
     def setUp(self):
-        self.target_name = gb.importName(TARGET_SERVICE_NAME,
-                                         gb.NameType.hostbased_service)
-        ctx_resp = gb.initSecContext(self.target_name)
+        self.target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                          gb.NameType.hostbased_service)
+        ctx_resp = gb.init_sec_context(self.target_name)
 
         self.client_token = ctx_resp[3]
         self.client_ctx = ctx_resp[0]
         self.client_ctx.shouldnt_be_none()
 
-        self.server_name = gb.importName(SERVICE_PRINCIPAL,
-                                         gb.NameType.principal)
-        self.server_creds = gb.acquireCred(self.server_name)[0]
+        self.server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                          gb.NameType.principal)
+        self.server_creds = gb.acquire_cred(self.server_name)[0]
 
         self.server_ctx = None
 
     def tearDown(self):
-        gb.releaseName(self.target_name)
-        gb.releaseName(self.server_name)
-        gb.releaseCred(self.server_creds)
-        gb.deleteSecContext(self.client_ctx)
+        gb.release_name(self.target_name)
+        gb.release_name(self.server_name)
+        gb.release_cred(self.server_creds)
+        gb.delete_sec_context(self.client_ctx)
 
         if self.server_ctx is not None:
-            gb.deleteSecContext(self.server_ctx)
+            gb.delete_sec_context(self.server_ctx)
 
     def test_basic_accept_context(self):
-        server_resp = gb.acceptSecContext(self.client_token,
-                                          acceptor_cred=self.server_creds)
+        server_resp = gb.accept_sec_context(self.client_token,
+                                            acceptor_cred=self.server_creds)
         server_resp.shouldnt_be_none()
 
         (self.server_ctx, name, mech_type, out_token,
@@ -404,81 +404,81 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
 
 class TestWrapUnwrap(_GSSAPIKerberosTestCase):
     def setUp(self):
-        self.target_name = gb.importName(TARGET_SERVICE_NAME,
-                                         gb.NameType.hostbased_service)
-        ctx_resp = gb.initSecContext(self.target_name)
+        self.target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                          gb.NameType.hostbased_service)
+        ctx_resp = gb.init_sec_context(self.target_name)
 
         self.client_token1 = ctx_resp[3]
         self.client_ctx = ctx_resp[0]
-        self.server_name = gb.importName(SERVICE_PRINCIPAL,
-                                         gb.NameType.principal)
-        self.server_creds = gb.acquireCred(self.server_name)[0]
-        server_resp = gb.acceptSecContext(self.client_token1,
-                                          acceptor_cred=self.server_creds)
+        self.server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                          gb.NameType.principal)
+        self.server_creds = gb.acquire_cred(self.server_name)[0]
+        server_resp = gb.accept_sec_context(self.client_token1,
+                                            acceptor_cred=self.server_creds)
         self.server_ctx = server_resp[0]
         self.server_tok = server_resp[3]
 
-        client_resp2 = gb.initSecContext(self.target_name,
-                                         context=self.client_ctx,
-                                         input_token=self.server_tok)
+        client_resp2 = gb.init_sec_context(self.target_name,
+                                           context=self.client_ctx,
+                                           input_token=self.server_tok)
         self.client_token2 = client_resp2[3]
         self.client_ctx = client_resp2[0]
 
     def tearDown(self):
-        gb.releaseName(self.target_name)
-        gb.releaseName(self.server_name)
-        gb.releaseCred(self.server_creds)
-        gb.deleteSecContext(self.client_ctx)
-        gb.deleteSecContext(self.server_ctx)
+        gb.release_name(self.target_name)
+        gb.release_name(self.server_name)
+        gb.release_cred(self.server_creds)
+        gb.delete_sec_context(self.client_ctx)
+        gb.delete_sec_context(self.server_ctx)
 
     def test_import_export_sec_context(self):
-        tok = gb.exportSecContext(self.client_ctx)
+        tok = gb.export_sec_context(self.client_ctx)
 
         tok.shouldnt_be_none()
         tok.should_be_a(bytes)
         tok.shouldnt_be_empty()
 
-        imported_ctx = gb.importSecContext(tok)
+        imported_ctx = gb.import_sec_context(tok)
         imported_ctx.shouldnt_be_none()
         imported_ctx.should_be_a(gb.SecurityContext)
 
         self.client_ctx = imported_ctx  # ensure that it gets deleted
 
     def test_get_mic(self):
-        mic_token = gb.getMIC(self.client_ctx, b"some message")
+        mic_token = gb.get_mic(self.client_ctx, b"some message")
 
         mic_token.shouldnt_be_none()
         mic_token.should_be_a(bytes)
         mic_token.shouldnt_be_empty()
 
     def test_basic_verify_mic(self):
-        mic_token = gb.getMIC(self.client_ctx, b"some message")
+        mic_token = gb.get_mic(self.client_ctx, b"some message")
 
-        qop_used = gb.verifyMIC(self.server_ctx, b"some message", mic_token)
+        qop_used = gb.verify_mic(self.server_ctx, b"some message", mic_token)
 
         qop_used.should_be_an_integer()
 
         # test a bad MIC
-        gb.verifyMIC.should_raise(gb.GSSError, self.server_ctx,
-                                  b"some other message", b"some invalid mic")
+        gb.verify_mic.should_raise(gb.GSSError, self.server_ctx,
+                                   b"some other message", b"some invalid mic")
 
     def test_bool_verify_mic(self):
-        mic_token = gb.getMIC(self.client_ctx, b"some message")
+        mic_token = gb.get_mic(self.client_ctx, b"some message")
 
-        (was_valid, qop_used, majs, mins) = gb.verifyMIC(self.server_ctx,
-                                                         b"some message",
-                                                         mic_token,
-                                                         True)
+        (was_valid, qop_used, majs, mins) = gb.verify_mic(self.server_ctx,
+                                                          b"some message",
+                                                          mic_token,
+                                                          True)
 
         was_valid.should_be_true()
         qop_used.should_be_an_integer()
         majs.should_be_an_integer()
         mins.should_be_an_integer()
 
-        (was_valid2, qop_used, majs, mins) = gb.verifyMIC(self.server_ctx,
-                                                          b"some new message",
-                                                          b"some invalid mic",
-                                                          True)
+        (was_valid2, qop_used, majs, mins) = gb.verify_mic(self.server_ctx,
+                                                           b"some new message",
+                                                           b"some invalid mic",
+                                                           True)
 
         was_valid2.should_be_false()
         qop_used.should_be_an_integer()
@@ -486,9 +486,9 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         mins.should_be_an_integer()
 
     def test_wrap_size_limit(self):
-        with_conf = gb.wrapSizeLimit(self.client_ctx, 100)
-        without_conf = gb.wrapSizeLimit(self.client_ctx, 100,
-                                        confidential=False)
+        with_conf = gb.wrap_size_limit(self.client_ctx, 100)
+        without_conf = gb.wrap_size_limit(self.client_ctx, 100,
+                                          confidential=False)
 
         with_conf.should_be_an_integer()
         without_conf.should_be_an_integer()

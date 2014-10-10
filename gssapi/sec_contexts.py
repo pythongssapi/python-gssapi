@@ -16,7 +16,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
                 mech_type=None, channel_bindings=None, usage=None):
 
         if token is not None:
-            base = rsec_contexts.importSecContext(token)
+            base = rsec_contexts.import_sec_context(token)
 
         return super(SecurityContext, cls).__new__(cls, base)
 
@@ -78,11 +78,11 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
     def get_mic(self, message):
         # TODO(directxman12): check flags?
-        return rmessage.getMIC(self, message)
+        return rmessage.get_mic(self, message)
 
     def verify_mic(self, message, mic, return_bool=False):
         # TODO(directxman12): implement supplementary?
-        return rmessage.verifyMIC(self, message, mic, return_bool)
+        return rmessage.verify_mic(self, message, mic, return_bool)
 
     def wrap(self, message, encrypt=True):
         res = rmessage.wrap(self, message, encrypt)
@@ -109,14 +109,14 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
     def get_wrap_size_limit(self, desired_output_size,
                             encrypted=True):
-        return rmessage.wrapSizeLimit(self, desired_output_size,
-                                      encrypted)
+        return rmessage.wrap_size_limit(self, desired_output_size,
+                                        encrypted)
 
     def process_token(self, token):
-        rsec_contexts.processContextToken(self, token)
+        rsec_contexts.process_context_token(self, token)
 
     def export(self):
-        return rsec_contexts.exportSecContext(self)
+        return rsec_contexts.export_sec_context(self)
 
     INQUIRE_ARGS = ('initiator_name', 'target_name', 'lifetime',
                     'mech_type', 'flags', 'locally_init', 'complete')
@@ -130,7 +130,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
         for arg in self.INQUIRE_ARGS:
             kwargs[arg] = kwargs.get(arg, default_val)
 
-        res = rsec_contexts.inquireContext(self, **kwargs)
+        res = rsec_contexts.inquire_context(self, **kwargs)
 
         if (kwargs.get('initiator_name', False) and
                 res.initiator_name is not None):
@@ -153,7 +153,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
     def lifetime(self):
         # TODO(directxman12): is this in any way different from what's
         #                     returned by inquire?
-        return rsec_contexts.contextTime(self)
+        return rsec_contexts.context_time(self)
 
     initiator_name = _utils.inquire_property('initiator_name')
     target_name = _utils.inquire_property('target_name')
@@ -175,8 +175,8 @@ class SecurityContext(rsec_contexts.SecurityContext):
             return self._initiator_step(token=token)
 
     def _acceptor_step(self, token):
-        res = rsec_contexts.acceptSecContext(token, self._creds,
-                                             self, self._channel_bindings)
+        res = rsec_contexts.accept_sec_context(token, self._creds,
+                                               self, self._channel_bindings)
 
         self.delegated_creds = Credentials(res.delegated_creds)
 
@@ -185,12 +185,12 @@ class SecurityContext(rsec_contexts.SecurityContext):
     def _initiator_step(self, token=None):
         # TODO(directxman12): should we have these all be properties,
         #                     or should some of them be arguments?
-        res = rsec_contexts.initSecContext(self._target_name, self._creds,
-                                           self, self._mech_type,
-                                           self._desired_flags,
-                                           self._desired_lifetime,
-                                           self._channel_bindings,
-                                           token)
+        res = rsec_contexts.init_sec_context(self._target_name, self._creds,
+                                             self, self._mech_type,
+                                             self._desired_flags,
+                                             self._desired_lifetime,
+                                             self._channel_bindings,
+                                             token)
 
         return res.token
 

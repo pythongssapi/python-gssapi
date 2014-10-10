@@ -43,7 +43,7 @@ cdef extern from "gssapi.h":
                          gss_qop_t *qop) nogil
 
 
-def getMIC(SecurityContext context not None, message, qop=None):
+def get_mic(SecurityContext context not None, message, qop=None):
     """
     getMIC(context, message, qop) -> bytes
     Generate a MIC for a message.
@@ -88,8 +88,8 @@ def getMIC(SecurityContext context not None, message, qop=None):
 
 
 # TODO(sross): should this method have two ways to run it?
-def verifyMIC(SecurityContext context not None, message, token,
-              return_bool=False):
+def verify_mic(SecurityContext context not None, message, token,
+               return_bool=False):
     """
     verifyMIC(context, message, token, return_bool=False) -> int or (bool, int,
                                                                      int, int)
@@ -147,8 +147,8 @@ def verifyMIC(SecurityContext context not None, message, token,
             raise GSSError(maj_stat, min_stat)
 
 
-def wrapSizeLimit(SecurityContext context not None, OM_uint32 output_size,
-                  confidential=True, qop=None):
+def wrap_size_limit(SecurityContext context not None, OM_uint32 output_size,
+                    confidential=True, qop=None):
     """
     wrapSizeLimit(context, output_size, confidential=True, qop=None) -> int
     Calculate the max message size.

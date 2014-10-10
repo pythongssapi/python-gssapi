@@ -244,15 +244,15 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
             target_name = gssnames.Name(TARGET_SERVICE_NAME,
                                         gb.NameType.hostbased_service)
             # TODO(directxman12): make this use the high-level SecurityContext
-            client_ctx_resp = gb.initSecContext(target_name)
+            client_ctx_resp = gb.init_sec_context(target_name)
             client_token = client_ctx_resp[3]
             del client_ctx_resp  # free everything but the token
 
             server_name = self.name
             server_creds = gsscreds.Credentials(desired_name=server_name,
                                                 usage='both')
-            server_ctx_resp = gb.acceptSecContext(client_token,
-                                                  acceptor_cred=server_creds)
+            server_ctx_resp = gb.accept_sec_context(client_token,
+                                                    acceptor_cred=server_creds)
 
             imp_creds = server_creds.impersonate(server_ctx_resp[1], **kwargs)
 

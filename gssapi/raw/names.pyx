@@ -65,7 +65,7 @@ cdef class Name:
             self.raw_name = NULL
 
 
-def importName(name not None, OID name_type=None):
+def import_name(name not None, OID name_type=None):
     """
     importName(name, name_type=NameType.hostbased_service) -> Name
     Convert a string and a NameType into a GSSAPI name.
@@ -111,7 +111,7 @@ def importName(name not None, OID name_type=None):
         raise GSSError(maj_stat, min_stat)
 
 
-def displayName(Name name not None, name_type=True):
+def display_name(Name name not None, name_type=True):
     """
     displayName(name, bool) -> (bytes, NameType)
     Convert a GSSAPI name into its components.
@@ -163,7 +163,7 @@ def displayName(Name name not None, name_type=True):
         return DisplayNameResult(text, py_name_type)
 
 
-def compareName(Name name1, Name name2):
+def compare_name(Name name1, Name name2):
     """
     compareName(name1, name2) -> bool
     Check two GSSAPI names to see if they are the same.
@@ -201,7 +201,7 @@ def compareName(Name name1, Name name2):
         raise GSSError(maj_stat, min_stat)
 
 
-def exportName(Name name not None):
+def export_name(Name name not None):
     """
     exportName(name) -> bytes
     Export a GSSAPI Mechanim Name.
@@ -242,7 +242,7 @@ def exportName(Name name not None):
         raise GSSError(maj_stat, min_stat)
 
 
-def canonicalizeName(Name name not None, OID mech_type not None):
+def canonicalize_name(Name name not None, OID mech_type not None):
     """
     canoncializeName(name, mech_type) -> Name
     Canonicalize an arbitrary GSSAPI Name into a Mechanism Name
@@ -280,7 +280,7 @@ def canonicalizeName(Name name not None, OID mech_type not None):
         raise GSSError(maj_stat, min_stat)
 
 
-def duplicateName(Name name not None):
+def duplicate_name(Name name not None):
     """
     duplicateName(name) -> Name
     Duplicate a GSSAPI Name
@@ -309,7 +309,7 @@ def duplicateName(Name name not None):
         raise GSSError(maj_stat, min_stat)
 
 
-def releaseName(Name name not None):
+def release_name(Name name not None):
     """
     releaseName(name)
     Release a GSSAPI Name.
