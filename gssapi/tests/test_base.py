@@ -306,6 +306,14 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         inq_resp.mechs.shouldnt_be_empty()
         inq_resp.mechs.should_include(gb.MechType.kerberos)
 
+    def test_create_oid_from_bytes(self):
+        kerberos_bytes = gb.MechType.kerberos.__bytes__()
+        new_oid = gb.OID(elements=kerberos_bytes)
+
+        new_oid.should_be(gb.MechType.kerberos)
+
+        del new_oid  # make sure we can dealloc
+
 
 class TestInitContext(_GSSAPIKerberosTestCase):
     def setUp(self):

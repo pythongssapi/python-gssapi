@@ -18,11 +18,17 @@ cdef class OID:
     # cdef gss_OID_desc raw_oid = NULL
     # cdef bint _free_on_dealloc = NULL
 
-    def __cinit__(self, OID cpy=None):
+    def __cinit__(OID self, OID cpy=None, elements=None):
+        if cpy is not None and elements is not None:
+            raise TypeError("Cannot instantiate a OID from both a copy and "
+                            " a new set of elements")
         if cpy is not None:
             self.raw_oid = cpy.raw_oid
 
-        self._free_on_dealloc = False
+        if elements is None:
+            self._free_on_dealloc = False
+        else:
+            self._from_bytes(elements)
 
     cdef int _copy_from(OID self, gss_OID_desc base) except -1:
         self.raw_oid.length = base.length
@@ -31,6 +37,18 @@ cdef class OID:
             raise MemoryError("Could not allocate memory for OID elements!")
         memcpy(self.raw_oid.elements, base.elements, self.raw_oid.length)
         self._free_on_dealloc = True
+        return 0
+
+    cdef int _from_bytes(OID self, object base) except -1:
+        base_bytes = bytes(base)
+        cdef char* byte_str = base_bytes
+
+        self.raw_oid.length = len(base_bytes)
+        self.raw_oid.elements = malloc(self.raw_oid.length)
+        if self.raw_oid.elements is NULL:
+            raise MemoryError("Could not allocate memory for OID elements!")
+        self._free_on_dealloc = True
+        memcpy(self.raw_oid.elements, byte_str, self.raw_oid.length)
         return 0
 
     def __dealloc__(self):

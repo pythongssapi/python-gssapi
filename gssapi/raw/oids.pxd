@@ -7,3 +7,4 @@ cdef class OID:
     cdef bint _free_on_dealloc
 
     cdef int _copy_from(OID self, gss_OID_desc base) except -1
+    cdef int _from_bytes(OID self, object elements) except -1

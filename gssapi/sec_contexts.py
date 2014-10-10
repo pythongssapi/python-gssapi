@@ -1,5 +1,3 @@
-import six
-
 from gssapi.raw import sec_contexts as rsec_contexts
 from gssapi.raw import message as rmessage
 from gssapi.raw import named_tuples as tuples
