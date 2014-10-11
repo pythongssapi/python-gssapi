@@ -106,6 +106,10 @@ cdef extern from "gssapi.h":
     OM_uint32 GSS_C_TRANS_FLAG
     OM_uint32 GSS_C_PROT_READY_FLAG
 
+    # error helpers
+    OM_uint32 GSS_CALLING_ERROR(OM_uint32 full_error)
+    OM_uint32 GSS_ROUTINE_ERROR(OM_uint32 full_error)
+    OM_uint32 GSS_SUPPLEMENTARY_INFO(OM_uint32 full_error)
 
 cdef extern from "gssapi/gssapi_krb5.h":
     gss_OID gss_mech_krb5

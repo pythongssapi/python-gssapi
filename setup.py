@@ -31,6 +31,15 @@ ext_module_misc = Extension(
     ]
 )
 
+ext_module_exceptions = Extension(
+    'gssapi.raw.exceptions',
+    extra_link_args = get_output('krb5-config --libs gssapi').split(),
+    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
+    sources = [
+        'gssapi/raw/exceptions.pyx',
+    ]
+)
+
 ext_module_creds = Extension(
     'gssapi.raw.creds',
     extra_link_args = get_output('krb5-config --libs gssapi').split() + ['-g'],
@@ -133,6 +142,7 @@ setup(
     cmdclass = {'build_ext': build_ext},
     ext_modules = [
         ext_module_misc,
+        ext_module_exceptions,
         ext_module_creds,
         ext_module_names,
         ext_module_sec_contexts,

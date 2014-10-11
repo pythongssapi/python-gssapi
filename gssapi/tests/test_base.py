@@ -314,6 +314,14 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         del new_oid  # make sure we can dealloc
 
+    def test_error_dispatch(self):
+        err_code1 = gb.ParameterReadError.CALLING_CODE
+        err_code2 = gb.BadNameError.ROUTINE_CODE
+        err = gb.GSSError(err_code1 | err_code2, 0)
+
+        err.should_be_a(gb.NameReadError)
+        err.maj_code.should_be(err_code1 | err_code2)
+
 
 class TestInitContext(_GSSAPIKerberosTestCase):
     def setUp(self):
