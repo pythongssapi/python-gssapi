@@ -50,6 +50,7 @@ class ParameterWriteError(GSSError):
 class MalformedParameterError(GSSError):
     CALLING_CODE = GSS_S_CALL_BAD_STRUCTURE
 
+
 # generic routine errors
 class BadMechanismError(GSSError):
     ROUTINE_CODE = GSS_S_BAD_MECH
