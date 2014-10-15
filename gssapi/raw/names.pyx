@@ -50,15 +50,15 @@ cdef class Name:
     def __cinit__(self, Name cpy=None):
         if cpy is not None:
             self.raw_name = cpy.raw_name
-            cpy._free_on_dealloc = False
-
-        self._free_on_dealloc = True
+            cpy.raw_name = GSS_C_NO_NAME
+        else:
+            self.raw_name = GSS_C_NO_NAME
 
     def __dealloc__(self):
         # essentially just releaseName(self), but it is unsafe to call
         # methods
         cdef OM_uint32 maj_stat, min_stat
-        if self.raw_name is not NULL and self._free_on_dealloc:
+        if self.raw_name is not GSS_C_NO_NAME:
             maj_stat = gss_release_name(&min_stat, &self.raw_name)
             if maj_stat != GSS_S_COMPLETE:
                 raise GSSError(maj_stat, min_stat)

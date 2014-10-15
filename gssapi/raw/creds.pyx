@@ -65,15 +65,15 @@ cdef class Creds:
     def __cinit__(self, Creds cpy=None):
         if cpy is not None:
             self.raw_creds = cpy.raw_creds
-            cpy._free_on_dealloc = False
-
-        self._free_on_dealloc = True
+            cpy.raw_creds = GSS_C_NO_CREDENTIAL
+        else:
+            self.raw_creds = GSS_C_NO_CREDENTIAL
 
     def __dealloc__(self):
         # essentially just releaseCred(self), but it is unsafe to call
         # methods
         cdef OM_uint32 maj_stat, min_stat
-        if self.raw_creds is not NULL and self._free_on_dealloc:
+        if self.raw_creds is not GSS_C_NO_CREDENTIAL:
             maj_stat = gss_release_cred(&min_stat, &self.raw_creds)
             if maj_stat != GSS_S_COMPLETE:
                 raise GSSError(maj_stat, min_stat)
