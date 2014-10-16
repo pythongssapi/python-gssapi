@@ -249,13 +249,15 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         imp_resp.shouldnt_be_none()
 
-        actual_mechs, output_init_ttl, output_accept_ttl = imp_resp
+        new_creds, actual_mechs, output_init_ttl, output_accept_ttl = imp_resp
 
         actual_mechs.shouldnt_be_empty()
         actual_mechs.should_include(gb.MechType.kerberos)
 
         output_init_ttl.should_be_a(int)
         output_accept_ttl.should_be_a(int)
+
+        new_creds.should_be_a(gb.Creds)
 
     def test_acquire_creds_impersonate_name(self):
         target_name = gb.import_name(TARGET_SERVICE_NAME,

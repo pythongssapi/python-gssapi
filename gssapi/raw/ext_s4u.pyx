@@ -185,8 +185,11 @@ def add_cred_impersonate_name(Creds input_cred not None,
                                                  &actual_initiator_ttl,
                                                  &actual_acceptor_ttl)
 
+    cdef Creds rc
     if maj_stat == GSS_S_COMPLETE:
-        return AddCredResult(c_create_mech_list(actual_mechs),
+        rc = Creds()
+        rc.raw_creds = creds
+        return AddCredResult(rc, c_create_mech_list(actual_mechs),
                              c_c_ttl_to_py(actual_initiator_ttl),
                              c_c_ttl_to_py(actual_acceptor_ttl))
     else:

@@ -18,7 +18,7 @@ InquireCredByMechResult = namedtuple('InquireCredByMechResult',
 
 
 AddCredResult = namedtuple('AddCredResult',
-                           ['mechs', 'init_lifetime',
+                           ['creds', 'mechs', 'init_lifetime',
                             'accept_lifetime'])
 
 

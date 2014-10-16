@@ -104,14 +104,16 @@ class Credentials(rcreds.Creds):
             if rcred_s4u is None:
                 raise AttributeError("Your GSSAPI implementation does not "
                                      "have support for S4U")
-            return rcred_s4u.add_cred_impersonate_name(self, impersonator,
-                                                       desired_name,
-                                                       desired_mech,
-                                                       usage, init_lifetime,
-                                                       accept_lifetime)
+            res = rcred_s4u.add_cred_impersonate_name(self, impersonator,
+                                                      desired_name,
+                                                      desired_mech,
+                                                      usage, init_lifetime,
+                                                      accept_lifetime)
         else:
-            return rcreds.add_cred(self, desired_name, desired_mech, usage,
-                                   init_lifetime, accept_lifetime)
+            res = rcreds.add_cred(self, desired_name, desired_mech, usage,
+                                  init_lifetime, accept_lifetime)
+
+        return Credentials(res.creds)
 
     def export(self):
         if rcred_imp_exp is None:
