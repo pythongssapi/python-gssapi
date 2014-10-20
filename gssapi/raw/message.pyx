@@ -231,6 +231,8 @@ def wrap(SecurityContext context not None, message, confidential=True,
         output_message = output_buffer.value[:output_buffer.length]
         gss_release_buffer(&min_stat, &output_buffer)
         return WrapResult(output_message, <bint>conf_used)
+    else:
+        raise GSSError(maj_stat, min_stat)
 
 
 def unwrap(SecurityContext context not None, message):
