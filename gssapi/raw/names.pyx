@@ -161,6 +161,8 @@ def display_name(Name name not None, name_type=True):
             py_name_type = None
 
         return DisplayNameResult(text, py_name_type)
+    else:
+        raise GSSError(maj_stat, min_stat)
 
 
 def compare_name(Name name1, Name name2):
