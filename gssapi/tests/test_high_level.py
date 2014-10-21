@@ -103,6 +103,20 @@ def true_false_perms(*all_elems_tuple):
     return parameterized.expand(perms)
 
 
+def _extension_test(extension_name, extension_text):
+    def make_ext_test(func):
+        def ext_test(self, *args, **kwargs):
+            if import_gssapi_extension(extension_name) is None:
+                self.skipTest("The {0} GSSAPI extension is not supported by your "
+                              "GSSAPI implementation".format(extension_text))
+            else:
+                func(self, *args, **kwargs)
+
+        return ext_test
+
+    return make_ext_test
+
+
 # NB(directxman12): MIT Kerberos completely ignores input TTLs for
 #                   credentials.  I suspect this is because the TTL
 #                   is actually set when kinit is called.
@@ -198,41 +212,29 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
     def test_add(self):
         self.skipTest("Not Yet Implemented")
 
+    @_extension_test('cred_imp_ext', 'credentials import-export')
     def test_export(self):
-        if import_gssapi_extension('cred_imp_exp') is None:
-            self.skipTest("The credentials import-export GSSAPI "
-                          "extension is not supported by your "
-                          "GSSAPI implementation")
-        else:
-            creds = gsscreds.Credentials(desired_name=self.name)
-            token = creds.export()
-            token.should_be(bytes)
+        creds = gsscreds.Credentials(desired_name=self.name)
+        token = creds.export()
+        token.should_be(bytes)
 
+    @_extension_test('cred_imp_ext', 'credentials import-export')
     def test_import_by_init(self):
-        if import_gssapi_extension('cred_imp_exp') is None:
-            self.skipTest("The credentials import-export GSSAPI "
-                          "extension is not supported by your "
-                          "GSSAPI implementation")
-        else:
-            creds = gsscreds.Credentials(desired_name=self.name)
-            token = creds.export()
-            imported_creds = gsscreds.Credentials(token=token)
+        creds = gsscreds.Credentials(desired_name=self.name)
+        token = creds.export()
+        imported_creds = gsscreds.Credentials(token=token)
 
-            imported_creds.lifetime.should_be(creds.lifetime)
-            imported_creds.name.should_be(creds.name)
+        imported_creds.lifetime.should_be(creds.lifetime)
+        imported_creds.name.should_be(creds.name)
 
+    @_extension_test('cred_imp_ext', 'credentials import-export')
     def test_pickle_unpickle(self):
-        if import_gssapi_extension('cred_imp_exp') is None:
-            self.skipTest("The credentials import-export GSSAPI "
-                          "extension is not supported by your "
-                          "GSSAPI implementation")
-        else:
-            creds = gsscreds.Credentials(desired_name=self.name)
-            pickled_creds = pickle.dumps(creds)
-            unpickled_creds = pickle.loads(pickled_creds)
+        creds = gsscreds.Credentials(desired_name=self.name)
+        pickled_creds = pickle.dumps(creds)
+        unpickled_creds = pickle.loads(pickled_creds)
 
-            unpickled_creds.lifetime.should_be(creds.lifetime)
-            unpickled_creds.name.should_be(creds.name)
+        unpickled_creds.lifetime.should_be(creds.lifetime)
+        unpickled_creds.name.should_be(creds.name)
 
     @exist_perms(lifetime=30, desired_mechs=[gb.MechType.kerberos],
                  usage='initiate')
@@ -259,12 +261,9 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
             imp_creds.shouldnt_be_none()
             imp_creds.should_be_a(gsscreds.Credentials)
 
+    @_extension_test('s4u', 'S4U')
     def test_add_with_impersonate(self):
-        if import_gssapi_extension('s4u') is None:
-            self.skipTest("The S4U GSSAPI extension is not supported "
-                          "by your GSSAPI implementation")
-        else:
-            self.skipTest("Not Yet Implemented")
+        self.skipTest("Not Yet Implemented")
 
 
 class NamesTestCase(_GSSAPIKerberosTestCase):
