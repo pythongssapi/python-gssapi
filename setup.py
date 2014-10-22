@@ -1,9 +1,10 @@
 #!/usr/bin/env python
-from setuptools import setup
+from setuptools import setup, Feature
 from setuptools.extension import Extension
 from Cython.Distutils import build_ext
 import sys
 import re
+import os
 
 get_output = None
 
@@ -19,125 +20,90 @@ except ImportError:
 
     get_output = _get_output
 
-link_args = get_output('krb5-config --libs gssapi')
-compile_args = get_output('krb5-config --cflags gssapi').split(),
+# get the compile and link args
+link_args = os.environ.get('GSSAPI_LINKER_ARGS', None)
+compile_args = os.environ.get('GSSAPI_COMPILER_ARGS', None)
 
-ext_module_misc = Extension(
-    'gssapi.raw.misc',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
-    sources = [
-        'gssapi/raw/misc.pyx',
-    ]
-)
+if link_args is None:
+    link_args = get_output('krb5-config --libs gssapi')
 
-ext_module_exceptions = Extension(
-    'gssapi.raw.exceptions',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
-    sources = [
-        'gssapi/raw/exceptions.pyx',
-    ]
-)
+if compile_args is None:
+    compile_args = get_output('krb5-config --cflags gssapi')
 
-ext_module_creds = Extension(
-    'gssapi.raw.creds',
-    extra_link_args = get_output('krb5-config --libs gssapi').split() + ['-g'],
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split() + ['-g'],
-    sources = [
-        'gssapi/raw/creds.pyx',
-    ]
-)
+link_args = link_args.split()
+compile_args = compile_args.split()
 
-ext_module_s4u = Extension(
-    'gssapi.raw.ext_s4u',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
-    sources = [
-        'gssapi/raw/ext_s4u.pyx',
-    ]
-)
+ENABLE_SUPPORT_DETECTION = (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
 
-ext_module_cred_store = Extension(
-    'gssapi.raw.ext_cred_store',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
-    sources = [
-        'gssapi/raw/ext_cred_store.pyx',
-    ]
-)
+if ENABLE_SUPPORT_DETECTION:
+    main_lib = os.environ.get('GSSAPI_MAIN_LIB', None)
+    if main_lib is None:
+        for opt in link_args:
+            if opt.startswith('-lgssapi'):
+                main_lib = 'lib%s.so' % opt[2:]
 
-ext_module_rfc5588 = Extension(
-    'gssapi.raw.ext_rfc5588',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
-    sources = [
-        'gssapi/raw/ext_rfc5588.pyx',
-    ]
-)
+    if main_lib is None:
+        raise Exception("Could not find main GSSAPI shared libary.  Please "
+                        "try setting GSSAPI_MAIN_LIB yourself or setting "
+                        "ENABLE_SUPPORT_DETECTION to 'false'")
 
-ext_module_names = Extension(
-    'gssapi.raw.names',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split() + ['-g'],
-    sources = [
-        'gssapi/raw/names.pyx',
-    ]
-)
+    import ctypes
+    GSSAPI_LIB = ctypes.CDLL(main_lib)
 
-ext_module_oids = Extension(
-    'gssapi.raw.oids',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
-    sources = [
-        'gssapi/raw/oids.pyx',
-    ]
-)
 
-ext_module_sec_contexts = Extension(
-    'gssapi.raw.sec_contexts',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
-    sources = [
-        'gssapi/raw/sec_contexts.pyx',
-    ]
-)
+class build_gssapi_ext(build_ext):
+    def run(self):
+        if not self.dry_run:
+            # optionally fake gssapi_ext.h using gssapi.h
+            prefix = get_output('krb5-config gssapi --prefix')
+            gssapi_ext_h = os.path.join(prefix, 'include/gssapi/gssapi_ext.h')
 
-ext_module_types = Extension(
-    'gssapi.raw.types',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
-    sources = [
-        'gssapi/raw/types.pyx',
-    ]
-)
+            if not os.path.exists(gssapi_ext_h):
+                target_dir = os.path.join(self.build_temp, 'c_include')
+                gssapi_dir = os.path.join(target_dir, 'gssapi')
+                if not os.path.exists(gssapi_dir):
+                    os.makedirs(gssapi_dir)
 
-ext_module_message = Extension(
-    'gssapi.raw.message',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
-    sources = [
-        'gssapi/raw/message.pyx',
-    ]
-)
+                target_file = os.path.join(target_dir, 'gssapi/gssapi_ext.h')
+                if not os.path.exists(target_file):
+                    with open(target_file, 'w') as header:
+                        header.write('#include "gssapi.h"')
 
-ext_module_cython_converters = Extension(
-    'gssapi.raw.cython_converters',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split() + ['-g'],
-    sources = [
-        'gssapi/raw/cython_converters.pyx',
-    ]
-)
+                for ext in self.extensions:
+                    ext.extra_compile_args.append("-I%s" % os.path.abspath(target_dir))
 
-mech_module_krb5 = Extension(
-    'gssapi.raw.mech_krb5',
-    extra_link_args = get_output('krb5-config --libs gssapi').split(),
-    extra_compile_args = get_output('krb5-config --cflags gssapi').split() + ['-g'],
-    sources = [
-        'gssapi/raw/mech_krb5.pyx',
-    ]
-)
+        build_ext.run(self)
+
+# detect support
+
+def main_file(module):
+    return Extension('gssapi.raw.%s' % module,
+                     extra_link_args = link_args,
+                     extra_compile_args = compile_args,
+                     sources = ['gssapi/raw/%s.pyx' % module])
+
+def extension_file(module, canary):
+    if ENABLE_SUPPORT_DETECTION and not hasattr(GSSAPI_LIB, canary):
+        return None
+    else:
+        return Extension('gssapi.raw.ext_%s' % module,
+                         extra_link_args = link_args,
+                         extra_compile_args = compile_args,
+                         sources = ['gssapi/raw/ext_%s.pyx' % module])
+
+def gssapi_modules(lst):
+    # filter out missing files
+    res = [mod for mod in lst if mod is not None]
+
+    # add in supported mech files
+    MECHS_SUPPORTED = os.environ.get('GSSAPI_MECHS', 'krb5').split(',')
+    for mech in MECHS_SUPPORTED:
+        res.append(Extension('gssapi.raw.mech_%s' % mech,
+                             extra_link_args = link_args,
+                             extra_compile_args = compile_args,
+                             sources = ['gssapi/raw/mech_%s.pyx' % mech]))
+
+    return res
 
 long_desc = re.sub('\.\. role:: \w+\(code\)\s*\n\s*.+', '',
                    re.sub(r':(python|bash|code):', '',
@@ -166,22 +132,21 @@ setup(
         'Topic :: Security',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    cmdclass = {'build_ext': build_ext},
-    ext_modules = [
-        ext_module_misc,
-        ext_module_exceptions,
-        ext_module_creds,
-        ext_module_names,
-        ext_module_sec_contexts,
-        ext_module_types,
-        ext_module_message,
-        ext_module_oids,
-        ext_module_cython_converters,
-        ext_module_s4u,
-        ext_module_cred_store,
-        ext_module_rfc5588,
-        mech_module_krb5,
-    ],
+    cmdclass = {'build_ext': build_gssapi_ext},
+    ext_modules = gssapi_modules([
+        main_file('misc'),
+        main_file('exceptions'),
+        main_file('creds'),
+        main_file('names'),
+        main_file('sec_contexts'),
+        main_file('types'),
+        main_file('message'),
+        main_file('oids'),
+        main_file('cython_converters'),
+        extension_file('s4u', 'gss_acquire_cred_impersonate_name'),
+        extension_file('cred_store', 'gss_store_cred_into'),
+        extension_file('rfc5588', 'gss_store_cred'),
+    ]),
     install_requires=[
         'flufl.enum >= 4.0'
     ],
