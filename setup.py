@@ -58,6 +58,24 @@ ext_module_s4u = Extension(
     ]
 )
 
+ext_module_cred_store = Extension(
+    'gssapi.raw.ext_cred_store',
+    extra_link_args = get_output('krb5-config --libs gssapi').split(),
+    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
+    sources = [
+        'gssapi/raw/ext_cred_store.pyx',
+    ]
+)
+
+ext_module_rfc5588 = Extension(
+    'gssapi.raw.ext_rfc5588',
+    extra_link_args = get_output('krb5-config --libs gssapi').split(),
+    extra_compile_args = get_output('krb5-config --cflags gssapi').split(),
+    sources = [
+        'gssapi/raw/ext_rfc5588.pyx',
+    ]
+)
+
 ext_module_names = Extension(
     'gssapi.raw.names',
     extra_link_args = get_output('krb5-config --libs gssapi').split(),
@@ -151,6 +169,8 @@ setup(
         ext_module_oids,
         ext_module_cython_converters,
         ext_module_s4u,
+        ext_module_cred_store,
+        ext_module_rfc5588,
     ],
     install_requires=[
         'flufl.enum >= 4.0'

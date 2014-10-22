@@ -55,3 +55,6 @@ InquireContextResult = namedtuple('InquireContextResult',
                                   ['initiator_name', 'target_name',
                                    'lifetime', 'mech_type', 'flags',
                                    'locally_init', 'complete'])
+
+StoreCredResult = namedtuple('StoreCredResult',
+                             ['mech_types', 'usage'])

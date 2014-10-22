@@ -12,3 +12,15 @@ try:
     from gssapi.raw.ext_s4u import *  # noqa
 except ImportError:
     pass  # no s4u support in the system's GSSAPI library
+
+# optional cred store support
+try:
+    from gssapi.raw.ext_cred_store import *  # noqa
+except ImportError:
+    pass
+
+# optional RFC 5588 support
+try:
+    from gssapi.raw.ext_rfc5588 import *  # noqa
+except ImportError:
+    pass

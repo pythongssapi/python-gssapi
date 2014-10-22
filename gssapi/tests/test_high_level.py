@@ -107,8 +107,8 @@ def _extension_test(extension_name, extension_text):
     def make_ext_test(func):
         def ext_test(self, *args, **kwargs):
             if import_gssapi_extension(extension_name) is None:
-                self.skipTest("The {0} GSSAPI extension is not supported by your "
-                              "GSSAPI implementation".format(extension_text))
+                self.skipTest("The %s GSSAPI extension is not supported by "
+                              "your GSSAPI implementation" % extension_text)
             else:
                 func(self, *args, **kwargs)
 
@@ -154,6 +154,35 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         ttl.should_be_an_integer()
 
         del creds
+
+    @_extension_test('rfc5588', 'RFC 5588')
+    def test_store_acquire(self):
+        self.skipTest("Not Yet Implemented")
+
+    @_extension_test('cred_store', 'credentials store')
+    def test_store_into_acquire_from(self):
+        CCACHE = 'FILE:{tmpdir}/other_ccache'.format(tmpdir=self.realm.tmpdir)
+        KT = '{tmpdir}/other_keytab'.format(tmpdir=self.realm.tmpdir)
+        store = {'ccache': CCACHE, 'keytab': KT}
+
+        princ_name = 'service/cs@' + self.realm.realm
+        self.realm.addprinc(princ_name)
+        self.realm.extract_keytab(princ_name, KT)
+        self.realm.kinit(princ_name, None, ['-k', '-t', KT])
+
+        initial_creds = gsscreds.Credentials(desired_name=None,
+                                             usage='initiate')
+
+        store_res = initial_creds.store(store, overwrite=True)
+
+        store_res.mech_types.shouldnt_be_none()
+        store_res.mech_types.shouldnt_be_empty()
+        store_res.usage.should_be('initiate')
+
+        name = gssnames.Name(princ_name)
+        retrieved_creds = gsscreds.Credentials(desired_name=name, store=store)
+
+        retrieved_creds.shouldnt_be_none()
 
     def test_create_from_other(self):
         self.skipTest("Not Yet Implemented")

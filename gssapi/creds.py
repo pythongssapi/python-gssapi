@@ -1,9 +1,11 @@
 from gssapi.raw import creds as rcreds
 from gssapi.raw import named_tuples as tuples
-from gssapi._utils import import_gssapi_extension
+from gssapi._utils import import_gssapi_extension, _encode_dict
 
 rcred_imp_exp = import_gssapi_extension('cred_imp_exp')
 rcred_s4u = import_gssapi_extension('s4u')
+rcred_cred_store = import_gssapi_extension('cred_store')
+rcred_rfc5588 = import_gssapi_extension('rfc5588')
 
 from gssapi import names
 
@@ -13,7 +15,8 @@ class Credentials(rcreds.Creds):
 
     def __new__(cls, base=None, token=None,
                 desired_name=None, lifetime=None,
-                desired_mechs=None, usage='both'):
+                desired_mechs=None, usage='both',
+                store=None):
         # TODO(directxman12): this is missing support for password
         #                     and cred_store (non-RFC methods)
         #                     as well as import_cred
@@ -27,7 +30,8 @@ class Credentials(rcreds.Creds):
 
             base_creds = rcred_imp_exp.import_cred(token)
         else:
-            res = cls.acquire(desired_name, lifetime, desired_mechs, usage)
+            res = cls.acquire(desired_name, lifetime, desired_mechs, usage,
+                              store=store)
             base_creds = res.creds
 
         return super(Credentials, cls).__new__(cls, base_creds)
@@ -54,11 +58,44 @@ class Credentials(rcreds.Creds):
 
     @classmethod
     def acquire(cls, desired_name=None, lifetime=None,
-                desired_mechs=None, usage='both'):
-        res = rcreds.acquire_cred(desired_name, lifetime, desired_mechs, usage)
+                desired_mechs=None, usage='both', store=None):
+        if store is None:
+            res = rcreds.acquire_cred(desired_name, lifetime,
+                                      desired_mechs, usage)
+        else:
+            if rcred_cred_store is None:
+                raise AttributeError("Your GSSAPI implementation does not "
+                                     "have support for manipulating "
+                                     "credential stores")
+
+            store = _encode_dict(store)
+
+            res = rcred_cred_store.acquire_cred_from(store, desired_name,
+                                                     lifetime, desired_mechs,
+                                                     usage)
 
         return tuples.AcquireCredResult(cls(base=res.creds), res.mechs,
                                         res.lifetime)
+
+    def store(self, store=None, usage='both', mech=None,
+              overwrite=False, set_default=False):
+        if store is None:
+            if rcred_rfc5588 is None:
+                raise AttributeError("Your GSSAPI implementation does not "
+                                     "have support for RFC 5588")
+
+            return rcred_cred_store.store_cred(self, usage, mech,
+                                               overwrite, set_default)
+        else:
+            if rcred_cred_store is None:
+                raise AttributeError("Your GSSAPI implementation does not "
+                                     "have support for manipulating "
+                                     "credential stores directly")
+
+            store = _encode_dict(store)
+
+            return rcred_cred_store.store_cred_into(store, self, usage, mech,
+                                                    overwrite, set_default)
 
     def impersonate(self, desired_name=None, lifetime=None,
                     desired_mechs=None, usage='initiate'):

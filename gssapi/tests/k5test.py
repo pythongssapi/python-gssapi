@@ -26,6 +26,7 @@ from __future__ import print_function
 
 import copy
 import os
+import shutil
 import signal
 import socket
 import string
@@ -331,6 +332,9 @@ class K5Realm(object):
             self.stop_kdc()
         if self._kadmind_proc:
             self.stop_kadmind()
+
+        if self.tmpdir:
+            shutil.rmtree(self.tmpdir)
 
     def addprinc(self, princname, password=None):
         if password:

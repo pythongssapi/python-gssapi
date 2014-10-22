@@ -289,6 +289,40 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         # no need to explicitly release any more -- we can just rely on
         # __dealloc__ (b/c cython)
 
+    def test_store_cred_acquire_cred(self):
+        self.skipTest("Not Yet Implemented")
+
+    def test_store_cred_into_acquire_cred(self):
+        CCACHE = 'FILE:{tmpdir}/other_ccache'.format(tmpdir=self.realm.tmpdir)
+        KT = '{tmpdir}/other_keytab'.format(tmpdir=self.realm.tmpdir)
+        store = {b'ccache': CCACHE.encode('UTF-8'),
+                 b'keytab': KT.encode('UTF-8')}
+
+        princ_name = 'service/cs@' + self.realm.realm
+        self.realm.addprinc(princ_name)
+        self.realm.extract_keytab(princ_name, KT)
+        self.realm.kinit(princ_name, None, ['-k', '-t', KT])
+
+        initial_creds = gb.acquire_cred(None, cred_usage='initiate').creds
+
+        # NB(sross): overwrite because the ccache doesn't exist yet
+        store_res = gb.store_cred_into(store, initial_creds, overwrite=True)
+
+        store_res.mech_types.shouldnt_be_none()
+        store_res.usage.should_be('initiate')
+
+        name = gb.import_name(princ_name.encode('UTF-8'))
+        retrieve_res = gb.acquire_cred_from(store, name)
+
+        retrieve_res.shouldnt_be_none()
+        retrieve_res.creds.shouldnt_be_none()
+        retrieve_res.creds.should_be_a(gb.Creds)
+
+        retrieve_res.mechs.shouldnt_be_empty()
+        retrieve_res.mechs.should_include(gb.MechType.kerberos)
+
+        retrieve_res.lifetime.should_be_an_integer()
+
     def test_inquire_creds(self):
         name = gb.import_name(SERVICE_PRINCIPAL,
                               gb.NameType.principal)

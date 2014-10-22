@@ -1,5 +1,7 @@
 import sys
 
+import six
+
 
 def import_gssapi_extension(name):
     try:
@@ -46,3 +48,13 @@ def _get_encoding():
 def set_encoding(enc):
     global _ENCODING
     _ENCODING = enc
+
+
+def _encode_dict(d):
+    def enc(x):
+        if isinstance(x, six.text_type):
+            return x.encode(_ENCODING)
+        else:
+            return x
+
+    return dict((enc(k), enc(v)) for k, v in six.iteritems(d))
