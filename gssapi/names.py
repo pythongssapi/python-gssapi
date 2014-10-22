@@ -14,6 +14,9 @@ class Name(rname.Name):
         elif isinstance(base, rname.Name):
             base_name = base
         else:
+            if isinstance(base, six.text_type):
+                base = base.encode(_utils._get_encoding())
+
             base_name = rname.import_name(base, name_type)
 
         return super(Name, cls).__new__(cls, base_name)
