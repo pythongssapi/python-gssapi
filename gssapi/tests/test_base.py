@@ -69,7 +69,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
     def test_canonicalize_export_name(self):
         imported_name = gb.import_name(self.ADMIN_PRINC,
-                                       gb.NameType.principal)
+                                       gb.NameType.kerberos_principal)
 
         canonicalized_name = gb.canonicalize_name(imported_name,
                                                   gb.MechType.kerberos)
@@ -110,7 +110,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         service_name1 = gb.import_name(TARGET_SERVICE_NAME)
         service_name2 = gb.import_name(TARGET_SERVICE_NAME)
         init_name = gb.import_name(self.ADMIN_PRINC,
-                                   gb.NameType.principal)
+                                   gb.NameType.kerberos_principal)
 
         gb.compare_name(service_name1, service_name2).should_be_true()
         gb.compare_name(service_name2, service_name1).should_be_true()
@@ -137,7 +137,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
     def test_acquire_creds(self):
         name = gb.import_name(SERVICE_PRINCIPAL,
-                              gb.NameType.principal)
+                              gb.NameType.kerberos_principal)
         cred_resp = gb.acquire_cred(name)
         cred_resp.shouldnt_be_none()
 
@@ -162,7 +162,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         client_token1 = ctx_resp[3]
         client_ctx = ctx_resp[0]
         server_name = gb.import_name(SERVICE_PRINCIPAL,
-                                     gb.NameType.principal)
+                                     gb.NameType.kerberos_principal)
         server_creds = gb.acquire_cred(server_name)[0]
         server_resp = gb.accept_sec_context(client_token1,
                                             acceptor_cred=server_creds)
@@ -186,7 +186,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         client_token1 = ctx_resp[3]
         client_ctx = ctx_resp[0]
         server_name = gb.import_name(SERVICE_PRINCIPAL,
-                                     gb.NameType.principal)
+                                     gb.NameType.kerberos_principal)
         server_creds = gb.acquire_cred(server_name)[0]
         server_resp = gb.accept_sec_context(client_token1,
                                             acceptor_cred=server_creds)
@@ -236,7 +236,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         del client_ctx_resp  # free all the things (except the token)!
 
         server_name = gb.import_name(SERVICE_PRINCIPAL,
-                                     gb.NameType.principal)
+                                     gb.NameType.kerberos_principal)
         server_creds = gb.acquire_cred(server_name, cred_usage='both')[0]
         server_ctx_resp = gb.accept_sec_context(client_token,
                                                 acceptor_cred=server_creds)
@@ -267,7 +267,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         del client_ctx_resp  # free all the things (except the token)!
 
         server_name = gb.import_name(SERVICE_PRINCIPAL,
-                                     gb.NameType.principal)
+                                     gb.NameType.kerberos_principal)
         server_creds = gb.acquire_cred(server_name, cred_usage='both')[0]
         server_ctx_resp = gb.accept_sec_context(client_token,
                                                 acceptor_cred=server_creds)
@@ -325,7 +325,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
     def test_inquire_creds(self):
         name = gb.import_name(SERVICE_PRINCIPAL,
-                              gb.NameType.principal)
+                              gb.NameType.kerberos_principal)
         cred = gb.acquire_cred(name).creds
 
         inq_resp = gb.inquire_cred(cred)
@@ -403,7 +403,7 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
         self.client_ctx.shouldnt_be_none()
 
         self.server_name = gb.import_name(SERVICE_PRINCIPAL,
-                                          gb.NameType.principal)
+                                          gb.NameType.kerberos_principal)
         self.server_creds = gb.acquire_cred(self.server_name)[0]
 
         self.server_ctx = None
@@ -455,7 +455,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         self.client_token1 = ctx_resp[3]
         self.client_ctx = ctx_resp[0]
         self.server_name = gb.import_name(SERVICE_PRINCIPAL,
-                                          gb.NameType.principal)
+                                          gb.NameType.kerberos_principal)
         self.server_creds = gb.acquire_cred(self.server_name)[0]
         server_resp = gb.accept_sec_context(self.client_token1,
                                             acceptor_cred=self.server_creds)

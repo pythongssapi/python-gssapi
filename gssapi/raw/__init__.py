@@ -24,3 +24,9 @@ try:
     from gssapi.raw.ext_rfc5588 import *  # noqa
 except ImportError:
     pass
+
+# optional KRB5 mech support
+try:
+    import gssapi.raw.mech_krb5  # noqa
+except ImportError:
+    pass

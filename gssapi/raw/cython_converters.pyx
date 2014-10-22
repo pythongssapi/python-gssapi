@@ -4,6 +4,12 @@ from gssapi.raw.oids cimport OID
 from gssapi.raw.types import MechType, NameType
 
 
+cdef OID c_make_oid(gss_OID oid):
+    cdef OID res = OID()
+    res.raw_oid = oid[0]
+    return res
+
+
 cdef gss_OID_set c_get_mech_oid_set(object mechs):
     """Convert a list of MechType values into an OID set."""
 

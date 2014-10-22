@@ -130,6 +130,15 @@ ext_module_cython_converters = Extension(
     ]
 )
 
+mech_module_krb5 = Extension(
+    'gssapi.raw.mech_krb5',
+    extra_link_args = get_output('krb5-config --libs gssapi').split(),
+    extra_compile_args = get_output('krb5-config --cflags gssapi').split() + ['-g'],
+    sources = [
+        'gssapi/raw/mech_krb5.pyx',
+    ]
+)
+
 long_desc = re.sub('\.\. role:: \w+\(code\)\s*\n\s*.+', '',
                    re.sub(r':(python|bash|code):', '',
                           re.sub(r'\.\. code-block:: \w+', '::',
@@ -171,6 +180,7 @@ setup(
         ext_module_s4u,
         ext_module_cred_store,
         ext_module_rfc5588,
+        mech_module_krb5,
     ],
     install_requires=[
         'flufl.enum >= 4.0'

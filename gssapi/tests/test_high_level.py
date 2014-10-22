@@ -124,7 +124,8 @@ def _extension_test(extension_name, extension_text):
 class CredsTestCase(_GSSAPIKerberosTestCase):
     def setUp(self):
         super(CredsTestCase, self).setUp()
-        self.name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+        self.name = gssnames.Name(SERVICE_PRINCIPAL,
+                                  gb.NameType.kerberos_principal)
 
     @exist_perms(lifetime=30, desired_mechs=[gb.MechType.kerberos],
                  usage='both')
@@ -305,10 +306,10 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name.shouldnt_be_none()
 
     def test_create_from_name_and_type(self):
-        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
 
         name.shouldnt_be_none()
-        name.name_type.should_be(gb.NameType.principal)
+        name.name_type.should_be(gb.NameType.kerberos_principal)
 
     def test_create_from_token(self):
         name1 = gssnames.Name(TARGET_SERVICE_NAME,
@@ -317,10 +318,10 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name2 = gssnames.Name(token=exported_name)
 
         name2.shouldnt_be_none()
-        name2.name_type.should_be(gb.NameType.principal)
+        name2.name_type.should_be(gb.NameType.kerberos_principal)
 
     def test_to_str(self):
-        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
 
         name_str = str(name)
 
@@ -333,7 +334,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name_str.should_be(target_val)
 
     def test_to_unicode(self):
-        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
 
         name_str = six.text_type(name)
 
@@ -341,7 +342,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name_str.should_be(SERVICE_PRINCIPAL.decode(gssutils._get_encoding()))
 
     def test_to_bytes(self):
-        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
 
         # NB(directxman12): bytes only calles __bytes__ on Python 3+
         name_bytes = name.__bytes__()
@@ -359,7 +360,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name1.shouldnt_be(name3)
 
     def test_canoncialize_and_export(self):
-        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.principal)
+        name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
         canonical_name = name.canonicalize(gb.MechType.kerberos)
         exported_name = canonical_name.export()
 
