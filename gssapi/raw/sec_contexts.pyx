@@ -204,19 +204,22 @@ def init_sec_context(Name target_name not None, Creds cred=None,
                                         &output_token_buffer,
                                         &ret_flags, &output_ttl)
 
+    output_token = None
+    if output_token_buffer.length:
+        output_token = output_token_buffer.value[:output_token_buffer.length]
+    gss_release_buffer(&min_stat, &output_token_buffer)
+
     cdef OID output_mech_type = OID()
     if maj_stat == GSS_S_COMPLETE or maj_stat == GSS_S_CONTINUE_NEEDED:
         output_mech_type.raw_oid = actual_mech_type[0]
-        output_token = output_token_buffer.value[:output_token_buffer.length]
         res = InitSecContextResult(output_context, output_mech_type,
                                    IntEnumFlagSet(RequirementFlag, ret_flags),
                                    output_token,
                                    c_c_ttl_to_py(output_ttl),
                                    maj_stat == GSS_S_CONTINUE_NEEDED)
-        gss_release_buffer(&min_stat, &output_token_buffer)
         return res
     else:
-        raise GSSError(maj_stat, min_stat)
+        raise GSSError(maj_stat, min_stat, token=output_token)
 
 
 def accept_sec_context(input_token not None, Creds acceptor_cred=None,
@@ -291,6 +294,11 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
                                           &ret_flags, &output_ttl,
                                           &delegated_cred)
 
+    output_token = None
+    if output_token_buffer.length:
+        output_token = output_token_buffer.value[:output_token_buffer.length]
+    gss_release_buffer(&min_stat, &output_token_buffer)
+
     cdef Name on = Name()
     cdef Creds oc = Creds()
     cdef OID py_mech_type
@@ -300,7 +308,6 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
         else:
             output_ttl_py = output_ttl
 
-        output_token = output_token_buffer.value[:output_token_buffer.length]
         on.raw_name = initiator_name
         oc.raw_creds = delegated_cred
         if mech_type is not NULL:
@@ -318,7 +325,7 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
         gss_release_buffer(&min_stat, &output_token_buffer)
         return res
     else:
-        raise GSSError(maj_stat, min_stat)
+        raise GSSError(maj_stat, min_stat, token=output_token)
 
 
 def inquire_context(SecurityContext context not None, initiator_name=True,

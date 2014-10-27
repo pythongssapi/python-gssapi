@@ -178,7 +178,7 @@ class GSSError(Exception):
 
         return (calling_code, routine_code, supplementary_code)
 
-    def __init__(self, maj_code, min_code):
+    def __init__(self, maj_code, min_code, token=None):
         """
         Create a new GSSError.
 
@@ -190,10 +190,13 @@ class GSSError(Exception):
         Args:
             maj_code (int): the major code associated with this error
             min_code (int): the minor code associated with this error
+            token (bytes): an error token associated with the error
         """
 
         self.maj_code = maj_code
         self.min_code = min_code
+
+        self.token = token
 
         split_codes = self._parse_major_code(maj_code)
         self.calling_code = split_codes[0]
