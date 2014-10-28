@@ -15,3 +15,8 @@ class UnknownUsageError(GeneralError):
 
 class EncryptionNotUsed(GeneralError):
     MAJOR_MESSAGE = "Confidentiality was requested, but not used"
+
+    def __init__(self, minor_message, unwrapped_message=None, **kwargs):
+        super(EncryptionNotUsed, self).__init__(minor_message, **kwargs)
+
+        self.unwrapped_message = unwrapped_message

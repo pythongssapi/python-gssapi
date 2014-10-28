@@ -103,7 +103,8 @@ class SecurityContext(rsec_contexts.SecurityContext):
                 self.actual_flags & RequirementFlag.confidentiality):
             raise excs.EncryptionNotUsage("The context was established with "
                                           "encryption, but unwrapped message "
-                                          "was not encrypted")
+                                          "was not encrypted",
+                                          unwrapped_message=res.message)
 
         return res.message
 
