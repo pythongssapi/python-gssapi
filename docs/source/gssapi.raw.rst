@@ -1,7 +1,7 @@
-base Package
+raw Package
 ============
 
-:mod:`base` Package
+:mod:`raw` Package
 -------------------
 
 .. automodule:: gssapi.raw
