@@ -43,7 +43,7 @@ def indicate_mechs():
         raise GSSError(maj_stat, min_stat)
 
 
-def display_status(unsigned int error_code, bint is_major_code,
+def _display_status(unsigned int error_code, bint is_major_code,
                    OID mech_type=None, unsigned int message_context=0):
     """
     Display a string message for a GSSAPI error code.
@@ -223,7 +223,7 @@ class GSSError(Exception):
 
         res = []
         try:
-            msg, ctx, cont = display_status(code, is_maj)
+            msg, ctx, cont = _display_status(code, is_maj)
             res.append(msg.decode(msg_encoding))
         except GSSError:
             res.append(u'issue decoding code: {0}'.format(code))
@@ -231,8 +231,8 @@ class GSSError(Exception):
 
         while cont:
             try:
-                msg, ctx, cont = display_status(code, is_maj,
-                                                message_context=ctx)
+                msg, ctx, cont = _display_status(code, is_maj,
+                                                 message_context=ctx)
                 res.append(msg.decode(msg_encoding))
             except GSSError:
                 res.append(u'issue decoding '
