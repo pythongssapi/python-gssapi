@@ -67,7 +67,6 @@ cdef class Name:
 
 def import_name(name not None, OID name_type=None):
     """
-    importName(name, name_type=NameType.hostbased_service) -> Name
     Convert a string and a NameType into a GSSAPI name.
 
     This method takes a string name and a name type and converts
@@ -113,7 +112,6 @@ def import_name(name not None, OID name_type=None):
 
 def display_name(Name name not None, name_type=True):
     """
-    displayName(name, bool) -> (bytes, NameType)
     Convert a GSSAPI name into its components.
 
     This method converts a GSSAPI name back into its text and
@@ -167,7 +165,6 @@ def display_name(Name name not None, name_type=True):
 
 def compare_name(Name name1, Name name2):
     """
-    compareName(name1, name2) -> bool
     Check two GSSAPI names to see if they are the same.
 
     This method compares two GSSAPI names, checking to
@@ -205,7 +202,6 @@ def compare_name(Name name1, Name name2):
 
 def export_name(Name name not None):
     """
-    exportName(name) -> bytes
     Export a GSSAPI Mechanim Name.
 
     This method "produces a canonical contigous string representation
@@ -246,7 +242,6 @@ def export_name(Name name not None):
 
 def canonicalize_name(Name name not None, OID mech_type not None):
     """
-    canoncializeName(name, mech_type) -> Name
     Canonicalize an arbitrary GSSAPI Name into a Mechanism Name
 
     This method turns any GSSAPI name into a "mechanism name",
@@ -284,7 +279,6 @@ def canonicalize_name(Name name not None, OID mech_type not None):
 
 def duplicate_name(Name name not None):
     """
-    duplicateName(name) -> Name
     Duplicate a GSSAPI Name
 
     Args:
@@ -313,7 +307,6 @@ def duplicate_name(Name name not None):
 
 def release_name(Name name not None):
     """
-    releaseName(name)
     Release a GSSAPI Name.
 
     Args:

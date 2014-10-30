@@ -82,9 +82,6 @@ cdef class Creds:
 
 def acquire_cred(Name name, ttl=None, mechs=None, cred_usage='both'):
     """
-    acquireCred(name, ttl=None, mechs=None, cred_usage='both') -> (Creds,
-                                                                   [MechType],
-                                                                int)
     Get GSSAPI credentials for the given name and mechanisms.
 
     This method gets GSSAPI credentials corresponding to the given name
@@ -157,7 +154,6 @@ def acquire_cred(Name name, ttl=None, mechs=None, cred_usage='both'):
 
 def release_cred(Creds creds not None):
     """
-    releaseCred(creds)
     Release GSSAPI Credentials.
 
     This method releases GSSAPI credentials.

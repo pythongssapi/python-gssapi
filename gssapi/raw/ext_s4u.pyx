@@ -41,10 +41,6 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
                                   Name name not None, ttl=None, mechs=None,
                                   cred_usage='initiate'):
     """
-    acquireCredImpersonateName(impersonator_cred, name, ttl=None, mechs=None,
-                               cred_usage='initiate') -> (Creds, [MechType],
-                                                          int)
-
     Acquire credentials by impersonating another name.
 
     This method is one of the ways to use S4U2Self.  It acquires credentials
@@ -118,9 +114,6 @@ def add_cred_impersonate_name(Creds input_cred not None,
                               cred_usage='initiate', initiator_ttl=None,
                               acceptor_ttl=None):
     """
-    addCredImpersonateName(input_cred, impersonator_cred, name, mech=None,
-                           cred_usage='initiate', initiator_ttl=None,
-                           acceptor_ttl=None) -> (Creds, [MechType], int, int)
     Add a credential-element to a credential by impersonating another name.
 
     This method is one of the ways to use S4U2Self.  It adds credentials

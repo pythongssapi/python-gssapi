@@ -25,7 +25,6 @@ cdef extern from "gssapi.h":
 
 def indicate_mechs():
     """
-    indicateMechs() -> [MechType]
     Get the currently supported mechanisms.
 
     This method retrieves the currently supported GSSAPI mechanisms.
@@ -47,8 +46,6 @@ def indicate_mechs():
 def display_status(unsigned int error_code, bint is_major_code,
                    OID mech_type=None, unsigned int message_context=0):
     """
-    displayStatus(error_code, is_major_code, mech_type=None,
-                  message_context=0) -> (bytes, int, bool)
     Display a string message for a GSSAPI error code.
 
     This method displays a message for a corresponding GSSAPI error code.

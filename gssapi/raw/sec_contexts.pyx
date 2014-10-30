@@ -113,10 +113,6 @@ def init_sec_context(Name target_name not None, Creds cred=None,
                      flags=None, ttl=None, channel_bindings=None,
                      input_token=None):
     """
-    initSecContext(target_name, cred=None, context=None, mech_type=None,
-                   flags=None, tll=None, channel_bindings=None,
-                   input_token=None) -> (SecurityContext, MechType,
-                                         [RequirementFlag], bytes, int, bool)
     Initiate a GSSAPI Security Context.
 
     This method initiates a GSSAPI security context, targeting the given
@@ -225,11 +221,6 @@ def init_sec_context(Name target_name not None, Creds cred=None,
 def accept_sec_context(input_token not None, Creds acceptor_cred=None,
                        SecurityContext context=None, channel_bindings=None):
     """
-    acceptSecContext(input_token, acceptor_cred=None, context=None,
-                     channel_bindings=None) -> (SecurityContext, Name,
-                                                MechType, bytes,
-                                                [RequirementFlag], int, Creds,
-                                                bool)
     Accept a GSSAPI security context.
 
     This method accepts a GSSAPI security context using a token sent by the
@@ -250,7 +241,7 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
 
     Returns:
         (SecurityContext, Name, MechType, bytes, [RequirementFlag], int,
-         Creds, bool): the resulting security context, the initiator name,
+            Creds, bool): the resulting security context, the initiator name,
             the mechanism being used, the output token, the flags in use, the
             lifetime of the context (or None for indefinite or not supported),
             the delegated credentials (valid only if the delegate_to_peer flag
@@ -332,8 +323,6 @@ def inquire_context(SecurityContext context not None, initiator_name=True,
                     target_name=True, lifetime=True, mech_type=True,
                     flags=True, locally_init=True, complete=True):
     """
-    inquireContext(context) -> (Name, Name, int, MechType, [RequirementFlag],
-                                bool, bool)
     Get information about a security context.
 
     This method obtains information about a security context, including
@@ -448,7 +437,6 @@ def inquire_context(SecurityContext context not None, initiator_name=True,
 
 def context_time(SecurityContext context not None):
     """
-    contextTime(context) -> int
     Get the amount of time for which the given context will remain valid.
 
     This method determines the amount of time for which the given
@@ -479,7 +467,6 @@ def context_time(SecurityContext context not None):
 
 def process_context_token(SecurityContext context not None, token):
     """
-    processContextToken(context, token)
     Process a token asynchronously
 
     This method provides a way to process a token, even if the
@@ -512,7 +499,6 @@ def process_context_token(SecurityContext context not None, token):
 
 def import_sec_context(token not None):
     """
-    importSecContext(token) -> SecurityContext
     Import a context from another process
 
     This method imports a security context established in another process
@@ -538,7 +524,6 @@ def import_sec_context(token not None):
 
 def export_sec_context(SecurityContext context not None):
     """
-    exportSecContext(context) -> bytes
     Export a context for use in another process
 
     This method exports a security context, deactivating in the current process
@@ -575,7 +560,6 @@ def export_sec_context(SecurityContext context not None):
 
 def delete_sec_context(SecurityContext context not None, local_only=True):
     """
-    deleteSecContext(context) -> bytes or None
     Delete a GSSAPI Security Context.
 
     This method deletes a GSSAPI security context,

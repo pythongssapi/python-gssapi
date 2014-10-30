@@ -45,7 +45,6 @@ cdef extern from "gssapi.h":
 
 def get_mic(SecurityContext context not None, message, qop=None):
     """
-    getMIC(context, message, qop) -> bytes
     Generate a MIC for a message.
 
     This method generates a Message Integrity Check token for the
@@ -91,8 +90,6 @@ def get_mic(SecurityContext context not None, message, qop=None):
 def verify_mic(SecurityContext context not None, message, token,
                return_bool=False):
     """
-    verifyMIC(context, message, token, return_bool=False) -> int or (bool, int,
-                                                                     int, int)
     Verify that a MIC matches a message.
 
     This method verifies that the given MIC matches the given message.
@@ -150,7 +147,6 @@ def verify_mic(SecurityContext context not None, message, token,
 def wrap_size_limit(SecurityContext context not None, OM_uint32 output_size,
                     confidential=True, qop=None):
     """
-    wrapSizeLimit(context, output_size, confidential=True, qop=None) -> int
     Calculate the max message size.
 
     This method calculates the unwrapped/unencrypted message size for
@@ -190,7 +186,6 @@ def wrap_size_limit(SecurityContext context not None, OM_uint32 output_size,
 def wrap(SecurityContext context not None, message, confidential=True,
          qop=None):
     """
-    wrap(context, message, confidential=True, qop=None) -> (bytes, bool)
     Wrap/Encrypt a message.
 
     This method wraps or encrypts a message (depending on the value
@@ -237,7 +232,6 @@ def wrap(SecurityContext context not None, message, confidential=True,
 
 def unwrap(SecurityContext context not None, message):
     """
-    unwrap(context, message) -> (bytes, bool, qop)
     Unwrap/Decrypt a message.
 
     This method unwraps or decrypts a message, depending
