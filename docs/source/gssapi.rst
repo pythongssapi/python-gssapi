@@ -1,18 +1,34 @@
 gssapi Package
 ==============
 
-:mod:`client` Module
+:mod:`creds` Module
 --------------------
 
-.. automodule:: gssapi.client
+.. automodule:: gssapi.creds
     :members:
     :undoc-members:
     :show-inheritance:
 
-:mod:`type_wrappers` Module
+:mod:`exceptions` Module
 ---------------------------
 
-.. automodule:: gssapi.type_wrappers
+.. automodule:: gssapi.exceptions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`names` Module
+---------------------------
+
+.. automodule:: gssapi.names
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`sec_contexts` Module
+---------------------------
+
+.. automodule:: gssapi.sec_contexts
     :members:
     :undoc-members:
     :show-inheritance:
