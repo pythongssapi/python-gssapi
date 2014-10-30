@@ -515,14 +515,3 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
 
         server_ctx.verify_mic.should_raise(gb.GSSError,
                                            b'other message', mic_token)
-
-    def test_verify_mic_bool(self):
-        client_ctx, server_ctx = self._create_completed_contexts()
-        mic_token = client_ctx.get_mic(b'some message')
-
-        server_ctx.verify_mic(b'some message',
-                              mic_token,
-                              return_bool=True).valid.should_be_true()
-        server_ctx.verify_mic(b'other message',
-                              mic_token,
-                              return_bool=True).valid.should_be_false()

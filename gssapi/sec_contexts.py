@@ -80,9 +80,9 @@ class SecurityContext(rsec_contexts.SecurityContext):
         # TODO(directxman12): check flags?
         return rmessage.get_mic(self, message)
 
-    def verify_mic(self, message, mic, return_bool=False):
+    def verify_mic(self, message, mic):
         # TODO(directxman12): implement supplementary?
-        return rmessage.verify_mic(self, message, mic, return_bool)
+        return rmessage.verify_mic(self, message, mic)
 
     def wrap(self, message, encrypt=True):
         res = rmessage.wrap(self, message, encrypt)

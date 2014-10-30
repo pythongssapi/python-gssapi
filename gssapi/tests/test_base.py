@@ -506,29 +506,6 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         gb.verify_mic.should_raise(gb.GSSError, self.server_ctx,
                                    b"some other message", b"some invalid mic")
 
-    def test_bool_verify_mic(self):
-        mic_token = gb.get_mic(self.client_ctx, b"some message")
-
-        (was_valid, qop_used, majs, mins) = gb.verify_mic(self.server_ctx,
-                                                          b"some message",
-                                                          mic_token,
-                                                          True)
-
-        was_valid.should_be_true()
-        qop_used.should_be_an_integer()
-        majs.should_be_an_integer()
-        mins.should_be_an_integer()
-
-        (was_valid2, qop_used, majs, mins) = gb.verify_mic(self.server_ctx,
-                                                           b"some new message",
-                                                           b"some invalid mic",
-                                                           True)
-
-        was_valid2.should_be_false()
-        qop_used.should_be_an_integer()
-        majs.should_be_an_integer()
-        mins.should_be_an_integer()
-
     def test_wrap_size_limit(self):
         with_conf = gb.wrap_size_limit(self.client_ctx, 100)
         without_conf = gb.wrap_size_limit(self.client_ctx, 100,

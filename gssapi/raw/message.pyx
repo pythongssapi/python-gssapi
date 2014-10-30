@@ -86,38 +86,25 @@ def get_mic(SecurityContext context not None, message, qop=None):
         raise GSSError(maj_stat, min_stat)
 
 
-# TODO(sross): should this method have two ways to run it?
-def verify_mic(SecurityContext context not None, message, token,
-               return_bool=False):
+def verify_mic(SecurityContext context not None, message, token):
     """
     Verify that a MIC matches a message.
 
     This method verifies that the given MIC matches the given message.
     There are two ways to run this method.  The default way (return_bool=False)
     will raise an error if the MIC does not match, and otherwise return
-    the QoP used to generate the MIC.  If return_bool is True, no exception
-    will be generated, and instead whether or not the MIC was valid, along
-    with the QoP and status codes will be returned.
-
-    Note:
-        GSS_S_DUPLICATE token is considered "success" for the purposes
-        of this method.  If you wish to distinguish between this and
-        GSS_S_COMPLETE, set return_bool to True and examine the major
-        status code.
+    the QoP used to generate the MIC.
 
     Args:
         context (SecurityContext): the current security context
         message (bytes): the message in question
         token (bytes): the MIC token in question
-        return_bool (bool): which return type to use (see main description)
 
     Returns:
-        int or (bool, int, int, int): either the QoP used or whether or not the
-            MIC was valid, the QoP used, the major status code, and the minor
-            status code
+        int: the QoP used.
 
     Raises:
-        GSSError: only if return_bool is False
+        GSSError
     """
 
     cdef gss_buffer_desc message_buffer = gss_buffer_desc(len(message),
@@ -132,16 +119,10 @@ def verify_mic(SecurityContext context not None, message, token,
         maj_stat = gss_verify_mic(&min_stat, context.raw_ctx, &message_buffer,
                                   &token_buffer, &qop_state)
 
-    if maj_stat == GSS_S_COMPLETE or maj_stat == GSS_S_DUPLICATE_TOKEN:
-        if return_bool:
-            return VerifyMICResult(True, qop_state, maj_stat, min_stat)
-        else:
-            return qop_state
+    if maj_stat == GSS_S_COMPLETE:
+        return qop_state
     else:
-        if return_bool:
-            return VerifyMICResult(False, qop_state, maj_stat, min_stat)
-        else:
-            raise GSSError(maj_stat, min_stat)
+        raise GSSError(maj_stat, min_stat)
 
 
 def wrap_size_limit(SecurityContext context not None, OM_uint32 output_size,
