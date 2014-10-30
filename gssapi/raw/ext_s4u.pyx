@@ -58,9 +58,9 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
             'initiate', 'accept', or 'both'
 
     Returns:
-        (Creds, [MechType], int): the resulting credentials, the actual
-            mechanisms with which they may be used, and their actual
-            lifetime (or None for indefinite or not support)
+        AcquireCredResult: the resulting credentials, the actual mechanisms
+        with which they may be used, and their actual lifetime (or None for
+        indefinite or not support)
 
     Raises:
         GSSError
@@ -139,10 +139,9 @@ def add_cred_impersonate_name(Creds input_cred not None,
             indefinite)
 
     Returns:
-        ([MechType], int, int): the actual mechanisms with which the
-            credentials may be used, the actual initiator TTL,
-            and the actual acceptor TTL (the TTLs may be None for indefinite
-            or not supported)
+        AddCredResult: the actual mechanisms with which the credentials may be
+        used, the actual initiator TTL, and the actual acceptor TTL (the TTLs
+        may be None for indefinite or not supported)
 
     Raises:
         GSSError

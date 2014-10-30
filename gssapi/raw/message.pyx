@@ -200,7 +200,7 @@ def wrap(SecurityContext context not None, message, confidential=True,
             (or None for the default QoP)
 
     Returns:
-        (bytes, bool): the wrapped/encrypted message, and whether or not
+        WrapResult: the wrapped/encrypted message, and whether or not
             encryption was actually used
 
     Raises:
@@ -242,9 +242,8 @@ def unwrap(SecurityContext context not None, message):
         message (bytes): the message to unwrap/decrypt
 
     Returns:
-        (bytes, bool, qop): the unwrapped/decrypted message,
-            whether or on encryption was used,
-            and the QoP used
+        UnwrapResult: the unwrapped/decrypted message, whether or on
+            encryption was used, and the QoP used
 
     Raises:
         GSSError

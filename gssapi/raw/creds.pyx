@@ -98,9 +98,9 @@ def acquire_cred(Name name, ttl=None, mechs=None, cred_usage='both'):
             'initiate', 'accept', or 'both'
 
     Returns:
-        (Creds, [MechType], int): the resulting credentials, the actual
-            mechanisms with which they may be used, and their actual
-            lifetime (or None for indefinite or not supported)
+        AcquireCredResult: the resulting credentials, the actual mechanisms
+        with which they may be used, and their actual lifetime (or None for
+        indefinite or not supported)
 
     Raises:
         GSSError

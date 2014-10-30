@@ -141,11 +141,11 @@ def init_sec_context(Name target_name not None, Creds cred=None,
             or None if you are creating a new context
 
     Returns:
-        (SecurityContext, MechType, [RequirementFlag], bytes, int, bool): the
-            output security context, the actual mech type, the actual flags
-            used, the output token to send to the acceptor, the actual
-            lifetime of the context (or None if not supported or indefinite),
-            and whether or not more calls are needed to finish the initiation.
+        InitSecContextResult: the output security context, the actual mech
+        type, the actual flags used, the output token to send to the acceptor,
+        the actual lifetime of the context (or None if not supported or
+        indefinite), and whether or not more calls are needed to finish the
+        initiation.
 
     Raises:
         GSSError
@@ -240,13 +240,12 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
         channel_bindings: NCI
 
     Returns:
-        (SecurityContext, Name, MechType, bytes, [RequirementFlag], int,
-            Creds, bool): the resulting security context, the initiator name,
-            the mechanism being used, the output token, the flags in use, the
-            lifetime of the context (or None for indefinite or not supported),
-            the delegated credentials (valid only if the delegate_to_peer flag
-            is set), and whether or not further token exchanges are needed to
-            finalize the security context.
+        AcceptSecContextResult: the resulting security context, the initiator
+            name, the mechanism being used, the output token, the flags in use,
+            the lifetime of the context (or None for indefinite or not
+            supported), the delegated credentials (valid only if the
+            delegate_to_peer flag is set), and whether or not further token
+            exchanges are needed to finalize the security context.
 
     Raises:
         GSSError
@@ -335,9 +334,8 @@ def inquire_context(SecurityContext context not None, initiator_name=True,
         context (SecurityContext): the context in question
 
     Returns:
-        (Name, Name, int, MechType, [RequirementFlag], bool, bool): the
-            initiator name, the target name, the TTL (can be None for
-            indefinite or not supported), the mech type, the
+        InquireContextResult: the initiator name, the target name, the TTL
+            (can be None for indefinite or not supported), the mech type, the
             flags, whether or not the context was locally initiated,
             and whether or not the context is currently fully established
 
@@ -573,7 +571,8 @@ def delete_sec_context(SecurityContext context not None, local_only=True):
             remote deletion (False), in which case a token is also returned
 
     Returns:
-        bytes or None: the output token (if remote deletion is requested)
+        bytes: the output token (if remote deletion is requested).  Generally
+            this is None, but bytes for compatability.
 
     Raises:
         GSSError

@@ -123,7 +123,7 @@ def display_name(Name name not None, name_type=True):
         name_type (bool): whether or not to retrieve the name type
 
     Returns:
-        (bytes, NameType): the text part of the name and its type
+        DisplayNameResult: the text part of the name and its type
 
     Raises:
         GSSError
@@ -313,7 +313,7 @@ def release_name(Name name not None):
         name (Name): the name in question
 
     Raises:
-    GSSError
+        GSSError
     """
 
     cdef OM_uint32 maj_stat, min_stat
