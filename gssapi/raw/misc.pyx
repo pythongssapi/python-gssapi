@@ -44,7 +44,7 @@ def indicate_mechs():
 
 
 def _display_status(unsigned int error_code, bint is_major_code,
-                   OID mech_type=None, unsigned int message_context=0):
+                    OID mech_type=None, unsigned int message_context=0):
     """
     Display a string message for a GSSAPI error code.
 

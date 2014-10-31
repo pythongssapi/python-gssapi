@@ -7,6 +7,7 @@ import unittest
 import should_be.all  # noqa
 
 import gssapi.raw as gb
+import gssapi.raw.misc as gbmisc
 from gssapi.tests import k5test as kt
 
 
@@ -123,7 +124,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         gb.release_name(init_name)
 
     def test_display_status(self):
-        status_resp = gb._display_status(0, False)
+        status_resp = gbmisc._display_status(0, False)
         status_resp.shouldnt_be_none()
 
         (status, ctx, cont) = status_resp
