@@ -2,6 +2,7 @@ import collections
 import copy
 import os
 import socket
+import unittest
 
 import should_be.all  # noqa
 
@@ -357,6 +358,147 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         err.should_be_a(gb.NameReadError)
         err.maj_code.should_be(err_code1 | err_code2)
+
+
+class TestIntEnumFlagSet(unittest.TestCase):
+    def test_create_from_int(self):
+        int_val = (gb.RequirementFlag.integrity |
+                   gb.RequirementFlag.confidentiality)
+        fset = gb.IntEnumFlagSet(gb.RequirementFlag, int_val)
+
+        int(fset).should_be(int_val)
+
+    def test_create_from_other_set(self):
+        int_val = (gb.RequirementFlag.integrity |
+                   gb.RequirementFlag.confidentiality)
+        fset1 = gb.IntEnumFlagSet(gb.RequirementFlag, int_val)
+        fset2 = gb.IntEnumFlagSet(gb.RequirementFlag, fset1)
+
+        fset1.should_be(fset2)
+
+    def test_create_from_list(self):
+        lst = [gb.RequirementFlag.integrity,
+               gb.RequirementFlag.confidentiality]
+        fset = gb.IntEnumFlagSet(gb.RequirementFlag, lst)
+
+        list(fset).should_have_same_items_as(lst)
+
+    def test_create_empty(self):
+        fset = gb.IntEnumFlagSet(gb.RequirementFlag)
+        fset.should_be_empty()
+
+    def _create_fset(self):
+        lst = [gb.RequirementFlag.integrity,
+               gb.RequirementFlag.confidentiality]
+        return gb.IntEnumFlagSet(gb.RequirementFlag, lst)
+
+    def test_contains(self):
+        fset = self._create_fset()
+        fset.should_include(gb.RequirementFlag.integrity)
+        fset.shouldnt_include(gb.RequirementFlag.protection_ready)
+
+    def test_len(self):
+        self._create_fset().should_have_length(2)
+
+    def test_add(self):
+        fset = self._create_fset()
+        fset.should_have_length(2)
+
+        fset.add(gb.RequirementFlag.protection_ready)
+        fset.should_have_length(3)
+        fset.should_include(gb.RequirementFlag.protection_ready)
+
+    def test_discard(self):
+        fset = self._create_fset()
+        fset.should_have_length(2)
+
+        fset.discard(gb.RequirementFlag.protection_ready)
+        fset.should_have_length(2)
+
+        fset.discard(gb.RequirementFlag.integrity)
+        fset.should_have_length(1)
+        fset.shouldnt_include(gb.RequirementFlag.integrity)
+
+    def test_and_enum(self):
+        fset = self._create_fset()
+        (fset & gb.RequirementFlag.integrity).should_be_true()
+        (fset & gb.RequirementFlag.protection_ready).should_be_false()
+
+    def test_and_int(self):
+        fset = self._create_fset()
+        int_val = int(gb.RequirementFlag.integrity)
+
+        (fset & int_val).should_be(int_val)
+
+    def test_and_set(self):
+        fset1 = self._create_fset()
+        fset2 = self._create_fset()
+        fset3 = self._create_fset()
+
+        fset1.add(gb.RequirementFlag.protection_ready)
+        fset2.add(gb.RequirementFlag.out_of_sequence_detection)
+
+        (fset1 & fset2).should_be(fset3)
+
+    def test_or_enum(self):
+        fset1 = self._create_fset()
+        fset2 = fset1 | gb.RequirementFlag.protection_ready
+
+        (fset1 < fset2).should_be_true()
+        fset2.should_include(gb.RequirementFlag.protection_ready)
+
+    def test_or_int(self):
+        fset = self._create_fset()
+        int_val = int(gb.RequirementFlag.integrity)
+
+        (fset | int_val).should_be(int(fset))
+
+    def test_or_set(self):
+        fset1 = self._create_fset()
+        fset2 = self._create_fset()
+        fset3 = self._create_fset()
+
+        fset1.add(gb.RequirementFlag.protection_ready)
+        fset2.add(gb.RequirementFlag.out_of_sequence_detection)
+        fset3.add(gb.RequirementFlag.protection_ready)
+        fset3.add(gb.RequirementFlag.out_of_sequence_detection)
+
+        (fset1 | fset2).should_be(fset3)
+
+    def test_xor_enum(self):
+        fset1 = self._create_fset()
+
+        fset2 = fset1 ^ gb.RequirementFlag.protection_ready
+        fset3 = fset1 ^ gb.RequirementFlag.integrity
+
+        fset2.should_have_length(3)
+        fset2.should_include(gb.RequirementFlag.protection_ready)
+
+        fset3.should_have_length(1)
+        fset3.shouldnt_include(gb.RequirementFlag.integrity)
+
+    def test_xor_int(self):
+        fset = self._create_fset()
+
+        (fset ^ int(gb.RequirementFlag.protection_ready)).should_be(
+            int(fset) ^ gb.RequirementFlag.protection_ready)
+
+        (fset ^ int(gb.RequirementFlag.integrity)).should_be(
+            int(fset) ^ gb.RequirementFlag.integrity)
+
+    def test_xor_set(self):
+        fset1 = self._create_fset()
+        fset2 = self._create_fset()
+
+        fset1.add(gb.RequirementFlag.protection_ready)
+        fset2.add(gb.RequirementFlag.out_of_sequence_detection)
+
+        fset3 = fset1 ^ fset2
+        fset3.should_have_length(2)
+        fset3.shouldnt_include(gb.RequirementFlag.integrity)
+        fset3.shouldnt_include(gb.RequirementFlag.confidentiality)
+        fset3.should_include(gb.RequirementFlag.protection_ready)
+        fset3.should_include(gb.RequirementFlag.out_of_sequence_detection)
 
 
 class TestInitContext(_GSSAPIKerberosTestCase):

@@ -4,8 +4,9 @@ from gssapi.raw.cython_types cimport *
 from gssapi.raw.cython_converters cimport c_make_oid
 from gssapi.raw.oids cimport OID
 
+from enum import IntEnum
 import collections
-from flufl.enum import IntEnum
+import copy
 import numbers
 import operator
 
@@ -109,36 +110,36 @@ class GenericFlagSet(collections.MutableSet):
         return l
 
     def add(self, flag):
-        self._val &= flag
+        self._val |= flag
 
     def discard(self, flag):
         # NB(directxman12): the 0xFFFFFFFF mask is needed to
         #                   make Python's invert work properly
-        self.val = self.val & (~flag & 0xFFFFFFFF)
+        self._val = self._val & (~flag & 0xFFFFFFFF)
 
     def __and__(self, other):
-        if isinstance(self, numbers.Integral):
+        if isinstance(other, numbers.Integral):
             return self._val & other
         else:
-            super(GenericFlagSet, self).__and__(other)
+            return super(GenericFlagSet, self).__and__(other)
 
     def __rand__(self, other):
         return self.__and__(other)
 
     def __or__(self, other):
-        if isinstance(self, numbers.Integral):
+        if isinstance(other, numbers.Integral):
             return self._val | other
         else:
-            super(GenericFlagSet, self).__or__(other)
+            return super(GenericFlagSet, self).__or__(other)
 
     def __ror__(self, other):
         return self.__or__(other)
 
     def __xor__(self, other):
-        if isinstance(self, numbers.Integral):
+        if isinstance(other, numbers.Integral):
             return self._val ^ other
         else:
-            super(GenericFlagSet, self).__xor__(other)
+            return super(GenericFlagSet, self).__xor__(other)
 
     def __rxor__(self, other):
         return self.__xor__(other)
@@ -149,14 +150,79 @@ class GenericFlagSet(collections.MutableSet):
     def __long__(self):
         return long(self._val)
 
+    def __eq__(self, other):
+        if isinstance(other, GenericFlagSet):
+            return self._val == other._val
+        else:
+            return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __repr__(self):
+        bits = "{0:032b}".format(self._val & 0xFFFFFFFF)
+        return "<{name} {bits}>".format(name=type(self).__name__,
+                                        bits=bits)
+
 
 class IntEnumFlagSet(GenericFlagSet):
     __slots__ = ('_val', '_enum')
 
     def __init__(self, enum, flags=None):
+        if not issubclass(enum, IntEnum):
+            raise Exception('"enum" not an Enum')
         self._enum = enum
         super(IntEnumFlagSet, self).__init__(flags)
 
     def __iter__(self):
         for i in super(IntEnumFlagSet, self).__iter__():
-            yield self._enum[i]
+            yield self._enum(i)
+
+    def __repr__(self):
+        fmt_str = "{name}({enum}, [{vals}])"
+        vals = ', '.join([elem.name for elem in self])
+        return fmt_str.format(name=type(self).__name__,
+                              enum=self._enum.__name__,
+                              vals=vals)
+
+    def __and__(self, other):
+        if isinstance(other, self._enum):
+            return other in self
+        else:
+            res = super(IntEnumFlagSet, self).__and__(other)
+            if isinstance(res, GenericFlagSet):
+                return IntEnumFlagSet(self._enum, res)
+            else:
+                return res
+
+    def __or__(self, other):
+        if isinstance(other, self._enum):
+            cpy = copy.copy(self)
+            cpy.add(other)
+            return cpy
+        else:
+            res = super(IntEnumFlagSet, self).__or__(other)
+            if isinstance(res, GenericFlagSet):
+                return IntEnumFlagSet(self._enum, res)
+            else:
+                return res
+
+    def __xor__(self, other):
+        if isinstance(other, self._enum):
+            cpy = copy.copy(self)
+            cpy._val = cpy._val ^ other
+            return cpy
+        else:
+            res = super(IntEnumFlagSet, self).__xor__(other)
+            if isinstance(res, GenericFlagSet):
+                return IntEnumFlagSet(self._enum, res)
+            else:
+                return res
+
+    def __sub__(self, other):
+        return IntEnumFlagSet(self._enum,
+                              super(IntEnumFlagSet, self).__sub__(other))
+
+    @classmethod
+    def _from_iterable(cls, it):
+        return GenericFlagSet(it)

@@ -148,7 +148,7 @@ setup(
         extension_file('rfc5588', 'gss_store_cred'),
     ]),
     install_requires=[
-        'flufl.enum >= 4.0'
+        'enum34'
     ],
     tests_require=[
         'tox'
