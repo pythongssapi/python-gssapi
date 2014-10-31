@@ -13,6 +13,7 @@ from gssapi import names as gssnames
 from gssapi import sec_contexts as gssctx
 from gssapi import raw as gb
 from gssapi import _utils as gssutils
+from gssapi import exceptions as excs
 from gssapi.tests import k5test as kt
 from gssapi._utils import import_gssapi_extension
 
@@ -478,15 +479,40 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         unpickled_ctx.usage.should_be('initiate')
         unpickled_ctx.target_name.should_be(self.target_name)
 
+    def test_encrypt_decrypt(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+
+        encrypted_msg = client_ctx.encrypt(b'test message')
+        encrypted_msg.should_be_a(bytes)
+
+        decrypted_msg = server_ctx.decrypt(encrypted_msg)
+        decrypted_msg.should_be_a(bytes)
+        decrypted_msg.should_be(b'test message')
+
+    def test_encrypt_decrypt_throws_error_on_no_encryption(self):
+        client_ctx, server_ctx = self._create_completed_contexts()
+
+        wrap_res = client_ctx.wrap(b'test message', False)
+        wrap_res.should_be_a(gb.WrapResult)
+        wrap_res.encrypted.should_be_false()
+        wrap_res.message.should_be_a(bytes)
+
+        server_ctx.decrypt.should_raise(excs.EncryptionNotUsed,
+                                        wrap_res.message)
+
     def test_wrap_unwrap(self):
         client_ctx, server_ctx = self._create_completed_contexts()
 
-        wrapped_message = client_ctx.wrap(b'test message')
-        wrapped_message.should_be_a(bytes)
+        wrap_res = client_ctx.wrap(b'test message', True)
+        wrap_res.should_be_a(gb.WrapResult)
+        wrap_res.encrypted.should_be_true()
+        wrap_res.message.should_be_a(bytes)
 
-        unwrapped_message = server_ctx.unwrap(wrapped_message)
-        unwrapped_message.should_be_a(bytes)
-        unwrapped_message.should_be(b'test message')
+        unwrap_res = server_ctx.unwrap(wrap_res.message)
+        unwrap_res.should_be_a(gb.UnwrapResult)
+        unwrap_res.message.should_be_a(bytes)
+        unwrap_res.message.should_be(b'test message')
+        unwrap_res.encrypted.should_be_true()
 
     def test_get_wrap_size_limit(self):
         client_ctx, server_ctx = self._create_completed_contexts()

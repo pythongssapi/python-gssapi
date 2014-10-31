@@ -84,27 +84,30 @@ class SecurityContext(rsec_contexts.SecurityContext):
         # TODO(directxman12): implement supplementary?
         return rmessage.verify_mic(self, message, mic)
 
-    def wrap(self, message, encrypt=True):
-        res = rmessage.wrap(self, message, encrypt)
+    def wrap(self, message, encrypt):
+        return rmessage.wrap(self, message, encrypt)
 
-        if encrypt and not res.encrypted:
+    def unwrap(self, message):
+        return rmessage.unwrap(self, message)
+
+    def encrypt(self, message):
+        res = self.wrap(message, encrypt=True)
+
+        if not res.encrypted:
             raise excs.EncryptionNotUsed("Wrapped message was not encrypted")
 
         return res.message
 
-    def unwrap(self, message):
-        # TODO(directxman12): should we raise our own error here if we
-        #                     expected a QoP or encryption and didn't get it?
-        #                     (maybe just for decrypt?)
+    def decrypt(self, message):
         # TODO(directman12): implement supplementary
-        res = rmessage.unwrap(self, message)
+        res = self.unwrap(message)
 
         if (not res.encrypted and
                 self.actual_flags & RequirementFlag.confidentiality):
-            raise excs.EncryptionNotUsage("The context was established with "
-                                          "encryption, but unwrapped message "
-                                          "was not encrypted",
-                                          unwrapped_message=res.message)
+            raise excs.EncryptionNotUsed("The context was established with "
+                                         "encryption, but unwrapped message "
+                                         "was not encrypted",
+                                         unwrapped_message=res.message)
 
         return res.message
 
