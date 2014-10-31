@@ -526,18 +526,18 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         with_conf.should_be_at_most(100)
         without_conf.should_be_at_most(100)
 
-    def test_get_mic(self):
+    def test_get_signature(self):
         client_ctx, server_ctx = self._create_completed_contexts()
-        mic_token = client_ctx.get_mic(b'some message')
+        mic_token = client_ctx.get_signature(b'some message')
 
         mic_token.should_be_a(bytes)
         mic_token.shouldnt_be_empty()
 
-    def test_verify_mic_raise(self):
+    def test_verify_signature_raise(self):
         client_ctx, server_ctx = self._create_completed_contexts()
-        mic_token = client_ctx.get_mic(b'some message')
+        mic_token = client_ctx.get_signature(b'some message')
 
-        server_ctx.verify_mic(b'some message', mic_token)
+        server_ctx.verify_signature(b'some message', mic_token)
 
-        server_ctx.verify_mic.should_raise(gb.GSSError,
-                                           b'other message', mic_token)
+        server_ctx.verify_signature.should_raise(gb.GSSError,
+                                                 b'other message', mic_token)

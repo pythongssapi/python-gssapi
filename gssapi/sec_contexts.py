@@ -76,11 +76,11 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
     # TODO(directxman12): implement flag properties
 
-    def get_mic(self, message):
+    def get_signature(self, message):
         # TODO(directxman12): check flags?
         return rmessage.get_mic(self, message)
 
-    def verify_mic(self, message, mic):
+    def verify_signature(self, message, mic):
         # TODO(directxman12): implement supplementary?
         return rmessage.verify_mic(self, message, mic)
 
