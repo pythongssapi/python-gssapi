@@ -588,6 +588,55 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
 
         cont_needed.should_be_a(bool)
 
+    def test_channel_bindings(self):
+        bdgs = gb.ChannelBindings(application_data=b'abcxyz',
+                                  initiator_address_type=gb.AddressType.ip,
+                                  initiator_address=b'127.0.0.1',
+                                  acceptor_address_type=gb.AddressType.ip,
+                                  acceptor_address=b'127.0.0.1')
+        self.target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                          gb.NameType.hostbased_service)
+        ctx_resp = gb.init_sec_context(self.target_name,
+                                       channel_bindings=bdgs)
+
+        self.client_token = ctx_resp[3]
+        self.client_ctx = ctx_resp[0]
+        self.client_ctx.shouldnt_be_none()
+
+        self.server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                          gb.NameType.kerberos_principal)
+        self.server_creds = gb.acquire_cred(self.server_name)[0]
+
+        server_resp = gb.accept_sec_context(self.client_token,
+                                            acceptor_cred=self.server_creds,
+                                            channel_bindings=bdgs)
+        server_resp.shouldnt_be_none
+        self.server_ctx = server_resp.context
+
+    def test_bad_channel_binding_raises_error(self):
+        bdgs = gb.ChannelBindings(application_data=b'abcxyz',
+                                  initiator_address_type=gb.AddressType.ip,
+                                  initiator_address=b'127.0.0.1',
+                                  acceptor_address_type=gb.AddressType.ip,
+                                  acceptor_address=b'127.0.0.1')
+        self.target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                          gb.NameType.hostbased_service)
+        ctx_resp = gb.init_sec_context(self.target_name,
+                                       channel_bindings=bdgs)
+
+        self.client_token = ctx_resp[3]
+        self.client_ctx = ctx_resp[0]
+        self.client_ctx.shouldnt_be_none()
+
+        self.server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                          gb.NameType.kerberos_principal)
+        self.server_creds = gb.acquire_cred(self.server_name)[0]
+
+        bdgs.acceptor_address = b'127.0.1.0'
+        gb.accept_sec_context.should_raise(gb.GSSError, self.client_token,
+                                           acceptor_cred=self.server_creds,
+                                           channel_bindings=bdgs)
+
 
 class TestWrapUnwrap(_GSSAPIKerberosTestCase):
     def setUp(self):

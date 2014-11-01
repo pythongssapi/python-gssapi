@@ -58,6 +58,41 @@ class RequirementFlag(IntEnum):
     transferable = GSS_C_TRANS_FLAG
 
 
+class AddressType(IntEnum):
+    """
+    GSSAPI Channel Bindings Address Types
+
+    This IntEnum represents the various address
+    types used with the channel bindings structure.
+
+    The numbers behind the values correspond directly
+    to their C counterparts.
+    """
+
+    unspecified = GSS_C_AF_UNSPEC
+    local = GSS_C_AF_LOCAL
+    ip = GSS_C_AF_INET
+    arpanet = GSS_C_AF_IMPLINK  # ARPAnet support, heh, heh
+    pup = GSS_C_AF_PUP
+    chaos = GSS_C_AF_CHAOS
+    xerox_ns = GSS_C_AF_NS  # and XEROX too?
+    nbs = GSS_C_AF_NBS
+    ecma = GSS_C_AF_ECMA
+    datakit = GSS_C_AF_DATAKIT
+    ccitt = GSS_C_AF_CCITT
+    ibm_sna = GSS_C_AF_SNA
+    decnet = GSS_C_AF_DECnet
+    dli = GSS_C_AF_DLI
+    lat = GSS_C_AF_LAT
+    hyperchannel = GSS_C_AF_HYLINK
+    appletalk = GSS_C_AF_APPLETALK  # this list just keeps getting better
+    bisync = GSS_C_AF_BSC
+    dss = GSS_C_AF_DSS
+    osi_tp4 = GSS_C_AF_OSI
+    x25 = GSS_C_AF_X25
+    # None --> GSS_C_AF_NULLADDR
+
+
 class MechType(object):
     """
     GSSAPI Mechanism Types

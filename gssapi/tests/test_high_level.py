@@ -458,6 +458,42 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         client_ctx.locally_initiated.should_be_true()
         client_ctx.complete.should_be_true()
 
+    def test_channel_bindings(self):
+        bdgs = gb.ChannelBindings(application_data=b'abcxyz',
+                                  initiator_address_type=gb.AddressType.ip,
+                                  initiator_address=b'127.0.0.1',
+                                  acceptor_address_type=gb.AddressType.ip,
+                                  acceptor_address=b'127.0.0.1')
+        client_ctx = self._create_client_ctx(desired_lifetime=400,
+                                             channel_bindings=bdgs)
+
+        client_token = client_ctx.step()
+        client_token.should_be_a(bytes)
+
+        server_ctx = gssctx.SecurityContext(creds=self.server_creds,
+                                            channel_bindings=bdgs)
+        server_token = server_ctx.step(client_token)
+        server_token.should_be_a(bytes)
+
+        client_ctx.step(server_token)
+
+    def test_bad_channel_bindings_raises_error(self):
+        bdgs = gb.ChannelBindings(application_data=b'abcxyz',
+                                  initiator_address_type=gb.AddressType.ip,
+                                  initiator_address=b'127.0.0.1',
+                                  acceptor_address_type=gb.AddressType.ip,
+                                  acceptor_address=b'127.0.0.1')
+        client_ctx = self._create_client_ctx(desired_lifetime=400,
+                                             channel_bindings=bdgs)
+
+        client_token = client_ctx.step()
+        client_token.should_be_a(bytes)
+
+        bdgs.acceptor_address = b'127.0.1.0'
+        server_ctx = gssctx.SecurityContext(creds=self.server_creds,
+                                            channel_bindings=bdgs)
+        server_ctx.step.should_raise(gb.BadChannelBindingsError, client_token)
+
     def test_export_create_from_token(self):
         client_ctx, server_ctx = self._create_completed_contexts()
         token = client_ctx.export()

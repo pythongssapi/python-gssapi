@@ -106,6 +106,30 @@ cdef extern from "gssapi.h":
     OM_uint32 GSS_C_TRANS_FLAG
     OM_uint32 GSS_C_PROT_READY_FLAG
 
+    # address types
+    OM_uint32 GSS_C_AF_UNSPEC
+    OM_uint32 GSS_C_AF_LOCAL
+    OM_uint32 GSS_C_AF_INET
+    OM_uint32 GSS_C_AF_IMPLINK
+    OM_uint32 GSS_C_AF_PUP
+    OM_uint32 GSS_C_AF_CHAOS
+    OM_uint32 GSS_C_AF_NS
+    OM_uint32 GSS_C_AF_NBS
+    OM_uint32 GSS_C_AF_ECMA
+    OM_uint32 GSS_C_AF_DATAKIT
+    OM_uint32 GSS_C_AF_CCITT
+    OM_uint32 GSS_C_AF_SNA
+    OM_uint32 GSS_C_AF_DECnet
+    OM_uint32 GSS_C_AF_DLI
+    OM_uint32 GSS_C_AF_LAT
+    OM_uint32 GSS_C_AF_HYLINK
+    OM_uint32 GSS_C_AF_APPLETALK
+    OM_uint32 GSS_C_AF_BSC
+    OM_uint32 GSS_C_AF_DSS
+    OM_uint32 GSS_C_AF_OSI
+    OM_uint32 GSS_C_AF_X25
+    OM_uint32 GSS_C_AF_NULLADDR
+
     # error helpers
     OM_uint32 GSS_CALLING_ERROR(OM_uint32 full_error)
     OM_uint32 GSS_ROUTINE_ERROR(OM_uint32 full_error)

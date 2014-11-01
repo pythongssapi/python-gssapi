@@ -6,6 +6,7 @@ from gssapi.raw.names import *  # noqa
 from gssapi.raw.sec_contexts import *  # noqa
 from gssapi.raw.oids import *  # noqa
 from gssapi.raw.types import *  # noqa
+from gssapi.raw.chan_bindings import *  # noqa
 
 # optional S4U support
 try:

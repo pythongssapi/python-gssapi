@@ -143,6 +143,7 @@ setup(
         main_file('message'),
         main_file('oids'),
         main_file('cython_converters'),
+        main_file('chan_bindings'),
         extension_file('s4u', 'gss_acquire_cred_impersonate_name'),
         extension_file('cred_store', 'gss_store_cred_into'),
         extension_file('rfc5588', 'gss_store_cred'),
