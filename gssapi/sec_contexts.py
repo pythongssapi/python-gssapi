@@ -74,6 +74,13 @@ class SecurityContext(rsec_contexts.SecurityContext):
             else:
                 self.usage = 'accept'
 
+        self._last_err = None
+        # self._last_tb = None
+
+    def __del__(self):
+        if self._last_err is not None:
+            del self._last_tb  # in case of cycles, break glass
+
     # TODO(directxman12): implement flag properties
 
     def get_signature(self, message):
@@ -167,16 +174,31 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
     @property
     def complete(self):
-        if self._started:
+        if self._last_err is not None:
+            try:
+                raise self._last_err, None, self._last_tb
+            finally:
+                del self._last_tb
+                self._last_err = None
+        elif self._started:
             return self._inquire(complete=True).complete
         else:
             return False
 
     def step(self, token=None):
-        if self.usage == 'accept':
-            return self._acceptor_step(token=token)
-        else:
-            return self._initiator_step(token=token)
+        try:
+            if self.usage == 'accept':
+                return self._acceptor_step(token=token)
+            else:
+                return self._initiator_step(token=token)
+        except GSSError as e:
+            if e.token is not None:
+                self._last_err = e
+                self._last_tb = sys.exc_info()[2]
+
+                return e.token
+            else:
+                raise e
 
     def _acceptor_step(self, token):
         res = rsec_contexts.accept_sec_context(token, self._creds,
