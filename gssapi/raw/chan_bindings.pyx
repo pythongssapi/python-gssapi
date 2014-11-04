@@ -1,4 +1,4 @@
-from libc.stdlib cimport malloc, free
+from libc.stdlib cimport calloc, free
 
 from gssapi.raw.cython_types cimport *
 
@@ -25,34 +25,24 @@ cdef class ChannelBindings:
 
     cdef gss_channel_bindings_t __cvalue__(ChannelBindings self) except NULL:
         cdef gss_channel_bindings_t res
-        res = <gss_channel_bindings_t>malloc(sizeof(res[0]))
+        res = <gss_channel_bindings_t>calloc(1, sizeof(gss_channel_bindings_t))
 
-        if self.initiator_address_type is None:
-            res.initiator_addrtype = GSS_C_AF_NULLADDR
-        else:
+        if self.initiator_address_type is not None:
             res.initiator_addrtype = self.initiator_address_type
 
         if self.initiator_address is not None:
             res.initiator_address.value = self.initiator_address
             res.initiator_address.length = len(self.initiator_address)
-        else:
-            res.initiator_address.length = 0
 
-        if self.acceptor_address_type is None:
-            res.acceptor_addrtype = GSS_C_AF_NULLADDR
-        else:
+        if self.acceptor_address_type is not None:
             res.acceptor_addrtype = self.acceptor_address_type
 
         if self.acceptor_address is not None:
             res.acceptor_address.value = self.acceptor_address
             res.acceptor_address.length = len(self.acceptor_address)
-        else:
-            res.acceptor_address.length = 0
 
         if self.application_data is not None:
             res.application_data.value = self.application_data
             res.application_data.length = len(self.application_data)
-        else:
-            res.application_data.length = 0
 
         return res
