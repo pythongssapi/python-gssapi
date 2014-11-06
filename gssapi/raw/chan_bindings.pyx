@@ -27,6 +27,9 @@ cdef class ChannelBindings:
         cdef gss_channel_bindings_t res
         res = <gss_channel_bindings_t>calloc(1, sizeof(res[0]))
 
+        # NB(directxman12): an addrtype of 0 as set by calloc is equivalent
+        #                   to GSS_C_AF_UNSPEC as per RFC 2744
+
         if self.initiator_address_type is not None:
             res.initiator_addrtype = self.initiator_address_type
 

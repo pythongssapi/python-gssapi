@@ -69,7 +69,7 @@ class AddressType(IntEnum):
     to their C counterparts.
     """
 
-    unspecified = GSS_C_AF_UNSPEC
+    # unspecified = GSS_C_AF_UNSPEC  # None --> GSS_C_AF_UNSPEC
     local = GSS_C_AF_LOCAL
     ip = GSS_C_AF_INET
     arpanet = GSS_C_AF_IMPLINK  # ARPAnet support, heh, heh
@@ -90,7 +90,7 @@ class AddressType(IntEnum):
     dss = GSS_C_AF_DSS
     osi_tp4 = GSS_C_AF_OSI
     x25 = GSS_C_AF_X25
-    # None --> GSS_C_AF_NULLADDR
+    null = GSS_C_AF_NULLADDR
 
 
 class MechType(object):
