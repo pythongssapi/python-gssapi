@@ -25,7 +25,7 @@ cdef class ChannelBindings:
 
     cdef gss_channel_bindings_t __cvalue__(ChannelBindings self) except NULL:
         cdef gss_channel_bindings_t res
-        res = <gss_channel_bindings_t>calloc(1, sizeof(gss_channel_bindings_t))
+        res = <gss_channel_bindings_t>calloc(1, sizeof(res[0]))
 
         if self.initiator_address_type is not None:
             res.initiator_addrtype = self.initiator_address_type
