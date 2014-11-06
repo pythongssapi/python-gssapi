@@ -22,6 +22,9 @@ TARGET_SERVICE_NAME = b'host'
 FQDN = socket.getfqdn().encode('utf-8')
 SERVICE_PRINCIPAL = TARGET_SERVICE_NAME + b'/' + FQDN
 
+# disable error deferring to catch errors immediately
+gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = False
+
 
 class _GSSAPIKerberosTestCase(kt.KerberosTestCase):
     @classmethod
@@ -385,6 +388,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
 class SecurityContextTestCase(_GSSAPIKerberosTestCase):
     def setUp(self):
         super(SecurityContextTestCase, self).setUp()
+        gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = False
         self.client_name = gssnames.Name(self.USER_PRINC)
         self.client_creds = gsscreds.Credentials(desired_name=None,
                                                  usage='initiate')
@@ -577,3 +581,37 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
 
         server_ctx.verify_signature.should_raise(gb.GSSError,
                                                  b'other message', mic_token)
+
+    def test_defer_step_error_on_method(self):
+        gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = True
+        bdgs = gb.ChannelBindings(application_data=b'abcxyz')
+        client_ctx = self._create_client_ctx(desired_lifetime=400,
+                                             channel_bindings=bdgs)
+
+        client_token = client_ctx.step()
+        client_token.should_be_a(bytes)
+
+        bdgs.application_data = b'defuvw'
+        server_ctx = gssctx.SecurityContext(creds=self.server_creds,
+                                            channel_bindings=bdgs)
+        server_ctx.step(client_token).should_be_a(bytes)
+        server_ctx.encrypt.should_raise(gb.BadChannelBindingsError, b'test')
+
+    def test_defer_step_error_on_complete_property_access(self):
+        gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = True
+        bdgs = gb.ChannelBindings(application_data=b'abcxyz')
+        client_ctx = self._create_client_ctx(desired_lifetime=400,
+                                             channel_bindings=bdgs)
+
+        client_token = client_ctx.step()
+        client_token.should_be_a(bytes)
+
+        bdgs.application_data = b'defuvw'
+        server_ctx = gssctx.SecurityContext(creds=self.server_creds,
+                                            channel_bindings=bdgs)
+        server_ctx.step(client_token).should_be_a(bytes)
+
+        def check_complete():
+            return server_ctx.complete
+
+        check_complete.should_raise(gb.BadChannelBindingsError)
