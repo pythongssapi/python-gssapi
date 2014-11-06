@@ -1,3 +1,5 @@
+import six
+
 from gssapi.raw import sec_contexts as rsec_contexts
 from gssapi.raw import message as rmessage
 from gssapi.raw import named_tuples as tuples
@@ -9,6 +11,7 @@ from gssapi.names import Name
 from gssapi.creds import Credentials
 
 
+@six.add_metaclass(_utils.CheckLastError)
 class SecurityContext(rsec_contexts.SecurityContext):
     # TODO(directxman12): do we want to use __slots__ here?
     def __new__(cls, base=None, token=None,
@@ -23,6 +26,9 @@ class SecurityContext(rsec_contexts.SecurityContext):
     def __init__(self, base=None, token=None,
                  name=None, creds=None, desired_lifetime=None, flags=None,
                  mech_type=None, channel_bindings=None, usage=None):
+
+        # NB(directxman12): _last_err must be set first
+        self._last_err = None
 
         # determine the usage ('initiate' vs 'accept')
         if base is None and token is None:
@@ -74,12 +80,8 @@ class SecurityContext(rsec_contexts.SecurityContext):
             else:
                 self.usage = 'accept'
 
-        self._last_err = None
-        # self._last_tb = None
-
-    def __del__(self):
-        if self._last_err is not None:
-            del self._last_tb  # in case of cycles, break glass
+    # NB(directxman12): DO NOT ADD AN __del__ TO THIS CLASS -- it screws up
+    #                   the garbage collector if _last_tb is still defined
 
     # TODO(directxman12): implement flag properties
 
@@ -132,6 +134,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
     INQUIRE_ARGS = ('initiator_name', 'target_name', 'lifetime',
                     'mech_type', 'flags', 'locally_init', 'complete')
 
+    @_utils.check_last_err
     def _inquire(self, **kwargs):
         if not kwargs:
             default_val = True
@@ -173,32 +176,19 @@ class SecurityContext(rsec_contexts.SecurityContext):
     locally_initiated = _utils.inquire_property('locally_init')
 
     @property
+    @_utils.check_last_err
     def complete(self):
-        if self._last_err is not None:
-            try:
-                raise self._last_err, None, self._last_tb
-            finally:
-                del self._last_tb
-                self._last_err = None
-        elif self._started:
+        if self._started:
             return self._inquire(complete=True).complete
         else:
             return False
 
+    @_utils.catch_and_return_token
     def step(self, token=None):
-        try:
-            if self.usage == 'accept':
-                return self._acceptor_step(token=token)
-            else:
-                return self._initiator_step(token=token)
-        except GSSError as e:
-            if e.token is not None:
-                self._last_err = e
-                self._last_tb = sys.exc_info()[2]
-
-                return e.token
-            else:
-                raise e
+        if self.usage == 'accept':
+            return self._acceptor_step(token=token)
+        else:
+            return self._initiator_step(token=token)
 
     def _acceptor_step(self, token):
         res = rsec_contexts.accept_sec_context(token, self._creds,

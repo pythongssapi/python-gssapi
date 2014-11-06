@@ -149,7 +149,8 @@ setup(
         extension_file('rfc5588', 'gss_store_cred'),
     ]),
     install_requires=[
-        'enum34'
+        'enum34',
+        'decorator'
     ],
     tests_require=[
         'tox'
