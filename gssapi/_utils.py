@@ -64,6 +64,7 @@ def _encode_dict(d):
     return dict((enc(k), enc(v)) for k, v in six.iteritems(d))
 
 
+# in case of Python 3, just use exception chaining
 @deco.decorator
 def catch_and_return_token(func, self, *args, **kwargs):
     try:
@@ -71,23 +72,46 @@ def catch_and_return_token(func, self, *args, **kwargs):
     except GSSError as e:
         if e.token is not None and self.__DEFER_STEP_ERRORS__:
             self._last_err = e
-            self._last_tb = sys.exc_info()[2]
+            # skip the "return func" line above in the traceback
+            if six.PY2:
+                self._last_tb = sys.exc_info()[2].tb_next.tb_next
+            else:
+                self._last_err.__traceback__ = e.__traceback__.tb_next
 
             return e.token
         else:
-            six.reraise(*sys.exc_info())
+            raise
 
 
 @deco.decorator
 def check_last_err(func, self, *args, **kwargs):
     if self._last_err is not None:
         try:
-            six.reraise(type(self._last_err), self._last_err, self._last_tb)
+            if six.PY2:
+                six.reraise(type(self._last_err), self._last_err,
+                            self._last_tb)
+            else:
+                # NB(directxman12): not using six.reraise in Python 3 leads
+                #                   to cleaner tracebacks, and raise x is valid
+                #                   syntax in Python 3 (unlike raise x, y, z)
+                raise self._last_err
         finally:
-            del self._last_tb  # in case of cycles, break glass
+            if six.PY2:
+                del self._last_tb  # in case of cycles, break glass
+
             self._last_err = None
     else:
         return func(self, *args, **kwargs)
+
+    @deco.decorator
+    def check_last_err(func, self, *args, **kwargs):
+        if self._last_err is not None:
+            try:
+                raise self._last_err
+            finally:
+                self._last_err = None
+        else:
+            return func(self, *args, **kwargs)
 
 
 class CheckLastError(type):
