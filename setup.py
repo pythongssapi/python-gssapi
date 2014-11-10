@@ -1,10 +1,16 @@
 #!/usr/bin/env python
-from setuptools import setup, Feature  # noqa
+from setuptools import setup
+from setuptools.command.build_ext import build_ext
 from setuptools.extension import Extension
-from Cython.Distutils import build_ext
-import sys  # noqa
 import re
 import os
+
+
+try:
+    from Cython.Build import cythonize
+    SOURCE_EXT = 'pyx'
+except ImportError:
+    SOURCE_EXT = 'c'
 
 get_output = None
 
@@ -83,7 +89,7 @@ def main_file(module):
     return Extension('gssapi.raw.%s' % module,
                      extra_link_args=link_args,
                      extra_compile_args=compile_args,
-                     sources=['gssapi/raw/%s.pyx' % module])
+                     sources=['gssapi/raw/%s.%s' % (module, SOURCE_EXT)])
 
 
 def extension_file(module, canary):
@@ -93,7 +99,8 @@ def extension_file(module, canary):
         return Extension('gssapi.raw.ext_%s' % module,
                          extra_link_args=link_args,
                          extra_compile_args=compile_args,
-                         sources=['gssapi/raw/ext_%s.pyx' % module])
+                         sources=['gssapi/raw/ext_%s.%s' % (module,
+                                                            SOURCE_EXT)])
 
 
 def gssapi_modules(lst):
@@ -106,7 +113,11 @@ def gssapi_modules(lst):
         res.append(Extension('gssapi.raw.mech_%s' % mech,
                              extra_link_args=link_args,
                              extra_compile_args=compile_args,
-                             sources=['gssapi/raw/mech_%s.pyx' % mech]))
+                             sources=['gssapi/raw/mech_%s.%s' % (mech,
+                                                                 SOURCE_EXT)]))
+
+    if SOURCE_EXT == 'pyx':
+        res = cythonize(res)
 
     return res
 
@@ -116,9 +127,9 @@ long_desc = re.sub('\.\. role:: \w+\(code\)\s*\n\s*.+', '',
                                  open('README.txt').read())))
 
 setup(
-    name='PyGSSAPI',
+    name='PythonGSSAPI',
     version='1.0.0',
-    author='Solly Ross',
+    author='The Python GSSAPI Team',
     author_email='sross@redhat.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.tests'],
     description='Python GSSAPI Wrapper',
@@ -128,12 +139,13 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: ISC License (ISCL)',
         'Programming Language :: Python :: Implementation :: CPython',
+        'Programming Language :: Cython',
         'Topic :: Security',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
@@ -153,6 +165,7 @@ setup(
         extension_file('cred_store', 'gss_store_cred_into'),
         extension_file('rfc5588', 'gss_store_cred'),
     ]),
+    keywords=['gssapi', 'security'],
     install_requires=[
         'enum34',
         'decorator'
