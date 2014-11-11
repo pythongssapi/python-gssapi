@@ -1,3 +1,7 @@
+from gssapi.raw.exceptions import *  # noqa
+from gssapi.raw.misc import GSSError  # noqa
+
+
 # non-GSS exceptions
 class GeneralError(Exception):
     MAJOR_MESSAGE = "General error"
