@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-from setuptools import setup, Feature
+from setuptools import setup, Feature  # noqa
 from setuptools.extension import Extension
 from Cython.Distutils import build_ext
-import sys
+import sys  # noqa
 import re
 import os
 
@@ -13,6 +13,7 @@ try:
     get_output = commands.getoutput
 except ImportError:
     import subprocess
+
     def _get_output(*args, **kwargs):
         res = subprocess.check_output(*args, shell=True, **kwargs)
         decoded = res.decode('utf-8')
@@ -33,7 +34,8 @@ if compile_args is None:
 link_args = link_args.split()
 compile_args = compile_args.split()
 
-ENABLE_SUPPORT_DETECTION = (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
+ENABLE_SUPPORT_DETECTION = \
+    (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
 
 if ENABLE_SUPPORT_DETECTION:
     main_lib = os.environ.get('GSSAPI_MAIN_LIB', None)
@@ -70,26 +72,29 @@ class build_gssapi_ext(build_ext):
                         header.write('#include "gssapi.h"')
 
                 for ext in self.extensions:
-                    ext.extra_compile_args.append("-I%s" % os.path.abspath(target_dir))
+                    ext.extra_compile_args.append("-I%s" %
+                                                  os.path.abspath(target_dir))
 
         build_ext.run(self)
 
-# detect support
 
+# detect support
 def main_file(module):
     return Extension('gssapi.raw.%s' % module,
-                     extra_link_args = link_args,
-                     extra_compile_args = compile_args,
-                     sources = ['gssapi/raw/%s.pyx' % module])
+                     extra_link_args=link_args,
+                     extra_compile_args=compile_args,
+                     sources=['gssapi/raw/%s.pyx' % module])
+
 
 def extension_file(module, canary):
     if ENABLE_SUPPORT_DETECTION and not hasattr(GSSAPI_LIB, canary):
         return None
     else:
         return Extension('gssapi.raw.ext_%s' % module,
-                         extra_link_args = link_args,
-                         extra_compile_args = compile_args,
-                         sources = ['gssapi/raw/ext_%s.pyx' % module])
+                         extra_link_args=link_args,
+                         extra_compile_args=compile_args,
+                         sources=['gssapi/raw/ext_%s.pyx' % module])
+
 
 def gssapi_modules(lst):
     # filter out missing files
@@ -99,9 +104,9 @@ def gssapi_modules(lst):
     MECHS_SUPPORTED = os.environ.get('GSSAPI_MECHS', 'krb5').split(',')
     for mech in MECHS_SUPPORTED:
         res.append(Extension('gssapi.raw.mech_%s' % mech,
-                             extra_link_args = link_args,
-                             extra_compile_args = compile_args,
-                             sources = ['gssapi/raw/mech_%s.pyx' % mech]))
+                             extra_link_args=link_args,
+                             extra_compile_args=compile_args,
+                             sources=['gssapi/raw/mech_%s.pyx' % mech]))
 
     return res
 
@@ -132,8 +137,8 @@ setup(
         'Topic :: Security',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    cmdclass = {'build_ext': build_gssapi_ext},
-    ext_modules = gssapi_modules([
+    cmdclass={'build_ext': build_gssapi_ext},
+    ext_modules=gssapi_modules([
         main_file('misc'),
         main_file('exceptions'),
         main_file('creds'),
