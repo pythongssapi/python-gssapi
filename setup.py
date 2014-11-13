@@ -1,16 +1,22 @@
 #!/usr/bin/env python
 from setuptools import setup
 from setuptools.command.build_ext import build_ext
+from setuptools.command.sdist import sdist
 from setuptools.extension import Extension
 import re
 import os
 
 
-try:
-    from Cython.Build import cythonize
-    SOURCE_EXT = 'pyx'
-except ImportError:
+SKIP_CYTHON_FILE = '__dont_use_cython__.txt'
+
+if os.path.exists(SKIP_CYTHON_FILE):
     SOURCE_EXT = 'c'
+else:
+    try:
+        from Cython.Build import cythonize
+        SOURCE_EXT = 'pyx'
+    except ImportError:
+        SOURCE_EXT = 'c'
 
 get_output = None
 
@@ -84,6 +90,19 @@ class build_gssapi_ext(build_ext):
         build_ext.run(self)
 
 
+# add in the flag that causes us not to compile from Cython when
+# installing from an sdist
+class sdist_gssapi(sdist):
+    def run(self):
+        if not self.dry_run:
+            with open(SKIP_CYTHON_FILE, 'w') as flag_file:
+                flag_file.write('COMPILE_FROM_C_ONLY')
+
+            sdist.run(self)
+
+            os.remove(SKIP_CYTHON_FILE)
+
+
 # detect support
 def main_file(module):
     return Extension('gssapi.raw.%s' % module,
@@ -149,7 +168,7 @@ setup(
         'Topic :: Security',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    cmdclass={'build_ext': build_gssapi_ext},
+    cmdclass={'build_ext': build_gssapi_ext, 'sdist': sdist_gssapi},
     ext_modules=gssapi_modules([
         main_file('misc'),
         main_file('exceptions'),
