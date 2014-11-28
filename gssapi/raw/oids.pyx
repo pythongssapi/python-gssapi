@@ -60,8 +60,27 @@ cdef class OID:
     def __bytes__(self):
         return (<char*>self.raw_oid.elements)[:self.raw_oid.length]
 
+    def _decode_asn1ber(self):
+        ber_encoding = self.__bytes__()
+        decoded = [ord(ber_encoding[0]) / 40, ord(ber_encoding[0]) % 40]
+        pos = 1
+        value = 0
+        while pos < len(ber_encoding):
+            byte = ord(ber_encoding[pos])
+            if byte & 0x80:
+                # This is one of the leading bytes
+                value <<= 7
+                value += ((byte & 0x7f) * 128)
+            else:
+                # This is the last byte of this value
+                value += (byte & 0x7f)
+                decoded.append(value)
+                value = 0
+            pos += 1
+        return decoded
+
     def __repr__(self):
-        return "<OID {0}>".format([ord(c) for c in self.__bytes__()])
+        return "<OID {0}>".format(self._decode_asn1ber())
 
     def __hash__(self):
         return hash(self.__bytes__())
