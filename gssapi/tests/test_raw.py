@@ -780,3 +780,23 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         unwrapped_message.should_be_a(bytes)
         unwrapped_message.shouldnt_be_empty()
         unwrapped_message.should_be(b'test message')
+
+
+TEST_OIDS = {'SPNEGO': {'bytes': b'\053\006\001\005\005\002',
+                        'string': '1.3.6.1.5.5.2'},
+             'KRB5': {'bytes': b'\052\206\110\206\367\022\001\002\002',
+                      'string': '1.2.840.113554.1.2.2'},
+             'KRB5_OLD': {'bytes': b'\053\005\001\005\002',
+                          'string': '1.3.5.1.5.2'},
+             'KRB5_WRONG': {'bytes': b'\052\206\110\202\367\022\001\002\002',
+                            'string': '1.2.840.48018.1.2.2'},
+             'IAKERB': {'bytes': b'\053\006\001\005\002\005',
+                        'string': '1.3.6.1.5.2.5'}}
+
+
+class TestOIDTransforms(unittest.TestCase):
+    def test_decode_from_bytes(self):
+        for oid in TEST_OIDS.values():
+            o = gb.OID(elements=oid['bytes'])
+            text = repr(o)
+            text.should_be("<OID {0}>".format(oid['string']))
