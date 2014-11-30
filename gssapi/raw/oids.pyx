@@ -80,7 +80,8 @@ cdef class OID:
         return decoded
 
     def __repr__(self):
-        return "<OID {0}>".format(self._decode_asn1ber())
+        dotted_oid = '.'.join(str(x) for x in self._decode_asn1ber())
+        return "<OID {0}>".format(dotted_oid)
 
     def __hash__(self):
         return hash(self.__bytes__())
