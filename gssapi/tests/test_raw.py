@@ -227,8 +227,8 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         is_open.should_be_true()
 
     def test_process_context_token(self):
-        # TODO(sross): figure out how to write a test for this
-        pass
+        # TODO(directxman12): figure out how to write a test for this
+        self.skipTest("Not Yet Implemented")
 
     def test_add_cred_impersonate_name(self):
         target_name = gb.import_name(TARGET_SERVICE_NAME,

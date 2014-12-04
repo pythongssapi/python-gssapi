@@ -100,7 +100,7 @@ def _display_status(unsigned int error_code, bint is_major_code,
         gss_release_buffer(&min_stat, &msg_buff)
         return (msg_out, msg_ctx_out, call_again)
     else:
-        # TODO(directxman12): this could potentially cause a recursive loop
+        # NB(directxman12): this is highly unlikely to cause a recursive loop
         raise GSSError(maj_stat, min_stat)
 
 

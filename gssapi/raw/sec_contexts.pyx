@@ -108,8 +108,7 @@ cdef class SecurityContext:
             self.raw_ctx = NULL
 
 
-# TODO(sross): add support for channel bindings
-# TODO(sross): figure out whether GSS_C_NO_NAME can be passed in here
+# TODO(directxman12): figure out whether GSS_C_NO_NAME can be passed in here
 def init_sec_context(Name target_name not None, Creds cred=None,
                      SecurityContext context=None,
                      OID mech_type=None,
@@ -173,7 +172,6 @@ def init_sec_context(Name target_name not None, Creds cred=None,
     else:
         bdng = GSS_C_NO_CHANNEL_BINDINGS
 
-    # TODO(sross): just import GSS_C_EMPTY_BUFFER == gss_buffer_desc(0, NULL)
     cdef gss_buffer_desc input_token_buffer = gss_buffer_desc(0, NULL)
 
     cdef OM_uint32 input_ttl = c_py_ttl_to_c(ttl)
@@ -193,7 +191,6 @@ def init_sec_context(Name target_name not None, Creds cred=None,
         input_token_buffer.length = len(input_token)
 
     cdef gss_OID actual_mech_type
-    # TODO(sross): just import GSS_C_EMPTY_BUFFER == gss_buffer_desc(0, NULL)
     cdef gss_buffer_desc output_token_buffer = gss_buffer_desc(0, NULL)
     cdef OM_uint32 ret_flags
     cdef OM_uint32 output_ttl

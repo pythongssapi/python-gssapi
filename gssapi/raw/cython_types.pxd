@@ -77,7 +77,7 @@ cdef extern from "gssapi.h":
     gss_OID GSS_C_NO_OID
     # NB(sross): because of how Cython creates variables, this is useless
     # gss_buffer_desc GSS_C_EMPTY_BUFFER
-    gss_name_t GSS_C_NO_NAME   # TODO(sross): actually check for this
+    gss_name_t GSS_C_NO_NAME
     OM_uint32 GSS_C_INDEFINITE
     gss_buffer_t GSS_C_NO_BUFFER
     gss_OID_set GSS_C_NO_OID_SET

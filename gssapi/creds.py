@@ -18,8 +18,7 @@ class Credentials(rcreds.Creds):
                 desired_mechs=None, usage='both',
                 store=None):
         # TODO(directxman12): this is missing support for password
-        #                     and cred_store (non-RFC methods)
-        #                     as well as import_cred
+        #                     (non-RFC method)
         if base is not None:
             base_creds = base
         elif token is not None:

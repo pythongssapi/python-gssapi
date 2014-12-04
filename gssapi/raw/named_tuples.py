@@ -1,5 +1,3 @@
-# NB(sross): something causes Python to segfault if we try to
-#            `from collections import namedtuple`
 from collections import namedtuple
 
 
@@ -31,7 +29,6 @@ VerifyMICResult = namedtuple('VerifyMICResult',
                               'minor_status'])
 
 
-# TODO(directxman12): should this be 'encrypted' or 'confidential'?
 WrapResult = namedtuple('WrapResult',
                         ['message', 'encrypted'])
 

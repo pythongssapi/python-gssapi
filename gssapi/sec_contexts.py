@@ -13,7 +13,6 @@ from gssapi.creds import Credentials
 
 @six.add_metaclass(_utils.CheckLastError)
 class SecurityContext(rsec_contexts.SecurityContext):
-    # TODO(directxman12): do we want to use __slots__ here?
     def __new__(cls, base=None, token=None,
                 name=None, creds=None, desired_lifetime=None, flags=None,
                 mech_type=None, channel_bindings=None, usage=None):
@@ -52,7 +51,6 @@ class SecurityContext(rsec_contexts.SecurityContext):
             if self.usage == 'initiate':
                 # takes: creds?, target_name, mech_type?, flags?,
                 #        channel_bindings?
-                # TODO(directxman12): should we check for this?
                 if name is None:
                     raise TypeError("You must pass the 'name' argument when "
                                     "creating an initiating security context")
@@ -90,7 +88,6 @@ class SecurityContext(rsec_contexts.SecurityContext):
         return rmessage.get_mic(self, message)
 
     def verify_signature(self, message, mic):
-        # TODO(directxman12): implement supplementary?
         return rmessage.verify_mic(self, message, mic)
 
     def wrap(self, message, encrypt):
@@ -108,7 +105,6 @@ class SecurityContext(rsec_contexts.SecurityContext):
         return res.message
 
     def decrypt(self, message):
-        # TODO(directman12): implement supplementary
         res = self.unwrap(message)
 
         if (not res.encrypted and
@@ -165,8 +161,6 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
     @property
     def lifetime(self):
-        # TODO(directxman12): is this in any way different from what's
-        #                     returned by inquire?
         return rsec_contexts.context_time(self)
 
     initiator_name = _utils.inquire_property('initiator_name')
@@ -199,8 +193,6 @@ class SecurityContext(rsec_contexts.SecurityContext):
         return res.token
 
     def _initiator_step(self, token=None):
-        # TODO(directxman12): should we have these all be properties,
-        #                     or should some of them be arguments?
         res = rsec_contexts.init_sec_context(self._target_name, self._creds,
                                              self, self._mech_type,
                                              self._desired_flags,
@@ -209,8 +201,6 @@ class SecurityContext(rsec_contexts.SecurityContext):
                                              token)
 
         return res.token
-
-    # TODO(directxman12): add a method to force delete?
 
     # pickle protocol support
     def __reduce__(self):
