@@ -800,3 +800,14 @@ class TestOIDTransforms(unittest.TestCase):
             o = gb.OID(elements=oid['bytes'])
             text = repr(o)
             text.should_be("<OID {0}>".format(oid['string']))
+
+    def test_encode_from_string(self):
+        for oid in TEST_OIDS.values():
+            o = gb.OID.from_int_seq(oid['string'])
+            o.__bytes__().should_be(oid['bytes'])
+
+    def test_encode_from_int_seq(self):
+        for oid in TEST_OIDS.values():
+            int_seq = oid['string'].split('.')
+            o = gb.OID.from_int_seq(int_seq)
+            o.__bytes__().should_be(oid['bytes'])
