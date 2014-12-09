@@ -96,6 +96,34 @@ cdef void c_free_key_value_set(gss_key_value_set_desc *kvset):
 #                     but that's not clear from the wiki page
 def acquire_cred_from(dict store, Name name, ttl=None,
                       mechs=None, cred_usage='both'):
+    """Acquire credentials from the given store
+
+    This method acquires credentials from the store specified by the
+    given credential store information.
+
+    The credential store information is a dictionary containing
+    mechanisms-specific keys and values pointing to a credential store
+    or stores.
+
+    Args:
+        store (dict): the credential store information pointing to the
+            credential store from which to acquire the credentials
+        name (Name): the name associated with the credentials,
+            or None for the default name
+        ttl (int): the desired lifetime of the credentials, or None
+            for indefinite
+        mechs (list): the desired mechanisms to be used with these
+            credentials, or None for the default set
+        cred_usage (str): the usage for these credentials -- either 'both',
+            'initiate', or 'accept'
+
+    Returns:
+        AcquireCredResult: the acquired credentials and information about
+            them
+
+    Raises:
+        GSSError
+    """
 
     cdef gss_OID_set desired_mechs
     if mechs is not None:
@@ -156,6 +184,38 @@ def add_cred_from(dict store, Creds input_creds,
                   Name name not None, OID mech not None,
                   cred_usage='both', initiator_ttl=None,
                   acceptor_ttl=None):
+    """Acquire credentials to add to the current set from the given store
+
+        This method works like :func:`acquire_cred_from`, except that it
+        adds the acquired credentials for a single mechanism to a copy of
+        the current set, instead of creating a new set for multiple mechanisms.
+        Unlike :meth:`acquire`, you cannot pass None desired name or
+        mechanism.
+
+    The credential store information is a dictionary containing
+    mechanisms-specific keys and values pointing to a credential store
+    or stores.
+
+    Args:
+        store (dict): the store into which to store the credentials,
+            or None for the default store.
+        name (Name): the name associated with the credentials
+        mech (OID): the desired mechanism to be used with these
+            credentials
+        cred_usage (str): the usage for these credentials -- either 'both',
+            'initiate', or 'accept'
+        initiator_ttl): the desired initiate lifetime of the
+            credentials, or None for indefinite
+        acceptor_ttl (int): the desired accept lifetime of the
+            credentials, or None for indefinite
+
+    Returns:
+        AcquireCredResult: the new credentials set and information about
+            it
+
+    Raises:
+        GSSError
+    """
 
     cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(initiator_ttl)
     cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(acceptor_ttl)
@@ -214,6 +274,35 @@ def add_cred_from(dict store, Creds input_creds,
 def store_cred_into(dict store, Creds creds not None,
                     cred_usage='both', OID mech=None, bint overwrite=False,
                     bint set_default=False):
+    """Store credentials to the given store
+
+    This method stores the given credentials into the store specified
+    by the given store information.  They may then be retrieved later using
+    :func:`import_cred_from`.
+
+    The credential store information is a dictionary containing
+    mechanisms-specific keys and values pointing to a credential store
+    or stores.
+
+    Args:
+        store (dict): the store into which to store the credentials,
+            or None for the default store.
+        creds (Creds): the credentials to store
+        cred_usage (str): the usage to store the credentials with -- either
+            'both', 'initiate', or 'accept'
+        mech (OID): the mechansim to associate with the stored credentials
+        overwrite (bool): whether or not to overwrite existing credentials
+            stored with the same name, etc
+        set_default (bool): whether or not to set these credentials as
+            the default credentials for the given store.
+
+    Returns:
+        StoreCredResult: the results of the credential storing operation
+
+    Raises:
+        GSSError
+    """
+
     cdef gss_OID desired_mech
     if mech is not None:
         desired_mech = &mech.raw_oid
