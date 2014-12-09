@@ -5,6 +5,7 @@ from gssapi.raw.types import MechType, NameType
 
 
 cdef OID c_make_oid(gss_OID oid):
+    """Create an OID from a C OID struct pointer"""
     cdef OID res = OID()
     res.raw_oid = oid[0]
     return res

@@ -5,6 +5,13 @@ from gssapi.raw.cython_converters cimport c_make_oid
 
 from gssapi.raw import types as gsstypes
 
+"""Kerberos-specific constants
+
+Upon import, this module will populate
+Kerberos-specific constants into NameType
+and MechType.
+"""
+
 
 cdef extern from "gssapi/gssapi_krb5.h":
     gss_OID gss_mech_krb5

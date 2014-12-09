@@ -2,6 +2,8 @@ from gssapi.raw.cython_types cimport OM_uint32
 
 from gssapi.raw.misc import GSSError
 
+"""Specific exceptions for GSSAPI errors"""
+
 
 cdef extern from "gssapi.h":
     # calling errors

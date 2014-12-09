@@ -108,6 +108,17 @@ class MechType(object):
 
 
 class GenericFlagSet(collections.MutableSet):
+    """A set backed by a 32-bit integer
+
+    This is a set backed by a 32 bit integer.
+    the members are integers where only one
+    bit is set.
+
+    The class supports normal set operations,
+    as well as traditional "flag set" operations,
+    such as bitwise AND, OR, and XOR.
+    """
+
     __slots__ = '_val'
     MAX_VAL = 1 << 31
 
@@ -201,6 +212,15 @@ class GenericFlagSet(collections.MutableSet):
 
 
 class IntEnumFlagSet(GenericFlagSet):
+    """A set backed by a 32-bit integer with enum members
+
+    This class is a :class:`GenericFlagSet` where the returned
+    members are values in an :class:`IntEnum`.
+
+    It functions exactly like a `GenericFlagSet`, except that
+    it also supports bitwise operations with the enum values.
+    """
+
     __slots__ = ('_val', '_enum')
 
     def __init__(self, enum, flags=None):
