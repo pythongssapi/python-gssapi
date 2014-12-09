@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# PyGSSAPI documentation build configuration file, created by
+# Python-GSSAPI documentation build configuration file, created by
 # sphinx-quickstart on Tue Jul  2 19:01:09 2013.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -42,8 +42,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'PyGSSAPI'
-copyright = u'2013, Solly Ross'
+project = u'Python-GSSAPI'
+copyright = u'2014, The Python-GSSAPI team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -169,7 +169,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'PyGSSAPIdoc'
+htmlhelp_basename = 'Python-GSSAPIdoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -188,8 +188,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'PyGSSAPI.tex', u'PyGSSAPI Documentation',
-   u'Solly Ross', 'manual'),
+  ('index', 'Python-GSSAPI.tex', u'Python-GSSAPI Documentation',
+   u'The Python-GSSAPI team', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -218,8 +218,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'pygssapi', u'PyGSSAPI Documentation',
-     [u'Solly Ross'], 1)
+    ('index', 'python-gssapi', u'Python-GSSAPI Documentation',
+     [u'The Python-GSSAPI team'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -232,9 +232,9 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'PyGSSAPI', u'PyGSSAPI Documentation',
-   u'Solly Ross', 'PyGSSAPI', 'One line description of project.',
-   'Miscellaneous'),
+  ('index', 'Python-GSSAPI', u'Python-GSSAPI Documentation',
+   u'The Python-GSSAPI team', 'Python-GSSAPI',
+   'One line description of project.', 'Miscellaneous'),
 ]
 
 # Documents to append as an appendix to all manuals.
@@ -252,3 +252,11 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'http://docs.python.org/': None}
+
+# which docstring to use for the class
+# can be 'class', 'init', or 'both'
+autoclass_content = 'both'
+
+# how to order members -- can 'alphabetical',
+# 'groupwise' (by member type), or 'bysource'
+autodoc_member_order = 'bysource'

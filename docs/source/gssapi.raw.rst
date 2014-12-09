@@ -112,3 +112,11 @@ raw Package
     :members:
     :undoc-members:
     :show-inheritance:
+
+:mod:`named_tuples` Module
+--------------------------
+
+.. automodule:: gssapi.raw.named_tuples
+    :members:
+    :undoc-members:
+    :show-inheritance:
