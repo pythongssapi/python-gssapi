@@ -1,21 +1,28 @@
 #!/usr/bin/env python
+from __future__ import print_function
+
 from setuptools import setup
 from setuptools.command.build_ext import build_ext
 from setuptools.command.sdist import sdist
 from setuptools.extension import Extension
 import re
+import sys
 import os
 
 
 SKIP_CYTHON_FILE = '__dont_use_cython__.txt'
 
 if os.path.exists(SKIP_CYTHON_FILE):
+    print("In distributed package, building from C files...", file=sys.stderr)
     SOURCE_EXT = 'c'
 else:
     try:
         from Cython.Build import cythonize
+        print("Building from Cython files...", file=sys.stderr)
         SOURCE_EXT = 'pyx'
     except ImportError:
+        print("Cython not found, building from Cython files...",
+              file=sys.stderr)
         SOURCE_EXT = 'c'
 
 get_output = None

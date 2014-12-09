@@ -1,0 +1,7 @@
+flake8
+nose
+nose_parameterized
+git+https://github.com/DirectXMan12/should_be.git
+six
+Cython
+
