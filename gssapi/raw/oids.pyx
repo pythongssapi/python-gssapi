@@ -11,8 +11,18 @@ cdef inline bint c_compare_oids(gss_OID a, gss_OID b):
 
 
 cdef class OID:
-    """
-    GSSAPI OID
+    """GSSAPI OID
+
+    A new OID may be created by passing the `elements` argument
+    to the constructor.  The `elements` argument should be a
+    `bytes` consisting of the BER-encoded values in the OID.
+
+    To retrive the underlying bytes, use the :func:`bytes`
+    function in Python 3 or the :meth:`__bytes__` method directly
+    in Python 2.
+
+    This object is hashable, and may be compared using equality
+    operators.
     """
     # defined in pxd
     # cdef gss_OID_desc raw_oid = NULL
