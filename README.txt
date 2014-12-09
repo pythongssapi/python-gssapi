@@ -1,6 +1,6 @@
-========
-PyGSSAPI
-========
+=============
+Python-GSSAPI
+=============
 
 .. role:: python(code)
    :language: python
@@ -8,22 +8,30 @@ PyGSSAPI
 .. role:: bash(code)
    :language: bash
 
-PyGSSAPI provides both low-level and high level wrappers around the GSSAPI
+Python-GSSAPI provides both low-level and high level wrappers around the GSSAPI
 C libraries.  While it focuses on the Kerberos mechanism, it should also be
-useable with other GSSAPI mechanisms that do not rely on mechanism-specific
-C values that cannot easily be translated into Python.
+useable with other GSSAPI mechanisms.
 
 Requirements
 ============
+
+Basic
+-----
 
 * A working implementation of GSSAPI (such as from MIT Kerberos)
   which includes header files
 
 * a C compiler (such as GCC)
 
-* Cython (*NEW*, to compile from scratch)
+* either the `enum34` Python package or Python 3.4+
 
-* the `flufl.enum` Python package
+Compiling from Scratch
+----------------------
+
+To compile from scratch, you will need Cython >= 0.21.1.
+
+For Running the Tests
+---------------------
 
 * the `nose` package (for tests)
 
@@ -32,12 +40,12 @@ Requirements
 Installation
 ============
 
-Easy Way 
+Easy Way
 --------
 
 .. code-block:: bash
 
-    $ pip install pygssapi
+    $ pip install gssapi
 
 From the Git Repo
 -----------------
@@ -51,119 +59,69 @@ From the Git Repo
 Tests
 =====
 
-I have written some tests of PyGSSAPI; they live in the `gssapi.tests`
-directory.  Currently the basic :python:`gssapi.raw` commands and
-:python:`gssapi.client.BasicGSSClient` have been tested.  Before running
-the tests, a valid 'host/[FQDN]' (e.g. 'host/some.domain') must have been
-:bash:`kinit`-ed.  If you run :bash:`tox`, it will do this for you (you will
-likely need to run :bash:`tox` with :bash:`sudo`).
-
-.. code-block:: bash
-
-   $ sudo tox
-
-or 
-
-.. code-block:: bash
-   
-   $ sudo kinit host/some.domain -k
-   $ sudo setup.py nosetests
+The tests for for Python-GSSAPI live in `gssapi.tests`.  In order to
+run the tests, you must have an MIT Kerberos installation (including
+the KDC).  The tests create a self-contained Kerberos setup, so running
+the tests will not interfere with any existing Kerberos installations.
 
 Structure
 =========
 
-PyGSSAPI is composed of two parts: the low-level, C-style wrapper and the
-high-level, Python-style wrapper (which is a wrapper around the low-level
-API).  Modules written in C are denoted by '(C)', whereas those written
-in Python are denoted '(Py)'
+Python-GSSAPI is composed of two parts: a low-level C-style API which
+thinly wraps the underlying RFC 2744 methods, and a high-level, Pythonic
+API (which is itself a wrapper around the low-level API).  Examples may
+be found in the `examples` directory.
 
 Low-Level API
 -------------
 
 The low-level API lives in `gssapi.raw`.  The methods contained therein
-are designed to match closely with the original GSSAPI C methods.  They
-follow the given format:
+are designed to match closely with the original GSSAPI C methods.  All
+relevant methods and classes may be imported directly from `gssapi.raw`.
+Extension methods will only be imported if they are present.  The low-level
+API follows the given format:
 
-* Names are camelCased versions of the C method names, with the 
-  :python:`gssapi_` prefix removed
+* Names match the RFC 2744 specification, with the :python:`gssapi_`
+  prefix removed
 
-* Parameters which use C int constants as enums have 
-  :python:`flufl.enum.IntEnum` classes defined, and thus may be passed
+* Parameters which use C int constants as enums have
+  :python:`enum.IntEnum` classes defined, and thus may be passed
   either the enum members or integers
 
 * In cases where a specific constant is passed in the C API to represent
   a default value, :python:`None` should be passed instead
 
-* In cases where non-integer C constants are passed, `flufl.enum.Enum`
-  classes are defined for common values
+* In cases where non-integer constants would be used in the API (i.e.
+  OIDs), enum-like objects have been defined containing named references
+  to values specified in RFC 2744.
 
-* Major and minor error codes are returned via :python:`gssapi.raw.GSSError`
+* Major and minor error codes are returned by raising
+  :python:`gssapi.raw.GSSError`.  The major error codes have exceptions
+  defined in in `gssapi.raw.exceptions` to make it easier to catch specific
+  errors or categories of errors.
 
-* All other relevant output values are returned in a tuple in the return
-  value of the method (in cases where a non-error major status code may
-  be returned, an additional member of the tuple is provided)
-
-Structure
-~~~~~~~~~
-
-gssapi : /
-    base : /
-        *includes all sub-packages automatically*
-
-        impl : (C)
-            core C-API methods
-        status_utils : (C)
-            utilities for dealing with status codes
-        types : (Py)
-            Enumerations and Exception Types
-
-Examples
-~~~~~~~~
-
-.. code-block:: python
-
-    import gssapi.raw as gb
-
-TODO(sross): provide more examples
+* All other relevant output values are returned via named tuples.
 
 High-Level API
 --------------
 
-The high-level API lives directly under :python:`gssapi`.  The classes 
-contained in each file are designed to provide a more Python, Object-Oriented
-view of GSSAPI.  Currently, they are designed for the basic GSSAPI tasks, but
-will be expanded upon in the future.
+The high-level API lives directly under :python:`gssapi`.  The classes
+contained in each file are designed to provide a more Pythonic, Object-Oriented
+view of GSSAPI.  The exceptions from the low-level API, plus several additional
+exceptions, live in `gssapi.exceptions`.  The rest of the classes may be
+imported directly from `gssapi`.  Only classes are exported by `gssapi` --
+all functions are methods of classes in the high-level API.
 
-Structure
-~~~~~~~~~
+Please note that QoP is not supported in the high-level API, since it has been
+deprecated.
 
-gssapi : /
-    client : (Py)
-        *basic clients*
+Extensions
+----------
 
-        BasicGSSClient
-            a client capable of performing basic GSS negotiation/encryption
-        BasicSASLGSSClient
-            a helper class to simplify working with SASL GSSAPI
-    type_wrappers : (Py)
-        provides useful wrappers around some Python capsule objects
+In addition to RFC 2743/2744, Python-GSSAPI also has support for:
 
-Examples
-~~~~~~~~
+* RFC 5588 (GSS-API Extension for Storing Delegated Credentials)
 
-.. code-block:: python
+* (Additional) Credential Store Extension
 
-    import gssapi.client as gss
-    
-    client = gss.BasicGSSClient('vnc@some.host', security_type='encrypted')
-
-    init_token = client.setupBaseSecurityContext()
-    # send to server, get response back...
-    next_token = client.updateSecurityContext(server_resp)
-    # encrypt a message
-    msg_enc = client.encrypt('WARNING: this is secret')
-    # send the message, get response back...
-    msg_unenc = client.decrypt(server_encrypted_message)
-
-    # freeing of resources (such as deleting the security context and releasing
-    # the names) is handled automatically
+* Services4User
