@@ -174,6 +174,25 @@ def release_cred(Creds creds not None):
 
 def inquire_cred(Creds creds not None, name=True, ttl=True,
                  usage=True, mechs=True):
+    """Inspect credentials for information
+
+    This method inspects a :class:`Creds` object for information.
+
+    Args:
+        creds (Creds): the credentials to inspect
+        name (bool): get the Name associated with the credentials
+        ttl (bool): get the TTL for the credentials
+        usage (bool): get the usage type of the credentials
+        mechs (bool): the mechanims used with the credentials
+
+    Returns:
+        InquireCredResult: the information about the credentials,
+            with unused fields set to None
+
+    Raises:
+        GSSError
+    """
+
     # TODO(directxman12): add docs
     cdef gss_name_t res_name
     cdef gss_name_t *res_name_ptr = NULL
@@ -232,6 +251,27 @@ def inquire_cred(Creds creds not None, name=True, ttl=True,
 def inquire_cred_by_mech(Creds creds not None, OID mech not None,
                          name=True, initiator_ttl=True,
                          acceptor_ttl=True, usage=True):
+    """Inspect credentials for mechanism-specific
+
+    This method inspects a :class:`Creds` object for information
+    specific to a particular mechanism.
+
+    Args:
+        creds (Creds): the credentials to inspect
+        mech (OID): the desired mechanism
+        name (bool): get the Name associated with the credentials
+        initiator_ttl (bool): get the initiator TTL for the credentials
+        acceprot_ttl (bool): get the acceptor TTL for the credentials
+        usage (bool): get the usage type of the credentials
+
+    Returns:
+        InquireCredByMechResult: the information about the credentials,
+            with unused fields set to None
+
+    Raises:
+        GSSError
+    """
+
     # TODO(directxman12): add docs
     cdef gss_name_t res_name
     cdef gss_name_t *res_name_ptr = NULL
