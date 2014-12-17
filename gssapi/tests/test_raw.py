@@ -371,6 +371,15 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         res.shouldnt_be_none()
         res.should_include(gb.NameType.kerberos_principal)
 
+    def test_inquire_mechs_for_name(self):
+        name = gb.import_name(self.USER_PRINC,
+                              gb.NameType.kerberos_principal)
+
+        res = gb.inquire_mechs_for_name(name)
+
+        res.shouldnt_be_none()
+        res.should_include(gb.MechType.kerberos)
+
 
 class TestIntEnumFlagSet(unittest.TestCase):
     def test_create_from_int(self):

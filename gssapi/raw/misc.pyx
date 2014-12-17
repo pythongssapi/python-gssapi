@@ -6,6 +6,7 @@ import six
 
 from gssapi.raw.cython_types cimport *
 from gssapi.raw.cython_converters cimport c_create_oid_set
+from gssapi.raw.names cimport Name
 from gssapi.raw.oids cimport OID
 
 from gssapi.raw.types import MechType
@@ -25,6 +26,10 @@ cdef extern from "gssapi.h":
     OM_uint32 gss_inquire_names_for_mech(OM_uint32 *minor_status,
                                          const gss_OID mech_type,
                                          gss_OID_set *name_types)
+
+    OM_uint32 gss_inquire_mechs_for_name(OM_uint32 *minor_status,
+                                         const gss_name_t input_name,
+                                         gss_OID_set *mech_types)
 
 
 def indicate_mechs():
@@ -72,6 +77,35 @@ def inquire_names_for_mech(OID mech_type not None):
 
     if maj_stat == GSS_S_COMPLETE:
         return c_create_oid_set(name_types)
+    else:
+        raise GSSError(maj_stat, min_stat)
+
+
+def inquire_mechs_for_name(Name name not None):
+    """List the mechanisms which can process a name.
+
+    This method lists the mechanisms which may be able to
+    process the given name.
+
+    Args:
+        name (Name): the name in question
+
+    Returns:
+        list: the mechanism OIDs able to process the given name
+
+    Raises:
+        GSSError
+    """
+
+    cdef gss_OID_set mech_types
+
+    cdef OM_uint32 maj_stat, min_stat
+
+    maj_stat = gss_inquire_mechs_for_name(&min_stat, name.raw_name,
+                                          &mech_types)
+
+    if maj_stat == GSS_S_COMPLETE:
+        return c_create_oid_set(mech_types)
     else:
         raise GSSError(maj_stat, min_stat)
 
