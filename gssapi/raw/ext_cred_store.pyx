@@ -7,7 +7,7 @@ from gssapi.raw.cython_types cimport *
 from gssapi.raw.names cimport Name
 from gssapi.raw.creds cimport Creds
 from gssapi.raw.oids cimport OID
-from gssapi.raw.cython_converters cimport c_create_mech_list
+from gssapi.raw.cython_converters cimport c_create_oid_set
 from gssapi.raw.cython_converters cimport c_get_mech_oid_set
 from gssapi.raw.cython_converters cimport c_c_ttl_to_py, c_py_ttl_to_c
 
@@ -174,7 +174,7 @@ def acquire_cred_from(dict store, Name name, ttl=None,
     cdef Creds rc = Creds()
     if maj_stat == GSS_S_COMPLETE:
         rc.raw_creds = creds
-        return AcquireCredResult(rc, c_create_mech_list(actual_mechs),
+        return AcquireCredResult(rc, c_create_oid_set(actual_mechs),
                                  c_c_ttl_to_py(actual_ttl))
     else:
         raise GSSError(maj_stat, min_stat)
@@ -264,7 +264,7 @@ def add_cred_from(dict store, Creds input_creds,
     if maj_stat == GSS_S_COMPLETE:
         rc = Creds()
         rc.raw_creds = creds
-        return AddCredResult(rc, c_create_mech_list(actual_mechs),
+        return AddCredResult(rc, c_create_oid_set(actual_mechs),
                              c_c_ttl_to_py(actual_initiator_ttl),
                              c_c_ttl_to_py(actual_acceptor_ttl))
     else:
@@ -348,7 +348,7 @@ def store_cred_into(dict store, Creds creds not None,
         else:
             py_actual_usage = 'both'
 
-        return StoreCredResult(c_create_mech_list(actual_mech_types),
+        return StoreCredResult(c_create_oid_set(actual_mech_types),
                                py_actual_usage)
     else:
         raise GSSError(maj_stat, min_stat)

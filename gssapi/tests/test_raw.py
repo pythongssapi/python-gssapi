@@ -57,7 +57,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         mechs = gb.indicate_mechs()
 
         mechs.shouldnt_be_none()
-        mechs.should_be_a(list)
+        mechs.should_be_a(set)
         mechs.shouldnt_be_empty()
 
         mechs.should_include(gb.MechType.kerberos)

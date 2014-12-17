@@ -5,7 +5,7 @@ import locale  # for decoding error messages
 import six
 
 from gssapi.raw.cython_types cimport *
-from gssapi.raw.cython_converters cimport c_create_mech_list
+from gssapi.raw.cython_converters cimport c_create_oid_set
 from gssapi.raw.oids cimport OID
 
 from gssapi.raw.types import MechType
@@ -38,7 +38,7 @@ def indicate_mechs():
     maj_stat = gss_indicate_mechs(&min_stat, &mech_set)
 
     if maj_stat == GSS_S_COMPLETE:
-        return c_create_mech_list(mech_set)
+        return c_create_oid_set(mech_set)
     else:
         raise GSSError(maj_stat, min_stat)
 

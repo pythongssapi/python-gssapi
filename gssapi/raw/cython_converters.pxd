@@ -10,7 +10,7 @@ from gssapi.raw.types import MechType, NameType
 
 cdef gss_OID_set c_get_mech_oid_set(object mechs)
 cdef inline bint c_compare_oids(gss_OID a, gss_OID b)
-cdef object c_create_mech_list(gss_OID_set mech_set, bint free=*)
+cdef object c_create_oid_set(gss_OID_set mech_set, bint free=*)
 cdef OID c_make_oid(gss_OID oid)
 
 cdef inline OM_uint32 c_py_ttl_to_c(object ttl) except? 1:
