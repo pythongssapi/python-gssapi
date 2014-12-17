@@ -22,6 +22,10 @@ cdef extern from "gssapi.h":
     OM_uint32 gss_indicate_mechs(OM_uint32 *minor_status,
                                  gss_OID_set *mech_set)
 
+    OM_uint32 gss_inquire_names_for_mech(OM_uint32 *minor_status,
+                                         const gss_OID mech_type,
+                                         gss_OID_set *name_types)
+
 
 def indicate_mechs():
     """
@@ -39,6 +43,35 @@ def indicate_mechs():
 
     if maj_stat == GSS_S_COMPLETE:
         return c_create_oid_set(mech_set)
+    else:
+        raise GSSError(maj_stat, min_stat)
+
+
+def inquire_names_for_mech(OID mech_type not None):
+    """Get the name types supported by a mechanism.
+
+    This method retrives the different name types supported by
+    the given mechanism.
+
+    Args:
+        mech_type (OID): the mechanism in question
+
+    Returns:
+        list: the name type OIDs supported by the given mechanism
+
+    Raises:
+        GSSError
+    """
+
+    cdef gss_OID_set name_types
+
+    cdef OM_uint32 maj_stat, min_stat
+
+    maj_stat = gss_inquire_names_for_mech(&min_stat, &mech_type.raw_oid,
+                                          &name_types)
+
+    if maj_stat == GSS_S_COMPLETE:
+        return c_create_oid_set(name_types)
     else:
         raise GSSError(maj_stat, min_stat)
 

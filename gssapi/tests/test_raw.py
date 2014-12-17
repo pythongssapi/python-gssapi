@@ -365,6 +365,12 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         err.should_be_a(gb.NameReadError)
         err.maj_code.should_be(err_code1 | err_code2)
 
+    def test_inquire_names_for_mech(self):
+        res = gb.inquire_names_for_mech(gb.MechType.kerberos)
+
+        res.shouldnt_be_none()
+        res.should_include(gb.NameType.kerberos_principal)
+
 
 class TestIntEnumFlagSet(unittest.TestCase):
     def test_create_from_int(self):
