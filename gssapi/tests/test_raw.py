@@ -8,6 +8,7 @@ import should_be.all  # noqa
 
 import gssapi.raw as gb
 import gssapi.raw.misc as gbmisc
+from gssapi.tests._utils import _extension_test
 from gssapi.tests import k5test as kt
 
 
@@ -230,6 +231,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         # TODO(directxman12): figure out how to write a test for this
         self.skipTest("Not Yet Implemented")
 
+    @_extension_test('s4u', 'S4U')
     def test_add_cred_impersonate_name(self):
         target_name = gb.import_name(TARGET_SERVICE_NAME,
                                      gb.NameType.hostbased_service)
@@ -261,6 +263,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         new_creds.should_be_a(gb.Creds)
 
+    @_extension_test('s4u', 'S4U')
     def test_acquire_creds_impersonate_name(self):
         target_name = gb.import_name(TARGET_SERVICE_NAME,
                                      gb.NameType.hostbased_service)
@@ -291,9 +294,11 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         # no need to explicitly release any more -- we can just rely on
         # __dealloc__ (b/c cython)
 
+    @_extension_test('rfc5588', 'RFC 5588')
     def test_store_cred_acquire_cred(self):
         self.skipTest("Not Yet Implemented")
 
+    @_extension_test('cred_store', 'credentials store')
     def test_store_cred_into_acquire_cred(self):
         CCACHE = 'FILE:{tmpdir}/other_ccache'.format(tmpdir=self.realm.tmpdir)
         KT = '{tmpdir}/other_keytab'.format(tmpdir=self.realm.tmpdir)

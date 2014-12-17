@@ -14,6 +14,7 @@ from gssapi import sec_contexts as gssctx
 from gssapi import raw as gb
 from gssapi import _utils as gssutils
 from gssapi import exceptions as excs
+from gssapi.tests._utils import _extension_test
 from gssapi.tests import k5test as kt
 from gssapi._utils import import_gssapi_extension
 
@@ -105,20 +106,6 @@ def true_false_perms(*all_elems_tuple):
 
     perms = _perms_cycle(curr_elems.pop(), curr_elems, {})
     return parameterized.expand(perms)
-
-
-def _extension_test(extension_name, extension_text):
-    def make_ext_test(func):
-        def ext_test(self, *args, **kwargs):
-            if import_gssapi_extension(extension_name) is None:
-                self.skipTest("The %s GSSAPI extension is not supported by "
-                              "your GSSAPI implementation" % extension_text)
-            else:
-                func(self, *args, **kwargs)
-
-        return ext_test
-
-    return make_ext_test
 
 
 # NB(directxman12): MIT Kerberos completely ignores input TTLs for
