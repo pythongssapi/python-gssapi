@@ -172,6 +172,75 @@ def release_cred(Creds creds not None):
     creds.raw_creds = NULL
 
 
+def add_cred(Creds input_cred, Name name not None, OID mech not None,
+             cred_usage='initiate', initiator_ttl=None, acceptor_ttl=None):
+    """Add a credential element to a credential.
+
+    This method can be used to either compose two credentials (i.e., original
+    and new credential), or to add a new element to an existing credential.
+
+    Args:
+        input_cred (Cred): the set of credentials to which to add the new
+            credentials
+        name (Name): name of principal to acquire a credential for
+        mech (MechType): the desired security mechanism (required).
+        cred_usage (str): usage type for credentials.  Possible values:
+            'initiate' (default), 'accept', 'both' (failsafe).
+        initiator_ttl (int): lifetime of credentials for use in initiating
+            security contexts (None for indefinite)
+        acceptor_ttl (int): lifetime of credentials for use in accepting
+            security contexts (None for indefinite)
+
+    Returns:
+        AddCredResult: the actual mechanisms with which the credentials may be
+        used, the actual initiator TTL, and the actual acceptor TTL (None for
+        either indefinite or not supported)
+
+    Raises:
+        GSSError
+
+    """
+    cdef gss_cred_usage_t usage
+    if cred_usage == 'initiate':
+        usage = GSS_C_INITIATE
+    elif cred_usage == 'accept':
+        usage = GSS_C_ACCEPT
+    else:  # cred_usage == 'both'
+        usage = GSS_C_BOTH
+
+    cdef gss_cred_id_t raw_input_cred
+    if input_cred is not None:
+        raw_input_cred = input_cred.raw_creds
+    else:
+        raw_input_cred = GSS_C_NO_CREDENTIAL
+
+    cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(initiator_ttl)
+    cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(acceptor_ttl)
+
+    cdef gss_cred_id_t output_creds
+    cdef gss_OID_set actual_mechs
+    cdef OM_uint32 actual_initiator_ttl, actual_acceptor_ttl
+
+    cdef OM_uint32 maj_stat, min_stat
+
+    with nogil:
+        maj_stat = gss_add_cred(&min_stat, raw_input_cred, name.raw_name,
+                                &mech.raw_oid, usage, input_initiator_ttl,
+                                input_acceptor_ttl, &output_creds,
+                                &actual_mechs, &actual_initiator_ttl,
+                                &actual_acceptor_ttl)
+
+    cdef Creds rc
+    if maj_stat == GSS_S_COMPLETE:
+        rc = Creds()
+        rc.raw_creds = output_creds
+        return AddCredResult(rc, c_create_oid_set(actual_mechs),
+                             c_c_ttl_to_py(actual_initiator_ttl),
+                             c_c_ttl_to_py(actual_acceptor_ttl))
+    else:
+        raise GSSError(maj_stat, min_stat)
+
+
 def inquire_cred(Creds creds not None, name=True, ttl=True,
                  usage=True, mechs=True):
     """Inspect credentials for information
