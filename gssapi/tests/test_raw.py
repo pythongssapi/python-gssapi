@@ -330,6 +330,36 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         retrieve_res.lifetime.should_be_an_integer()
 
+    def test_add_cred(self):
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        client_ctx_resp = gb.init_sec_context(target_name)
+        client_token = client_ctx_resp[3]
+        del client_ctx_resp  # free all the things (except the token)!
+
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name, cred_usage='both')[0]
+        server_ctx_resp = gb.accept_sec_context(client_token,
+                                                acceptor_cred=server_creds)
+
+        input_creds = gb.Creds()
+        imp_resp = gb.add_cred(input_creds,
+                               server_ctx_resp[1],
+                               gb.MechType.kerberos)
+
+        imp_resp.shouldnt_be_none()
+
+        new_creds, actual_mechs, output_init_ttl, output_accept_ttl = imp_resp
+
+        actual_mechs.shouldnt_be_empty()
+        actual_mechs.should_include(gb.MechType.kerberos)
+
+        output_init_ttl.should_be_a(int)
+        output_accept_ttl.should_be_a(int)
+
+        new_creds.should_be_a(gb.Creds)
+
     def test_inquire_creds(self):
         name = gb.import_name(SERVICE_PRINCIPAL,
                               gb.NameType.kerberos_principal)
