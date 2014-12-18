@@ -276,7 +276,8 @@ class Credentials(rcreds.Creds):
                                               res.usage)
 
     def add(self, desired_name, desired_mech, usage='both',
-            init_lifetime=None, accept_lifetime=None, impersonator=None):
+            init_lifetime=None, accept_lifetime=None, impersonator=None,
+            store=None):
         """Acquire more credentials to add to the current set
 
         This method works like :meth:`acquire`, except that it adds the
@@ -288,6 +289,17 @@ class Credentials(rcreds.Creds):
         If the `impersonator` argument is used, the credentials will
         impersonate the given name using the impersonator credentials.
         This requires the Services4User extension.
+
+        If the `store` argument is used, the credentials will be acquired
+        from the given credential store (if supported).  Otherwise, the
+        credentials are acquired from the default store.
+
+        The credential store information is a dictionary containing
+        mechanisms-specific keys and values pointing to a credential store
+        or stores.
+
+        Note that the `store` argument is not compatible with the
+        `impersonator` argument.
 
         Args:
             desired_name (Name): the name associated with the
@@ -302,13 +314,30 @@ class Credentials(rcreds.Creds):
                 credentials, or None for indefinite
             impersonator (Credentials): the credentials to use to impersonate
                 the given name, or None to not acquire normally
+            store (dict): the credential store information pointing to the
+                credential store from which to acquire the credentials,
+                or None for the default store
 
         Returns:
             Credentials: the credentials set containing the current credentials
                 and the newly acquired ones.
         """
 
-        if impersonator is not None:
+        if store is not None and impersonator is not None:
+            raise ValueError('You cannot use both the `impersonator` and '
+                             '`store` arguments at the same time')
+
+        if store is not None:
+            if rcred_cred_store is None:
+                raise NotImplementedError("Your GSSAPI implementation does "
+                                          "not have support for manipulating "
+                                          "credential stores")
+
+            res = rcred_cred_store.add_cred_from(store, self, desired_name,
+                                                 desired_mech, usage,
+                                                 init_lifetime,
+                                                 accept_lifetime)
+        elif impersonator is not None:
             if rcred_s4u is None:
                 raise NotImplementedError("Your GSSAPI implementation does "
                                           "not have support for S4U")

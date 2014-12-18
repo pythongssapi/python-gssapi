@@ -115,6 +115,10 @@ def true_false_perms(*all_elems_tuple):
 class CredsTestCase(_GSSAPIKerberosTestCase):
     def setUp(self):
         super(CredsTestCase, self).setUp()
+
+        svc_princ = SERVICE_PRINCIPAL.decode("UTF-8")
+        self.realm.kinit(svc_princ, flags=['-k'])
+
         self.name = gssnames.Name(SERVICE_PRINCIPAL,
                                   gb.NameType.kerberos_principal)
 
@@ -232,6 +236,10 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
     def test_add(self):
         self.skipTest("Not Yet Implemented")
+
+    # NB(directxman12): we don't test add_cred_from because it really requires
+    #                   multiple mechanism support, which would mean something
+    #                   like requiring NTLM libraries
 
     @_extension_test('cred_imp_ext', 'credentials import-export')
     def test_export(self):
