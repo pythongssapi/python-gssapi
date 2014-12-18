@@ -8,6 +8,7 @@ install:
   - "sudo apt-add-repository -y ppa:sssd/updates "
   - "sudo apt-get update -q"
   - "DEBIAN_FRONTEND=noninteractive sudo apt-get install -qq krb5-user krb5-kdc krb5-admin-server"
+  - "pip install --install-option='--no-cython-compile' cython"
   - "pip install -r test-requirements.txt"
 
 script: sh .travis.sh
