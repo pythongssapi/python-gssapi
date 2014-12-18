@@ -108,7 +108,7 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
         raise GSSError(maj_stat, min_stat)
 
 
-def add_cred_impersonate_name(Creds input_cred not None,
+def add_cred_impersonate_name(Creds input_cred,
                               Creds impersonator_cred not None,
                               Name name not None, OID mech not None,
                               cred_usage='initiate', initiator_ttl=None,
@@ -159,6 +159,12 @@ def add_cred_impersonate_name(Creds input_cred not None,
     else:
         usage = GSS_C_BOTH
 
+    cdef gss_cred_id_t raw_input_cred
+    if input_cred is not None:
+        raw_input_cred = input_cred.raw_creds
+    else:
+        raw_input_cred = GSS_C_NO_CREDENTIAL
+
     cdef gss_cred_id_t creds
     cdef gss_OID_set actual_mechs
     cdef OM_uint32 actual_initiator_ttl
@@ -167,8 +173,7 @@ def add_cred_impersonate_name(Creds input_cred not None,
     cdef OM_uint32 maj_stat, min_stat
 
     with nogil:
-        maj_stat = gss_add_cred_impersonate_name(&min_stat,
-                                                 input_cred.raw_creds,
+        maj_stat = gss_add_cred_impersonate_name(&min_stat, raw_input_cred,
                                                  impersonator_cred.raw_creds,
                                                  name.raw_name, &mech.raw_oid,
                                                  usage, input_initiator_ttl,
