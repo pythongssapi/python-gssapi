@@ -52,9 +52,9 @@ class Credentials(rcreds.Creds):
             base_creds = base
         elif token is not None:
             if rcred_imp_exp is None:
-                raise AttributeError("Your GSSAPI implementation does not "
-                                     "have support for importing and "
-                                     "exporting creditials")
+                raise NotImplementedError("Your GSSAPI implementation does "
+                                          "not have support for importing and "
+                                          "exporting creditials")
 
             base_creds = rcred_imp_exp.import_cred(token)
         else:
@@ -128,9 +128,9 @@ class Credentials(rcreds.Creds):
                                       desired_mechs, usage)
         else:
             if rcred_cred_store is None:
-                raise AttributeError("Your GSSAPI implementation does not "
-                                     "have support for manipulating "
-                                     "credential stores")
+                raise NotImplementedError("Your GSSAPI implementation does "
+                                          "not have support for manipulating "
+                                          "credential stores")
 
             store = _encode_dict(store)
 
@@ -167,16 +167,16 @@ class Credentials(rcreds.Creds):
 
         if store is None:
             if rcred_rfc5588 is None:
-                raise AttributeError("Your GSSAPI implementation does not "
-                                     "have support for RFC 5588")
+                raise NotImplementedError("Your GSSAPI implementation does "
+                                          "not have support for RFC 5588")
 
             return rcred_cred_store.store_cred(self, usage, mech,
                                                overwrite, set_default)
         else:
             if rcred_cred_store is None:
-                raise AttributeError("Your GSSAPI implementation does not "
-                                     "have support for manipulating "
-                                     "credential stores directly")
+                raise NotImplementedError("Your GSSAPI implementation does "
+                                          "not have support for manipulating "
+                                          "credential stores directly")
 
             store = _encode_dict(store)
 
@@ -206,8 +206,8 @@ class Credentials(rcreds.Creds):
         """
 
         if rcred_s4u is None:
-            raise AttributeError("Your GSSAPI implementation does not "
-                                 "have support for S4U")
+            raise NotImplementedError("Your GSSAPI implementation does not "
+                                      "have support for S4U")
 
         res = rcred_s4u.acquire_cred_impersonate_name(self, desired_name,
                                                       lifetime, desired_mechs,
@@ -310,8 +310,8 @@ class Credentials(rcreds.Creds):
 
         if impersonator is not None:
             if rcred_s4u is None:
-                raise AttributeError("Your GSSAPI implementation does not "
-                                     "have support for S4U")
+                raise NotImplementedError("Your GSSAPI implementation does "
+                                          "not have support for S4U")
             res = rcred_s4u.add_cred_impersonate_name(self, impersonator,
                                                       desired_name,
                                                       desired_mech,
@@ -336,9 +336,9 @@ class Credentials(rcreds.Creds):
         """
 
         if rcred_imp_exp is None:
-            raise AttributeError("Your GSSAPI implementation does not "
-                                 "have support for importing and exporting "
-                                 "creditials")
+            raise NotImplementedError("Your GSSAPI implementation does not "
+                                      "have support for importing and "
+                                      "exporting creditials")
 
         return rcred_imp_exp.export_cred(self)
 
