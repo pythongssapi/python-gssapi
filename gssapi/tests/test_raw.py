@@ -227,9 +227,8 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         is_open.should_be_a(bool)
         is_open.should_be_true()
 
-    def test_process_context_token(self):
-        # TODO(directxman12): figure out how to write a test for this
-        self.skipTest("Not Yet Implemented")
+    # NB(directxman12): We don't test `process_context_token` because
+    #                   there is no clear non-deprecated way to test it
 
     @_extension_test('s4u', 'S4U')
     def test_add_cred_impersonate_name(self):
@@ -296,7 +295,36 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
     @_extension_test('rfc5588', 'RFC 5588')
     def test_store_cred_acquire_cred(self):
-        self.skipTest("Not Yet Implemented")
+        # we need to acquire a forwardable ticket
+        svc_princ = SERVICE_PRINCIPAL.decode("UTF-8")
+        self.realm.kinit(svc_princ, flags=['-k', '-f'])
+
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+
+        client_creds = gb.acquire_cred(None, cred_usage='initiate').creds
+        client_ctx_resp = gb.init_sec_context(
+            target_name, cred=client_creds,
+            flags=gb.RequirementFlag.delegate_to_peer)
+
+        client_token = client_ctx_resp[3]
+
+        server_creds = gb.acquire_cred(None, cred_usage='accept').creds
+        server_ctx_resp = gb.accept_sec_context(client_token,
+                                                acceptor_cred=server_creds)
+
+        deleg_creds = server_ctx_resp.delegated_creds
+        deleg_creds.shouldnt_be_none()
+        store_res = gb.store_cred(deleg_creds, cred_usage='initiate',
+                                  set_default=True)
+
+        store_res.shouldnt_be_none()
+        store_res.usage.should_be('initiate')
+        store_res.mech_types.should_include(gb.MechType.kerberos)
+
+        deleg_name = gb.inquire_cred(deleg_creds).name
+        acq_resp = gb.acquire_cred(deleg_name, cred_usage='initiate')
+        acq_resp.shouldnt_be_none()
 
     @_extension_test('cred_store', 'credentials store')
     def test_store_cred_into_acquire_cred(self):

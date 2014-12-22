@@ -310,7 +310,7 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
         free(bdng)
 
     cdef Name on = Name()
-    cdef Creds oc = Creds()
+    cdef Creds oc = None
     cdef OID py_mech_type
     if maj_stat == GSS_S_COMPLETE or maj_stat == GSS_S_CONTINUE_NEEDED:
         if output_ttl == GSS_C_INDEFINITE:
@@ -319,7 +319,11 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
             output_ttl_py = output_ttl
 
         on.raw_name = initiator_name
-        oc.raw_creds = delegated_cred
+
+        if delegated_cred is not NULL:
+            oc = Creds()
+            oc.raw_creds = delegated_cred
+
         if mech_type is not NULL:
             py_mech_type = OID()
             py_mech_type.raw_oid = mech_type[0]

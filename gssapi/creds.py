@@ -170,8 +170,8 @@ class Credentials(rcreds.Creds):
                 raise NotImplementedError("Your GSSAPI implementation does "
                                           "not have support for RFC 5588")
 
-            return rcred_cred_store.store_cred(self, usage, mech,
-                                               overwrite, set_default)
+            return rcred_rfc5588.store_cred(self, usage, mech,
+                                            overwrite, set_default)
         else:
             if rcred_cred_store is None:
                 raise NotImplementedError("Your GSSAPI implementation does "
@@ -332,6 +332,7 @@ class Credentials(rcreds.Creds):
                 raise NotImplementedError("Your GSSAPI implementation does "
                                           "not have support for manipulating "
                                           "credential stores")
+            store = _encode_dict(store)
 
             res = rcred_cred_store.add_cred_from(store, self, desired_name,
                                                  desired_mech, usage,
