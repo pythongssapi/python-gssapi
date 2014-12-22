@@ -39,7 +39,7 @@ cdef extern from "gssapi/gssapi_ext.h":
 
 def acquire_cred_impersonate_name(Creds impersonator_cred not None,
                                   Name name not None, ttl=None, mechs=None,
-                                  cred_usage='initiate'):
+                                  usage='initiate'):
     """
     Acquire credentials by impersonating another name.
 
@@ -54,7 +54,7 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
         ttl (int): the lifetime for the credentials (or None for indefinite)
         mechs ([MechType]): the desired mechanisms for which the credentials
             should work (or None for the default set)
-        cred_usage (str): the usage type for the credentials: may be
+        usage (str): the usage type for the credentials: may be
             'initiate', 'accept', or 'both'
 
     Returns:
@@ -73,15 +73,15 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
         desired_mechs = GSS_C_NO_OID_SET
 
     cdef OM_uint32 input_ttl = c_py_ttl_to_c(ttl)
-    cdef gss_cred_usage_t usage
     cdef gss_name_t c_name = name.raw_name
 
-    if cred_usage == 'initiate':
-        usage = GSS_C_INITIATE
-    elif cred_usage == 'accept':
-        usage = GSS_C_ACCEPT
+    cdef gss_cred_usage_t c_usage
+    if usage == 'initiate':
+        c_usage = GSS_C_INITIATE
+    elif usage == 'accept':
+        c_usage = GSS_C_ACCEPT
     else:
-        usage = GSS_C_BOTH
+        c_usage = GSS_C_BOTH
 
     cdef gss_cred_id_t creds
     cdef gss_OID_set actual_mechs
@@ -92,7 +92,7 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
     with nogil:
         maj_stat = gss_acquire_cred_impersonate_name(
             &min_stat, impersonator_cred.raw_creds, name.raw_name,
-            input_ttl, desired_mechs, usage, &creds, &actual_mechs,
+            input_ttl, desired_mechs, c_usage, &creds, &actual_mechs,
             &actual_ttl)
 
     cdef OM_uint32 tmp_min_stat
@@ -111,7 +111,7 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
 def add_cred_impersonate_name(Creds input_cred,
                               Creds impersonator_cred not None,
                               Name name not None, OID mech not None,
-                              cred_usage='initiate', initiator_ttl=None,
+                              usage='initiate', initiator_ttl=None,
                               acceptor_ttl=None):
     """
     Add a credential-element to a credential by impersonating another name.
@@ -129,7 +129,7 @@ def add_cred_impersonate_name(Creds input_cred,
         name (Name): the name to impersonate
         mech (MechType): the desired mechanism.  Note that this is both
             singular and required, unlike acquireCredImpersonateName
-        cred_usage (str): the usage type for the credentials: may be
+        usage (str): the usage type for the credentials: may be
             'initiate', 'accept', or 'both'
         initiator_ttl (int): the lifetime for the credentials to remain valid
             when using them to initiate security contexts (or None for
@@ -149,15 +149,15 @@ def add_cred_impersonate_name(Creds input_cred,
 
     cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(initiator_ttl)
     cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(acceptor_ttl)
-    cdef gss_cred_usage_t usage
     cdef gss_name_t c_name = name.raw_name
 
-    if cred_usage == 'initiate':
-        usage = GSS_C_INITIATE
-    elif cred_usage == 'accept':
-        usage = GSS_C_ACCEPT
+    cdef gss_cred_usage_t c_usage
+    if usage == 'initiate':
+        c_usage = GSS_C_INITIATE
+    elif usage == 'accept':
+        c_usage = GSS_C_ACCEPT
     else:
-        usage = GSS_C_BOTH
+        c_usage = GSS_C_BOTH
 
     cdef gss_cred_id_t raw_input_cred
     if input_cred is not None:
@@ -176,7 +176,7 @@ def add_cred_impersonate_name(Creds input_cred,
         maj_stat = gss_add_cred_impersonate_name(&min_stat, raw_input_cred,
                                                  impersonator_cred.raw_creds,
                                                  name.raw_name, &mech.raw_oid,
-                                                 usage, input_initiator_ttl,
+                                                 c_usage, input_initiator_ttl,
                                                  input_acceptor_ttl, &creds,
                                                  &actual_mechs,
                                                  &actual_initiator_ttl,

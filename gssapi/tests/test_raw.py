@@ -240,7 +240,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         server_name = gb.import_name(SERVICE_PRINCIPAL,
                                      gb.NameType.kerberos_principal)
-        server_creds = gb.acquire_cred(server_name, cred_usage='both')[0]
+        server_creds = gb.acquire_cred(server_name, usage='both')[0]
         server_ctx_resp = gb.accept_sec_context(client_token,
                                                 acceptor_cred=server_creds)
 
@@ -272,7 +272,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         server_name = gb.import_name(SERVICE_PRINCIPAL,
                                      gb.NameType.kerberos_principal)
-        server_creds = gb.acquire_cred(server_name, cred_usage='both')[0]
+        server_creds = gb.acquire_cred(server_name, usage='both')[0]
         server_ctx_resp = gb.accept_sec_context(client_token,
                                                 acceptor_cred=server_creds)
 
@@ -338,7 +338,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         self.realm.extract_keytab(princ_name, KT)
         self.realm.kinit(princ_name, None, ['-k', '-t', KT])
 
-        initial_creds = gb.acquire_cred(None, cred_usage='initiate').creds
+        initial_creds = gb.acquire_cred(None, usage='initiate').creds
 
         # NB(sross): overwrite because the ccache doesn't exist yet
         store_res = gb.store_cred_into(store, initial_creds, overwrite=True)
@@ -367,7 +367,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         server_name = gb.import_name(SERVICE_PRINCIPAL,
                                      gb.NameType.kerberos_principal)
-        server_creds = gb.acquire_cred(server_name, cred_usage='both')[0]
+        server_creds = gb.acquire_cred(server_name, usage='both')[0]
         server_ctx_resp = gb.accept_sec_context(client_token,
                                                 acceptor_cred=server_creds)
 

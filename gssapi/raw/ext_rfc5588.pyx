@@ -22,7 +22,7 @@ cdef extern from "gssapi.h":
                              gss_cred_usage_t *actual_usage) nogil
 
 
-def store_cred(Creds creds not None, cred_usage='both', OID mech=None,
+def store_cred(Creds creds not None, usage='both', OID mech=None,
                bint overwrite=False, bint set_default=False):
     """Store credentials to the default store
 
@@ -31,7 +31,7 @@ def store_cred(Creds creds not None, cred_usage='both', OID mech=None,
 
     Args:
         creds (Creds): the credentials to store
-        cred_usage (str): the usage to store the credentials with -- either
+        usage (str): the usage to store the credentials with -- either
             'both', 'initiate', or 'accept'
         mech (OID): the mechansim to associate with the stored credentials
         overwrite (bool): whether or not to overwrite existing credentials
@@ -51,13 +51,13 @@ def store_cred(Creds creds not None, cred_usage='both', OID mech=None,
     else:
         desired_mech = GSS_C_NO_OID
 
-    cdef gss_cred_usage_t usage
-    if cred_usage == 'initiate':
-        usage = GSS_C_INITIATE
-    elif cred_usage == 'accept':
-        usage = GSS_C_ACCEPT
+    cdef gss_cred_usage_t c_usage
+    if usage == 'initiate':
+        c_usage = GSS_C_INITIATE
+    elif usage == 'accept':
+        c_usage = GSS_C_ACCEPT
     else:
-        usage = GSS_C_BOTH
+        c_usage = GSS_C_BOTH
 
     cdef gss_cred_id_t c_creds = creds.raw_creds
 
@@ -67,7 +67,7 @@ def store_cred(Creds creds not None, cred_usage='both', OID mech=None,
     cdef OM_uint32 maj_stat, min_stat
 
     with nogil:
-        maj_stat = gss_store_cred(&min_stat, c_creds, usage,
+        maj_stat = gss_store_cred(&min_stat, c_creds, c_usage,
                                   desired_mech, overwrite,
                                   set_default, &actual_mech_types,
                                   &actual_usage)

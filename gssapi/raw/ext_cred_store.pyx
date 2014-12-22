@@ -95,7 +95,7 @@ cdef void c_free_key_value_set(gss_key_value_set_desc *kvset):
 # TODO(directxman12): some of these probably need a "not null",
 #                     but that's not clear from the wiki page
 def acquire_cred_from(dict store, Name name, ttl=None,
-                      mechs=None, cred_usage='both'):
+                      mechs=None, usage='both'):
     """Acquire credentials from the given store
 
     This method acquires credentials from the store specified by the
@@ -114,7 +114,7 @@ def acquire_cred_from(dict store, Name name, ttl=None,
             for indefinite
         mechs (list): the desired mechanisms to be used with these
             credentials, or None for the default set
-        cred_usage (str): the usage for these credentials -- either 'both',
+        usage (str): the usage for these credentials -- either 'both',
             'initiate', or 'accept'
 
     Returns:
@@ -139,13 +139,13 @@ def acquire_cred_from(dict store, Name name, ttl=None,
     else:
         c_name = name.raw_name
 
-    cdef gss_cred_usage_t usage
-    if cred_usage == 'initiate':
-        usage = GSS_C_INITIATE
-    elif cred_usage == 'accept':
-        usage = GSS_C_ACCEPT
+    cdef gss_cred_usage_t c_usage
+    if usage == 'initiate':
+        c_usage = GSS_C_INITIATE
+    elif usage == 'accept':
+        c_usage = GSS_C_ACCEPT
     else:
-        usage = GSS_C_BOTH
+        c_usage = GSS_C_BOTH
 
     cdef gss_key_value_set_desc *c_store
     if store is not None:
@@ -161,7 +161,7 @@ def acquire_cred_from(dict store, Name name, ttl=None,
 
     with nogil:
         maj_stat = gss_acquire_cred_from(&min_stat, c_name, input_ttl,
-                                         desired_mechs, usage, c_store,
+                                         desired_mechs, c_usage, c_store,
                                          &creds, &actual_mechs, &actual_ttl)
 
     cdef OM_uint32 tmp_min_stat
@@ -182,7 +182,7 @@ def acquire_cred_from(dict store, Name name, ttl=None,
 
 def add_cred_from(dict store, Creds input_creds,
                   Name name not None, OID mech not None,
-                  cred_usage='both', initiator_ttl=None,
+                  usage='both', initiator_ttl=None,
                   acceptor_ttl=None):
     """Acquire credentials to add to the current set from the given store
 
@@ -202,7 +202,7 @@ def add_cred_from(dict store, Creds input_creds,
         name (Name): the name associated with the credentials
         mech (OID): the desired mechanism to be used with these
             credentials
-        cred_usage (str): the usage for these credentials -- either 'both',
+        usage (str): the usage for these credentials -- either 'both',
             'initiate', or 'accept'
         initiator_ttl): the desired initiate lifetime of the
             credentials, or None for indefinite
@@ -220,13 +220,13 @@ def add_cred_from(dict store, Creds input_creds,
     cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(initiator_ttl)
     cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(acceptor_ttl)
 
-    cdef gss_cred_usage_t usage
-    if cred_usage == 'initiate':
-        usage = GSS_C_INITIATE
-    elif cred_usage == 'accept':
-        usage = GSS_C_ACCEPT
+    cdef gss_cred_usage_t c_usage
+    if usage == 'initiate':
+        c_usage = GSS_C_INITIATE
+    elif usage == 'accept':
+        c_usage = GSS_C_ACCEPT
     else:
-        usage = GSS_C_BOTH
+        c_usage = GSS_C_BOTH
 
     cdef gss_name_t c_name = name.raw_name
     cdef gss_OID c_mech = &mech.raw_oid
@@ -252,7 +252,7 @@ def add_cred_from(dict store, Creds input_creds,
 
     with nogil:
         maj_stat = gss_add_cred_from(&min_stat, c_input_creds, c_name,
-                                     c_mech, usage, input_initiator_ttl,
+                                     c_mech, c_usage, input_initiator_ttl,
                                      input_acceptor_ttl, c_store, &creds,
                                      &actual_mechs, &actual_initiator_ttl,
                                      &actual_acceptor_ttl)
@@ -272,7 +272,7 @@ def add_cred_from(dict store, Creds input_creds,
 
 
 def store_cred_into(dict store, Creds creds not None,
-                    cred_usage='both', OID mech=None, bint overwrite=False,
+                    usage='both', OID mech=None, bint overwrite=False,
                     bint set_default=False):
     """Store credentials to the given store
 
@@ -288,7 +288,7 @@ def store_cred_into(dict store, Creds creds not None,
         store (dict): the store into which to store the credentials,
             or None for the default store.
         creds (Creds): the credentials to store
-        cred_usage (str): the usage to store the credentials with -- either
+        usage (str): the usage to store the credentials with -- either
             'both', 'initiate', or 'accept'
         mech (OID): the mechansim to associate with the stored credentials
         overwrite (bool): whether or not to overwrite existing credentials
@@ -309,13 +309,13 @@ def store_cred_into(dict store, Creds creds not None,
     else:
         desired_mech = GSS_C_NO_OID
 
-    cdef gss_cred_usage_t usage
-    if cred_usage == 'initiate':
-        usage = GSS_C_INITIATE
-    elif cred_usage == 'accept':
-        usage = GSS_C_ACCEPT
+    cdef gss_cred_usage_t c_usage
+    if usage == 'initiate':
+        c_usage = GSS_C_INITIATE
+    elif usage == 'accept':
+        c_usage = GSS_C_ACCEPT
     else:
-        usage = GSS_C_BOTH
+        c_usage = GSS_C_BOTH
 
     cdef gss_key_value_set_desc *c_store
     if store is not None:
@@ -331,7 +331,7 @@ def store_cred_into(dict store, Creds creds not None,
     cdef OM_uint32 maj_stat, min_stat
 
     with nogil:
-        maj_stat = gss_store_cred_into(&min_stat, c_creds, usage,
+        maj_stat = gss_store_cred_into(&min_stat, c_creds, c_usage,
                                        desired_mech, overwrite,
                                        set_default, c_store,
                                        &actual_mech_types,

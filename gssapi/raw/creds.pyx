@@ -80,7 +80,7 @@ cdef class Creds:
             self.raw_creds = NULL
 
 
-def acquire_cred(Name name, ttl=None, mechs=None, cred_usage='both'):
+def acquire_cred(Name name, ttl=None, mechs=None, usage='both'):
     """
     Get GSSAPI credentials for the given name and mechanisms.
 
@@ -94,7 +94,7 @@ def acquire_cred(Name name, ttl=None, mechs=None, cred_usage='both'):
         ttl (int): the lifetime for the credentials (or None for indefinite)
         mechs ([MechType]): the desired mechanisms for which the credentials
             should work, or None for the default set
-        cred_usage (str): the usage type for the credentials: may be
+        usage (str): the usage type for the credentials: may be
             'initiate', 'accept', or 'both'
 
     Returns:
@@ -113,7 +113,6 @@ def acquire_cred(Name name, ttl=None, mechs=None, cred_usage='both'):
         desired_mechs = GSS_C_NO_OID_SET
 
     cdef OM_uint32 input_ttl = c_py_ttl_to_c(ttl)
-    cdef gss_cred_usage_t usage
 
     cdef gss_name_t c_name
     if name is None:
@@ -121,12 +120,13 @@ def acquire_cred(Name name, ttl=None, mechs=None, cred_usage='both'):
     else:
         c_name = name.raw_name
 
-    if cred_usage == 'initiate':
-        usage = GSS_C_INITIATE
-    elif cred_usage == 'accept':
-        usage = GSS_C_ACCEPT
+    cdef gss_cred_usage_t c_usage
+    if usage == 'initiate':
+        c_usage = GSS_C_INITIATE
+    elif usage == 'accept':
+        c_usage = GSS_C_ACCEPT
     else:
-        usage = GSS_C_BOTH
+        c_usage = GSS_C_BOTH
 
     cdef gss_cred_id_t creds
     cdef gss_OID_set actual_mechs
@@ -136,7 +136,7 @@ def acquire_cred(Name name, ttl=None, mechs=None, cred_usage='both'):
 
     with nogil:
         maj_stat = gss_acquire_cred(&min_stat, c_name, input_ttl,
-                                    desired_mechs, usage, &creds,
+                                    desired_mechs, c_usage, &creds,
                                     &actual_mechs, &actual_ttl)
 
     cdef OM_uint32 tmp_min_stat
@@ -173,7 +173,7 @@ def release_cred(Creds creds not None):
 
 
 def add_cred(Creds input_cred, Name name not None, OID mech not None,
-             cred_usage='initiate', initiator_ttl=None, acceptor_ttl=None):
+             usage='initiate', initiator_ttl=None, acceptor_ttl=None):
     """Add a credential element to a credential.
 
     This method can be used to either compose two credentials (i.e., original
@@ -184,7 +184,7 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
             credentials
         name (Name): name of principal to acquire a credential for
         mech (MechType): the desired security mechanism (required).
-        cred_usage (str): usage type for credentials.  Possible values:
+        usage (str): usage type for credentials.  Possible values:
             'initiate' (default), 'accept', 'both' (failsafe).
         initiator_ttl (int): lifetime of credentials for use in initiating
             security contexts (None for indefinite)
@@ -200,13 +200,13 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
         GSSError
 
     """
-    cdef gss_cred_usage_t usage
-    if cred_usage == 'initiate':
-        usage = GSS_C_INITIATE
-    elif cred_usage == 'accept':
-        usage = GSS_C_ACCEPT
-    else:  # cred_usage == 'both'
-        usage = GSS_C_BOTH
+    cdef gss_cred_usage_t c_usage
+    if usage == 'initiate':
+        c_usage = GSS_C_INITIATE
+    elif usage == 'accept':
+        c_usage = GSS_C_ACCEPT
+    else:  # usage == 'both'
+        c_usage = GSS_C_BOTH
 
     cdef gss_cred_id_t raw_input_cred
     if input_cred is not None:
@@ -225,7 +225,7 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
 
     with nogil:
         maj_stat = gss_add_cred(&min_stat, raw_input_cred, name.raw_name,
-                                &mech.raw_oid, usage, input_initiator_ttl,
+                                &mech.raw_oid, c_usage, input_initiator_ttl,
                                 input_acceptor_ttl, &output_creds,
                                 &actual_mechs, &actual_initiator_ttl,
                                 &actual_acceptor_ttl)
