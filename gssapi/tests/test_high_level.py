@@ -300,13 +300,13 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         retrieved_creds.shouldnt_be_none()
         retrieved_creds.should_be_a(gsscreds.Credentials)
 
-    @_extension_test('cred_imp_ext', 'credentials import-export')
+    @_extension_test('cred_imp_exp', 'credentials import-export')
     def test_export(self):
         creds = gsscreds.Credentials(name=self.name)
         token = creds.export()
-        token.should_be(bytes)
+        token.should_be_a(bytes)
 
-    @_extension_test('cred_imp_ext', 'credentials import-export')
+    @_extension_test('cred_imp_exp', 'credentials import-export')
     def test_import_by_init(self):
         creds = gsscreds.Credentials(name=self.name)
         token = creds.export()
@@ -315,7 +315,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         imported_creds.lifetime.should_be(creds.lifetime)
         imported_creds.name.should_be(creds.name)
 
-    @_extension_test('cred_imp_ext', 'credentials import-export')
+    @_extension_test('cred_imp_exp', 'credentials import-export')
     def test_pickle_unpickle(self):
         creds = gsscreds.Credentials(name=self.name)
         pickled_creds = pickle.dumps(creds)

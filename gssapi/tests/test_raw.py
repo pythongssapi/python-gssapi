@@ -157,6 +157,17 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         gb.release_name(name)
         gb.release_cred(creds)
 
+    @_extension_test('cred_imp_exp', 'credentials import-export')
+    def test_cred_import_export(self):
+        creds = gb.acquire_cred(None).creds
+        token = gb.export_cred(creds)
+        imported_creds = gb.import_cred(token)
+
+        inquire_orig = gb.inquire_cred(creds, name=True)
+        inquire_imp = gb.inquire_cred(imported_creds, name=True)
+
+        gb.compare_name(inquire_orig.name, inquire_imp.name).should_be_true()
+
     def test_context_time(self):
         target_name = gb.import_name(TARGET_SERVICE_NAME,
                                      gb.NameType.hostbased_service)

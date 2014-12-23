@@ -190,6 +190,7 @@ setup(
         extension_file('s4u', 'gss_acquire_cred_impersonate_name'),
         extension_file('cred_store', 'gss_store_cred_into'),
         extension_file('rfc5588', 'gss_store_cred'),
+        extension_file('cred_imp_exp', 'gss_import_cred'),
     ]),
     keywords=['gssapi', 'security'],
     install_requires=[

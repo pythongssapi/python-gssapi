@@ -26,6 +26,11 @@ try:
 except ImportError:
     pass
 
+try:
+    from gssapi.raw.ext_cred_imp_exp import *  # noqa
+except ImportError:
+    pass
+
 # optional KRB5 mech support
 try:
     import gssapi.raw.mech_krb5  # noqa
