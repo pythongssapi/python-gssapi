@@ -8,6 +8,9 @@ Python-GSSAPI
 .. role:: bash(code)
    :language: bash
 
+.. image:: https://travis-ci.org/pythongssapi/python-gssapi.svg?branch=master
+    :target: https://travis-ci.org/pythongssapi/python-gssapi
+
 Python-GSSAPI provides both low-level and high level wrappers around the GSSAPI
 C libraries.  While it focuses on the Kerberos mechanism, it should also be
 useable with other GSSAPI mechanisms.
@@ -125,3 +128,15 @@ In addition to RFC 2743/2744, Python-GSSAPI also has support for:
 * (Additional) Credential Store Extension
 
 * Services4User
+
+* Credentials import-export
+
+The Team
+========
+
+(GitHub usernames in parentheses)
+
+* Solly Ross (@directxman12)
+* Robbie Harwood (@frozencemetery)
+* Simo Sorce (@simo5)
+* Hugh Cole-Baker (@sigmaris)
