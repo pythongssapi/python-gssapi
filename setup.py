@@ -153,7 +153,7 @@ long_desc = re.sub('\.\. role:: \w+\(code\)\s*\n\s*.+', '',
                                  open('README.txt').read())))
 
 setup(
-    name='PythonGSSAPI',
+    name='gssapi',
     version='1.0.0',
     author='The Python GSSAPI Team',
     author_email='sross@redhat.com',
