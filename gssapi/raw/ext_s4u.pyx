@@ -38,8 +38,8 @@ cdef extern from "gssapi/gssapi_ext.h":
 
 
 def acquire_cred_impersonate_name(Creds impersonator_cred not None,
-                                  Name name not None, ttl=None, mechs=None,
-                                  usage='initiate'):
+                                  Name name not None, lifetime=None,
+                                  mechs=None, usage='initiate'):
     """
     Acquire credentials by impersonating another name.
 
@@ -51,7 +51,8 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
         impersonator_cred (Cred): the credentials with permissions to
             impersonate the target name
         name (Name): the name to impersonate
-        ttl (int): the lifetime for the credentials (or None for indefinite)
+        lifetime (int): the lifetime for the credentials (or None for
+            indefinite)
         mechs ([MechType]): the desired mechanisms for which the credentials
             should work (or None for the default set)
         usage (str): the usage type for the credentials: may be
@@ -72,7 +73,7 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
     else:
         desired_mechs = GSS_C_NO_OID_SET
 
-    cdef OM_uint32 input_ttl = c_py_ttl_to_c(ttl)
+    cdef OM_uint32 input_ttl = c_py_ttl_to_c(lifetime)
     cdef gss_name_t c_name = name.raw_name
 
     cdef gss_cred_usage_t c_usage
@@ -111,8 +112,8 @@ def acquire_cred_impersonate_name(Creds impersonator_cred not None,
 def add_cred_impersonate_name(Creds input_cred,
                               Creds impersonator_cred not None,
                               Name name not None, OID mech not None,
-                              usage='initiate', initiator_ttl=None,
-                              acceptor_ttl=None):
+                              usage='initiate', init_lifetime=None,
+                              accept_lifetime=None):
     """
     Add a credential-element to a credential by impersonating another name.
 
@@ -131,11 +132,11 @@ def add_cred_impersonate_name(Creds input_cred,
             singular and required, unlike acquireCredImpersonateName
         usage (str): the usage type for the credentials: may be
             'initiate', 'accept', or 'both'
-        initiator_ttl (int): the lifetime for the credentials to remain valid
-            when using them to initiate security contexts (or None for
+        init_lifetime (int): the lifetime for the credentials to remain
+            valid when using them to initiate security contexts (or None for
             indefinite)
-        acceptor_ttl (int): the lifetime for the credentials to remain valid
-            when using them to accept security contexts (or None for
+        accept_lifetime (int): the lifetime for the credentials to remain
+            valid when using them to accept security contexts (or None for
             indefinite)
 
     Returns:
@@ -147,8 +148,8 @@ def add_cred_impersonate_name(Creds input_cred,
         GSSError
     """
 
-    cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(initiator_ttl)
-    cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(acceptor_ttl)
+    cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(init_lifetime)
+    cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(accept_lifetime)
     cdef gss_name_t c_name = name.raw_name
 
     cdef gss_cred_usage_t c_usage

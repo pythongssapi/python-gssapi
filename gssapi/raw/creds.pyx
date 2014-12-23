@@ -80,7 +80,7 @@ cdef class Creds:
             self.raw_creds = NULL
 
 
-def acquire_cred(Name name, ttl=None, mechs=None, usage='both'):
+def acquire_cred(Name name, lifetime=None, mechs=None, usage='both'):
     """
     Get GSSAPI credentials for the given name and mechanisms.
 
@@ -91,7 +91,8 @@ def acquire_cred(Name name, ttl=None, mechs=None, usage='both'):
     Args:
         name (Name): the name for which to acquire the credentials (or None
             for the "no name" functionality)
-        ttl (int): the lifetime for the credentials (or None for indefinite)
+        lifetime (int): the lifetime for the credentials (or None for
+            indefinite)
         mechs ([MechType]): the desired mechanisms for which the credentials
             should work, or None for the default set
         usage (str): the usage type for the credentials: may be
@@ -112,7 +113,7 @@ def acquire_cred(Name name, ttl=None, mechs=None, usage='both'):
     else:
         desired_mechs = GSS_C_NO_OID_SET
 
-    cdef OM_uint32 input_ttl = c_py_ttl_to_c(ttl)
+    cdef OM_uint32 input_ttl = c_py_ttl_to_c(lifetime)
 
     cdef gss_name_t c_name
     if name is None:
@@ -173,7 +174,8 @@ def release_cred(Creds creds not None):
 
 
 def add_cred(Creds input_cred, Name name not None, OID mech not None,
-             usage='initiate', initiator_ttl=None, acceptor_ttl=None):
+             usage='initiate', init_lifetime=None,
+             accept_lifetime=None):
     """Add a credential element to a credential.
 
     This method can be used to either compose two credentials (i.e., original
@@ -186,9 +188,9 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
         mech (MechType): the desired security mechanism (required).
         usage (str): usage type for credentials.  Possible values:
             'initiate' (default), 'accept', 'both' (failsafe).
-        initiator_ttl (int): lifetime of credentials for use in initiating
+        init_lifetime (int): lifetime of credentials for use in initiating
             security contexts (None for indefinite)
-        acceptor_ttl (int): lifetime of credentials for use in accepting
+        accept_lifetime (int): lifetime of credentials for use in accepting
             security contexts (None for indefinite)
 
     Returns:
@@ -214,8 +216,8 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
     else:
         raw_input_cred = GSS_C_NO_CREDENTIAL
 
-    cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(initiator_ttl)
-    cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(acceptor_ttl)
+    cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(init_lifetime)
+    cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(accept_lifetime)
 
     cdef gss_cred_id_t output_creds
     cdef gss_OID_set actual_mechs
@@ -241,8 +243,8 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
         raise GSSError(maj_stat, min_stat)
 
 
-def inquire_cred(Creds creds not None, name=True, ttl=True,
-                 usage=True, mechs=True):
+def inquire_cred(Creds creds not None, name=True, lifetime=True, usage=True,
+                 mechs=True):
     """Inspect credentials for information
 
     This method inspects a :class:`Creds` object for information.
@@ -250,7 +252,7 @@ def inquire_cred(Creds creds not None, name=True, ttl=True,
     Args:
         creds (Creds): the credentials to inspect
         name (bool): get the Name associated with the credentials
-        ttl (bool): get the TTL for the credentials
+        lifetime (bool): get the TTL for the credentials
         usage (bool): get the usage type of the credentials
         mechs (bool): the mechanims used with the credentials
 
@@ -270,7 +272,7 @@ def inquire_cred(Creds creds not None, name=True, ttl=True,
 
     cdef OM_uint32 res_ttl
     cdef OM_uint32 *res_ttl_ptr = NULL
-    if ttl:
+    if lifetime:
         res_ttl_ptr = &res_ttl
 
     cdef gss_cred_usage_t res_usage
@@ -305,7 +307,7 @@ def inquire_cred(Creds creds not None, name=True, ttl=True,
                 py_usage = 'both'
 
         py_ttl = None
-        if ttl:
+        if lifetime:
             py_ttl = c_c_ttl_to_py(res_ttl)
 
         py_mechs = None
@@ -318,8 +320,8 @@ def inquire_cred(Creds creds not None, name=True, ttl=True,
 
 
 def inquire_cred_by_mech(Creds creds not None, OID mech not None,
-                         name=True, initiator_ttl=True,
-                         acceptor_ttl=True, usage=True):
+                         name=True, init_lifetime=True,
+                         accept_lifetime=True, usage=True):
     """Inspect credentials for mechanism-specific
 
     This method inspects a :class:`Creds` object for information
@@ -329,8 +331,8 @@ def inquire_cred_by_mech(Creds creds not None, OID mech not None,
         creds (Creds): the credentials to inspect
         mech (OID): the desired mechanism
         name (bool): get the Name associated with the credentials
-        initiator_ttl (bool): get the initiator TTL for the credentials
-        acceprot_ttl (bool): get the acceptor TTL for the credentials
+        init_lifetime (bool): get the initiator TTL for the credentials
+        accept_lifetime (bool): get the acceptor TTL for the credentials
         usage (bool): get the usage type of the credentials
 
     Returns:
@@ -349,12 +351,12 @@ def inquire_cred_by_mech(Creds creds not None, OID mech not None,
 
     cdef OM_uint32 res_initiator_ttl
     cdef OM_uint32 *res_initiator_ttl_ptr = NULL
-    if initiator_ttl:
+    if init_lifetime:
         res_initiator_ttl_ptr = &res_initiator_ttl
 
     cdef OM_uint32 res_acceptor_ttl
     cdef OM_uint32 *res_acceptor_ttl_ptr = NULL
-    if acceptor_ttl:
+    if accept_lifetime:
         res_acceptor_ttl_ptr = &res_acceptor_ttl
 
     cdef gss_cred_usage_t res_usage
@@ -376,11 +378,11 @@ def inquire_cred_by_mech(Creds creds not None, OID mech not None,
             rn = None
 
         py_initiator_ttl = None
-        if initiator_ttl:
+        if init_lifetime:
             py_initiator_ttl = c_c_ttl_to_py(res_initiator_ttl)
 
         py_acceptor_ttl = None
-        if acceptor_ttl:
+        if accept_lifetime:
             py_acceptor_ttl = c_c_ttl_to_py(res_acceptor_ttl)
 
         py_usage = None

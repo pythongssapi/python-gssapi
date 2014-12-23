@@ -112,7 +112,7 @@ cdef class SecurityContext:
 def init_sec_context(Name target_name not None, Creds cred=None,
                      SecurityContext context=None,
                      OID mech_type=None,
-                     flags=None, ttl=None,
+                     flags=None, lifetime=None,
                      ChannelBindings channel_bindings=None,
                      input_token=None):
     """
@@ -137,8 +137,8 @@ def init_sec_context(Name target_name not None, Creds cred=None,
         flags ([RequirementFlag]): the flags to request for the security
             context, or None to use the default set: mutual_authentication and
             out_of_sequence_detection
-        ttl (int): the request lifetime of the security context (a value of
-            0 or None means indefinite)
+        lifetime (int): the request lifetime of the security context (a value
+            of 0 or None means indefinite)
         channel_bindings (ChannelBindings): The channel bindings (or None for
             no channel bindings)
         input_token (bytes): the token to use to update the security context,
@@ -174,7 +174,7 @@ def init_sec_context(Name target_name not None, Creds cred=None,
 
     cdef gss_buffer_desc input_token_buffer = gss_buffer_desc(0, NULL)
 
-    cdef OM_uint32 input_ttl = c_py_ttl_to_c(ttl)
+    cdef OM_uint32 input_ttl = c_py_ttl_to_c(lifetime)
 
     cdef SecurityContext output_context = context
     if output_context is None:

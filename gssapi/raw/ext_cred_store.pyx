@@ -94,7 +94,7 @@ cdef void c_free_key_value_set(gss_key_value_set_desc *kvset):
 
 # TODO(directxman12): some of these probably need a "not null",
 #                     but that's not clear from the wiki page
-def acquire_cred_from(dict store, Name name, ttl=None,
+def acquire_cred_from(dict store, Name name, lifetime=None,
                       mechs=None, usage='both'):
     """Acquire credentials from the given store
 
@@ -110,7 +110,7 @@ def acquire_cred_from(dict store, Name name, ttl=None,
             credential store from which to acquire the credentials
         name (Name): the name associated with the credentials,
             or None for the default name
-        ttl (int): the desired lifetime of the credentials, or None
+        lifetime (int): the desired lifetime of the credentials, or None
             for indefinite
         mechs (list): the desired mechanisms to be used with these
             credentials, or None for the default set
@@ -131,7 +131,7 @@ def acquire_cred_from(dict store, Name name, ttl=None,
     else:
         desired_mechs = GSS_C_NO_OID_SET
 
-    cdef OM_uint32 input_ttl = c_py_ttl_to_c(ttl)
+    cdef OM_uint32 input_ttl = c_py_ttl_to_c(lifetime)
 
     cdef gss_name_t c_name
     if name is None:
@@ -182,8 +182,8 @@ def acquire_cred_from(dict store, Name name, ttl=None,
 
 def add_cred_from(dict store, Creds input_creds,
                   Name name not None, OID mech not None,
-                  usage='both', initiator_ttl=None,
-                  acceptor_ttl=None):
+                  usage='both', init_lifetime=None,
+                  accept_lifetime=None):
     """Acquire credentials to add to the current set from the given store
 
         This method works like :func:`acquire_cred_from`, except that it
@@ -204,9 +204,9 @@ def add_cred_from(dict store, Creds input_creds,
             credentials
         usage (str): the usage for these credentials -- either 'both',
             'initiate', or 'accept'
-        initiator_ttl): the desired initiate lifetime of the
+        init_lifetime (int): the desired initiate lifetime of the
             credentials, or None for indefinite
-        acceptor_ttl (int): the desired accept lifetime of the
+        accept_lifetime (int): the desired accept lifetime of the
             credentials, or None for indefinite
 
     Returns:
@@ -217,8 +217,8 @@ def add_cred_from(dict store, Creds input_creds,
         GSSError
     """
 
-    cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(initiator_ttl)
-    cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(acceptor_ttl)
+    cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(init_lifetime)
+    cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(accept_lifetime)
 
     cdef gss_cred_usage_t c_usage
     if usage == 'initiate':
