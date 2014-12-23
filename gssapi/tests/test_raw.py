@@ -302,20 +302,20 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         target_name = gb.import_name(TARGET_SERVICE_NAME,
                                      gb.NameType.hostbased_service)
 
-        client_creds = gb.acquire_cred(None, cred_usage='initiate').creds
+        client_creds = gb.acquire_cred(None, usage='initiate').creds
         client_ctx_resp = gb.init_sec_context(
             target_name, cred=client_creds,
             flags=gb.RequirementFlag.delegate_to_peer)
 
         client_token = client_ctx_resp[3]
 
-        server_creds = gb.acquire_cred(None, cred_usage='accept').creds
+        server_creds = gb.acquire_cred(None, usage='accept').creds
         server_ctx_resp = gb.accept_sec_context(client_token,
                                                 acceptor_cred=server_creds)
 
         deleg_creds = server_ctx_resp.delegated_creds
         deleg_creds.shouldnt_be_none()
-        store_res = gb.store_cred(deleg_creds, cred_usage='initiate',
+        store_res = gb.store_cred(deleg_creds, usage='initiate',
                                   set_default=True)
 
         store_res.shouldnt_be_none()
@@ -323,7 +323,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         store_res.mech_types.should_include(gb.MechType.kerberos)
 
         deleg_name = gb.inquire_cred(deleg_creds).name
-        acq_resp = gb.acquire_cred(deleg_name, cred_usage='initiate')
+        acq_resp = gb.acquire_cred(deleg_name, usage='initiate')
         acq_resp.shouldnt_be_none()
 
     @_extension_test('cred_store', 'credentials store')

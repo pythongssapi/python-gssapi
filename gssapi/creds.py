@@ -25,10 +25,8 @@ class Credentials(rcreds.Creds):
 
     __slots__ = ()
 
-    def __new__(cls, base=None, token=None,
-                desired_name=None, lifetime=None,
-                desired_mechs=None, usage='both',
-                store=None):
+    def __new__(cls, base=None, token=None, name=None, lifetime=None,
+                mechs=None, usage='both', store=None):
         """Acquire or import a set of credentials.
 
         The constructor either acquires or imports a set of GSSAPI
@@ -58,7 +56,7 @@ class Credentials(rcreds.Creds):
 
             base_creds = rcred_imp_exp.import_cred(token)
         else:
-            res = cls.acquire(desired_name, lifetime, desired_mechs, usage,
+            res = cls.acquire(name, lifetime, mechs, usage,
                               store=store)
             base_creds = res.creds
 
@@ -89,8 +87,8 @@ class Credentials(rcreds.Creds):
                             usage=True, mechs=False).usage
 
     @classmethod
-    def acquire(cls, desired_name=None, lifetime=None,
-                desired_mechs=None, usage='both', store=None):
+    def acquire(cls, name=None, lifetime=None, mechs=None, usage='both',
+                store=None):
         """Acquire GSSAPI credentials
 
         This method acquires credentials.  If the `store` argument is
@@ -106,11 +104,11 @@ class Credentials(rcreds.Creds):
         extension.
 
         Args:
-            desired_name (Name): the name associated with the credentials,
+            name (Name): the name associated with the credentials,
                 or None for the default name
             lifetime (int): the desired lifetime of the credentials, or None
                 for indefinite
-            desired_mechs (list): the desired mechanisms to be used with these
+            mechs (list): the desired mechanisms to be used with these
                 credentials, or None for the default set
             usage (str): the usage for these credentials -- either 'both',
                 'initiate', or 'accept'
@@ -124,8 +122,8 @@ class Credentials(rcreds.Creds):
         """
 
         if store is None:
-            res = rcreds.acquire_cred(desired_name, lifetime,
-                                      desired_mechs, usage)
+            res = rcreds.acquire_cred(name, lifetime,
+                                      mechs, usage)
         else:
             if rcred_cred_store is None:
                 raise NotImplementedError("Your GSSAPI implementation does "
@@ -134,8 +132,8 @@ class Credentials(rcreds.Creds):
 
             store = _encode_dict(store)
 
-            res = rcred_cred_store.acquire_cred_from(store, desired_name,
-                                                     lifetime, desired_mechs,
+            res = rcred_cred_store.acquire_cred_from(store, name,
+                                                     lifetime, mechs,
                                                      usage)
 
         return tuples.AcquireCredResult(cls(base=res.creds), res.mechs,
@@ -183,8 +181,8 @@ class Credentials(rcreds.Creds):
             return rcred_cred_store.store_cred_into(store, self, usage, mech,
                                                     overwrite, set_default)
 
-    def impersonate(self, desired_name=None, lifetime=None,
-                    desired_mechs=None, usage='initiate'):
+    def impersonate(self, name=None, lifetime=None, mechs=None,
+                    usage='initiate'):
         """Impersonate a name using the current credentials
 
         This method acquires credentials by impersonating another
@@ -192,10 +190,10 @@ class Credentials(rcreds.Creds):
         Services4User extension.
 
         Args:
-            desired_name (Name): the name to impersonate
+            name (Name): the name to impersonate
             lifetime (int): the desired lifetime of the new credentials,
                 or None for indefinite
-            desired_mechs (list): the desired mechanisms for the new
+            mechs (list): the desired mechanisms for the new
                 credentials
             usage (str): the desired usage for the new credentials -- either
                 'both', 'initiate', or 'accept'.  Note that some mechanisms
@@ -209,8 +207,8 @@ class Credentials(rcreds.Creds):
             raise NotImplementedError("Your GSSAPI implementation does not "
                                       "have support for S4U")
 
-        res = rcred_s4u.acquire_cred_impersonate_name(self, desired_name,
-                                                      lifetime, desired_mechs,
+        res = rcred_s4u.acquire_cred_impersonate_name(self, name,
+                                                      lifetime, mechs,
                                                       usage)
 
         return type(self)(base=res.creds)
@@ -275,7 +273,7 @@ class Credentials(rcreds.Creds):
                                               res.accept_lifetime,
                                               res.usage)
 
-    def add(self, desired_name, desired_mech, usage='both',
+    def add(self, name, mech, usage='both',
             init_lifetime=None, accept_lifetime=None, impersonator=None,
             store=None):
         """Acquire more credentials to add to the current set
@@ -302,9 +300,9 @@ class Credentials(rcreds.Creds):
         `impersonator` argument.
 
         Args:
-            desired_name (Name): the name associated with the
+            name (Name): the name associated with the
                 credentials
-            desired_mech (OID): the desired mechanism to be used with these
+            mech (OID): the desired mechanism to be used with these
                 credentials
             usage (str): the usage for these credentials -- either 'both',
                 'initiate', or 'accept'
@@ -334,22 +332,20 @@ class Credentials(rcreds.Creds):
                                           "credential stores")
             store = _encode_dict(store)
 
-            res = rcred_cred_store.add_cred_from(store, self, desired_name,
-                                                 desired_mech, usage,
-                                                 init_lifetime,
+            res = rcred_cred_store.add_cred_from(store, self, name, mech,
+                                                 usage, init_lifetime,
                                                  accept_lifetime)
         elif impersonator is not None:
             if rcred_s4u is None:
                 raise NotImplementedError("Your GSSAPI implementation does "
                                           "not have support for S4U")
             res = rcred_s4u.add_cred_impersonate_name(self, impersonator,
-                                                      desired_name,
-                                                      desired_mech,
-                                                      usage, init_lifetime,
+                                                      name, mech, usage,
+                                                      init_lifetime,
                                                       accept_lifetime)
         else:
-            res = rcreds.add_cred(self, desired_name, desired_mech, usage,
-                                  init_lifetime, accept_lifetime)
+            res = rcreds.add_cred(self, name, mech, usage, init_lifetime,
+                                  accept_lifetime)
 
         return Credentials(res.creds)
 

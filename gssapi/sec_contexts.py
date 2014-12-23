@@ -26,7 +26,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
     """
 
     def __new__(cls, base=None, token=None,
-                name=None, creds=None, desired_lifetime=None, flags=None,
+                name=None, creds=None, lifetime=None, flags=None,
                 mech_type=None, channel_bindings=None, usage=None):
 
         if token is not None:
@@ -35,7 +35,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
         return super(SecurityContext, cls).__new__(cls, base)
 
     def __init__(self, base=None, token=None,
-                 name=None, creds=None, desired_lifetime=None, flags=None,
+                 name=None, creds=None, lifetime=None, flags=None,
                  mech_type=None, channel_bindings=None, usage=None):
         """
         The constructor creates a new security context, but does not begin
@@ -56,7 +56,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         For a security context of the `initiate` usage, the `name` argument
         must be used, and the `creds`, `mech_type`, `flags`,
-        `desired_lifetime`, and `channel_bindings` arguments may be
+        `lifetime`, and `channel_bindings` arguments may be
         used as well.
 
         For a security context of the `accept` usage, the `creds` and
@@ -94,11 +94,11 @@ class SecurityContext(rsec_contexts.SecurityContext):
                 self._target_name = name
                 self._mech_type = mech_type
                 self._desired_flags = IntEnumFlagSet(RequirementFlag, flags)
-                self._desired_lifetime = desired_lifetime
+                self._desired_lifetime = lifetime
             else:
                 # takes creds?
                 if (name is not None or flags is not None or
-                        mech_type is not None or desired_lifetime is not None):
+                        mech_type is not None or lifetime is not None):
                     raise TypeError("You must pass at most the 'creds' "
                                     "argument when creating an accepting "
                                     "security context")

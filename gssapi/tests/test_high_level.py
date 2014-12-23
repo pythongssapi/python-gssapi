@@ -121,19 +121,19 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         self.name = gssnames.Name(SERVICE_PRINCIPAL,
                                   gb.NameType.kerberos_principal)
 
-    @exist_perms(lifetime=30, desired_mechs=[gb.MechType.kerberos],
+    @exist_perms(lifetime=30, mechs=[gb.MechType.kerberos],
                  usage='both')
     def test_acquire_by_init(self, str_name, kwargs):
-        creds = gsscreds.Credentials(desired_name=self.name, **kwargs)
+        creds = gsscreds.Credentials(name=self.name, **kwargs)
 
         creds.lifetime.should_be_an_integer()
 
         del creds
 
-    @exist_perms(lifetime=30, desired_mechs=[gb.MechType.kerberos],
+    @exist_perms(lifetime=30, mechs=[gb.MechType.kerberos],
                  usage='both')
     def test_acquire_by_method(self, str_name, kwargs):
-        cred_resp = gsscreds.Credentials.acquire(desired_name=self.name,
+        cred_resp = gsscreds.Credentials.acquire(name=self.name,
                                                  **kwargs)
 
         cred_resp.shouldnt_be_none()
@@ -177,7 +177,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         store_res.usage.should_be('initiate')
         store_res.mech_types.should_include(gb.MechType.kerberos)
 
-        reacquired_creds = gsscreds.Credentials(desired_name=deleg_creds.name,
+        reacquired_creds = gsscreds.Credentials(name=deleg_creds.name,
                                                 usage='initiate')
         reacquired_creds.shouldnt_be_none()
 
@@ -192,7 +192,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         self.realm.extract_keytab(princ_name, KT)
         self.realm.kinit(princ_name, None, ['-k', '-t', KT])
 
-        initial_creds = gsscreds.Credentials(desired_name=None,
+        initial_creds = gsscreds.Credentials(name=None,
                                              usage='initiate')
 
         store_res = initial_creds.store(store, overwrite=True)
@@ -202,19 +202,19 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         store_res.usage.should_be('initiate')
 
         name = gssnames.Name(princ_name)
-        retrieved_creds = gsscreds.Credentials(desired_name=name, store=store)
+        retrieved_creds = gsscreds.Credentials(name=name, store=store)
 
         retrieved_creds.shouldnt_be_none()
 
     def test_create_from_other(self):
-        raw_creds = gb.acquire_cred(None, cred_usage='accept').creds
+        raw_creds = gb.acquire_cred(None, usage='accept').creds
 
         high_level_creds = gsscreds.Credentials(raw_creds)
         high_level_creds.usage.should_be('accept')
 
     @true_false_perms('name', 'lifetime', 'usage', 'mechs')
     def test_inquire(self, str_name, kwargs):
-        creds = gsscreds.Credentials(desired_name=self.name)
+        creds = gsscreds.Credentials(name=self.name)
         resp = creds.inquire(**kwargs)
 
         if kwargs['name']:
@@ -240,7 +240,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
     @true_false_perms('name', 'init_lifetime', 'accept_lifetime', 'usage')
     def test_inquire_by_mech(self, str_name, kwargs):
-        creds = gsscreds.Credentials(desired_name=self.name)
+        creds = gsscreds.Credentials(name=self.name)
         resp = creds.inquire_by_mech(mech=gb.MechType.kerberos, **kwargs)
 
         if kwargs['name']:
@@ -283,7 +283,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         self.realm.extract_keytab(princ_name, KT)
         self.realm.kinit(princ_name, None, ['-k', '-t', KT])
 
-        initial_creds = gsscreds.Credentials(desired_name=None,
+        initial_creds = gsscreds.Credentials(name=None,
                                              usage='initiate')
 
         store_res = initial_creds.store(store, overwrite=True)
@@ -302,13 +302,13 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
     @_extension_test('cred_imp_ext', 'credentials import-export')
     def test_export(self):
-        creds = gsscreds.Credentials(desired_name=self.name)
+        creds = gsscreds.Credentials(name=self.name)
         token = creds.export()
         token.should_be(bytes)
 
     @_extension_test('cred_imp_ext', 'credentials import-export')
     def test_import_by_init(self):
-        creds = gsscreds.Credentials(desired_name=self.name)
+        creds = gsscreds.Credentials(name=self.name)
         token = creds.export()
         imported_creds = gsscreds.Credentials(token=token)
 
@@ -317,14 +317,14 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
     @_extension_test('cred_imp_ext', 'credentials import-export')
     def test_pickle_unpickle(self):
-        creds = gsscreds.Credentials(desired_name=self.name)
+        creds = gsscreds.Credentials(name=self.name)
         pickled_creds = pickle.dumps(creds)
         unpickled_creds = pickle.loads(pickled_creds)
 
         unpickled_creds.lifetime.should_be(creds.lifetime)
         unpickled_creds.name.should_be(creds.name)
 
-    @exist_perms(lifetime=30, desired_mechs=[gb.MechType.kerberos],
+    @exist_perms(lifetime=30, mechs=[gb.MechType.kerberos],
                  usage='initiate')
     @_extension_test('s4u', 'S4U')
     def test_impersonate(self, str_name, kwargs):
@@ -336,7 +336,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         del client_ctx_resp  # free everything but the token
 
         server_name = self.name
-        server_creds = gsscreds.Credentials(desired_name=server_name,
+        server_creds = gsscreds.Credentials(name=server_name,
                                             usage='both')
         server_ctx_resp = gb.accept_sec_context(client_token,
                                                 acceptor_cred=server_creds)
@@ -461,14 +461,14 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         super(SecurityContextTestCase, self).setUp()
         gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = False
         self.client_name = gssnames.Name(self.USER_PRINC)
-        self.client_creds = gsscreds.Credentials(desired_name=None,
+        self.client_creds = gsscreds.Credentials(name=None,
                                                  usage='initiate')
 
         self.target_name = gssnames.Name(TARGET_SERVICE_NAME,
                                          gb.NameType.hostbased_service)
 
         self.server_name = gssnames.Name(SERVICE_PRINCIPAL)
-        self.server_creds = gsscreds.Credentials(desired_name=self.server_name,
+        self.server_creds = gsscreds.Credentials(name=self.server_name,
                                                  usage='accept')
 
     def _create_client_ctx(self, **kwargs):
@@ -483,7 +483,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         high_level_ctx = gssctx.SecurityContext(raw_client_ctx)
         high_level_ctx.target_name.should_be(self.target_name)
 
-    @exist_perms(desired_lifetime=30, flags=[],
+    @exist_perms(lifetime=30, flags=[],
                  mech_type=gb.MechType.kerberos,
                  channel_bindings=None)
     def test_create_new_init(self, str_name, kwargs):
@@ -506,7 +506,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         create_sec_context.should_raise(TypeError)
 
     def _create_completed_contexts(self):
-        client_ctx = self._create_client_ctx(desired_lifetime=400)
+        client_ctx = self._create_client_ctx(lifetime=400)
 
         client_token = client_ctx.step()
         client_token.should_be_a(bytes)
@@ -542,7 +542,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
                                   initiator_address=b'127.0.0.1',
                                   acceptor_address_type=gb.AddressType.ip,
                                   acceptor_address=b'127.0.0.1')
-        client_ctx = self._create_client_ctx(desired_lifetime=400,
+        client_ctx = self._create_client_ctx(lifetime=400,
                                              channel_bindings=bdgs)
 
         client_token = client_ctx.step()
@@ -561,7 +561,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
                                   initiator_address=b'127.0.0.1',
                                   acceptor_address_type=gb.AddressType.ip,
                                   acceptor_address=b'127.0.0.1')
-        client_ctx = self._create_client_ctx(desired_lifetime=400,
+        client_ctx = self._create_client_ctx(lifetime=400,
                                              channel_bindings=bdgs)
 
         client_token = client_ctx.step()
@@ -659,7 +659,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
     def test_defer_step_error_on_method(self):
         gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = True
         bdgs = gb.ChannelBindings(application_data=b'abcxyz')
-        client_ctx = self._create_client_ctx(desired_lifetime=400,
+        client_ctx = self._create_client_ctx(lifetime=400,
                                              channel_bindings=bdgs)
 
         client_token = client_ctx.step()
@@ -674,7 +674,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
     def test_defer_step_error_on_complete_property_access(self):
         gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = True
         bdgs = gb.ChannelBindings(application_data=b'abcxyz')
-        client_ctx = self._create_client_ctx(desired_lifetime=400,
+        client_ctx = self._create_client_ctx(lifetime=400,
                                              channel_bindings=bdgs)
 
         client_token = client_ctx.step()
