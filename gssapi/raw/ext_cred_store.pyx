@@ -186,11 +186,11 @@ def add_cred_from(dict store, Creds input_creds,
                   accept_lifetime=None):
     """Acquire credentials to add to the current set from the given store
 
-        This method works like :func:`acquire_cred_from`, except that it
-        adds the acquired credentials for a single mechanism to a copy of
-        the current set, instead of creating a new set for multiple mechanisms.
-        Unlike :meth:`acquire`, you cannot pass None desired name or
-        mechanism.
+    This method works like :func:`acquire_cred_from`, except that it
+    adds the acquired credentials for a single mechanism to a copy of
+    the current set, instead of creating a new set for multiple mechanisms.
+    Unlike :meth:`acquire`, you cannot pass None desired name or
+    mechanism.
 
     The credential store information is a dictionary containing
     mechanisms-specific keys and values pointing to a credential store
@@ -278,7 +278,7 @@ def store_cred_into(dict store, Creds creds not None,
 
     This method stores the given credentials into the store specified
     by the given store information.  They may then be retrieved later using
-    :func:`import_cred_from`.
+    :func:`acquire_cred_from` or :func:`add_cred_from`.
 
     The credential store information is a dictionary containing
     mechanisms-specific keys and values pointing to a credential store
