@@ -179,7 +179,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
                                      gb.NameType.kerberos_principal)
         server_creds = gb.acquire_cred(server_name)[0]
         server_resp = gb.accept_sec_context(client_token1,
-                                            acceptor_cred=server_creds)
+                                            acceptor_creds=server_creds)
         server_tok = server_resp[3]
 
         client_resp2 = gb.init_sec_context(target_name,
@@ -203,7 +203,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
                                      gb.NameType.kerberos_principal)
         server_creds = gb.acquire_cred(server_name)[0]
         server_resp = gb.accept_sec_context(client_token1,
-                                            acceptor_cred=server_creds)
+                                            acceptor_creds=server_creds)
         server_tok = server_resp[3]
 
         client_resp2 = gb.init_sec_context(target_name,
@@ -253,7 +253,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
                                      gb.NameType.kerberos_principal)
         server_creds = gb.acquire_cred(server_name, usage='both')[0]
         server_ctx_resp = gb.accept_sec_context(client_token,
-                                                acceptor_cred=server_creds)
+                                                acceptor_creds=server_creds)
 
         input_creds = gb.Creds()
         imp_resp = gb.add_cred_impersonate_name(input_creds,
@@ -285,7 +285,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
                                      gb.NameType.kerberos_principal)
         server_creds = gb.acquire_cred(server_name, usage='both')[0]
         server_ctx_resp = gb.accept_sec_context(client_token,
-                                                acceptor_cred=server_creds)
+                                                acceptor_creds=server_creds)
 
         imp_resp = gb.acquire_cred_impersonate_name(server_creds,
                                                     server_ctx_resp[1])
@@ -315,14 +315,14 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         client_creds = gb.acquire_cred(None, usage='initiate').creds
         client_ctx_resp = gb.init_sec_context(
-            target_name, cred=client_creds,
+            target_name, creds=client_creds,
             flags=gb.RequirementFlag.delegate_to_peer)
 
         client_token = client_ctx_resp[3]
 
         server_creds = gb.acquire_cred(None, usage='accept').creds
         server_ctx_resp = gb.accept_sec_context(client_token,
-                                                acceptor_cred=server_creds)
+                                                acceptor_creds=server_creds)
 
         deleg_creds = server_ctx_resp.delegated_creds
         deleg_creds.shouldnt_be_none()
@@ -380,7 +380,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
                                      gb.NameType.kerberos_principal)
         server_creds = gb.acquire_cred(server_name, usage='both')[0]
         server_ctx_resp = gb.accept_sec_context(client_token,
-                                                acceptor_cred=server_creds)
+                                                acceptor_creds=server_creds)
 
         input_creds = gb.Creds()
         imp_resp = gb.add_cred(input_creds,
@@ -651,7 +651,7 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
 
     def test_basic_accept_context(self):
         server_resp = gb.accept_sec_context(self.client_token,
-                                            acceptor_cred=self.server_creds)
+                                            acceptor_creds=self.server_creds)
         server_resp.shouldnt_be_none()
 
         (self.server_ctx, name, mech_type, out_token,
@@ -697,7 +697,7 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
         self.server_creds = gb.acquire_cred(self.server_name)[0]
 
         server_resp = gb.accept_sec_context(self.client_token,
-                                            acceptor_cred=self.server_creds,
+                                            acceptor_creds=self.server_creds,
                                             channel_bindings=bdgs)
         server_resp.shouldnt_be_none
         self.server_ctx = server_resp.context
@@ -723,7 +723,7 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
 
         bdgs.acceptor_address = b'127.0.1.0'
         gb.accept_sec_context.should_raise(gb.GSSError, self.client_token,
-                                           acceptor_cred=self.server_creds,
+                                           acceptor_creds=self.server_creds,
                                            channel_bindings=bdgs)
 
 
@@ -739,7 +739,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
                                           gb.NameType.kerberos_principal)
         self.server_creds = gb.acquire_cred(self.server_name)[0]
         server_resp = gb.accept_sec_context(self.client_token1,
-                                            acceptor_cred=self.server_creds)
+                                            acceptor_creds=self.server_creds)
         self.server_ctx = server_resp[0]
         self.server_tok = server_resp[3]
 

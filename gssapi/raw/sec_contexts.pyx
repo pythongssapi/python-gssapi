@@ -109,7 +109,7 @@ cdef class SecurityContext:
 
 
 # TODO(directxman12): figure out whether GSS_C_NO_NAME can be passed in here
-def init_sec_context(Name target_name not None, Creds cred=None,
+def init_sec_context(Name target_name not None, Creds creds=None,
                      SecurityContext context=None,
                      OID mech=None,
                      flags=None, lifetime=None,
@@ -128,7 +128,7 @@ def init_sec_context(Name target_name not None, Creds cred=None,
 
     Args:
         target_name (Name): the target for the security context
-        cred (Creds): the credentials to use to initiate the context,
+        creds (Creds): the credentials to use to initiate the context,
             or None to use the default credentials
         context (SecurityContext): the security context to update, or
             None to create a new context
@@ -181,8 +181,8 @@ def init_sec_context(Name target_name not None, Creds cred=None,
         output_context = SecurityContext()
 
     cdef gss_cred_id_t act_cred
-    if cred is not None:
-        act_cred = cred.raw_creds
+    if creds is not None:
+        act_cred = creds.raw_creds
     else:
         act_cred = GSS_C_NO_CREDENTIAL
 
@@ -228,7 +228,7 @@ def init_sec_context(Name target_name not None, Creds cred=None,
         raise GSSError(maj_stat, min_stat, token=output_token)
 
 
-def accept_sec_context(input_token not None, Creds acceptor_cred=None,
+def accept_sec_context(input_token not None, Creds acceptor_creds=None,
                        SecurityContext context=None,
                        ChannelBindings channel_bindings=None):
     """
@@ -244,8 +244,8 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
 
     Args:
         input_token (bytes): the token sent by the context initiator
-        acceptor_cred (Creds): the credentials to be used to accept the context
-            (or None to use the default credentials)
+        acceptor_creds (Creds): the credentials to be used to accept the
+            context (or None to use the default credentials)
         context (SecurityContext): the security context to update
             (or None to create a new security context object)
         channel_bindings (ChannelBindings): The channel bindings (or None for
@@ -277,8 +277,8 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
         output_context = SecurityContext()
 
     cdef gss_cred_id_t act_acceptor_cred
-    if acceptor_cred is None:
-        act_acceptor_cred = acceptor_cred.raw_creds
+    if acceptor_creds is None:
+        act_acceptor_cred = acceptor_creds.raw_creds
     else:
         act_acceptor_cred = GSS_C_NO_CREDENTIAL
 

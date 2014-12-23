@@ -339,7 +339,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         server_creds = gsscreds.Credentials(name=server_name,
                                             usage='both')
         server_ctx_resp = gb.accept_sec_context(client_token,
-                                                acceptor_cred=server_creds)
+                                                acceptor_creds=server_creds)
 
         imp_creds = server_creds.impersonate(server_ctx_resp[1], **kwargs)
 
