@@ -27,7 +27,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
     def __new__(cls, base=None, token=None,
                 name=None, creds=None, lifetime=None, flags=None,
-                mech_type=None, channel_bindings=None, usage=None):
+                mech=None, channel_bindings=None, usage=None):
 
         if token is not None:
             base = rsec_contexts.import_sec_context(token)
@@ -36,7 +36,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
     def __init__(self, base=None, token=None,
                  name=None, creds=None, lifetime=None, flags=None,
-                 mech_type=None, channel_bindings=None, usage=None):
+                 mech=None, channel_bindings=None, usage=None):
         """
         The constructor creates a new security context, but does not begin
         the initiate or accept process.
@@ -55,7 +55,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
         security context (if `base` or `token` are used) or the argument set.
 
         For a security context of the `initiate` usage, the `name` argument
-        must be used, and the `creds`, `mech_type`, `flags`,
+        must be used, and the `creds`, `mech`, `flags`,
         `lifetime`, and `channel_bindings` arguments may be
         used as well.
 
@@ -86,19 +86,19 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
             # check for appropriate arguments
             if self.usage == 'initiate':
-                # takes: creds?, target_name, mech_type?, flags?,
+                # takes: creds?, target_name, mech?, flags?,
                 #        channel_bindings?
                 if name is None:
                     raise TypeError("You must pass the 'name' argument when "
                                     "creating an initiating security context")
                 self._target_name = name
-                self._mech_type = mech_type
+                self._mech = mech
                 self._desired_flags = IntEnumFlagSet(RequirementFlag, flags)
                 self._desired_lifetime = lifetime
             else:
                 # takes creds?
                 if (name is not None or flags is not None or
-                        mech_type is not None or lifetime is not None):
+                        mech is not None or lifetime is not None):
                     raise TypeError("You must pass at most the 'creds' "
                                     "argument when creating an accepting "
                                     "security context")
@@ -290,7 +290,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
         return rsec_contexts.export_sec_context(self)
 
     _INQUIRE_ARGS = ('initiator_name', 'target_name', 'lifetime',
-                     'mech_type', 'flags', 'locally_init', 'complete')
+                     'mech', 'flags', 'locally_init', 'complete')
 
     @_utils.check_last_err
     def _inquire(self, **kwargs):
@@ -306,7 +306,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
             initiator_name (bool): get the initiator name for this context
             target_name (bool): get the target name for this context
             lifetime (bool): get the remaining lifetime for this context
-            mech_type (bool): get the mechanism used by this context
+            mech (bool): get the mechanism used by this context
             flags (bool): get the flags set on this context
             locally_init (bool): get whether this context was locally initiated
             complete (bool): get whether negotiation on this context has
@@ -339,7 +339,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
             target_name = None
 
         return tuples.InquireContextResult(init_name, target_name,
-                                           res.lifetime, res.mech_type,
+                                           res.lifetime, res.mech,
                                            res.flags, res.locally_init,
                                            res.complete)
 
@@ -352,8 +352,8 @@ class SecurityContext(rsec_contexts.SecurityContext):
         'initiator_name', 'Get the Name of the initiator of this context')
     target_name = _utils.inquire_property(
         'target_name', 'Get the Name of the target of this context')
-    mech_type = _utils.inquire_property(
-        'mech_type', 'Get the mechanism in use by this context')
+    mech = _utils.inquire_property(
+        'mech', 'Get the mechanism in use by this context')
     actual_flags = _utils.inquire_property(
         'flags', 'Get the flags set on this context')
     locally_initiated = _utils.inquire_property(
@@ -412,7 +412,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
     def _initiator_step(self, token=None):
         res = rsec_contexts.init_sec_context(self._target_name, self._creds,
-                                             self, self._mech_type,
+                                             self, self._mech,
                                              self._desired_flags,
                                              self._desired_lifetime,
                                              self._channel_bindings,

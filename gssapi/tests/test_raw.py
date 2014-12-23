@@ -320,7 +320,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         store_res.shouldnt_be_none()
         store_res.usage.should_be('initiate')
-        store_res.mech_types.should_include(gb.MechType.kerberos)
+        store_res.mechs.should_include(gb.MechType.kerberos)
 
         deleg_name = gb.inquire_cred(deleg_creds).name
         acq_resp = gb.acquire_cred(deleg_name, usage='initiate')
@@ -343,7 +343,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         # NB(sross): overwrite because the ccache doesn't exist yet
         store_res = gb.store_cred_into(store, initial_creds, overwrite=True)
 
-        store_res.mech_types.shouldnt_be_none()
+        store_res.mechs.shouldnt_be_none()
         store_res.usage.should_be('initiate')
 
         name = gb.import_name(princ_name.encode('UTF-8'))

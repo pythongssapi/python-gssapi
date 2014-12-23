@@ -240,7 +240,7 @@ def export_name(Name name not None):
         raise GSSError(maj_stat, min_stat)
 
 
-def canonicalize_name(Name name not None, OID mech_type not None):
+def canonicalize_name(Name name not None, OID mech not None):
     """
     Canonicalize an arbitrary GSSAPI Name into a Mechanism Name
 
@@ -250,7 +250,7 @@ def canonicalize_name(Name name not None, OID mech_type not None):
 
     Args:
         name (Name): the name to canonicalize
-        mech_type (MechType): the mechanism type to use to
+        mech (MechType): the mechanism type to use to
             canonicalize the name
 
     Returns:
@@ -266,7 +266,7 @@ def canonicalize_name(Name name not None, OID mech_type not None):
 
     with nogil:
         maj_stat = gss_canonicalize_name(&min_stat, name.raw_name,
-                                         &mech_type.raw_oid,
+                                         &mech.raw_oid,
                                          &canonicalized_name)
 
     cdef Name cn = Name()

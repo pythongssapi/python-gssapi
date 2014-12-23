@@ -52,14 +52,14 @@ def indicate_mechs():
         raise GSSError(maj_stat, min_stat)
 
 
-def inquire_names_for_mech(OID mech_type not None):
+def inquire_names_for_mech(OID mech not None):
     """Get the name types supported by a mechanism.
 
     This method retrives the different name types supported by
     the given mechanism.
 
     Args:
-        mech_type (OID): the mechanism in question
+        mech (OID): the mechanism in question
 
     Returns:
         list: the name type OIDs supported by the given mechanism
@@ -72,7 +72,7 @@ def inquire_names_for_mech(OID mech_type not None):
 
     cdef OM_uint32 maj_stat, min_stat
 
-    maj_stat = gss_inquire_names_for_mech(&min_stat, &mech_type.raw_oid,
+    maj_stat = gss_inquire_names_for_mech(&min_stat, &mech.raw_oid,
                                           &name_types)
 
     if maj_stat == GSS_S_COMPLETE:
@@ -111,7 +111,7 @@ def inquire_mechs_for_name(Name name not None):
 
 
 def _display_status(unsigned int error_code, bint is_major_code,
-                    OID mech_type=None, unsigned int message_context=0):
+                    OID mech=None, unsigned int message_context=0):
     """
     Display a string message for a GSSAPI error code.
 
@@ -126,7 +126,7 @@ def _display_status(unsigned int error_code, bint is_major_code,
         error_code (int): The error code in question
         is_major_code (bool): is this a major code (True) or a
             minor code (False)
-        mech_type (MechType): The mechanism type that returned this error code
+        mech (MechType): The mechanism type that returned this error code
             (defaults to None, for the default mechanism)
         message_context (int): The context for this call -- this is used when
             multiple messages are available (defaults to 0)
@@ -147,10 +147,10 @@ def _display_status(unsigned int error_code, bint is_major_code,
     else:
         status_type = GSS_C_MECH_CODE
 
-    if mech_type is None:
+    if mech is None:
         c_mech_type = GSS_C_NO_OID
     else:
-        c_mech_type = &mech_type.raw_oid
+        c_mech_type = &mech.raw_oid
 
     cdef OM_uint32 maj_stat
     cdef OM_uint32 min_stat

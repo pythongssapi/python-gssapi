@@ -111,7 +111,7 @@ cdef class SecurityContext:
 # TODO(directxman12): figure out whether GSS_C_NO_NAME can be passed in here
 def init_sec_context(Name target_name not None, Creds cred=None,
                      SecurityContext context=None,
-                     OID mech_type=None,
+                     OID mech=None,
                      flags=None, lifetime=None,
                      ChannelBindings channel_bindings=None,
                      input_token=None):
@@ -132,7 +132,7 @@ def init_sec_context(Name target_name not None, Creds cred=None,
             or None to use the default credentials
         context (SecurityContext): the security context to update, or
             None to create a new context
-        mech_type (MechType): the mechanism type for this security context,
+        mech (MechType): the mechanism type for this security context,
             or None for the default mechanism type
         flags ([RequirementFlag]): the flags to request for the security
             context, or None to use the default set: mutual_authentication and
@@ -156,8 +156,8 @@ def init_sec_context(Name target_name not None, Creds cred=None,
     """
 
     cdef gss_OID mech_oid
-    if mech_type is not None:
-        mech_oid = &mech_type.raw_oid
+    if mech is not None:
+        mech_oid = &mech.raw_oid
     else:
         mech_oid = GSS_C_NO_OID
 
@@ -343,13 +343,13 @@ def accept_sec_context(input_token not None, Creds acceptor_cred=None,
 
 
 def inquire_context(SecurityContext context not None, initiator_name=True,
-                    target_name=True, lifetime=True, mech_type=True,
+                    target_name=True, lifetime=True, mech=True,
                     flags=True, locally_init=True, complete=True):
     """
     Get information about a security context.
 
     This method obtains information about a security context, including
-    the initiator and target names, as well as the TTL, mech type,
+    the initiator and target names, as well as the TTL, mech,
     flags, and its current state (open vs closed).
 
     Note: the target name may be None if it would have been GSS_C_NO_NAME
@@ -384,7 +384,7 @@ def inquire_context(SecurityContext context not None, initiator_name=True,
 
     cdef gss_OID output_mech_type
     cdef gss_OID *mech_type_ptr = NULL
-    if mech_type:
+    if mech:
         mech_type_ptr = &output_mech_type
 
     cdef OM_uint32 output_flags
@@ -425,7 +425,7 @@ def inquire_context(SecurityContext context not None, initiator_name=True,
         else:
             tn = None
 
-        if mech_type:
+        if mech:
             py_mech_type = OID()
             py_mech_type.raw_oid = output_mech_type[0]
         else:

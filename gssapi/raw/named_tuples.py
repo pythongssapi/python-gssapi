@@ -39,19 +39,19 @@ UnwrapResult = namedtuple('UnwrapResult',
 
 AcceptSecContextResult = namedtuple('AcceptSecContextResult',
                                     ['context', 'initiator_name',
-                                     'mech_type', 'token', 'flags', 'lifetime',
+                                     'mech', 'token', 'flags', 'lifetime',
                                      'delegated_creds', 'more_steps'])
 
 
 InitSecContextResult = namedtuple('InitSecContextResult',
-                                  ['context', 'mech_type', 'flags', 'token',
+                                  ['context', 'mech', 'flags', 'token',
                                    'lifetime', 'more_steps'])
 
 
 InquireContextResult = namedtuple('InquireContextResult',
                                   ['initiator_name', 'target_name',
-                                   'lifetime', 'mech_type', 'flags',
+                                   'lifetime', 'mech', 'flags',
                                    'locally_init', 'complete'])
 
 StoreCredResult = namedtuple('StoreCredResult',
-                             ['mech_types', 'usage'])
+                             ['mechs', 'usage'])

@@ -99,20 +99,20 @@ class Name(rname.Name):
 
         return rname.export_name(self)
 
-    def canonicalize(self, mech_type):
+    def canonicalize(self, mech):
         """Canonicalize a name with respect to a mechanism
 
         This method returns a new Name that is canonicalized according to
         the given mechanism.
 
         Args:
-            mech_type (OID): the mechanism type to use
+            mech (OID): the mechanism type to use
 
         Returns:
             Name: the canonicalized name
         """
 
-        return type(self)(rname.canonicalize_name(self, mech_type))
+        return type(self)(rname.canonicalize_name(self, mech))
 
     def __copy__(self):
         return type(self)(rname.duplicate_name(self))
