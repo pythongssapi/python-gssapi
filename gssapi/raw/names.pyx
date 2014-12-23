@@ -235,6 +235,7 @@ def export_name(Name name not None):
         # force conversion to a python string with the specified length
         # (we use the slice to tell cython that we know the length already)
         res = exported_name.value[:exported_name.length]
+        gss_release_buffer(&min_stat, &exported_name)
         return res
     else:
         raise GSSError(maj_stat, min_stat)
