@@ -163,7 +163,7 @@ def display_name(Name name not None, name_type=True):
         raise GSSError(maj_stat, min_stat)
 
 
-def compare_name(Name name1, Name name2):
+def compare_name(Name name1=None, Name name2=None):
     """
     Check two GSSAPI names to see if they are the same.
 

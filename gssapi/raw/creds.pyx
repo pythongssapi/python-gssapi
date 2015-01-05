@@ -80,7 +80,7 @@ cdef class Creds:
             self.raw_creds = NULL
 
 
-def acquire_cred(Name name, lifetime=None, mechs=None, usage='both'):
+def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
     """
     Get GSSAPI credentials for the given name and mechanisms.
 

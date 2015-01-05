@@ -92,9 +92,7 @@ cdef void c_free_key_value_set(gss_key_value_set_desc *kvset):
     free(kvset)
 
 
-# TODO(directxman12): some of these probably need a "not null",
-#                     but that's not clear from the wiki page
-def acquire_cred_from(dict store, Name name, lifetime=None,
+def acquire_cred_from(dict store=None, Name name=None, lifetime=None,
                       mechs=None, usage='both'):
     """Acquire credentials from the given store
 
