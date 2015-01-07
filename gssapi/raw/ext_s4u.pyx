@@ -12,7 +12,7 @@ from gssapi.raw.misc import GSSError
 from gssapi.raw.named_tuples import AcquireCredResult, AddCredResult
 
 
-cdef extern from "gssapi/gssapi_ext.h":
+cdef extern from "python_gssapi_ext.h":
     OM_uint32 gss_acquire_cred_impersonate_name(OM_uint32 *min_stat,
                                                 const gss_cred_id_t imp_creds,
                                                 const gss_name_t name,

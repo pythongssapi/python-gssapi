@@ -7,7 +7,7 @@ from gssapi.raw.misc import GSSError
 from gssapi.raw.named_tuples import VerifyMICResult, WrapResult, UnwrapResult
 
 
-cdef extern from "gssapi.h":
+cdef extern from "python_gssapi.h":
     OM_uint32 gss_get_mic(OM_uint32 *min_stat,
                           const gss_ctx_id_t context,
                           gss_qop_t qop,

@@ -7,7 +7,7 @@ from gssapi.raw.misc import GSSError
 from gssapi.raw.named_tuples import DisplayNameResult
 
 
-cdef extern from "gssapi.h":
+cdef extern from "python_gssapi.h":
     OM_uint32 gss_import_name(OM_uint32 *min_stat,
                               const gss_buffer_t input_buffer,
                               const gss_OID name_type,

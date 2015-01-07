@@ -16,7 +16,7 @@ from gssapi.raw.named_tuples import InitSecContextResult
 from gssapi.raw.named_tuples import InquireContextResult
 
 
-cdef extern from "gssapi.h":
+cdef extern from "python_gssapi.h":
     OM_uint32 gss_init_sec_context(OM_uint32 *min_stat,
                                    const gss_cred_id_t initiator_creds,
                                    gss_ctx_id_t *context,

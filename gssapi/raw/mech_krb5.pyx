@@ -13,7 +13,7 @@ and MechType.
 """
 
 
-cdef extern from "gssapi/gssapi_krb5.h":
+cdef extern from "python_gssapi_krb5.h":
     gss_OID gss_mech_krb5
     gss_OID GSS_KRB5_NT_PRINCIPAL_NAME
 

@@ -12,7 +12,7 @@ from gssapi.raw.oids cimport OID
 from gssapi.raw.types import MechType
 
 
-cdef extern from "gssapi.h":
+cdef extern from "python_gssapi.h":
     OM_uint32 gss_display_status(OM_uint32 *minor_status,
                                  OM_uint32 status_value,
                                  int status_type,

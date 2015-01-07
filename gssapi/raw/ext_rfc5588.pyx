@@ -11,7 +11,7 @@ from gssapi.raw.cython_converters cimport c_c_ttl_to_py, c_py_ttl_to_c
 from gssapi.raw.named_tuples import StoreCredResult
 from gssapi.raw.misc import GSSError
 
-cdef extern from "gssapi.h":
+cdef extern from "python_gssapi.h":
     OM_uint32 gss_store_cred(OM_uint32 *min_stat,
                              gss_cred_id_t input_creds,
                              gss_cred_usage_t cred_usage,

@@ -5,7 +5,7 @@ from gssapi.raw.misc import GSSError
 """Specific exceptions for GSSAPI errors"""
 
 
-cdef extern from "gssapi.h":
+cdef extern from "python_gssapi.h":
     # calling errors
     OM_uint32 GSS_S_CALL_INACCESSIBLE_READ
     OM_uint32 GSS_S_CALL_INACCESSIBLE_WRITE

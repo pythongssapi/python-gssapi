@@ -5,6 +5,7 @@ from setuptools import setup
 from setuptools.command.build_ext import build_ext
 from setuptools.command.sdist import sdist
 from setuptools.extension import Extension
+import platform
 import re
 import sys
 import os
@@ -21,7 +22,7 @@ else:
         print("Building from Cython files...", file=sys.stderr)
         SOURCE_EXT = 'pyx'
     except ImportError:
-        print("Cython not found, building from Cython files...",
+        print("Cython not found, building from C files...",
               file=sys.stderr)
         SOURCE_EXT = 'c'
 
@@ -43,12 +44,22 @@ except ImportError:
 # get the compile and link args
 link_args = os.environ.get('GSSAPI_LINKER_ARGS', None)
 compile_args = os.environ.get('GSSAPI_COMPILER_ARGS', None)
+osx_has_gss_framework = False
+if sys.platform == 'darwin':
+    mac_ver = [int(v) for v in platform.mac_ver()[0].split('.')]
+    osx_has_gss_framework = (mac_ver >= [10, 7, 0])
 
 if link_args is None:
-    link_args = get_output('krb5-config --libs gssapi')
+    if osx_has_gss_framework:
+        link_args = '-framework GSS'
+    else:
+        link_args = get_output('krb5-config --libs gssapi')
 
 if compile_args is None:
-    compile_args = get_output('krb5-config --cflags gssapi')
+    if osx_has_gss_framework:
+        compile_args = '-framework GSS -DOSX_HAS_GSS_FRAMEWORK'
+    else:
+        compile_args = get_output('krb5-config --cflags gssapi')
 
 link_args = link_args.split()
 compile_args = compile_args.split()
@@ -57,42 +68,31 @@ ENABLE_SUPPORT_DETECTION = \
     (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
 
 if ENABLE_SUPPORT_DETECTION:
+    import ctypes.util
+
     main_lib = os.environ.get('GSSAPI_MAIN_LIB', None)
-    if main_lib is None:
+    if main_lib is None and osx_has_gss_framework:
+        main_lib = ctypes.util.find_library('GSS')
+    elif main_lib is None:
         for opt in link_args:
             if opt.startswith('-lgssapi'):
                 main_lib = 'lib%s.so' % opt[2:]
 
     if main_lib is None:
-        raise Exception("Could not find main GSSAPI shared libary.  Please "
+        raise Exception("Could not find main GSSAPI shared library.  Please "
                         "try setting GSSAPI_MAIN_LIB yourself or setting "
                         "ENABLE_SUPPORT_DETECTION to 'false'")
 
-    import ctypes
     GSSAPI_LIB = ctypes.CDLL(main_lib)
 
 
 class build_gssapi_ext(build_ext):
     def run(self):
-        if not self.dry_run:
-            # optionally fake gssapi_ext.h using gssapi.h
-            prefix = get_output('krb5-config gssapi --prefix')
-            gssapi_ext_h = os.path.join(prefix, 'include/gssapi/gssapi_ext.h')
-
-            if not os.path.exists(gssapi_ext_h):
-                target_dir = os.path.join(self.build_temp, 'c_include')
-                gssapi_dir = os.path.join(target_dir, 'gssapi')
-                if not os.path.exists(gssapi_dir):
-                    os.makedirs(gssapi_dir)
-
-                target_file = os.path.join(target_dir, 'gssapi/gssapi_ext.h')
-                if not os.path.exists(target_file):
-                    with open(target_file, 'w') as header:
-                        header.write('#include "gssapi.h"')
-
-                for ext in self.extensions:
-                    ext.extra_compile_args.append("-I%s" %
-                                                  os.path.abspath(target_dir))
+        prefix = get_output('krb5-config gssapi --prefix')
+        gssapi_ext_h = os.path.join(prefix, 'include/gssapi/gssapi_ext.h')
+        if os.path.exists(gssapi_ext_h):
+            for ext in self.extensions:
+                ext.extra_compile_args.append("-DHAS_GSSAPI_EXT_H")
 
         build_ext.run(self)
 

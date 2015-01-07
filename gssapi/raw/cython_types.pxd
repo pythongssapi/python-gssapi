@@ -1,7 +1,7 @@
 from libc.stdint cimport uint32_t
 
 
-cdef extern from "gssapi.h":
+cdef extern from "python_gssapi.h":
     # basic types
     ctypedef uint32_t OM_uint32
 

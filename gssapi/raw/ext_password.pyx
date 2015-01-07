@@ -15,7 +15,7 @@ from gssapi.raw.names cimport Name
 from gssapi.raw.misc import GSSError
 from gssapi.raw.named_tuples import AcquireCredResult
 
-cdef extern from "gssapi/gssapi_ext.h":
+cdef extern from "python_gssapi_ext.h":
     OM_uint32 gss_acquire_cred_with_password(OM_uint32 *min_stat,
                                              const gss_name_t desired_name,
                                              const gss_buffer_t password,

@@ -12,7 +12,7 @@ from gssapi.raw.misc import GSSError
 from gssapi.raw.named_tuples import AcquireCredResult, AddCredResult
 
 
-cdef extern from "gssapi/gssapi_ext.h":
+cdef extern from "python_gssapi_ext.h":
     OM_uint32 gss_export_cred(OM_uint32 *min_stat, gss_cred_id_t cred_handle,
                               gss_buffer_t token) nogil
 

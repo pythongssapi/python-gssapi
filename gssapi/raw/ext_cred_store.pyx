@@ -18,7 +18,7 @@ from gssapi.raw.named_tuples import StoreCredResult
 from gssapi.raw.misc import GSSError
 
 
-cdef extern from "gssapi/gssapi_ext.h":
+cdef extern from "python_gssapi_ext.h":
     ctypedef struct gss_key_value_element_desc:
         const char *key
         const char *value

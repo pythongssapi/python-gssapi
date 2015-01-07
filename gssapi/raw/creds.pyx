@@ -13,7 +13,7 @@ from gssapi.raw.named_tuples import AcquireCredResult, AddCredResult
 from gssapi.raw.named_tuples import InquireCredResult, InquireCredByMechResult
 
 
-cdef extern from "gssapi.h":
+cdef extern from "python_gssapi.h":
     OM_uint32 gss_acquire_cred(OM_uint32 *min_stat,
                                const gss_name_t name,
                                OM_uint32 ttl,
