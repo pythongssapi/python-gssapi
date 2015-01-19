@@ -36,3 +36,10 @@ try:
     import gssapi.raw.mech_krb5  # noqa
 except ImportError:
     pass
+
+# optional password support
+try:
+    from gssapi.raw.ext_password import *  # noqa
+    from gssapi.raw.ext_password_add import *  # noqa
+except ImportError:
+    pass

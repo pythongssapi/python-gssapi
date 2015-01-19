@@ -191,6 +191,10 @@ setup(
         extension_file('cred_store', 'gss_store_cred_into'),
         extension_file('rfc5588', 'gss_store_cred'),
         extension_file('cred_imp_exp', 'gss_import_cred'),
+
+        # see ext_password{,_add}.pyx for more information on this split
+        extension_file('password', 'gss_acquire_cred_with_password'),
+        extension_file('password_add', 'gss_add_cred_with_password'),
     ]),
     keywords=['gssapi', 'security'],
     install_requires=[
