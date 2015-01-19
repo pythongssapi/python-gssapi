@@ -57,6 +57,22 @@ raw Package
     :undoc-members:
     :show-inheritance:
 
+:mod:`ext_password` Module
+---------------------
+
+.. automodule:: gssapi.raw.ext_password
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`ext_password_add` Module
+---------------------
+
+.. automodule:: gssapi.raw.ext_password_add
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 :mod:`mech_krb5` Module
 -----------------------
 

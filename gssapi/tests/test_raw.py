@@ -53,6 +53,9 @@ class _GSSAPIKerberosTestCase(kt.KerberosTestCase):
 
 
 class TestBaseUtilities(_GSSAPIKerberosTestCase):
+    def setUp(self):
+        self.realm.kinit(SERVICE_PRINCIPAL.decode("UTF-8"), flags=['-k'])
+
     def test_indicate_mechs(self):
         mechs = gb.indicate_mechs()
 
@@ -448,6 +451,50 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         res.shouldnt_be_none()
         res.should_include(gb.MechType.kerberos)
+
+    @_extension_test('password', 'Password')
+    def test_acquire_cred_with_password(self):
+        password = self.realm.password('user')
+        self.realm.kinit(self.realm.user_princ, password=password)
+
+        name = gb.import_name(b'user', gb.NameType.kerberos_principal)
+
+        imp_resp = gb.acquire_cred_with_password(name,
+                                                 password.encode('UTF-8'))
+        imp_resp.shouldnt_be_none()
+
+        imp_creds, actual_mechs, output_ttl = imp_resp
+
+        imp_creds.shouldnt_be_none()
+        imp_creds.should_be_a(gb.Creds)
+
+        actual_mechs.shouldnt_be_empty()
+        actual_mechs.should_include(gb.MechType.kerberos)
+
+        output_ttl.should_be_a(int)
+
+    @_extension_test('password_add', 'Password (add)')
+    def test_add_cred_with_password(self):
+        password = self.realm.password('user')
+        self.realm.kinit(self.realm.user_princ, password=password)
+
+        name = gb.import_name(b'user', gb.NameType.kerberos_principal)
+
+        input_creds = gb.Creds()
+        imp_resp = gb.add_cred_with_password(input_creds, name,
+                                             gb.MechType.kerberos,
+                                             password.encode('UTF-8'))
+        imp_resp.shouldnt_be_none()
+
+        new_creds, actual_mechs, output_init_ttl, output_accept_ttl = imp_resp
+
+        actual_mechs.shouldnt_be_empty()
+        actual_mechs.should_include(gb.MechType.kerberos)
+
+        output_init_ttl.should_be_a(int)
+        output_accept_ttl.should_be_a(int)
+
+        new_creds.should_be_a(gb.Creds)
 
 
 class TestIntEnumFlagSet(unittest.TestCase):
