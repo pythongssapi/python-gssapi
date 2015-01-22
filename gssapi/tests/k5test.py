@@ -30,6 +30,7 @@ import shutil
 import signal
 import socket
 import string
+import sys
 import subprocess
 import tempfile
 import unittest
@@ -150,15 +151,36 @@ class K5Realm(object):
             self.kinit(self.user_princ, self.password('user'))
             self.klist()
 
-    def _init_paths(self, **paths):
-        self.kdb5_util = paths.get('kdb5_util', '/usr/sbin/kdb5_util')
-        self.krb5kdc = paths.get('krb5kdc', '/usr/sbin/krb5kdc')
-        self.kadmin_local = paths.get('kadmin_local', '/usr/sbin/kadmin.local')
-        self.kprop = paths.get('kprop', '/usr/sbin/kprop')
-        self.kadmind = paths.get('kadmind', '/usr/sbin/kadmind')
+    def _discover_path(self, name, default, paths):
+        stderr_out = getattr(subprocess, 'DEVNULL', subprocess.PIPE)
+        try:
+            path = subprocess.check_output(['which', name],
+                                           stderr=stderr_out).strip()
+            path = path.decode(sys.getfilesystemencoding() or
+                               sys.getdefaultencoding())
+            print("Using discovered path for {name} ({path}".format(
+                name=name, path=path))
+            return path
+        except subprocess.CalledProcessError as e:
+            path = paths.get(name, default)
+            print("Using default path for {name} ({path}): {err}".format(
+                name=name, path=path, err=e))
+            return path
 
-        self._kinit = paths.get('kinit', '/usr/bin/kinit')
-        self._klist = paths.get('klist', '/usr/bin/klist')
+    def _init_paths(self, **paths):
+        self.kdb5_util = self._discover_path('kdb5_util',
+                                             '/usr/sbin/kdb5_util', paths)
+        self.krb5kdc = self._discover_path('krb5kdc',
+                                           '/usr/sbin/krb5kdc', paths)
+        self.kadmin_local = self._discover_path('kadmin_local',
+                                                '/usr/sbin/kadmin.local',
+                                                paths)
+        self.kprop = self._discover_path('kprop', '/usr/sbin/kprop', paths)
+        self.kadmind = self._discover_path('kadmind',
+                                           '/usr/sbin/kadmind', paths)
+
+        self._kinit = self._discover_path('kinit', '/usr/bin/kinit', paths)
+        self._klist = self._discover_path('klist', '/usr/bin/klist', paths)
 
     def _create_conf(self, profile, filename):
         with open(filename, 'w') as conf_file:
