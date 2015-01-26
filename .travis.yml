@@ -4,12 +4,16 @@ python:
   - "3.3"
   - "3.4"
 
+env:
+  - KRB5_PPAS="sssd/updates"
+  - KRB5_PPAS="rharwood/krb5-1.13 sssd/updates"
+
 install:
   - "sudo sed -i '1i 127.0.0.1 test.box' /etc/hosts"
   - "sudo hostname test.box"
-  - "sudo apt-add-repository -y ppa:sssd/updates "
+  - "for i in $KRB5_PPAS; do sudo apt-add-repository -y ppa:$i; done"
   - "sudo apt-get update -q"
-  - "DEBIAN_FRONTEND=noninteractive sudo apt-get install -qq krb5-user krb5-kdc krb5-admin-server libkrb5-dev krb5-multidev"
+  - "DEBIAN_FRONTEND=noninteractive sudo apt-get install -y krb5-user krb5-kdc krb5-admin-server libkrb5-dev krb5-multidev"
   - "pip install --install-option='--no-cython-compile' cython"
   - "pip install -r test-requirements.txt"
 
