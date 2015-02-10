@@ -2,12 +2,12 @@ from gssapi.raw import creds as rcreds
 from gssapi.raw import named_tuples as tuples
 from gssapi._utils import import_gssapi_extension, _encode_dict
 
+from gssapi import names
+
 rcred_imp_exp = import_gssapi_extension('cred_imp_exp')
 rcred_s4u = import_gssapi_extension('s4u')
 rcred_cred_store = import_gssapi_extension('cred_store')
 rcred_rfc5588 = import_gssapi_extension('rfc5588')
-
-from gssapi import names
 
 
 class Credentials(rcreds.Creds):

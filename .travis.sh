@@ -6,7 +6,7 @@ F8_SETUP=$?
 flake8 gssapi
 F8_PY=$?
 
-flake8 gssapi --filename='*.pyx,*.pxd' --ignore=E225,E226,E227,E901
+flake8 gssapi --filename='*.pyx,*.pxd' --ignore=E225,E226,E227,E901,E402
 F8_MAIN_CYTHON=$?
 
 python setup.py nosetests
