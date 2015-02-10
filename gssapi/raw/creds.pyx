@@ -175,7 +175,7 @@ def release_cred(Creds creds not None):
 
 def add_cred(Creds input_cred, Name name not None, OID mech not None,
              usage='initiate', init_lifetime=None,
-             accept_lifetime=None):
+             accept_lifetime=None, mutate_input=False):
     """Add a credential element to a credential.
 
     This method can be used to either compose two credentials (i.e., original
@@ -192,11 +192,14 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
             security contexts (None for indefinite)
         accept_lifetime (int): lifetime of credentials for use in accepting
             security contexts (None for indefinite)
+        mutate_input (bool): whether to mutate the input credentials (True)
+            or produce a new set of credentials (False).  Defaults to False
 
     Returns:
         AddCredResult: the actual mechanisms with which the credentials may be
         used, the actual initiator TTL, and the actual acceptor TTL (None for
-        either indefinite or not supported)
+        either indefinite or not supported).  Note that the credentials may
+        be set to None if mutate_input is set to True.
 
     Raises:
         GSSError
@@ -220,6 +223,10 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
     cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(accept_lifetime)
 
     cdef gss_cred_id_t output_creds
+    cdef gss_cred_id_t *output_creds_ptr = NULL
+    if not mutate_input:
+        output_creds_ptr = &output_creds
+
     cdef gss_OID_set actual_mechs
     cdef OM_uint32 actual_initiator_ttl, actual_acceptor_ttl
 
@@ -228,14 +235,18 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
     with nogil:
         maj_stat = gss_add_cred(&min_stat, raw_input_cred, name.raw_name,
                                 &mech.raw_oid, c_usage, input_initiator_ttl,
-                                input_acceptor_ttl, &output_creds,
+                                input_acceptor_ttl, output_creds_ptr,
                                 &actual_mechs, &actual_initiator_ttl,
                                 &actual_acceptor_ttl)
 
     cdef Creds rc
     if maj_stat == GSS_S_COMPLETE:
-        rc = Creds()
-        rc.raw_creds = output_creds
+        if mutate_input:
+            rc = None
+        else:
+            rc = Creds()
+            rc.raw_creds = output_creds
+
         return AddCredResult(rc, c_create_oid_set(actual_mechs),
                              c_c_ttl_to_py(actual_initiator_ttl),
                              c_c_ttl_to_py(actual_acceptor_ttl))

@@ -402,6 +402,9 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         new_creds.should_be_a(gb.Creds)
 
+    # NB(sross): we skip testing add_cred with mutate for the same reasons
+    #            that testing add_cred in the high-level API is skipped
+
     def test_inquire_creds(self):
         name = gb.import_name(SERVICE_PRINCIPAL,
                               gb.NameType.kerberos_principal)
