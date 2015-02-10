@@ -44,6 +44,10 @@ def store_cred(Creds creds not None, usage='both', OID mech=None,
 
     Raises:
         GSSError
+        ExpiredCredentialsError
+        MissingCredentialsError
+        OperationUnavailableError
+        DuplicateCredentialsElementError
     """
     cdef gss_OID desired_mech
     if mech is not None:

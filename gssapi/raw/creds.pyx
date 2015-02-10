@@ -104,7 +104,11 @@ def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
         indefinite or not supported)
 
     Raises:
-        GSSError
+        BadMechanismError
+        BadNameTypeError
+        BadNameError
+        ExpiredCredentialsError
+        MissingCredentialsError
     """
 
     cdef gss_OID_set desired_mechs
@@ -163,7 +167,7 @@ def release_cred(Creds creds not None):
         creds (Creds): the credentials in question
 
     Raises:
-        GSSError
+        MissingCredentialsError
     """
 
     cdef OM_uint32 maj_stat, min_stat
@@ -202,8 +206,12 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
         be set to None if mutate_input is set to True.
 
     Raises:
-        GSSError
-
+        BadMechanismError
+        BadNameTypeError
+        BadNameError
+        DuplicateCredentialsElementError
+        ExpiredCredentialsError
+        MissingCredentialsError
     """
     cdef gss_cred_usage_t c_usage
     if usage == 'initiate':
@@ -272,7 +280,9 @@ def inquire_cred(Creds creds not None, name=True, lifetime=True, usage=True,
             with unused fields set to None
 
     Raises:
-        GSSError
+        MissingCredentialsError
+        InvalidCredentialsError
+        ExpiredCredentialsError
     """
 
     # TODO(directxman12): add docs
@@ -351,7 +361,8 @@ def inquire_cred_by_mech(Creds creds not None, OID mech not None,
             with unused fields set to None
 
     Raises:
-        GSSError
+        MissingCredentialsError
+        InvalidCredentialsError
     """
 
     # TODO(directxman12): add docs

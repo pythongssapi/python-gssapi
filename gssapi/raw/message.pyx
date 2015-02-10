@@ -62,7 +62,9 @@ def get_mic(SecurityContext context not None, message, qop=None):
         bytes: the generated MIC token
 
     Raises:
-        GSSError
+        ExpiredContextError
+        MissingContextError
+        BadQoPError
     """
 
     cdef gss_buffer_desc message_buffer = gss_buffer_desc(len(message),
@@ -104,7 +106,14 @@ def verify_mic(SecurityContext context not None, message, token):
         int: the QoP used.
 
     Raises:
-        GSSError
+        InvalidTokenError
+        BadMICError
+        DuplicateTokenError
+        ExpiredTokenError
+        TokenTooLateError
+        TokenTooEarlyError
+        ExpiredContextError
+        MissingContextError
     """
 
     cdef gss_buffer_desc message_buffer = gss_buffer_desc(len(message),
@@ -144,7 +153,9 @@ def wrap_size_limit(SecurityContext context not None, OM_uint32 output_size,
         int: the maximum unencrypted/unwrapped message size
 
     Raises:
-        GSSError
+        MissingContextError
+        ExpiredContextError
+        BadQoPError
     """
 
     cdef int conf_req = confidential
@@ -185,7 +196,9 @@ def wrap(SecurityContext context not None, message, confidential=True,
             encryption was actually used
 
     Raises:
-        GSSError
+        ExpiredContextError
+        MissingContextError
+        BadQoPError
     """
 
     cdef int conf_req = confidential
@@ -227,7 +240,14 @@ def unwrap(SecurityContext context not None, message):
             encryption was used, and the QoP used
 
     Raises:
-        GSSError
+        InvalidTokenError
+        BadMICError
+        DuplicateTokenError
+        ExpiredTokenError
+        TokenTooLateError
+        TokenTooEarlyError
+        ExpiredContextError
+        MissingContextError
     """
 
     cdef gss_buffer_desc input_buffer = gss_buffer_desc(len(message), message)

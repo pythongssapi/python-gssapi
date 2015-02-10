@@ -152,7 +152,18 @@ def init_sec_context(Name target_name not None, Creds creds=None,
         initiation.
 
     Raises:
-        GSSError
+        InvalidTokenError
+        InvalidCredentialsError
+        MissingCredentialsError
+        ExpiredCredentialsError
+        BadChannelBindingsError
+        BadMICError
+        ExpiredTokenError
+        DuplicateTokenError
+        MissingContextError
+        BadNameTypeError
+        BadNameError
+        BadMechanismError
     """
 
     cdef gss_OID mech_oid
@@ -260,7 +271,16 @@ def accept_sec_context(input_token not None, Creds acceptor_creds=None,
             exchanges are needed to finalize the security context.
 
     Raises:
-        GSSError
+        InvalidTokenError
+        InvalidCredentialsError
+        MissingCredentialsError
+        ExpiredCredentialsError
+        BadChannelBindingsError
+        MissingContextError
+        BadMICError
+        ExpiredTokenError
+        DuplicateTokenError
+        BadMechanismError
     """
 
     cdef gss_channel_bindings_t bdng
@@ -364,7 +384,7 @@ def inquire_context(SecurityContext context not None, initiator_name=True,
             and whether or not the context is currently fully established
 
     Raises:
-        GSSError
+        MissingContextError
     """
 
     cdef gss_name_t output_init_name
@@ -472,7 +492,8 @@ def context_time(SecurityContext context not None):
         int: the number of seconds for which the context will be valid
 
     Raises:
-        GSSError
+        ExpiredContextError
+        MissingContextError
     """
 
     cdef OM_uint32 ttl
@@ -504,7 +525,8 @@ def process_context_token(SecurityContext context not None, token):
         token (bytes): the token to process
 
     Raises:
-        GSSError
+        InvalidTokenError
+        MissingContextError
     """
 
     cdef gss_buffer_desc token_buffer = gss_buffer_desc(len(token), token)
@@ -525,6 +547,12 @@ def import_sec_context(token not None):
 
     This method imports a security context established in another process
     by reading the specified token which was output by exportSecContext.
+
+    Raises:
+        MissingContextError
+        InvalidTokenError
+        OperationUnavailableError
+        UnauthorizedError
     """
 
     cdef gss_buffer_desc token_buffer = gss_buffer_desc(len(token), token)
@@ -561,7 +589,9 @@ def export_sec_context(SecurityContext context not None):
         bytes: the output token to be imported
 
     Raises:
-        GSSError
+        ExpiredContextError
+        MissingContextError
+        OperationUnavailableError
     """
 
     cdef gss_buffer_desc output_token = gss_buffer_desc(0, NULL)
@@ -599,7 +629,7 @@ def delete_sec_context(SecurityContext context not None, local_only=True):
             this is None, but bytes for compatability.
 
     Raises:
-        GSSError
+        MissingContextError
     """
 
     cdef OM_uint32 maj_stat, min_stat

@@ -80,7 +80,9 @@ def import_name(name not None, OID name_type=None):
         Name: the GSSAPI version of the name
 
     Raises:
-        GSSError
+        BadNameTypeError
+        BadNameError
+        BadMechanismError
     """
 
     cdef gss_OID nt
@@ -126,7 +128,7 @@ def display_name(Name name not None, name_type=True):
         DisplayNameResult: the text part of the name and its type
 
     Raises:
-        GSSError
+        BadNameError
     """
 
     # GSS_C_EMPTY_BUFFER
@@ -178,7 +180,8 @@ def compare_name(Name name1=None, Name name2=None):
         bool: whether or not the names are equal
 
     Raises:
-        GSSError
+        BadNameTypeError
+        BadNameError
     """
 
     # check for either value being None
@@ -221,7 +224,9 @@ def export_name(Name name not None):
         bytes: the exported name
 
     Raises:
-        GSSError
+        MechanismNameRequiredError
+        BadNameTypeError
+        BadNameError
     """
 
     # GSS_C_EMPTY_BUFFER
@@ -258,7 +263,9 @@ def canonicalize_name(Name name not None, OID mech not None):
         Name: a canonicalized version of the input name
 
     Raises:
-        GSSError
+        BadMechanismError
+        BadNameTypeError
+        BadNameError
     """
 
     cdef gss_name_t canonicalized_name
@@ -289,7 +296,7 @@ def duplicate_name(Name name not None):
         Name: a duplicate of the input name
 
     Raises:
-        GSSError
+        BadNameError
     """
 
     cdef gss_name_t new_name
@@ -314,7 +321,7 @@ def release_name(Name name not None):
         name (Name): the name in question
 
     Raises:
-        GSSError
+        BadNameError
     """
 
     cdef OM_uint32 maj_stat, min_stat
