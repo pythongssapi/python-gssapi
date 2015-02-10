@@ -36,6 +36,11 @@ class Name(rname.Name):
 
         Otherwise, a new name will be created, using the `base` argument as
         the string and the `name_type` argument to denote the name type.
+
+        Raises:
+            BadNameTypeError
+            BadNameError
+            BadMechanismError
         """
 
         if token is not None:
@@ -95,6 +100,11 @@ class Name(rname.Name):
 
         Returns:
             bytes: the exported name in token form
+
+        Raises:
+            MechanismNameRequiredError
+            BadNameTypeError
+            BadNameError
         """
 
         return rname.export_name(self)
@@ -110,6 +120,11 @@ class Name(rname.Name):
 
         Returns:
             Name: the canonicalized name
+
+        Raises:
+            BadMechanismError
+            BadNameTypeError
+            BadNameError
         """
 
         return type(self)(rname.canonicalize_name(self, mech))

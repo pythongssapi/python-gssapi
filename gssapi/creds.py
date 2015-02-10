@@ -42,6 +42,13 @@ class Credentials(rcreds.Creds):
 
         Otherwise, the credentials are acquired as per the
         :meth:`acquire` method.
+
+        Raises:
+            BadMechanismError
+            BadNameTypeError
+            BadNameError
+            ExpiredCredentialsError
+            MissingCredentialsError
         """
 
         # TODO(directxman12): this is missing support for password
@@ -119,6 +126,13 @@ class Credentials(rcreds.Creds):
         Returns:
             AcquireCredResult: the acquired credentials and information about
                 them
+
+        Raises:
+            BadMechanismError
+            BadNameTypeError
+            BadNameError
+            ExpiredCredentialsError
+            MissingCredentialsError
         """
 
         if store is None:
@@ -161,6 +175,13 @@ class Credentials(rcreds.Creds):
 
         Returns:
             StoreCredResult: the results of the credential storing operation
+
+        Raises:
+            GSSError
+            ExpiredCredentialsError
+            MissingCredentialsError
+            OperationUnavailableError
+            DuplicateCredentialsElementError
         """
 
         if store is None:
@@ -227,6 +248,11 @@ class Credentials(rcreds.Creds):
         Returns:
             InquireCredResult: the information about the credentials,
                 with None used when the corresponding argument was False
+
+        Raises:
+            MissingCredentialsError
+            InvalidCredentialsError
+            ExpiredCredentialsError
         """
 
         res = rcreds.inquire_cred(self, name, lifetime, usage, mechs)
@@ -319,6 +345,14 @@ class Credentials(rcreds.Creds):
         Returns:
             Credentials: the credentials set containing the current credentials
                 and the newly acquired ones.
+
+        Raises:
+            BadMechanismError
+            BadNameTypeError
+            BadNameError
+            DuplicateCredentialsElementError
+            ExpiredCredentialsError
+            MissingCredentialsError
         """
 
         if store is not None and impersonator is not None:

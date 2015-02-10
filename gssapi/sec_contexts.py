@@ -134,6 +134,11 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         Returns:
             bytes: the message signature
+
+        Raises:
+            ExpiredContextError
+            MissingContextError
+            BadQoPError
         """
 
         # TODO(directxman12): check flags?
@@ -154,6 +159,16 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         Raises:
             BadMICError: the signature was not valid
+
+        Raises:
+            InvalidTokenError
+            BadMICError
+            DuplicateTokenError
+            ExpiredTokenError
+            TokenTooLateError
+            TokenTooEarlyError
+            ExpiredContextError
+            MissingContextError
         """
 
         return rmessage.verify_mic(self, message, mic)
@@ -171,6 +186,11 @@ class SecurityContext(rsec_contexts.SecurityContext):
         Returns:
             WrapResult: the wrapped message and details about it
                 (e.g. whether encryption was used succesfully)
+
+        Raises:
+            ExpiredContextError
+            MissingContextError
+            BadQoPError
         """
 
         return rmessage.wrap(self, message, encrypt)
@@ -187,6 +207,16 @@ class SecurityContext(rsec_contexts.SecurityContext):
         Returns:
             UnwrapResult: the unwrapped message and details about it
                 (e.g. wheter encryption was used)
+
+        Raises:
+            InvalidTokenError
+            BadMICError
+            DuplicateTokenError
+            ExpiredTokenError
+            TokenTooLateError
+            TokenTooEarlyError
+            ExpiredContextError
+            MissingContextError
         """
 
         return rmessage.unwrap(self, message)
@@ -208,6 +238,9 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         Raises:
             EncryptionNotUsed: the encryption could not be used
+            ExpiredContextError
+            MissingContextError
+            BadQoPError
         """
 
         res = self.wrap(message, encrypt=True)
@@ -233,6 +266,14 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         Raises:
             EncryptionNotUsed: encryption was expected, but not used
+            InvalidTokenError
+            BadMICError
+            DuplicateTokenError
+            ExpiredTokenError
+            TokenTooLateError
+            TokenTooEarlyError
+            ExpiredContextError
+            MissingContextError
         """
 
         res = self.unwrap(message)
@@ -260,6 +301,11 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         Returns:
             int: the maximum input message size
+
+        Raises:
+            MissingContextError
+            ExpiredContextError
+            BadQoPError
         """
 
         return rmessage.wrap_size_limit(self, desired_output_size,
@@ -273,6 +319,10 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         Args:
             token (bytes): the token to process
+
+        Raises:
+            InvalidTokenError
+            MissingContextError
         """
 
         rsec_contexts.process_context_token(self, token)
@@ -285,6 +335,11 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         Returns:
             bytes: the exported security context
+
+        Raises:
+            ExpiredContextError
+            MissingContextError
+            OperationUnavailableError
         """
 
         return rsec_contexts.export_sec_context(self)
@@ -315,6 +370,9 @@ class SecurityContext(rsec_contexts.SecurityContext):
         Returns:
             InquireContextResult: the results of the inquiry, with unused
                 fields set to None
+
+        Raises:
+            MissingContextError
         """
         if not kwargs:
             default_val = True
@@ -395,6 +453,20 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         Returns:
             bytes: the output token to send to the other participant
+
+        Raises:
+            InvalidTokenError
+            InvalidCredentialsError
+            MissingCredentialsError
+            ExpiredCredentialsError
+            BadChannelBindingsError
+            BadMICError
+            ExpiredTokenError: (initiate only)
+            DuplicateTokenError
+            MissingContextError
+            BadNameTypeError: (initiate only)
+            BadNameError: (initiate only)
+            BadMechanismError
         """
 
         if self.usage == 'accept':
