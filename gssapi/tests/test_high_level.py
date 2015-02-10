@@ -14,7 +14,7 @@ from gssapi import sec_contexts as gssctx
 from gssapi import raw as gb
 from gssapi import _utils as gssutils
 from gssapi import exceptions as excs
-from gssapi.tests._utils import _extension_test
+from gssapi.tests._utils import _extension_test, _minversion_test
 from gssapi.tests import k5test as kt
 
 
@@ -656,6 +656,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         server_ctx.verify_signature.should_raise(gb.GSSError,
                                                  b'other message', mic_token)
 
+    @_minversion_test("1.11", "returning tokens")
     def test_defer_step_error_on_method(self):
         gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = True
         bdgs = gb.ChannelBindings(application_data=b'abcxyz')
@@ -671,6 +672,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         server_ctx.step(client_token).should_be_a(bytes)
         server_ctx.encrypt.should_raise(gb.BadChannelBindingsError, b'test')
 
+    @_minversion_test("1.11", "returning tokens")
     def test_defer_step_error_on_complete_property_access(self):
         gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = True
         bdgs = gb.ChannelBindings(application_data=b'abcxyz')
