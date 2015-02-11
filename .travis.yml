@@ -1,13 +1,21 @@
 language: python
 python:
   - "2.7"
-  - "3.3"
   - "3.4"
 
 env:
   - KRB5_PPAS="" # 1.10
   - KRB5_PPAS="sssd/updates" # 1.12
   - KRB5_PPAS="rharwood/krb5-1.13 sssd/updates" # 1.13
+  - KRB5_PPAS="rharwood/krb5-master sssd/updates" # master
+
+matrix:
+  exclude:
+    - python: "3.4"
+      env: KRB5_PPAS="" # 1.10
+  include:
+    - python: "3.3"
+      env: KRB5_PPAS="sssd/updates" # 1.12
 
 install:
   - "sudo sed -i '1i 127.0.0.1 test.box' /etc/hosts"
