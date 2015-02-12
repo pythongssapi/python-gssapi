@@ -48,5 +48,10 @@ InquireContextResult = namedtuple('InquireContextResult',
                                    'lifetime', 'mech', 'flags',
                                    'locally_init', 'complete'])
 
+
 StoreCredResult = namedtuple('StoreCredResult',
                              ['mechs', 'usage'])
+
+
+IOVUnwrapResult = namedtuple('IOVUnwrapResult',
+                             ['encrypted', 'qop'])

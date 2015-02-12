@@ -43,3 +43,9 @@ try:
     from gssapi.raw.ext_password_add import *  # noqa
 except ImportError:
     pass
+
+# optional DCE (IOV/AEAD) support
+try:
+    from gssapi.raw.ext_dce import *  # noqa
+except ImportError:
+    pass
