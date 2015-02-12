@@ -944,6 +944,148 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         unwrapped_message.shouldnt_be_empty()
         unwrapped_message.should_be(b'test message')
 
+    @_extension_test('dce', 'DCE (IOV/AEAD)')
+    def test_basic_iov_wrap_unwrap_prealloc(self):
+        init_data = b'some encrypted data'
+        init_other_data = b'some other encrypted data'
+        init_signed_info = b'some sig data'
+        init_message = gb.IOV((gb.IOVBufferType.sign_only, init_signed_info),
+                              init_data, init_other_data, auto_alloc=False)
+
+        init_message[0].allocate.should_be_false()
+        init_message[4].allocate.should_be_false()
+        init_message[5].allocate.should_be_false()
+
+        conf = gb.wrap_iov_length(self.client_ctx, init_message)
+
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        init_message[0].should_be_at_least_size(1)
+        init_message[5].should_be_at_least_size(1)
+
+        conf = gb.wrap_iov(self.client_ctx, init_message)
+
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        # make sure we didn't strings used
+        init_data.should_be(b'some encrypted data')
+        init_other_data.should_be(b'some other encrypted data')
+        init_signed_info.should_be(b'some sig data')
+
+        init_message[2].value.shouldnt_be(b'some encrypted data')
+        init_message[3].value.shouldnt_be(b'some other encrypted data')
+
+        (conf, qop) = gb.unwrap_iov(self.server_ctx, init_message)
+
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        qop.should_be_a(int)
+
+        init_message[1].value.should_be(init_signed_info)
+        init_message[2].value.should_be(init_data)
+        init_message[3].value.should_be(init_other_data)
+
+    @_extension_test('dce', 'DCE (IOV/AEAD)')
+    def test_basic_iov_wrap_unwrap_autoalloc(self):
+        init_data = b'some encrypted data'
+        init_other_data = b'some other encrypted data'
+        init_signed_info = b'some sig data'
+        init_message = gb.IOV((gb.IOVBufferType.sign_only, init_signed_info),
+                              init_data, init_other_data)
+
+        conf = gb.wrap_iov(self.client_ctx, init_message)
+
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        # make sure we didn't strings used
+        init_data.should_be(b'some encrypted data')
+        init_other_data.should_be(b'some other encrypted data')
+        init_signed_info.should_be(b'some sig data')
+
+        init_message[2].value.shouldnt_be(b'some encrypted data')
+        init_message[3].value.shouldnt_be(b'some other encrypted data')
+
+        (conf, qop) = gb.unwrap_iov(self.server_ctx, init_message)
+
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        qop.should_be_a(int)
+
+        init_message[1].value.should_be(init_signed_info)
+        init_message[2].value.should_be(init_data)
+        init_message[3].value.should_be(init_other_data)
+
+    @_extension_test('dce', 'DCE (IOV/AEAD)')
+    def test_basic_aead_wrap_unwrap(self):
+        assoc_data = b'some sig data'
+        (wrapped_message, conf) = gb.wrap_aead(self.client_ctx,
+                                               b'test message', assoc_data)
+
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        wrapped_message.should_be_a(bytes)
+        wrapped_message.shouldnt_be_empty()
+        wrapped_message.should_be_longer_than('test message')
+
+        (unwrapped_message, conf, qop) = gb.unwrap_aead(self.server_ctx,
+                                                        wrapped_message,
+                                                        assoc_data)
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        qop.should_be_an_integer()
+        qop.should_be_at_least(0)
+
+        unwrapped_message.should_be_a(bytes)
+        unwrapped_message.shouldnt_be_empty()
+        unwrapped_message.should_be(b'test message')
+
+    @_extension_test('dce', 'DCE (IOV/AEAD)')
+    def test_basic_aead_wrap_unwrap_no_assoc(self):
+        (wrapped_message, conf) = gb.wrap_aead(self.client_ctx,
+                                               b'test message')
+
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        wrapped_message.should_be_a(bytes)
+        wrapped_message.shouldnt_be_empty()
+        wrapped_message.should_be_longer_than('test message')
+
+        (unwrapped_message, conf, qop) = gb.unwrap_aead(self.server_ctx,
+                                                        wrapped_message)
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        qop.should_be_an_integer()
+        qop.should_be_at_least(0)
+
+        unwrapped_message.should_be_a(bytes)
+        unwrapped_message.shouldnt_be_empty()
+        unwrapped_message.should_be(b'test message')
+
+    @_extension_test('dce', 'DCE (IOV/AEAD)')
+    def test_basic_aead_wrap_unwrap_bad_assoc_raises_error(self):
+        assoc_data = b'some sig data'
+        (wrapped_message, conf) = gb.wrap_aead(self.client_ctx,
+                                               b'test message', assoc_data)
+
+        conf.should_be_a(bool)
+        conf.should_be_true()
+
+        wrapped_message.should_be_a(bytes)
+        wrapped_message.shouldnt_be_empty()
+        wrapped_message.should_be_longer_than('test message')
+
+        gb.unwrap_aead.should_raise(gb.BadMICError, self.server_ctx,
+                                    wrapped_message, b'some other sig data')
+
 
 TEST_OIDS = {'SPNEGO': {'bytes': b'\053\006\001\005\005\002',
                         'string': '1.3.6.1.5.5.2'},

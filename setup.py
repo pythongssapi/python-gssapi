@@ -62,7 +62,7 @@ if compile_args is None:
         compile_args = get_output('krb5-config --cflags gssapi')
 
 link_args = link_args.split()
-compile_args = compile_args.split()
+compile_args = compile_args.split() + ['-g']
 
 ENABLE_SUPPORT_DETECTION = \
     (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
@@ -191,6 +191,7 @@ setup(
         extension_file('cred_store', 'gss_store_cred_into'),
         extension_file('rfc5588', 'gss_store_cred'),
         extension_file('cred_imp_exp', 'gss_import_cred'),
+        extension_file('dce', 'gss_wrap_iov'),
 
         # see ext_password{,_add}.pyx for more information on this split
         extension_file('password', 'gss_acquire_cred_with_password'),
