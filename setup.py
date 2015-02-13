@@ -192,6 +192,7 @@ setup(
         extension_file('rfc5588', 'gss_store_cred'),
         extension_file('cred_imp_exp', 'gss_import_cred'),
         extension_file('dce', 'gss_wrap_iov'),
+        extension_file('iov_mic', 'gss_get_mic_iov'),
 
         # see ext_password{,_add}.pyx for more information on this split
         extension_file('password', 'gss_acquire_cred_with_password'),

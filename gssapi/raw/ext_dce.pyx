@@ -15,11 +15,6 @@ from enum import IntEnum
 import six
 
 cdef extern from "python_gssapi_ext.h":
-    ctypedef struct gss_iov_buffer_desc:
-        OM_uint32 type
-        gss_buffer_desc buffer
-    ctypedef gss_iov_buffer_desc* gss_iov_buffer_t
-
     # NB(directxman12): this wiki page has a different argument order
     #                   than the header file, and uses size_t instead of int
     #                   (this file matches the header file)
@@ -106,11 +101,14 @@ IOVBuffer = namedtuple('IOVBuffer', ['type', 'allocate', 'value'])
 
 
 cdef class IOV:
-    cdef gss_iov_buffer_desc *_iov
-    cdef int iov_len
-    cdef bint _unprocessed
-    cdef bint c_changed
-    cdef list _buffs
+    # defined in ext_dce.pxd
+
+    # cdef int iov_len
+    # cdef bint c_changed
+
+    # cdef gss_iov_buffer_desc *_iov
+    # cdef bint _unprocessed
+    # cdef list _buffs
 
     AUTO_ALLOC_BUFFERS = set([IOVBufferType.header, IOVBufferType.padding,
                               IOVBufferType.trailer])

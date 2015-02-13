@@ -47,5 +47,7 @@ except ImportError:
 # optional DCE (IOV/AEAD) support
 try:
     from gssapi.raw.ext_dce import *  # noqa
+    # optional IOV MIC support (requires DCE support)
+    from gssapi.raw.ext_iov_mic import *  # noqa
 except ImportError:
     pass
