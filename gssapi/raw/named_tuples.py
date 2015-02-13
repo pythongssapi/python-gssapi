@@ -24,11 +24,6 @@ DisplayNameResult = namedtuple('DisplayNameResult',
                                ['name', 'name_type'])
 
 
-VerifyMICResult = namedtuple('VerifyMICResult',
-                             ['valid', 'qop', 'major_status',
-                              'minor_status'])
-
-
 WrapResult = namedtuple('WrapResult',
                         ['message', 'encrypted'])
 

@@ -4,7 +4,7 @@ from gssapi.raw.cython_types cimport *
 from gssapi.raw.sec_contexts cimport SecurityContext
 
 from gssapi.raw.misc import GSSError
-from gssapi.raw.named_tuples import VerifyMICResult, WrapResult, UnwrapResult
+from gssapi.raw.named_tuples import WrapResult, UnwrapResult
 
 
 cdef extern from "python_gssapi.h":
@@ -93,9 +93,8 @@ def verify_mic(SecurityContext context not None, message, token):
     Verify that a MIC matches a message.
 
     This method verifies that the given MIC matches the given message.
-    There are two ways to run this method.  The default way (return_bool=False)
-    will raise an error if the MIC does not match, and otherwise return
-    the QoP used to generate the MIC.
+    If the MIC does not match the given message, an exception will
+    be raised.
 
     Args:
         context (SecurityContext): the current security context
