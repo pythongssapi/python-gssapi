@@ -1086,6 +1086,55 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         gb.unwrap_aead.should_raise(gb.BadMICError, self.server_ctx,
                                     wrapped_message, b'some other sig data')
 
+    @_extension_test('iov_mic', 'IOV MIC')
+    def test_get_mic_iov(self):
+        init_message = gb.IOV(b'some data',
+                              (gb.IOVBufferType.sign_only, b'some sig data'),
+                              gb.IOVBufferType.mic_token, std_layout=False)
+
+        gb.get_mic_iov(self.client_ctx, init_message)
+
+        init_message[2].type.should_be(gb.IOVBufferType.mic_token)
+        init_message[2].value.shouldnt_be_empty()
+
+    @_extension_test('iov_mic', 'IOV MIC')
+    def test_basic_verify_mic_iov(self):
+        init_message = gb.IOV(b'some data',
+                              (gb.IOVBufferType.sign_only, b'some sig data'),
+                              gb.IOVBufferType.mic_token, std_layout=False)
+
+        gb.get_mic_iov(self.client_ctx, init_message)
+
+        init_message[2].type.should_be(gb.IOVBufferType.mic_token)
+        init_message[2].value.shouldnt_be_empty()
+
+        qop_used = gb.verify_mic_iov(self.server_ctx, init_message)
+
+        qop_used.should_be_an_integer()
+
+    @_extension_test('iov_mic', 'IOV MIC')
+    def test_verify_mic_iov_bad_mic_raises_error(self):
+        init_message = gb.IOV(b'some data',
+                              (gb.IOVBufferType.sign_only, b'some sig data'),
+                              (gb.IOVBufferType.mic_token, 'abaava'),
+                              std_layout=False)
+
+        # test a bad MIC
+        gb.verify_mic_iov.should_raise(gb.GSSError, self.server_ctx,
+                                       init_message)
+
+    @_extension_test('iov_mic', 'IOV MIC')
+    def test_get_mic_iov_length(self):
+        init_message = gb.IOV(b'some data',
+                              (gb.IOVBufferType.sign_only, b'some sig data'),
+                              gb.IOVBufferType.mic_token, std_layout=False,
+                              auto_alloc=False)
+
+        gb.get_mic_iov_length(self.client_ctx, init_message)
+
+        init_message[2].type.should_be(gb.IOVBufferType.mic_token)
+        init_message[2].value.shouldnt_be_empty()
+
 
 TEST_OIDS = {'SPNEGO': {'bytes': b'\053\006\001\005\005\002',
                         'string': '1.3.6.1.5.5.2'},
