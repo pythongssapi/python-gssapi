@@ -11,6 +11,8 @@ from gssapi.raw.oids cimport OID
 
 from gssapi.raw.types import MechType
 
+from enum import EnumMeta, Enum
+
 
 cdef extern from "python_gssapi.h":
     OM_uint32 gss_display_status(OM_uint32 *minor_status,
@@ -329,3 +331,64 @@ class GSSError(Exception):
                                    maj_str=maj_str,
                                    min_stat=self.min_code,
                                    min_str=min_str)
+
+
+# WARNING: FOR YOUR OWN PERSONAL SANITY, DO NOT TRY THIS AT HOME
+# This allows things like extensions declaring their own RequirementFlags
+# without having to worry about import order.  There *might* be a cleaner
+# way to do this, but most of the ways probably exploit the interals of Enum
+class _EnumExtension(EnumMeta):
+    def __new__(metacls, name, bases, classdict):
+        # find the base class that this overrides
+
+        base_attr = classdict.get('__base__', None)
+
+        if len(bases) != 1 or bases[0] is not object or base_attr is None:
+            raise TypeError("Enumeration extensions must be created as "
+                            "`ClassName(object)` and must contain the "
+                            "`__base__` attribute")
+
+        adds_to = base_attr
+        del classdict['__base__']
+
+        bases = adds_to.__bases__
+
+        # we need to have the same Enum type
+        if not issubclass(adds_to, Enum):
+            raise TypeError("Enumeration extensions must extend a subtype "
+                            "of Enum or directly sublcass object")
+
+        # roughly preserve insertion order in Python 3.4+
+        # (actually preserving order would require using parts of the Enum
+        # implementation that aren't part of the spec)
+        old_classdict = classdict
+        classdict = metacls.__prepare__(name, bases)
+
+        # NB(directxman12): we can't use update, because that doesn't
+        # trigger __setitem__, which thus won't update the _EnumDict correctly
+        base_members = adds_to.__members__
+        for k, v in base_members.items():
+            classdict[k] = v.value
+
+        for k, v in old_classdict.items():
+            if k in base_members:
+                raise AttributeError("Enumeration extensions cannot override "
+                                     "existing enumeration members")
+
+            classdict[k] = v
+
+        res = super(_EnumExtension, metacls).__new__(metacls, name,
+                                                     bases, classdict)
+
+        # replace the old with the new
+        for k, v in res.__dict__.items():
+            if (k not in ('__module__', '__qualname__', '__doc__') and
+                    k in adds_to.__dict__):
+                setattr(adds_to, k, v)
+
+        # preserve enum semantics
+        for member in adds_to.__members__.values():
+            member.__class__ = adds_to
+
+        # always return the original
+        return adds_to
