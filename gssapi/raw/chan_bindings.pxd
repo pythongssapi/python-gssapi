@@ -11,4 +11,4 @@ cdef class ChannelBindings:
 
     cdef public bytes application_data
 
-    cdef gss_channel_bindings_t __cvalue__(ChannelBindings self)
+    cdef gss_channel_bindings_t __cvalue__(ChannelBindings self) except NULL
