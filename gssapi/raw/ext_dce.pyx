@@ -6,13 +6,14 @@ from libc.string cimport memcpy
 from gssapi.raw.cython_types cimport *
 from gssapi.raw.sec_contexts cimport SecurityContext
 
-from gssapi.raw.misc import GSSError, _EnumExtension
+from gssapi.raw.misc import GSSError
 from gssapi.raw import types as gssapi_types
 from gssapi.raw.named_tuples import IOVUnwrapResult, WrapResult, UnwrapResult
 from collections import namedtuple, Sequence
 
 from enum import IntEnum
 import six
+from gssapi.raw._enum_extensions import ExtendableEnum
 
 cdef extern from "python_gssapi_ext.h":
     # NB(directxman12): this wiki page has a different argument order
@@ -62,12 +63,10 @@ cdef extern from "python_gssapi_ext.h":
     OM_uint32 GSS_IOV_BUFFER_FLAG_ALLOCATE
     OM_uint32 GSS_IOV_BUFFER_FLAG_ALLOCATED
 
-    OM_uint32 GSS_C_DCE_STYLE
-    OM_uint32 GSS_C_IDENTIFY_FLAG
-    OM_uint32 GSS_C_EXTENDED_ERROR_FLAG
+    # a few more are in the enum extension file
 
 
-class IOVBufferType(IntEnum):
+class IOVBufferType(IntEnum, metaclass=ExtendableEnum):
     """
     IOV Buffer Types
 
@@ -86,15 +85,6 @@ class IOVBufferType(IntEnum):
     padding = GSS_IOV_BUFFER_TYPE_PADDING
     stream = GSS_IOV_BUFFER_TYPE_STREAM
     sign_only = GSS_IOV_BUFFER_TYPE_SIGN_ONLY
-
-
-@six.add_metaclass(_EnumExtension)
-class RequirementFlag(object):
-    __base__ = gssapi_types.RequirementFlag
-
-    dce_style = GSS_C_DCE_STYLE
-    identify = GSS_C_IDENTIFY_FLAG
-    extended_error = GSS_C_EXTENDED_ERROR_FLAG
 
 
 IOVBuffer = namedtuple('IOVBuffer', ['type', 'allocate', 'value'])

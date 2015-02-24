@@ -5,8 +5,6 @@ import socket
 import unittest
 
 import should_be.all  # noqa
-from enum import IntEnum
-import six
 
 import gssapi.raw as gb
 import gssapi.raw.misc as gbmisc
@@ -641,78 +639,6 @@ class TestIntEnumFlagSet(unittest.TestCase):
         fset3.shouldnt_include(gb.RequirementFlag.confidentiality)
         fset3.should_include(gb.RequirementFlag.protection_ready)
         fset3.should_include(gb.RequirementFlag.out_of_sequence_detection)
-
-
-class TestEnumExtension(unittest.TestCase):
-    def setUp(self):
-        class ExtendedEnum(IntEnum):
-            """some docs"""
-            a = 1
-            b = 2
-            c = 3
-
-        class OtherEnum(IntEnum):
-            a = 1
-            b = 2
-            c = 3
-
-        self._ext_enum = ExtendedEnum
-        self._plain_enum = OtherEnum
-
-    def test_same_dict(self):
-        @six.add_metaclass(gbmisc._EnumExtension)
-        class ExtendedEnum(object):
-            __base__ = self._ext_enum
-            d = 4
-            e = 5
-
-        self._ext_enum.__dict__.keys().should_be(
-                self._plain_enum.__dict__.keys())
-
-    def test_members_copy_mult(self):
-        @six.add_metaclass(gbmisc._EnumExtension)
-        class ExtendedEnum(object):
-            __base__ = self._ext_enum
-            d = 4
-
-        @six.add_metaclass(gbmisc._EnumExtension)
-        class ExtendedEnum2(object):
-            __base__ = self._ext_enum
-            e = 5
-
-        self._ext_enum.__members__.should_include(
-            ['a', 'b', 'c', 'd', 'e'])
-
-        self._ext_enum.a.should_be(1)
-        self._ext_enum.b.should_be(2)
-        self._ext_enum.c.should_be(3)
-        self._ext_enum.d.should_be(4)
-        self._ext_enum.e.should_be(5)
-
-    def test_all_class_are_same(self):
-        @six.add_metaclass(gbmisc._EnumExtension)
-        class ExtendedEnum(object):
-            __base__ = self._ext_enum
-            d = 4
-
-        assert ExtendedEnum is self._ext_enum
-
-    def test_members_are_still_instance(self):
-        @six.add_metaclass(gbmisc._EnumExtension)
-        class EnumExt(object):
-            __base__ = self._ext_enum
-            d = 4
-
-        self._ext_enum.a.should_be_a(self._ext_enum)
-        self._ext_enum.d.should_be_a(self._ext_enum)
-
-    def test_doc_is_preserved(self):
-        @six.add_metaclass(gbmisc._EnumExtension)
-        class ExtendedEnum(object):
-            __base__ = self._ext_enum
-            d = 4
-
-        self._ext_enum.__doc__.should_be('some docs')
 
 
 class TestInitContext(_GSSAPIKerberosTestCase):

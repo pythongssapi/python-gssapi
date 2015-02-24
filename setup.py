@@ -118,10 +118,23 @@ def main_file(module):
                      sources=['gssapi/raw/%s.%s' % (module, SOURCE_EXT)])
 
 
+ENUM_EXTS = []
+
+
 def extension_file(module, canary):
     if ENABLE_SUPPORT_DETECTION and not hasattr(GSSAPI_LIB, canary):
         return None
     else:
+        enum_ext_path = 'gssapi/raw/_enum_extensions/ext_%s.%s' % (module,
+                                                                   SOURCE_EXT)
+        if os.path.exists(enum_ext_path):
+            ENUM_EXTS.append(
+                Extension('gssapi.raw._enum_extensions.ext_%s' % module,
+                          extra_link_args=link_args,
+                          extra_compile_args=compile_args,
+                          sources=[enum_ext_path],
+                          include_dirs=['gssapi/raw/']))
+
         return Extension('gssapi.raw.ext_%s' % module,
                          extra_link_args=link_args,
                          extra_compile_args=compile_args,
@@ -142,6 +155,9 @@ def gssapi_modules(lst):
                              sources=['gssapi/raw/mech_%s.%s' % (mech,
                                                                  SOURCE_EXT)]))
 
+    # add in any present enum extension files
+    res.extend(ENUM_EXTS)
+
     if SOURCE_EXT == 'pyx':
         res = cythonize(res)
 
@@ -157,7 +173,8 @@ setup(
     version='1.0.0',
     author='The Python GSSAPI Team',
     author_email='sross@redhat.com',
-    packages=['gssapi', 'gssapi.raw', 'gssapi.tests'],
+    packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
+              'gssapi.tests'],
     description='Python GSSAPI Wrapper',
     long_description=long_desc,
     license='LICENSE.txt',

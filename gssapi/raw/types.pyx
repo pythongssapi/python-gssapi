@@ -4,11 +4,14 @@ from gssapi.raw.cython_types cimport *
 from gssapi.raw.cython_converters cimport c_make_oid
 from gssapi.raw.oids cimport OID
 
+from gssapi.raw._enum_extensions import ExtendableEnum
+
 from enum import IntEnum
 import collections
 import copy
 import numbers
 import operator
+import six
 
 
 class NameType(object):
@@ -36,7 +39,7 @@ class NameType(object):
     # mech-specific name types are added automatically on import
 
 
-class RequirementFlag(IntEnum):
+class RequirementFlag(IntEnum, metaclass=ExtendableEnum):
     """
     GSSAPI Requirement Flags
 
@@ -58,7 +61,7 @@ class RequirementFlag(IntEnum):
     transferable = GSS_C_TRANS_FLAG
 
 
-class AddressType(IntEnum):
+class AddressType(IntEnum, metaclass=ExtendableEnum):
     """
     GSSAPI Channel Bindings Address Types
 

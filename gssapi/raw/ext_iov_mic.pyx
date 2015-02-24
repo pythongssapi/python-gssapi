@@ -4,10 +4,9 @@ from gssapi.raw.cython_types cimport *
 from gssapi.raw.sec_contexts cimport SecurityContext
 from gssapi.raw.ext_dce cimport IOV, gss_iov_buffer_desc
 
-from gssapi.raw.misc import GSSError, _EnumExtension
-from gssapi.raw import ext_dce
+from gssapi.raw.misc import GSSError
+from gssapi.raw.ext_dce import IOVBufferType
 
-import six
 
 cdef extern from "python_gssapi_ext.h":
     OM_uint32 gss_get_mic_iov(OM_uint32 *min_stat, gss_ctx_id_t context_handle,
@@ -26,13 +25,7 @@ cdef extern from "python_gssapi_ext.h":
                                  gss_iov_buffer_desc *iov,
                                  int iov_count) nogil
 
-    OM_uint32 GSS_IOV_BUFFER_TYPE_MIC_TOKEN
-
-
-@six.add_metaclass(_EnumExtension)
-class IOVBufferType(object):
-    __base__ = ext_dce.IOVBufferType
-    mic_token = GSS_IOV_BUFFER_TYPE_MIC_TOKEN
+    # more in the enum extension file
 
 
 IOV.AUTO_ALLOC_BUFFERS.add(IOVBufferType.mic_token)
