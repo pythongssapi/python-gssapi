@@ -4,26 +4,19 @@ python:
   - "3.4"
 
 env:
-  - KRB5_PPAS="" # 1.10
-  - KRB5_PPAS="sssd/updates" # 1.12
-  - KRB5_PPAS="rharwood/krb5-1.13 sssd/updates" # 1.13
-  - KRB5_PPAS="rharwood/krb5-master sssd/updates" # master
+  - KRB5_VER="1.10"
+  - KRB5_VER="1.12"
+  - KRB5_VER="1.13"
+  - KRB5_VER="master"
 
 matrix:
   exclude:
     - python: "3.4"
-      env: KRB5_PPAS="" # 1.10
+      env: KRB5_VER="1.10"
   include:
     - python: "3.3"
-      env: KRB5_PPAS="sssd/updates" # 1.12
+      env: KRB5_VER="1.12"
 
-install:
-  - "sudo sed -i '1i 127.0.0.1 test.box' /etc/hosts"
-  - "sudo hostname test.box"
-  - "for i in $KRB5_PPAS; do sudo apt-add-repository -y ppa:$i; done"
-  - "sudo apt-get update -q"
-  - "DEBIAN_FRONTEND=noninteractive sudo apt-get install -y krb5-user krb5-kdc krb5-admin-server libkrb5-dev krb5-multidev"
-  - "pip install --install-option='--no-cython-compile' cython"
-  - "pip install -r test-requirements.txt"
+install: sh .travis.install.sh
 
 script: sh .travis.sh
