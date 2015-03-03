@@ -9,6 +9,7 @@ import should_be.all  # noqa
 import gssapi.raw as gb
 import gssapi.raw.misc as gbmisc
 from gssapi.tests._utils import _extension_test, _minversion_test
+from gssapi.tests._utils import _requires_krb_plugin
 from gssapi.tests import k5test as kt
 
 
@@ -111,6 +112,128 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         out_type.shouldnt_be_none()
         out_type.should_be(gb.NameType.hostbased_service)
+
+    # NB(directxman12): we don't test display_name_ext because the krb5 mech
+    # doesn't actually implement it
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    def test_inquire_name_not_mech_name(self):
+        base_name = gb.import_name(TARGET_SERVICE_NAME,
+                                   gb.NameType.hostbased_service)
+        inquire_res = gb.inquire_name(base_name)
+
+        inquire_res.shouldnt_be_none()
+
+        inquire_res.is_mech_name.should_be_false()
+        inquire_res.mech.should_be_none()
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    def test_inquire_name_mech_name(self):
+        base_name = gb.import_name(TARGET_SERVICE_NAME,
+                                   gb.NameType.hostbased_service)
+        mech_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+
+        inquire_res = gb.inquire_name(mech_name)
+        inquire_res.shouldnt_be_none()
+
+        inquire_res.is_mech_name.should_be_true()
+        inquire_res.mech.should_be_a(gb.OID)
+        inquire_res.mech.should_be(gb.MechType.kerberos)
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    @_extension_test('rfc6680_comp_oid', 'RFC 6680 (COMPOSITE_EXPORT OID)')
+    def test_import_export_name_composite_no_attrs(self):
+        base_name = gb.import_name(TARGET_SERVICE_NAME,
+                                   gb.NameType.hostbased_service)
+
+        canon_name = gb.canonicalize_name(base_name,
+                                          gb.MechType.kerberos)
+        exported_name = gb.export_name_composite(canon_name)
+
+        exported_name.should_be_a(bytes)
+
+        imported_name = gb.import_name(exported_name,
+                                       gb.NameType.composite_export)
+
+        imported_name.should_be_a(gb.Name)
+
+    # NB(directxman12): the greet_client plugin only allows for one value
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    @_requires_krb_plugin('authdata', 'greet_client')
+    def test_inquire_name_with_attrs(self):
+        base_name = gb.import_name(TARGET_SERVICE_NAME,
+                                   gb.NameType.hostbased_service)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+        gb.set_name_attribute(canon_name, b'urn:greet:greeting',
+                              [b'some greeting'])
+
+        inquire_res = gb.inquire_name(canon_name)
+        inquire_res.shouldnt_be_none()
+
+        inquire_res.attrs.should_be_a(list)
+        inquire_res.attrs.should_be([b'urn:greet:greeting'])
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    @_requires_krb_plugin('authdata', 'greet_client')
+    def test_basic_get_set_delete_name_attributes_no_auth(self):
+        base_name = gb.import_name(TARGET_SERVICE_NAME,
+                                   gb.NameType.hostbased_service)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+
+        gb.set_name_attribute(canon_name, b'urn:greet:greeting',
+                              [b'some other val'], complete=True)
+
+        get_res = gb.get_name_attribute(canon_name, b'urn:greet:greeting')
+        get_res.shouldnt_be_none()
+
+        get_res.values.should_be_a(list)
+        get_res.values.should_be([b'some other val'])
+
+        get_res.display_values.should_be_a(list)
+        get_res.display_values.should_be(get_res.values)
+
+        get_res.complete.should_be_true()
+        get_res.authenticated.should_be_false()
+
+        gb.delete_name_attribute(canon_name, b'urn:greet:greeting')
+
+        # NB(directxman12): the code below currently segfaults due to the way
+        # that krb5 and the krb5 greet plugin is written
+        # gb.get_name_attribute.should_raise(
+        #     gb.exceptions.OperationUnavailableError, canon_name,
+        #     'urn:greet:greeting')
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    @_requires_krb_plugin('authdata', 'greet_client')
+    def test_import_export_name_composite(self):
+        base_name = gb.import_name(TARGET_SERVICE_NAME,
+                                   gb.NameType.hostbased_service)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+        gb.set_name_attribute(canon_name, b'urn:greet:greeting', [b'some val'])
+
+        exported_name = gb.export_name_composite(canon_name)
+
+        exported_name.should_be_a(bytes)
+
+        # TODO(directxman12): when you just import a token as composite,
+        # appears as this name whose text is all garbled, since it contains
+        # all of the attributes, etc, but doesn't properly have the attributes.
+        # Once it's canonicalized, the attributes reappear.  However, if you
+        # just import it as normal export, the attributes appear directly.
+        # It is thus unclear as to what is going on
+
+        # imported_name_raw = gb.import_name(exported_name,
+        #                                    gb.NameType.composite_export)
+        # imported_name = gb.canonicalize_name(imported_name_r,
+        #                                      gb.MechType.kerberos)
+
+        imported_name = gb.import_name(exported_name, gb.NameType.export)
+
+        imported_name.should_be_a(gb.Name)
+
+        get_res = gb.get_name_attribute(imported_name, b'urn:greet:greeting')
+        get_res.values.should_be([b'some val'])
 
     def test_compare_name(self):
         service_name1 = gb.import_name(TARGET_SERVICE_NAME)

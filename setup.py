@@ -62,7 +62,7 @@ if compile_args is None:
         compile_args = get_output('krb5-config --cflags gssapi')
 
 link_args = link_args.split()
-compile_args = compile_args.split() + ['-g']
+compile_args = compile_args.split()
 
 ENABLE_SUPPORT_DETECTION = \
     (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
@@ -210,6 +210,10 @@ setup(
         extension_file('cred_imp_exp', 'gss_import_cred'),
         extension_file('dce', 'gss_wrap_iov'),
         extension_file('iov_mic', 'gss_get_mic_iov'),
+
+        # see ext_rfc6680_comp_oid for more information on this split
+        extension_file('rfc6680', 'gss_display_name_ext'),
+        extension_file('rfc6680_comp_oid', 'GSS_C_NT_COMPOSITE_EXPORT'),
 
         # see ext_password{,_add}.pyx for more information on this split
         extension_file('password', 'gss_acquire_cred_with_password'),

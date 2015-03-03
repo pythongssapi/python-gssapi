@@ -55,3 +55,12 @@ StoreCredResult = namedtuple('StoreCredResult',
 
 IOVUnwrapResult = namedtuple('IOVUnwrapResult',
                              ['encrypted', 'qop'])
+
+
+InquireNameResult = namedtuple('InquireNameResult',
+                               ['attrs', 'is_mech_name', 'mech'])
+
+
+GetNameAttributeResult = namedtuple('GetNamedAttributeResult',
+                                    ['values', 'display_values',
+                                     'authenticated', 'complete'])

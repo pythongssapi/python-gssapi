@@ -64,3 +64,10 @@ try:
     from gssapi.raw.ext_iov_mic import *  # noqa
 except ImportError:
     pass
+
+# optional RFC 6680 support
+try:
+    from gssapi.raw.ext_rfc6680 import *  # noqa
+    from gssapi.raw.ext_rfc6680_comp_oid import *  # noqa
+except ImportError:
+    pass

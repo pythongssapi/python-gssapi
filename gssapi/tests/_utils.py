@@ -120,3 +120,28 @@ def _find_plugin_dirs_src(search_path):
         return options_raw.split('\n')
     else:
         return None
+
+
+_KRB_PREFIX = None
+
+
+def _requires_krb_plugin(plugin_type, plugin_name):
+    global _KRB_PREFIX
+    if _KRB_PREFIX is None:
+        _KRB_PREFIX = get_output("krb5-config --prefix")
+
+    plugin_path = os.path.join(_KRB_PREFIX, 'lib/krb5/plugins',
+                               plugin_type, '%s.so' % plugin_name)
+
+    def make_krb_plugin_test(func):
+        def krb_plugin_test(self, *args, **kwargs):
+            if not os.path.exists(plugin_path):
+                self.skipTest("You do not have the GSSAPI {type}"
+                              "plugin {name} installed".format(
+                                  type=plugin_type, name=plugin_name))
+            else:
+                func(self, *args, **kwargs)
+
+        return krb_plugin_test
+
+    return make_krb_plugin_test
