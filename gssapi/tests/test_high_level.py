@@ -15,6 +15,7 @@ from gssapi import raw as gb
 from gssapi import _utils as gssutils
 from gssapi import exceptions as excs
 from gssapi.tests._utils import _extension_test, _minversion_test
+from gssapi.tests._utils import _requires_krb_plugin
 from gssapi.tests import k5test as kt
 
 
@@ -395,6 +396,45 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name2.shouldnt_be_none()
         name2.name_type.should_be(gb.NameType.kerberos_principal)
 
+    @_extension_test('rfc6680', 'RFC 6680')
+    def test_create_from_composite_token_no_attrs(self):
+        name1 = gssnames.Name(TARGET_SERVICE_NAME,
+                              gb.NameType.hostbased_service)
+        exported_name = name1.canonicalize(
+            gb.MechType.kerberos).export(composite=True)
+        name2 = gssnames.Name(token=exported_name, composite=True)
+
+        name2.shouldnt_be_none()
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    @_requires_krb_plugin('authdata', 'greet_client')
+    def test_create_from_composite_token_with_attrs(self):
+        name1 = gssnames.Name(TARGET_SERVICE_NAME,
+                              gb.NameType.hostbased_service)
+
+        canon_name = name1.canonicalize(gb.MechType.kerberos)
+        canon_name.attributes['urn:greet:greeting'] = b'some val'
+
+        exported_name = canon_name.export(composite=True)
+
+        # TODO(directxman12): when you just import a token as composite,
+        # appears as this name whose text is all garbled, since it contains
+        # all of the attributes, etc, but doesn't properly have the attributes.
+        # Once it's canonicalized, the attributes reappear.  However, if you
+        # just import it as normal export, the attributes appear directly.
+        # It is thus unclear as to what is going on
+        # name2_raw = gssnames.Name(token=exported_name, composite=True)
+        # name2 = name2_raw.canonicalize(gb.MechType.kerberos)
+
+        name2 = gssnames.Name(token=exported_name)
+
+        name2.shouldnt_be_none()
+
+        name2.attributes['urn:greet:greeting'].values.should_be(
+            set([b'some val']))
+        name2.attributes['urn:greet:greeting'].complete.should_be_true()
+        name2.attributes['urn:greet:greeting'].authenticated.should_be_false()
+
     def test_to_str(self):
         name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
 
@@ -454,6 +494,66 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name2 = copy.copy(name1)
 
         name1.should_be(name2)
+
+    # NB(directxman12): we don't test display_name_ext because the krb5 mech
+    # doesn't actually implement it
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    def test_is_mech_name(self):
+        name = gssnames.Name(TARGET_SERVICE_NAME,
+                             gb.NameType.hostbased_service)
+
+        name.is_mech_name.should_be_false()
+
+        canon_name = name.canonicalize(gb.MechType.kerberos)
+
+        canon_name.is_mech_name.should_be_true()
+        canon_name.mech.should_be_a(gb.OID)
+        canon_name.mech.should_be(gb.MechType.kerberos)
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    def test_export_name_composite_no_attrs(self):
+        name = gssnames.Name(TARGET_SERVICE_NAME,
+                             gb.NameType.hostbased_service)
+        canon_name = name.canonicalize(gb.MechType.kerberos)
+        exported_name = canon_name.export(composite=True)
+
+        exported_name.should_be_a(bytes)
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    @_requires_krb_plugin('authdata', 'greet_client')
+    def test_export_name_composite_with_attrs(self):
+        name = gssnames.Name(TARGET_SERVICE_NAME,
+                             gb.NameType.hostbased_service)
+        canon_name = name.canonicalize(gb.MechType.kerberos)
+        canon_name.attributes['urn:greet:greeting'] = b'some val'
+        exported_name = canon_name.export(composite=True)
+
+        exported_name.should_be_a(bytes)
+
+    @_extension_test('rfc6680', 'RFC 6680')
+    @_requires_krb_plugin('authdata', 'greet_client')
+    def test_basic_get_set_del_name_attribute_no_auth(self):
+        name = gssnames.Name(TARGET_SERVICE_NAME,
+                             gb.NameType.hostbased_service)
+        canon_name = name.canonicalize(gb.MechType.kerberos)
+
+        canon_name.attributes['urn:greet:greeting'] = (b'some val', True)
+        canon_name.attributes['urn:greet:greeting'].values.should_be(
+            set([b'some val']))
+        canon_name.attributes['urn:greet:greeting'].complete.should_be_true()
+        (canon_name.attributes['urn:greet:greeting'].authenticated
+            .should_be_false())
+
+        del canon_name.attributes['urn:greet:greeting']
+
+        # NB(directxman12): for some reason, the greet:greeting handler plugin
+        # doesn't properly delete itself -- it just clears the value
+        # If we try to get its value now, we segfault (due to an issue with
+        # greet:greeting's delete).  Instead, just try setting the value again
+        # canon_name.attributes.should_be_empty(), which would normally give
+        # an error.
+        canon_name.attributes['urn:greet:greeting'] = b'some other val'
 
 
 class SecurityContextTestCase(_GSSAPIKerberosTestCase):
