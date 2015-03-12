@@ -297,7 +297,7 @@ def accept_sec_context(input_token not None, Creds acceptor_creds=None,
         output_context = SecurityContext()
 
     cdef gss_cred_id_t act_acceptor_cred
-    if acceptor_creds is None:
+    if acceptor_creds is not None:
         act_acceptor_cred = acceptor_creds.raw_creds
     else:
         act_acceptor_cred = GSS_C_NO_CREDENTIAL

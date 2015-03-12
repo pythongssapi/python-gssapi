@@ -8,7 +8,7 @@ import should_be.all  # noqa
 
 import gssapi.raw as gb
 import gssapi.raw.misc as gbmisc
-from gssapi.tests._utils import _extension_test
+from gssapi.tests._utils import _extension_test, _minversion_test
 from gssapi.tests import k5test as kt
 
 
@@ -306,6 +306,27 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         output_ttl.should_be_a(int)
         # no need to explicitly release any more -- we can just rely on
         # __dealloc__ (b/c cython)
+
+    @_extension_test('s4u', 'S4U')
+    @_minversion_test('1.11', 'returning delegated S4U2Proxy credentials')
+    def test_always_get_delegated_creds(self):
+        svc_princ = SERVICE_PRINCIPAL.decode("UTF-8")
+        self.realm.kinit(svc_princ, flags=['-k', '-f'])
+
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+
+        client_token = gb.init_sec_context(target_name).token
+
+        # if our acceptor creds have a usage of both, we get
+        # s4u2proxy delegated credentials
+        server_creds = gb.acquire_cred(None, usage='both').creds
+        server_ctx_resp = gb.accept_sec_context(client_token,
+                                                acceptor_creds=server_creds)
+
+        server_ctx_resp.shouldnt_be_none()
+        server_ctx_resp.delegated_creds.shouldnt_be_none()
+        server_ctx_resp.delegated_creds.should_be_a(gb.Creds)
 
     @_extension_test('rfc5588', 'RFC 5588')
     def test_store_cred_acquire_cred(self):
@@ -698,6 +719,33 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
 
         if self.server_ctx is not None:
             gb.delete_sec_context(self.server_ctx)
+
+    def test_basic_accept_context_no_acceptor_creds(self):
+        server_resp = gb.accept_sec_context(self.client_token)
+        server_resp.shouldnt_be_none()
+
+        (self.server_ctx, name, mech_type, out_token,
+         out_req_flags, out_ttl, delegated_cred, cont_needed) = server_resp
+
+        self.server_ctx.shouldnt_be_none()
+        self.server_ctx.should_be_a(gb.SecurityContext)
+
+        name.shouldnt_be_none()
+        name.should_be_a(gb.Name)
+
+        mech_type.should_be(gb.MechType.kerberos)
+
+        out_token.shouldnt_be_empty()
+
+        out_req_flags.should_be_a(collections.Set)
+        out_req_flags.should_be_at_least_length(2)
+
+        out_ttl.should_be_greater_than(0)
+
+        if delegated_cred is not None:
+            delegated_cred.should_be_a(gb.Creds)
+
+        cont_needed.should_be_a(bool)
 
     def test_basic_accept_context(self):
         server_resp = gb.accept_sec_context(self.client_token,
