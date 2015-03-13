@@ -221,7 +221,8 @@ def init_sec_context(Name target_name not None, Creds creds=None,
     output_token = None
     if output_token_buffer.length:
         output_token = output_token_buffer.value[:output_token_buffer.length]
-    gss_release_buffer(&min_stat, &output_token_buffer)
+    cdef OM_uint32 tmp_min_stat
+    gss_release_buffer(&tmp_min_stat, &output_token_buffer)
 
     if channel_bindings is not None:
         free(bdng)
@@ -229,12 +230,11 @@ def init_sec_context(Name target_name not None, Creds creds=None,
     cdef OID output_mech_type = OID()
     if maj_stat == GSS_S_COMPLETE or maj_stat == GSS_S_CONTINUE_NEEDED:
         output_mech_type.raw_oid = actual_mech_type[0]
-        res = InitSecContextResult(output_context, output_mech_type,
-                                   IntEnumFlagSet(RequirementFlag, ret_flags),
-                                   output_token,
-                                   c_c_ttl_to_py(output_ttl),
-                                   maj_stat == GSS_S_CONTINUE_NEEDED)
-        return res
+        return InitSecContextResult(output_context, output_mech_type,
+                                    IntEnumFlagSet(RequirementFlag, ret_flags),
+                                    output_token,
+                                    c_c_ttl_to_py(output_ttl),
+                                    maj_stat == GSS_S_CONTINUE_NEEDED)
     else:
         raise GSSError(maj_stat, min_stat, token=output_token)
 
@@ -324,7 +324,8 @@ def accept_sec_context(input_token not None, Creds acceptor_creds=None,
     output_token = None
     if output_token_buffer.length:
         output_token = output_token_buffer.value[:output_token_buffer.length]
-    gss_release_buffer(&min_stat, &output_token_buffer)
+    cdef OM_uint32 tmp_min_stat
+    gss_release_buffer(&tmp_min_stat, &output_token_buffer)
 
     if channel_bindings is not None:
         free(bdng)
@@ -350,13 +351,12 @@ def accept_sec_context(input_token not None, Creds acceptor_creds=None,
         else:
             py_mech_type = None
 
-        res = AcceptSecContextResult(output_context, on, py_mech_type,
-                                     output_token,
-                                     IntEnumFlagSet(RequirementFlag,
-                                                    ret_flags),
-                                     output_ttl_py, oc,
-                                     maj_stat == GSS_S_CONTINUE_NEEDED)
-        gss_release_buffer(&min_stat, &output_token_buffer)
+        return AcceptSecContextResult(output_context, on, py_mech_type,
+                                      output_token,
+                                      IntEnumFlagSet(RequirementFlag,
+                                                     ret_flags),
+                                      output_ttl_py, oc,
+                                      maj_stat == GSS_S_CONTINUE_NEEDED)
         return res
     else:
         raise GSSError(maj_stat, min_stat, token=output_token)
