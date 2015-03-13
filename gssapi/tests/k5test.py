@@ -37,6 +37,8 @@ import unittest
 
 import six
 
+from gssapi.tests import _utils
+
 
 def _cfg_merge(cfg1, cfg2):
     if not cfg2:
@@ -85,6 +87,8 @@ _default_kdc_conf = {
             'kdc_tcp_ports': '$port0',
             'database_name': '$tmpdir/db'}},
     'dbmodules': {
+        'db_module_dir': os.path.join(_utils._find_plugin_dir(),
+                                      'kdb'),
         'db': {'db_library': 'db2', 'database_name': '$tmpdir/db'}},
     'logging': {
         'admin_server': 'FILE:$tmpdir/kadmind5.log',
