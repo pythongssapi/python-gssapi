@@ -1,138 +1,135 @@
-raw Package
-===========
+Low-Level API
+=============
 
-:mod:`raw` Package
-------------------
+The low-level API contains a variety of functions that map directly to the
+corresponding C functions.  Additionally, it contains several basic wrapper
+classes that wrap underlying C structs and automatically deallocate them
+when the Python object itself is deallocated.
 
-.. automodule:: gssapi.raw
-    :members:
-    :undoc-members:
-    :show-inheritance:
+Core RFC 2744
+-------------
 
-:mod:`creds` Module
--------------------
-
-.. automodule:: gssapi.raw.creds
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`cython_converters` Module
--------------------------------
-
-.. automodule:: gssapi.raw.cython_converters
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`exceptions` Module
-------------------------
-
-.. automodule:: gssapi.raw.exceptions
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`ext_cred_store` Module
-----------------------------
-
-.. automodule:: gssapi.raw.ext_cred_store
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`ext_rfc5588` Module
--------------------------
-
-.. automodule:: gssapi.raw.ext_rfc5588
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`ext_s4u` Module
----------------------
-
-.. automodule:: gssapi.raw.ext_s4u
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`ext_password` Module
----------------------
-
-.. automodule:: gssapi.raw.ext_password
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`ext_password_add` Module
----------------------
-
-.. automodule:: gssapi.raw.ext_password_add
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`mech_krb5` Module
------------------------
-
-.. automodule:: gssapi.raw.mech_krb5
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`message` Module
----------------------
-
-.. automodule:: gssapi.raw.message
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`misc` Module
-------------------
-
-.. automodule:: gssapi.raw.misc
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`names` Module
--------------------
+Names
+~~~~~
 
 .. automodule:: gssapi.raw.names
     :members:
     :undoc-members:
-    :show-inheritance:
 
-:mod:`oids` Module
-------------------
+Credentials
+~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.creds
+    :members:
+    :undoc-members:
+
+Security Contexts
+~~~~~~~~~~~~~~~~~
+
+.. automodule::  gssapi.raw.sec_contexts
+    :members:
+    :undoc-members:
+
+.. automodule:: gssapi.raw.message
+    :members:
+    :undoc-members:
+
+Misc
+~~~~
 
 .. automodule:: gssapi.raw.oids
     :members:
     :undoc-members:
-    :show-inheritance:
 
-:mod:`sec_contexts` Module
---------------------------
-
-.. automodule:: gssapi.raw.sec_contexts
+.. automodule:: gssapi.raw.misc
     :members:
     :undoc-members:
-    :show-inheritance:
-
-:mod:`types` Module
--------------------
 
 .. automodule:: gssapi.raw.types
     :members:
     :undoc-members:
-    :show-inheritance:
 
-:mod:`named_tuples` Module
---------------------------
+.. automodule:: gssapi.raw.chan_bindings
+    :members:
+    :undoc-members:
 
-.. automodule:: gssapi.raw.named_tuples
+Extensions
+----------
+
+The following is a list of GSSAPI extensions supported by the low-level API.
+Ones supported by the high-level API are marked as such.  Note that while
+all of these extensions have bindings, they may not be supported by your
+particularly GSSAPI implementation, in which case they will simply not be
+compiled.
+
+:rfc:`5588` (GSS-API Extension for Storing Delegated Credentials)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_rfc5588
+    :members:
+    :undoc-members:
+
+Credential Store Extensions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_cred_store
+    :members:
+    :undoc-members:
+
+:rfc:`6680` (GSS-API Naming Extensions)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_rfc6680
+    :members:
+    :undoc-members:
+
+.. automodule:: gssapi.raw.ext_rfc6680_comp_oid
+    :members:
+    :undoc-members:
+
+Credentials Import-Export Extensions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_cred_imp_exp
+    :members:
+    :undoc-members:
+
+DCE (IOV/AEAD) Extensions
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_dce
+    :members:
+    :undoc-members:
+
+IOV MIC Extensions
+~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_iov_mic
+    :members:
+    :undoc-members:
+
+Services4User Extensions
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_s4u
+    :members:
+    :undoc-members:
+
+Acquiring Credentials With a Password Extensions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_password
+    :members:
+    :undoc-members:
+
+.. automodule:: gssapi.raw.ext_password_add
+    :members:
+    :undoc-members:
+
+Exceptions
+----------
+
+.. automodule:: gssapi.raw.exceptions
     :members:
     :undoc-members:
     :show-inheritance:
