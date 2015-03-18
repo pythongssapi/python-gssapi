@@ -131,6 +131,12 @@ In addition to RFC 2743/2744, Python-GSSAPI also has support for:
 
 * Credentials import-export
 
+* RFC 6680 (GSS-API Naming Extensions)
+
+* DCE and IOV MIC extensions
+
+* `acquire_cred_with_password` and `add_cred_with_password`
+
 The Team
 ========
 
