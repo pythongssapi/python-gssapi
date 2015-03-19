@@ -69,6 +69,11 @@ gssapi_ext_h = os.path.join(prefix, 'include/gssapi/gssapi_ext.h')
 if os.path.exists(gssapi_ext_h):
     compile_args.append("-DHAS_GSSAPI_EXT_H")
 
+# ensure that any specific directories are listed before any generic system
+# directories inserted by setuptools
+library_dirs = [arg[2:] for arg in link_args if arg.startswith('-L')]
+link_args = [arg for arg in link_args if not arg.startswith('-L')]
+
 ENABLE_SUPPORT_DETECTION = \
     (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
 
@@ -109,6 +114,7 @@ def main_file(module):
     return Extension('gssapi.raw.%s' % module,
                      extra_link_args=link_args,
                      extra_compile_args=compile_args,
+                     library_dirs=library_dirs,
                      sources=['gssapi/raw/%s.%s' % (module, SOURCE_EXT)])
 
 
@@ -127,11 +133,13 @@ def extension_file(module, canary):
                           extra_link_args=link_args,
                           extra_compile_args=compile_args,
                           sources=[enum_ext_path],
+                          library_dirs=library_dirs,
                           include_dirs=['gssapi/raw/']))
 
         return Extension('gssapi.raw.ext_%s' % module,
                          extra_link_args=link_args,
                          extra_compile_args=compile_args,
+                         library_dirs=library_dirs,
                          sources=['gssapi/raw/ext_%s.%s' % (module,
                                                             SOURCE_EXT)])
 
@@ -146,6 +154,7 @@ def gssapi_modules(lst):
         res.append(Extension('gssapi.raw.mech_%s' % mech,
                              extra_link_args=link_args,
                              extra_compile_args=compile_args,
+                             library_dirs=library_dirs,
                              sources=['gssapi/raw/mech_%s.%s' % (mech,
                                                                  SOURCE_EXT)]))
 
