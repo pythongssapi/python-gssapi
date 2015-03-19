@@ -2,7 +2,6 @@
 from __future__ import print_function
 
 from setuptools import setup
-from setuptools.command.build_ext import build_ext
 from setuptools.command.sdist import sdist
 from setuptools.extension import Extension
 import platform
@@ -64,6 +63,12 @@ if compile_args is None:
 link_args = link_args.split()
 compile_args = compile_args.split()
 
+# add in the extra workarounds for different include structures
+prefix = get_output('krb5-config gssapi --prefix')
+gssapi_ext_h = os.path.join(prefix, 'include/gssapi/gssapi_ext.h')
+if os.path.exists(gssapi_ext_h):
+    compile_args.append("-DHAS_GSSAPI_EXT_H")
+
 ENABLE_SUPPORT_DETECTION = \
     (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
 
@@ -84,17 +89,6 @@ if ENABLE_SUPPORT_DETECTION:
                         "ENABLE_SUPPORT_DETECTION to 'false'")
 
     GSSAPI_LIB = ctypes.CDLL(main_lib)
-
-
-class build_gssapi_ext(build_ext):
-    def run(self):
-        prefix = get_output('krb5-config gssapi --prefix')
-        gssapi_ext_h = os.path.join(prefix, 'include/gssapi/gssapi_ext.h')
-        if os.path.exists(gssapi_ext_h):
-            for ext in self.extensions:
-                ext.extra_compile_args.append("-DHAS_GSSAPI_EXT_H")
-
-        build_ext.run(self)
 
 
 # add in the flag that causes us not to compile from Cython when
@@ -192,7 +186,7 @@ setup(
         'Topic :: Security',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    cmdclass={'build_ext': build_gssapi_ext, 'sdist': sdist_gssapi},
+    cmdclass={'sdist': sdist_gssapi},
     ext_modules=gssapi_modules([
         main_file('misc'),
         main_file('exceptions'),
