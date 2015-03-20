@@ -122,15 +122,8 @@ def _find_plugin_dirs_src(search_path):
         return None
 
 
-_KRB_PREFIX = None
-
-
 def _requires_krb_plugin(plugin_type, plugin_name):
-    global _KRB_PREFIX
-    if _KRB_PREFIX is None:
-        _KRB_PREFIX = get_output("krb5-config --prefix")
-
-    plugin_path = os.path.join(_KRB_PREFIX, 'lib/krb5/plugins',
+    plugin_path = os.path.join(_find_plugin_dir(),
                                plugin_type, '%s.so' % plugin_name)
 
     def make_krb_plugin_test(func):
