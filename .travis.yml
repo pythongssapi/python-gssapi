@@ -7,7 +7,7 @@ env:
   - KRB5_VER="1.10"
   - KRB5_VER="1.12"
   - KRB5_VER="1.13"
-  - KRB5_VER="master"
+  # - KRB5_VER="master"
 
 matrix:
   exclude:
