@@ -1,10 +1,17 @@
 Low-Level API
 =============
 
-The low-level API contains a variety of functions that map directly to the
-corresponding C functions.  Additionally, it contains several basic wrapper
-classes that wrap underlying C structs and automatically deallocate them
-when the Python object itself is deallocated.
+.. py:module:: gssapi.raw
+
+The low-level API contains a variety of Python functions that map directly
+to the corresponding C functions.  Additionally, it contains several basic
+wrapper classes that wrap underlying C structs and automatically deallocate
+them when the Python object itself is deallocated.
+
+.. warning::
+
+    All methods in both the high-level and low-level APIs may throw the generic
+    GSSError exception.
 
 Core RFC 2744
 -------------
@@ -53,14 +60,16 @@ Misc
     :members:
     :undoc-members:
 
-Extensions
-----------
+Additional RFCs and Extensions
+------------------------------
 
 The following is a list of GSSAPI extensions supported by the low-level API.
-Ones supported by the high-level API are marked as such.  Note that while
-all of these extensions have bindings, they may not be supported by your
-particularly GSSAPI implementation, in which case they will simply not be
-compiled.
+
+.. note::
+    While all of these extensions have bindings, they may not be supported
+    by your particularly GSSAPI implementation.  In this case, they will not
+    be compiled, and will simply not be available in the :mod:`gssapi.raw`
+    namespace.
 
 :rfc:`5588` (GSS-API Extension for Storing Delegated Credentials)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

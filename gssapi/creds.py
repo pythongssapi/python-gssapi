@@ -21,36 +21,33 @@ class Credentials(rcreds.Creds):
 
     If your implementation of GSSAPI supports the credentials import-export
     extension, you may pickle and unpickle this object.
+
+    The constructor either acquires or imports a set of GSSAPI
+    credentials.
+
+    If the `base` argument is used, an existing
+    :class:`~gssapi.raw.creds.Cred` object from the low-level API is
+    converted into a high-level object.
+
+    If the `token` argument is used, the credentials
+    are imported using the token, if the credentials import-export
+    extension is supported (:requires-ext:`cred_imp_exp`).
+
+    Otherwise, the credentials are acquired as per the
+    :meth:`acquire` method.
+
+    Raises:
+        BadMechanismError
+        BadNameTypeError
+        BadNameError
+        ExpiredCredentialsError
+        MissingCredentialsError
     """
 
     __slots__ = ()
 
     def __new__(cls, base=None, token=None, name=None, lifetime=None,
                 mechs=None, usage='both', store=None):
-        """Acquire or import a set of credentials.
-
-        The constructor either acquires or imports a set of GSSAPI
-        credentials.
-
-        If the `base` argument is used, an existing
-        :class:`~gssapi.raw.creds.Cred` object from the low-level API is
-        converted into a high-level object.
-
-        If the :python:`token` argument is used, the credentials
-        are imported using the token, if the credentials import-export
-        extension is supported.
-
-        Otherwise, the credentials are acquired as per the
-        :meth:`acquire` method.
-
-        Raises:
-            BadMechanismError
-            BadNameTypeError
-            BadNameError
-            ExpiredCredentialsError
-            MissingCredentialsError
-        """
-
         # TODO(directxman12): this is missing support for password
         #                     (non-RFC method)
         if base is not None:
@@ -71,25 +68,25 @@ class Credentials(rcreds.Creds):
 
     @property
     def name(self):
-        """Get the name associated with the credentials"""
+        """Get the name associated with these credentials"""
         return self.inquire(name=True, lifetime=False,
                             usage=False, mechs=False).name
 
     @property
     def lifetime(self):
-        """Get the remaining lifetime of the credentials"""
+        """Get the remaining lifetime of these credentials"""
         return self.inquire(name=False, lifetime=True,
                             usage=False, mechs=False).lifetime
 
     @property
     def mechs(self):
-        """Get the mechanisms for the current credentials"""
+        """Get the mechanisms for these credentials"""
         return self.inquire(name=False, lifetime=False,
                             usage=False, mechs=True).mechs
 
     @property
     def usage(self):
-        """Get the usage (initiate, accept, or both) of the credentials"""
+        """Get the usage (initiate, accept, or both) of these credentials"""
         return self.inquire(name=False, lifetime=False,
                             usage=True, mechs=False).usage
 
@@ -115,13 +112,13 @@ class Credentials(rcreds.Creds):
                 or None for the default name
             lifetime (int): the desired lifetime of the credentials, or None
                 for indefinite
-            mechs (list): the desired mechanisms to be used with these
+            mechs (list): the desired :class:`MechType`s to be used with the
                 credentials, or None for the default set
-            usage (str): the usage for these credentials -- either 'both',
+            usage (str): the usage for the credentials -- either 'both',
                 'initiate', or 'accept'
             store (dict): the credential store information pointing to the
                 credential store from which to acquire the credentials,
-                or None for the default store
+                or None for the default store (:requires-ext:`cred_store`)
 
         Returns:
             AcquireCredResult: the acquired credentials and information about
@@ -155,19 +152,22 @@ class Credentials(rcreds.Creds):
 
     def store(self, store=None, usage='both', mech=None,
               overwrite=False, set_default=False):
-        """Store credentials to the given store
+        """Store these credentials into the given store
 
         This method stores the current credentials into the specified
         credentials store.  If the default store is used, support for
-        RFC 5588 is required.  Otherwise, support for the credentials
+        :rfc:`5588` is required.  Otherwise, support for the credentials
         store extension is required.
+
+        :requires-ext:`rfc5588` or :requires-ext:`cred_store`
 
         Args:
             store (dict): the store into which to store the credentials,
                 or None for the default store.
             usage (str): the usage to store the credentials with -- either
                 'both', 'initiate', or 'accept'
-            mech (OID): the mechansim to associate with the stored credentials
+            mech (OID): the :class:`MechType` to associate with the
+                stored credentials
             overwrite (bool): whether or not to overwrite existing credentials
                 stored with the same name, etc
             set_default (bool): whether or not to set these credentials as
@@ -207,14 +207,15 @@ class Credentials(rcreds.Creds):
         """Impersonate a name using the current credentials
 
         This method acquires credentials by impersonating another
-        name using the current credentials.  This requires the
-        Services4User extension.
+        name using the current credentials.
+
+        :requires-ext:`s4u`
 
         Args:
             name (Name): the name to impersonate
             lifetime (int): the desired lifetime of the new credentials,
                 or None for indefinite
-            mechs (list): the desired mechanisms for the new
+            mechs (list): the desired :class:`MechType`s for the new
                 credentials
             usage (str): the desired usage for the new credentials -- either
                 'both', 'initiate', or 'accept'.  Note that some mechanisms
@@ -235,9 +236,9 @@ class Credentials(rcreds.Creds):
         return type(self)(base=res.creds)
 
     def inquire(self, name=True, lifetime=True, usage=True, mechs=True):
-        """Inspect the credentials for information
+        """Inspect these credentials for information
 
-        This method inspects the credentials for information about them.
+        This method inspects these credentials for information about them.
 
         Args:
             name (bool): get the name associated with the credentials
@@ -267,10 +268,10 @@ class Credentials(rcreds.Creds):
 
     def inquire_by_mech(self, mech, name=True, init_lifetime=True,
                         accept_lifetime=True, usage=True):
-        """Inspect the credentials for per-mechanism information
+        """Inspect these credentials for per-mechanism information
 
-        This method inspects the credentials for per-mechanism information
-        about them
+        This method inspects these credentials for per-mechanism information
+        about them.
 
         Args:
             mech (OID): the mechanism for which to retrive the information
@@ -311,12 +312,12 @@ class Credentials(rcreds.Creds):
         mechanism.
 
         If the `impersonator` argument is used, the credentials will
-        impersonate the given name using the impersonator credentials.
-        This requires the Services4User extension.
+        impersonate the given name using the impersonator credentials
+        (:requires-ext:`s4u`).
 
         If the `store` argument is used, the credentials will be acquired
-        from the given credential store (if supported).  Otherwise, the
-        credentials are acquired from the default store.
+        from the given credential store (:requires-ext:`cred_store`).
+        Otherwise, the credentials are acquired from the default store.
 
         The credential store information is a dictionary containing
         mechanisms-specific keys and values pointing to a credential store
@@ -328,9 +329,9 @@ class Credentials(rcreds.Creds):
         Args:
             name (Name): the name associated with the
                 credentials
-            mech (OID): the desired mechanism to be used with these
+            mech (OID): the desired :class:`MechType` to be used with the
                 credentials
-            usage (str): the usage for these credentials -- either 'both',
+            usage (str): the usage for the credentials -- either 'both',
                 'initiate', or 'accept'
             init_lifetime (int): the desired initiate lifetime of the
                 credentials, or None for indefinite
@@ -338,9 +339,10 @@ class Credentials(rcreds.Creds):
                 credentials, or None for indefinite
             impersonator (Credentials): the credentials to use to impersonate
                 the given name, or None to not acquire normally
+                (:requires-ext:`s4u`)
             store (dict): the credential store information pointing to the
                 credential store from which to acquire the credentials,
-                or None for the default store
+                or None for the default store (:requires-ext:`cred_store`)
 
         Returns:
             Credentials: the credentials set containing the current credentials
@@ -384,12 +386,14 @@ class Credentials(rcreds.Creds):
         return Credentials(res.creds)
 
     def export(self):
-        """Export the credentials to a token
+        """Export these credentials into a token
 
         This method exports the current credentials to a token that can
         then be imported by passing the `token` argument to the constructor.
 
         This is often used to pass credentials between processes.
+
+        :requires-ext:`cred_imp_exp`
 
         Returns:
             bytes: the exported credentials in token form

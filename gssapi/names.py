@@ -12,7 +12,7 @@ rname_rfc6680_comp_oid = _utils.import_gssapi_extension('rfc6680_comp_oid')
 
 
 class Name(rname.Name):
-    """GSSAPI Name
+    """A GSSAPI Name
 
     This class represents a GSSAPI name which may be used with
     used with and/or returned by other GSSAPI methods.
@@ -24,6 +24,14 @@ class Name(rname.Name):
 
     The :func:`str` and :func:`bytes` methods may be used to retrieve the
     text of the name.
+
+    Note:
+        Name strings will be automatically converted to and from unicode
+        strings as appropriate.  If a method is listed as returning a
+        :class:`str` object, it will return a unicode string.
+
+        The encoding used will be python-gssapi's current encoding, which
+        defaults to UTF-8.
     """
 
     __slots__ = ('_attr_obj')
@@ -65,11 +73,13 @@ class Name(rname.Name):
         return super(Name, cls).__new__(cls, base_name)
 
     def __init__(self, base=None, name_type=None, token=None, composite=False):
-        """Create or import a GSSAPI name
+        """
+        The constructor can be used to "import" a name from a human readable
+        representation, or from a token, and can also be used to convert a
+        low-level :class:`gssapi.raw.names.Name` object into a high-level
+        object.
 
-        The constructor either creates or imports a GSSAPI name.
-
-        If a :python:`~gssapi.raw.names.Name` object from the low-level API
+        If a :class:`~gssapi.raw.names.Name` object from the low-level API
         is passed as the `base` argument, it will be converted into a
         high-level object.
 
@@ -78,7 +88,8 @@ class Name(rname.Name):
         pass `composite=True`.
 
         Otherwise, a new name will be created, using the `base` argument as
-        the string and the `name_type` argument to denote the name type.
+        the human-readable string and the `name_type` argument to denote the
+        name type.
 
         Raises:
             BadNameTypeError
@@ -109,13 +120,16 @@ class Name(rname.Name):
 
     def display_as(self, name_type):
         """
-        Display the current name as the given name type.
+        Display this name as the given name type.
 
-        This method attempts to display the current Name using
-        the syntax of the given NameType, if possible.
+        This method attempts to display the current :class:`Name`
+        using the syntax of the given :class:`NameType`, if possible.
+
+        :requires-ext:`rfc6680`
 
         Args:
-            name_type (OID): the NameType to use to display the given name
+            name_type (OID): the :class:`NameType` to use to display the given
+                name
 
         Returns:
             str: the displayed name
@@ -133,7 +147,7 @@ class Name(rname.Name):
 
     @property
     def name_type(self):
-        """Get the name type of this name"""
+        """The :class:`NameType` of this name"""
         return rname.display_name(self, name_type=True).name_type
 
     def __eq__(self, other):
@@ -153,10 +167,14 @@ class Name(rname.Name):
                                                   name_type=disp_res.name_type)
 
     def export(self, composite=False):
-        """Export the name
+        """Export this name as a token.
 
         This method exports the name into a byte string which can then be
         imported by using the `token` argument of the constructor.
+
+        Args:
+            composite (bool): whether or not use to a composite token --
+                :requires-ext:`rfc6680`
 
         Returns:
             bytes: the exported name in token form
@@ -178,13 +196,13 @@ class Name(rname.Name):
             return rname.export_name(self)
 
     def canonicalize(self, mech):
-        """Canonicalize a name with respect to a mechanism
+        """Canonicalize a name with respect to a mechanism.
 
-        This method returns a new Name that is canonicalized according to
-        the given mechanism.
+        This method returns a new :class:`Name` that is canonicalized according
+        to the given mechanism.
 
         Args:
-            mech (OID): the mechanism type to use
+            mech (OID): the :class:`MechType` to use
 
         Returns:
             Name: the canonicalized name
@@ -204,7 +222,7 @@ class Name(rname.Name):
         return type(self)(rname.duplicate_name(self))
 
     def _inquire(self, **kwargs):
-        """Inspect the name for information
+        """Inspect this name for information.
 
         This method inspects the name for information.
 
@@ -243,14 +261,35 @@ class Name(rname.Name):
 
     @property
     def is_mech_name(self):
+        """Whether or not this name is a mechanism name
+        (:requires-ext:`rfc6680`)
+        """
         return self._inquire(mech_name=True).is_mech_name
 
     @property
     def mech(self):
+        """The mechanism associated with this name (:requires-ext:`rfc6680`)
+        """
         return self._inquire(mech_name=True).mech
 
     @property
     def attributes(self):
+        """The attributes of this name (:requires-ext:`rfc6680`)
+
+        The attributes are presenting in the form of a
+        :class:`~collections.MutableMapping` (a dict-like object).
+
+        Retrieved values will always be in the form of :class:`frozensets`.
+
+        When assigning values, if iterables are used, they be considered to be
+        the set of values for the given attribute.  If a non-iterable is used,
+        it will be considered a single value, and automatically wrapped in an
+        iterable.
+
+        Note:
+            String types (includes :class:`bytes`) are not considered to
+            be iterables in this case.
+        """
         if self._attr_obj is None:
             raise NotImplementedError("Your GSSAPI implementation does not "
                                       "support RFC 6680 (the GSSAPI naming "
