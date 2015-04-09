@@ -8,7 +8,7 @@ from gssapi.raw.oids cimport OID
 from gssapi.raw.misc import GSSError
 from gssapi.raw.named_tuples import InquireNameResult, GetNameAttributeResult
 
-cdef extern from "gssapi/gssapi_ext.h":
+cdef extern from "python_gssapi_ext.h":
     OM_uint32 gss_display_name_ext(OM_uint32 *min_stat, gss_name_t name,
                                    gss_OID name_type,
                                    gss_buffer_t output_name) nogil
