@@ -16,10 +16,12 @@ matrix:
   include:
     - python: "3.3"
       env: KRB5_VER="1.12"
+    - python: "2.7"
+      env: KRB5_VER="heimdal"
 
-install: sh .travis.install.sh
+install: sh -ex .travis.install.sh
 
-script: sh .travis.sh
+script: sh -x .travis.sh
 
 before_deploy: sh .travis.before-deploy.sh
 deploy:

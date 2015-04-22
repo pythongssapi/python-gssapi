@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/bin/sh -x
+
+if [ x"$KRB5_VER" = "xheimdal" ]; then
+    python setup.py build_ext --inplace
+    exit $?
+fi
 
 flake8 setup.py
 F8_SETUP=$?
