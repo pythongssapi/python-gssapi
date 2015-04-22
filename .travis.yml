@@ -23,16 +23,29 @@ install: sh -ex .travis.install.sh
 
 script: sh -x .travis.sh
 
-before_deploy: sh .travis.before-deploy.sh
+before_deploy: sh -x .travis.before-deploy.sh
 deploy:
-  provider: releases
-  api_key:
-    secure: U8RPR6liglI4J8MOSEyK9uxvSFRMcCkKLflpIFKcpUFg+PUuK85YtRdOOL/L/pifat9/KvoF7OJEMNTQjoYAhziMu8GGsiPZlkFzXNiy54FxTTtgprkhllRK7nw/jK/hopKM01goKVaUL860aU+KdpfStRTaAy8ZGEj13jwOMYU=
-  file:
-    - tag_build/${TRAVIS_TAG}.md5sum
-    - tag_build/${TRAVIS_TAG}.tar.gz
-  on:
-    repo: pythongssapi/python-gssapi
-    tags: true
-    python: "3.4"
-    condition: "$KRB5_VER = '1.13'"
+  - provider: releases
+    api_key:
+      secure: U8RPR6liglI4J8MOSEyK9uxvSFRMcCkKLflpIFKcpUFg+PUuK85YtRdOOL/L/pifat9/KvoF7OJEMNTQjoYAhziMu8GGsiPZlkFzXNiy54FxTTtgprkhllRK7nw/jK/hopKM01goKVaUL860aU+KdpfStRTaAy8ZGEj13jwOMYU=
+    file_glob: true
+    file:
+      - tag_build/*
+    on:
+      repo: pythongssapi/python-gssapi
+      tags: true
+      python: "3.4"
+      condition: "$KRB5_VER = '1.13'"
+    skip_cleanup: true
+  - provider: pypi
+    user:
+      secure: gMwGf6Zt2BuPHN6Qy4feaJaZQBIYZ1lZIdFcpugyhnWtxytzwApx2LTXqHgdaVK7Ik6Xk97RmWS5SyciKmC2V1nyaHCX/f31QZAD3TrLqhScPtvE6j9j/srJhDBjp5yAT8NENMykeSvoIhiidw1tPzWYRW9c93roaOUv6Kqd3zc=
+    password:
+      secure: D0lX+DRVac2GN3bZuKxd45DluBrcvwMfV+cciannEJ39kjbHTQEdpi0Uv92rDLNicjqyjy9rAEP7UAQQ1GDOvZcN5OG1+uWU1tSV84uKPgT92YbbQQdHRs/Rh3KSHKeaiJ+3TTDSeBuXYgWRs2gCeVAb18LBYjtIHLZxCFB8ln0=
+    on:
+      repo: pythongssapi/python-gssapi
+      tags: true
+      python: "3.4"
+      condition: "$KRB5_VER = '1.13'"
+    skip_cleanup: true
+    docs_dir: travis_docs_build/html
