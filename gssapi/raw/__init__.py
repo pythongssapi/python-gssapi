@@ -1,3 +1,39 @@
+"""Low-Level GSSAPI Bindings
+
+The low-level API presents a series of methods designed
+to closely mimic the C API presented in RFC 2744 and
+associated RFCs.
+
+In this API, classes are simply thin wrappers around C
+constructs, and generally lack instance methods.  However,
+classes will automatically free associated memory (so the
+release_xyz methods are not necessary to call).
+
+The core RFC 2744 components are organized into the following
+submodules:
+
+    gssapi.raw.names -- Names
+
+    gssapi.raw.creds -- Credentials
+
+    gssapi.raw.sec_contexts -- Security Contexts
+
+    gssapi.raw.message -- Message encryption, decryption, etc
+
+    gssapi.raw.misc -- Miscellaneous functions
+
+    gssapi.raw.types -- Miscellaneous types (enums, etc)
+
+    gssapi.raw.exceptions -- Exceptions
+
+Additionally, a number of extensions may be present.  All extensions
+are in modules of the form `gssapi.raw.ext_xyz`.
+
+All available functions and classes can be accessed directly from this
+module (`gssapi.raw`) -- it is unneccessary to directly import submodules.
+"""
+
+
 import pkgutil
 import importlib
 
