@@ -76,7 +76,7 @@ cdef extern from "python_gssapi.h":
 
 cdef class SecurityContext:
     """
-    A GSSAPI Context
+    A GSSAPI Security Context
     """
     # defined in pxd
     # cdef gss_ctx_id_t raw_ctx
@@ -116,7 +116,9 @@ def init_sec_context(Name target_name not None, Creds creds=None,
                      ChannelBindings channel_bindings=None,
                      input_token=None):
     """
-    Initiate a GSSAPI Security Context.
+    init_sec_context(target_name, creds=None, context=None, mech=None, \
+flags=None, lifetime=None, channel_bindings=None, input_token=None)
+    Initiate a GSSAPI security context.
 
     This method initiates a GSSAPI security context, targeting the given
     target name.  To create a basic context, just provide the target name.
@@ -134,9 +136,10 @@ def init_sec_context(Name target_name not None, Creds creds=None,
             None to create a new context
         mech (MechType): the mechanism type for this security context,
             or None for the default mechanism type
-        flags ([RequirementFlag]): the flags to request for the security
-            context, or None to use the default set: mutual_authentication and
-            out_of_sequence_detection
+        flags (list): the flags to request for the security context, or
+            None to use the default set: mutual_authentication and
+            out_of_sequence_detection.  This may also be an
+            :class:`IntEnumFlagSet`
         lifetime (int): the request lifetime of the security context (a value
             of 0 or None means indefinite)
         channel_bindings (ChannelBindings): The channel bindings (or None for
@@ -243,6 +246,8 @@ def accept_sec_context(input_token not None, Creds acceptor_creds=None,
                        SecurityContext context=None,
                        ChannelBindings channel_bindings=None):
     """
+    accept_sec_context(input_token, acceptor_creds=None, context=None, \
+channel_bindings=None)
     Accept a GSSAPI security context.
 
     This method accepts a GSSAPI security context using a token sent by the
@@ -366,13 +371,16 @@ def inquire_context(SecurityContext context not None, initiator_name=True,
                     target_name=True, lifetime=True, mech=True,
                     flags=True, locally_init=True, complete=True):
     """
+    inquire_context(context, initiator_name=True, target_name=True, \
+lifetime=True, mech=True, flags=True, locally_init=True, complete=True)
     Get information about a security context.
 
     This method obtains information about a security context, including
     the initiator and target names, as well as the TTL, mech,
     flags, and its current state (open vs closed).
 
-    Note: the target name may be None if it would have been GSS_C_NO_NAME
+    Note:
+        the target name may be ``None`` if it would have been ``GSS_C_NO_NAME``
 
     Args:
         context (SecurityContext): the context in question
@@ -479,6 +487,7 @@ def inquire_context(SecurityContext context not None, initiator_name=True,
 
 def context_time(SecurityContext context not None):
     """
+    context_time(context)
     Get the amount of time for which the given context will remain valid.
 
     This method determines the amount of time for which the given
@@ -510,7 +519,8 @@ def context_time(SecurityContext context not None):
 
 def process_context_token(SecurityContext context not None, token):
     """
-    Process a token asynchronously
+    process_context_token(context, token)
+    Process a token asynchronously.
 
     This method provides a way to process a token, even if the
     given security context is not expecting one.  For example,
@@ -518,6 +528,9 @@ def process_context_token(SecurityContext context not None, token):
     is complete, but the acceptor is unable to accept the context,
     and wishes to send a token to the initiator, letting the
     initiator know of the error.
+
+    Warning:
+        This method has been essentially deprecated by :rfc:`2744`.
 
     Args:
         context (SecurityContext): the security context against which
@@ -543,10 +556,12 @@ def process_context_token(SecurityContext context not None, token):
 
 def import_sec_context(token not None):
     """
-    Import a context from another process
+    import_sec_context(token)
+    Import a context from another process.
 
     This method imports a security context established in another process
-    by reading the specified token which was output by exportSecContext.
+    by reading the specified token which was output by
+    :func:`export_sec_context`.
 
     Raises:
         MissingContextError
@@ -574,11 +589,12 @@ def import_sec_context(token not None):
 
 def export_sec_context(SecurityContext context not None):
     """
-    Export a context for use in another process
+    export_sec_context(context)
+    Export a context for use in another process.
 
     This method exports a security context, deactivating in the current process
     and creating a token which can then be imported into another process
-    with importSecContext.
+    with :func:`import_sec_context`.
 
     Warning: this modifies the input context
 
@@ -612,12 +628,17 @@ def export_sec_context(SecurityContext context not None):
 
 def delete_sec_context(SecurityContext context not None, local_only=True):
     """
-    Delete a GSSAPI Security Context.
+    delete_sec_context(context, local_only=True)
+    Delete a GSSAPI security context.
 
     This method deletes a GSSAPI security context,
     returning an output token to send to the other
     holder of the security context to notify them
     of the deletion.
+
+    Note:
+        This method generally should not be used.  :class:`SecurityContext`
+        objects will automatically be freed by Python.
 
     Args:
         context (SecurityContext): the security context in question

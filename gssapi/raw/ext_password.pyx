@@ -30,10 +30,14 @@ cdef extern from "python_gssapi_ext.h":
 def acquire_cred_with_password(Name name not None, password not None,
                                lifetime=None, mechs=None, usage="initiate"):
     """
+    acquire_cred_with_password(name, password, lifetime=None, mechs=None, \
+usage="initiate")
     Acquire credentials through provided password.
 
     This function is originally from Solaris and is not documented by either
     MIT or Heimdal.
+
+    In general, it functions similarly to :func:`acquire_cred`.
 
     Args:
         name (Name): the name to acquire credentials for

@@ -32,6 +32,7 @@ cdef extern from "python_gssapi.h":
 
 def indicate_mechs():
     """
+    indicate_mechs()
     Get the currently supported mechanisms.
 
     This method retrieves the currently supported GSSAPI mechanisms.
@@ -51,7 +52,9 @@ def indicate_mechs():
 
 
 def inquire_names_for_mech(OID mech not None):
-    """Get the name types supported by a mechanism.
+    """
+    inquire_names_for_mech(mech)
+    Get the name types supported by a mechanism.
 
     This method retrives the different name types supported by
     the given mechanism.
@@ -80,7 +83,9 @@ def inquire_names_for_mech(OID mech not None):
 
 
 def inquire_mechs_for_name(Name name not None):
-    """List the mechanisms which can process a name.
+    """
+    inquire_mechs_for_name(name)
+    List the mechanisms which can process a name.
 
     This method lists the mechanisms which may be able to
     process the given name.
@@ -216,7 +221,7 @@ class GSSErrorRegistry(type):
 #                   so that display_status can use it
 class GSSError(Exception, metaclass=GSSErrorRegistry):
     """
-    GSSAPI Error
+    A GSSAPI Error
 
     This Exception represents an error returned from the GSSAPI
     C bindings.  It contains the major and minor status codes

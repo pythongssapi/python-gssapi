@@ -34,15 +34,19 @@ IOV.AUTO_ALLOC_BUFFERS.add(IOVBufferType.mic_token)
 def get_mic_iov(SecurityContext context not None, IOV message not None,
                 qop=None):
     """
-    Generate MIC tokens for the given IOV message
+    get_mic_iov(context, message, qop=None)
+    Generate MIC tokens for the given IOV message.
 
     This method generates a MIC token for the given IOV message, and places it
     in the :attr:`IOVBufferType.mic_token` buffer in the IOV.  This method
     operates entirely in-place, and returns nothing.
 
+    Warning:
+        This modifies the input :class:`IOV`.
+
     Args:
         context (SecurityContext): the current security context
-        message (list): a list of :class:`IOVBuffer` objects
+        message (IOV): the :class:`IOV` containing the message
         qop (int): the desired Quality of Protection
             (or None for the default QoP)
 
@@ -70,14 +74,18 @@ def get_mic_iov(SecurityContext context not None, IOV message not None,
 def get_mic_iov_length(SecurityContext context not None, IOV message not None,
                        qop=None):
     """
-    Allocate space for the MIC buffer in the given IOV message
+    get_mic_iov_length(context, message, qop=None)
+    Allocate space for the MIC buffer in the given IOV message.
 
     This method allocates space for the MIC token buffer
     (:attr:`IOVBufferType.mic_token`) in the given IOV message.
 
+    Warning:
+        This modifies the input :class:`IOV`.
+
     Args:
         context (SecurityContext): the current security context
-        message (list): a list of :class:`IOVBuffer` objects
+        message (IOV): the :class:`IOV` containing the message
         qop (int): the desired Quality of Protection
             (or None for the default QoP)
 
@@ -105,7 +113,8 @@ def get_mic_iov_length(SecurityContext context not None, IOV message not None,
 def verify_mic_iov(SecurityContext context not None, IOV message not None,
                    qop=None):
     """
-    Verify that the MIC matches the data in the given IOV message
+    verify_mic_iov(context, message, qop=None)
+    Verify that the MIC matches the data in the given IOV message.
 
     This method verifies that the MIC token in the MIC buffer
     (:attr:`IOVBufferType.mic_token`) match the data buffer(s)
@@ -113,7 +122,7 @@ def verify_mic_iov(SecurityContext context not None, IOV message not None,
 
     Args:
         context (SecurityContext): the current security context
-        message (list): a list of :class:`IOVBuffer` objects
+        message (IOV): the :class:`IOV` containing the message
 
     Returns:
         int: the QoP used to generate the MIC token

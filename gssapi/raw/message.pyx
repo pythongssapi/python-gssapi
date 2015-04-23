@@ -45,6 +45,7 @@ cdef extern from "python_gssapi.h":
 
 def get_mic(SecurityContext context not None, message, qop=None):
     """
+    get_mic(context, message, qop=None)
     Generate a MIC for a message.
 
     This method generates a Message Integrity Check token for the
@@ -90,6 +91,7 @@ def get_mic(SecurityContext context not None, message, qop=None):
 
 def verify_mic(SecurityContext context not None, message, token):
     """
+    verify_mic(context, message, token)
     Verify that a MIC matches a message.
 
     This method verifies that the given MIC matches the given message.
@@ -136,6 +138,7 @@ def verify_mic(SecurityContext context not None, message, token):
 def wrap_size_limit(SecurityContext context not None, OM_uint32 output_size,
                     confidential=True, qop=None):
     """
+    wrap_size_limit(context, output_size, confidential=True, qop=None)
     Calculate the max message size.
 
     This method calculates the unwrapped/unencrypted message size for
@@ -177,6 +180,7 @@ def wrap_size_limit(SecurityContext context not None, OM_uint32 output_size,
 def wrap(SecurityContext context not None, message, confidential=True,
          qop=None):
     """
+    wrap(context, message, confidential=True, qop=None)
     Wrap/Encrypt a message.
 
     This method wraps or encrypts a message (depending on the value
@@ -225,6 +229,7 @@ def wrap(SecurityContext context not None, message, confidential=True,
 
 def unwrap(SecurityContext context not None, message):
     """
+    unwrap(context, message)
     Unwrap/Decrypt a message.
 
     This method unwraps or decrypts a message, depending

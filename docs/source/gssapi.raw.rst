@@ -19,6 +19,12 @@ Core RFC 2744
 Names
 ~~~~~
 
+.. note::
+    Some functions in the following section will refer to
+    "mechanism names".  These are not names of mechanisms.
+    Instead, they are a special form of name specific to
+    a given mechanism.
+
 .. automodule:: gssapi.raw.names
     :members:
     :undoc-members:

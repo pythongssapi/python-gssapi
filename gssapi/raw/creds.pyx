@@ -82,6 +82,7 @@ cdef class Creds:
 
 def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
     """
+    acquire_cred(name=None, lifetime=None, mechs=None, usage='both')
     Get GSSAPI credentials for the given name and mechanisms.
 
     This method gets GSSAPI credentials corresponding to the given name
@@ -159,9 +160,14 @@ def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
 
 def release_cred(Creds creds not None):
     """
+    release_cred(creds)
     Release GSSAPI Credentials.
 
     This method releases GSSAPI credentials.
+
+    Warning:
+        This method is deprecated.  Credentials are
+        automatically freed by Python.
 
     Args:
         creds (Creds): the credentials in question
@@ -180,7 +186,10 @@ def release_cred(Creds creds not None):
 def add_cred(Creds input_cred, Name name not None, OID mech not None,
              usage='initiate', init_lifetime=None,
              accept_lifetime=None, mutate_input=False):
-    """Add a credential element to a credential.
+    """
+    add_cred(input_cred, name, mech, usage='initiate', init_lifetime=None, \
+accept_lifetime=None, mutate_input=False)
+    Add a credential element to a credential.
 
     This method can be used to either compose two credentials (i.e., original
     and new credential), or to add a new element to an existing credential.
@@ -264,7 +273,9 @@ def add_cred(Creds input_cred, Name name not None, OID mech not None,
 
 def inquire_cred(Creds creds not None, name=True, lifetime=True, usage=True,
                  mechs=True):
-    """Inspect credentials for information
+    """
+    inquire_cred(creds, name=True, lifetime=True, usage=True, mechs=True)
+    Inspect credentials for information.
 
     This method inspects a :class:`Creds` object for information.
 
@@ -343,10 +354,14 @@ def inquire_cred(Creds creds not None, name=True, lifetime=True, usage=True,
 def inquire_cred_by_mech(Creds creds not None, OID mech not None,
                          name=True, init_lifetime=True,
                          accept_lifetime=True, usage=True):
-    """Inspect credentials for mechanism-specific
+    """
+    inquire_cred_by_mech(creds, mech, name=True, init_lifetime=True, \
+accept_lifetime=True, usage=True)
+    Inspect credentials for mechanism-specific information.
 
     This method inspects a :class:`Creds` object for information
-    specific to a particular mechanism.
+    specific to a particular mechanism.  It functions similarly
+    to :func:`inquire_cred`.
 
     Args:
         creds (Creds): the credentials to inspect

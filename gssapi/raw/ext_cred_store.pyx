@@ -95,7 +95,10 @@ cdef void c_free_key_value_set(gss_key_value_set_desc *kvset):
 
 def acquire_cred_from(dict store=None, Name name=None, lifetime=None,
                       mechs=None, usage='both'):
-    """Acquire credentials from the given store
+    """
+    acquire_cred_from(store=None, name=None, lifetime=None, mechs=None, \
+usage='both')
+    Acquire credentials from the given store.
 
     This method acquires credentials from the store specified by the
     given credential store information.
@@ -183,12 +186,15 @@ def add_cred_from(dict store, Creds input_creds,
                   Name name not None, OID mech not None,
                   usage='both', init_lifetime=None,
                   accept_lifetime=None):
-    """Acquire credentials to add to the current set from the given store
+    """
+    add_cred_from(store, input_creds, name, mech, usage='both', \
+init_lifetime=None, accept_lifetime=None)
+    Acquire credentials to add to the current set from the given store.
 
     This method works like :func:`acquire_cred_from`, except that it
     adds the acquired credentials for a single mechanism to a copy of
     the current set, instead of creating a new set for multiple mechanisms.
-    Unlike :meth:`acquire`, you cannot pass None desired name or
+    Unlike :func:`acquire_cred`, you cannot pass None for the desired name or
     mechanism.
 
     The credential store information is a dictionary containing
@@ -273,7 +279,10 @@ def add_cred_from(dict store, Creds input_creds,
 def store_cred_into(dict store, Creds creds not None,
                     usage='both', OID mech=None, bint overwrite=False,
                     bint set_default=False):
-    """Store credentials to the given store
+    """
+    store_cred_into(store, creds, usage='both', mech=None, overwrite=False, \
+set_default=False)
+    Store credentials into the given store.
 
     This method stores the given credentials into the store specified
     by the given store information.  They may then be retrieved later using

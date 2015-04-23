@@ -22,9 +22,11 @@ cdef extern from "python_gssapi_ext.h":
 
 
 def export_cred(Creds creds not None):
-    """Export GSSAPI credentials object
+    """
+    export_cred(creds)
+    Export GSSAPI credentials.
 
-    This method exports a GSSSAPI credentials object into a token
+    This method exports GSSSAPI credentials into a token
     which may be transmitted between different processes.
 
     Args:
@@ -54,7 +56,9 @@ def export_cred(Creds creds not None):
 
 
 def import_cred(token not None):
-    """Import GSSAPI credentials from a token
+    """
+    import_cred(token)
+    Import GSSAPI credentials from a token.
 
     This method imports a credentials object from a token
     previously exported by :func:`export_cred`.

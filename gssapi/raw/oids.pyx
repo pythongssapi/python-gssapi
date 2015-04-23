@@ -13,7 +13,8 @@ cdef inline bint c_compare_oids(gss_OID a, gss_OID b):
 
 
 cdef class OID:
-    """GSSAPI OID
+    """
+    A GSSAPI OID
 
     A new OID may be created by passing the `elements` argument
     to the constructor.  The `elements` argument should be a
@@ -65,7 +66,9 @@ cdef class OID:
 
     @classmethod
     def from_int_seq(cls, integer_sequence):
-        """Create a OID from a sequence of integers
+        """
+        from_int_seq(integer_sequence)
+        Create a OID from a sequence of integers.
 
         This method creates an OID from a sequence of integers.
         The sequence can either be in dotted form as a string,

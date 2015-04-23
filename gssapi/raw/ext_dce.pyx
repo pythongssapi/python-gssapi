@@ -91,6 +91,7 @@ IOVBuffer = namedtuple('IOVBuffer', ['type', 'allocate', 'value'])
 
 
 cdef class IOV:
+    """A GSSAPI IOV"""
     # defined in ext_dce.pxd
 
     # cdef int iov_len
@@ -304,24 +305,28 @@ cdef class IOV:
 def wrap_iov(SecurityContext context not None, IOV message not None,
              confidential=True, qop=None):
     """
-    Wrap/Encrypt an IOV message
+    wrap_iov(context, message, confidential=True, qop=None)
+    Wrap/Encrypt an IOV message.
 
     This method wraps or encrypts an IOV message.  The allocate
-    parameter of the :class:`IOVBuffer` indicates whether or
-    not that particular buffer should be automatically allocated
-    (for use with padding, header, and trailer buffers).
+    parameter of the :class:`IOVBuffer` objects in the :class:`IOV`
+    indicates whether or not that particular buffer should be
+    automatically allocated (for use with padding, header, and
+    trailer buffers).
+
+    Warning:
+        This modifies the input :class:`IOV`.
 
     Args:
         context (SecurityContext): the current security context
-        message (list): a list of :class:`IOVBuffer` objects
+        message (IOV): an :class:`IOV` containing the message
         confidential (bool): whether or not to encrypt the message (True),
             or just wrap it with a MIC (False)
         qop (int): the desired Quality of Protection
             (or None for the default QoP)
 
     Returns:
-        WrapResult: the wrapped/encrypted message (IOV list), and
-            whether or not encryption was actually used
+        bool: whether or not confidentiality was actually used
 
     Raises:
         GSSError
@@ -348,12 +353,14 @@ def wrap_iov(SecurityContext context not None, IOV message not None,
 
 def unwrap_iov(SecurityContext context not None, IOV message not None):
     """
-    Unwrap/Decrypt an IOV message
+    unwrap_iov(context, message)
+    Unwrap/Decrypt an IOV message.
 
-    This method unwraps or decrypts an IOV message.  The allocate
-    parameter of the :class:`IOVBuffer` indicates whether or
-    not that particular buffer should be automatically allocated
-    (for use with padding, header, and trailer buffers).
+    This method uwraps or decrypts an IOV message.  The allocate
+    parameter of the :class:`IOVBuffer` objects in the :class:`IOV`
+    indicates whether or not that particular buffer should be
+    automatically allocated (for use with padding, header, and
+    trailer buffers).
 
     As a special case, you may pass an entire IOV message
     as a single 'stream'.  In this case, pass a buffer type
@@ -361,13 +368,16 @@ def unwrap_iov(SecurityContext context not None, IOV message not None):
     :attr:`IOVBufferType.data`.  The former should contain the
     entire IOV message, while the latter should be empty.
 
+    Warning:
+        This modifies the input :class:`IOV`.
+
     Args:
         context (SecurityContext): the current security context
-        message (list): a list of :class:`IOVBuffer` objects
+        message (IOV): an :class:`IOV` containing the message
 
     Returns:
-        UnwrapResult: the unwrapped/decrypted message, whether or not
-            encryption was used, and the QoP used
+        IOVUnwrapResult: whether or not confidentiality was used,
+            and the QoP used.
 
     Raises:
         GSSError
@@ -393,7 +403,8 @@ def unwrap_iov(SecurityContext context not None, IOV message not None):
 def wrap_iov_length(SecurityContext context not None, IOV message not None,
                     confidential=True, qop=None):
     """
-    Appropriately size padding, trailer, and header IOV buffers
+    wrap_iov_length(context, message, confidential=True, qop=None)
+    Appropriately size padding, trailer, and header IOV buffers.
 
     This method sets the length values on the IOV buffers.  You
     should already have data provided for the data (and sign-only)
@@ -402,9 +413,12 @@ def wrap_iov_length(SecurityContext context not None, IOV message not None,
     In Python terms, this will result in an appropriately sized
     `bytes` object consisting of all zeros.
 
+    Warning:
+        This modifies the input :class:`IOV`.
+
     Args:
         context (SecurityContext): the current security context
-        message (list): a list of :class:`IOVBuffer` objects
+        message (IOV): an :class:`IOV` containing the message
 
     Returns:
         WrapResult: a list of :class:IOVBuffer` objects, and whether or not
@@ -437,7 +451,8 @@ def wrap_iov_length(SecurityContext context not None, IOV message not None,
 def wrap_aead(SecurityContext context not None, bytes message not None,
               bytes associated=None, confidential=True, qop=None):
     """
-    Wrap/Encrypt an AEAD Message
+    wrap_aead(context, message, associated=None, confidential=True, qop=None)
+    Wrap/Encrypt an AEAD message.
 
     This method takes an input message and associated data,
     and outputs and AEAD message.
@@ -492,7 +507,8 @@ def wrap_aead(SecurityContext context not None, bytes message not None,
 def unwrap_aead(SecurityContext context not None, bytes message not None,
                 bytes associated=None):
     """
-    Unwrap/Decrypt an AEAD Message
+    unwrap_aead(context, message, associated=None)
+    Unwrap/Decrypt an AEAD message.
 
     This method takes an encrpyted/wrapped AEAD message and some associated
     data, and returns an unwrapped/decrypted message.

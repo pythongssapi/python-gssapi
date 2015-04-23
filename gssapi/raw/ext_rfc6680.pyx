@@ -38,7 +38,8 @@ cdef extern from "python_gssapi_ext.h":
 
 def display_name_ext(Name name not None, OID name_type not None):
     """
-    Display the given Name using the given name type OID
+    display_name_ext(name, name_type)
+    Display the given Name using the given name type.
 
     This method attempts to display the given Name using the syntax of
     the given name type.  If this is not possible, an appropriate error
@@ -75,12 +76,13 @@ def display_name_ext(Name name not None, OID name_type not None):
 
 def inquire_name(Name name not None, mech_name=True, attrs=True):
     """
-    Get information about a Name
+    inquire_name(name, mech_name=True, attrs=True)
+    Get information about a Name.
 
     This method retrives information about the given name, including
     the set of attribute names for the given name, as well as whether or
-    not the name is a Mechanism Name.  Additionally, if the given name is
-    a Mechanism Name, the associated mechansim is returned as well.
+    not the name is a mechanism name.  Additionally, if the given name is
+    a mechanism name, the associated mechansim is returned as well.
 
     Args:
         name (Name): the name about which to inquire
@@ -140,7 +142,8 @@ def inquire_name(Name name not None, mech_name=True, attrs=True):
 def set_name_attribute(Name name not None, attr not None, value not None,
                        bint complete=False):
     """
-    Set the value(s) of a Name attribute
+    set_name_attribute(name, attr, value, complete=False)
+    Set the value(s) of a name attribute.
 
     This method sets the value(s) of the given attribute on the given name.
 
@@ -185,7 +188,8 @@ def set_name_attribute(Name name not None, attr not None, value not None,
 
 def get_name_attribute(Name name not None, attr not None, more=None):
     """
-    Get the value(s) of a Name attribute
+    get_name_attribute(name, attr, more=None)
+    Get the value(s) of a name attribute.
 
     This method retrieves the value(s) of the given attribute
     for the given Name.
@@ -244,7 +248,8 @@ def get_name_attribute(Name name not None, attr not None, more=None):
 
 def delete_name_attribute(Name name not None, attr not None):
     """
-    Remove an attribute from a Name
+    delete_name_attribute(name, attr)
+    Remove an attribute from a name.
 
     This method removes an attribute from a Name.  This method may be
     used before :func:`set_name_attribute` clear the values of an attribute
@@ -275,11 +280,18 @@ def delete_name_attribute(Name name not None, attr not None):
 
 def export_name_composite(Name name not None):
     """
-    Export a name, preserving attribute information
+    export_name_composite(name)
+    Export a name, preserving attribute information.
 
     This method functions similarly to :func:`export_name`, except that
     it preserves attribute information.  The resulting bytes may be imported
-    using :func:`import_name` with the `NameType.composite_export` name type.
+    using :func:`import_name` with the :attr:`NameType.composite_export`
+    name type.
+
+    Note:
+        Some versions of MIT Kerberos require you to either canonicalize a name
+        once it has been imported with composite-export name type, or to import
+        using the normal export name type.
 
     Args:
         name (Name): the name to export

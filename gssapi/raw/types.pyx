@@ -18,13 +18,8 @@ class NameType(object):
     """
     GSSAPI Name Types
 
-    This IntEnum represents GSSAPI name types
-    (to be used with importName, etc)
-
-    Note that the integers behind these
-    enum members do not correspond to any numbers
-    in the GSSAPI C bindings, and are subject
-    to change at any point.
+    This enum-like object represents GSSAPI name
+    types (to be used with :func:`import_name`, etc)
     """
 
     # mech-agnostic name types
@@ -43,8 +38,9 @@ class RequirementFlag(IntEnum, metaclass=ExtendableEnum):
     """
     GSSAPI Requirement Flags
 
-    This IntEnum represents flags to be used in the
-    service flags parameter of initSecContext.
+    This :class:`~enum.IntEnum` represents flags used with the
+    :class:`SecurityContext`-related methods (e.g.
+    :func:`init_sec_context`)
 
     The numbers behind the values correspond directly
     to their C counterparts.
@@ -65,11 +61,13 @@ class AddressType(IntEnum, metaclass=ExtendableEnum):
     """
     GSSAPI Channel Bindings Address Types
 
-    This IntEnum represents the various address
-    types used with the channel bindings structure.
+    This :class:`~enum.IntEnum` represents the various address
+    types used with the :class:`ChannelBindings` structure.
 
     The numbers behind the values correspond directly
-    to their C counterparts.
+    to their C counterparts.  There is no value for
+    ``GSS_C_AF_UNSPEC``, since this is represented
+    by ``None``.
     """
 
     # unspecified = GSS_C_AF_UNSPEC  # None --> GSS_C_AF_UNSPEC
@@ -100,10 +98,8 @@ class MechType(object):
     """
     GSSAPI Mechanism Types
 
-    This class acts like an Enum, but is not
-
-    The elements of this pseudo-Enum are OID objects.
-
+    This enum-like object contains any mechanism :class:`OID`
+    values registered by imported mechanisms.
     """
     pass
 
@@ -218,7 +214,7 @@ class IntEnumFlagSet(GenericFlagSet):
     """A set backed by a 32-bit integer with enum members
 
     This class is a :class:`GenericFlagSet` where the returned
-    members are values in an :class:`IntEnum`.
+    members are values in an :class:`~enum.IntEnum`.
 
     It functions exactly like a `GenericFlagSet`, except that
     it also supports bitwise operations with the enum values.

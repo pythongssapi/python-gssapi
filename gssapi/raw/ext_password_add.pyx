@@ -37,10 +37,14 @@ def add_cred_with_password(Creds input_cred not None, Name name not None,
                            accept_lifetime=None):
 
     """
+    add_cred_with_password(input_cred, name, mech, password, \
+usage='initiate', init_lifetime=None, accept_lifetime=None)
     Add a credential-element to a credential using provided password.
 
     This function is originally from Solaris and is not documented by either
     MIT or Heimdal.
+
+    In general, it functions similarly to :func:`add_cred`.
 
     Args:
         input_cred (Creds): the credentials to add to

@@ -24,7 +24,10 @@ cdef extern from "python_gssapi.h":
 
 def store_cred(Creds creds not None, usage='both', OID mech=None,
                bint overwrite=False, bint set_default=False):
-    """Store credentials to the default store
+    """
+    store_cred(creds, usage='both', mech=None, overwrite=False, \
+set_default=False)
+    Store credentials into the default store.
 
     This method stores the given credentials into the default store.
     They may then be retrieved later using :func:`acquire_cred`.
