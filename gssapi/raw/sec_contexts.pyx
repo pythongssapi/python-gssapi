@@ -647,7 +647,7 @@ def delete_sec_context(SecurityContext context not None, local_only=True):
 
     Returns:
         bytes: the output token (if remote deletion is requested).  Generally
-            this is None, but bytes for compatability.
+            this is None, but bytes for compatibility.
 
     Raises:
         MissingContextError
