@@ -261,8 +261,5 @@ setup(
         'enum34',
         'decorator',
         'six'
-    ],
-    tests_require=[
-        'tox'
     ]
 )
