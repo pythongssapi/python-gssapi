@@ -159,6 +159,8 @@ ENUM_EXTS = []
 
 def extension_file(module, canary):
     if ENABLE_SUPPORT_DETECTION and not hasattr(GSSAPI_LIB, canary):
+        print('Skipping the %s extension because it '
+              'is not supported by your GSSAPI implementation...' % module)
         return None
     else:
         enum_ext_path = 'gssapi/raw/_enum_extensions/ext_%s.%s' % (module,
