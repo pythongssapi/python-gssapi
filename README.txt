@@ -11,6 +11,12 @@ Python-GSSAPI
 .. image:: https://travis-ci.org/pythongssapi/python-gssapi.svg?branch=master
     :target: https://travis-ci.org/pythongssapi/python-gssapi
 
+.. image:: https://badge.fury.io/gh/pythongssapi%2Fpython-gssapi.svg
+    :target: http://badge.fury.io/gh/pythongssapi%2Fpython-gssapi
+
+.. image:: https://badge.fury.io/py/gssapi.svg
+    :target: http://badge.fury.io/py/gssapi
+
 Python-GSSAPI provides both low-level and high level wrappers around the GSSAPI
 C libraries.  While it focuses on the Kerberos mechanism, it should also be
 useable with other GSSAPI mechanisms.
