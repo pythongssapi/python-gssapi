@@ -619,6 +619,19 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
 
         return (client_ctx, server_ctx)
 
+    def test_complete_on_partially_completed(self):
+        client_ctx = self._create_client_ctx()
+        client_tok = client_ctx.step()
+        client_ctx.complete.should_be_false()
+
+        server_ctx = gssctx.SecurityContext(creds=self.server_creds)
+        server_tok = server_ctx.step(client_tok)
+
+        client_ctx.step(server_tok)
+
+        client_ctx.complete.should_be_true()
+        server_ctx.complete.should_be_true()
+
     def test_initiate_accept_steps(self):
         client_ctx, server_ctx = self._create_completed_contexts()
 

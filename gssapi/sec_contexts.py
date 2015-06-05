@@ -110,10 +110,21 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         else:
             # we already have a context in progress, just inspect it
-            if self.locally_initiated:
-                self.usage = 'initiate'
-            else:
-                self.usage = 'accept'
+            # NB(directxman12): MIT krb5 refuses to inquire about a context
+            # if it's partially established, so we have to check here
+
+            try:
+                if self.locally_initiated:
+                    self.usage = 'initiate'
+                else:
+                    self.usage = 'accept'
+            except excs.MissingContextError:
+                msg = ("Cannot extract usage from a partially completed "
+                       "context")
+                raise excs.UnknownUsageError(msg, obj="security context")
+
+        # This is to work around an MIT krb5 bug (see the `complete` property)
+        self._complete = None
 
     # NB(directxman12): DO NOT ADD AN __del__ TO THIS CLASS -- it screws up
     #                   the garbage collector if _last_tb is still defined
@@ -422,8 +433,19 @@ class SecurityContext(rsec_contexts.SecurityContext):
     @_utils.check_last_err
     def complete(self):
         """Whether negotiation for this context has been completed"""
+        # NB(directxman12): MIT krb5 has a bug where it refuses to
+        #                   inquire about partially completed contexts,
+        #                   so we can't just use `self._inquire` generally
         if self._started:
-            return self._inquire(complete=True).complete
+            if self._complete is None:
+                try:
+                    res = self._inquire(complete=True).complete
+                except excs.MissingContextError:
+                    return False
+                else:
+                    self._complete = res
+
+            return self._complete
         else:
             return False
 
@@ -491,6 +513,8 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         self.delegated_creds = Credentials(res.delegated_creds)
 
+        self._complete = not res.more_steps
+
         return res.token
 
     def _initiator_step(self, token=None):
@@ -500,6 +524,8 @@ class SecurityContext(rsec_contexts.SecurityContext):
                                              self._desired_lifetime,
                                              self._channel_bindings,
                                              token)
+
+        self._complete = not res.more_steps
 
         return res.token
 
