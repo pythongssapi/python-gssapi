@@ -61,7 +61,7 @@ From the Git Repo
 
 .. code-block:: bash
 
-    $ git clone https://github.com/DirectXMan12/python-gssapi.git
+    $ git clone https://github.com/pythongssapi/python-gssapi.git
     $ python setup.py build
     $ python setup.py install
 
