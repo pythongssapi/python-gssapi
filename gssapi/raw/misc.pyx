@@ -288,7 +288,7 @@ class GSSError(Exception, metaclass=GSSErrorRegistry):
                 given code
         """
 
-        msg_encoding = locale.getlocale(locale.LC_MESSAGES)[0] or 'UTF-8'
+        msg_encoding = locale.getlocale(locale.LC_MESSAGES)[1] or 'UTF-8'
 
         res = []
         try:
