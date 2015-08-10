@@ -204,7 +204,7 @@ flags=None, lifetime=None, channel_bindings=None, input_token=None)
         input_token_buffer.value = input_token
         input_token_buffer.length = len(input_token)
 
-    cdef gss_OID actual_mech_type
+    cdef gss_OID actual_mech_type = GSS_C_NO_OID;
     cdef gss_buffer_desc output_token_buffer = gss_buffer_desc(0, NULL)
     cdef OM_uint32 ret_flags
     cdef OM_uint32 output_ttl
@@ -232,7 +232,9 @@ flags=None, lifetime=None, channel_bindings=None, input_token=None)
 
     cdef OID output_mech_type = OID()
     if maj_stat == GSS_S_COMPLETE or maj_stat == GSS_S_CONTINUE_NEEDED:
-        output_mech_type.raw_oid = actual_mech_type[0]
+        if actual_mech_type:
+            output_mech_type.raw_oid = actual_mech_type[0]
+
         return InitSecContextResult(output_context, output_mech_type,
                                     IntEnumFlagSet(RequirementFlag, ret_flags),
                                     output_token,
