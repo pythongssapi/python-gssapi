@@ -362,7 +362,6 @@ channel_bindings=None)
                                                      ret_flags),
                                       output_ttl_py, oc,
                                       maj_stat == GSS_S_CONTINUE_NEEDED)
-        return res
     else:
         raise GSSError(maj_stat, min_stat, token=output_token)
 
