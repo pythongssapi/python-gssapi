@@ -397,6 +397,22 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name2.name_type.should_be(gb.NameType.kerberos_principal)
 
     @_extension_test('rfc6680', 'RFC 6680')
+    def test_display_as(self):
+        name = gssnames.Name(TARGET_SERVICE_NAME,
+                             gb.NameType.hostbased_service)
+        canonical_name = name.canonicalize(gb.MechType.kerberos)
+
+        # NB(directxman12): krb5 doesn't implement display_name_ext, so just
+        # check to make sure we return the right types and a reasonable value
+        krb_name = canonical_name.display_as(
+            gb.NameType.hostbased_service)
+
+        princ_str = SERVICE_PRINCIPAL.decode('utf-8') + '@'
+        six.text_type(canonical_name).should_be(princ_str)
+        krb_name.should_be_a(six.text_type)
+        krb_name.should_be(princ_str)
+
+    @_extension_test('rfc6680', 'RFC 6680')
     def test_create_from_composite_token_no_attrs(self):
         name1 = gssnames.Name(TARGET_SERVICE_NAME,
                               gb.NameType.hostbased_service)

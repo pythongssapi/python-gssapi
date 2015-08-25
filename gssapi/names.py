@@ -112,7 +112,7 @@ class Name(rname.Name):
 
     def __unicode__(self):
         # Python 2 -- someone asked for unicode
-        return self.__bytes__().encode(_utils._get_encoding())
+        return self.__bytes__().decode(_utils._get_encoding())
 
     def __bytes__(self):
         # Python 3 -- someone asked for bytes
@@ -142,8 +142,8 @@ class Name(rname.Name):
             raise NotImplementedError("Your GSSAPI implementation does not "
                                       "support RFC 6680 (the GSSAPI naming "
                                       "extensions)")
-        return rname_rfc6680.display_name_ext(self, name_type).encode(
-            _utils.get_encoding())
+        return rname_rfc6680.display_name_ext(self, name_type).decode(
+            _utils._get_encoding())
 
     @property
     def name_type(self):
