@@ -208,7 +208,7 @@ long_desc = re.sub('\.\. role:: \w+\(code\)\s*\n\s*.+', '',
 
 setup(
     name='gssapi',
-    version='1.1.2',
+    version='1.1.3',
     author='The Python GSSAPI Team',
     author_email='sross@redhat.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
