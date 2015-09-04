@@ -125,6 +125,21 @@ class Name(rname.Name):
         This method attempts to display the current :class:`Name`
         using the syntax of the given :class:`NameType`, if possible.
 
+        Warning:
+
+            In MIT krb5 versions below 1.13.3, this method can segfault if
+            the name was not *originally* created with a `name_type` that was
+            not ``None`` (even in cases when a ``name_type``
+            is later "added", such as via :meth:`canonicalize`).
+            **Do not use this method unless you are sure the above
+            conditions can never happen in your code.**
+
+        Warning:
+
+            In addition to the above warning, current versions of MIT krb5 do
+            not actually fully implement this method, and it may return
+            incorrect results in the case of canonicalized names.
+
         :requires-ext:`rfc6680`
 
         Args:
