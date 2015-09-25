@@ -206,6 +206,13 @@ long_desc = re.sub('\.\. role:: \w+\(code\)\s*\n\s*.+', '',
                           re.sub(r'\.\. code-block:: \w+', '::',
                                  open('README.txt').read())))
 
+install_requires = [
+    'decorator',
+    'six'
+]
+if sys.version_info < (3, 4):
+    install_requires.append('enum34')
+
 setup(
     name='gssapi',
     version='1.1.3',
@@ -259,9 +266,5 @@ setup(
         extension_file('password_add', 'gss_add_cred_with_password'),
     ]),
     keywords=['gssapi', 'security'],
-    install_requires=[
-        'enum34',
-        'decorator',
-        'six'
-    ]
+    install_requires=install_requires
 )
