@@ -1,7 +1,7 @@
 language: python
 python:
   - "2.7"
-  - "3.4"
+  - "3.5"
 
 env:
   - KRB5_VER="1.10"
@@ -11,12 +11,14 @@ env:
 
 matrix:
   exclude:
-    - python: "3.4"
+    - python: "3.5"
       env: KRB5_VER="1.10"
   include:
     - python: "3.3"
       env: KRB5_VER="1.12"
-    - python: "2.7"
+    - python: "3.4"
+      env: KRB5_VER="1.13"
+    - python: "3.5"
       env: KRB5_VER="heimdal"
 
 install: sh -ex .travis.install.sh
@@ -34,7 +36,7 @@ deploy:
     on:
       repo: pythongssapi/python-gssapi
       tags: true
-      python: "3.4"
+      python: "3.5"
       condition: "$KRB5_VER = '1.13'"
     skip_cleanup: true
   - provider: pypi
@@ -45,7 +47,7 @@ deploy:
     on:
       repo: pythongssapi/python-gssapi
       tags: true
-      python: "3.4"
+      python: "3.5"
       condition: "$KRB5_VER = '1.13'"
     skip_cleanup: true
     docs_dir: travis_docs_build/html
