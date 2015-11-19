@@ -34,6 +34,8 @@ Basic
 
 * either the `enum34` Python package or Python 3.4+
 
+* the `six` and `decorator` python packages
+
 Compiling from Scratch
 ----------------------
 
@@ -58,6 +60,8 @@ Easy Way
 
 From the Git Repo
 -----------------
+
+After being sure to install all the requirements,
 
 .. code-block:: bash
 
