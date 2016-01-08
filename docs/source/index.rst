@@ -19,12 +19,16 @@ corresponding C functions.  The high-level API makes use of the low-level API
 to access underlying GSSAPI functionality.  Additionally certain extensions
 are currently only available from the low-level API.
 
+To get started, check out the :doc:`tutorials page <tutorials>` or jump
+straight into the :doc:`high-level API documentation <gssapi>`.
+
 .. toctree::
    :hidden:
    :maxdepth: 3
 
    gssapi.rst
    gssapi.raw.rst
+   tutorials.rst
 
 
 Indices and tables
