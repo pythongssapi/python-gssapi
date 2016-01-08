@@ -21,13 +21,22 @@ representing the primary abstractions that GSSAPI provides:
 Main Classes
 ------------
 
+Names
+"""""
+
 .. automodule:: gssapi.names
     :members:
     :undoc-members:
 
+Credentials
+"""""""""""
+
 .. automodule:: gssapi.creds
     :members:
     :undoc-members:
+
+Security Contexts
+"""""""""""""""""
 
 .. automodule:: gssapi.sec_contexts
     :members:
