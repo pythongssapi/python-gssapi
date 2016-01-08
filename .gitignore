@@ -14,3 +14,4 @@ docs/build
 __dont_use_cython__.txt
 **/__pycache__
 .eggs
+.venv
