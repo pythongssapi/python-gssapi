@@ -22,7 +22,8 @@ class SecurityContext(rsec_contexts.SecurityContext):
     :class:`~gssapi.raw.sec_contexts.SecurityContext` class,
     and thus may used with both low-level and high-level API methods.
 
-    This class may be pickled an unpickled.
+    This class may be pickled and unpickled (the attached delegated
+    credentials object will not be preserved, however).
     """
 
     def __new__(cls, base=None, token=None,
@@ -106,7 +107,7 @@ class SecurityContext(rsec_contexts.SecurityContext):
             self._channel_bindings = channel_bindings
             self._creds = creds
 
-            self.delegated_creds = None
+            self._delegated_creds = None
 
         else:
             # we already have a context in progress, just inspect it
@@ -418,6 +419,18 @@ class SecurityContext(rsec_contexts.SecurityContext):
         """The amount of time for which this context remains valid"""
         return rsec_contexts.context_time(self)
 
+    @property
+    def delegated_creds(self):
+        """The credentials delegated from the initiator to the acceptor
+
+        .. warning::
+
+            This value will not be preserved across picklings.  These should
+            be separately exported and transfered.
+
+        """
+        return self._delegated_creds
+
     initiator_name = _utils.inquire_property(
         'initiator_name', 'The :class:`Name` of the initiator of this context')
     target_name = _utils.inquire_property(
@@ -512,9 +525,9 @@ class SecurityContext(rsec_contexts.SecurityContext):
                                                self, self._channel_bindings)
 
         if res.delegated_creds is not None:
-            self.delegated_creds = Credentials(res.delegated_creds)
+            self._delegated_creds = Credentials(res.delegated_creds)
         else:
-            self.delegated_creds = None
+            self._delegated_creds = None
 
         self._complete = not res.more_steps
 
