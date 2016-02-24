@@ -1,18 +1,21 @@
+sudo: required
+dist: trusty
+
 language: python
 python:
   - "2.7"
   - "3.5"
 
 env:
-  - KRB5_VER="1.10"
+  # - KRB5_VER="1.10"
   - KRB5_VER="1.12"
   - KRB5_VER="1.13"
   # - KRB5_VER="master"
 
 matrix:
-  exclude:
-    - python: "3.5"
-      env: KRB5_VER="1.10"
+  # exclude:
+  #   - python: "3.5"
+  #     env: KRB5_VER="1.10"
   include:
     - python: "3.3"
       env: KRB5_VER="1.12"

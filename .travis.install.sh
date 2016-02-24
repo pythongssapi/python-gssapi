@@ -10,12 +10,8 @@ if [ x"$KRB5_VER" = "xheimdal" ]; then
     sudo apt-get update
     DEBIAN_FRONTEND=noninteractive sudo apt-get -y install heimdal-dev
     exit 0
-elif [ x"$KRB5_VER" != "x1.10" ]; then
-    sudo apt-add-repository -y ppa:sssd/updates
-
-    if [ x"$KRB5_VER" != "x1.12" ]; then
-        sudo apt-add-repository -y ppa:rharwood/krb5-$KRB5_VER
-    fi
+elif [ x"$KRB5_VER" != "x1.12" ]; then
+    sudo apt-add-repository -y ppa:rharwood/krb5-$KRB5_VER
 fi
 
 sudo apt-get update
