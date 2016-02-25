@@ -511,7 +511,10 @@ class SecurityContext(rsec_contexts.SecurityContext):
         res = rsec_contexts.accept_sec_context(token, self._creds,
                                                self, self._channel_bindings)
 
-        self.delegated_creds = Credentials(res.delegated_creds)
+        if res.delegated_creds is not None:
+            self.delegated_creds = Credentials(res.delegated_creds)
+        else:
+            self.delegated_creds = None
 
         self._complete = not res.more_steps
 
