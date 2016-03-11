@@ -21,9 +21,10 @@ for later:
     >>>
 
 Note that this assumes you have a KRB5 realm set up, and some relevant
-functions available in the `REALM` object (see gssapi-console.py, or
+functions available in the `REALM` object (see gssapi-console.py in
+[gssapi_console](https://pypi.python.org/pypi/gssapi_console)), or
 try `$ run-lit -e gssapi basic-tutorial.md` when you have both
-gssapi-console and yalpt installed).  Any actions performed using the
+gssapi_console and yalpt installed).  Any actions performed using the
 `REALM` object are not part of the GSSAPI library; the `REALM` object
 simply contians wrappers to krb5 commands generally run separately from
 the application using GSSAPI.
@@ -205,9 +206,9 @@ since the context was set up to use encryption (the default):
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
       File "<string>", line 2, in decrypt
-      File "/home/directxman12/dev/gssapi/gssapi-console/.venv/lib/python3.4/site-packages/gssapi/_utils.py", line 167, in check_last_err
+      File "/usr/lib/python3.4/site-packages/gssapi/_utils.py", line 167, in check_last_err
         return func(self, *args, **kwargs)
-      File "/home/directxman12/dev/gssapi/gssapi-console/.venv/lib/python3.4/site-packages/gssapi/sec_contexts.py", line 295, in decrypt
+      File "/usr/lib/python3.4/site-packages/gssapi/sec_contexts.py", line 295, in decrypt
         unwrapped_message=res.message)
     gssapi.exceptions.EncryptionNotUsed: Confidentiality was requested, but not used: The context was established with encryption, but unwrapped message was not encrypted.
     >>>
