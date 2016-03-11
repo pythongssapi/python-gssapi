@@ -14,9 +14,8 @@ from gssapi import sec_contexts as gssctx
 from gssapi import raw as gb
 from gssapi import _utils as gssutils
 from gssapi import exceptions as excs
-from gssapi.tests._utils import _extension_test, _minversion_test
-from gssapi.tests._utils import _requires_krb_plugin
-from gssapi.tests import k5test as kt
+import k5test.unit as ktu
+import k5test as kt
 
 
 TARGET_SERVICE_NAME = b'host'
@@ -151,7 +150,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
         del creds
 
-    @_extension_test('rfc5588', 'RFC 5588')
+    @ktu.gssapi_extension_test('rfc5588', 'RFC 5588')
     def test_store_acquire(self):
         # we need to acquire a forwardable ticket
         svc_princ = SERVICE_PRINCIPAL.decode("UTF-8")
@@ -182,7 +181,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
                                                 usage='initiate')
         reacquired_creds.shouldnt_be_none()
 
-    @_extension_test('cred_store', 'credentials store')
+    @ktu.gssapi_extension_test('cred_store', 'credentials store')
     def test_store_into_acquire_from(self):
         CCACHE = 'FILE:{tmpdir}/other_ccache'.format(tmpdir=self.realm.tmpdir)
         KT = '{tmpdir}/other_keytab'.format(tmpdir=self.realm.tmpdir)
@@ -273,7 +272,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         new_creds.shouldnt_be_none()
         new_creds.should_be_a(gsscreds.Credentials)
 
-    @_extension_test('cred_store', 'credentials store')
+    @ktu.gssapi_extension_test('cred_store', 'credentials store')
     def test_store_into_add_from(self):
         CCACHE = 'FILE:{tmpdir}/other_ccache'.format(tmpdir=self.realm.tmpdir)
         KT = '{tmpdir}/other_keytab'.format(tmpdir=self.realm.tmpdir)
@@ -301,13 +300,13 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         retrieved_creds.shouldnt_be_none()
         retrieved_creds.should_be_a(gsscreds.Credentials)
 
-    @_extension_test('cred_imp_exp', 'credentials import-export')
+    @ktu.gssapi_extension_test('cred_imp_exp', 'credentials import-export')
     def test_export(self):
         creds = gsscreds.Credentials(name=self.name)
         token = creds.export()
         token.should_be_a(bytes)
 
-    @_extension_test('cred_imp_exp', 'credentials import-export')
+    @ktu.gssapi_extension_test('cred_imp_exp', 'credentials import-export')
     def test_import_by_init(self):
         creds = gsscreds.Credentials(name=self.name)
         token = creds.export()
@@ -316,7 +315,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         imported_creds.lifetime.should_be(creds.lifetime)
         imported_creds.name.should_be(creds.name)
 
-    @_extension_test('cred_imp_exp', 'credentials import-export')
+    @ktu.gssapi_extension_test('cred_imp_exp', 'credentials import-export')
     def test_pickle_unpickle(self):
         creds = gsscreds.Credentials(name=self.name)
         pickled_creds = pickle.dumps(creds)
@@ -327,7 +326,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
     @exist_perms(lifetime=30, mechs=[gb.MechType.kerberos],
                  usage='initiate')
-    @_extension_test('s4u', 'S4U')
+    @ktu.gssapi_extension_test('s4u', 'S4U')
     def test_impersonate(self, str_name, kwargs):
         target_name = gssnames.Name(TARGET_SERVICE_NAME,
                                     gb.NameType.hostbased_service)
@@ -347,7 +346,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         imp_creds.shouldnt_be_none()
         imp_creds.should_be_a(gsscreds.Credentials)
 
-    @_extension_test('s4u', 'S4U')
+    @ktu.gssapi_extension_test('s4u', 'S4U')
     def test_add_with_impersonate(self):
         target_name = gssnames.Name(TARGET_SERVICE_NAME,
                                     gb.NameType.hostbased_service)
@@ -396,7 +395,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name2.shouldnt_be_none()
         name2.name_type.should_be(gb.NameType.kerberos_principal)
 
-    @_extension_test('rfc6680', 'RFC 6680')
+    @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     def test_display_as(self):
         name = gssnames.Name(TARGET_SERVICE_NAME,
                              gb.NameType.hostbased_service)
@@ -412,7 +411,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         krb_name.should_be_a(six.text_type)
         krb_name.should_be(princ_str)
 
-    @_extension_test('rfc6680', 'RFC 6680')
+    @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     def test_create_from_composite_token_no_attrs(self):
         name1 = gssnames.Name(TARGET_SERVICE_NAME,
                               gb.NameType.hostbased_service)
@@ -422,8 +421,8 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
 
         name2.shouldnt_be_none()
 
-    @_extension_test('rfc6680', 'RFC 6680')
-    @_requires_krb_plugin('authdata', 'greet_client')
+    @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
+    @ktu.krb_plugin_test('authdata', 'greet_client')
     def test_create_from_composite_token_with_attrs(self):
         name1 = gssnames.Name(TARGET_SERVICE_NAME,
                               gb.NameType.hostbased_service)
@@ -514,7 +513,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
     # NB(directxman12): we don't test display_name_ext because the krb5 mech
     # doesn't actually implement it
 
-    @_extension_test('rfc6680', 'RFC 6680')
+    @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     def test_is_mech_name(self):
         name = gssnames.Name(TARGET_SERVICE_NAME,
                              gb.NameType.hostbased_service)
@@ -527,7 +526,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         canon_name.mech.should_be_a(gb.OID)
         canon_name.mech.should_be(gb.MechType.kerberos)
 
-    @_extension_test('rfc6680', 'RFC 6680')
+    @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     def test_export_name_composite_no_attrs(self):
         name = gssnames.Name(TARGET_SERVICE_NAME,
                              gb.NameType.hostbased_service)
@@ -536,8 +535,8 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
 
         exported_name.should_be_a(bytes)
 
-    @_extension_test('rfc6680', 'RFC 6680')
-    @_requires_krb_plugin('authdata', 'greet_client')
+    @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
+    @ktu.krb_plugin_test('authdata', 'greet_client')
     def test_export_name_composite_with_attrs(self):
         name = gssnames.Name(TARGET_SERVICE_NAME,
                              gb.NameType.hostbased_service)
@@ -547,8 +546,8 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
 
         exported_name.should_be_a(bytes)
 
-    @_extension_test('rfc6680', 'RFC 6680')
-    @_requires_krb_plugin('authdata', 'greet_client')
+    @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
+    @ktu.krb_plugin_test('authdata', 'greet_client')
     def test_basic_get_set_del_name_attribute_no_auth(self):
         name = gssnames.Name(TARGET_SERVICE_NAME,
                              gb.NameType.hostbased_service)
@@ -785,7 +784,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         server_ctx.verify_signature.should_raise(gb.GSSError,
                                                  b'other message', mic_token)
 
-    @_minversion_test("1.11", "returning tokens")
+    @ktu.krb_minversion_test("1.11", "returning tokens")
     def test_defer_step_error_on_method(self):
         gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = True
         bdgs = gb.ChannelBindings(application_data=b'abcxyz')
@@ -801,7 +800,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         server_ctx.step(client_token).should_be_a(bytes)
         server_ctx.encrypt.should_raise(gb.BadChannelBindingsError, b'test')
 
-    @_minversion_test("1.11", "returning tokens")
+    @ktu.krb_minversion_test("1.11", "returning tokens")
     def test_defer_step_error_on_complete_property_access(self):
         gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = True
         bdgs = gb.ChannelBindings(application_data=b'abcxyz')
