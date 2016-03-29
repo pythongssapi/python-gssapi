@@ -173,7 +173,8 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         deleg_creds = server_ctx.delegated_creds
         deleg_creds.shouldnt_be_none()
 
-        store_res = deleg_creds.store(usage='initiate', set_default=True)
+        store_res = deleg_creds.store(usage='initiate', set_default=True,
+                                      overwrite=True)
         store_res.usage.should_be('initiate')
         store_res.mechs.should_include(gb.MechType.kerberos)
 

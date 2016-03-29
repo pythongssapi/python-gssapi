@@ -475,7 +475,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         deleg_creds = server_ctx_resp.delegated_creds
         deleg_creds.shouldnt_be_none()
         store_res = gb.store_cred(deleg_creds, usage='initiate',
-                                  set_default=True)
+                                  set_default=True, overwrite=True)
 
         store_res.shouldnt_be_none()
         store_res.usage.should_be('initiate')
