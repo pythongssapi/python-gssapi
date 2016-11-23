@@ -43,12 +43,12 @@ Suppose we wanted to refer to an HTTP server on the current host.
 We could refer to it as a *host-based service*, or in the default
 mechanism form (in this case, for krb5):
 
-    >>> server_hostbased_name = gssapi.Name('http@' + FQDN, name_type=gssapi.NameType.hostbased_service)
+    >>> server_hostbased_name = gssapi.Name('HTTP@' + FQDN, name_type=gssapi.NameType.hostbased_service)
     >>> server_hostbased_name
-    Name(b'http@sross', <OID 1.2.840.113554.1.2.1.4>)
-    >>> server_name = gssapi.Name('http/sross@')
+    Name(b'HTTP@sross', <OID 1.2.840.113554.1.2.1.4>)
+    >>> server_name = gssapi.Name('HTTP/sross@')
     >>> server_name
-    Name(b'http/sross@', None)
+    Name(b'HTTP/sross@', None)
     >>>
 
 These are both effectively the same, but if we *canonicalize* both
@@ -75,11 +75,11 @@ Credentials may be acquired for a particular name, or the default set
 of credentials may be acquired.
 
 For instance, suppose that we are writing a server, and wish to
-communicate accept connections as the 'http' service.  We would need
+communicate accept connections as the 'HTTP' service.  We would need
 to acquire credentials as such:
 
-    >>> REALM.addprinc('http/%s@%s' % (FQDN, REALM.realm))
-    >>> REALM.extract_keytab('http/%s@%s' % (FQDN, REALM.realm), REALM.keytab)
+    >>> REALM.addprinc('HTTP/%s@%s' % (FQDN, REALM.realm))
+    >>> REALM.extract_keytab('HTTP/%s@%s' % (FQDN, REALM.realm), REALM.keytab)
     >>> server_creds = gssapi.Credentials(usage='accept', name=server_name)
     >>>
 
