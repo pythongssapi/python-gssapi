@@ -19,5 +19,6 @@ elif [ x"$KRB5_VER" != "x1.10" ]; then
 fi
 
 sudo apt-get update
-DEBIAN_FRONTEND=noninteractive sudo apt-get install -y krb5-user krb5-kdc krb5-admin-server libkrb5-dev krb5-multidev
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y krb5-user krb5-kdc
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y krb5-admin-server libkrb5-dev krb5-multidev
 DEBIAN_FRONTEND=noninteractive sudo apt-get -y install krb5-greet-client || true
