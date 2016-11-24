@@ -1,31 +1,40 @@
+sudo: required
+
+# not necessary, but less confusing if defined
 language: python
-python:
-  - "2.7"
-  - "3.5"
+
+services:
+  - docker
 
 env:
-  - KRB5_VER="1.10"
-  - KRB5_VER="1.12"
-  - KRB5_VER="1.13"
-  # - KRB5_VER="master"
+  - DISTRO=debian:stable PYTHON="2"
+  - DISTRO=debian:stable PYTHON="3" # 3.4, not 3.5
+  - DISTRO=debian:stable PYTHON="3" KRB5_VER="heimdal"
+  - DISTRO=centos:7 PYTHON="2" # el7 doesn't do python3 modules
+  - DISTRO=fedora:rawhide PYTHON="3"
+  - DISTRO=fedora:rawhide PYTHON="2"
 
-matrix:
-  exclude:
-    - python: "3.5"
-      env: KRB5_VER="1.10"
-  include:
-    - python: "3.3"
-      env: KRB5_VER="1.12"
-    - python: "3.4"
-      env: KRB5_VER="1.13"
-    - python: "3.5"
-      env: KRB5_VER="heimdal"
+script:
+  - sudo sed -i '1i 127.0.0.1 test.box' /etc/hosts
+  - sudo hostname test.box
+  - >
+    docker run
+    -v `pwd`:/tmp/build
+    -w /tmp/build
+    -e KRB5_VER=$KRB5_VER
+    -e PYTHON=$PYTHON
+    $DISTRO
+    /bin/bash -ex .travis.sh
 
-install: sh -ex .travis.install.sh
-
-script: sh -x .travis.sh
-
-before_deploy: sh -x .travis.before-deploy.sh
+before_deploy:
+  - >
+    docker run
+    -v `pwd`:/tmp/build
+    -w /tmp/build
+    -e TRAVIS_TAG=$TRAVIS_TAG
+    -e PKG_NAME_VER=$PKG_NAME_VER
+    $DISTRO
+    /bin/sh -x .travis.before-deploy.sh
 deploy:
   - provider: releases
     api_key:
@@ -36,8 +45,7 @@ deploy:
     on:
       repo: pythongssapi/python-gssapi
       tags: true
-      python: "3.5"
-      condition: "$KRB5_VER = '1.13'"
+      condition: "$DISTRO = 'fedora:rawhide' && $PYTHON = '3'"
     skip_cleanup: true
   - provider: pypi
     user:
@@ -47,7 +55,6 @@ deploy:
     on:
       repo: pythongssapi/python-gssapi
       tags: true
-      python: "3.5"
-      condition: "$KRB5_VER = '1.13'"
+      condition: "$DISTRO = 'fedora:rawhide' && $PYTHON = '3'"
     skip_cleanup: true
     docs_dir: travis_docs_build/html

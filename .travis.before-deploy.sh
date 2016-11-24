@@ -1,5 +1,9 @@
 #!/bin/sh
 
+source ./.venv/bin/activate
+
+yum -y install tar coreutils git
+
 # build the docs
 # the first run is for the docs build, so don't clean up
 pip install -r docs-requirements.txt
