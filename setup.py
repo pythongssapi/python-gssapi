@@ -201,6 +201,7 @@ def gssapi_modules(lst):
 
     return res
 
+
 long_desc = re.sub('\.\. role:: \w+\(code\)\s*\n\s*.+', '',
                    re.sub(r':(python|bash|code):', '',
                           re.sub(r'\.\. code-block:: \w+', '::',
