@@ -139,7 +139,7 @@ def _display_status(unsigned int error_code, bint is_major_code,
             whether or not to call again for further messages
 
     Raises:
-       GSSError
+       ValueError
     """
 
     cdef int status_type
@@ -165,13 +165,16 @@ def _display_status(unsigned int error_code, bint is_major_code,
 
     if maj_stat == GSS_S_COMPLETE:
         call_again = bool(msg_ctx_out)
-
         msg_out = msg_buff.value[:msg_buff.length]
         gss_release_buffer(&min_stat, &msg_buff)
         return (msg_out, msg_ctx_out, call_again)
     else:
-        # NB(directxman12): this is highly unlikely to cause a recursive loop
-        raise GSSError(maj_stat, min_stat)
+        # This hides whatever error gss_display_status is complaining about,
+        # but obviates infinite recursion into stack exhaustion.  The
+        # exception raised here is handled by get_all_statuses(), which prints
+        # the code.
+        raise ValueError("gss_display_status call returned failure "
+                         "(major {0}, minor {1}).".format(maj_stat, min_stat))
 
 
 class GSSErrorRegistry(type):
@@ -294,8 +297,8 @@ class GSSError(Exception, metaclass=GSSErrorRegistry):
         try:
             msg, ctx, cont = _display_status(code, is_maj)
             res.append(msg.decode(msg_encoding))
-        except GSSError:
-            res.append(u'issue decoding code: {0}'.format(code))
+        except ValueError as e:
+            res.append(u'{0}  Decoding code: {1}'.format(e, code))
             cont = False
 
         while cont:
@@ -303,9 +306,8 @@ class GSSError(Exception, metaclass=GSSErrorRegistry):
                 msg, ctx, cont = _display_status(code, is_maj,
                                                  message_context=ctx)
                 res.append(msg.decode(msg_encoding))
-            except GSSError:
-                res.append(u'issue decoding '
-                           u'code: {0}'.format(code))
+            except ValueError:
+                res.append(u'{0}  Decoding code: {1}'.format(e, code))
                 cont = False
 
         return res
