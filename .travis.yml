@@ -33,8 +33,10 @@ before_deploy:
     -w /tmp/build
     -e TRAVIS_TAG=$TRAVIS_TAG
     -e PKG_NAME_VER=$PKG_NAME_VER
+    -e KRB5_VER=$KRB5_VER
+    -e PYTHON=$PYTHON
     $DISTRO
-    /bin/sh -x .travis.before-deploy.sh
+    /bin/bash -ex .travis.before-deploy.sh
 deploy:
   - provider: releases
     api_key:

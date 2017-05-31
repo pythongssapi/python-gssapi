@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/bin/bash -ex
+
+# build again since I can't figure out how to get travis to recognize the old
+# build in the new container.  The other alternative (besides actually solving
+# the issue) is to run the docs build and tarball generation every time.
+./.travis.sh
 
 source ./.venv/bin/activate
 
@@ -27,7 +32,6 @@ mkdir ./tag_build
 
 # create and checksum the tarball
 
-# no bashisms for portability
 if [ x"${TRAVIS_TAG#v[0-9]}" = "x${TRAVIS_TAG}" ]; then
     PYTHON_GSSAPI_VERSION=${TRAVIS_TAG}
 else
