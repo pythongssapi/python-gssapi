@@ -112,8 +112,8 @@ class Credentials(rcreds.Creds):
                 or None for the default name
             lifetime (int): the desired lifetime of the credentials, or None
                 for indefinite
-            mechs (list): the desired :class:`MechType`s to be used with the
-                credentials, or None for the default set
+            mechs (list): the desired :class:`MechType` OIDs to be used
+                with the credentials, or None for the default set
             usage (str): the usage for the credentials -- either 'both',
                 'initiate', or 'accept'
             store (dict): the credential store information pointing to the
@@ -215,7 +215,7 @@ class Credentials(rcreds.Creds):
             name (Name): the name to impersonate
             lifetime (int): the desired lifetime of the new credentials,
                 or None for indefinite
-            mechs (list): the desired :class:`MechType`s for the new
+            mechs (list): the desired :class:`MechType` OIDs for the new
                 credentials
             usage (str): the desired usage for the new credentials -- either
                 'both', 'initiate', or 'accept'.  Note that some mechanisms

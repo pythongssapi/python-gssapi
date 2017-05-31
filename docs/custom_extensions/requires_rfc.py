@@ -48,7 +48,8 @@ class RequiresExtRole(object):
 
             title_node = nodes.Text(ext_title, ext_title)
 
-            ref_nodes[0].children = [title_node]
+            ref_nodes[0].clear()
+            ref_nodes[0].append(title_node)
 
             middle_parts = ref_nodes
 
