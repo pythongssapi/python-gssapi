@@ -38,7 +38,7 @@ before_deploy:
 deploy:
   - provider: releases
     api_key:
-      secure: U8RPR6liglI4J8MOSEyK9uxvSFRMcCkKLflpIFKcpUFg+PUuK85YtRdOOL/L/pifat9/KvoF7OJEMNTQjoYAhziMu8GGsiPZlkFzXNiy54FxTTtgprkhllRK7nw/jK/hopKM01goKVaUL860aU+KdpfStRTaAy8ZGEj13jwOMYU=
+      secure: e8kjZEY28gWySD5FsnG9CMgeKgFS12gB/xm1Ck1jEgIhYT01VwxvBMHIU7SV/92+aeBao5clN4/qN4P035hD8TShHUMzV7rsmXmqcaCwi3J5sh2hyy4e1PfYAshuX7bxvkfqJSvSonLz0AKHW4pj17yMrTXpWiEioGg0fSLtTHo=
     file_glob: true
     file:
       - tag_build/*
