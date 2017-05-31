@@ -24,9 +24,6 @@ python setup.py build_sphinx --build-dir travis_docs_build
 # clean up
 git clean -Xdf
 
-# until this gets fixed in dpl
-rm setuptools-*.zip
-
 # make the dir
 mkdir ./tag_build
 
