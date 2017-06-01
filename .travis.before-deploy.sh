@@ -25,6 +25,7 @@ python setup.py build_sphinx --build-dir travis_docs_build
 git clean -Xdf
 
 # make the dir
+rm -rf ./tag_build || true
 mkdir ./tag_build
 
 # create and checksum the tarball
