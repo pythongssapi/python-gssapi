@@ -6,7 +6,7 @@ import pickle
 
 import should_be.all  # noqa
 import six
-from nose_parameterized import parameterized
+from parameterized import parameterized
 
 from gssapi import creds as gsscreds
 from gssapi import mechs as gssmechs
