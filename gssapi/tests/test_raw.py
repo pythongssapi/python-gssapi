@@ -644,6 +644,96 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
         new_creds.should_be_a(gb.Creds)
 
+    @ktu.gssapi_extension_test('rfc5587', 'RFC 5587')
+    def test_rfc5587(self):
+        mechs = gb.indicate_mechs_by_attrs(None, None, None)
+
+        mechs.should_be_a(set)
+        mechs.shouldnt_be_empty()
+
+        # We need last_attr to be an attribute on last_mech.
+        # Since mechs is of type set and thus not indexable, these
+        # are used to track the last visited mech for testing
+        # purposes, and saves a call to inquire_attrs_for_mech().
+        last_attr = None
+        last_mech = None
+
+        for mech in mechs:
+            mech.shouldnt_be_none()
+            mech.should_be_a(gb.OID)
+            last_mech = mech
+
+            inquire_out = gb.inquire_attrs_for_mech(mech)
+            mech_attrs = inquire_out.mech_attrs
+            known_mech_attrs = inquire_out.known_mech_attrs
+
+            mech_attrs.should_be_a(set)
+            mech_attrs.shouldnt_be_empty()
+
+            known_mech_attrs.should_be_a(set)
+            known_mech_attrs.shouldnt_be_empty()
+
+            # Verify that we get data for every available
+            # attribute. Testing the contents of a few known
+            # attributes is done in test_display_mech_attr().
+            for mech_attr in mech_attrs:
+                mech_attr.shouldnt_be_none()
+                mech_attr.should_be_a(gb.OID)
+
+                display_out = gb.display_mech_attr(mech_attr)
+                display_out.name.shouldnt_be_none()
+                display_out.short_desc.shouldnt_be_none()
+                display_out.long_desc.shouldnt_be_none()
+                display_out.name.should_be_a(bytes)
+                display_out.short_desc.should_be_a(bytes)
+                display_out.long_desc.should_be_a(bytes)
+
+                last_attr = mech_attr
+
+            for mech_attr in known_mech_attrs:
+                mech_attr.shouldnt_be_none()
+                mech_attr.should_be_a(gb.OID)
+
+                display_out = gb.display_mech_attr(mech_attr)
+                display_out.name.shouldnt_be_none()
+                display_out.short_desc.shouldnt_be_none()
+                display_out.long_desc.shouldnt_be_none()
+                display_out.name.should_be_a(bytes)
+                display_out.short_desc.should_be_a(bytes)
+                display_out.long_desc.should_be_a(bytes)
+
+        attrs = set([last_attr])
+
+        mechs = gb.indicate_mechs_by_attrs(attrs, None, None)
+        mechs.shouldnt_be_empty()
+        mechs.should_include(last_mech)
+
+        mechs = gb.indicate_mechs_by_attrs(None, attrs, None)
+        mechs.shouldnt_include(last_mech)
+
+        mechs = gb.indicate_mechs_by_attrs(None, None, attrs)
+        mechs.shouldnt_be_empty()
+        mechs.should_include(last_mech)
+
+    @ktu.gssapi_extension_test('rfc5587', 'RFC 5587')
+    def test_display_mech_attr(self):
+        test_attrs = [
+            # oid, name, short_desc, long_desc
+            # Taken from krb5/src/tests/gssapi/t_saslname
+            [gb.OID.from_int_seq("1.3.6.1.5.5.13.24"), b"GSS_C_MA_CBINDINGS",
+             b"channel-bindings", b"Mechanism supports channel bindings."],
+            [gb.OID.from_int_seq("1.3.6.1.5.5.13.1"),
+             b"GSS_C_MA_MECH_CONCRETE", b"concrete-mech",
+             b"Mechanism is neither a pseudo-mechanism nor a composite "
+             b"mechanism."]
+        ]
+
+        for attr in test_attrs:
+            display_out = gb.display_mech_attr(attr[0])
+            display_out.name.should_be(attr[1])
+            display_out.short_desc.should_be(attr[2])
+            display_out.long_desc.should_be(attr[3])
+
 
 class TestIntEnumFlagSet(unittest.TestCase):
     def test_create_from_int(self):

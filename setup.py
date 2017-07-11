@@ -258,6 +258,7 @@ setup(
         main_file('chan_bindings'),
         extension_file('s4u', 'gss_acquire_cred_impersonate_name'),
         extension_file('cred_store', 'gss_store_cred_into'),
+        extension_file('rfc5587', 'gss_indicate_mechs_by_attrs'),
         extension_file('rfc5588', 'gss_store_cred'),
         extension_file('cred_imp_exp', 'gss_import_cred'),
         extension_file('dce', 'gss_wrap_iov'),
