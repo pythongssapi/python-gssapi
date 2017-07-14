@@ -82,6 +82,7 @@ if ENABLE_SUPPORT_DETECTION:
     import ctypes.util
 
     main_lib = os.environ.get('GSSAPI_MAIN_LIB', None)
+    main_path = ""
     if main_lib is None and osx_has_gss_framework:
         main_lib = ctypes.util.find_library('GSS')
     elif main_lib is None:
@@ -89,12 +90,16 @@ if ENABLE_SUPPORT_DETECTION:
             if opt.startswith('-lgssapi'):
                 main_lib = 'lib%s.so' % opt[2:]
 
+            # To support Heimdal on Debian, read the linker path.
+            if opt.startswith('-Wl,/'):
+                main_path = opt[4:] + "/"
+
     if main_lib is None:
         raise Exception("Could not find main GSSAPI shared library.  Please "
                         "try setting GSSAPI_MAIN_LIB yourself or setting "
                         "ENABLE_SUPPORT_DETECTION to 'false'")
 
-    GSSAPI_LIB = ctypes.CDLL(main_lib)
+    GSSAPI_LIB = ctypes.CDLL(main_path + main_lib)
 
 
 # add in the flag that causes us not to compile from Cython when
