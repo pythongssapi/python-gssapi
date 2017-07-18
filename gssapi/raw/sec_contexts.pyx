@@ -107,6 +107,10 @@ cdef class SecurityContext:
 
             self.raw_ctx = NULL
 
+    def copy_from(self, SecurityContext other):
+        self.raw_ctx = other.raw_ctx
+        other.raw_ctx = NULL
+
 
 # TODO(directxman12): figure out whether GSS_C_NO_NAME can be passed in here
 def init_sec_context(Name target_name not None, Creds creds=None,

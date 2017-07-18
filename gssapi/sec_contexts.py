@@ -4,11 +4,14 @@ from gssapi.raw import sec_contexts as rsec_contexts
 from gssapi.raw import message as rmessage
 from gssapi.raw import named_tuples as tuples
 from gssapi.raw.types import RequirementFlag, IntEnumFlagSet
+from gssapi._utils import import_gssapi_extension
 
 import gssapi.exceptions as excs
 from gssapi import _utils
 from gssapi.names import Name
 from gssapi.creds import Credentials
+
+rchannel_bindings = import_gssapi_extension('channel_bindings')
 
 
 @six.add_metaclass(_utils.CheckLastError)
@@ -32,11 +35,13 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         if token is not None:
             base = rsec_contexts.import_sec_context(token)
+        elif rchannel_bindings is not None and base is None:
+            base = rchannel_bindings.create_sec_context()
 
         return super(SecurityContext, cls).__new__(cls, base)
 
-    def __init__(self, base=None, token=None,
-                 name=None, creds=None, lifetime=None, flags=None,
+    def __init__(self, base=None, token=None, name=None, creds=None,
+                 lifetime=None, flags=None, ret_flags_understood=None,
                  mech=None, channel_bindings=None, usage=None):
         """
         The constructor creates a new security context, but does not begin
@@ -66,6 +71,8 @@ class SecurityContext(rsec_contexts.SecurityContext):
 
         # NB(directxman12): _last_err must be set first
         self._last_err = None
+        self._desired_flags = 0
+        self._understood_flags = 0
 
         # determine the usage ('initiate' vs 'accept')
         if base is None and token is None:
@@ -95,6 +102,8 @@ class SecurityContext(rsec_contexts.SecurityContext):
                 self._target_name = name
                 self._mech = mech
                 self._desired_flags = IntEnumFlagSet(RequirementFlag, flags)
+                self._understood_flags = IntEnumFlagSet(RequirementFlag,
+                                                        ret_flags_understood)
                 self._desired_lifetime = lifetime
             else:
                 # takes creds?
@@ -103,6 +112,14 @@ class SecurityContext(rsec_contexts.SecurityContext):
                     raise TypeError("You must pass at most the 'creds' "
                                     "argument when creating an accepting "
                                     "security context")
+
+            if rchannel_bindings is not None:
+                i_flags = int(self._desired_flags)
+                i_ret_flags = int(self._understood_flags)
+
+                if flags is not None or ret_flags_understood is not None:
+                    rchannel_bindings.set_context_flags(self, i_flags,
+                                                        i_ret_flags)
 
             self._channel_bindings = channel_bindings
             self._creds = creds
