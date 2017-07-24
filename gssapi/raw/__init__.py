@@ -81,6 +81,12 @@ try:
 except ImportError:
     pass
 
+# optional RFC 5801 support
+try:
+    from gssapi.raw.ext_rfc5801 import *  # noqa
+except ImportError:
+    pass
+
 try:
     from gssapi.raw.ext_cred_imp_exp import *  # noqa
 except ImportError:

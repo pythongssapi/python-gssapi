@@ -70,3 +70,7 @@ InquireAttrsResult = namedtuple('InquireAttrsResult',
 
 DisplayAttrResult = namedtuple('DisplayAttrResult', ['name', 'short_desc',
                                                      'long_desc'])
+
+InquireSASLNameResult = namedtuple('InquireSASLNameResult',
+                                   ['sasl_mech_name', 'mech_name',
+                                    'mech_description'])

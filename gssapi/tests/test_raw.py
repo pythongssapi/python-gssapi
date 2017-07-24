@@ -734,6 +734,32 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
             display_out.short_desc.should_be(attr[2])
             display_out.long_desc.should_be(attr[3])
 
+    @ktu.gssapi_extension_test('rfc5801', 'SASL Names')
+    def test_sasl_names(self):
+        mechs = gb.indicate_mechs()
+
+        for mech in mechs:
+            out = gb.inquire_saslname_for_mech(mech)
+
+            out_smn = out.sasl_mech_name
+            out_smn.shouldnt_be_none()
+            out_smn.should_be_a(bytes)
+            out_smn.shouldnt_be_empty()
+
+            out_mn = out.mech_name
+            out_mn.shouldnt_be_none()
+            out_mn.should_be_a(bytes)
+            out_mn.shouldnt_be_empty()
+
+            out_md = out.mech_description
+            out_md.shouldnt_be_none()
+            out_md.should_be_a(bytes)
+            out_md.shouldnt_be_empty()
+
+            cmp_mech = gb.inquire_mech_for_saslname(out_smn)
+            cmp_mech.shouldnt_be_none()
+            cmp_mech.should_be(mech)
+
 
 class TestIntEnumFlagSet(unittest.TestCase):
     def test_create_from_int(self):
