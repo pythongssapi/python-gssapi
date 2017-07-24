@@ -9,6 +9,7 @@ import six
 from nose_parameterized import parameterized
 
 from gssapi import creds as gsscreds
+from gssapi import mechs as gssmechs
 from gssapi import names as gssnames
 from gssapi import sec_contexts as gssctx
 from gssapi import raw as gb
@@ -367,6 +368,61 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
         new_creds.shouldnt_be(None)
         new_creds.should_be_a(gsscreds.Credentials)
+
+
+class MechsTestCase(_GSSAPIKerberosTestCase):
+    def test_indicate_mechs(self):
+        mechs = gssmechs.Mechanism.all_mechs()
+        for mech in mechs:
+            s = str(mech)
+            s.shouldnt_be_empty()
+
+    @ktu.gssapi_extension_test('rfc5801', 'RFC 5801: SASL Names')
+    def test_sasl_properties(self):
+        mechs = gssmechs.Mechanism.all_mechs()
+        encoding = gssutils._get_encoding()
+        for mech in mechs:
+            s = str(mech)
+            s.shouldnt_be_empty()
+            s.should_be_a(str)
+            s.should_be(mech._saslname.mech_name.decode(encoding))
+
+            mech.sasl_name.shouldnt_be_empty()
+            mech.sasl_name.should_be_a(six.text_type)
+
+            mech.description.shouldnt_be_empty()
+            mech.description.should_be_a(six.text_type)
+
+            cmp_mech = gssmechs.Mechanism.from_sasl_name(mech.sasl_name)
+            str(cmp_mech).should_be(str(mech))
+
+    @ktu.gssapi_extension_test('rfc5587', 'RFC 5587: Mech Inquiry')
+    def test_mech_inquiry(self):
+        mechs = list(gssmechs.Mechanism.all_mechs())
+        c = len(mechs)
+        for mech in mechs:
+            attrs = mech.attrs
+            known_attrs = mech.known_attrs
+
+            for attr in attrs:
+                from_desired = gssmechs.Mechanism.from_attrs(m_desired=[attr])
+                from_except = gssmechs.Mechanism.from_attrs(m_except=[attr])
+
+                from_desired = list(from_desired)
+                from_except = list(from_except)
+
+                (len(from_desired) + len(from_except)).should_be(c)
+                from_desired.should_include(mech)
+                from_except.shouldnt_include(mech)
+
+            for attr in known_attrs:
+                from_desired = gssmechs.Mechanism.from_attrs(m_desired=[attr])
+                from_except = gssmechs.Mechanism.from_attrs(m_except=[attr])
+
+                from_desired = list(from_desired)
+                from_except = list(from_except)
+
+                (len(from_desired) + len(from_except)).should_be(c)
 
 
 class NamesTestCase(_GSSAPIKerberosTestCase):
