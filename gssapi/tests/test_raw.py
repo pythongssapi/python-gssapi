@@ -1353,3 +1353,13 @@ class TestOIDTransforms(unittest.TestCase):
             int_seq = oid['string'].split('.')
             o = gb.OID.from_int_seq(int_seq)
             o.__bytes__().should_be(oid['bytes'])
+
+    def test_comparisons(self):
+        krb5 = gb.OID.from_int_seq(TEST_OIDS['KRB5']['string'])
+        krb5_other = gb.OID.from_int_seq(TEST_OIDS['KRB5']['string'])
+        spnego = gb.OID.from_int_seq(TEST_OIDS['SPNEGO']['string'])
+
+        (krb5 == krb5_other).should_be(True)
+        (krb5 == spnego).should_be(False)
+        (krb5 != krb5_other).should_be(False)
+        (krb5 != spnego).should_be(True)

@@ -155,7 +155,7 @@ cdef class OID:
         return hash(self.__bytes__())
 
     def __richcmp__(OID self, OID other, op):
-        if op == 2 or op == 3:  # ==
+        if op == 2:  # ==
             return c_compare_oids(&self.raw_oid, &other.raw_oid)
         elif op == 3:  # !=
             return not c_compare_oids(&self.raw_oid, &other.raw_oid)
