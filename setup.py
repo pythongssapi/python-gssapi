@@ -263,6 +263,7 @@ setup(
         extension_file('cred_imp_exp', 'gss_import_cred'),
         extension_file('dce', 'gss_wrap_iov'),
         extension_file('iov_mic', 'gss_get_mic_iov'),
+        extension_file('channel_bindings', 'gss_create_sec_context'),
 
         # see ext_rfc6680_comp_oid for more information on this split
         extension_file('rfc6680', 'gss_display_name_ext'),

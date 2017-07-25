@@ -113,3 +113,9 @@ try:
     from gssapi.raw.ext_rfc6680_comp_oid import *  # noqa
 except ImportError:
     pass
+
+# optional Channel Bound Flag support
+try:
+    from gssapi.raw.ext_channel_bindings import *  # noqa
+except ImportError:
+    pass

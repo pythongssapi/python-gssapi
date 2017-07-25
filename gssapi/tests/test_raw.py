@@ -734,6 +734,128 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
             display_out.short_desc.should_be(attr[2])
             display_out.long_desc.should_be(attr[3])
 
+    def helper_cb_check(self, req_flags, init_ret_flags_understood,
+                        accept_ret_flags_understood, init_cb, accept_cb,
+                        m_init_ret_flags,
+                        e_init_ret_flags, m_accept_ret_flags,
+                        e_accept_ret_flags):
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+
+        server_creds = gb.acquire_cred(None)[0]
+
+        init_ctx = gb.create_sec_context()
+        init_ctx.shouldnt_be_none()
+        init_ctx.should_be_a(gb.SecurityContext)
+
+        gb.set_context_flags(init_ctx, req_flags,
+                             init_ret_flags_understood)
+
+        accept_ctx = gb.create_sec_context()
+        accept_ctx.shouldnt_be_none()
+        accept_ctx.should_be_a(gb.SecurityContext)
+
+        gb.set_context_flags(accept_ctx, req_flags,
+                             accept_ret_flags_understood)
+
+        init_cont_needed = True
+        accept_cont_needed = True
+
+        init_token = None
+        accept_token = None
+
+        init_ret_flags = 0
+        accept_ret_flags = 0
+
+        while True:
+            ctx_resp = None
+            ctx_resp = gb.init_sec_context(target_name=target_name,
+                                           context=init_ctx,
+                                           input_token=accept_token,
+                                           channel_bindings=init_cb)
+            ctx_resp.shouldnt_be_none()
+
+            (init_ctx, _, init_ret_flags, init_token, _,
+             init_cont_needed) = ctx_resp
+
+            if not accept_cont_needed:
+                break
+
+            ctx_resp = gb.accept_sec_context(init_token, context=accept_ctx,
+                                             acceptor_creds=server_creds,
+                                             channel_bindings=accept_cb)
+            ctx_resp.shouldnt_be_none()
+
+            (ctx, _, _, accept_token, accept_ret_flags, _,
+             _, accept_cont_needed) = ctx_resp
+
+            if not init_cont_needed:
+                break
+
+        if ((int(init_ret_flags) & m_init_ret_flags) != e_init_ret_flags):
+            return False
+
+        if ((int(accept_ret_flags) & m_accept_ret_flags) !=
+                e_accept_ret_flags):
+            return False
+
+        gb.delete_sec_context(init_ctx)
+        gb.delete_sec_context(accept_ctx)
+        gb.release_cred(server_creds)
+        gb.release_name(target_name)
+
+        return True
+
+    @ktu.gssapi_extension_test('channel_bindings', 'Channel Bindings')
+    def test_cb_semantics(self):
+        f_mutual = gb.types.RequirementFlag.mutual_authentication
+        f_cb = gb.types.RequirementFlag.channel_bound
+        f_both = f_mutual | f_cb
+
+        cb = gb.ChannelBindings(application_data=b'test',
+                                initiator_address_type=gb.AddressType.ip,
+                                initiator_address=b'127.0.0.1',
+                                acceptor_address_type=gb.AddressType.ip,
+                                acceptor_address=b'127.0.0.1')
+
+        cb_fail = gb.ChannelBindings(application_data=b'fail',
+                                     initiator_address_type=gb.AddressType.ip,
+                                     initiator_address=b'127.0.0.1',
+                                     acceptor_address_type=gb.AddressType.ip,
+                                     acceptor_address=b'127.0.0.1')
+
+        bad_bindings = gb.exceptions.BadChannelBindingsError
+
+        tests = [
+            # ret_error, req_flags, init_ret_flags_understood,
+            # accept_ret_flags_understood, init_cb, accept_cb,
+            # m_init_ret_flags, e_init_ret_flags,
+            # m_accept_ret_flags, e_accept_ret_flags
+
+            # These tests are in the same order as t_channel_bindings.c
+            [0, 0, 0, 0, None, None, 0, 0, 0, 0],
+            [bad_bindings, f_both, 0, 0, cb, cb_fail, f_cb, 0, f_cb, 0],
+            [bad_bindings, f_both, 0, 0, None, cb, f_cb, 0, f_cb, 0],
+            [0, f_both, 0, 0, cb, cb, f_cb, 0, f_cb, f_cb],
+            [0, f_both, 0, 0, cb, None, f_cb, 0, f_cb, 0],
+            [0, f_both, f_cb, f_cb, cb, None, f_cb, 0, f_cb, 0],
+            [0, f_both, f_cb, f_cb, None, None, f_cb, 0, f_cb, 0],
+            [0, f_both, f_cb, f_cb, None, cb, f_cb, 0, f_cb, 0],
+            [0, f_both, f_cb, f_cb, cb, cb, f_cb, 0, f_cb, f_cb],
+        ]
+
+        for test in tests:
+            if test[0] == 0:
+                res = self.helper_cb_check(test[1], test[2], test[3], test[4],
+                                           test[5], test[6], test[7], test[8],
+                                           test[9])
+                res.should_be(True)
+            else:
+                self.helper_cb_check.should_raise(test[0], test[1], test[2],
+                                                  test[3], test[4], test[5],
+                                                  test[6], test[7], test[8],
+                                                  test[9])
+
 
 class TestIntEnumFlagSet(unittest.TestCase):
     def test_create_from_int(self):

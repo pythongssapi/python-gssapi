@@ -1,4 +1,4 @@
-from libc.stdint cimport uint32_t
+from libc.stdint cimport uint32_t, uint64_t
 
 
 cdef extern from "python_gssapi.h":
