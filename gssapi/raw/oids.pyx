@@ -32,11 +32,20 @@ cdef class OID:
     # cdef bint _free_on_dealloc = NULL
 
     def __cinit__(OID self, OID cpy=None, elements=None):
+        """
+        Note: cpy is named such for historical reasons. To perform a deep
+        copy, specify the elements parameter; this will copy the value of the
+        OID. To perform a shallow copy and take ownership of an existing OID,
+        use the cpy (default) argument.
+        """
         if cpy is not None and elements is not None:
             raise TypeError("Cannot instantiate a OID from both a copy and "
                             " a new set of elements")
         if cpy is not None:
             self.raw_oid = cpy.raw_oid
+            # take ownership of this OID (for dynamic cases)
+            self._free_on_dealloc = cpy._free_on_dealloc
+            cpy._free_on_dealloc = False
 
         if elements is None:
             self._free_on_dealloc = False
