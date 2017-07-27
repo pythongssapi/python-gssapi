@@ -156,9 +156,12 @@ cdef class OID:
             pos += 1
         return decoded
 
+    @property
+    def dotted_form(self):
+        return '.'.join(str(x) for x in self._decode_asn1ber())
+
     def __repr__(self):
-        dotted_oid = '.'.join(str(x) for x in self._decode_asn1ber())
-        return "<OID {0}>".format(dotted_oid)
+        return "<OID {0}>".format(self.dotted_form)
 
     def __hash__(self):
         return hash(self.__bytes__())
