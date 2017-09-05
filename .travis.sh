@@ -25,19 +25,22 @@ if [ -f /etc/debian_version ]; then
     source ./.venv/bin/activate
 elif [ -f /etc/redhat-release ]; then
     # yum has no update-only verb
+    function yuminst() {
+        yum -y --nogpgcheck install $@
+    }
 
-    yum -y install krb5-{devel,libs,server,workstation} which gcc findutils
+    yuminst krb5-{devel,libs,server,workstation} which gcc findutils
 
     if [ -f /etc/fedora-release ]; then
         # path to binary here in case Rawhide changes it
-        yum install -y redhat-rpm-config \
+        yuminst redhat-rpm-config \
             /usr/bin/virtualenv python${PYTHON}-{virtualenv,devel}
         virtualenv -p $(which python${PYTHON}) .venv
         source ./.venv/bin/activate
         pip install --install-option='--no-cython-compile' cython
     else
         # Cython on el7 is too old - downstream patches
-        yum install -y python$IS3-{virtualenv,devel}
+        yuminst python$IS3-{virtualenv,devel}
         virtualenv -p $(which python$IS3) .venv
         source ./.venv/bin/activate
         pip install --upgrade pip # el7 pip doesn't quite work right
