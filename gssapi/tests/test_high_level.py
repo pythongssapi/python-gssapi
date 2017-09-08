@@ -651,7 +651,8 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
     def test_initiate_accept_steps(self):
         client_ctx, server_ctx = self._create_completed_contexts()
 
-        server_ctx.lifetime.should_be_at_most(400)
+        # KDC may allow for clockskew by increasing acceptor context lifetime
+        server_ctx.lifetime.should_be_at_most(400 + 300)
         server_ctx.initiator_name.should_be(client_ctx.initiator_name)
         server_ctx.mech.should_be_a(gb.OID)
         server_ctx.actual_flags.should_be_a(gb.IntEnumFlagSet)
