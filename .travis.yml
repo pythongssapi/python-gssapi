@@ -51,9 +51,9 @@ deploy:
     skip_cleanup: true
   - provider: pypi
     user:
-      secure: gMwGf6Zt2BuPHN6Qy4feaJaZQBIYZ1lZIdFcpugyhnWtxytzwApx2LTXqHgdaVK7Ik6Xk97RmWS5SyciKmC2V1nyaHCX/f31QZAD3TrLqhScPtvE6j9j/srJhDBjp5yAT8NENMykeSvoIhiidw1tPzWYRW9c93roaOUv6Kqd3zc=
+      secure: "c00ALag2DKlSDbpuldoyYenA1+8J+T3tyQ1dTozEBqr57uvVqH8ACaeN3BM0QWVssYpQRgM28CVDrELLA2OS/cdAzdC4GH6E7uMwlYMop3eJD0LMyl4hMaejOAeDfe9HOJy2QqyXPM1OCdGYJ9N1G14TDuZCu14r1udEkscEG2I="
     password:
-      secure: D0lX+DRVac2GN3bZuKxd45DluBrcvwMfV+cciannEJ39kjbHTQEdpi0Uv92rDLNicjqyjy9rAEP7UAQQ1GDOvZcN5OG1+uWU1tSV84uKPgT92YbbQQdHRs/Rh3KSHKeaiJ+3TTDSeBuXYgWRs2gCeVAb18LBYjtIHLZxCFB8ln0=
+      secure: "GTuDbZAVsV9oIBG3dnmLuh/UdXUDyEvu6J7Nl92xpf9Fh9OznZwE0mgBGqUfi27lAdFq52NMbX4CtiQSiExUBi+CztGI3xuVPSvGewZ4ChAD3eu7028dtSzuLckJztjnBiWVRZq06J1ibFmzWsOKYhFZc5PCmisudLa4Zm2htAg="
     on:
       repo: pythongssapi/python-gssapi
       tags: true
