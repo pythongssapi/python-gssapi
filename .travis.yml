@@ -14,49 +14,63 @@ env:
   - DISTRO=fedora:rawhide PYTHON="3"
   - DISTRO=fedora:rawhide PYTHON="2"
 
+# we do everything in docker
+install: skip
+before_install: skip
+
+stages:
+- verify
+- test
+- name: deploy
+  if: tag is PRESENT
+
 script:
   - sudo sed -i '1i 127.0.0.1 test.box' /etc/hosts
   - sudo hostname test.box
-  - >
-    docker run
-    -v `pwd`:/tmp/build
-    -w /tmp/build
-    -e KRB5_VER=$KRB5_VER
-    -e PYTHON=$PYTHON
-    $DISTRO
-    /bin/bash -ex .travis.sh
+  - source ./.travis/lib-util.sh
+  - util::docker-run $DISTRO ./.travis/build.sh
 
-before_deploy:
-  - >
-    docker run
-    -v `pwd`:/tmp/build
-    -w /tmp/build
-    -e TRAVIS_TAG=$TRAVIS_TAG
-    -e PKG_NAME_VER=$PKG_NAME_VER
-    -e KRB5_VER=$KRB5_VER
-    -e PYTHON=$PYTHON
-    $DISTRO
-    /bin/bash -ex .travis.before-deploy.sh
-deploy:
-  - provider: releases
-    api_key:
-      secure: e8kjZEY28gWySD5FsnG9CMgeKgFS12gB/xm1Ck1jEgIhYT01VwxvBMHIU7SV/92+aeBao5clN4/qN4P035hD8TShHUMzV7rsmXmqcaCwi3J5sh2hyy4e1PfYAshuX7bxvkfqJSvSonLz0AKHW4pj17yMrTXpWiEioGg0fSLtTHo=
-    file_glob: true
-    file:
-      - tag_build/*
-    on:
-      repo: pythongssapi/python-gssapi
-      tags: true
-      condition: "$DISTRO = 'fedora:rawhide' && $PYTHON = '3'"
-    skip_cleanup: true
-  - provider: pypi
-    user:
-      secure: gMwGf6Zt2BuPHN6Qy4feaJaZQBIYZ1lZIdFcpugyhnWtxytzwApx2LTXqHgdaVK7Ik6Xk97RmWS5SyciKmC2V1nyaHCX/f31QZAD3TrLqhScPtvE6j9j/srJhDBjp5yAT8NENMykeSvoIhiidw1tPzWYRW9c93roaOUv6Kqd3zc=
-    password:
-      secure: D0lX+DRVac2GN3bZuKxd45DluBrcvwMfV+cciannEJ39kjbHTQEdpi0Uv92rDLNicjqyjy9rAEP7UAQQ1GDOvZcN5OG1+uWU1tSV84uKPgT92YbbQQdHRs/Rh3KSHKeaiJ+3TTDSeBuXYgWRs2gCeVAb18LBYjtIHLZxCFB8ln0=
-    on:
-      repo: pythongssapi/python-gssapi
-      tags: true
-      condition: "$DISTRO = 'fedora:rawhide' && $PYTHON = '3'"
-    skip_cleanup: true
-    docs_dir: travis_docs_build/html
+jobs:
+  include:
+  - stage: verify
+    env: DISTRO=fedora:rawhide PYTHON="2"
+    script:
+    - source ./.travis/lib-util.sh
+    - util::docker-run $DISTRO ./.travis/verify.sh
+
+  - stage: verify
+    env: DISTRO=fedora:rawhide PYTHON="3"
+    script:
+    - source ./.travis/lib-util.sh
+    - util::docker-run $DISTRO ./.travis/verify.sh
+
+  - stage: deploy
+    script: skip
+    env: DISTRO=fedora:rawhide PYTHON="3"
+    before_deploy:
+    - source ./.travis/lib-util.sh
+    - util::docker-run $DISTRO ./.travis/before-deploy.sh
+    - ls -alR `pwd`
+
+    deploy:
+    - provider: releases
+      api_key:
+        secure: e8kjZEY28gWySD5FsnG9CMgeKgFS12gB/xm1Ck1jEgIhYT01VwxvBMHIU7SV/92+aeBao5clN4/qN4P035hD8TShHUMzV7rsmXmqcaCwi3J5sh2hyy4e1PfYAshuX7bxvkfqJSvSonLz0AKHW4pj17yMrTXpWiEioGg0fSLtTHo=
+      file_glob: true
+      file:
+        - tag_build/*
+      skip_cleanup: true
+      on:
+        all_branches: true
+
+    - provider: pypi
+      user:
+        secure: "jUAMucBq+9xH8x9u0I0LOwrs3Zb++KN7FwIIwz2CyAt/+TyyrJzeGJaV+dTiJ1OqcUIFqQG6jopzpnAe4biL1O68PEwz9BphKetFLpLHiFNm/n67LYno6NFonWmxndIy99pOP6NZu29nzSNeYq/KgEHo/5OkqEGOxk//lh7X/OY="
+      password:
+        secure: "ZqywwnR+G5VeM2sStwfLeutOvqbULHtnStjrdYc8WcC/FBVwmH/W48fTlvxrnswmfKx7Eljv0nN4VcBpoFf1tvz4O2oK/tCRpf0N8SvpT0jBx8bLGUxJ1/3Po6rFgBRWgSb/mzKHPKI6fLlQNcNg8lrd9e1j/zgbVRSwNeMUOR8="
+      skip_cleanup: true
+      docs_dir: travis_docs_build/html
+      on:
+        all_branches: true
+      # NB(directxman12): this is a hack.  Check ./.travis/before-deploy.sh for an explanation.
+      distributions: "check"
