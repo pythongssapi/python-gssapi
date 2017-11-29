@@ -11,7 +11,7 @@ verify::flake8() {
     # E225: missing whitespace around operator
     # E226: missing whitespace around arithmetic operator
     # E227: missing whitespace around bitwise or shift operator
-    # E402: module level import not at top of file
+    # E402: module level import not at top of file (needed for the `GSSAPI="blah" lines)
     # E901: SyntaxError or IndentationError
     # E999: Internal AST compilation error (flake8 specific)
     flake8 gssapi --filename='*.pyx,*.pxd' --ignore=E225,E226,E227,E402,E901,E999
