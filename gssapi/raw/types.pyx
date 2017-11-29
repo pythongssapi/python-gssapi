@@ -144,15 +144,15 @@ class GenericFlagSet(collections.MutableSet):
 
     def __len__(self):
         # get the Hamming weight of _val
-        cdef unsigned int l = 0
+        cdef unsigned int size = 0
         cdef unsigned int i = 1
         while i < self.MAX_VAL:
             if i & self._val:
-                l += 1
+                size += 1
 
             i <<= 1
 
-        return l
+        return size
 
     def add(self, flag):
         self._val |= flag

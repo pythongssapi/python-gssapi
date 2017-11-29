@@ -29,15 +29,15 @@ cdef gss_OID_set c_get_mech_oid_set(object mechs):
 cdef object c_create_oid_set(gss_OID_set mech_set, bint free=True):
     """Convert a GSS OID set struct to a set of OIDs"""
 
-    l = set()
+    py_set = set()
     cdef i
     for i in range(mech_set.count):
         mech_type = OID()
         mech_type._copy_from(mech_set.elements[i])
-        l.add(mech_type)
+        py_set.add(mech_type)
 
     cdef OM_uint32 tmp_min_stat
     if free:
         gss_release_oid_set(&tmp_min_stat, &mech_set)
 
-    return l
+    return py_set
