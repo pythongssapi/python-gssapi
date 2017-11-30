@@ -1,6 +1,7 @@
 #!/bin/bash -ex
 
 source ./.travis/lib-setup.sh
+source ./.travis/lib-deploy.sh
 
 # build again since I can't figure out how to get travis to recognize the old
 # build in the new container.  The other alternative (besides actually solving
@@ -13,15 +14,7 @@ setup::activate
 yum -y install tar coreutils git
 
 # build the docs
-# the first run is for the docs build, so don't clean up
-pip install -r docs-requirements.txt
-
-# install dependencies so that sphinx doesn't have issues
-# (this actually just installs the whole package in dev mode)
-pip install -e .
-
-# place in a non-standard location so that they don't get cleaned up
-python setup.py build_sphinx --build-dir travis_docs_build
+deploy::build-docs
 
 # NB(directxman12): this is a *terrible* hack, but basically,
 # dpl (the Travis deployer) uses `twine` instead of `setup.py sdist upload`.
