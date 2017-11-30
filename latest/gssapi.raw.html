@@ -217,7 +217,7 @@ a full form name specific to a mechanism.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to canonicalize</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to canonicalize</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the mechanism type to use to
 canonicalize the name</li>
 </ul>
@@ -226,7 +226,7 @@ canonicalize the name</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a canonicalized version of the input name</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name">Name</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name">Name</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -251,8 +251,8 @@ see if they are equivalent.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name1</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the first name to compare</li>
-<li><strong>name2</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the second name to compare</li>
+<li><strong>name1</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the first name to compare</li>
+<li><strong>name2</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the second name to compare</li>
 </ul>
 </td>
 </tr>
@@ -285,7 +285,7 @@ returned name type will be <code class="docutils literal"><span class="pre">None
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name in question</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name in question</li>
 <li><strong>name_type</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to retrieve the name type</li>
 </ul>
 </td>
@@ -311,11 +311,11 @@ returned name type will be <code class="docutils literal"><span class="pre">None
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to duplicate</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to duplicate</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a duplicate of the input name</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name">Name</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name">Name</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#gssapi.raw.exceptions.BadNameError" title="gssapi.raw.exceptions.BadNameError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameError</span></code></a></td>
 </tr>
@@ -336,7 +336,7 @@ by <a class="reference internal" href="#gssapi.raw.names.canonicalize_name" titl
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to export</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to export</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the exported name</p>
@@ -368,14 +368,14 @@ them into a GSSAPI <a class="reference internal" href="#gssapi.raw.names.Name" t
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<em>bytes</em>) – the string version of the name</li>
-<li><strong>name_type</strong> (<a class="reference internal" href="#gssapi.raw.types.NameType" title="gssapi.raw.types.NameType"><em>NameType</em></a>) – the type of this name</li>
+<li><strong>name_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.NameType" title="gssapi.NameType"><em>NameType</em></a>) – the type of this name</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the GSSAPI version of the name</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name">Name</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name">Name</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -404,7 +404,7 @@ automatically freed by Python.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name in question</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name in question</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#gssapi.raw.exceptions.BadNameError" title="gssapi.raw.exceptions.BadNameError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameError</span></code></a></td>
 </tr>
@@ -433,7 +433,7 @@ be specified.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name for which to acquire the credentials (or None
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name for which to acquire the credentials (or None
 for the “no name” functionality)</li>
 <li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials (or None for
 indefinite)</li>
@@ -478,7 +478,7 @@ and new credential), or to add a new element to an existing credential.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>input_cred</strong> (<em>Cred</em>) – the set of credentials to which to add the new
 credentials</li>
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – name of principal to acquire a credential for</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – name of principal to acquire a credential for</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired security mechanism (required).</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – usage type for credentials.  Possible values:
 ‘initiate’ (default), ‘accept’, ‘both’ (failsafe).</li>
@@ -831,7 +831,7 @@ of the last call, as well as the input token received from the acceptor.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>target_name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the target for the security context</li>
+<li><strong>target_name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the target for the security context</li>
 <li><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to use to initiate the context,
 or None to use the default credentials</li>
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security context to update, or
@@ -1297,7 +1297,7 @@ process the given name.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name in question</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name in question</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the mechanism OIDs able to process the given name</td>
 </tr>
@@ -1739,7 +1739,7 @@ or stores.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>store</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – the credential store information pointing to the
 credential store from which to acquire the credentials</li>
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name associated with the credentials,
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials,
 or None for the default name</li>
 <li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired lifetime of the credentials, or None
 for indefinite</li>
@@ -1787,7 +1787,7 @@ or stores.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>store</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – the store into which to store the credentials,
 or None for the default store.</li>
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name associated with the credentials</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired mechanism to be used with these
 credentials</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
@@ -1875,7 +1875,7 @@ operation instead of an ‘add’ operation).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to remove the attribute from</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to remove the attribute from</li>
 <li><strong>attr</strong> (<em>bytes</em>) – the name of the attribute</li>
 </ul>
 </td>
@@ -1902,7 +1902,7 @@ will be raised.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to display</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to display</li>
 <li><strong>name_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the name type (see NameType) to use to
 display the given name</li>
 </ul>
@@ -1940,7 +1940,7 @@ using the normal export name type.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to export</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to export</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the exported composite name</td>
 </tr>
@@ -1966,7 +1966,7 @@ multiple calls to retrieve multiple values).</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the Name from which to get the attribute</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the Name from which to get the attribute</li>
 <li><strong>attr</strong> (<em>bytes</em>) – the name of the attribute</li>
 </ul>
 </td>
@@ -2005,7 +2005,7 @@ a mechanism name, the associated mechansim is returned as well.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name about which to inquire</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name about which to inquire</li>
 <li><strong>mech_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to retrieve if this name
 is a mech_name (and the associate mechanism)</li>
 <li><strong>attrs</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to retrieve the attribute name list</li>
@@ -2046,7 +2046,7 @@ used in between calls to “clear” the values.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the Name on which to set the attribute</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the Name on which to set the attribute</li>
 <li><strong>attr</strong> (<em>bytes</em>) – the name of the attribute</li>
 <li><strong>value</strong> (<em>list</em>) – a list of bytes objects to use as the value(s)</li>
 <li><strong>complete</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to mark this attribute’s value
@@ -2500,7 +2500,7 @@ impersonator credentials must have a usage of ‘both’ or ‘initiate’.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>impersonator_cred</strong> (<em>Cred</em>) – the credentials with permissions to
 impersonate the target name</li>
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to impersonate</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to impersonate</li>
 <li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials (or None for
 indefinite)</li>
 <li><strong>mechs</strong> (<em>[</em><a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a><em>]</em>) – the desired mechanisms for which the credentials
@@ -2542,7 +2542,7 @@ proxy credentials.  The impersonator credentials must have a usage of
 credentials</li>
 <li><strong>impersonator_cred</strong> (<em>Cred</em>) – the credentials with permissions to
 impersonate the target name</li>
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to impersonate</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to impersonate</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired mechanism.  Note that this is both
 singular and required, unlike acquireCredImpersonateName</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage type for the credentials: may be
@@ -2586,7 +2586,7 @@ MIT or Heimdal.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to acquire credentials for</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to acquire credentials for</li>
 <li><strong>password</strong> (<em>bytes</em>) – the password used to acquire credentialss with</li>
 <li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials (or None for
 indefinite)</li>
@@ -2625,7 +2625,7 @@ MIT or Heimdal.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>input_cred</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to add to</li>
-<li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to acquire credentials for</li>
+<li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to acquire credentials for</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired mechanism.  Note that this is both
 singular and required</li>
 <li><strong>password</strong> (<em>bytes</em>) – the password used to acquire credentialss with</li>

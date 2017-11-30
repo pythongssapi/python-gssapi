@@ -325,7 +325,7 @@ to the given mechanism.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the canonicalized name</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name">Name</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name">Name</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -452,7 +452,7 @@ extension.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name associated with the credentials,
+<li><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials,
 or None for the default name</li>
 <li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired lifetime of the credentials, or None
 for indefinite</li>
@@ -548,7 +548,7 @@ name using the current credentials.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to impersonate</li>
+<li><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to impersonate</li>
 <li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired lifetime of the new credentials,
 or None for indefinite</li>
 <li><strong>mechs</strong> (<em>list</em>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> OIDs for the new
@@ -669,7 +669,7 @@ or stores.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name associated with the
+<li><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the
 credentials</li>
 <li><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to be used with the
 credentials</li>
