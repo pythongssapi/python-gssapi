@@ -21,6 +21,8 @@ before_install: skip
 stages:
 - verify
 - test
+- name: deploy latest docs
+  if: (branch = master OR branch =~ ^infra/$) AND type = push
 - name: deploy
   if: tag is PRESENT
 
@@ -44,9 +46,30 @@ jobs:
     - source ./.travis/lib-util.sh
     - util::docker-run $DISTRO ./.travis/verify.sh
 
+  - stage: deploy latest docs
+    script: skip
+    env:
+    - DISTRO=fedora:rawhide
+    - PYTHON="3"
+    - secure: L5SpEj5+no20PWwC9Y/XNhAfmUvYiuykwSMa/YyqvUuBjdizzpZcHr7Ego5nMdM1TniTxj4pSTM+GbM0FHCzNmAINSRh9g/D3hheRqlRBacqR0XwC9ZZRvkKvtzwnLh4vYWiauq4AoDeR5U6tkEcay6LjE57iMQcLjcKYBc+Eos=
+    before_deploy:
+    - source ./.travis/lib-util.sh
+    - util::docker-run $DISTRO ./.travis/before-docs-deploy.sh
+
+    deploy:
+    - provider: script
+      script: .travis/docs-deploy.sh travis_docs_build/html latest pythongssapi/python-gssapi
+      skip_cleanup: true
+      on:
+        all_branches: true
+
+
   - stage: deploy
     script: skip
-    env: DISTRO=fedora:rawhide PYTHON="3"
+    env:
+    - DISTRO=fedora:rawhide
+    - PYTHON="3"
+    - secure: L5SpEj5+no20PWwC9Y/XNhAfmUvYiuykwSMa/YyqvUuBjdizzpZcHr7Ego5nMdM1TniTxj4pSTM+GbM0FHCzNmAINSRh9g/D3hheRqlRBacqR0XwC9ZZRvkKvtzwnLh4vYWiauq4AoDeR5U6tkEcay6LjE57iMQcLjcKYBc+Eos=
     before_deploy:
     - source ./.travis/lib-util.sh
     - util::docker-run $DISTRO ./.travis/before-deploy.sh
@@ -55,7 +78,7 @@ jobs:
     deploy:
     - provider: releases
       api_key:
-        secure: e8kjZEY28gWySD5FsnG9CMgeKgFS12gB/xm1Ck1jEgIhYT01VwxvBMHIU7SV/92+aeBao5clN4/qN4P035hD8TShHUMzV7rsmXmqcaCwi3J5sh2hyy4e1PfYAshuX7bxvkfqJSvSonLz0AKHW4pj17yMrTXpWiEioGg0fSLtTHo=
+        secure: fAaSSSjd/nUrIpINBjAT590pGF2nGq3I8ee6aGq6IAFpXoa/9eeN5eyOrE4MYucWCwYcH28c7510n35vuZQQor+UZIDo6l0K5M64/NZE1cZ43zOMjw3yHlrsJG+ohPS7YvjqD8GaFlLhF6ZvWvrPmWeijvs8qAT1eL7QoEG0xBk=
       file_glob: true
       file:
         - tag_build/*
@@ -74,3 +97,10 @@ jobs:
         all_branches: true
       # NB(directxman12): this is a hack.  Check ./.travis/before-deploy.sh for an explanation.
       distributions: "check"
+    
+    - provider: script
+      script: .travis/docs-deploy.sh travis_docs_build/html stable pythongssapi/python-gssapi
+      skip_cleanup: true
+      on:
+        all_branches: true
+
