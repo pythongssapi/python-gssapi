@@ -259,7 +259,7 @@ incorrect results in the case of canonicalized names.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name_type</strong> (<a class="reference internal" href="gssapi.raw.html#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal"><span class="pre">NameType</span></code></a> to use to display the given
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name_type</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal"><span class="pre">NameType</span></code></a> to use to display the given
 name</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the displayed name</td>
@@ -319,7 +319,7 @@ to the given mechanism.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mech</strong> (<a class="reference internal" href="gssapi.raw.html#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to use</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to use</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the canonicalized name</p>
@@ -508,7 +508,7 @@ store extension is required.</p>
 or None for the default store.</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage to store the credentials with – either
 ‘both’, ‘initiate’, or ‘accept’</li>
-<li><strong>mech</strong> (<a class="reference internal" href="gssapi.raw.html#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to associate with the
+<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to associate with the
 stored credentials</li>
 <li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to overwrite existing credentials
 stored with the same name, etc</li>
@@ -619,7 +619,7 @@ about them.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>mech</strong> (<a class="reference internal" href="gssapi.raw.html#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the mechanism for which to retrive the information</li>
+<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechanism for which to retrive the information</li>
 <li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the name associated with the credentials</li>
 <li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the remaining initiate lifetime for
 the credentials</li>
@@ -671,7 +671,7 @@ or stores.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name associated with the
 credentials</li>
-<li><strong>mech</strong> (<a class="reference internal" href="gssapi.raw.html#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to be used with the
+<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to be used with the
 credentials</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage for the credentials – either ‘both’,
 ‘initiate’, or ‘accept’</li>
@@ -1318,7 +1318,7 @@ a string in dotted form</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the OID represented by the given integer sequence</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="gssapi.raw.html#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID">OID</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#gssapi.OID" title="gssapi.OID">OID</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – the sequence is less than two elements long</td>
 </tr>
@@ -2449,6 +2449,7 @@ values like names.</p>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'1.2.2',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

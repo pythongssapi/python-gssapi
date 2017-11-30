@@ -368,7 +368,7 @@ them into a GSSAPI <a class="reference internal" href="#gssapi.raw.names.Name" t
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<em>bytes</em>) – the string version of the name</li>
-<li><strong>name_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.NameType" title="gssapi.NameType"><em>NameType</em></a>) – the type of this name</li>
+<li><strong>name_type</strong> (<a class="reference internal" href="#gssapi.raw.types.NameType" title="gssapi.raw.types.NameType"><em>NameType</em></a>) – the type of this name</li>
 </ul>
 </td>
 </tr>
@@ -567,7 +567,7 @@ to <a class="reference internal" href="#gssapi.raw.creds.inquire_cred" title="gs
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to inspect</li>
-<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the desired mechanism</li>
+<li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired mechanism</li>
 <li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the Name associated with the credentials</li>
 <li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the initiator TTL for the credentials</li>
 <li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the acceptor TTL for the credentials</li>
@@ -1180,7 +1180,7 @@ a string in dotted form</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the OID represented by the given integer sequence</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID">OID</a></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID">OID</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – the sequence is less than two elements long</td>
 </tr>
@@ -1319,7 +1319,7 @@ the given mechanism.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mech</strong> (<a class="reference internal" href="#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the mechanism in question</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechanism in question</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the name type OIDs supported by the given mechanism</td>
 </tr>
@@ -1627,9 +1627,9 @@ to their C counterparts.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>initiator_address_type</strong> (<a class="reference internal" href="#gssapi.raw.types.AddressType" title="gssapi.raw.types.AddressType"><em>AddressType</em></a>) – the initiator address type</li>
+<li><strong>initiator_address_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.AddressType" title="gssapi.AddressType"><em>AddressType</em></a>) – the initiator address type</li>
 <li><strong>initiator_address</strong> (<em>bytes</em>) – the initiator address</li>
-<li><strong>acceptor_address_type</strong> (<a class="reference internal" href="#gssapi.raw.types.AddressType" title="gssapi.raw.types.AddressType"><em>AddressType</em></a>) – the acceptor address type</li>
+<li><strong>acceptor_address_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.AddressType" title="gssapi.AddressType"><em>AddressType</em></a>) – the acceptor address type</li>
 <li><strong>acceptor_address</strong> (<em>bytes</em>) – the acceptor address</li>
 <li><strong>application_data</strong> (<em>bytes</em>) – additional application-specific data</li>
 </ul>
@@ -1692,7 +1692,7 @@ They may then be retrieved later using <a class="reference internal" href="#gssa
 <li><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to store</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage to store the credentials with – either
 ‘both’, ‘initiate’, or ‘accept’</li>
-<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the mechansim to associate with the stored credentials</li>
+<li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechansim to associate with the stored credentials</li>
 <li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to overwrite existing credentials
 stored with the same name, etc</li>
 <li><strong>set_default</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to set these credentials as
@@ -1788,7 +1788,7 @@ or stores.</p>
 <li><strong>store</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – the store into which to store the credentials,
 or None for the default store.</li>
 <li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name associated with the credentials</li>
-<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the desired mechanism to be used with these
+<li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired mechanism to be used with these
 credentials</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
 ‘initiate’, or ‘accept’</li>
@@ -1837,7 +1837,7 @@ or None for the default store.</li>
 <li><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to store</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage to store the credentials with – either
 ‘both’, ‘initiate’, or ‘accept’</li>
-<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the mechansim to associate with the stored credentials</li>
+<li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechansim to associate with the stored credentials</li>
 <li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to overwrite existing credentials
 stored with the same name, etc</li>
 <li><strong>set_default</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to set these credentials as
@@ -1903,7 +1903,7 @@ will be raised.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to display</li>
-<li><strong>name_type</strong> (<a class="reference internal" href="#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><em>OID</em></a>) – the name type (see NameType) to use to
+<li><strong>name_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the name type (see NameType) to use to
 display the given name</li>
 </ul>
 </td>
@@ -3619,6 +3619,7 @@ exception message</p>
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
             VERSION:'1.2.2',
+            LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
