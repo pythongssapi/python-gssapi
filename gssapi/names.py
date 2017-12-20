@@ -14,8 +14,8 @@ rname_rfc6680_comp_oid = _utils.import_gssapi_extension('rfc6680_comp_oid')
 class Name(rname.Name):
     """A GSSAPI Name
 
-    This class represents a GSSAPI name which may be used with
-    used with and/or returned by other GSSAPI methods.
+    This class represents a GSSAPI name which may be used with and/or returned
+    by other GSSAPI methods.
 
     It inherits from the low-level GSSAPI :class:`~gssapi.raw.names.Name`
     class, and thus may used with both low-level and high-level API methods.
