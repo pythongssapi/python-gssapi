@@ -119,3 +119,9 @@ try:
     from gssapi.raw.ext_rfc6680_comp_oid import *  # noqa
 except ImportError:
     pass
+
+# optional Global Grid Forum
+try:
+    from gssapi.raw.ext_ggf import * # noqa
+except ImportError:
+    pass
