@@ -760,6 +760,93 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
             cmp_mech.shouldnt_be_none()
             cmp_mech.should_be(mech)
 
+    @ktu.gssapi_extension_test('ggf', 'Global Grid Forum')
+    @ktu.gssapi_extension_test('s4u', 'S4U')
+    @ktu.krb_minversion_test('1.16',
+                             'querying impersonator name of krb5 GSS '
+                             'Credential using the '
+                             'GSS_KRB5_GET_CRED_IMPERSONATOR OID')
+    def test_inquire_cred_by_oid_impersonator(self):
+        svc_princ = SERVICE_PRINCIPAL.decode("UTF-8")
+        self.realm.kinit(svc_princ, flags=['-k', '-f'])
+
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+
+        client_token = gb.init_sec_context(target_name).token
+
+        # if our acceptor creds have a usage of both, we get
+        # s4u2proxy delegated credentials
+        server_creds = gb.acquire_cred(None, usage='both').creds
+        server_ctx_resp = gb.accept_sec_context(client_token,
+                                                acceptor_creds=server_creds)
+
+        server_ctx_resp.shouldnt_be_none()
+        server_ctx_resp.delegated_creds.shouldnt_be_none()
+        server_ctx_resp.delegated_creds.should_be_a(gb.Creds)
+
+        # GSS_KRB5_GET_CRED_IMPERSONATOR
+        oid = gb.OID.from_int_seq("1.2.840.113554.1.2.2.5.14")
+        info = gb.inquire_cred_by_oid(server_ctx_resp.delegated_creds, oid)
+
+        info.should_be_a(list)
+        info.shouldnt_be_empty()
+        info[0].should_be_a(bytes)
+        info[0].should_be(b"%s@%s" % (SERVICE_PRINCIPAL,
+                                      self.realm.realm.encode('utf-8')))
+
+    @ktu.gssapi_extension_test('ggf', 'Global Grid Forum')
+    def test_inquire_sec_context_by_oid(self):
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        ctx_resp1 = gb.init_sec_context(target_name)
+
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_resp = gb.accept_sec_context(ctx_resp1[3],
+                                            acceptor_creds=server_creds)
+        server_ctx = server_resp[0]
+        server_tok = server_resp[3]
+
+        client_resp2 = gb.init_sec_context(target_name,
+                                           context=ctx_resp1[0],
+                                           input_token=server_tok)
+        client_ctx = client_resp2[0]
+
+        # GSS_C_INQ_SSPI_SESSION_KEY
+        session_key_oid = gb.OID.from_int_seq("1.2.840.113554.1.2.2.5.5")
+
+        client_key = gb.inquire_sec_context_by_oid(client_ctx, session_key_oid)
+        server_key = gb.inquire_sec_context_by_oid(server_ctx, session_key_oid)
+
+        client_key.should_be_a(list)
+        client_key.shouldnt_be_empty()
+        server_key.should_be_a(list)
+        server_key.shouldnt_be_empty()
+        client_key.should_have_same_items_as(server_key)
+
+    @ktu.gssapi_extension_test('ggf', 'Global Grid Forum')
+    def test_inquire_sec_context_by_oid_should_raise_error(self):
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        ctx_resp1 = gb.init_sec_context(target_name)
+
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_resp = gb.accept_sec_context(ctx_resp1[3],
+                                            acceptor_creds=server_creds)
+
+        client_resp2 = gb.init_sec_context(target_name,
+                                           context=ctx_resp1[0],
+                                           input_token=server_resp[3])
+        client_ctx = client_resp2[0]
+
+        invalid_oid = gb.OID.from_int_seq("1.2.3.4.5.6.7.8.9")
+        gb.inquire_sec_context_by_oid.should_raise(gb.GSSError, client_ctx,
+                                                   invalid_oid)
+
 
 class TestIntEnumFlagSet(unittest.TestCase):
     def test_create_from_int(self):
