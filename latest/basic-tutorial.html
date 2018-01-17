@@ -168,16 +168,16 @@
             
   <div class="section" id="a-basic-introduction-to-gssapi">
 <span id="a-basic-introduction-to-gssapi"></span><h1>A Basic Introduction to GSSAPI<a class="headerlink" href="#a-basic-introduction-to-gssapi" title="Permalink to this headline">¶</a></h1>
-<p>GSSAPI (which stands for &quot;Generic Security Service API&quot;) is an
+<p>GSSAPI (which stands for “Generic Security Service API”) is an
 standard layer for interfacing with security services.  While it
 supports multiple different mechanisms, it is most commonly used
-with Kerberos 5 (&quot;krb5&quot; for short).</p>
+with Kerberos 5 (“krb5” for short).</p>
 <p>This tutorial will provide a basic introduction to interacting with
 GSSAPI through Python.</p>
 <p><em>Note</em>: This file is designed to be runnable using
 <a class="reference external" href="https://github.com/directxman12/yalpt">YALPT</a>.  You can also just
 read it normally.</p>
-<p>To start out, we'll import python-gssapi, and save the current FQDN
+<p>To start out, we’ll import python-gssapi, and save the current FQDN
 for later:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">gssapi</span><span class="o">,</span> <span class="nn">socket</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">FQDN</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">getfqdn</span><span class="p">()</span>
@@ -212,7 +212,7 @@ mechanism form (in this case, for krb5):</p>
 </pre></div>
 </div>
 <p>These are both effectively the same, but if we <em>canonicalize</em> both
-names with respect to krb5, we'll see that GSSAPI knows they're the
+names with respect to krb5, we’ll see that GSSAPI knows they’re the
 same:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server_name</span> <span class="o">==</span> <span class="n">server_hostbased_name</span>
 <span class="go">False</span>
@@ -232,7 +232,7 @@ credentials generally represent a handle to the TGT.</p>
 <p>Credentials may be acquired for a particular name, or the default set
 of credentials may be acquired.</p>
 <p>For instance, suppose that we are writing a server, and wish to
-communicate accept connections as the 'HTTP' service.  We would need
+communicate accept connections as the ‘HTTP’ service.  We would need
 to acquire credentials as such:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">REALM</span><span class="o">.</span><span class="n">addprinc</span><span class="p">(</span><span class="s1">&#39;HTTP/</span><span class="si">%s</span><span class="s1">@</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">FQDN</span><span class="p">,</span> <span class="n">REALM</span><span class="o">.</span><span class="n">realm</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">REALM</span><span class="o">.</span><span class="n">extract_keytab</span><span class="p">(</span><span class="s1">&#39;HTTP/</span><span class="si">%s</span><span class="s1">@</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">FQDN</span><span class="p">,</span> <span class="n">REALM</span><span class="o">.</span><span class="n">realm</span><span class="p">),</span> <span class="n">REALM</span><span class="o">.</span><span class="n">keytab</span><span class="p">)</span>
@@ -246,8 +246,8 @@ For users, this generally means that they have already performed a <code class="
 (i.e. have cached a TGT), while for services (like above), having a keytab
 is sufficient.  This process is generally performed outside the application
 using the GSSAPI.</p>
-<p>Credentials have a <em>usage</em>: 'accept' for accepting security contexts,
-'initiate' for initiating security contexts, or 'both' for
+<p>Credentials have a <em>usage</em>: ‘accept’ for accepting security contexts,
+‘initiate’ for initiating security contexts, or ‘both’ for
 credentials used for both initiating and accepting security contexts.</p>
 <p>Credentials also have an associated <em>name</em>, <em>lifetime</em> (which may
 be <code class="docutils literal"><span class="pre">None</span></code> for indefinite), and set of <em>mechansims</em> with which the
@@ -276,7 +276,7 @@ as ensure <em>integrity</em> (message signing), <em>confidentiality</em> (messag
 encryption), or both for messages exchanged between the two parties.</p>
 <p>When establishing a security context, the default credentials are
 used unless otherwise specified.  This allows applications to use
-the user's already acquired credentials:</p>
+the user’s already acquired credentials:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client_ctx</span> <span class="o">=</span> <span class="n">gssapi</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">server_name</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;initiate&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">initial_client_token</span> <span class="o">=</span> <span class="n">client_ctx</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">client_ctx</span><span class="o">.</span><span class="n">complete</span>
@@ -298,7 +298,7 @@ from above.  The http server can then accept that context:</p>
 Here, we specify a set of accepting credentials to use, although
 this is optional (the defaults will be used if no credentials are
 specified).</p>
-<p>Let's finish up the exchange:</p>
+<p>Let’s finish up the exchange:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server_tok</span> <span class="o">=</span> <span class="n">initial_server_token</span>
 <span class="go">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="ow">not</span> <span class="p">(</span><span class="n">client_ctx</span><span class="o">.</span><span class="n">complete</span> <span class="ow">and</span> <span class="n">server_ctx</span><span class="o">.</span><span class="n">complete</span><span class="p">):</span>
