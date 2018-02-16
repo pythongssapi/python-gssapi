@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>High-Level API &mdash; Python-GSSAPI 1.3.0 documentation</title>
+  <title>High-Level API &mdash; Python-GSSAPI 1.4.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Python-GSSAPI 1.3.0 documentation" href="index.html"/>
+    <link rel="top" title="Python-GSSAPI 1.4.0 documentation" href="index.html"/>
         <link rel="next" title="Low-Level API" href="gssapi.raw.html"/>
         <link rel="prev" title="Python-GSSAPI: Python bindings for GSSAPI" href="index.html"/> 
 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.0
               </div>
             
           
@@ -172,8 +172,8 @@
 <span id="high-level-api"></span><h1>High-Level API<a class="headerlink" href="#module-gssapi" title="Permalink to this headline">¶</a></h1>
 <p>The high-level API contains three main classes for interacting with GSSAPI,
 representing the primary abstractions that GSSAPI provides:
-<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal"><span class="pre">Name</span></code></a>, <a class="reference internal" href="#gssapi.creds.Credentials" title="gssapi.creds.Credentials"><code class="xref py py-class docutils literal"><span class="pre">Credentials</span></code></a>, and
-<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal"><span class="pre">SecurityContext</span></code></a>.</p>
+<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>, <a class="reference internal" href="#gssapi.creds.Credentials" title="gssapi.creds.Credentials"><code class="xref py py-class docutils literal notranslate"><span class="pre">Credentials</span></code></a>, and
+<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a>.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Classes in the high-level API inherit from the corresponding classes in the
@@ -182,7 +182,7 @@ low-level API, and thus may be passed in to low-level API functions.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">All methods in both the high-level and low-level APIs may throw the generic
-<a class="reference internal" href="#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><code class="xref py py-class docutils literal"><span class="pre">GSSError</span></code></a> exception.</p>
+<a class="reference internal" href="#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">GSSError</span></code></a> exception.</p>
 </div>
 <div class="section" id="main-classes">
 <h2>Main Classes<a class="headerlink" href="#main-classes" title="Permalink to this headline">¶</a></h2>
@@ -194,24 +194,24 @@ low-level API, and thus may be passed in to low-level API functions.</p>
 <dd><p>A GSSAPI Name</p>
 <p>This class represents a GSSAPI name which may be used with and/or returned
 by other GSSAPI methods.</p>
-<p>It inherits from the low-level GSSAPI <a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><code class="xref py py-class docutils literal"><span class="pre">Name</span></code></a>
+<p>It inherits from the low-level GSSAPI <a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>
 class, and thus may used with both low-level and high-level API methods.</p>
 <p>This class may be pickled and unpickled, as well as copied.</p>
-<p>The <code class="xref py py-func docutils literal"><span class="pre">str()</span></code> and <code class="xref py py-func docutils literal"><span class="pre">bytes()</span></code> methods may be used to retrieve the
+<p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">str()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">bytes()</span></code> methods may be used to retrieve the
 text of the name.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>Name strings will be automatically converted to and from unicode
 strings as appropriate.  If a method is listed as returning a
-<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">str</span></code></a> object, it will return a unicode string.</p>
+<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a> object, it will return a unicode string.</p>
 <p class="last">The encoding used will be python-gssapi’s current encoding, which
 defaults to UTF-8.</p>
 </div>
 <p>The constructor can be used to “import” a name from a human readable
 representation, or from a token, and can also be used to convert a
-low-level <a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.names.Name</span></code></a> object into a high-level
+low-level <a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.names.Name</span></code></a> object into a high-level
 object.</p>
-<p>If a <a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><code class="xref py py-class docutils literal"><span class="pre">Name</span></code></a> object from the low-level API
+<p>If a <a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> object from the low-level API
 is passed as the <cite>base</cite> argument, it will be converted into a
 high-level object.</p>
 <p>If the <cite>token</cite> argument is used, the name will be imported using
@@ -225,9 +225,9 @@ name type.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameTypeError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal"><span class="pre">BadMechanismError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameTypeError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMechanismError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -237,14 +237,14 @@ name type.</p>
 <dt id="gssapi.names.Name.display_as">
 <code class="descname">display_as</code><span class="sig-paren">(</span><em>name_type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/names.html#Name.display_as"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.names.Name.display_as" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display this name as the given name type.</p>
-<p>This method attempts to display the current <a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal"><span class="pre">Name</span></code></a>
-using the syntax of the given <a class="reference internal" href="#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal"><span class="pre">NameType</span></code></a>, if possible.</p>
+<p>This method attempts to display the current <a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>
+using the syntax of the given <a class="reference internal" href="#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameType</span></code></a>, if possible.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">In MIT krb5 versions below 1.13.3, this method can segfault if
 the name was not <em>originally</em> created with a <cite>name_type</cite> that was
-not <code class="docutils literal"><span class="pre">None</span></code> (even in cases when a <code class="docutils literal"><span class="pre">name_type</span></code>
-is later “added”, such as via <a class="reference internal" href="#gssapi.names.Name.canonicalize" title="gssapi.names.Name.canonicalize"><code class="xref py py-meth docutils literal"><span class="pre">canonicalize()</span></code></a>).
+not <code class="docutils literal notranslate"><span class="pre">None</span></code> (even in cases when a <code class="docutils literal notranslate"><span class="pre">name_type</span></code>
+is later “added”, such as via <a class="reference internal" href="#gssapi.names.Name.canonicalize" title="gssapi.names.Name.canonicalize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">canonicalize()</span></code></a>).
 <strong>Do not use this method unless you are sure the above
 conditions can never happen in your code.</strong></p>
 </div>
@@ -259,14 +259,14 @@ incorrect results in the case of canonicalized names.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name_type</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal"><span class="pre">NameType</span></code></a> to use to display the given
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name_type</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameType</span></code></a> to use to display the given
 name</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the displayed name</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><code class="xref py py-exc docutils literal"><span class="pre">OperationUnavailableError</span></code></a></td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OperationUnavailableError</span></code></a></td>
 </tr>
 </tbody>
 </table>
@@ -275,7 +275,7 @@ name</td>
 <dl class="attribute">
 <dt id="gssapi.names.Name.name_type">
 <code class="descname">name_type</code><a class="headerlink" href="#gssapi.names.Name.name_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal"><span class="pre">NameType</span></code></a> of this name</p>
+<dd><p>The <a class="reference internal" href="#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameType</span></code></a> of this name</p>
 </dd></dl>
 
 <dl class="method">
@@ -299,9 +299,9 @@ imported by using the <cite>token</cite> argument of the constructor.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.MechanismNameRequiredError" title="gssapi.exceptions.MechanismNameRequiredError"><code class="xref py py-exc docutils literal"><span class="pre">MechanismNameRequiredError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameTypeError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MechanismNameRequiredError" title="gssapi.exceptions.MechanismNameRequiredError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MechanismNameRequiredError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameTypeError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -313,13 +313,13 @@ imported by using the <cite>token</cite> argument of the constructor.</p>
 <dt id="gssapi.names.Name.canonicalize">
 <code class="descname">canonicalize</code><span class="sig-paren">(</span><em>mech</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/names.html#Name.canonicalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.names.Name.canonicalize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Canonicalize a name with respect to a mechanism.</p>
-<p>This method returns a new <a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal"><span class="pre">Name</span></code></a> that is canonicalized according
+<p>This method returns a new <a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> that is canonicalized according
 to the given mechanism.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to use</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> to use</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the canonicalized name</p>
@@ -329,9 +329,9 @@ to the given mechanism.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal"><span class="pre">BadMechanismError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameTypeError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMechanismError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameTypeError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -357,15 +357,15 @@ to the given mechanism.</p>
 <code class="descname">attributes</code><a class="headerlink" href="#gssapi.names.Name.attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>The attributes of this name (<em>requires the <a class="reference external" href="https://tools.ietf.org/html/rfc6680.html">RFC 6680</a> extension</em>)</p>
 <p>The attributes are presenting in the form of a
-<a class="reference external" href="https://docs.python.org/2/library/collections.html#collections.MutableMapping" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">MutableMapping</span></code></a> (a dict-like object).</p>
-<p>Retrieved values will always be in the form of <code class="xref py py-class docutils literal"><span class="pre">frozensets</span></code>.</p>
+<a class="reference external" href="https://docs.python.org/2/library/collections.html#collections.MutableMapping" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableMapping</span></code></a> (a dict-like object).</p>
+<p>Retrieved values will always be in the form of <code class="xref py py-class docutils literal notranslate"><span class="pre">frozensets</span></code>.</p>
 <p>When assigning values, if iterables are used, they be considered to be
 the set of values for the given attribute.  If a non-iterable is used,
 it will be considered a single value, and automatically wrapped in an
 iterable.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">String types (includes <code class="xref py py-class docutils literal"><span class="pre">bytes</span></code>) are not considered to
+<p class="last">String types (includes <code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code>) are not considered to
 be iterables in this case.</p>
 </div>
 </dd></dl>
@@ -381,30 +381,30 @@ be iterables in this case.</p>
 <dd><p>GSSAPI Credentials</p>
 <p>This class represents a set of GSSAPI credentials which may
 be used with and/or returned by other GSSAPI methods.</p>
-<p>It inherits from the low-level GSSAPI <a class="reference internal" href="gssapi.raw.html#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><code class="xref py py-class docutils literal"><span class="pre">Creds</span></code></a>
+<p>It inherits from the low-level GSSAPI <a class="reference internal" href="gssapi.raw.html#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><code class="xref py py-class docutils literal notranslate"><span class="pre">Creds</span></code></a>
 class, and thus may used with both low-level and high-level API methods.</p>
 <p>If your implementation of GSSAPI supports the credentials import-export
 extension, you may pickle and unpickle this object.</p>
 <p>The constructor either acquires or imports a set of GSSAPI
 credentials.</p>
 <p>If the <cite>base</cite> argument is used, an existing
-<code class="xref py py-class docutils literal"><span class="pre">Cred</span></code> object from the low-level API is
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Cred</span></code> object from the low-level API is
 converted into a high-level object.</p>
 <p>If the <cite>token</cite> argument is used, the credentials
 are imported using the token, if the credentials import-export
 extension is supported (<em>requires the <a class="reference internal" href="gssapi.raw.html#module-gssapi.raw.ext_cred_imp_exp" title="gssapi.raw.ext_cred_imp_exp">Credentials Import/Export Extension</a></em>).</p>
 <p>Otherwise, the credentials are acquired as per the
-<a class="reference internal" href="#gssapi.creds.Credentials.acquire" title="gssapi.creds.Credentials.acquire"><code class="xref py py-meth docutils literal"><span class="pre">acquire()</span></code></a> method.</p>
+<a class="reference internal" href="#gssapi.creds.Credentials.acquire" title="gssapi.creds.Credentials.acquire"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acquire()</span></code></a> method.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal"><span class="pre">BadMechanismError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameTypeError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">MissingCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMechanismError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameTypeError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingCredentialsError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -456,7 +456,7 @@ extension.</p>
 or None for the default name</li>
 <li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired lifetime of the credentials, or None
 for indefinite</li>
-<li><strong>mechs</strong> (<em>list</em>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> OIDs to be used
+<li><strong>mechs</strong> (<em>list</em>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> OIDs to be used
 with the credentials, or None for the default set</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage for the credentials – either ‘both’,
 ‘initiate’, or ‘accept’</li>
@@ -478,11 +478,11 @@ or None for the default store (<em>requires the <a class="reference internal" hr
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal"><span class="pre">BadMechanismError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameTypeError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">MissingCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMechanismError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameTypeError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingCredentialsError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -508,7 +508,7 @@ store extension is required.</p>
 or None for the default store.</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage to store the credentials with – either
 ‘both’, ‘initiate’, or ‘accept’</li>
-<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to associate with the
+<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> to associate with the
 stored credentials</li>
 <li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to overwrite existing credentials
 stored with the same name, etc</li>
@@ -524,11 +524,11 @@ the default credentials for the given store.</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><code class="xref py py-exc docutils literal"><span class="pre">GSSError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">MissingCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><code class="xref py py-exc docutils literal"><span class="pre">OperationUnavailableError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError" title="gssapi.exceptions.DuplicateCredentialsElementError"><code class="xref py py-exc docutils literal"><span class="pre">DuplicateCredentialsElementError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GSSError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OperationUnavailableError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError" title="gssapi.exceptions.DuplicateCredentialsElementError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DuplicateCredentialsElementError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -551,7 +551,7 @@ name using the current credentials.</p>
 <li><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to impersonate</li>
 <li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired lifetime of the new credentials,
 or None for indefinite</li>
-<li><strong>mechs</strong> (<em>list</em>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> OIDs for the new
+<li><strong>mechs</strong> (<em>list</em>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> OIDs for the new
 credentials</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the desired usage for the new credentials – either
 ‘both’, ‘initiate’, or ‘accept’.  Note that some mechanisms
@@ -598,9 +598,9 @@ may only support ‘initiate’.</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">MissingCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError" title="gssapi.exceptions.InvalidCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">InvalidCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError" title="gssapi.exceptions.InvalidCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredCredentialsError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -648,10 +648,10 @@ the credentials</li>
 <dt id="gssapi.creds.Credentials.add">
 <code class="descname">add</code><span class="sig-paren">(</span><em>name</em>, <em>mech</em>, <em>usage='both'</em>, <em>init_lifetime=None</em>, <em>accept_lifetime=None</em>, <em>impersonator=None</em>, <em>store=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/creds.html#Credentials.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.creds.Credentials.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acquire more credentials to add to the current set</p>
-<p>This method works like <a class="reference internal" href="#gssapi.creds.Credentials.acquire" title="gssapi.creds.Credentials.acquire"><code class="xref py py-meth docutils literal"><span class="pre">acquire()</span></code></a>, except that it adds the
+<p>This method works like <a class="reference internal" href="#gssapi.creds.Credentials.acquire" title="gssapi.creds.Credentials.acquire"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acquire()</span></code></a>, except that it adds the
 acquired credentials for a single mechanism to a copy of the current
 set, instead of creating a new set for multiple mechanisms.
-Unlike <a class="reference internal" href="#gssapi.creds.Credentials.acquire" title="gssapi.creds.Credentials.acquire"><code class="xref py py-meth docutils literal"><span class="pre">acquire()</span></code></a>, you cannot pass None desired name or
+Unlike <a class="reference internal" href="#gssapi.creds.Credentials.acquire" title="gssapi.creds.Credentials.acquire"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acquire()</span></code></a>, you cannot pass None desired name or
 mechanism.</p>
 <p>If the <cite>impersonator</cite> argument is used, the credentials will
 impersonate the given name using the impersonator credentials
@@ -671,7 +671,7 @@ or stores.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the
 credentials</li>
-<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a> to be used with the
+<li><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired <a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> to be used with the
 credentials</li>
 <li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage for the credentials – either ‘both’,
 ‘initiate’, or ‘accept’</li>
@@ -700,12 +700,12 @@ or None for the default store (<em>requires the <a class="reference internal" hr
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal"><span class="pre">BadMechanismError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameTypeError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError" title="gssapi.exceptions.DuplicateCredentialsElementError"><code class="xref py py-exc docutils literal"><span class="pre">DuplicateCredentialsElementError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">MissingCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMechanismError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameTypeError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError" title="gssapi.exceptions.DuplicateCredentialsElementError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DuplicateCredentialsElementError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingCredentialsError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -745,14 +745,14 @@ then be imported by passing the <cite>token</cite> argument to the constructor.<
 <p>This class represents a GSSAPI security context that may be used
 with and/or returned by other GSSAPI methods.</p>
 <p>It inherits from the low-level GSSAPI
-<a class="reference internal" href="gssapi.raw.html#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal"><span class="pre">SecurityContext</span></code></a> class,
+<a class="reference internal" href="gssapi.raw.html#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a> class,
 and thus may used with both low-level and high-level API methods.</p>
 <p>This class may be pickled and unpickled (the attached delegated
 credentials object will not be preserved, however).</p>
 <p>The constructor creates a new security context, but does not begin
 the initiate or accept process.</p>
 <p>If the <cite>base</cite> argument is used, an existing
-<a class="reference internal" href="gssapi.raw.html#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal"><span class="pre">SecurityContext</span></code></a> object from
+<a class="reference internal" href="gssapi.raw.html#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a> object from
 the low-level API is converted into a high-level object.</p>
 <p>If the <cite>token</cite> argument is passed, the security context is imported
 using the token.</p>
@@ -772,7 +772,7 @@ used as well.</p>
 <dd><p>Calculate the signature for a message.</p>
 <p>This method calculates the signature (called a MIC) for
 the given message, which may be then used with
-<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext.verify_signature" title="gssapi.sec_contexts.SecurityContext.verify_signature"><code class="xref py py-meth docutils literal"><span class="pre">verify_signature()</span></code></a> to confirm the validity of the
+<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext.verify_signature" title="gssapi.sec_contexts.SecurityContext.verify_signature"><code class="xref py py-meth docutils literal notranslate"><span class="pre">verify_signature()</span></code></a> to confirm the validity of the
 signature.  This is useful if you wish to transmit the
 message signature and message in your own format.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -789,9 +789,9 @@ message signature and message in your own format.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadQoPError" title="gssapi.exceptions.BadQoPError"><code class="xref py py-exc docutils literal"><span class="pre">BadQoPError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadQoPError" title="gssapi.exceptions.BadQoPError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadQoPError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -804,7 +804,7 @@ message signature and message in your own format.</p>
 <code class="descname">verify_signature</code><span class="sig-paren">(</span><em>message</em>, <em>mic</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/sec_contexts.html#SecurityContext.verify_signature"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.sec_contexts.SecurityContext.verify_signature" title="Permalink to this definition">¶</a></dt>
 <dd><p>Verify the signature for a message.</p>
 <p>This method verifies that a signature (generated by
-<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext.get_signature" title="gssapi.sec_contexts.SecurityContext.get_signature"><code class="xref py py-meth docutils literal"><span class="pre">get_signature()</span></code></a> is valid for the given message.</p>
+<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext.get_signature" title="gssapi.sec_contexts.SecurityContext.get_signature"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_signature()</span></code></a> is valid for the given message.</p>
 <p>If the signature is valid, the method will return.
 Otherwise, it will raise an error.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -818,14 +818,14 @@ Otherwise, it will raise an error.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.BadMICError" title="gssapi.exceptions.BadMICError"><code class="xref py py-exc docutils literal"><span class="pre">BadMICError</span></code></a> – the signature was not valid</li>
-<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal"><span class="pre">InvalidTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError" title="gssapi.exceptions.DuplicateTokenError"><code class="xref py py-exc docutils literal"><span class="pre">DuplicateTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError" title="gssapi.exceptions.ExpiredTokenError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError" title="gssapi.exceptions.TokenTooLateError"><code class="xref py py-exc docutils literal"><span class="pre">TokenTooLateError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError" title="gssapi.exceptions.TokenTooEarlyError"><code class="xref py py-exc docutils literal"><span class="pre">TokenTooEarlyError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMICError" title="gssapi.exceptions.BadMICError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMICError</span></code></a> – the signature was not valid</li>
+<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError" title="gssapi.exceptions.DuplicateTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DuplicateTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError" title="gssapi.exceptions.ExpiredTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError" title="gssapi.exceptions.TokenTooLateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TokenTooLateError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError" title="gssapi.exceptions.TokenTooEarlyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TokenTooEarlyError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -861,9 +861,9 @@ encrypting it.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadQoPError" title="gssapi.exceptions.BadQoPError"><code class="xref py py-exc docutils literal"><span class="pre">BadQoPError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadQoPError" title="gssapi.exceptions.BadQoPError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadQoPError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -896,14 +896,14 @@ verifying the signature along the way.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal"><span class="pre">InvalidTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadMICError" title="gssapi.exceptions.BadMICError"><code class="xref py py-exc docutils literal"><span class="pre">BadMICError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError" title="gssapi.exceptions.DuplicateTokenError"><code class="xref py py-exc docutils literal"><span class="pre">DuplicateTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError" title="gssapi.exceptions.ExpiredTokenError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError" title="gssapi.exceptions.TokenTooLateError"><code class="xref py py-exc docutils literal"><span class="pre">TokenTooLateError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError" title="gssapi.exceptions.TokenTooEarlyError"><code class="xref py py-exc docutils literal"><span class="pre">TokenTooEarlyError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMICError" title="gssapi.exceptions.BadMICError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMICError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError" title="gssapi.exceptions.DuplicateTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DuplicateTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError" title="gssapi.exceptions.ExpiredTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError" title="gssapi.exceptions.TokenTooLateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TokenTooLateError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError" title="gssapi.exceptions.TokenTooEarlyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TokenTooEarlyError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -916,7 +916,7 @@ verifying the signature along the way.</p>
 <code class="descname">encrypt</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/sec_contexts.html#SecurityContext.encrypt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.sec_contexts.SecurityContext.encrypt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Encrypt a message.</p>
 <p>This method wraps and encrypts a message, similarly to
-<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext.wrap" title="gssapi.sec_contexts.SecurityContext.wrap"><code class="xref py py-meth docutils literal"><span class="pre">wrap()</span></code></a>.  The difference is that encryption is always
+<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext.wrap" title="gssapi.sec_contexts.SecurityContext.wrap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wrap()</span></code></a>.  The difference is that encryption is always
 used, and the method will raise an exception if this is
 not possible.  Additionally, this method simply returns
 the encrypted message directly.</p>
@@ -934,10 +934,10 @@ the encrypted message directly.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed" title="gssapi.exceptions.EncryptionNotUsed"><code class="xref py py-exc docutils literal"><span class="pre">EncryptionNotUsed</span></code></a> – the encryption could not be used</li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadQoPError" title="gssapi.exceptions.BadQoPError"><code class="xref py py-exc docutils literal"><span class="pre">BadQoPError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed" title="gssapi.exceptions.EncryptionNotUsed"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EncryptionNotUsed</span></code></a> – the encryption could not be used</li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadQoPError" title="gssapi.exceptions.BadQoPError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadQoPError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -950,7 +950,7 @@ the encrypted message directly.</p>
 <code class="descname">decrypt</code><span class="sig-paren">(</span><em>message</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/sec_contexts.html#SecurityContext.decrypt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.sec_contexts.SecurityContext.decrypt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decrypt a message.</p>
 <p>This method decrypts and unwraps a message, verifying the signature
-along the way, similarly to <a class="reference internal" href="#gssapi.sec_contexts.SecurityContext.unwrap" title="gssapi.sec_contexts.SecurityContext.unwrap"><code class="xref py py-meth docutils literal"><span class="pre">unwrap()</span></code></a>.  The difference is that
+along the way, similarly to <a class="reference internal" href="#gssapi.sec_contexts.SecurityContext.unwrap" title="gssapi.sec_contexts.SecurityContext.unwrap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap()</span></code></a>.  The difference is that
 this method will raise an exception if encryption was established
 by the context and not used, and simply returns the decrypted
 message directly.</p>
@@ -968,15 +968,15 @@ message directly.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed" title="gssapi.exceptions.EncryptionNotUsed"><code class="xref py py-exc docutils literal"><span class="pre">EncryptionNotUsed</span></code></a> – encryption was expected, but not used</li>
-<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal"><span class="pre">InvalidTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadMICError" title="gssapi.exceptions.BadMICError"><code class="xref py py-exc docutils literal"><span class="pre">BadMICError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError" title="gssapi.exceptions.DuplicateTokenError"><code class="xref py py-exc docutils literal"><span class="pre">DuplicateTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError" title="gssapi.exceptions.ExpiredTokenError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError" title="gssapi.exceptions.TokenTooLateError"><code class="xref py py-exc docutils literal"><span class="pre">TokenTooLateError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError" title="gssapi.exceptions.TokenTooEarlyError"><code class="xref py py-exc docutils literal"><span class="pre">TokenTooEarlyError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed" title="gssapi.exceptions.EncryptionNotUsed"><code class="xref py py-exc docutils literal notranslate"><span class="pre">EncryptionNotUsed</span></code></a> – encryption was expected, but not used</li>
+<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMICError" title="gssapi.exceptions.BadMICError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMICError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError" title="gssapi.exceptions.DuplicateTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DuplicateTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError" title="gssapi.exceptions.ExpiredTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError" title="gssapi.exceptions.TokenTooLateError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TokenTooLateError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError" title="gssapi.exceptions.TokenTooEarlyError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">TokenTooEarlyError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -1008,9 +1008,9 @@ into account</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadQoPError" title="gssapi.exceptions.BadQoPError"><code class="xref py py-exc docutils literal"><span class="pre">BadQoPError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadQoPError" title="gssapi.exceptions.BadQoPError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadQoPError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -1036,8 +1036,8 @@ was not expecting it.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal"><span class="pre">InvalidTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -1062,9 +1062,9 @@ between processes.</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><code class="xref py py-exc docutils literal"><span class="pre">OperationUnavailableError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OperationUnavailableError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -1092,19 +1092,19 @@ be separately exported and transfered.</p>
 <dl class="attribute">
 <dt id="gssapi.sec_contexts.SecurityContext.initiator_name">
 <code class="descname">initiator_name</code><a class="headerlink" href="#gssapi.sec_contexts.SecurityContext.initiator_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal"><span class="pre">Name</span></code></a> of the initiator of this context</p>
+<dd><p>The <a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> of the initiator of this context</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="gssapi.sec_contexts.SecurityContext.target_name">
 <code class="descname">target_name</code><a class="headerlink" href="#gssapi.sec_contexts.SecurityContext.target_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>The <a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal"><span class="pre">Name</span></code></a> of the target of this context</p>
+<dd><p>The <a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> of the target of this context</p>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="gssapi.sec_contexts.SecurityContext.mech">
 <code class="descname">mech</code><a class="headerlink" href="#gssapi.sec_contexts.SecurityContext.mech" title="Permalink to this definition">¶</a></dt>
-<dd><p>The mechanism (<a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal"><span class="pre">MechType</span></code></a>) in use by this context</p>
+<dd><p>The mechanism (<a class="reference internal" href="#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a>) in use by this context</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -1136,7 +1136,7 @@ would be thrown.  The generated exception will be thrown on the next
 method call or property lookup on the context.
 <strong>This is the default behavior.</strong></p>
 <p>This method should be used in a while loop, as such:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">input_token</span> <span class="o">=</span> <span class="bp">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">input_token</span> <span class="o">=</span> <span class="bp">None</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="k">while</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">complete</span><span class="p">:</span>
         <span class="n">output_token</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">input_token</span><span class="p">)</span>
@@ -1168,18 +1168,18 @@ with the status of the negotiation.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
-<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal"><span class="pre">InvalidTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError" title="gssapi.exceptions.InvalidCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">InvalidCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">MissingCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredCredentialsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadChannelBindingsError" title="gssapi.exceptions.BadChannelBindingsError"><code class="xref py py-exc docutils literal"><span class="pre">BadChannelBindingsError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadMICError" title="gssapi.exceptions.BadMICError"><code class="xref py py-exc docutils literal"><span class="pre">BadMICError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError" title="gssapi.exceptions.ExpiredTokenError"><code class="xref py py-exc docutils literal"><span class="pre">ExpiredTokenError</span></code></a> – (initiate only)</li>
-<li><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError" title="gssapi.exceptions.DuplicateTokenError"><code class="xref py py-exc docutils literal"><span class="pre">DuplicateTokenError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal"><span class="pre">MissingContextError</span></code></a></li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameTypeError</span></code></a> – (initiate only)</li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal"><span class="pre">BadNameError</span></code></a> – (initiate only)</li>
-<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal"><span class="pre">BadMechanismError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError" title="gssapi.exceptions.InvalidCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">InvalidCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError" title="gssapi.exceptions.MissingCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError" title="gssapi.exceptions.ExpiredCredentialsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredCredentialsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadChannelBindingsError" title="gssapi.exceptions.BadChannelBindingsError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadChannelBindingsError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMICError" title="gssapi.exceptions.BadMICError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMICError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError" title="gssapi.exceptions.ExpiredTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ExpiredTokenError</span></code></a> – (initiate only)</li>
+<li><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError" title="gssapi.exceptions.DuplicateTokenError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DuplicateTokenError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError" title="gssapi.exceptions.BadNameTypeError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameTypeError</span></code></a> – (initiate only)</li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadNameError</span></code></a> – (initiate only)</li>
+<li><a class="reference internal" href="#gssapi.exceptions.BadMechanismError" title="gssapi.exceptions.BadMechanismError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">BadMechanismError</span></code></a></li>
 </ul>
 </td>
 </tr>
@@ -1195,14 +1195,14 @@ with the status of the negotiation.</p>
 <h2>Enums and Helper Classes<a class="headerlink" href="#enums-and-helper-classes" title="Permalink to this headline">¶</a></h2>
 <p>The following enumerations from the low-level API are also
 used with the high-level API.  For convienience, the are
-imported in the high-level API <a class="reference internal" href="#module-gssapi" title="gssapi"><code class="xref py py-mod docutils literal"><span class="pre">gssapi</span></code></a> module:</p>
+imported in the high-level API <a class="reference internal" href="#module-gssapi" title="gssapi"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gssapi</span></code></a> module:</p>
 <dl class="class">
 <dt id="gssapi.NameType">
 <em class="property">class </em><code class="descname">NameType</code><a class="headerlink" href="#gssapi.NameType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>GSSAPI Name Types</p>
 <p>This enum-like object represents GSSAPI name
-types (to be used with <a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.import_name" title="gssapi.raw.names.import_name"><code class="xref py py-func docutils literal"><span class="pre">import_name()</span></code></a>, etc)</p>
+types (to be used with <a class="reference internal" href="gssapi.raw.html#gssapi.raw.names.import_name" title="gssapi.raw.names.import_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">import_name()</span></code></a>, etc)</p>
 <dl class="attribute">
 <dt id="gssapi.NameType.anonymous">
 <code class="descname">anonymous</code><em class="property"> = &lt;OID 1.3.6.1.5.6.3&gt;</em><a class="headerlink" href="#gssapi.NameType.anonymous" title="Permalink to this definition">¶</a></dt>
@@ -1248,9 +1248,9 @@ types (to be used with <a class="reference internal" href="gssapi.raw.html#gssap
 <dl class="class">
 <dt id="gssapi.MechType">
 <em class="property">class </em><code class="descname">MechType</code><a class="headerlink" href="#gssapi.MechType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/2/library/functions.html#object" title="(in Python v2.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>GSSAPI Mechanism Types</p>
-<p>This enum-like object contains any mechanism <a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><code class="xref py py-class docutils literal"><span class="pre">OID</span></code></a>
+<p>This enum-like object contains any mechanism <a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><code class="xref py py-class docutils literal notranslate"><span class="pre">OID</span></code></a>
 values registered by imported mechanisms.</p>
 <dl class="attribute">
 <dt id="gssapi.MechType.kerberos">
@@ -1262,11 +1262,11 @@ values registered by imported mechanisms.</p>
 <dl class="class">
 <dt id="gssapi.RequirementFlag">
 <em class="property">class </em><code class="descname">RequirementFlag</code><a class="headerlink" href="#gssapi.RequirementFlag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
 <p>GSSAPI Requirement Flags</p>
-<p>This <code class="xref py py-class docutils literal"><span class="pre">IntEnum</span></code> represents flags used with the
-<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal"><span class="pre">SecurityContext</span></code></a>-related methods (e.g.
-<a class="reference internal" href="gssapi.raw.html#gssapi.raw.sec_contexts.init_sec_context" title="gssapi.raw.sec_contexts.init_sec_context"><code class="xref py py-func docutils literal"><span class="pre">init_sec_context()</span></code></a>)</p>
+<p>This <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code> represents flags used with the
+<a class="reference internal" href="#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a>-related methods (e.g.
+<a class="reference internal" href="gssapi.raw.html#gssapi.raw.sec_contexts.init_sec_context" title="gssapi.raw.sec_contexts.init_sec_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">init_sec_context()</span></code></a>)</p>
 <p>The numbers behind the values correspond directly
 to their C counterparts.</p>
 </dd></dl>
@@ -1274,14 +1274,14 @@ to their C counterparts.</p>
 <dl class="class">
 <dt id="gssapi.AddressType">
 <em class="property">class </em><code class="descname">AddressType</code><a class="headerlink" href="#gssapi.AddressType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">enum.IntEnum</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.IntEnum</span></code></p>
 <p>GSSAPI Channel Bindings Address Types</p>
-<p>This <code class="xref py py-class docutils literal"><span class="pre">IntEnum</span></code> represents the various address
-types used with the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><code class="xref py py-class docutils literal"><span class="pre">ChannelBindings</span></code></a> structure.</p>
+<p>This <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code> represents the various address
+types used with the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelBindings</span></code></a> structure.</p>
 <p>The numbers behind the values correspond directly
 to their C counterparts.  There is no value for
-<code class="docutils literal"><span class="pre">GSS_C_AF_UNSPEC</span></code>, since this is represented
-by <code class="docutils literal"><span class="pre">None</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">GSS_C_AF_UNSPEC</span></code>, since this is represented
+by <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 </dd></dl>
 
 <p>Similiarly, there are a couple classes from the low-level API
@@ -1295,8 +1295,8 @@ by several methods:</p>
 <p>A new OID may be created by passing the <cite>elements</cite> argument
 to the constructor.  The <cite>elements</cite> argument should be a
 <cite>bytes</cite> consisting of the BER-encoded values in the OID.</p>
-<p>To retrive the underlying bytes, use the <code class="xref py py-func docutils literal"><span class="pre">bytes()</span></code>
-function in Python 3 or the <code class="xref py py-meth docutils literal"><span class="pre">__bytes__()</span></code> method directly
+<p>To retrive the underlying bytes, use the <code class="xref py py-func docutils literal notranslate"><span class="pre">bytes()</span></code>
+function in Python 3 or the <code class="xref py py-meth docutils literal notranslate"><span class="pre">__bytes__()</span></code> method directly
 in Python 2.</p>
 <p>This object is hashable, and may be compared using equality
 operators.</p>
@@ -1320,7 +1320,7 @@ a string in dotted form</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#gssapi.OID" title="gssapi.OID">OID</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal"><span class="pre">ValueError</span></code> – the sequence is less than two elements long</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> – the sequence is less than two elements long</td>
 </tr>
 </tbody>
 </table>
@@ -1331,10 +1331,10 @@ a string in dotted form</td>
 <dl class="class">
 <dt id="gssapi.IntEnumFlagSet">
 <em class="property">class </em><code class="descname">IntEnumFlagSet</code><a class="headerlink" href="#gssapi.IntEnumFlagSet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.types.GenericFlagSet" title="gssapi.raw.types.GenericFlagSet"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.types.GenericFlagSet</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.types.GenericFlagSet" title="gssapi.raw.types.GenericFlagSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.types.GenericFlagSet</span></code></a></p>
 <p>A set backed by a 32-bit integer with enum members</p>
-<p>This class is a <a class="reference internal" href="gssapi.raw.html#gssapi.raw.types.GenericFlagSet" title="gssapi.raw.types.GenericFlagSet"><code class="xref py py-class docutils literal"><span class="pre">GenericFlagSet</span></code></a> where the returned
-members are values in an <code class="xref py py-class docutils literal"><span class="pre">IntEnum</span></code>.</p>
+<p>This class is a <a class="reference internal" href="gssapi.raw.html#gssapi.raw.types.GenericFlagSet" title="gssapi.raw.types.GenericFlagSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericFlagSet</span></code></a> where the returned
+members are values in an <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code>.</p>
 <p>It functions exactly like a <cite>GenericFlagSet</cite>, except that
 it also supports bitwise operations with the enum values.</p>
 </dd></dl>
@@ -1347,7 +1347,7 @@ can raise in addition to several other high-level-specific exceptions:</p>
 <span class="target" id="module-gssapi.exceptions"></span><dl class="exception">
 <dt id="gssapi.exceptions.GeneralError">
 <em class="property">exception </em><code class="descname">GeneralError</code><span class="sig-paren">(</span><em>minor_message</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/exceptions.html#GeneralError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.exceptions.GeneralError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>A General High-Level API Error</p>
 <dl class="attribute">
 <dt id="gssapi.exceptions.GeneralError.MAJOR_MESSAGE">
@@ -1364,7 +1364,7 @@ can raise in addition to several other high-level-specific exceptions:</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.UnknownUsageError">
 <em class="property">exception </em><code class="descname">UnknownUsageError</code><span class="sig-paren">(</span><em>minor_message</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/exceptions.html#UnknownUsageError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.exceptions.UnknownUsageError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#gssapi.exceptions.GeneralError" title="gssapi.exceptions.GeneralError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.exceptions.GeneralError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#gssapi.exceptions.GeneralError" title="gssapi.exceptions.GeneralError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.exceptions.GeneralError</span></code></a></p>
 <p>An Error indicating an unknown usage type</p>
 <dl class="attribute">
 <dt id="gssapi.exceptions.UnknownUsageError.MAJOR_MESSAGE">
@@ -1376,7 +1376,7 @@ can raise in addition to several other high-level-specific exceptions:</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.EncryptionNotUsed">
 <em class="property">exception </em><code class="descname">EncryptionNotUsed</code><span class="sig-paren">(</span><em>minor_message</em>, <em>unwrapped_message=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/exceptions.html#EncryptionNotUsed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.exceptions.EncryptionNotUsed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#gssapi.exceptions.GeneralError" title="gssapi.exceptions.GeneralError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.exceptions.GeneralError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#gssapi.exceptions.GeneralError" title="gssapi.exceptions.GeneralError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.exceptions.GeneralError</span></code></a></p>
 <p>An Error indicating that encryption was requested, but not used</p>
 <dl class="attribute">
 <dt id="gssapi.exceptions.EncryptionNotUsed.MAJOR_MESSAGE">
@@ -1388,7 +1388,7 @@ can raise in addition to several other high-level-specific exceptions:</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.BadChannelBindingsError">
 <em class="property">exception </em><code class="descname">BadChannelBindingsError</code><a class="headerlink" href="#gssapi.exceptions.BadChannelBindingsError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1417,7 +1417,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.BadMICError">
 <em class="property">exception </em><code class="descname">BadMICError</code><a class="headerlink" href="#gssapi.exceptions.BadMICError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1446,7 +1446,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.BadMechanismError">
 <em class="property">exception </em><code class="descname">BadMechanismError</code><a class="headerlink" href="#gssapi.exceptions.BadMechanismError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1475,7 +1475,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.BadNameError">
 <em class="property">exception </em><code class="descname">BadNameError</code><a class="headerlink" href="#gssapi.exceptions.BadNameError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1504,7 +1504,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.BadNameTypeError">
 <em class="property">exception </em><code class="descname">BadNameTypeError</code><a class="headerlink" href="#gssapi.exceptions.BadNameTypeError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1533,7 +1533,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.BadQoPError">
 <em class="property">exception </em><code class="descname">BadQoPError</code><a class="headerlink" href="#gssapi.exceptions.BadQoPError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1562,7 +1562,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.BadStatusError">
 <em class="property">exception </em><code class="descname">BadStatusError</code><a class="headerlink" href="#gssapi.exceptions.BadStatusError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1591,7 +1591,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.ContextReadError">
 <em class="property">exception </em><code class="descname">ContextReadError</code><a class="headerlink" href="#gssapi.exceptions.ContextReadError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.MissingContextError" title="gssapi.raw.exceptions.MissingContextError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.MissingContextError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.MissingContextError" title="gssapi.raw.exceptions.MissingContextError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingContextError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1615,7 +1615,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.ContextWriteError">
 <em class="property">exception </em><code class="descname">ContextWriteError</code><a class="headerlink" href="#gssapi.exceptions.ContextWriteError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterWriteError" title="gssapi.raw.exceptions.ParameterWriteError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.ParameterWriteError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.MissingContextError" title="gssapi.raw.exceptions.MissingContextError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.MissingContextError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterWriteError" title="gssapi.raw.exceptions.ParameterWriteError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterWriteError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.MissingContextError" title="gssapi.raw.exceptions.MissingContextError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingContextError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1639,7 +1639,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.CredentialsReadError">
 <em class="property">exception </em><code class="descname">CredentialsReadError</code><a class="headerlink" href="#gssapi.exceptions.CredentialsReadError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.MissingCredentialsError" title="gssapi.raw.exceptions.MissingCredentialsError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.MissingCredentialsError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.MissingCredentialsError" title="gssapi.raw.exceptions.MissingCredentialsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingCredentialsError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1663,7 +1663,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.CredentialsWriteError">
 <em class="property">exception </em><code class="descname">CredentialsWriteError</code><a class="headerlink" href="#gssapi.exceptions.CredentialsWriteError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterWriteError" title="gssapi.raw.exceptions.ParameterWriteError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.ParameterWriteError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.MissingCredentialsError" title="gssapi.raw.exceptions.MissingCredentialsError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.MissingCredentialsError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterWriteError" title="gssapi.raw.exceptions.ParameterWriteError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterWriteError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.MissingCredentialsError" title="gssapi.raw.exceptions.MissingCredentialsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingCredentialsError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1687,7 +1687,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.DuplicateCredentialsElementError">
 <em class="property">exception </em><code class="descname">DuplicateCredentialsElementError</code><a class="headerlink" href="#gssapi.exceptions.DuplicateCredentialsElementError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1716,7 +1716,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.DuplicateTokenError">
 <em class="property">exception </em><code class="descname">DuplicateTokenError</code><a class="headerlink" href="#gssapi.exceptions.DuplicateTokenError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1745,7 +1745,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.ExpiredContextError">
 <em class="property">exception </em><code class="descname">ExpiredContextError</code><a class="headerlink" href="#gssapi.exceptions.ExpiredContextError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1774,7 +1774,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.ExpiredCredentialsError">
 <em class="property">exception </em><code class="descname">ExpiredCredentialsError</code><a class="headerlink" href="#gssapi.exceptions.ExpiredCredentialsError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1803,7 +1803,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.ExpiredTokenError">
 <em class="property">exception </em><code class="descname">ExpiredTokenError</code><a class="headerlink" href="#gssapi.exceptions.ExpiredTokenError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1832,7 +1832,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.GSSError">
 <em class="property">exception </em><code class="descname">GSSError</code><a class="headerlink" href="#gssapi.exceptions.GSSError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>A GSSAPI Error</p>
 <p>This Exception represents an error returned from the GSSAPI
 C bindings.  It contains the major and minor status codes
@@ -1917,7 +1917,7 @@ or minor status code (False)</li>
 <dl class="exception">
 <dt id="gssapi.exceptions.InvalidCredentialsError">
 <em class="property">exception </em><code class="descname">InvalidCredentialsError</code><a class="headerlink" href="#gssapi.exceptions.InvalidCredentialsError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1946,7 +1946,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.InvalidTokenError">
 <em class="property">exception </em><code class="descname">InvalidTokenError</code><a class="headerlink" href="#gssapi.exceptions.InvalidTokenError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -1975,7 +1975,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.MalformedParameterError">
 <em class="property">exception </em><code class="descname">MalformedParameterError</code><a class="headerlink" href="#gssapi.exceptions.MalformedParameterError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2004,7 +2004,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.MechanismNameRequiredError">
 <em class="property">exception </em><code class="descname">MechanismNameRequiredError</code><a class="headerlink" href="#gssapi.exceptions.MechanismNameRequiredError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2033,7 +2033,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.MissingContextError">
 <em class="property">exception </em><code class="descname">MissingContextError</code><a class="headerlink" href="#gssapi.exceptions.MissingContextError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2062,7 +2062,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.MissingCredentialsError">
 <em class="property">exception </em><code class="descname">MissingCredentialsError</code><a class="headerlink" href="#gssapi.exceptions.MissingCredentialsError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2091,7 +2091,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.NameReadError">
 <em class="property">exception </em><code class="descname">NameReadError</code><a class="headerlink" href="#gssapi.exceptions.NameReadError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.BadNameError" title="gssapi.raw.exceptions.BadNameError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.BadNameError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.BadNameError" title="gssapi.raw.exceptions.BadNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.BadNameError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2115,7 +2115,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.NameTypeReadError">
 <em class="property">exception </em><code class="descname">NameTypeReadError</code><a class="headerlink" href="#gssapi.exceptions.NameTypeReadError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.BadNameTypeError" title="gssapi.raw.exceptions.BadNameTypeError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.BadNameTypeError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.BadNameTypeError" title="gssapi.raw.exceptions.BadNameTypeError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.BadNameTypeError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2139,7 +2139,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.OperationUnavailableError">
 <em class="property">exception </em><code class="descname">OperationUnavailableError</code><a class="headerlink" href="#gssapi.exceptions.OperationUnavailableError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2168,7 +2168,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.ParameterReadError">
 <em class="property">exception </em><code class="descname">ParameterReadError</code><a class="headerlink" href="#gssapi.exceptions.ParameterReadError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2197,7 +2197,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.ParameterWriteError">
 <em class="property">exception </em><code class="descname">ParameterWriteError</code><a class="headerlink" href="#gssapi.exceptions.ParameterWriteError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2226,7 +2226,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.SupplementaryError">
 <em class="property">exception </em><code class="descname">SupplementaryError</code><a class="headerlink" href="#gssapi.exceptions.SupplementaryError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2250,7 +2250,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.TokenOutOfSequenceError">
 <em class="property">exception </em><code class="descname">TokenOutOfSequenceError</code><a class="headerlink" href="#gssapi.exceptions.TokenOutOfSequenceError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2274,7 +2274,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.TokenReadError">
 <em class="property">exception </em><code class="descname">TokenReadError</code><a class="headerlink" href="#gssapi.exceptions.TokenReadError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.InvalidTokenError" title="gssapi.raw.exceptions.InvalidTokenError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.InvalidTokenError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.InvalidTokenError" title="gssapi.raw.exceptions.InvalidTokenError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.InvalidTokenError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2298,7 +2298,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.TokenTooEarlyError">
 <em class="property">exception </em><code class="descname">TokenTooEarlyError</code><a class="headerlink" href="#gssapi.exceptions.TokenTooEarlyError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.TokenOutOfSequenceError" title="gssapi.raw.exceptions.TokenOutOfSequenceError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.TokenOutOfSequenceError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.TokenOutOfSequenceError" title="gssapi.raw.exceptions.TokenOutOfSequenceError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.TokenOutOfSequenceError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2327,7 +2327,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.TokenTooLateError">
 <em class="property">exception </em><code class="descname">TokenTooLateError</code><a class="headerlink" href="#gssapi.exceptions.TokenTooLateError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.TokenOutOfSequenceError" title="gssapi.raw.exceptions.TokenOutOfSequenceError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.exceptions.TokenOutOfSequenceError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.exceptions.TokenOutOfSequenceError" title="gssapi.raw.exceptions.TokenOutOfSequenceError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.TokenOutOfSequenceError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2356,7 +2356,7 @@ exception message</p>
 <dl class="exception">
 <dt id="gssapi.exceptions.UnauthorizedError">
 <em class="property">exception </em><code class="descname">UnauthorizedError</code><a class="headerlink" href="#gssapi.exceptions.UnauthorizedError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="gssapi.raw.html#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
 retrieves the releated human-readable
@@ -2448,7 +2448,7 @@ values like names.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.3.0',
+            VERSION:'1.4.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
