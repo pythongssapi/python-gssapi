@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>gssapi.names &mdash; Python-GSSAPI 1.3.0 documentation</title>
+  <title>gssapi.names &mdash; Python-GSSAPI 1.4.1 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Python-GSSAPI 1.3.0 documentation" href="../../index.html"/>
+    <link rel="top" title="Python-GSSAPI 1.4.1 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                1.3.0
+                1.4.1
               </div>
             
           
@@ -171,8 +171,8 @@
 <div class="viewcode-block" id="Name"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name">[docs]</a><span class="k">class</span> <span class="nc">Name</span><span class="p">(</span><span class="n">rname</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A GSSAPI Name</span>
 
-<span class="sd">    This class represents a GSSAPI name which may be used with</span>
-<span class="sd">    used with and/or returned by other GSSAPI methods.</span>
+<span class="sd">    This class represents a GSSAPI name which may be used with and/or returned</span>
+<span class="sd">    by other GSSAPI methods.</span>
 
 <span class="sd">    It inherits from the low-level GSSAPI :class:`~gssapi.raw.names.Name`</span>
 <span class="sd">    class, and thus may used with both low-level and high-level API methods.</span>
@@ -314,8 +314,8 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
                                       <span class="s2">&quot;support RFC 6680 (the GSSAPI naming &quot;</span>
                                       <span class="s2">&quot;extensions)&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">display_name_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
-            <span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span></div>
+        <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">display_name_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span></div>
+            <span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -364,8 +364,8 @@
                                           <span class="s2">&quot;naming extensions)&quot;</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">export_name_composite</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">export_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="k">else</span><span class="p">:</span></div>
+            <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">export_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Name.canonicalize"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.canonicalize">[docs]</a>    <span class="k">def</span> <span class="nf">canonicalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Canonicalize a name with respect to a mechanism.</span>
@@ -384,8 +384,8 @@
 <span class="sd">            BadNameTypeError</span>
 <span class="sd">            BadNameError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">canonicalize_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">))</span></div>
+</div>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">canonicalize_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">duplicate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
@@ -466,8 +466,8 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
                                       <span class="s2">&quot;support RFC 6680 (the GSSAPI naming &quot;</span>
                                       <span class="s2">&quot;extensions)&quot;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span></div>
+</div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span>
 
 
 <span class="k">class</span> <span class="nc">_NameAttributeMapping</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">MutableMapping</span><span class="p">):</span>
@@ -557,7 +557,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.3.0',
+            VERSION:'1.4.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
