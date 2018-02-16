@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # NB (very important): BE VERY CAREFUL WITH `set -x` FOR THIS FILE.
-# The GitHub token is sensative information, and should never
+# The GitHub token is sensitive information, and should never
 # be displayed on in the clear.
 
 source_directory=${1?need <source dir> <target dir> <target repo> [<target branch, default: gh-pages>]}
@@ -24,6 +24,12 @@ echo $desc > ${scratch_dir}/docs/${target_directory}/.from
 pushd $scratch_dir/docs
 git config user.email "deploy@travis-ci.org"
 git config user.name "Deployment Bot (from Travis CI)"
+
+if [[ $(git status --porcelain | wc -l) -eq 0 ]]; then
+    echo "no docs changes in the latest commit"
+    exit 0
+fi
+
 git add ${target_directory}
 git commit -m "Update ${target_directory} docs in based on ${desc}"
 
