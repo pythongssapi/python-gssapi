@@ -6,15 +6,7 @@ language: python
 services:
   - docker
 
-env:
-  - DISTRO=debian:stable PYTHON="2"
-  - DISTRO=debian:stable PYTHON="3" # 3.4, not 3.5
-  - DISTRO=debian:stable PYTHON="3" KRB5_VER="heimdal"
-  - DISTRO=centos:7 PYTHON="2" # el7 doesn't do python3 modules
-  - DISTRO=fedora:rawhide PYTHON="3"
-  - DISTRO=fedora:rawhide PYTHON="2"
-
-# we do everything in docker
+# we do everything in docker for non MacOS, MacOS setup is in .travis/build.sh
 install: skip
 before_install: skip
 
@@ -27,10 +19,11 @@ stages:
   if: tag is PRESENT
 
 script:
-  - sudo sed -i '1i 127.0.0.1 test.box' /etc/hosts
-  - sudo hostname test.box
-  - source ./.travis/lib-util.sh
-  - util::docker-run $DISTRO ./.travis/build.sh
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo sed -i '1i 127.0.0.1 test.box' /etc/hosts; fi
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo hostname test.box; fi
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then source ./.travis/lib-util.sh; fi
+- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then util::docker-run $DISTRO ./.travis/build.sh; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./.travis/build.sh; fi
 
 jobs:
   include:
@@ -45,6 +38,39 @@ jobs:
     script:
     - source ./.travis/lib-util.sh
     - util::docker-run $DISTRO ./.travis/verify.sh
+
+
+  # need to explictly define each builder for test due to different os types
+  - stage: test
+    env: DISTRO=debian:stable PYTHON="2"
+
+  - stage: test
+    env: DISTRO=debian:stable PYTHON="3" # 3.4, not 3.5
+
+  - stage: test
+    env: DISTRO=debian:stable PYTHON="3" KRB5_VER="heimdal"
+
+  - stage: test
+    env: DISTRO=centos:7 PYTHON="2" # el7 doesn't do python3 modules
+
+  - stage: test
+    env: DISTRO=fedora:rawhide PYTHON="3"
+
+  - stage: test
+    env: DISTRO=fedora:rawhide PYTHON="2"
+
+  - stage: test
+    env: PYTHON="2" KRB5_VER="heimdal" PYENV="2.7.14"
+    os: osx
+    osx_image: xcode9.2
+    language: generic # causes issues with pyenv installer when set to python
+
+  - stage: test
+    env: PYTHON="3" KRB5_VER="heimdal" PYENV="3.6.3"
+    os: osx
+    osx_image: xcode9.2
+    language: generic # causes issues with pyenv installer when set to python
+
 
   - stage: deploy latest docs
     script: skip
@@ -97,10 +123,9 @@ jobs:
         all_branches: true
       # NB(directxman12): this is a hack.  Check ./.travis/before-deploy.sh for an explanation.
       distributions: "check"
-    
+
     - provider: script
       script: .travis/docs-deploy.sh travis_docs_build/html stable pythongssapi/python-gssapi
       skip_cleanup: true
       on:
         all_branches: true
-
