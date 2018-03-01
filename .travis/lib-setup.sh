@@ -64,11 +64,22 @@ setup::rh::install() {
     fi
 }
 
+setup::macos::install() {
+    # install Python from pyenv so we know what version is being used
+    pyenv install $PYENV
+    pyenv global $PYENV
+    virtualenv -p $(pyenv which python) .venv
+    source ./.venv/bin/activate
+    pip install --install-option='--no-cython-compile' cython
+}
+
 setup::install() {
     if [ -f /etc/debian_version ]; then
         setup::debian::install
     elif [ -f /etc/redhat-release ]; then
         setup::rh::install
+    elif [ "$(uname)" == "Darwin" ]; then
+        setup::macos::install
     else
         echo "Distro not found!"
         false
