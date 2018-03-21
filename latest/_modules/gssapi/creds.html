@@ -304,8 +304,8 @@
                                                      <span class="n">lifetime</span><span class="p">,</span> <span class="n">mechs</span><span class="p">,</span>
                                                      <span class="n">usage</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">AcquireCredResult</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">mechs</span><span class="p">,</span></div>
-                                        <span class="n">res</span><span class="o">.</span><span class="n">lifetime</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">AcquireCredResult</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">mechs</span><span class="p">,</span>
+                                        <span class="n">res</span><span class="o">.</span><span class="n">lifetime</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.store"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.store">[docs]</a>    <span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">mech</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
               <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">set_default</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -356,8 +356,8 @@
 
             <span class="n">store</span> <span class="o">=</span> <span class="n">_encode_dict</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
 
-            <span class="k">return</span> <span class="n">rcred_cred_store</span><span class="o">.</span><span class="n">store_cred_into</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span></div>
-                                                    <span class="n">overwrite</span><span class="p">,</span> <span class="n">set_default</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">rcred_cred_store</span><span class="o">.</span><span class="n">store_cred_into</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span>
+                                                    <span class="n">overwrite</span><span class="p">,</span> <span class="n">set_default</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.impersonate"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.impersonate">[docs]</a>    <span class="k">def</span> <span class="nf">impersonate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;initiate&#39;</span><span class="p">):</span>
@@ -389,8 +389,8 @@
         <span class="n">res</span> <span class="o">=</span> <span class="n">rcred_s4u</span><span class="o">.</span><span class="n">acquire_cred_impersonate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
                                                       <span class="n">lifetime</span><span class="p">,</span> <span class="n">mechs</span><span class="p">,</span>
                                                       <span class="n">usage</span><span class="p">)</span>
-</div>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">base</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">base</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.inquire"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.inquire">[docs]</a>    <span class="k">def</span> <span class="nf">inquire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Inspect these credentials for information</span>
@@ -420,8 +420,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">res_name</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireCredResult</span><span class="p">(</span><span class="n">res_name</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">lifetime</span><span class="p">,</span></div>
-                                        <span class="n">res</span><span class="o">.</span><span class="n">usage</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">mechs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireCredResult</span><span class="p">(</span><span class="n">res_name</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">lifetime</span><span class="p">,</span>
+                                        <span class="n">res</span><span class="o">.</span><span class="n">usage</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">mechs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.inquire_by_mech"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.inquire_by_mech">[docs]</a>    <span class="k">def</span> <span class="nf">inquire_by_mech</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">init_lifetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                         <span class="n">accept_lifetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -454,8 +454,8 @@
 
         <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireCredByMechResult</span><span class="p">(</span><span class="n">res_name</span><span class="p">,</span>
                                               <span class="n">res</span><span class="o">.</span><span class="n">init_lifetime</span><span class="p">,</span>
-                                              <span class="n">res</span><span class="o">.</span><span class="n">accept_lifetime</span><span class="p">,</span></div>
-                                              <span class="n">res</span><span class="o">.</span><span class="n">usage</span><span class="p">)</span>
+                                              <span class="n">res</span><span class="o">.</span><span class="n">accept_lifetime</span><span class="p">,</span>
+                                              <span class="n">res</span><span class="o">.</span><span class="n">usage</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.add"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span>
             <span class="n">init_lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">accept_lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">impersonator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -539,8 +539,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">rcreds</span><span class="o">.</span><span class="n">add_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">init_lifetime</span><span class="p">,</span>
                                   <span class="n">accept_lifetime</span><span class="p">)</span>
-</div>
-        <span class="k">return</span> <span class="n">Credentials</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Credentials</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.export"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Export these credentials into a token</span>
@@ -560,13 +560,13 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
                                       <span class="s2">&quot;have support for importing and &quot;</span>
                                       <span class="s2">&quot;exporting creditials&quot;</span><span class="p">)</span>
-</div>
-        <span class="k">return</span> <span class="n">rcred_imp_exp</span><span class="o">.</span><span class="n">export_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rcred_imp_exp</span><span class="o">.</span><span class="n">export_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
     <span class="c1"># pickle protocol support</span>
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># the unpickle arguments to new are (base=None, token=self.export())</span></div>
-        <span class="k">return</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">export</span><span class="p">()))</span>
+        <span class="c1"># the unpickle arguments to new are (base=None, token=self.export())</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">export</span><span class="p">()))</span></div>
 </pre></div>
 
            </div>
