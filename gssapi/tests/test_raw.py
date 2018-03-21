@@ -668,10 +668,8 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
             known_mech_attrs = inquire_out.known_mech_attrs
 
             mech_attrs.should_be_a(set)
-            mech_attrs.shouldnt_be_empty()
 
             known_mech_attrs.should_be_a(set)
-            known_mech_attrs.shouldnt_be_empty()
 
             # Verify that we get data for every available
             # attribute. Testing the contents of a few known
@@ -749,12 +747,10 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
             out_mn = out.mech_name
             out_mn.shouldnt_be_none()
             out_mn.should_be_a(bytes)
-            out_mn.shouldnt_be_empty()
 
             out_md = out.mech_description
             out_md.shouldnt_be_none()
             out_md.should_be_a(bytes)
-            out_md.shouldnt_be_empty()
 
             cmp_mech = gb.inquire_mech_for_saslname(out_smn)
             cmp_mech.shouldnt_be_none()

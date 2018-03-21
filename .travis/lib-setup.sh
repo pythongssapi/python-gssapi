@@ -20,7 +20,8 @@ setup::debian::install() {
     if [ x"$KRB5_VER" = "xheimdal" ]; then
         apt-get -y install heimdal-dev
     else
-        apt-get -y install krb5-{user,kdc,admin-server,multidev} libkrb5-dev
+        apt-get -y install krb5-{user,kdc,admin-server,multidev} libkrb5-dev \
+                gss-ntlmssp
     fi
 
     apt-get -y install gcc virtualenv python$IS3-{virtualenv,dev} cython$IS3
@@ -55,7 +56,8 @@ setup::fedora::install() {
 }
 
 setup::rh::install() {
-    setup::rh::yuminst krb5-{devel,libs,server,workstation} which gcc findutils
+    setup::rh::yuminst krb5-{devel,libs,server,workstation} \
+                       which gcc findutils gssntlmssp
 
     if [ -f /etc/fedora-release ]; then
         setup::fedora::install
