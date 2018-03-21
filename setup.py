@@ -52,12 +52,16 @@ if sys.platform == 'darwin':
 if link_args is None:
     if osx_has_gss_framework:
         link_args = '-framework GSS'
+    elif os.environ.get('MINGW_PREFIX'):
+        link_args = '-lgss'
     else:
         link_args = get_output('krb5-config --libs gssapi')
 
 if compile_args is None:
     if osx_has_gss_framework:
         compile_args = '-framework GSS -DOSX_HAS_GSS_FRAMEWORK'
+    elif os.environ.get('MINGW_PREFIX'):
+        compile_args = '-fPIC'
     else:
         compile_args = get_output('krb5-config --cflags gssapi')
 
@@ -88,6 +92,8 @@ if ENABLE_SUPPORT_DETECTION:
     main_path = ""
     if main_lib is None and osx_has_gss_framework:
         main_lib = ctypes.util.find_library('GSS')
+    elif os.environ.get('MINGW_PREFIX'):
+        main_lib = os.environ.get('MINGW_PREFIX')+'/bin/libgss-3.dll'
     elif main_lib is None:
         for opt in link_args:
             if opt.startswith('-lgssapi'):
