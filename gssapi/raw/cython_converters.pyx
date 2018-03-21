@@ -29,6 +29,13 @@ cdef gss_OID_set c_get_mech_oid_set(object mechs):
 cdef object c_create_oid_set(gss_OID_set mech_set, bint free=True):
     """Convert a GSS OID set struct to a set of OIDs"""
 
+    if mech_set == GSS_C_NO_OID_SET:
+        # return the empty set if the we get passed the C equivalent
+        # (it could be argued that the C equivalent is closer to None,
+        # but returning None would make the API harder to work with,
+        # without much value)
+        return set()
+
     py_set = set()
     cdef i
     for i in range(mech_set.count):
