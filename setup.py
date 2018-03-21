@@ -71,7 +71,7 @@ compile_args = compile_args.split()
 # add in the extra workarounds for different include structures
 try:
     prefix = get_output('krb5-config gssapi --prefix')
-except:
+except Exception:
     prefix = sys.prefix
 gssapi_ext_h = os.path.join(prefix, 'include/gssapi/gssapi_ext.h')
 if os.path.exists(gssapi_ext_h):
