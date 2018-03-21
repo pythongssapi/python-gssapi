@@ -52,12 +52,16 @@ if sys.platform == 'darwin':
 if link_args is None:
     if osx_has_gss_framework:
         link_args = '-framework GSS'
+    elif os.environ.get('MINGW_PREFIX'):
+        link_args = '-lgss'
     else:
         link_args = get_output('krb5-config --libs gssapi')
 
 if compile_args is None:
     if osx_has_gss_framework:
         compile_args = '-framework GSS -DOSX_HAS_GSS_FRAMEWORK'
+    elif os.environ.get('MINGW_PREFIX'):
+        compile_args = '-fPIC'
     else:
         compile_args = get_output('krb5-config --cflags gssapi')
 
@@ -65,7 +69,10 @@ link_args = link_args.split()
 compile_args = compile_args.split()
 
 # add in the extra workarounds for different include structures
-prefix = get_output('krb5-config gssapi --prefix')
+try:
+    prefix = get_output('krb5-config gssapi --prefix')
+except Exception:
+    prefix = sys.prefix
 gssapi_ext_h = os.path.join(prefix, 'include/gssapi/gssapi_ext.h')
 if os.path.exists(gssapi_ext_h):
     compile_args.append("-DHAS_GSSAPI_EXT_H")
@@ -85,6 +92,8 @@ if ENABLE_SUPPORT_DETECTION:
     main_path = ""
     if main_lib is None and osx_has_gss_framework:
         main_lib = ctypes.util.find_library('GSS')
+    elif os.environ.get('MINGW_PREFIX'):
+        main_lib = os.environ.get('MINGW_PREFIX')+'/bin/libgss-3.dll'
     elif main_lib is None:
         for opt in link_args:
             if opt.startswith('-lgssapi'):
