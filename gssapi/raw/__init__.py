@@ -125,3 +125,9 @@ try:
     from gssapi.raw.ext_ggf import *  # noqa
 except ImportError:
     pass
+
+# optional set_cred_option support
+try:
+    from gssapi.raw.ext_set_cred_opt import *  # noqa
+except ImportError:
+    pass

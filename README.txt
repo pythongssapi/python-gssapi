@@ -156,6 +156,8 @@ In addition to RFC 2743/2744, Python-GSSAPI also has support for:
 
 * `acquire_cred_with_password` and `add_cred_with_password`
 
+* GGF Extensions
+
 The Team
 ========
 

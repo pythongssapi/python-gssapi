@@ -843,6 +843,85 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         gb.inquire_sec_context_by_oid.should_raise(gb.GSSError, client_ctx,
                                                    invalid_oid)
 
+    @ktu.gssapi_extension_test('ggf', 'Global Grid Forum')
+    @ktu.gssapi_extension_test('password', 'Add Credential with Password')
+    def test_set_sec_context_option(self):
+        ntlm_mech = gb.OID.from_int_seq("1.3.6.1.4.1.311.2.2.10")
+        username = gb.import_name(name=b"user",
+                                  name_type=gb.NameType.user)
+        try:
+            cred = gb.acquire_cred_with_password(name=username,
+                                                 password=b"password",
+                                                 mechs=[ntlm_mech])
+        except gb.GSSError:
+            self.skipTest('You do not have the GSSAPI gss-ntlmssp mech '
+                          'installed')
+
+        server = gb.import_name(name=b"server",
+                                name_type=gb.NameType.hostbased_service)
+        orig_context = gb.init_sec_context(server, creds=cred.creds,
+                                           mech=ntlm_mech)[0]
+
+        # GSS_NTLMSSP_RESET_CRYPTO_OID_STRING
+        reset_mech = gb.OID.from_int_seq("1.3.6.1.4.1.7165.655.1.3")
+        out_context = gb.set_sec_context_option(reset_mech,
+                                                context=orig_context,
+                                                value=b"\x00" * 4)
+        out_context.should_be_a(gb.SecurityContext)
+
+    @ktu.gssapi_extension_test('ggf', 'Global Grid Forum')
+    @ktu.gssapi_extension_test('password', 'Add Credential with Password')
+    def test_set_sec_context_option_fail(self):
+        ntlm_mech = gb.OID.from_int_seq("1.3.6.1.4.1.311.2.2.10")
+        username = gb.import_name(name=b"user",
+                                  name_type=gb.NameType.user)
+        try:
+            cred = gb.acquire_cred_with_password(name=username,
+                                                 password=b"password",
+                                                 mechs=[ntlm_mech])
+        except gb.GSSError:
+            self.skipTest('You do not have the GSSAPI gss-ntlmssp mech '
+                          'installed')
+
+        server = gb.import_name(name=b"server",
+                                name_type=gb.NameType.hostbased_service)
+        context = gb.init_sec_context(server, creds=cred.creds,
+                                      mech=ntlm_mech)[0]
+
+        # GSS_NTLMSSP_RESET_CRYPTO_OID_STRING
+        reset_mech = gb.OID.from_int_seq("1.3.6.1.4.1.7165.655.1.3")
+
+        # will raise a GSSError if no data was passed in
+        gb.set_sec_context_option.should_raise(gb.GSSError, reset_mech,
+                                               context)
+
+    @ktu.gssapi_extension_test('set_cred_opt', 'Kitten Set Credential Option')
+    @ktu.krb_minversion_test('1.14',
+                             'GSS_KRB5_CRED_NO_CI_FLAGS_X was added in MIT '
+                             'krb5 1.14')
+    def test_set_cred_option(self):
+        name = gb.import_name(SERVICE_PRINCIPAL,
+                              gb.NameType.kerberos_principal)
+        # GSS_KRB5_CRED_NO_CI_FLAGS_X
+        no_ci_flags_x = gb.OID.from_int_seq("1.2.752.43.13.29")
+        orig_cred = gb.acquire_cred(name).creds
+
+        # nothing much we can test here apart from it doesn't fail and the
+        # id of the return cred is the same as the input one
+        output_cred = gb.set_cred_option(no_ci_flags_x, creds=orig_cred)
+        output_cred.should_be_a(gb.Creds)
+
+    @ktu.gssapi_extension_test('set_cred_opt', 'Kitten Set Credential Option')
+    def test_set_cred_option_should_raise_error(self):
+        name = gb.import_name(SERVICE_PRINCIPAL,
+                              gb.NameType.kerberos_principal)
+        orig_cred = gb.acquire_cred(name).creds
+
+        # this is a fake OID and shouldn't work at all
+        invalid_oid = gb.OID.from_int_seq("1.2.3.4.5.6.7.8.9")
+        gb.set_cred_option.should_raise(gb.GSSError, invalid_oid, orig_cred,
+                                        b"\x00")
+
 
 class TestIntEnumFlagSet(unittest.TestCase):
     def test_create_from_int(self):
