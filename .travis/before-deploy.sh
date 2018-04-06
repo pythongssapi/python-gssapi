@@ -11,7 +11,7 @@ source ./.travis/lib-deploy.sh
 
 setup::activate
 
-yum -y install tar coreutils git
+yum -y install tar git
 
 # build the docs
 deploy::build-docs
