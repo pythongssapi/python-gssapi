@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Low-Level API &mdash; Python-GSSAPI 1.4.1 documentation</title>
+  <title>Low-Level API &mdash; Python-GSSAPI 1.5.0 documentation</title>
   
 
   
@@ -25,26 +25,19 @@
   
 
   
-  
     <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="Python-GSSAPI 1.4.1 documentation" href="index.html"/>
-        <link rel="next" title="Tutorials" href="tutorials.html"/>
-        <link rel="prev" title="High-Level API" href="gssapi.html"/> 
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="tutorials.html" />
+    <link rel="prev" title="High-Level API" href="gssapi.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -66,7 +59,7 @@
             
             
               <div class="version">
-                1.4.1
+                1.5.0
               </div>
             
           
@@ -126,7 +119,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">Python-GSSAPI</a>
@@ -134,9 +127,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -259,7 +253,7 @@ see if they are equivalent.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">whether or not the names are equal</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)">bool</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -286,7 +280,7 @@ returned name type will be <code class="docutils literal notranslate"><span clas
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name in question</li>
-<li><strong>name_type</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to retrieve the name type</li>
+<li><strong>name_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to retrieve the name type</li>
 </ul>
 </td>
 </tr>
@@ -342,7 +336,7 @@ by <a class="reference internal" href="#gssapi.raw.names.canonicalize_name" titl
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the exported name</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">bytes</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)">bytes</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -367,7 +361,7 @@ them into a GSSAPI <a class="reference internal" href="#gssapi.raw.names.Name" t
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>name</strong> (<em>bytes</em>) – the string version of the name</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the string version of the name</li>
 <li><strong>name_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.NameType" title="gssapi.NameType"><em>NameType</em></a>) – the type of this name</li>
 </ul>
 </td>
@@ -435,11 +429,11 @@ be specified.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name for which to acquire the credentials (or None
 for the “no name” functionality)</li>
-<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials (or None for
+<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the lifetime for the credentials (or None for
 indefinite)</li>
 <li><strong>mechs</strong> (<em>[</em><a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a><em>]</em>) – the desired mechanisms for which the credentials
 should work, or None for the default set</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage type for the credentials: may be
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – the usage type for the credentials: may be
 ‘initiate’, ‘accept’, or ‘both’</li>
 </ul>
 </td>
@@ -480,13 +474,13 @@ and new credential), or to add a new element to an existing credential.</p>
 credentials</li>
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – name of principal to acquire a credential for</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired security mechanism (required).</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – usage type for credentials.  Possible values:
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – usage type for credentials.  Possible values:
 ‘initiate’ (default), ‘accept’, ‘both’ (failsafe).</li>
-<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – lifetime of credentials for use in initiating
+<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – lifetime of credentials for use in initiating
 security contexts (None for indefinite)</li>
-<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – lifetime of credentials for use in accepting
+<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – lifetime of credentials for use in accepting
 security contexts (None for indefinite)</li>
-<li><strong>mutate_input</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether to mutate the input credentials (True)
+<li><strong>mutate_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether to mutate the input credentials (True)
 or produce a new set of credentials (False).  Defaults to False</li>
 </ul>
 </td>
@@ -525,10 +519,10 @@ be set to None if mutate_input is set to True.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to inspect</li>
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the Name associated with the credentials</li>
-<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the TTL for the credentials</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the usage type of the credentials</li>
-<li><strong>mechs</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – the mechanims used with the credentials</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – get the Name associated with the credentials</li>
+<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – get the TTL for the credentials</li>
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – get the usage type of the credentials</li>
+<li><strong>mechs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – the mechanims used with the credentials</li>
 </ul>
 </td>
 </tr>
@@ -568,10 +562,10 @@ to <a class="reference internal" href="#gssapi.raw.creds.inquire_cred" title="gs
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to inspect</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired mechanism</li>
-<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the Name associated with the credentials</li>
-<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the initiator TTL for the credentials</li>
-<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the acceptor TTL for the credentials</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – get the usage type of the credentials</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – get the Name associated with the credentials</li>
+<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – get the initiator TTL for the credentials</li>
+<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – get the acceptor TTL for the credentials</li>
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – get the usage type of the credentials</li>
 </ul>
 </td>
 </tr>
@@ -644,7 +638,7 @@ existing security context object.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>input_token</strong> (<em>bytes</em>) – the token sent by the context initiator</li>
+<li><strong>input_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the token sent by the context initiator</li>
 <li><strong>acceptor_creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to be used to accept the
 context (or None to use the default credentials)</li>
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security context to update
@@ -704,7 +698,7 @@ give a result of 0.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the number of seconds for which the context will be valid</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)">int</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -736,7 +730,7 @@ objects will automatically be freed by Python.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security context in question</li>
-<li><strong>local_only</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – should we request local deletion (True), or also
+<li><strong>local_only</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – should we request local deletion (True), or also
 remote deletion (False), in which case a token is also returned</li>
 </ul>
 </td>
@@ -749,7 +743,7 @@ remote deletion (False), in which case a token is also returned</li>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">bytes</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)">bytes</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#gssapi.raw.exceptions.MissingContextError" title="gssapi.raw.exceptions.MissingContextError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></p>
@@ -777,7 +771,7 @@ with <a class="reference internal" href="#gssapi.raw.sec_contexts.import_sec_con
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the output token to be imported</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">bytes</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)">bytes</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -838,15 +832,15 @@ or None to use the default credentials</li>
 None to create a new context</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the mechanism type for this security context,
 or None for the default mechanism type</li>
-<li><strong>flags</strong> (<em>list</em>) – the flags to request for the security context, or
+<li><strong>flags</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)"><em>list</em></a>) – the flags to request for the security context, or
 None to use the default set: mutual_authentication and
 out_of_sequence_detection.  This may also be an
 <a class="reference internal" href="#gssapi.raw.types.IntEnumFlagSet" title="gssapi.raw.types.IntEnumFlagSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnumFlagSet</span></code></a></li>
-<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the request lifetime of the security context (a value
+<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the request lifetime of the security context (a value
 of 0 or None means indefinite)</li>
 <li><strong>channel_bindings</strong> (<a class="reference internal" href="#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><em>ChannelBindings</em></a>) – The channel bindings (or None for
 no channel bindings)</li>
-<li><strong>input_token</strong> (<em>bytes</em>) – the token to use to update the security context,
+<li><strong>input_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the token to use to update the security context,
 or None if you are creating a new context</li>
 </ul>
 </td>
@@ -935,7 +929,7 @@ initiator know of the error.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security context against which
 to process the token</li>
-<li><strong>token</strong> (<em>bytes</em>) – the token to process</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the token to process</li>
 </ul>
 </td>
 </tr>
@@ -963,8 +957,8 @@ together.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
-<li><strong>message</strong> (<em>bytes</em>) – the message for which to generate the MIC</li>
-<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the requested Quality of Protection
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the message for which to generate the MIC</li>
+<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the requested Quality of Protection
 (or None to use the default)</li>
 </ul>
 </td>
@@ -972,7 +966,7 @@ together.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the generated MIC token</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">bytes</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)">bytes</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -998,7 +992,7 @@ on whether the sender used confidentiality.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
-<li><strong>message</strong> (<em>bytes</em>) – the message to unwrap/decrypt</li>
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the message to unwrap/decrypt</li>
 </ul>
 </td>
 </tr>
@@ -1042,15 +1036,15 @@ be raised.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
-<li><strong>message</strong> (<em>bytes</em>) – the message in question</li>
-<li><strong>token</strong> (<em>bytes</em>) – the MIC token in question</li>
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the message in question</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the MIC token in question</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the QoP used.</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)">int</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -1081,10 +1075,10 @@ of confidential) with the given Quality of Protection.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
-<li><strong>message</strong> (<em>bytes</em>) – the message to wrap or encrypt</li>
-<li><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to encrypt the message (True),
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the message to wrap or encrypt</li>
+<li><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to encrypt the message (True),
 or just wrap it with a MIC (False)</li>
-<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired Quality of Protection
+<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the desired Quality of Protection
 (or None for the default QoP)</li>
 </ul>
 </td>
@@ -1123,9 +1117,9 @@ the given maximum wrapped/encrypted message size.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
-<li><strong>output_size</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the maximum desired wrapped/encrypted message size</li>
-<li><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not confidentiality is being used</li>
-<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the QoP that will be when you actually call wrap
+<li><strong>output_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the maximum desired wrapped/encrypted message size</li>
+<li><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not confidentiality is being used</li>
+<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the QoP that will be when you actually call wrap
 (or None for the default QoP)</li>
 </ul>
 </td>
@@ -1133,7 +1127,7 @@ the given maximum wrapped/encrypted message size.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the maximum unencrypted/unwrapped message size</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)">int</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><ul class="first last simple">
@@ -1182,7 +1176,7 @@ a string in dotted form</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID">OID</a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code> – the sequence is less than two elements long</td>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.6)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">ValueError</span></code></a> – the sequence is less than two elements long</td>
 </tr>
 </tbody>
 </table>
@@ -1209,9 +1203,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -1222,9 +1216,9 @@ exception message</p>
 <code class="descname">MESSAGE</code><em class="property"> = 'Major ({maj_stat}): {maj_str}, Minor ({min_stat}): {min_str}'</em><a class="headerlink" href="#gssapi.raw.misc.GSSError.MESSAGE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="gssapi.raw.misc.GSSError.gen_message">
-<code class="descname">gen_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.GSSError.gen_message" title="Permalink to this definition">¶</a></dt>
+<code class="descname">gen_message</code><a class="headerlink" href="#gssapi.raw.misc.GSSError.gen_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieves all messages for this error’s status codes</p>
 <p>This method retrieves all messages for this error’s status codes,
 and forms them into a string for use as an exception message</p>
@@ -1234,15 +1228,15 @@ and forms them into a string for use as an exception message</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">a string for use as this error’s message</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)">bytes</a></td>
 </tr>
 </tbody>
 </table>
 </dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="gssapi.raw.misc.GSSError.get_all_statuses">
-<code class="descname">get_all_statuses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.GSSError.get_all_statuses" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get_all_statuses</code><a class="headerlink" href="#gssapi.raw.misc.GSSError.get_all_statuses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve all messages for a status code.</p>
 <p>This method retrieves all human-readable messages
 available for the given status code.</p>
@@ -1251,8 +1245,8 @@ available for the given status code.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the status code in question</li>
-<li><strong>is_maj</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether this is a major status code (True)
+<li><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the status code in question</li>
+<li><strong>is_maj</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether this is a major status code (True)
 or minor status code (False)</li>
 </ul>
 </td>
@@ -1265,7 +1259,7 @@ or minor status code (False)</li>
 </p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[bytes]</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)">bytes</a>]</p>
 </td>
 </tr>
 </tbody>
@@ -1301,7 +1295,7 @@ process the given name.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the mechanism OIDs able to process the given name</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GSSError</span></code></a></td>
 </tr>
@@ -1323,7 +1317,7 @@ the given mechanism.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the name type OIDs supported by the given mechanism</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)">list</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GSSError</span></code></a></td>
 </tr>
@@ -1335,7 +1329,7 @@ the given mechanism.</p>
 <dt id="gssapi.raw.types.AddressType">
 <em class="property">class </em><code class="descname">AddressType</code><a class="headerlink" href="#gssapi.raw.types.AddressType" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Channel Bindings Address Types</p>
-<p>This <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code> represents the various address
+<p>This <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> represents the various address
 types used with the <a class="reference internal" href="#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelBindings</span></code></a> structure.</p>
 <p>The numbers behind the values correspond directly
 to their C counterparts.  There is no value for
@@ -1463,14 +1457,14 @@ such as bitwise AND, OR, and XOR.</p>
 <code class="descname">MAX_VAL</code><em class="property"> = 2147483648</em><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.MAX_VAL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="gssapi.raw.types.GenericFlagSet.add">
-<code class="descname">add</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.add" title="Permalink to this definition">¶</a></dt>
+<code class="descname">add</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.add" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="attribute">
 <dt id="gssapi.raw.types.GenericFlagSet.discard">
-<code class="descname">discard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.discard" title="Permalink to this definition">¶</a></dt>
+<code class="descname">discard</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.discard" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1480,7 +1474,7 @@ such as bitwise AND, OR, and XOR.</p>
 <em class="property">class </em><code class="descname">IntEnumFlagSet</code><a class="headerlink" href="#gssapi.raw.types.IntEnumFlagSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>A set backed by a 32-bit integer with enum members</p>
 <p>This class is a <a class="reference internal" href="#gssapi.raw.types.GenericFlagSet" title="gssapi.raw.types.GenericFlagSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericFlagSet</span></code></a> where the returned
-members are values in an <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code>.</p>
+members are values in an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a>.</p>
 <p>It functions exactly like a <cite>GenericFlagSet</cite>, except that
 it also supports bitwise operations with the enum values.</p>
 </dd></dl>
@@ -1550,7 +1544,7 @@ types (to be used with <a class="reference internal" href="#gssapi.raw.names.imp
 <dt id="gssapi.raw.types.RequirementFlag">
 <em class="property">class </em><code class="descname">RequirementFlag</code><a class="headerlink" href="#gssapi.raw.types.RequirementFlag" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Requirement Flags</p>
-<p>This <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code> represents flags used with the
+<p>This <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.6)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> represents flags used with the
 <a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a>-related methods (e.g.
 <a class="reference internal" href="#gssapi.raw.sec_contexts.init_sec_context" title="gssapi.raw.sec_contexts.init_sec_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">init_sec_context()</span></code></a>)</p>
 <p>The numbers behind the values correspond directly
@@ -1628,10 +1622,10 @@ to their C counterparts.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>initiator_address_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.AddressType" title="gssapi.AddressType"><em>AddressType</em></a>) – the initiator address type</li>
-<li><strong>initiator_address</strong> (<em>bytes</em>) – the initiator address</li>
+<li><strong>initiator_address</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the initiator address</li>
 <li><strong>acceptor_address_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.AddressType" title="gssapi.AddressType"><em>AddressType</em></a>) – the acceptor address type</li>
-<li><strong>acceptor_address</strong> (<em>bytes</em>) – the acceptor address</li>
-<li><strong>application_data</strong> (<em>bytes</em>) – additional application-specific data</li>
+<li><strong>acceptor_address</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the acceptor address</li>
+<li><strong>application_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – additional application-specific data</li>
 </ul>
 </td>
 </tr>
@@ -1690,12 +1684,12 @@ They may then be retrieved later using <a class="reference internal" href="#gssa
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to store</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage to store the credentials with – either
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – the usage to store the credentials with – either
 ‘both’, ‘initiate’, or ‘accept’</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechansim to associate with the stored credentials</li>
-<li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to overwrite existing credentials
+<li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to overwrite existing credentials
 stored with the same name, etc</li>
-<li><strong>set_default</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to set these credentials as
+<li><strong>set_default</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to set these credentials as
 the default credentials for the given store.</li>
 </ul>
 </td>
@@ -1737,15 +1731,15 @@ or stores.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>store</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – the credential store information pointing to the
+<li><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) – the credential store information pointing to the
 credential store from which to acquire the credentials</li>
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials,
 or None for the default name</li>
-<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired lifetime of the credentials, or None
+<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the desired lifetime of the credentials, or None
 for indefinite</li>
-<li><strong>mechs</strong> (<em>list</em>) – the desired mechanisms to be used with these
+<li><strong>mechs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)"><em>list</em></a>) – the desired mechanisms to be used with these
 credentials, or None for the default set</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
 ‘initiate’, or ‘accept’</li>
 </ul>
 </td>
@@ -1785,16 +1779,16 @@ or stores.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>store</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – the store into which to store the credentials,
+<li><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) – the store into which to store the credentials,
 or None for the default store.</li>
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired mechanism to be used with these
 credentials</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
 ‘initiate’, or ‘accept’</li>
-<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired initiate lifetime of the
+<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the desired initiate lifetime of the
 credentials, or None for indefinite</li>
-<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired accept lifetime of the
+<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the desired accept lifetime of the
 credentials, or None for indefinite</li>
 </ul>
 </td>
@@ -1832,15 +1826,15 @@ or stores.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>store</strong> (<a class="reference external" href="https://docs.python.org/2/library/stdtypes.html#dict" title="(in Python v2.7)"><em>dict</em></a>) – the store into which to store the credentials,
+<li><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) – the store into which to store the credentials,
 or None for the default store.</li>
 <li><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to store</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage to store the credentials with – either
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – the usage to store the credentials with – either
 ‘both’, ‘initiate’, or ‘accept’</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechansim to associate with the stored credentials</li>
-<li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to overwrite existing credentials
+<li><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to overwrite existing credentials
 stored with the same name, etc</li>
-<li><strong>set_default</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to set these credentials as
+<li><strong>set_default</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to set these credentials as
 the default credentials for the given store.</li>
 </ul>
 </td>
@@ -1876,7 +1870,7 @@ operation instead of an ‘add’ operation).</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to remove the attribute from</li>
-<li><strong>attr</strong> (<em>bytes</em>) – the name of the attribute</li>
+<li><strong>attr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the name of the attribute</li>
 </ul>
 </td>
 </tr>
@@ -1911,7 +1905,7 @@ display the given name</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the displayed name</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">bytes</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)">bytes</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#gssapi.raw.exceptions.OperationUnavailableError" title="gssapi.raw.exceptions.OperationUnavailableError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">OperationUnavailableError</span></code></a> – the given name could not be displayed
@@ -1944,7 +1938,7 @@ using the normal export name type.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the exported composite name</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)">bytes</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GSSError</span></code></a></td>
 </tr>
@@ -1967,7 +1961,7 @@ multiple calls to retrieve multiple values).</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the Name from which to get the attribute</li>
-<li><strong>attr</strong> (<em>bytes</em>) – the name of the attribute</li>
+<li><strong>attr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the name of the attribute</li>
 </ul>
 </td>
 </tr>
@@ -2006,9 +2000,9 @@ a mechanism name, the associated mechansim is returned as well.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name about which to inquire</li>
-<li><strong>mech_name</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to retrieve if this name
+<li><strong>mech_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to retrieve if this name
 is a mech_name (and the associate mechanism)</li>
-<li><strong>attrs</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to retrieve the attribute name list</li>
+<li><strong>attrs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to retrieve the attribute name list</li>
 </ul>
 </td>
 </tr>
@@ -2047,9 +2041,9 @@ used in between calls to “clear” the values.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the Name on which to set the attribute</li>
-<li><strong>attr</strong> (<em>bytes</em>) – the name of the attribute</li>
-<li><strong>value</strong> (<em>list</em>) – a list of bytes objects to use as the value(s)</li>
-<li><strong>complete</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to mark this attribute’s value
+<li><strong>attr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the name of the attribute</li>
+<li><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.6)"><em>list</em></a>) – a list of bytes objects to use as the value(s)</li>
+<li><strong>complete</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to mark this attribute’s value
 set as being “complete”</li>
 </ul>
 </td>
@@ -2080,7 +2074,7 @@ which may be transmitted between different processes.</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the exported token representing the given credentials object</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bytes</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)">bytes</a></td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GSSError</span></code></a></td>
 </tr>
@@ -2098,7 +2092,7 @@ previously exported by <a class="reference internal" href="#gssapi.raw.ext_cred_
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>token</strong> (<em>bytes</em>) – the token to import</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the token to import</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the imported credentials object</td>
 </tr>
@@ -2201,8 +2195,8 @@ data, and returns an unwrapped/decrypted message.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
-<li><strong>message</strong> (<em>bytes</em>) – the AEAD message to unwrap or decrypt</li>
-<li><strong>associated</strong> (<em>bytes</em>) – associated data that goes with the message</li>
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the AEAD message to unwrap or decrypt</li>
+<li><strong>associated</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – associated data that goes with the message</li>
 </ul>
 </td>
 </tr>
@@ -2282,11 +2276,11 @@ and outputs and AEAD message.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
-<li><strong>message</strong> (<em>bytes</em>) – the message to wrap or encrypt</li>
-<li><strong>associated</strong> (<em>bytes</em>) – associated data to go with the message</li>
-<li><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to encrypt the message (True),
+<li><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the message to wrap or encrypt</li>
+<li><strong>associated</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – associated data to go with the message</li>
+<li><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to encrypt the message (True),
 or just wrap it with a MIC (False)</li>
-<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired Quality of Protection
+<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the desired Quality of Protection
 (or None for the default QoP)</li>
 </ul>
 </td>
@@ -2329,9 +2323,9 @@ trailer buffers).</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
 <li><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – an <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</li>
-<li><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)"><em>bool</em></a>) – whether or not to encrypt the message (True),
+<li><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) – whether or not to encrypt the message (True),
 or just wrap it with a MIC (False)</li>
-<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired Quality of Protection
+<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the desired Quality of Protection
 (or None for the default QoP)</li>
 </ul>
 </td>
@@ -2339,7 +2333,7 @@ or just wrap it with a MIC (False)</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">whether or not confidentiality was actually used</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2/library/functions.html#bool" title="(in Python v2.7)">bool</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)">bool</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GSSError</span></code></a></p>
@@ -2411,7 +2405,7 @@ operates entirely in-place, and returns nothing.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
 <li><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</li>
-<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired Quality of Protection
+<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the desired Quality of Protection
 (or None for the default QoP)</li>
 </ul>
 </td>
@@ -2440,7 +2434,7 @@ operates entirely in-place, and returns nothing.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</li>
 <li><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</li>
-<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the desired Quality of Protection
+<li><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the desired Quality of Protection
 (or None for the default QoP)</li>
 </ul>
 </td>
@@ -2472,7 +2466,7 @@ in the given IOV method.</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the QoP used to generate the MIC token</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)">int</a></p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)">int</a></p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-exc docutils literal notranslate"><span class="pre">GSSError</span></code></a></p>
@@ -2501,11 +2495,11 @@ impersonator credentials must have a usage of ‘both’ or ‘initiate’.</p>
 <li><strong>impersonator_cred</strong> (<em>Cred</em>) – the credentials with permissions to
 impersonate the target name</li>
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to impersonate</li>
-<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials (or None for
+<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the lifetime for the credentials (or None for
 indefinite)</li>
 <li><strong>mechs</strong> (<em>[</em><a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a><em>]</em>) – the desired mechanisms for which the credentials
 should work (or None for the default set)</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage type for the credentials: may be
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – the usage type for the credentials: may be
 ‘initiate’, ‘accept’, or ‘both’</li>
 </ul>
 </td>
@@ -2545,12 +2539,12 @@ impersonate the target name</li>
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to impersonate</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired mechanism.  Note that this is both
 singular and required, unlike acquireCredImpersonateName</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage type for the credentials: may be
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – the usage type for the credentials: may be
 ‘initiate’, ‘accept’, or ‘both’</li>
-<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials to remain
+<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the lifetime for the credentials to remain
 valid when using them to initiate security contexts (or None for
 indefinite)</li>
-<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials to remain
+<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the lifetime for the credentials to remain
 valid when using them to accept security contexts (or None for
 indefinite)</li>
 </ul>
@@ -2587,12 +2581,12 @@ MIT or Heimdal.</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to acquire credentials for</li>
-<li><strong>password</strong> (<em>bytes</em>) – the password used to acquire credentialss with</li>
-<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials (or None for
+<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the password used to acquire credentialss with</li>
+<li><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the lifetime for the credentials (or None for
 indefinite)</li>
 <li><strong>mechs</strong> (<em>[</em><a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a><em>]</em>) – the desired mechanisms for which the credentials
 should work (or None for the default set)</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – usage type for credentials.  Possible values:
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – usage type for credentials.  Possible values:
 ‘initiate’ (default), ‘accept’, ‘both’ (failsafe).</li>
 </ul>
 </td>
@@ -2628,13 +2622,13 @@ MIT or Heimdal.</p>
 <li><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to acquire credentials for</li>
 <li><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired mechanism.  Note that this is both
 singular and required</li>
-<li><strong>password</strong> (<em>bytes</em>) – the password used to acquire credentialss with</li>
-<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – the usage type for the credentials: may be
+<li><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – the password used to acquire credentialss with</li>
+<li><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) – the usage type for the credentials: may be
 ‘initiate’, ‘accept’, or ‘both’</li>
-<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials to remain valid
+<li><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the lifetime for the credentials to remain valid
 when using them to initiate security contexts (or None for
 indefinite)</li>
-<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the lifetime for the credentials to remain
+<li><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the lifetime for the credentials to remain
 valid when using them to accept security contexts (or None for
 indefinite)</li>
 </ul>
@@ -2673,9 +2667,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2702,9 +2696,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2731,9 +2725,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2760,9 +2754,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2789,9 +2783,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2818,9 +2812,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2847,9 +2841,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2876,9 +2870,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2900,9 +2894,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2924,9 +2918,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2948,9 +2942,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -2972,9 +2966,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3001,9 +2995,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3030,9 +3024,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3059,9 +3053,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3088,9 +3082,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3117,9 +3111,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3146,9 +3140,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3175,9 +3169,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3204,9 +3198,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3233,9 +3227,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3262,9 +3256,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3291,9 +3285,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3315,9 +3309,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3339,9 +3333,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3368,9 +3362,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3397,9 +3391,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3426,9 +3420,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3450,9 +3444,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3474,9 +3468,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3498,9 +3492,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3527,9 +3521,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3556,9 +3550,9 @@ exception message</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the major code associated with this error</li>
-<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – the minor code associated with this error</li>
-<li><strong>token</strong> (<em>bytes</em>) – an error token associated with the error</li>
+<li><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the major code associated with this error</li>
+<li><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) – the minor code associated with this error</li>
+<li><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.6)"><em>bytes</em></a>) – an error token associated with the error</li>
 </ul>
 </td>
 </tr>
@@ -3576,9 +3570,7 @@ exception message</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -3600,7 +3592,7 @@ exception message</p>
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -3618,7 +3610,7 @@ exception message</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.4.1',
+            VERSION:'1.5.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -3637,14 +3629,13 @@ exception message</p>
     <script type="text/javascript" src="_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

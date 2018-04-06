@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>gssapi.creds &mdash; Python-GSSAPI 1.4.1 documentation</title>
+  <title>gssapi.creds &mdash; Python-GSSAPI 1.5.0 documentation</title>
   
 
   
@@ -25,25 +25,17 @@
   
 
   
-  
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Python-GSSAPI 1.4.1 documentation" href="../../index.html"/>
-        <link rel="up" title="Module code" href="../index.html"/> 
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -65,7 +57,7 @@
             
             
               <div class="version">
-                1.4.1
+                1.5.0
               </div>
             
           
@@ -104,7 +96,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">Python-GSSAPI</a>
@@ -112,9 +104,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -304,8 +297,8 @@
                                                      <span class="n">lifetime</span><span class="p">,</span> <span class="n">mechs</span><span class="p">,</span>
                                                      <span class="n">usage</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">AcquireCredResult</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">mechs</span><span class="p">,</span></div>
-                                        <span class="n">res</span><span class="o">.</span><span class="n">lifetime</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">AcquireCredResult</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">mechs</span><span class="p">,</span>
+                                        <span class="n">res</span><span class="o">.</span><span class="n">lifetime</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.store"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.store">[docs]</a>    <span class="k">def</span> <span class="nf">store</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">mech</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
               <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">set_default</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -356,8 +349,8 @@
 
             <span class="n">store</span> <span class="o">=</span> <span class="n">_encode_dict</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
 
-            <span class="k">return</span> <span class="n">rcred_cred_store</span><span class="o">.</span><span class="n">store_cred_into</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span></div>
-                                                    <span class="n">overwrite</span><span class="p">,</span> <span class="n">set_default</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">rcred_cred_store</span><span class="o">.</span><span class="n">store_cred_into</span><span class="p">(</span><span class="n">store</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span>
+                                                    <span class="n">overwrite</span><span class="p">,</span> <span class="n">set_default</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.impersonate"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.impersonate">[docs]</a>    <span class="k">def</span> <span class="nf">impersonate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;initiate&#39;</span><span class="p">):</span>
@@ -389,8 +382,8 @@
         <span class="n">res</span> <span class="o">=</span> <span class="n">rcred_s4u</span><span class="o">.</span><span class="n">acquire_cred_impersonate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
                                                       <span class="n">lifetime</span><span class="p">,</span> <span class="n">mechs</span><span class="p">,</span>
                                                       <span class="n">usage</span><span class="p">)</span>
-</div>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">base</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">base</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.inquire"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.inquire">[docs]</a>    <span class="k">def</span> <span class="nf">inquire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Inspect these credentials for information</span>
@@ -420,8 +413,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">res_name</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireCredResult</span><span class="p">(</span><span class="n">res_name</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">lifetime</span><span class="p">,</span></div>
-                                        <span class="n">res</span><span class="o">.</span><span class="n">usage</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">mechs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireCredResult</span><span class="p">(</span><span class="n">res_name</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">lifetime</span><span class="p">,</span>
+                                        <span class="n">res</span><span class="o">.</span><span class="n">usage</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">mechs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.inquire_by_mech"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.inquire_by_mech">[docs]</a>    <span class="k">def</span> <span class="nf">inquire_by_mech</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">init_lifetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                         <span class="n">accept_lifetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -454,8 +447,8 @@
 
         <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireCredByMechResult</span><span class="p">(</span><span class="n">res_name</span><span class="p">,</span>
                                               <span class="n">res</span><span class="o">.</span><span class="n">init_lifetime</span><span class="p">,</span>
-                                              <span class="n">res</span><span class="o">.</span><span class="n">accept_lifetime</span><span class="p">,</span></div>
-                                              <span class="n">res</span><span class="o">.</span><span class="n">usage</span><span class="p">)</span>
+                                              <span class="n">res</span><span class="o">.</span><span class="n">accept_lifetime</span><span class="p">,</span>
+                                              <span class="n">res</span><span class="o">.</span><span class="n">usage</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.add"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span>
             <span class="n">init_lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">accept_lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">impersonator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -539,8 +532,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">rcreds</span><span class="o">.</span><span class="n">add_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">init_lifetime</span><span class="p">,</span>
                                   <span class="n">accept_lifetime</span><span class="p">)</span>
-</div>
-        <span class="k">return</span> <span class="n">Credentials</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Credentials</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">creds</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Credentials.export"><a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Export these credentials into a token</span>
@@ -560,19 +553,17 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
                                       <span class="s2">&quot;have support for importing and &quot;</span>
                                       <span class="s2">&quot;exporting creditials&quot;</span><span class="p">)</span>
-</div>
-        <span class="k">return</span> <span class="n">rcred_imp_exp</span><span class="o">.</span><span class="n">export_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rcred_imp_exp</span><span class="o">.</span><span class="n">export_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
     <span class="c1"># pickle protocol support</span>
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># the unpickle arguments to new are (base=None, token=self.export())</span></div>
-        <span class="k">return</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">export</span><span class="p">()))</span>
+        <span class="c1"># the unpickle arguments to new are (base=None, token=self.export())</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">export</span><span class="p">()))</span></div>
 </pre></div>
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -585,7 +576,7 @@
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -603,7 +594,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.4.1',
+            VERSION:'1.5.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -622,14 +613,13 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>

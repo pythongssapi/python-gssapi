@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>gssapi.names &mdash; Python-GSSAPI 1.4.1 documentation</title>
+  <title>gssapi.names &mdash; Python-GSSAPI 1.5.0 documentation</title>
   
 
   
@@ -25,25 +25,17 @@
   
 
   
-  
     <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="Python-GSSAPI 1.4.1 documentation" href="../../index.html"/>
-        <link rel="up" title="Module code" href="../index.html"/> 
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
@@ -65,7 +57,7 @@
             
             
               <div class="version">
-                1.4.1
+                1.5.0
               </div>
             
           
@@ -104,7 +96,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">Python-GSSAPI</a>
@@ -112,9 +104,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -314,8 +307,8 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
                                       <span class="s2">&quot;support RFC 6680 (the GSSAPI naming &quot;</span>
                                       <span class="s2">&quot;extensions)&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">display_name_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span></div>
-            <span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">display_name_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
+            <span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -364,8 +357,8 @@
                                           <span class="s2">&quot;naming extensions)&quot;</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">export_name_composite</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span></div>
-            <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">export_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">export_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Name.canonicalize"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.canonicalize">[docs]</a>    <span class="k">def</span> <span class="nf">canonicalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Canonicalize a name with respect to a mechanism.</span>
@@ -384,8 +377,8 @@
 <span class="sd">            BadNameTypeError</span>
 <span class="sd">            BadNameError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-</div>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">canonicalize_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">canonicalize_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">duplicate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
@@ -466,8 +459,8 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
                                       <span class="s2">&quot;support RFC 6680 (the GSSAPI naming &quot;</span>
                                       <span class="s2">&quot;extensions)&quot;</span><span class="p">)</span>
-</div>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span></div>
 
 
 <span class="k">class</span> <span class="nc">_NameAttributeMapping</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">MutableMapping</span><span class="p">):</span>
@@ -524,9 +517,7 @@
 </pre></div>
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -539,7 +530,7 @@
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -557,7 +548,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.4.1',
+            VERSION:'1.5.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
@@ -576,14 +567,13 @@
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
   
 
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
       });
-  </script>
-   
+  </script> 
 
 </body>
 </html>
