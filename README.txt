@@ -55,6 +55,14 @@ For Running the Tests
 
 * the `shouldbe` package (for tests)
 
+* the `k5test` package
+
+To install test dependencies using pip:
+
+.. code-block:: bash
+
+    $ pip install -r test-requirements.txt # Optional, for running test suite
+
 Installation
 ============
 
