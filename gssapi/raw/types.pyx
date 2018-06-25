@@ -13,6 +13,11 @@ import numbers
 import operator
 import six
 
+if six.PY2:
+    from collections import MutableSet
+else:
+    from collections.abc import MutableSet
+
 
 class NameType(object):
     """
@@ -106,7 +111,7 @@ class MechType(object):
     # these are added in by the individual mechanism files on import
 
 
-class GenericFlagSet(collections.MutableSet):
+class GenericFlagSet(MutableSet):
     """A set backed by a 32-bit integer
 
     This is a set backed by a 32 bit integer.

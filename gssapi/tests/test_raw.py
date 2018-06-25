@@ -1,15 +1,20 @@
-import collections
 import copy
 import os
 import socket
 import unittest
 
+import six
 import should_be.all  # noqa
 
 import gssapi.raw as gb
 import gssapi.raw.misc as gbmisc
 import k5test.unit as ktu
 import k5test as kt
+
+if six.PY2:
+    from collections import Set
+else:
+    from collections.abc import Set
 
 
 TARGET_SERVICE_NAME = b'host'
@@ -355,7 +360,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         mech_type.should_be(gb.MechType.kerberos)
 
         flags.shouldnt_be_none()
-        flags.should_be_a(collections.Set)
+        flags.should_be_a(Set)
         flags.shouldnt_be_empty()
 
         local_est.should_be_a(bool)
@@ -1084,7 +1089,7 @@ class TestInitContext(_GSSAPIKerberosTestCase):
 
         out_mech_type.should_be(gb.MechType.kerberos)
 
-        out_req_flags.should_be_a(collections.Set)
+        out_req_flags.should_be_a(Set)
         out_req_flags.should_be_at_least_length(2)
 
         out_token.shouldnt_be_empty()
@@ -1139,7 +1144,7 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
 
         out_token.shouldnt_be_empty()
 
-        out_req_flags.should_be_a(collections.Set)
+        out_req_flags.should_be_a(Set)
         out_req_flags.should_be_at_least_length(2)
 
         out_ttl.should_be_greater_than(0)
@@ -1167,7 +1172,7 @@ class TestAcceptContext(_GSSAPIKerberosTestCase):
 
         out_token.shouldnt_be_empty()
 
-        out_req_flags.should_be_a(collections.Set)
+        out_req_flags.should_be_a(Set)
         out_req_flags.should_be_at_least_length(2)
 
         out_ttl.should_be_greater_than(0)
