@@ -1,11 +1,15 @@
-import collections
-
 import six
 
 from gssapi.raw import names as rname
 from gssapi.raw import NameType
 from gssapi.raw import named_tuples as tuples
 from gssapi import _utils
+
+if six.PY2:
+    from collections import MutableMapping, Iterable
+else:
+    from collections.abc import MutableMapping, Iterable
+
 
 rname_rfc6680 = _utils.import_gssapi_extension('rfc6680')
 rname_rfc6680_comp_oid = _utils.import_gssapi_extension('rfc6680_comp_oid')
@@ -313,7 +317,7 @@ class Name(rname.Name):
         return self._attr_obj
 
 
-class _NameAttributeMapping(collections.MutableMapping):
+class _NameAttributeMapping(MutableMapping):
 
     """Provides dict-like access to RFC 6680 Name attributes."""
     def __init__(self, name):
@@ -345,7 +349,7 @@ class _NameAttributeMapping(collections.MutableMapping):
             complete = False
 
         if (isinstance(value, (six.string_types, bytes)) or
-                not isinstance(value, collections.Iterable)):
+                not isinstance(value, Iterable)):
             # NB(directxman12): this allows us to easily assign a single
             # value, since that's a common case
             value = [value]
