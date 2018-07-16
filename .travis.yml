@@ -28,13 +28,13 @@ script:
 jobs:
   include:
   - stage: verify
-    env: DISTRO=fedora:rawhide PYTHON="2"
+    env: DISTRO=fedora:latest PYTHON="2"
     script:
     - source ./.travis/lib-util.sh
     - util::docker-run $DISTRO ./.travis/verify.sh
 
   - stage: verify
-    env: DISTRO=fedora:rawhide PYTHON="3"
+    env: DISTRO=fedora:latest PYTHON="3"
     script:
     - source ./.travis/lib-util.sh
     - util::docker-run $DISTRO ./.travis/verify.sh
@@ -54,10 +54,10 @@ jobs:
     env: DISTRO=centos:7 PYTHON="2" # el7 doesn't do python3 modules
 
   - stage: test
-    env: DISTRO=fedora:rawhide PYTHON="3"
+    env: DISTRO=fedora:latest PYTHON="3"
 
   - stage: test
-    env: DISTRO=fedora:rawhide PYTHON="2"
+    env: DISTRO=fedora:latest PYTHON="2"
 
   - stage: test
     env: PYTHON="2" KRB5_VER="heimdal" PYENV="2.7.14"
@@ -75,7 +75,7 @@ jobs:
   - stage: deploy latest docs
     script: skip
     env:
-    - DISTRO=fedora:rawhide
+    - DISTRO=fedora:latest
     - PYTHON="3"
     - secure: L5SpEj5+no20PWwC9Y/XNhAfmUvYiuykwSMa/YyqvUuBjdizzpZcHr7Ego5nMdM1TniTxj4pSTM+GbM0FHCzNmAINSRh9g/D3hheRqlRBacqR0XwC9ZZRvkKvtzwnLh4vYWiauq4AoDeR5U6tkEcay6LjE57iMQcLjcKYBc+Eos=
     before_deploy:
@@ -93,7 +93,7 @@ jobs:
   - stage: deploy
     script: skip
     env:
-    - DISTRO=fedora:rawhide
+    - DISTRO=fedora:latest
     - PYTHON="3"
     - secure: L5SpEj5+no20PWwC9Y/XNhAfmUvYiuykwSMa/YyqvUuBjdizzpZcHr7Ego5nMdM1TniTxj4pSTM+GbM0FHCzNmAINSRh9g/D3hheRqlRBacqR0XwC9ZZRvkKvtzwnLh4vYWiauq4AoDeR5U6tkEcay6LjE57iMQcLjcKYBc+Eos=
     before_deploy:
