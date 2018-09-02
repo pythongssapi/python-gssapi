@@ -164,15 +164,16 @@ class Mechanism(roids.OID):
         return cls(m)
 
     @classmethod
-    def from_attrs(cls, m_desired=None, m_except=None, m_critical=None):
+    def from_attrs(cls, desired_attrs=None, except_attrs=None,
+                   critical_attrs=None):
         """
         Get a generator of mechanisms supporting the specified attributes. See
         RFC 5587's :func:`indicate_mechs_by_attrs` for more information.
 
         Args:
-            m_desired ([OID]): Desired attributes
-            m_except ([OID]): Except attributes
-            m_critical ([OID]): Critical attributes
+            desired_attrs ([OID]): Desired attributes
+            except_attrs ([OID]): Except attributes
+            critical_attrs ([OID]): Critical attributes
 
         Returns:
             [Mechanism]: A set of mechanisms having the desired features.
@@ -182,18 +183,18 @@ class Mechanism(roids.OID):
 
         :requires-ext:`rfc5587`
         """
-        if isinstance(m_desired, roids.OID):
-            m_desired = set([m_desired])
-        if isinstance(m_except, roids.OID):
-            m_except = set([m_except])
-        if isinstance(m_critical, roids.OID):
-            m_critical = set([m_critical])
+        if isinstance(desired_attrs, roids.OID):
+            desired_attrs = set([desired_attrs])
+        if isinstance(except_attrs, roids.OID):
+            except_attrs = set([except_attrs])
+        if isinstance(critical_attrs, roids.OID):
+            critical_attrs = set([critical_attrs])
 
         if rfc5587 is None:
             raise NotImplementedError("Your GSSAPI implementation does not "
                                       "have support for RFC 5587")
 
-        mechs = rfc5587.indicate_mechs_by_attrs(m_desired,
-                                                m_except,
-                                                m_critical)
+        mechs = rfc5587.indicate_mechs_by_attrs(desired_attrs,
+                                                except_attrs,
+                                                critical_attrs)
         return (cls(mech) for mech in mechs)

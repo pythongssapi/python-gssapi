@@ -400,13 +400,16 @@ class MechsTestCase(_GSSAPIKerberosTestCase):
     def test_mech_inquiry(self):
         mechs = list(gssmechs.Mechanism.all_mechs())
         c = len(mechs)
+
+        g_M_from_attrs = gssmechs.Mechanism.from_attrs
+
         for mech in mechs:
             attrs = mech.attrs
             known_attrs = mech.known_attrs
 
             for attr in attrs:
-                from_desired = gssmechs.Mechanism.from_attrs(m_desired=[attr])
-                from_except = gssmechs.Mechanism.from_attrs(m_except=[attr])
+                from_desired = g_M_from_attrs(desired_attrs=[attr])
+                from_except = g_M_from_attrs(except_attrs=[attr])
 
                 from_desired = list(from_desired)
                 from_except = list(from_except)
@@ -416,8 +419,8 @@ class MechsTestCase(_GSSAPIKerberosTestCase):
                 from_except.shouldnt_include(mech)
 
             for attr in known_attrs:
-                from_desired = gssmechs.Mechanism.from_attrs(m_desired=[attr])
-                from_except = gssmechs.Mechanism.from_attrs(m_except=[attr])
+                from_desired = g_M_from_attrs(desired_attrs=[attr])
+                from_except = g_M_from_attrs(except_attrs=[attr])
 
                 from_desired = list(from_desired)
                 from_except = list(from_except)
