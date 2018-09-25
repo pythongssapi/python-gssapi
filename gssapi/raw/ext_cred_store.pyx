@@ -109,7 +109,8 @@ usage='both')
 
     Args:
         store (dict): the credential store information pointing to the
-            credential store from which to acquire the credentials
+            credential store from which to acquire the credentials.
+            See :doc:`credstore` for valid values
         name (Name): the name associated with the credentials,
             or None for the default name
         lifetime (int): the desired lifetime of the credentials, or None
@@ -204,6 +205,7 @@ init_lifetime=None, accept_lifetime=None)
     Args:
         store (dict): the store into which to store the credentials,
             or None for the default store.
+            See :doc:`credstore` for valid values
         name (Name): the name associated with the credentials
         mech (OID): the desired mechanism to be used with these
             credentials
@@ -295,6 +297,7 @@ set_default=False)
     Args:
         store (dict): the store into which to store the credentials,
             or None for the default store.
+            See :doc:`credstore` for valid values
         creds (Creds): the credentials to store
         usage (str): the usage to store the credentials with -- either
             'both', 'initiate', or 'accept'
