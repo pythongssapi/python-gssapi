@@ -28,6 +28,7 @@ straight into the :doc:`high-level API documentation <gssapi>`.
 
    gssapi.rst
    gssapi.raw.rst
+   otherdoc.rst
    tutorials.rst
 
 
