@@ -656,17 +656,17 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         mechs.should_be_a(set)
         mechs.shouldnt_be_empty()
 
-        # We need last_attr to be an attribute on last_mech.
-        # Since mechs is of type set and thus not indexable, these
-        # are used to track the last visited mech for testing
-        # purposes, and saves a call to inquire_attrs_for_mech().
-        last_attr = None
-        last_mech = None
+        # We're validating RFC 5587 here: by iterating over all mechanisms,
+        # we can query their attributes and build a mapping of attr->{mechs}.
+        # To test indicate_mechs_by_attrs, we can use this mapping and
+        # ensure that, when the attribute is placed in a slot, we get the
+        # expected result (e.g., attr in have --> mechs are present).
+        attrs_dict = {}
+        known_attrs_dict = {}
 
         for mech in mechs:
             mech.shouldnt_be_none()
             mech.should_be_a(gb.OID)
-            last_mech = mech
 
             inquire_out = gb.inquire_attrs_for_mech(mech)
             mech_attrs = inquire_out.mech_attrs
@@ -691,7 +691,9 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
                 display_out.short_desc.should_be_a(bytes)
                 display_out.long_desc.should_be_a(bytes)
 
-                last_attr = mech_attr
+                if mech_attr not in attrs_dict:
+                    attrs_dict[mech_attr] = set()
+                attrs_dict[mech_attr].add(mech)
 
             for mech_attr in known_mech_attrs:
                 mech_attr.shouldnt_be_none()
@@ -705,18 +707,27 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
                 display_out.short_desc.should_be_a(bytes)
                 display_out.long_desc.should_be_a(bytes)
 
-        attrs = set([last_attr])
+                if mech_attr not in known_attrs_dict:
+                    known_attrs_dict[mech_attr] = set()
+                known_attrs_dict[mech_attr].add(mech)
 
-        mechs = gb.indicate_mechs_by_attrs(attrs, None, None)
-        mechs.shouldnt_be_empty()
-        mechs.should_include(last_mech)
+        for attr, expected_mechs in attrs_dict.items():
+            attrs = set([attr])
 
-        mechs = gb.indicate_mechs_by_attrs(None, attrs, None)
-        mechs.shouldnt_include(last_mech)
+            mechs = gb.indicate_mechs_by_attrs(attrs, None, None)
+            mechs.shouldnt_be_empty()
+            mechs.should_be(expected_mechs)
 
-        mechs = gb.indicate_mechs_by_attrs(None, None, attrs)
-        mechs.shouldnt_be_empty()
-        mechs.should_include(last_mech)
+            mechs = gb.indicate_mechs_by_attrs(None, attrs, None)
+            for expected_mech in expected_mechs:
+                mechs.shouldnt_include(expected_mech)
+
+        for attr, expected_mechs in known_attrs_dict.items():
+            attrs = set([attr])
+
+            mechs = gb.indicate_mechs_by_attrs(None, None, attrs)
+            mechs.shouldnt_be_empty()
+            mechs.should_be(expected_mechs)
 
     @ktu.gssapi_extension_test('rfc5587', 'RFC 5587')
     def test_display_mech_attr(self):
