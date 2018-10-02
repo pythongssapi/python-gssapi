@@ -56,7 +56,7 @@ class Mechanism(roids.OID):
 
     def _bytes_desc(self):
         base = self.dotted_form
-        if rfc5801 is not None:
+        if rfc5801 is not None and self._saslname and self._saslname.mech_name:
             base = self._saslname.mech_name
 
         if isinstance(base, six.text_type):
