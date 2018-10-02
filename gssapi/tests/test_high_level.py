@@ -380,18 +380,18 @@ class MechsTestCase(_GSSAPIKerberosTestCase):
     @ktu.gssapi_extension_test('rfc5801', 'RFC 5801: SASL Names')
     def test_sasl_properties(self):
         mechs = gssmechs.Mechanism.all_mechs()
-        encoding = gssutils._get_encoding()
         for mech in mechs:
             s = str(mech)
             s.shouldnt_be_empty()
             s.should_be_a(str)
-            s.should_be(mech._saslname.mech_name.decode(encoding))
 
-            mech.sasl_name.shouldnt_be_empty()
-            mech.sasl_name.should_be_a(six.text_type)
+            # Note that some mechanisms don't have SASL names or SASL
+            # descriptions; in this case, GSSAPI returns empty strings.
+            if mech.sasl_name:
+                mech.sasl_name.should_be_a(six.text_type)
 
-            mech.description.shouldnt_be_empty()
-            mech.description.should_be_a(six.text_type)
+            if mech.description:
+                mech.description.should_be_a(six.text_type)
 
             cmp_mech = gssmechs.Mechanism.from_sasl_name(mech.sasl_name)
             str(cmp_mech).should_be(str(mech))
