@@ -8,8 +8,8 @@ from libc.stdlib cimport free, malloc
 from gssapi.raw.cython_types cimport gss_OID
 
 cdef inline bint c_compare_oids(gss_OID a, gss_OID b):
-    return (a.length == b.length and
-            not memcmp(a.elements, b.elements, a.length))
+    return (a.length == b.length and not
+            memcmp(a.elements, b.elements, a.length))
 
 
 cdef class OID:
