@@ -32,5 +32,5 @@ cdef inline object c_c_ttl_to_py(OM_uint32 ttl):
 cdef inline bint c_compare_oids(gss_OID a, gss_OID b):
     """Compare two OIDs to see if they are the same."""
 
-    return (a.length == b.length and
-            not memcmp(a.elements, b.elements, a.length))
+    return (a.length == b.length and not
+            memcmp(a.elements, b.elements, a.length))
