@@ -46,7 +46,7 @@ Enums and Helper Classes
 ------------------------
 
 The following enumerations from the low-level API are also
-used with the high-level API.  For convienience, the are
+used with the high-level API.  For convenience, they are
 imported in the high-level API :mod:`gssapi` module:
 
 .. autoclass:: gssapi.NameType
@@ -68,7 +68,7 @@ imported in the high-level API :mod:`gssapi` module:
 .. autoclass:: gssapi.AddressType
     :show-inheritance:
 
-Similiarly, there are a couple classes from the low-level API
+Similarly, there are a couple classes from the low-level API
 that are imported into the high-level API module.  These classes
 are less likely to be used directly by a user, but are returned
 by several methods:
