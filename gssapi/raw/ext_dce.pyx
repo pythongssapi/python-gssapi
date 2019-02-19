@@ -168,7 +168,7 @@ cdef class IOV:
             self._iov = <gss_iov_buffer_desc *>calloc(
                 self.iov_len, sizeof(gss_iov_buffer_desc))
             if self._iov is NULL:
-                    raise MemoryError("Cannot calloc for IOV buffer array")
+                raise MemoryError("Cannot calloc for IOV buffer array")
 
             for i in range(self.iov_len):
                 buff = self._buffs[i]
