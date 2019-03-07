@@ -26,7 +26,7 @@ functions available in the `REALM` object (see gssapi-console.py in
 try `$ run-lit -e gssapi basic-tutorial.md` when you have both
 gssapi_console and yalpt installed).  Any actions performed using the
 `REALM` object are not part of the GSSAPI library; the `REALM` object
-simply contains wrappers to krb5 commands generally run separately from
+simply contians wrappers to krb5 commands generally run separately from
 the application using GSSAPI.
 
 Names and Credentials
@@ -36,7 +36,7 @@ Two important concepts in GSSAPI are *names* and *credentials*.
 
 *Names*, as the name suggests, identify different entities, be they
 users or services.  GSSAPI has the concept of different *name types*.
-These represent different types of names and corresponding syntax
+These represent different types of names and corresponding sytaxes
 for representing names as strings.
 
 Suppose we wanted to refer to an HTTP server on the current host.
@@ -95,7 +95,7 @@ Credentials have a *usage*: 'accept' for accepting security contexts,
 credentials used for both initiating and accepting security contexts.
 
 Credentials also have an associated *name*, *lifetime* (which may
-be `None` for indefinite), and set of *mechanisms* with which the
+be `None` for indefinite), and set of *mechansims* with which the
 credentials are usable:
 
     >>> server_creds.usage
@@ -132,7 +132,7 @@ the user's already acquired credentials:
     >>>
 
 Just like credentials, security contexts are either initiating
-contexts, or accepting contexts (they cannot be both).  Initiating
+contexts, or accepting contexts (they cannot be both).  Initating
 contexts must specify at least a target name.  In this case,
 we indicate that we wish to establish a context with the HTTP server
 from above.  The http server can then accept that context:
@@ -186,7 +186,7 @@ messages, or just sign them:
     >>>
 
 Manually passing in a second parameter and checking whether or not encryption
-was used can get tedious, so python-gssapi provides two convenience methods
+was used can get tedious, so python-gssapi provides two convinience methods
 to help with this: `encrypt` and `decrypt`.  If the context is set up to use
 encryption, they will call `wrap` with encryption.  If not, they will
 call `wrap` without encryption.

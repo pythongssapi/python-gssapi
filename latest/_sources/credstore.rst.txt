@@ -2,7 +2,7 @@ Common Values for Credentials Store Extensions
 ==============================================
 
 The credentials store extension is an extension introduced by the MIT krb5
-library implementation of GSSAPI. It allows for finer control of credentials
+library implementation of GSSAPI. It allows for finer control of creedntials
 from within a GSSAPI application.
 Each mechanism can define keywords to manipulate various aspects of their
 credentials for storage or retrieval operations.
