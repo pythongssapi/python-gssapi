@@ -772,6 +772,73 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
             cmp_mech.shouldnt_be_none()
             cmp_mech.should_be(mech)
 
+    @ktu.gssapi_extension_test('rfc4178', 'Negotiation Mechanism')
+    def test_set_neg_mechs(self):
+        all_mechs = gb.indicate_mechs()
+        spnego_mech = gb.OID.from_int_seq("1.3.6.1.5.5.2")
+        krb5_mech = gb.OID.from_int_seq("1.2.840.113554.1.2.2")
+        ntlm_mech = gb.OID.from_int_seq("1.3.6.1.4.1.311.2.2.10")
+
+        server_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+
+        username = gb.import_name(name=b"user",
+                                  name_type=gb.NameType.user)
+        krb5_client_creds = gb.acquire_cred(
+                                None, usage='initiate',
+                                mechs=[krb5_mech, spnego_mech]).creds
+        try:
+            ntlm_client_creds = gb.acquire_cred_with_password(
+                                name=username,
+                                password=b'password',
+                                mechs=[ntlm_mech, spnego_mech]).creds
+        except gb.GSSError:
+            self.skipTest('You do not have the GSSAPI gss-ntlmssp mech '
+                          'installed')
+
+        server_creds = gb.acquire_cred(server_name, usage='accept',
+                                       mechs=all_mechs).creds
+
+        neg_resp = gb.set_neg_mechs(server_creds, [ntlm_mech])
+        neg_resp.should_be_none()
+
+        client_ctx_resp = gb.init_sec_context(server_name,
+                                              creds=ntlm_client_creds,
+                                              mech=spnego_mech)
+        client_token = client_ctx_resp.token
+
+        server_ctx_resp = gb.accept_sec_context(client_token,
+                                                acceptor_creds=server_creds)
+        server_ctx_resp.shouldnt_be_none()
+
+        client_ctx_resp = gb.init_sec_context(server_name,
+                                              creds=krb5_client_creds,
+                                              mech=spnego_mech)
+        client_token = client_ctx_resp.token
+
+        gb.accept_sec_context.should_raise(gb.GSSError, client_token,
+                                           acceptor_creds=server_creds)
+
+        neg_resp = gb.set_neg_mechs(server_creds, [krb5_mech])
+        neg_resp.should_be_none()
+
+        client_ctx_resp = gb.init_sec_context(server_name,
+                                              creds=krb5_client_creds,
+                                              mech=spnego_mech)
+        client_token = client_ctx_resp.token
+
+        server_ctx_resp = gb.accept_sec_context(client_token,
+                                                acceptor_creds=server_creds)
+        server_ctx_resp.shouldnt_be_none()
+
+        client_ctx_resp = gb.init_sec_context(server_name,
+                                              creds=ntlm_client_creds,
+                                              mech=spnego_mech)
+        client_token = client_ctx_resp.token
+
+        gb.accept_sec_context.should_raise(gb.GSSError, client_token,
+                                           acceptor_creds=server_creds)
+
     @ktu.gssapi_extension_test('ggf', 'Global Grid Forum')
     @ktu.gssapi_extension_test('s4u', 'S4U')
     @ktu.krb_minversion_test('1.16',

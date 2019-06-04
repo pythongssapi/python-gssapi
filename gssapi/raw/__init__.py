@@ -69,6 +69,12 @@ try:
 except ImportError:
     pass
 
+# optional RFC 4178 support
+try:
+    from gssapi.raw.ext_rfc4178 import *  # noqa
+except ImportError:
+    pass
+
 # optional RFC 5587 support
 try:
     from gssapi.raw.ext_rfc5587 import *  # noqa

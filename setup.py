@@ -269,6 +269,7 @@ setup(
         main_file('chan_bindings'),
         extension_file('s4u', 'gss_acquire_cred_impersonate_name'),
         extension_file('cred_store', 'gss_store_cred_into'),
+        extension_file('rfc4178', 'gss_set_neg_mechs'),
         extension_file('rfc5587', 'gss_indicate_mechs_by_attrs'),
         extension_file('rfc5588', 'gss_store_cred'),
         extension_file('rfc5801', 'gss_inquire_saslname_for_mech'),
