@@ -185,14 +185,14 @@ functions available in the <code class="docutils literal notranslate"><span clas
 try <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">run-lit</span> <span class="pre">-e</span> <span class="pre">gssapi</span> <span class="pre">basic-tutorial.md</span></code> when you have both
 gssapi_console and yalpt installed).  Any actions performed using the
 <code class="docutils literal notranslate"><span class="pre">REALM</span></code> object are not part of the GSSAPI library; the <code class="docutils literal notranslate"><span class="pre">REALM</span></code> object
-simply contians wrappers to krb5 commands generally run separately from
+simply contains wrappers to krb5 commands generally run separately from
 the application using GSSAPI.</p>
 <div class="section" id="names-and-credentials">
 <h2>Names and Credentials<a class="headerlink" href="#names-and-credentials" title="Permalink to this headline">¶</a></h2>
 <p>Two important concepts in GSSAPI are <em>names</em> and <em>credentials</em>.</p>
 <p><em>Names</em>, as the name suggests, identify different entities, be they
 users or services.  GSSAPI has the concept of different <em>name types</em>.
-These represent different types of names and corresponding sytaxes
+These represent different types of names and corresponding syntax
 for representing names as strings.</p>
 <p>Suppose we wanted to refer to an HTTP server on the current host.
 We could refer to it as a <em>host-based service</em>, or in the default
@@ -245,7 +245,7 @@ using the GSSAPI.</p>
 ‘initiate’ for initiating security contexts, or ‘both’ for
 credentials used for both initiating and accepting security contexts.</p>
 <p>Credentials also have an associated <em>name</em>, <em>lifetime</em> (which may
-be <code class="docutils literal notranslate"><span class="pre">None</span></code> for indefinite), and set of <em>mechansims</em> with which the
+be <code class="docutils literal notranslate"><span class="pre">None</span></code> for indefinite), and set of <em>mechanisms</em> with which the
 credentials are usable:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server_creds</span><span class="o">.</span><span class="n">usage</span>
 <span class="go">&#39;accept&#39;</span>
@@ -280,7 +280,7 @@ the user’s already acquired credentials:</p>
 </pre></div>
 </div>
 <p>Just like credentials, security contexts are either initiating
-contexts, or accepting contexts (they cannot be both).  Initating
+contexts, or accepting contexts (they cannot be both).  Initiating
 contexts must specify at least a target name.  In this case,
 we indicate that we wish to establish a context with the HTTP server
 from above.  The http server can then accept that context:</p>
@@ -333,7 +333,7 @@ messages, or just sign them:</p>
 </pre></div>
 </div>
 <p>Manually passing in a second parameter and checking whether or not encryption
-was used can get tedious, so python-gssapi provides two convinience methods
+was used can get tedious, so python-gssapi provides two convenience methods
 to help with this: <code class="docutils literal notranslate"><span class="pre">encrypt</span></code> and <code class="docutils literal notranslate"><span class="pre">decrypt</span></code>.  If the context is set up to use
 encryption, they will call <code class="docutils literal notranslate"><span class="pre">wrap</span></code> with encryption.  If not, they will
 call <code class="docutils literal notranslate"><span class="pre">wrap</span></code> without encryption.</p>
