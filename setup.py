@@ -213,7 +213,10 @@ class GSSAPIDistribution(Distribution, object):
             return self._ext_modules
 
         if getattr(self, '_cythonized_ext_modules', None) is None:
-            self._cythonized_ext_modules = cythonize(self._ext_modules)
+            self._cythonized_ext_modules = cythonize(
+                self._ext_modules,
+                language_level=2,
+            )
 
         return self._cythonized_ext_modules
 
