@@ -75,6 +75,24 @@ setup::macos::install() {
     pip install --install-option='--no-cython-compile' cython
 }
 
+setup::windows::install() {
+    # Install the right Python version and MIT Kerberos
+    choco install python"${PYENV:0:1}" --version $PYENV
+    choco install mitkerberos --install-arguments "'ADDLOCAL=ALL'" || true
+    PYPATH="/c/Python${PYENV:0:1}${PYENV:2:1}"
+    # Update path to include them
+    export PATH="$PYPATH:$PYPATH/Scripts:/c/Program Files/MIT/Kerberos/bin:$PATH"
+
+    if [ "${PYENV:0:1}" == "2" ]; then
+        choco install vcredist2008
+        # Skip dotnet dependency:
+        # https://github.com/fredrikaverpil/vcpython27/pull/3
+        choco install --ignore-dependencies vcpython27
+    fi
+
+    python -m pip install --upgrade pip
+}
+
 setup::install() {
     if [ -f /etc/debian_version ]; then
         setup::debian::install
@@ -82,6 +100,8 @@ setup::install() {
         setup::rh::install
     elif [ "$(uname)" == "Darwin" ]; then
         setup::macos::install
+    elif [ "$TRAVIS_OS_NAME" == "windows" ]; then
+        setup::windows::install
     else
         echo "Distro not found!"
         false

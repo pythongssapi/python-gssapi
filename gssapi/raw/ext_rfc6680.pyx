@@ -67,7 +67,7 @@ def display_name_ext(Name name not None, OID name_type not None):
                                     &name_type.raw_oid, &output_name)
 
     if maj_stat == GSS_S_COMPLETE:
-        name_text = output_name.value[:output_name.length]
+        name_text = (<char*>output_name.value)[:output_name.length]
         gss_release_buffer(&min_stat, &output_name)
         return name_text
     else:
@@ -126,7 +126,9 @@ def inquire_name(Name name not None, mech_name=True, attrs=True):
         if attr_names != GSS_C_NO_BUFFER_SET:
             for i in range(attr_names.count):
                 attr_name = attr_names.elements[i]
-                py_attr_names.append(attr_name.value[:attr_name.length])
+                py_attr_names.append(
+                    (<char*>attr_name.value)[:attr_name.length]
+                )
 
             gss_release_buffer_set(&min_stat, &attr_names)
 
@@ -233,9 +235,9 @@ def get_name_attribute(Name name not None, attr not None, more=None):
                                           &more_val)
 
         if maj_stat == GSS_S_COMPLETE:
-            py_vals.append(val_buff.value[:val_buff.length])
+            py_vals.append((<char*>val_buff.value)[:val_buff.length])
             py_displ_vals.append(
-                displ_val_buff.value[:displ_val_buff.length])
+                (<char*>displ_val_buff.value)[:displ_val_buff.length])
 
             gss_release_buffer(&min_stat, &val_buff)
             gss_release_buffer(&min_stat, &displ_val_buff)
@@ -310,7 +312,7 @@ def export_name_composite(Name name not None):
     maj_stat = gss_export_name_composite(&min_stat, name.raw_name, &res)
 
     if maj_stat == GSS_S_COMPLETE:
-        py_res = res.value[:res.length]
+        py_res = (<char*>res.value)[:res.length]
         gss_release_buffer(&min_stat, &res)
         return py_res
     else:

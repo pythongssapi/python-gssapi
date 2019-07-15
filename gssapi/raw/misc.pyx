@@ -165,7 +165,7 @@ def _display_status(unsigned int error_code, bint is_major_code,
 
     if maj_stat == GSS_S_COMPLETE:
         call_again = bool(msg_ctx_out)
-        msg_out = msg_buff.value[:msg_buff.length]
+        msg_out = (<char*>msg_buff.value)[:msg_buff.length]
         gss_release_buffer(&min_stat, &msg_buff)
         return (msg_out, msg_ctx_out, call_again)
     else:

@@ -19,25 +19,25 @@ stages:
   if: tag is PRESENT
 
 script:
-- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo sed -i '1i 127.0.0.1 test.box' /etc/hosts; fi
-- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then sudo hostname test.box; fi
-- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then source ./.travis/lib-util.sh; fi
-- if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then util::docker-run $DISTRO ./.travis/build.sh; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./.travis/build.sh; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  sudo sed -i '1i 127.0.0.1 test.box' /etc/hosts;
+  sudo hostname test.box;
+  source ./.travis/lib-util.sh;
+  util::docker-run $DISTRO ./.travis/build.sh;
+  fi
+- if [[ "$TRAVIS_OS_NAME" != "linux" ]]; then ./.travis/build.sh; fi
 
 jobs:
   include:
-  - stage: verify
+  - &docker_verify
+    stage: verify
     env: DISTRO=fedora:latest PYTHON="2"
     script:
     - source ./.travis/lib-util.sh
     - util::docker-run $DISTRO ./.travis/verify.sh
 
-  - stage: verify
+  - <<: *docker_verify
     env: DISTRO=fedora:latest PYTHON="3"
-    script:
-    - source ./.travis/lib-util.sh
-    - util::docker-run $DISTRO ./.travis/verify.sh
 
 
   # need to explictly define each builder for test due to different os types
@@ -59,17 +59,27 @@ jobs:
   - stage: test
     env: DISTRO=fedora:latest PYTHON="2"
 
-  - stage: test
+  - &osx_test
+    stage: test
     env: PYTHON="2" KRB5_VER="heimdal" PYENV="2.7.14"
     os: osx
     osx_image: xcode9.2
     language: generic # causes issues with pyenv installer when set to python
 
-  - stage: test
+  - <<: *osx_test
     env: PYTHON="3" KRB5_VER="heimdal" PYENV="3.6.3"
-    os: osx
-    osx_image: xcode9.2
-    language: generic # causes issues with pyenv installer when set to python
+
+  - &win_test
+    stage: test
+    env: PYTHON="2" PYENV="2.7.16" EXTRA_BUILDEXT="--compiler=mingw32"
+    os: windows
+    language: sh  # Windows not supported yet
+
+  - <<: *win_test
+    env: PYTHON="3" PYENV="3.6.8"
+
+  - <<: *win_test
+    env: PYTHON="3" PYENV="3.7.3"
 
 
   - stage: deploy latest docs
@@ -129,3 +139,27 @@ jobs:
       skip_cleanup: true
       on:
         all_branches: true
+
+  - &win_deploy
+    stage: deploy
+    os: windows
+    script: skip
+    env: PYTHON="2" PYENV="2.7.16" EXTRA_BUILDEXT="--compiler=mingw32"
+    before_deploy:
+      - ./.travis/before-deploy-windows-wheels.sh
+    deploy:
+      - provider: pypi
+        user:
+          secure: "jUAMucBq+9xH8x9u0I0LOwrs3Zb++KN7FwIIwz2CyAt/+TyyrJzeGJaV+dTiJ1OqcUIFqQG6jopzpnAe4biL1O68PEwz9BphKetFLpLHiFNm/n67LYno6NFonWmxndIy99pOP6NZu29nzSNeYq/KgEHo/5OkqEGOxk//lh7X/OY="
+        password:
+          secure: "ZqywwnR+G5VeM2sStwfLeutOvqbULHtnStjrdYc8WcC/FBVwmH/W48fTlvxrnswmfKx7Eljv0nN4VcBpoFf1tvz4O2oK/tCRpf0N8SvpT0jBx8bLGUxJ1/3Po6rFgBRWgSb/mzKHPKI6fLlQNcNg8lrd9e1j/zgbVRSwNeMUOR8="
+        skip_cleanup: true
+        on:
+          all_branches: true
+        distributions: "check"  # Hack, see above
+
+  - <<: *win_deploy
+    env: PYTHON="3" PYENV="3.6.8"
+
+  - <<: *win_deploy
+    env: PYTHON="3" PYENV="3.7.3"

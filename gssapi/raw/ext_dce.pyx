@@ -209,7 +209,7 @@ cdef class IOV:
                     new_val = b'\x00' * new_len
             else:
                 new_len = self._iov[i].buffer.length
-                new_val = self._iov[i].buffer.value[:new_len]
+                new_val = (<char*>self._iov[i].buffer.value)[:new_len]
 
             alloc = False
             if self._iov[i].type & GSS_IOV_BUFFER_FLAG_ALLOCATE:
@@ -503,7 +503,7 @@ def wrap_aead(SecurityContext context not None, bytes message not None,
                                  &conf_used, &output_buffer)
 
     if maj_stat == GSS_S_COMPLETE:
-        output_message = output_buffer.value[:output_buffer.length]
+        output_message = (<char*>output_buffer.value)[:output_buffer.length]
         gss_release_buffer(&min_stat, &output_buffer)
         return WrapResult(output_message, <bint>conf_used)
     else:
@@ -553,7 +553,7 @@ def unwrap_aead(SecurityContext context not None, bytes message not None,
                                    &conf_state, &qop_state)
 
     if maj_stat == GSS_S_COMPLETE:
-        output_message = output_buffer.value[:output_buffer.length]
+        output_message = (<char*>output_buffer.value)[:output_buffer.length]
         gss_release_buffer(&min_stat, &output_buffer)
         return UnwrapResult(output_message, <bint>conf_state, qop_state)
     else:
