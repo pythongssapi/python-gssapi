@@ -140,9 +140,9 @@ def display_mech_attr(OID attr):
                                          &long_desc)
 
     if maj_stat == GSS_S_COMPLETE:
-        out_name = name.value[:name.length]
-        out_short = short_desc.value[:short_desc.length]
-        out_long = long_desc.value[:long_desc.length]
+        out_name = (<char*>name.value)[:name.length]
+        out_short = (<char*>short_desc.value)[:short_desc.length]
+        out_long = (<char*>long_desc.value)[:long_desc.length]
 
         gss_release_buffer(&min_stat, &name)
         gss_release_buffer(&min_stat, &short_desc)

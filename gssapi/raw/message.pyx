@@ -82,7 +82,7 @@ def get_mic(SecurityContext context not None, message, qop=None):
                                &message_buffer, &token_buffer)
 
     if maj_stat == GSS_S_COMPLETE:
-        res = token_buffer.value[:token_buffer.length]
+        res = (<char*>token_buffer.value)[:token_buffer.length]
         gss_release_buffer(&min_stat, &token_buffer)
         return res
     else:
@@ -220,7 +220,7 @@ def wrap(SecurityContext context not None, message, confidential=True,
                             &message_buffer, &conf_used, &output_buffer)
 
     if maj_stat == GSS_S_COMPLETE:
-        output_message = output_buffer.value[:output_buffer.length]
+        output_message = (<char*>output_buffer.value)[:output_buffer.length]
         gss_release_buffer(&min_stat, &output_buffer)
         return WrapResult(output_message, <bint>conf_used)
     else:
@@ -268,7 +268,7 @@ def unwrap(SecurityContext context not None, message):
                               &output_buffer, &conf_state, &qop_state)
 
     if maj_stat == GSS_S_COMPLETE:
-        output_message = output_buffer.value[:output_buffer.length]
+        output_message = (<char*>output_buffer.value)[:output_buffer.length]
         gss_release_buffer(&min_stat, &output_buffer)
         return UnwrapResult(output_message, <bint>conf_state, qop_state)
     else:

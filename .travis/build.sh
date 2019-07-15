@@ -5,11 +5,16 @@ source ./.travis/lib-setup.sh
 setup::install
 
 # always build in-place so that Sphinx can find the modules
-python setup.py build_ext --inplace
+python setup.py build_ext --inplace $EXTRA_BUILDEXT
 BUILD_RES=$?
 
 if [ x"$KRB5_VER" = "xheimdal" ]; then
     # heimdal can't run the tests yet, so just exit
+    exit $BUILD_RES
+fi
+
+if [ "$TRAVIS_OS_NAME" == "windows" ]; then
+    # Windows can't run tests yet, so just exit
     exit $BUILD_RES
 fi
 

@@ -48,7 +48,7 @@ def export_cred(Creds creds not None):
         maj_stat = gss_export_cred(&min_stat, creds.raw_creds, &exported_creds)
 
     if maj_stat == GSS_S_COMPLETE:
-        res = exported_creds.value[:exported_creds.length]
+        res = (<char*>exported_creds.value)[:exported_creds.length]
         gss_release_buffer(&min_stat, &exported_creds)
         return res
     else:

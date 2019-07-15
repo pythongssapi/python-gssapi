@@ -223,7 +223,8 @@ flags=None, lifetime=None, channel_bindings=None, input_token=None)
 
     output_token = None
     if output_token_buffer.length:
-        output_token = output_token_buffer.value[:output_token_buffer.length]
+        output_token = \
+            (<char*>output_token_buffer.value)[:output_token_buffer.length]
     cdef OM_uint32 tmp_min_stat
     gss_release_buffer(&tmp_min_stat, &output_token_buffer)
 
@@ -330,7 +331,8 @@ channel_bindings=None)
 
     output_token = None
     if output_token_buffer.length:
-        output_token = output_token_buffer.value[:output_token_buffer.length]
+        output_token = \
+            (<char*>output_token_buffer.value)[:output_token_buffer.length]
     cdef OM_uint32 tmp_min_stat
     gss_release_buffer(&tmp_min_stat, &output_token_buffer)
 
@@ -620,7 +622,7 @@ def export_sec_context(SecurityContext context not None):
                                           &output_token)
 
     if maj_stat == GSS_S_COMPLETE:
-        res_token = output_token.value[:output_token.length]
+        res_token = (<char*>output_token.value)[:output_token.length]
         gss_release_buffer(&min_stat, &output_token)
         return res_token
     else:
@@ -665,7 +667,7 @@ def delete_sec_context(SecurityContext context not None, local_only=True):
                                           GSS_C_NO_BUFFER)
 
     if maj_stat == GSS_S_COMPLETE:
-        res = output_token.value[:output_token.length]
+        res = (<char*>output_token.value)[:output_token.length]
         context.raw_ctx = NULL
         return res
     else:

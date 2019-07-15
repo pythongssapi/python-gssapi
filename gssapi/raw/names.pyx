@@ -151,7 +151,7 @@ def display_name(Name name not None, name_type=True):
 
     cdef OID py_name_type
     if maj_stat == GSS_S_COMPLETE:
-        text = output_buffer.value[:output_buffer.length]
+        text = (<char*>output_buffer.value)[:output_buffer.length]
         gss_release_buffer(&min_stat, &output_buffer)
         if name_type:
             if output_name_type == GSS_C_NO_OID:
@@ -240,7 +240,7 @@ def export_name(Name name not None):
     if maj_stat == GSS_S_COMPLETE:
         # force conversion to a python string with the specified length
         # (we use the slice to tell cython that we know the length already)
-        res = exported_name.value[:exported_name.length]
+        res = (<char*>exported_name.value)[:exported_name.length]
         gss_release_buffer(&min_stat, &exported_name)
         return res
     else:

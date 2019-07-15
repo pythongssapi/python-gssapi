@@ -50,9 +50,9 @@ def inquire_saslname_for_mech(OID mech not None):
                                                  &mech_name, &mech_desc)
 
     if maj_stat == GSS_S_COMPLETE:
-        out_smn = sasl_mech_name.value[:sasl_mech_name.length]
-        out_mn = mech_name.value[:mech_name.length]
-        out_md = mech_desc.value[:mech_desc.length]
+        out_smn = (<char*>sasl_mech_name.value)[:sasl_mech_name.length]
+        out_mn = (<char*>mech_name.value)[:mech_name.length]
+        out_md = (<char*>mech_desc.value)[:mech_desc.length]
 
         gss_release_buffer(&min_stat, &sasl_mech_name)
         gss_release_buffer(&min_stat, &mech_name)

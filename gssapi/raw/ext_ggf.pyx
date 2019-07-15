@@ -74,7 +74,7 @@ def inquire_cred_by_oid(Creds cred_handle not None,
         if data_set != GSS_C_NO_BUFFER_SET:
             for i in range(data_set.count):
                 token = data_set.elements[i]
-                py_tokens.append(token.value[:token.length])
+                py_tokens.append((<char*>token.value)[:token.length])
 
             gss_release_buffer_set(&min_stat, &data_set)
 
@@ -124,7 +124,7 @@ def inquire_sec_context_by_oid(SecurityContext context not None,
         if data_set != GSS_C_NO_BUFFER_SET:
             for i in range(data_set.count):
                 token = data_set.elements[i]
-                py_tokens.append(token.value[:token.length])
+                py_tokens.append((<char*>token.value)[:token.length])
 
             gss_release_buffer_set(&min_stat, &data_set)
 
