@@ -145,6 +145,7 @@ jobs:
     os: windows
     script: skip
     env: PYTHON="2" PYENV="2.7.16" EXTRA_BUILDEXT="--compiler=mingw32"
+    language: sh # Travis doesn't support python here
     before_deploy:
       - ./.travis/before-deploy-windows-wheels.sh
     deploy:
