@@ -123,10 +123,9 @@ jobs:
         all_branches: true
 
     - provider: pypi
-      user:
-        secure: "jUAMucBq+9xH8x9u0I0LOwrs3Zb++KN7FwIIwz2CyAt/+TyyrJzeGJaV+dTiJ1OqcUIFqQG6jopzpnAe4biL1O68PEwz9BphKetFLpLHiFNm/n67LYno6NFonWmxndIy99pOP6NZu29nzSNeYq/KgEHo/5OkqEGOxk//lh7X/OY="
+      user: rharwood
       password:
-        secure: "ZqywwnR+G5VeM2sStwfLeutOvqbULHtnStjrdYc8WcC/FBVwmH/W48fTlvxrnswmfKx7Eljv0nN4VcBpoFf1tvz4O2oK/tCRpf0N8SvpT0jBx8bLGUxJ1/3Po6rFgBRWgSb/mzKHPKI6fLlQNcNg8lrd9e1j/zgbVRSwNeMUOR8="
+        secure: "hN861mjtLeC8IysypC6Pqzlazq29I+c69XGjbUR53izYQ90cz2F+B2azVTl9Su9NbXzdsGnhWZrjY1jtYMPIZE15xDaC8vs61QijFClqmyuKNRVzCt1w/sj21hyLXnYIrkAo4e3bswPF+hRGNwfb+rVrR/dqUwd1wyjZBBYMcQE="
       skip_cleanup: true
       docs_dir: travis_docs_build/html
       on:
@@ -143,23 +142,21 @@ jobs:
   - &win_deploy
     stage: deploy
     os: windows
-    script: skip
-    env: PYTHON="2" PYENV="2.7.16" EXTRA_BUILDEXT="--compiler=mingw32"
-    before_deploy:
+    script: # This is egregious hacks around Travis
       - ./.travis/before-deploy-windows-wheels.sh
-    deploy:
-      - provider: pypi
-        user:
-          secure: "jUAMucBq+9xH8x9u0I0LOwrs3Zb++KN7FwIIwz2CyAt/+TyyrJzeGJaV+dTiJ1OqcUIFqQG6jopzpnAe4biL1O68PEwz9BphKetFLpLHiFNm/n67LYno6NFonWmxndIy99pOP6NZu29nzSNeYq/KgEHo/5OkqEGOxk//lh7X/OY="
-        password:
-          secure: "ZqywwnR+G5VeM2sStwfLeutOvqbULHtnStjrdYc8WcC/FBVwmH/W48fTlvxrnswmfKx7Eljv0nN4VcBpoFf1tvz4O2oK/tCRpf0N8SvpT0jBx8bLGUxJ1/3Po6rFgBRWgSb/mzKHPKI6fLlQNcNg8lrd9e1j/zgbVRSwNeMUOR8="
-        skip_cleanup: true
-        on:
-          all_branches: true
-        distributions: "check"  # Hack, see above
+      - ./.travis/deploy-win.sh
+    env:
+      - PYTHON="2"
+      - PYENV="2.7.16"
+      - EXTRA_BUILDEXT="--compiler=mingw32"
+    language: sh # Travis doesn't support python here
 
   - <<: *win_deploy
-    env: PYTHON="3" PYENV="3.6.8"
+    env:
+      - PYTHON="3"
+      - PYENV="3.6.8"
 
   - <<: *win_deploy
-    env: PYTHON="3" PYENV="3.7.3"
+    env:
+      - PYTHON="3"
+      - PYENV="3.7.3"

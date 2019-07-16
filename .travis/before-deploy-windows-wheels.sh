@@ -7,6 +7,10 @@ source ./.travis/lib-deploy.sh
 
 ./.travis/build.sh
 
+# Sigh, go find paths again
+PYPATH="/c/Python${PYENV:0:1}${PYENV:2:1}"
+export PATH="$PYPATH:$PYPATH/Scripts:/c/Program Files/MIT/Kerberos/bin:$PATH"
+
 # build the wheel
 python -m pip install wheel
 python setup.py bdist_wheel
