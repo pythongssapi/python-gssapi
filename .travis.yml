@@ -144,22 +144,31 @@ jobs:
     stage: deploy
     os: windows
     script: skip
-    env: PYTHON="2" PYENV="2.7.16" EXTRA_BUILDEXT="--compiler=mingw32"
+    env:
+      - PYTHON="2"
+      - PYENV="2.7.16"
+      - EXTRA_BUILDEXT="--compiler=mingw32"
+      - secure: "PIP_USER=USER"  # <- Replace and encrypt
+      - secure: "PIP_PASSWORD=PASSWORD"  # <- Replace and encrypt
     before_deploy:
       - ./.travis/before-deploy-windows-wheels.sh
     deploy:
-      - provider: pypi
-        user:
-          secure: "jUAMucBq+9xH8x9u0I0LOwrs3Zb++KN7FwIIwz2CyAt/+TyyrJzeGJaV+dTiJ1OqcUIFqQG6jopzpnAe4biL1O68PEwz9BphKetFLpLHiFNm/n67LYno6NFonWmxndIy99pOP6NZu29nzSNeYq/KgEHo/5OkqEGOxk//lh7X/OY="
-        password:
-          secure: "ZqywwnR+G5VeM2sStwfLeutOvqbULHtnStjrdYc8WcC/FBVwmH/W48fTlvxrnswmfKx7Eljv0nN4VcBpoFf1tvz4O2oK/tCRpf0N8SvpT0jBx8bLGUxJ1/3Po6rFgBRWgSb/mzKHPKI6fLlQNcNg8lrd9e1j/zgbVRSwNeMUOR8="
+      - provider: script
+        script: .travis/deploy-win.sh
         skip_cleanup: true
         on:
           all_branches: true
-        distributions: "check"  # Hack, see above
 
   - <<: *win_deploy
-    env: PYTHON="3" PYENV="3.6.8"
+    env:
+      - PYTHON="3"
+      - PYENV="3.6.8"
+      - secure: "PIP_USER=USER"  # <- Replace and encrypt
+      - secure: "PIP_PASSWORD=PASSWORD"  # <- Replace and encrypt
 
   - <<: *win_deploy
-    env: PYTHON="3" PYENV="3.7.3"
+    env:
+      - PYTHON="3"
+      - PYENV="3.7.3"
+      - secure: "PIP_USER=USER"  # <- Replace and encrypt
+      - secure: "PIP_PASSWORD=PASSWORD"  # <- Replace and encrypt
