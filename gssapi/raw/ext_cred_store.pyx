@@ -83,7 +83,8 @@ cdef gss_key_value_set_desc* c_create_key_value_set(dict values) except NULL:
 
     for (i, (k, v)) in enumerate(values.items()):
         res.elements[i].key = k
-        res.elements[i].value = v
+        if v:
+            res.elements[i].value = v
 
     return res
 
