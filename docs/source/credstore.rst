@@ -13,6 +13,11 @@ operations.
    share the same or similar keywords, but their meaning is always local to a
    specific mechanism.
 
+.. note:
+
+   `None` is not a permitted value and will raise exceptions.  Phrased
+   differently, values must be strings, not empty.
+
 The krb5 mechanism in MIT libraries
 -----------------------------------
 
