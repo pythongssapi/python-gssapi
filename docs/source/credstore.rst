@@ -76,3 +76,10 @@ The value is a string in the form **type:residual** where **type** can be any
 replay cache storage type understood by the implementation and **residual** is
 the cache identifier (usually something like a path).  If the string is a
 path, then the type is defaulted to `FILE`.
+
+The krb5 mechanism in Heimdal
+-----------------------------
+
+Heimdal has recently implemented the credential store extensions with the same
+interface as MIT krb5.  However, it is not yet present in any released
+version.
