@@ -1283,6 +1283,80 @@ it also supports bitwise operations with the enum values.</p>
 <p>The high-level API can raise all of the exceptions that the low-level API
 can raise in addition to several other high-level-specific exceptions:</p>
 <span class="target" id="module-gssapi.exceptions"></span><dl class="exception">
+<dt id="gssapi.exceptions.GSSError">
+<em class="property">exception </em><code class="sig-name descname">GSSError</code><a class="headerlink" href="#gssapi.exceptions.GSSError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<p>A GSSAPI Error</p>
+<p>This Exception represents an error returned from the GSSAPI
+C bindings.  It contains the major and minor status codes
+returned by the method which caused the error, and can
+generate human-readable string messages from the error
+codes</p>
+<p>Create a new GSSError.</p>
+<p>This method creates a new GSSError,
+retrieves the releated human-readable
+string messages, and uses the results to construct an
+exception message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the major code associated with this error</p></li>
+<li><p><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the minor code associated with this error</p></li>
+<li><p><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)"><em>bytes</em></a>) – an error token associated with the error</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="gssapi.exceptions.GSSError.MESSAGE">
+<code class="sig-name descname">MESSAGE</code><em class="property"> = 'Major ({maj_stat}): {maj_str}, Minor ({min_stat}): {min_str}'</em><a class="headerlink" href="#gssapi.exceptions.GSSError.MESSAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gssapi.exceptions.GSSError.gen_message">
+<code class="sig-name descname">gen_message</code><a class="headerlink" href="#gssapi.exceptions.GSSError.gen_message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves all messages for this error’s status codes</p>
+<p>This method retrieves all messages for this error’s status codes,
+and forms them into a string for use as an exception message</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a string for use as this error’s message</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gssapi.exceptions.GSSError.get_all_statuses">
+<code class="sig-name descname">get_all_statuses</code><a class="headerlink" href="#gssapi.exceptions.GSSError.get_all_statuses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve all messages for a status code.</p>
+<p>This method retrieves all human-readable messages
+available for the given status code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the status code in question</p></li>
+<li><p><strong>is_maj</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – whether this is a major status code (True)
+or minor status code (False)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A list of string messages associated with the</dt><dd><p>given code</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
 <dt id="gssapi.exceptions.GeneralError">
 <em class="property">exception </em><code class="sig-name descname">GeneralError</code><span class="sig-paren">(</span><em class="sig-param">minor_message</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/exceptions.html#GeneralError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gssapi.exceptions.GeneralError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
@@ -1700,80 +1774,6 @@ exception message</p>
 <dt id="gssapi.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE">
 <code class="sig-name descname">SUPPLEMENTARY_CODE</code><em class="property"> = 4</em><a class="headerlink" href="#gssapi.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-</dd></dl>
-
-<dl class="exception">
-<dt id="gssapi.exceptions.GSSError">
-<em class="property">exception </em><code class="sig-name descname">GSSError</code><a class="headerlink" href="#gssapi.exceptions.GSSError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
-<p>A GSSAPI Error</p>
-<p>This Exception represents an error returned from the GSSAPI
-C bindings.  It contains the major and minor status codes
-returned by the method which caused the error, and can
-generate human-readable string messages from the error
-codes</p>
-<p>Create a new GSSError.</p>
-<p>This method creates a new GSSError,
-retrieves the releated human-readable
-string messages, and uses the results to construct an
-exception message</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>maj_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the major code associated with this error</p></li>
-<li><p><strong>min_code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the minor code associated with this error</p></li>
-<li><p><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)"><em>bytes</em></a>) – an error token associated with the error</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="attribute">
-<dt id="gssapi.exceptions.GSSError.MESSAGE">
-<code class="sig-name descname">MESSAGE</code><em class="property"> = 'Major ({maj_stat}): {maj_str}, Minor ({min_stat}): {min_str}'</em><a class="headerlink" href="#gssapi.exceptions.GSSError.MESSAGE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="gssapi.exceptions.GSSError.gen_message">
-<code class="sig-name descname">gen_message</code><a class="headerlink" href="#gssapi.exceptions.GSSError.gen_message" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieves all messages for this error’s status codes</p>
-<p>This method retrieves all messages for this error’s status codes,
-and forms them into a string for use as an exception message</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>a string for use as this error’s message</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="gssapi.exceptions.GSSError.get_all_statuses">
-<code class="sig-name descname">get_all_statuses</code><a class="headerlink" href="#gssapi.exceptions.GSSError.get_all_statuses" title="Permalink to this definition">¶</a></dt>
-<dd><p>Retrieve all messages for a status code.</p>
-<p>This method retrieves all human-readable messages
-available for the given status code.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>code</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – the status code in question</p></li>
-<li><p><strong>is_maj</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – whether this is a major status code (True)
-or minor status code (False)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A list of string messages associated with the</dt><dd><p>given code</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.7)">bytes</a>]</p>
-</dd>
-</dl>
-</dd></dl>
 
 </dd></dl>
 
