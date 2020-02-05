@@ -31,8 +31,8 @@ setup::debian::install() {
 }
 
 setup::rh::yuminst() {
-    # yum has no update-only verb
-    yum -y --nogpgcheck install $@
+    # yum has no update-only verb.  Also: modularity just makes this slower.
+    yum -y --nogpgcheck --disablerepo=\*modul\* install $@
 }
 
 setup::centos::install() {
