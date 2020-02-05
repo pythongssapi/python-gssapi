@@ -11,7 +11,6 @@ install: skip
 before_install: skip
 
 stages:
-- verify
 - test
 - name: deploy latest docs
   if: (branch = master OR branch =~ ^infra/$) AND type = push
@@ -28,19 +27,8 @@ script:
 - if [[ "$TRAVIS_OS_NAME" != "linux" ]]; then ./.travis/build.sh; fi
 
 jobs:
-  include:
-  - &docker_verify
-    stage: verify
-    env: DISTRO=fedora:latest PYTHON="2"
-    script:
-    - source ./.travis/lib-util.sh
-    - util::docker-run $DISTRO ./.travis/verify.sh
-
-  - <<: *docker_verify
-    env: DISTRO=fedora:latest PYTHON="3"
-
-
   # need to explictly define each builder for test due to different os types
+  include:
   - stage: test
     env: DISTRO=debian:stable PYTHON="2"
 
@@ -54,7 +42,7 @@ jobs:
     env: DISTRO=centos:7 PYTHON="2" # el7 doesn't do python3 modules
 
   - stage: test
-    env: DISTRO=fedora:latest PYTHON="3"
+    env: DISTRO=fedora:latest PYTHON="3" FLAKE="yes"
 
   - stage: test
     env: DISTRO=fedora:latest PYTHON="2"
