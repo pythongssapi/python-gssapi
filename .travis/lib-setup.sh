@@ -67,7 +67,8 @@ setup::rh::install() {
 }
 
 setup::macos::install() {
-    # install Python from pyenv so we know what version is being used
+    # Install Python from pyenv so we know what version is being used.  This
+    # doesn't work for newer macos.
     pyenv install $PYENV
     pyenv global $PYENV
     virtualenv -p $(pyenv which python) .venv
