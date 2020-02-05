@@ -38,8 +38,9 @@ jobs:
   - stage: test
     env: DISTRO=debian:stable PYTHON="3" KRB5_VER="heimdal"
 
+  # el7 doesn't do python3 modules, and epel7's python3-gssapi is patched
   - stage: test
-    env: DISTRO=centos:7 PYTHON="2" # el7 doesn't do python3 modules
+    env: DISTRO=centos:8 PYTHON="3"
 
   - stage: test
     env: DISTRO=fedora:latest PYTHON="3" FLAKE="yes"
