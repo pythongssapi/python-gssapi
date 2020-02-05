@@ -11,6 +11,7 @@ util::docker-run() {
     -e PKG_NAME_VER=$PKG_NAME_VER \
     -e KRB5_VER=$KRB5_VER \
     -e PYTHON=$PYTHON \
+    -e FLAKE=$FLAKE \
     $distro \
     /bin/bash -ex $@
 }
