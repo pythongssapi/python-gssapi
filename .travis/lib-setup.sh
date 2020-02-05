@@ -83,13 +83,6 @@ setup::windows::install() {
     # Update path to include them
     export PATH="$PYPATH:$PYPATH/Scripts:/c/Program Files/MIT/Kerberos/bin:$PATH"
 
-    if [ "${PYENV:0:1}" == "2" ]; then
-        choco install vcredist2008
-        # Skip dotnet dependency:
-        # https://github.com/fredrikaverpil/vcpython27/pull/3
-        choco install --ignore-dependencies vcpython27
-    fi
-
     python -m pip install --upgrade pip
 }
 
