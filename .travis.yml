@@ -30,9 +30,6 @@ jobs:
   # need to explictly define each builder for test due to different os types
   include:
   - stage: test
-    env: DISTRO=debian:stable PYTHON="2"
-
-  - stage: test
     env: DISTRO=debian:stable PYTHON="3" # 3.4, not 3.5
 
   - stage: test
@@ -45,31 +42,21 @@ jobs:
   - stage: test
     env: DISTRO=fedora:latest PYTHON="3" FLAKE="yes"
 
-  - stage: test
-    env: DISTRO=fedora:latest PYTHON="2"
-
   - &osx_test
     stage: test
-    env: PYTHON="2" KRB5_VER="heimdal" PYENV="2.7.14"
+    env: PYTHON="3" KRB5_VER="heimdal" PYENV="3.6.3"
     os: osx
     osx_image: xcode9.2
     language: generic # causes issues with pyenv installer when set to python
 
-  - <<: *osx_test
-    env: PYTHON="3" KRB5_VER="heimdal" PYENV="3.6.3"
-
   - &win_test
     stage: test
-    env: PYTHON="2" PYENV="2.7.16" EXTRA_BUILDEXT="--compiler=mingw32"
+    env: PYTHON="3" PYENV="3.7.3"
     os: windows
     language: sh  # Windows not supported yet
 
   - <<: *win_test
     env: PYTHON="3" PYENV="3.6.8"
-
-  - <<: *win_test
-    env: PYTHON="3" PYENV="3.7.3"
-
 
   - stage: deploy latest docs
     script: skip
@@ -87,7 +74,6 @@ jobs:
       skip_cleanup: true
       on:
         all_branches: true
-
 
   - stage: deploy
     script: skip
@@ -135,17 +121,11 @@ jobs:
       - ./.travis/before-deploy-windows-wheels.sh
       - ./.travis/deploy-win.sh
     env:
-      - PYTHON="2"
-      - PYENV="2.7.16"
-      - EXTRA_BUILDEXT="--compiler=mingw32"
+      - PYTHON="3"
+      - PYENV="3.7.3"
     language: sh # Travis doesn't support python here
 
   - <<: *win_deploy
     env:
       - PYTHON="3"
       - PYENV="3.6.8"
-
-  - <<: *win_deploy
-    env:
-      - PYTHON="3"
-      - PYENV="3.7.3"
