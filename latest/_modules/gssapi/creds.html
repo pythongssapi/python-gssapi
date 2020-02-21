@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -150,11 +150,11 @@
            <div itemprop="articleBody">
             
   <h1>Source code for gssapi.creds</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="k">import</span> <span class="n">creds</span> <span class="k">as</span> <span class="n">rcreds</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="k">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
-<span class="kn">from</span> <span class="nn">gssapi._utils</span> <span class="k">import</span> <span class="n">import_gssapi_extension</span><span class="p">,</span> <span class="n">_encode_dict</span>
+<span></span><span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">creds</span> <span class="k">as</span> <span class="n">rcreds</span>
+<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
+<span class="kn">from</span> <span class="nn">gssapi._utils</span> <span class="kn">import</span> <span class="n">import_gssapi_extension</span><span class="p">,</span> <span class="n">_encode_dict</span>
 
-<span class="kn">from</span> <span class="nn">gssapi</span> <span class="k">import</span> <span class="n">names</span>
+<span class="kn">from</span> <span class="nn">gssapi</span> <span class="kn">import</span> <span class="n">names</span>
 
 <span class="n">rcred_imp_exp</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;cred_imp_exp&#39;</span><span class="p">)</span>
 <span class="n">rcred_s4u</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;s4u&#39;</span><span class="p">)</span>
@@ -198,7 +198,7 @@
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">mechs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">store</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="c1"># TODO(directxman12): this is missing support for password</span>
         <span class="c1">#                     (non-RFC method)</span>

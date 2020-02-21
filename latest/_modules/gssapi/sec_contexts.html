@@ -21,10 +21,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script type="text/javascript" src="../../_static/language_data.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -152,15 +152,15 @@
   <h1>Source code for gssapi.sec_contexts</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">six</span>
 
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="k">import</span> <span class="n">sec_contexts</span> <span class="k">as</span> <span class="n">rsec_contexts</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="k">import</span> <span class="n">message</span> <span class="k">as</span> <span class="n">rmessage</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="k">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw.types</span> <span class="k">import</span> <span class="n">RequirementFlag</span><span class="p">,</span> <span class="n">IntEnumFlagSet</span>
+<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">sec_contexts</span> <span class="k">as</span> <span class="n">rsec_contexts</span>
+<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">message</span> <span class="k">as</span> <span class="n">rmessage</span>
+<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
+<span class="kn">from</span> <span class="nn">gssapi.raw.types</span> <span class="kn">import</span> <span class="n">RequirementFlag</span><span class="p">,</span> <span class="n">IntEnumFlagSet</span>
 
 <span class="kn">import</span> <span class="nn">gssapi.exceptions</span> <span class="k">as</span> <span class="nn">excs</span>
-<span class="kn">from</span> <span class="nn">gssapi</span> <span class="k">import</span> <span class="n">_utils</span>
-<span class="kn">from</span> <span class="nn">gssapi.names</span> <span class="k">import</span> <span class="n">Name</span>
-<span class="kn">from</span> <span class="nn">gssapi.creds</span> <span class="k">import</span> <span class="n">Credentials</span>
+<span class="kn">from</span> <span class="nn">gssapi</span> <span class="kn">import</span> <span class="n">_utils</span>
+<span class="kn">from</span> <span class="nn">gssapi.names</span> <span class="kn">import</span> <span class="n">Name</span>
+<span class="kn">from</span> <span class="nn">gssapi.creds</span> <span class="kn">import</span> <span class="n">Credentials</span>
 
 
 <div class="viewcode-block" id="SecurityContext"><a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext">[docs]</a><span class="nd">@six</span><span class="o">.</span><span class="n">add_metaclass</span><span class="p">(</span><span class="n">_utils</span><span class="o">.</span><span class="n">CheckLastError</span><span class="p">)</span>
@@ -178,7 +178,7 @@
 <span class="sd">    credentials object will not be preserved, however).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">creds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">mech</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channel_bindings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
@@ -187,7 +187,7 @@
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">SecurityContext</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">creds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">mech</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">channel_bindings</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
