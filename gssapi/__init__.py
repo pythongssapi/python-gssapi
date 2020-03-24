@@ -26,6 +26,8 @@ Note:
     low-level API functions.
 """
 
+import gssapi._win_config  # noqa
+
 from gssapi.raw.types import NameType, RequirementFlag, AddressType  # noqa
 from gssapi.raw.types import MechType, IntEnumFlagSet  # noqa
 from gssapi.raw.oids import OID  # noqa
