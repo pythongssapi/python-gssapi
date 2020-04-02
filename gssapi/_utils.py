@@ -4,6 +4,8 @@ import types
 import six
 import decorator as deco
 
+from typing import Optional
+
 from gssapi.raw.misc import GSSError
 
 
@@ -43,7 +45,7 @@ def flag_property(flag):
     return property(getter, setter)
 
 
-def inquire_property(name, doc=None):
+def inquire_property(name: str, doc: Optional[str] = None):
     """Creates a property based on an inquire result
 
     This method creates a property that calls the
@@ -59,7 +61,7 @@ def inquire_property(name, doc=None):
 
     def inquire_property(self):
         if not self._started:
-            msg = ("Cannot read {0} from a security context whose "
+            msg = (f"Cannot read {name} from a security context whose "
                    "establishment has not yet been started.")
             raise AttributeError(msg)
 
