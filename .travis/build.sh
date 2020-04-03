@@ -30,19 +30,15 @@ fi
 python setup.py build_ext --inplace $EXTRA_BUILDEXT
 BUILD_RES=$?
 
-if [ x"$KRB5_VER" = "xheimdal" ]; then
-    # heimdal can't run the tests yet, so just exit
-    exit $BUILD_RES
-fi
-
-if [ "$TRAVIS_OS_NAME" == "windows" ]; then
-    # Windows can't run tests yet, so just exit
-    exit $BUILD_RES
-fi
-
 if [ $BUILD_RES -ne 0 ]; then
     # if the build failed, don't run the tests
     exit $BUILD_RES
+fi
+
+if [ x"$KRB5_VER" = "xheimdal" ] || [ "$TRAVIS_OS_NAME" = "windows" ]; then
+    # heimdal/Windows can't run the tests yet, so just make sure it imports and exit
+    python -c "import gssapi"
+    exit $?
 fi
 
 python setup.py nosetests --verbosity=3
