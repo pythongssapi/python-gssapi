@@ -5,3 +5,4 @@ shouldbe
 six
 Cython
 k5test
+decorator
