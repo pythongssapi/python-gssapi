@@ -29,7 +29,7 @@ def _missing_ref(app, env, node, contnode):
         non_raw_opts = []
         for opt in options:
             full_name, type_info = opt
-            mod_name, _mod_type = type_info
+            lib_name, mod_name, _mod_type = type_info
             if mod_name.startswith('gssapi.raw'):
                 raw_opts.append(opt)
             else:
@@ -53,7 +53,7 @@ def _missing_ref(app, env, node, contnode):
         choice = options[0]
 
     choice_name, choice_info = choice
-    choice_mod, choice_type = choice_info
+    gssapi, choice_mod, choice_type = choice_info
 
     if choice_type == 'module':
         return env.domains['py']._make_module_refnode(
