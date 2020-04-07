@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Low-Level API &mdash; Python-GSSAPI 1.6.2 documentation</title>
+  <title>Low-Level API &mdash; Python-GSSAPI 1.6.4 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                1.6.2
+                1.6.4
               </div>
             
           
@@ -196,15 +196,15 @@ GSSError exception.</p>
 Instead, they are a special form of name specific to
 a given mechanism.</p>
 </div>
-<span class="target" id="module-gssapi.raw.names"></span><dl class="class">
+<span class="target" id="module-gssapi.raw.names"></span><dl class="py class">
 <dt id="gssapi.raw.names.Name">
 <em class="property">class </em><code class="sig-name descname">Name</code><a class="headerlink" href="#gssapi.raw.names.Name" title="Permalink to this definition">¶</a></dt>
 <dd><p>A GSSAPI Name</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.names.canonicalize_name">
-<code class="sig-name descname">canonicalize_name</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">mech</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.canonicalize_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">canonicalize_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mech</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.canonicalize_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Canonicalize an arbitrary GSSAPI Name into a Mechanism Name</p>
 <p>This method turns any GSSAPI name into a “mechanism name” –
 a full form name specific to a mechanism.</p>
@@ -232,9 +232,9 @@ canonicalize the name</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.names.compare_name">
-<code class="sig-name descname">compare_name</code><span class="sig-paren">(</span><em class="sig-param">name1</em>, <em class="sig-param">name2</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.compare_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">compare_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name1</span></em>, <em class="sig-param"><span class="n">name2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.compare_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check two GSSAPI names to see if they are the same.</p>
 <p>This method compares two GSSAPI names, checking to
 see if they are equivalent.</p>
@@ -260,13 +260,13 @@ see if they are equivalent.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.names.display_name">
-<code class="sig-name descname">display_name</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">name_type=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.display_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">display_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">name_type</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.display_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a GSSAPI name into its components.</p>
 <p>This method converts a GSSAPI <a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a> back into its
 text form.  If <code class="docutils literal notranslate"><span class="pre">name_type</span></code> is True, it also attempts to
-retrieve the <a class="reference internal" href="#gssapi.raw.types.NameType" title="gssapi.raw.types.NameType"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameType</span></code></a> of the name (otherwise the
+retrieve the <a class="reference internal" href="gssapi.raw.types.NameType.html#gssapi.raw.types.NameType" title="gssapi.raw.types.NameType"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameType</span></code></a> of the name (otherwise the
 returned name type will be <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -287,9 +287,9 @@ returned name type will be <code class="docutils literal notranslate"><span clas
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.names.duplicate_name">
-<code class="sig-name descname">duplicate_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.duplicate_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">duplicate_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.duplicate_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Duplicate a GSSAPI name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -307,7 +307,7 @@ returned name type will be <code class="docutils literal notranslate"><span clas
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.names.export_name">
 <code class="sig-name descname">export_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.export_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export a GSSAPI name.</p>
@@ -315,7 +315,7 @@ returned name type will be <code class="docutils literal notranslate"><span clas
 of a mechanism name, suitable for direct comparison for use in
 authorization functions”.</p>
 <p>The input name must be a valid GSSAPI mechanism name, as generated
-by <a class="reference internal" href="#gssapi.raw.names.canonicalize_name" title="gssapi.raw.names.canonicalize_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">canonicalize_name()</span></code></a> or <a class="reference internal" href="#gssapi.raw.sec_contexts.accept_sec_context" title="gssapi.raw.sec_contexts.accept_sec_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">accept_sec_context()</span></code></a>.</p>
+by <a class="reference internal" href="#gssapi.raw.names.canonicalize_name" title="gssapi.raw.names.canonicalize_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">canonicalize_name()</span></code></a> or <a class="reference internal" href="gssapi.raw.sec_contexts.accept_sec_context.html#gssapi.raw.sec_contexts.accept_sec_context" title="gssapi.raw.sec_contexts.accept_sec_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">accept_sec_context()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to export</p>
@@ -336,9 +336,9 @@ by <a class="reference internal" href="#gssapi.raw.names.canonicalize_name" titl
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.names.import_name">
-<code class="sig-name descname">import_name</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">name_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.import_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">import_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">name_type</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.import_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a string and a name type into a GSSAPI name.</p>
 <p>This method takes a string name and a name type and converts
 them into a GSSAPI <a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>.</p>
@@ -365,9 +365,9 @@ them into a GSSAPI <a class="reference internal" href="#gssapi.raw.names.Name" t
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.names.release_name">
-<code class="sig-name descname">release_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.release_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">release_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.names.release_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Release a GSSAPI name.</p>
 <p>This method frees a GSSAPI <a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><code class="xref py py-class docutils literal notranslate"><span class="pre">Name</span></code></a>.
 You probably won’t have to do this.</p>
@@ -389,15 +389,15 @@ automatically freed by Python.</p>
 </div>
 <div class="section" id="module-gssapi.raw.creds">
 <span id="credentials"></span><h3>Credentials<a class="headerlink" href="#module-gssapi.raw.creds" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.creds.Creds">
 <em class="property">class </em><code class="sig-name descname">Creds</code><a class="headerlink" href="#gssapi.raw.creds.Creds" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Credentials</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.creds.acquire_cred">
-<code class="sig-name descname">acquire_cred</code><span class="sig-paren">(</span><em class="sig-param">name=None</em>, <em class="sig-param">lifetime=None</em>, <em class="sig-param">mechs=None</em>, <em class="sig-param">usage='both'</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.acquire_cred" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">acquire_cred</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mechs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'both'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.acquire_cred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get GSSAPI credentials for the given name and mechanisms.</p>
 <p>This method gets GSSAPI credentials corresponding to the given name
 and mechanims.  The desired TTL and usage for the the credential may also
@@ -435,9 +435,9 @@ indefinite or not supported)</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.creds.add_cred">
-<code class="sig-name descname">add_cred</code><span class="sig-paren">(</span><em class="sig-param">input_cred</em>, <em class="sig-param">name</em>, <em class="sig-param">mech</em>, <em class="sig-param">usage='initiate'</em>, <em class="sig-param">init_lifetime=None</em>, <em class="sig-param">accept_lifetime=None</em>, <em class="sig-param">mutate_input=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.add_cred" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_cred</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_cred</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mech</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'initiate'</span></em>, <em class="sig-param"><span class="n">init_lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">accept_lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mutate_input</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.add_cred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a credential element to a credential.</p>
 <p>This method can be used to either compose two credentials (i.e., original
 and new credential), or to add a new element to an existing credential.</p>
@@ -480,9 +480,9 @@ be set to None if mutate_input is set to True.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.creds.inquire_cred">
-<code class="sig-name descname">inquire_cred</code><span class="sig-paren">(</span><em class="sig-param">creds</em>, <em class="sig-param">name=True</em>, <em class="sig-param">lifetime=True</em>, <em class="sig-param">usage=True</em>, <em class="sig-param">mechs=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.inquire_cred" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">inquire_cred</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">creds</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">mechs</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.inquire_cred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inspect credentials for information.</p>
 <p>This method inspects a <a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><code class="xref py py-class docutils literal notranslate"><span class="pre">Creds</span></code></a> object for information.</p>
 <dl class="field-list simple">
@@ -515,9 +515,9 @@ be set to None if mutate_input is set to True.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.creds.inquire_cred_by_mech">
-<code class="sig-name descname">inquire_cred_by_mech</code><span class="sig-paren">(</span><em class="sig-param">creds</em>, <em class="sig-param">mech</em>, <em class="sig-param">name=True</em>, <em class="sig-param">init_lifetime=True</em>, <em class="sig-param">accept_lifetime=True</em>, <em class="sig-param">usage=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.inquire_cred_by_mech" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">inquire_cred_by_mech</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">creds</span></em>, <em class="sig-param"><span class="n">mech</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">init_lifetime</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">accept_lifetime</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.inquire_cred_by_mech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inspect credentials for mechanism-specific information.</p>
 <p>This method inspects a <a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><code class="xref py py-class docutils literal notranslate"><span class="pre">Creds</span></code></a> object for information
 specific to a particular mechanism.  It functions similarly
@@ -552,9 +552,9 @@ to <a class="reference internal" href="#gssapi.raw.creds.inquire_cred" title="gs
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.creds.release_cred">
-<code class="sig-name descname">release_cred</code><span class="sig-paren">(</span><em class="sig-param">creds</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.release_cred" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">release_cred</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">creds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.creds.release_cred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Release GSSAPI Credentials.</p>
 <p>This method releases GSSAPI credentials.</p>
 <div class="admonition warning">
@@ -575,15 +575,15 @@ automatically freed by Python.</p>
 </div>
 <div class="section" id="module-gssapi.raw.sec_contexts">
 <span id="security-contexts"></span><h3>Security Contexts<a class="headerlink" href="#module-gssapi.raw.sec_contexts" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.sec_contexts.SecurityContext">
 <em class="property">class </em><code class="sig-name descname">SecurityContext</code><a class="headerlink" href="#gssapi.raw.sec_contexts.SecurityContext" title="Permalink to this definition">¶</a></dt>
 <dd><p>A GSSAPI Security Context</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.sec_contexts.accept_sec_context">
-<code class="sig-name descname">accept_sec_context</code><span class="sig-paren">(</span><em class="sig-param">input_token</em>, <em class="sig-param">acceptor_creds=None</em>, <em class="sig-param">context=None</em>, <em class="sig-param">channel_bindings=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.accept_sec_context" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">accept_sec_context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_token</span></em>, <em class="sig-param"><span class="n">acceptor_creds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">context</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">channel_bindings</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.accept_sec_context" title="Permalink to this definition">¶</a></dt>
 <dd><p>Accept a GSSAPI security context.</p>
 <p>This method accepts a GSSAPI security context using a token sent by the
 initiator, using the given credentials.  It can either be used to accept a
@@ -636,9 +636,9 @@ exchanges are needed to finalize the security context.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.sec_contexts.context_time">
-<code class="sig-name descname">context_time</code><span class="sig-paren">(</span><em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.context_time" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">context_time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.context_time" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the amount of time for which the given context will remain valid.</p>
 <p>This method determines the amount of time for which the given
 security context will remain valid.  An expired context will
@@ -662,9 +662,9 @@ give a result of 0.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.sec_contexts.delete_sec_context">
-<code class="sig-name descname">delete_sec_context</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">local_only=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.delete_sec_context" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete_sec_context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">local_only</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.delete_sec_context" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a GSSAPI security context.</p>
 <p>This method deletes a GSSAPI security context,
 returning an output token to send to the other
@@ -699,9 +699,9 @@ remote deletion (False), in which case a token is also returned</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.sec_contexts.export_sec_context">
-<code class="sig-name descname">export_sec_context</code><span class="sig-paren">(</span><em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.export_sec_context" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">export_sec_context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.export_sec_context" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export a context for use in another process.</p>
 <p>This method exports a security context, deactivating in the current process
 and creating a token which can then be imported into another process
@@ -727,9 +727,9 @@ with <a class="reference internal" href="#gssapi.raw.sec_contexts.import_sec_con
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.sec_contexts.import_sec_context">
-<code class="sig-name descname">import_sec_context</code><span class="sig-paren">(</span><em class="sig-param">token</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.import_sec_context" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">import_sec_context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.import_sec_context" title="Permalink to this definition">¶</a></dt>
 <dd><p>Import a context from another process.</p>
 <p>This method imports a security context established in another process
 by reading the specified token which was output by
@@ -746,9 +746,9 @@ by reading the specified token which was output by
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.sec_contexts.init_sec_context">
-<code class="sig-name descname">init_sec_context</code><span class="sig-paren">(</span><em class="sig-param">target_name</em>, <em class="sig-param">creds=None</em>, <em class="sig-param">context=None</em>, <em class="sig-param">mech=None</em>, <em class="sig-param">flags=None</em>, <em class="sig-param">lifetime=None</em>, <em class="sig-param">channel_bindings=None</em>, <em class="sig-param">input_token=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.init_sec_context" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">init_sec_context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_name</span></em>, <em class="sig-param"><span class="n">creds</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">context</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mech</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">flags</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">channel_bindings</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">input_token</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.init_sec_context" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initiate a GSSAPI security context.</p>
 <p>This method initiates a GSSAPI security context, targeting the given
 target name.  To create a basic context, just provide the target name.
@@ -771,7 +771,7 @@ or None for the default mechanism type</p></li>
 <li><p><strong>flags</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – the flags to request for the security context, or
 None to use the default set: mutual_authentication and
 out_of_sequence_detection.  This may also be an
-<a class="reference internal" href="#gssapi.raw.types.IntEnumFlagSet" title="gssapi.raw.types.IntEnumFlagSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnumFlagSet</span></code></a></p></li>
+<a class="reference internal" href="gssapi.raw.types.IntEnumFlagSet.html#gssapi.raw.types.IntEnumFlagSet" title="gssapi.raw.types.IntEnumFlagSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnumFlagSet</span></code></a></p></li>
 <li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – the request lifetime of the security context (a value
 of 0 or None means indefinite)</p></li>
 <li><p><strong>channel_bindings</strong> (<a class="reference internal" href="#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><em>ChannelBindings</em></a>) – The channel bindings (or None for
@@ -809,9 +809,9 @@ initiation.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.sec_contexts.inquire_context">
-<code class="sig-name descname">inquire_context</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">initiator_name=True</em>, <em class="sig-param">target_name=True</em>, <em class="sig-param">lifetime=True</em>, <em class="sig-param">mech=True</em>, <em class="sig-param">flags=True</em>, <em class="sig-param">locally_init=True</em>, <em class="sig-param">complete=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.inquire_context" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">inquire_context</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">initiator_name</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">target_name</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">mech</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">flags</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">locally_init</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">complete</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.inquire_context" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get information about a security context.</p>
 <p>This method obtains information about a security context, including
 the initiator and target names, as well as the TTL, mech,
@@ -842,9 +842,9 @@ and whether or not the context is currently fully established</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.sec_contexts.process_context_token">
-<code class="sig-name descname">process_context_token</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">token</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.process_context_token" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">process_context_token</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.sec_contexts.process_context_token" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process a token asynchronously.</p>
 <p>This method provides a way to process a token, even if the
 given security context is not expecting one.  For example,
@@ -873,9 +873,9 @@ to process the token</p></li>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-gssapi.raw.message"></span><dl class="function">
+<span class="target" id="module-gssapi.raw.message"></span><dl class="py function">
 <dt id="gssapi.raw.message.get_mic">
-<code class="sig-name descname">get_mic</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">qop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.get_mic" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_mic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">qop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.get_mic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a MIC for a message.</p>
 <p>This method generates a Message Integrity Check token for the
 given message.  This can be separately trasmitted to the other
@@ -906,9 +906,9 @@ together.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.message.unwrap">
-<code class="sig-name descname">unwrap</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.unwrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">unwrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.unwrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unwrap/Decrypt a message.</p>
 <p>This method unwraps or decrypts a message, depending
 on whether the sender used confidentiality.</p>
@@ -944,9 +944,9 @@ on whether the sender used confidentiality.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.message.verify_mic">
-<code class="sig-name descname">verify_mic</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">token</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.verify_mic" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">verify_mic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.verify_mic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Verify that a MIC matches a message.</p>
 <p>This method verifies that the given MIC matches the given message.
 If the MIC does not match the given message, an exception will
@@ -980,9 +980,9 @@ be raised.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.message.wrap">
-<code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">confidential=True</em>, <em class="sig-param">qop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.wrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">confidential</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">qop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.wrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrap/Encrypt a message.</p>
 <p>This method wraps or encrypts a message (depending on the value
 of confidential) with the given Quality of Protection.</p>
@@ -1017,9 +1017,9 @@ or just wrap it with a MIC (False)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.message.wrap_size_limit">
-<code class="sig-name descname">wrap_size_limit</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">output_size</em>, <em class="sig-param">confidential=True</em>, <em class="sig-param">qop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.wrap_size_limit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">wrap_size_limit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">output_size</span></em>, <em class="sig-param"><span class="n">confidential</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">qop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.message.wrap_size_limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate the max message size.</p>
 <p>This method calculates the unwrapped/unencrypted message size for
 the given maximum wrapped/encrypted message size.</p>
@@ -1052,7 +1052,7 @@ the given maximum wrapped/encrypted message size.</p>
 </div>
 <div class="section" id="module-gssapi.raw.oids">
 <span id="misc"></span><h3>Misc<a class="headerlink" href="#module-gssapi.raw.oids" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.oids.OID">
 <em class="property">class </em><code class="sig-name descname">OID</code><a class="headerlink" href="#gssapi.raw.oids.OID" title="Permalink to this definition">¶</a></dt>
 <dd><p>A GSSAPI OID</p>
@@ -1064,14 +1064,14 @@ function in Python 3 or the <code class="xref py py-meth docutils literal notran
 in Python 2.</p>
 <p>This object is hashable, and may be compared using equality
 operators.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.oids.OID.dotted_form">
 <code class="sig-name descname">dotted_form</code><a class="headerlink" href="#gssapi.raw.oids.OID.dotted_form" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="gssapi.raw.oids.OID.from_int_seq">
-<code class="sig-name descname">from_int_seq</code><span class="sig-paren">(</span><em class="sig-param">integer_sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.oids.OID.from_int_seq" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">from_int_seq</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">integer_sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.oids.OID.from_int_seq" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a OID from a sequence of integers.</p>
 <p>This method creates an OID from a sequence of integers.
 The sequence can either be in dotted form as a string,
@@ -1097,7 +1097,7 @@ a string in dotted form</p>
 
 </dd></dl>
 
-<span class="target" id="module-gssapi.raw.misc"></span><dl class="exception">
+<span class="target" id="module-gssapi.raw.misc"></span><dl class="py exception">
 <dt id="gssapi.raw.misc.GSSError">
 <em class="property">exception </em><code class="sig-name descname">GSSError</code><a class="headerlink" href="#gssapi.raw.misc.GSSError" title="Permalink to this definition">¶</a></dt>
 <dd><p>A GSSAPI Error</p>
@@ -1120,14 +1120,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.misc.GSSError.MESSAGE">
 <code class="sig-name descname">MESSAGE</code><em class="property"> = 'Major ({maj_stat}): {maj_str}, Minor ({min_stat}): {min_str}'</em><a class="headerlink" href="#gssapi.raw.misc.GSSError.MESSAGE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="gssapi.raw.misc.GSSError.gen_message">
-<code class="sig-name descname">gen_message</code><a class="headerlink" href="#gssapi.raw.misc.GSSError.gen_message" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">gen_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.GSSError.gen_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieves all messages for this error’s status codes</p>
 <p>This method retrieves all messages for this error’s status codes,
 and forms them into a string for use as an exception message</p>
@@ -1141,9 +1141,9 @@ and forms them into a string for use as an exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="gssapi.raw.misc.GSSError.get_all_statuses">
-<code class="sig-name descname">get_all_statuses</code><a class="headerlink" href="#gssapi.raw.misc.GSSError.get_all_statuses" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_all_statuses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span></em>, <em class="sig-param"><span class="n">is_maj</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.GSSError.get_all_statuses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve all messages for a status code.</p>
 <p>This method retrieves all human-readable messages
 available for the given status code.</p>
@@ -1170,12 +1170,12 @@ or minor status code (False)</p></li>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.misc.GSSErrorRegistry">
 <em class="property">class </em><code class="sig-name descname">GSSErrorRegistry</code><a class="headerlink" href="#gssapi.raw.misc.GSSErrorRegistry" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.misc.indicate_mechs">
 <code class="sig-name descname">indicate_mechs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.indicate_mechs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the currently supported mechanisms.</p>
@@ -1183,9 +1183,9 @@ or minor status code (False)</p></li>
 Note that if unknown mechanims are found, those will be skipped.</p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.misc.inquire_mechs_for_name">
-<code class="sig-name descname">inquire_mechs_for_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.inquire_mechs_for_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">inquire_mechs_for_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.inquire_mechs_for_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>List the mechanisms which can process a name.</p>
 <p>This method lists the mechanisms which may be able to
 process the given name.</p>
@@ -1205,9 +1205,9 @@ process the given name.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.misc.inquire_names_for_mech">
-<code class="sig-name descname">inquire_names_for_mech</code><span class="sig-paren">(</span><em class="sig-param">mech</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.inquire_names_for_mech" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">inquire_names_for_mech</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mech</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.inquire_names_for_mech" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the name types supported by a mechanism.</p>
 <p>This method retrives the different name types supported by
 the given mechanism.</p>
@@ -1227,124 +1227,124 @@ the given mechanism.</p>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-gssapi.raw.types"></span><dl class="class">
+<span class="target" id="module-gssapi.raw.types"></span><dl class="py class">
 <dt id="gssapi.raw.types.AddressType">
 <em class="property">class </em><code class="sig-name descname">AddressType</code><a class="headerlink" href="#gssapi.raw.types.AddressType" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Channel Bindings Address Types</p>
 <p>This <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> represents the various address
-types used with the <a class="reference internal" href="#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelBindings</span></code></a> structure.</p>
+types used with the <a class="reference internal" href="gssapi.raw.chan_bindings.ChannelBindings.html#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelBindings</span></code></a> structure.</p>
 <p>The numbers behind the values correspond directly
 to their C counterparts.  There is no value for
 <code class="docutils literal notranslate"><span class="pre">GSS_C_AF_UNSPEC</span></code>, since this is represented
 by <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.appletalk">
 <code class="sig-name descname">appletalk</code><em class="property"> = 16</em><a class="headerlink" href="#gssapi.raw.types.AddressType.appletalk" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.arpanet">
 <code class="sig-name descname">arpanet</code><em class="property"> = 3</em><a class="headerlink" href="#gssapi.raw.types.AddressType.arpanet" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.bisync">
 <code class="sig-name descname">bisync</code><em class="property"> = 17</em><a class="headerlink" href="#gssapi.raw.types.AddressType.bisync" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.ccitt">
 <code class="sig-name descname">ccitt</code><em class="property"> = 10</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ccitt" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.chaos">
 <code class="sig-name descname">chaos</code><em class="property"> = 5</em><a class="headerlink" href="#gssapi.raw.types.AddressType.chaos" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.datakit">
 <code class="sig-name descname">datakit</code><em class="property"> = 9</em><a class="headerlink" href="#gssapi.raw.types.AddressType.datakit" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.decnet">
 <code class="sig-name descname">decnet</code><em class="property"> = 12</em><a class="headerlink" href="#gssapi.raw.types.AddressType.decnet" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.dli">
 <code class="sig-name descname">dli</code><em class="property"> = 13</em><a class="headerlink" href="#gssapi.raw.types.AddressType.dli" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.dss">
 <code class="sig-name descname">dss</code><em class="property"> = 18</em><a class="headerlink" href="#gssapi.raw.types.AddressType.dss" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.ecma">
 <code class="sig-name descname">ecma</code><em class="property"> = 8</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ecma" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.hyperchannel">
 <code class="sig-name descname">hyperchannel</code><em class="property"> = 15</em><a class="headerlink" href="#gssapi.raw.types.AddressType.hyperchannel" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.ibm_sna">
 <code class="sig-name descname">ibm_sna</code><em class="property"> = 11</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ibm_sna" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.ip">
 <code class="sig-name descname">ip</code><em class="property"> = 2</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ip" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.lat">
 <code class="sig-name descname">lat</code><em class="property"> = 14</em><a class="headerlink" href="#gssapi.raw.types.AddressType.lat" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.local">
 <code class="sig-name descname">local</code><em class="property"> = 1</em><a class="headerlink" href="#gssapi.raw.types.AddressType.local" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.nbs">
 <code class="sig-name descname">nbs</code><em class="property"> = 7</em><a class="headerlink" href="#gssapi.raw.types.AddressType.nbs" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.null">
 <code class="sig-name descname">null</code><em class="property"> = 255</em><a class="headerlink" href="#gssapi.raw.types.AddressType.null" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.osi_tp4">
 <code class="sig-name descname">osi_tp4</code><em class="property"> = 19</em><a class="headerlink" href="#gssapi.raw.types.AddressType.osi_tp4" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.pup">
 <code class="sig-name descname">pup</code><em class="property"> = 4</em><a class="headerlink" href="#gssapi.raw.types.AddressType.pup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.x25">
 <code class="sig-name descname">x25</code><em class="property"> = 21</em><a class="headerlink" href="#gssapi.raw.types.AddressType.x25" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.xerox_ns">
 <code class="sig-name descname">xerox_ns</code><em class="property"> = 6</em><a class="headerlink" href="#gssapi.raw.types.AddressType.xerox_ns" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.types.GenericFlagSet">
 <em class="property">class </em><code class="sig-name descname">GenericFlagSet</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>A set backed by a 32-bit integer</p>
@@ -1354,39 +1354,39 @@ bit is set.</p>
 <p>The class supports normal set operations,
 as well as traditional “flag set” operations,
 such as bitwise AND, OR, and XOR.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.GenericFlagSet.MAX_VAL">
 <code class="sig-name descname">MAX_VAL</code><em class="property"> = 2147483648</em><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.MAX_VAL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.GenericFlagSet.a">
 <code class="sig-name descname">a</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.a" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="gssapi.raw.types.GenericFlagSet.add">
-<code class="sig-name descname">add</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.add" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py method">
 <dt id="gssapi.raw.types.GenericFlagSet.discard">
-<code class="sig-name descname">discard</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.discard" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">discard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.discard" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.GenericFlagSet.l">
 <code class="sig-name descname">l</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.l" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.GenericFlagSet.v">
 <code class="sig-name descname">v</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.v" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.types.IntEnumFlagSet">
 <em class="property">class </em><code class="sig-name descname">IntEnumFlagSet</code><a class="headerlink" href="#gssapi.raw.types.IntEnumFlagSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>A set backed by a 32-bit integer with enum members</p>
@@ -1396,139 +1396,139 @@ members are values in an <a class="reference external" href="https://docs.python
 it also supports bitwise operations with the enum values.</p>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.types.MechType">
 <em class="property">class </em><code class="sig-name descname">MechType</code><a class="headerlink" href="#gssapi.raw.types.MechType" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Mechanism Types</p>
-<p>This enum-like object contains any mechanism <a class="reference internal" href="#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><code class="xref py py-class docutils literal notranslate"><span class="pre">OID</span></code></a>
+<p>This enum-like object contains any mechanism <a class="reference internal" href="gssapi.raw.oids.OID.html#gssapi.raw.oids.OID" title="gssapi.raw.oids.OID"><code class="xref py py-class docutils literal notranslate"><span class="pre">OID</span></code></a>
 values registered by imported mechanisms.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.MechType.kerberos">
 <code class="sig-name descname">kerberos</code><em class="property"> = &lt;OID 1.2.840.113554.1.2.2&gt;</em><a class="headerlink" href="#gssapi.raw.types.MechType.kerberos" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.types.NameType">
 <em class="property">class </em><code class="sig-name descname">NameType</code><a class="headerlink" href="#gssapi.raw.types.NameType" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Name Types</p>
 <p>This enum-like object represents GSSAPI name
-types (to be used with <a class="reference internal" href="#gssapi.raw.names.import_name" title="gssapi.raw.names.import_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">import_name()</span></code></a>, etc)</p>
-<dl class="attribute">
+types (to be used with <a class="reference internal" href="gssapi.raw.names.import_name.html#gssapi.raw.names.import_name" title="gssapi.raw.names.import_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">import_name()</span></code></a>, etc)</p>
+<dl class="py attribute">
 <dt id="gssapi.raw.types.NameType.anonymous">
 <code class="sig-name descname">anonymous</code><em class="property"> = &lt;OID 1.3.6.1.5.6.3&gt;</em><a class="headerlink" href="#gssapi.raw.types.NameType.anonymous" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.NameType.composite_export">
 <code class="sig-name descname">composite_export</code><em class="property"> = &lt;OID 1.3.6.1.5.6.6&gt;</em><a class="headerlink" href="#gssapi.raw.types.NameType.composite_export" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.NameType.export">
 <code class="sig-name descname">export</code><em class="property"> = &lt;OID 1.3.6.1.5.6.4&gt;</em><a class="headerlink" href="#gssapi.raw.types.NameType.export" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.NameType.hostbased_service">
 <code class="sig-name descname">hostbased_service</code><em class="property"> = &lt;OID 1.2.840.113554.1.2.1.4&gt;</em><a class="headerlink" href="#gssapi.raw.types.NameType.hostbased_service" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.NameType.kerberos_principal">
 <code class="sig-name descname">kerberos_principal</code><em class="property"> = &lt;OID 1.2.840.113554.1.2.2.1&gt;</em><a class="headerlink" href="#gssapi.raw.types.NameType.kerberos_principal" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.NameType.machine_uid">
 <code class="sig-name descname">machine_uid</code><em class="property"> = &lt;OID 1.2.840.113554.1.2.1.2&gt;</em><a class="headerlink" href="#gssapi.raw.types.NameType.machine_uid" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.NameType.string_uid">
 <code class="sig-name descname">string_uid</code><em class="property"> = &lt;OID 1.2.840.113554.1.2.1.3&gt;</em><a class="headerlink" href="#gssapi.raw.types.NameType.string_uid" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.NameType.user">
 <code class="sig-name descname">user</code><em class="property"> = &lt;OID 1.2.840.113554.1.2.1.1&gt;</em><a class="headerlink" href="#gssapi.raw.types.NameType.user" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.types.RequirementFlag">
 <em class="property">class </em><code class="sig-name descname">RequirementFlag</code><a class="headerlink" href="#gssapi.raw.types.RequirementFlag" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Requirement Flags</p>
 <p>This <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> represents flags used with the
-<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a>-related methods (e.g.
-<a class="reference internal" href="#gssapi.raw.sec_contexts.init_sec_context" title="gssapi.raw.sec_contexts.init_sec_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">init_sec_context()</span></code></a>)</p>
+<a class="reference internal" href="gssapi.raw.sec_contexts.SecurityContext.html#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a>-related methods (e.g.
+<a class="reference internal" href="gssapi.raw.sec_contexts.init_sec_context.html#gssapi.raw.sec_contexts.init_sec_context" title="gssapi.raw.sec_contexts.init_sec_context"><code class="xref py py-func docutils literal notranslate"><span class="pre">init_sec_context()</span></code></a>)</p>
 <p>The numbers behind the values correspond directly
 to their C counterparts.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.anonymity">
 <code class="sig-name descname">anonymity</code><em class="property"> = 64</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.anonymity" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.confidentiality">
 <code class="sig-name descname">confidentiality</code><em class="property"> = 16</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.confidentiality" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.dce_style">
 <code class="sig-name descname">dce_style</code><em class="property"> = 4096</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.dce_style" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.delegate_to_peer">
 <code class="sig-name descname">delegate_to_peer</code><em class="property"> = 1</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.delegate_to_peer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.extended_error">
 <code class="sig-name descname">extended_error</code><em class="property"> = 16384</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.extended_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.identify">
 <code class="sig-name descname">identify</code><em class="property"> = 8192</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.identify" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.integrity">
 <code class="sig-name descname">integrity</code><em class="property"> = 32</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.integrity" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.mutual_authentication">
 <code class="sig-name descname">mutual_authentication</code><em class="property"> = 2</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.mutual_authentication" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.out_of_sequence_detection">
 <code class="sig-name descname">out_of_sequence_detection</code><em class="property"> = 8</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.out_of_sequence_detection" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.protection_ready">
 <code class="sig-name descname">protection_ready</code><em class="property"> = 128</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.protection_ready" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.replay_detection">
 <code class="sig-name descname">replay_detection</code><em class="property"> = 4</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.replay_detection" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.transferable">
 <code class="sig-name descname">transferable</code><em class="property"> = 256</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.transferable" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<span class="target" id="module-gssapi.raw.chan_bindings"></span><dl class="class">
+<span class="target" id="module-gssapi.raw.chan_bindings"></span><dl class="py class">
 <dt id="gssapi.raw.chan_bindings.ChannelBindings">
 <em class="property">class </em><code class="sig-name descname">ChannelBindings</code><a class="headerlink" href="#gssapi.raw.chan_bindings.ChannelBindings" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Channel Bindings</p>
@@ -1544,27 +1544,27 @@ to their C counterparts.</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.chan_bindings.ChannelBindings.acceptor_address">
 <code class="sig-name descname">acceptor_address</code><a class="headerlink" href="#gssapi.raw.chan_bindings.ChannelBindings.acceptor_address" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.chan_bindings.ChannelBindings.acceptor_address_type">
 <code class="sig-name descname">acceptor_address_type</code><a class="headerlink" href="#gssapi.raw.chan_bindings.ChannelBindings.acceptor_address_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.chan_bindings.ChannelBindings.application_data">
 <code class="sig-name descname">application_data</code><a class="headerlink" href="#gssapi.raw.chan_bindings.ChannelBindings.application_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.chan_bindings.ChannelBindings.initiator_address">
 <code class="sig-name descname">initiator_address</code><a class="headerlink" href="#gssapi.raw.chan_bindings.ChannelBindings.initiator_address" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.chan_bindings.ChannelBindings.initiator_address_type">
 <code class="sig-name descname">initiator_address_type</code><a class="headerlink" href="#gssapi.raw.chan_bindings.ChannelBindings.initiator_address_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -1585,12 +1585,12 @@ namespace.</p>
 </div>
 <div class="section" id="module-gssapi.raw.ext_rfc5588">
 <span id="rfc-5588-gss-api-extension-for-storing-delegated-credentials"></span><h3><span class="target" id="index-1"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc5588.html"><strong>RFC 5588</strong></a> (GSS-API Extension for Storing Delegated Credentials)<a class="headerlink" href="#module-gssapi.raw.ext_rfc5588" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_rfc5588.store_cred">
-<code class="sig-name descname">store_cred</code><span class="sig-paren">(</span><em class="sig-param">creds</em>, <em class="sig-param">usage='both'</em>, <em class="sig-param">mech=None</em>, <em class="sig-param">overwrite=False</em>, <em class="sig-param">set_default=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc5588.store_cred" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">store_cred</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">creds</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'both'</span></em>, <em class="sig-param"><span class="n">mech</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">overwrite</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">set_default</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc5588.store_cred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Store credentials into the default store.</p>
 <p>This method stores the given credentials into the default store.
-They may then be retrieved later using <a class="reference internal" href="#gssapi.raw.creds.acquire_cred" title="gssapi.raw.creds.acquire_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred()</span></code></a>.</p>
+They may then be retrieved later using <a class="reference internal" href="gssapi.raw.creds.acquire_cred.html#gssapi.raw.creds.acquire_cred" title="gssapi.raw.creds.acquire_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -1626,9 +1626,9 @@ the default credentials for the given store.</p></li>
 <div class="section" id="module-gssapi.raw.ext_cred_store">
 <span id="credential-store-extensions"></span><h3>Credential Store Extensions<a class="headerlink" href="#module-gssapi.raw.ext_cred_store" title="Permalink to this headline">¶</a></h3>
 <p>Credential Store Extension</p>
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_cred_store.acquire_cred_from">
-<code class="sig-name descname">acquire_cred_from</code><span class="sig-paren">(</span><em class="sig-param">store=None</em>, <em class="sig-param">name=None</em>, <em class="sig-param">lifetime=None</em>, <em class="sig-param">mechs=None</em>, <em class="sig-param">usage='both'</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_store.acquire_cred_from" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">acquire_cred_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">store</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mechs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'both'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_store.acquire_cred_from" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acquire credentials from the given store.</p>
 <p>This method acquires credentials from the store specified by the
 given credential store information.</p>
@@ -1667,14 +1667,14 @@ credentials, or None for the default set</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_cred_store.add_cred_from">
-<code class="sig-name descname">add_cred_from</code><span class="sig-paren">(</span><em class="sig-param">store</em>, <em class="sig-param">input_creds</em>, <em class="sig-param">name</em>, <em class="sig-param">mech</em>, <em class="sig-param">usage='both'</em>, <em class="sig-param">init_lifetime=None</em>, <em class="sig-param">accept_lifetime=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_store.add_cred_from" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_cred_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">store</span></em>, <em class="sig-param"><span class="n">input_creds</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mech</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'both'</span></em>, <em class="sig-param"><span class="n">init_lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">accept_lifetime</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_store.add_cred_from" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acquire credentials to add to the current set from the given store.</p>
 <p>This method works like <a class="reference internal" href="#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred_from()</span></code></a>, except that it
 adds the acquired credentials for a single mechanism to a copy of
 the current set, instead of creating a new set for multiple mechanisms.
-Unlike <a class="reference internal" href="#gssapi.raw.creds.acquire_cred" title="gssapi.raw.creds.acquire_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred()</span></code></a>, you cannot pass None for the desired name or
+Unlike <a class="reference internal" href="gssapi.raw.creds.acquire_cred.html#gssapi.raw.creds.acquire_cred" title="gssapi.raw.creds.acquire_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred()</span></code></a>, you cannot pass None for the desired name or
 mechanism.</p>
 <p>The credential store information is a dictionary containing
 mechanisms-specific keys and values pointing to a credential store
@@ -1712,9 +1712,9 @@ credentials, or None for indefinite</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_cred_store.store_cred_into">
-<code class="sig-name descname">store_cred_into</code><span class="sig-paren">(</span><em class="sig-param">store</em>, <em class="sig-param">creds</em>, <em class="sig-param">usage='both'</em>, <em class="sig-param">mech=None</em>, <em class="sig-param">overwrite=False</em>, <em class="sig-param">set_default=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_store.store_cred_into" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">store_cred_into</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">store</span></em>, <em class="sig-param"><span class="n">creds</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'both'</span></em>, <em class="sig-param"><span class="n">mech</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">overwrite</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">set_default</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_store.store_cred_into" title="Permalink to this definition">¶</a></dt>
 <dd><p>Store credentials into the given store.</p>
 <p>This method stores the given credentials into the store specified
 by the given store information.  They may then be retrieved later using
@@ -1753,9 +1753,9 @@ the default credentials for the given store.</p></li>
 </div>
 <div class="section" id="module-gssapi.raw.ext_rfc6680">
 <span id="rfc-6680-gss-api-naming-extensions"></span><h3><span class="target" id="index-2"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc6680.html"><strong>RFC 6680</strong></a> (GSS-API Naming Extensions)<a class="headerlink" href="#module-gssapi.raw.ext_rfc6680" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_rfc6680.delete_name_attribute">
-<code class="sig-name descname">delete_name_attribute</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">attr</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.delete_name_attribute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete_name_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">attr</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.delete_name_attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove an attribute from a name.</p>
 <p>This method removes an attribute from a Name.  This method may be
 used before <a class="reference internal" href="#gssapi.raw.ext_rfc6680.set_name_attribute" title="gssapi.raw.ext_rfc6680.set_name_attribute"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_name_attribute()</span></code></a> clear the values of an attribute
@@ -1778,9 +1778,9 @@ operation instead of an ‘add’ operation).</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_rfc6680.display_name_ext">
-<code class="sig-name descname">display_name_ext</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">name_type</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.display_name_ext" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">display_name_ext</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">name_type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.display_name_ext" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display the given Name using the given name type.</p>
 <p>This method attempts to display the given Name using the syntax of
 the given name type.  If this is not possible, an appropriate error
@@ -1806,13 +1806,13 @@ display the given name</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_rfc6680.export_name_composite">
-<code class="sig-name descname">export_name_composite</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.export_name_composite" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">export_name_composite</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.export_name_composite" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export a name, preserving attribute information.</p>
-<p>This method functions similarly to <a class="reference internal" href="#gssapi.raw.names.export_name" title="gssapi.raw.names.export_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">export_name()</span></code></a>, except that
+<p>This method functions similarly to <a class="reference internal" href="gssapi.raw.names.export_name.html#gssapi.raw.names.export_name" title="gssapi.raw.names.export_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">export_name()</span></code></a>, except that
 it preserves attribute information.  The resulting bytes may be imported
-using <a class="reference internal" href="#gssapi.raw.names.import_name" title="gssapi.raw.names.import_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">import_name()</span></code></a> with the <a class="reference internal" href="#gssapi.raw.types.NameType.composite_export" title="gssapi.raw.types.NameType.composite_export"><code class="xref py py-attr docutils literal notranslate"><span class="pre">NameType.composite_export</span></code></a>
+using <a class="reference internal" href="gssapi.raw.names.import_name.html#gssapi.raw.names.import_name" title="gssapi.raw.names.import_name"><code class="xref py py-func docutils literal notranslate"><span class="pre">import_name()</span></code></a> with the <a class="reference internal" href="gssapi.raw.types.NameType.composite_export.html#gssapi.raw.types.NameType.composite_export" title="gssapi.raw.types.NameType.composite_export"><code class="xref py py-attr docutils literal notranslate"><span class="pre">NameType.composite_export</span></code></a>
 name type.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1836,9 +1836,9 @@ using the normal export name type.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_rfc6680.get_name_attribute">
-<code class="sig-name descname">get_name_attribute</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">attr</em>, <em class="sig-param">more=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.get_name_attribute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_name_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">attr</span></em>, <em class="sig-param"><span class="n">more</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.get_name_attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the value(s) of a name attribute.</p>
 <p>This method retrieves the value(s) of the given attribute
 for the given Name.</p>
@@ -1871,9 +1871,9 @@ not the attribute’s value set was marked as complete</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_rfc6680.inquire_name">
-<code class="sig-name descname">inquire_name</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">mech_name=True</em>, <em class="sig-param">attrs=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.inquire_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">inquire_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mech_name</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">attrs</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.inquire_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get information about a Name.</p>
 <p>This method retrives information about the given name, including
 the set of attribute names for the given name, as well as whether or
@@ -1905,9 +1905,9 @@ the associated mechanism if it is a Mechanism Name</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_rfc6680.set_name_attribute">
-<code class="sig-name descname">set_name_attribute</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">attr</em>, <em class="sig-param">value</em>, <em class="sig-param">complete=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.set_name_attribute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_name_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">attr</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">complete</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.set_name_attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the value(s) of a name attribute.</p>
 <p>This method sets the value(s) of the given attribute on the given name.</p>
 <p>Note that this functionality more closely matches the pseudo-API
@@ -1936,9 +1936,9 @@ set as being “complete”</p></li>
 <div class="section" id="module-gssapi.raw.ext_cred_imp_exp">
 <span id="credentials-import-export-extensions"></span><h3>Credentials Import-Export Extensions<a class="headerlink" href="#module-gssapi.raw.ext_cred_imp_exp" title="Permalink to this headline">¶</a></h3>
 <p>Credentials Import/Export Extension</p>
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_cred_imp_exp.export_cred">
-<code class="sig-name descname">export_cred</code><span class="sig-paren">(</span><em class="sig-param">creds</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_imp_exp.export_cred" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">export_cred</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">creds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_imp_exp.export_cred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export GSSAPI credentials.</p>
 <p>This method exports GSSSAPI credentials into a token
 which may be transmitted between different processes.</p>
@@ -1958,9 +1958,9 @@ which may be transmitted between different processes.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_cred_imp_exp.import_cred">
-<code class="sig-name descname">import_cred</code><span class="sig-paren">(</span><em class="sig-param">token</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_imp_exp.import_cred" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">import_cred</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_imp_exp.import_cred" title="Permalink to this definition">¶</a></dt>
 <dd><p>Import GSSAPI credentials from a token.</p>
 <p>This method imports a credentials object from a token
 previously exported by <a class="reference internal" href="#gssapi.raw.ext_cred_imp_exp.export_cred" title="gssapi.raw.ext_cred_imp_exp.export_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">export_cred()</span></code></a>.</p>
@@ -1983,28 +1983,28 @@ previously exported by <a class="reference internal" href="#gssapi.raw.ext_cred_
 </div>
 <div class="section" id="module-gssapi.raw.ext_dce">
 <span id="dce-iov-aead-extensions"></span><h3>DCE (IOV/AEAD) Extensions<a class="headerlink" href="#module-gssapi.raw.ext_dce" title="Permalink to this headline">¶</a></h3>
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.ext_dce.IOV">
 <em class="property">class </em><code class="sig-name descname">IOV</code><a class="headerlink" href="#gssapi.raw.ext_dce.IOV" title="Permalink to this definition">¶</a></dt>
 <dd><p>A GSSAPI IOV</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOV.AUTO_ALLOC_BUFFERS">
 <code class="sig-name descname">AUTO_ALLOC_BUFFERS</code><em class="property"> = {&lt;IOVBufferType.header: 2&gt;, &lt;IOVBufferType.trailer: 7&gt;, &lt;IOVBufferType.padding: 9&gt;, &lt;IOVBufferType.mic_token: 12&gt;}</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOV.AUTO_ALLOC_BUFFERS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="gssapi.raw.ext_dce.IOV.count">
 <code class="sig-name descname">count</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.IOV.count" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="gssapi.raw.ext_dce.IOV.index">
 <code class="sig-name descname">index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.IOV.index" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="gssapi.raw.ext_dce.IOVBufferType">
 <em class="property">class </em><code class="sig-name descname">IOVBufferType</code><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType" title="Permalink to this definition">¶</a></dt>
 <dd><p>IOV Buffer Types</p>
@@ -2012,56 +2012,56 @@ previously exported by <a class="reference internal" href="#gssapi.raw.ext_cred_
 types to be used with the IOV methods.</p>
 <p>The numbers behind the values correspond directly
 to their C counterparts.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.data">
 <code class="sig-name descname">data</code><em class="property"> = 1</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.empty">
 <code class="sig-name descname">empty</code><em class="property"> = 0</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.empty" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.header">
 <code class="sig-name descname">header</code><em class="property"> = 2</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.header" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.mech_params">
 <code class="sig-name descname">mech_params</code><em class="property"> = 3</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.mech_params" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.mic_token">
 <code class="sig-name descname">mic_token</code><em class="property"> = 12</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.mic_token" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.padding">
 <code class="sig-name descname">padding</code><em class="property"> = 9</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.padding" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.sign_only">
 <code class="sig-name descname">sign_only</code><em class="property"> = 11</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.sign_only" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.stream">
 <code class="sig-name descname">stream</code><em class="property"> = 10</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.stream" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.trailer">
 <code class="sig-name descname">trailer</code><em class="property"> = 7</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.trailer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_dce.unwrap_aead">
-<code class="sig-name descname">unwrap_aead</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">associated=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.unwrap_aead" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">unwrap_aead</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">associated</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.unwrap_aead" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unwrap/Decrypt an AEAD message.</p>
 <p>This method takes an encrpyted/wrapped AEAD message and some associated
 data, and returns an unwrapped/decrypted message.</p>
@@ -2089,9 +2089,9 @@ data, and returns an unwrapped/decrypted message.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_dce.unwrap_iov">
-<code class="sig-name descname">unwrap_iov</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.unwrap_iov" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">unwrap_iov</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.unwrap_iov" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unwrap/Decrypt an IOV message.</p>
 <p>This method uwraps or decrypts an IOV message.  The allocate
 parameter of the <code class="xref py py-class docutils literal notranslate"><span class="pre">IOVBuffer</span></code> objects in the <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a>
@@ -2130,9 +2130,9 @@ entire IOV message, while the latter should be empty.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_dce.wrap_aead">
-<code class="sig-name descname">wrap_aead</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">associated=None</em>, <em class="sig-param">confidential=True</em>, <em class="sig-param">qop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.wrap_aead" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">wrap_aead</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">associated</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">confidential</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">qop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.wrap_aead" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrap/Encrypt an AEAD message.</p>
 <p>This method takes an input message and associated data,
 and outputs and AEAD message.</p>
@@ -2164,9 +2164,9 @@ or just wrap it with a MIC (False)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_dce.wrap_iov">
-<code class="sig-name descname">wrap_iov</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">confidential=True</em>, <em class="sig-param">qop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.wrap_iov" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">wrap_iov</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">confidential</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">qop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.wrap_iov" title="Permalink to this definition">¶</a></dt>
 <dd><p>Wrap/Encrypt an IOV message.</p>
 <p>This method wraps or encrypts an IOV message.  The allocate
 parameter of the <code class="xref py py-class docutils literal notranslate"><span class="pre">IOVBuffer</span></code> objects in the <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a>
@@ -2200,9 +2200,9 @@ or just wrap it with a MIC (False)</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_dce.wrap_iov_length">
-<code class="sig-name descname">wrap_iov_length</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">confidential=True</em>, <em class="sig-param">qop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.wrap_iov_length" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">wrap_iov_length</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">confidential</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">qop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.wrap_iov_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Appropriately size padding, trailer, and header IOV buffers.</p>
 <p>This method sets the length values on the IOV buffers.  You
 should already have data provided for the data (and sign-only)
@@ -2239,22 +2239,22 @@ buffer(s) so that padding lengths can be appropriately computed.</p>
 </div>
 <div class="section" id="module-gssapi.raw.ext_iov_mic">
 <span id="iov-mic-extensions"></span><h3>IOV MIC Extensions<a class="headerlink" href="#module-gssapi.raw.ext_iov_mic" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_iov_mic.get_mic_iov">
-<code class="sig-name descname">get_mic_iov</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">qop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_iov_mic.get_mic_iov" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_mic_iov</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">qop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_iov_mic.get_mic_iov" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate MIC tokens for the given IOV message.</p>
 <p>This method generates a MIC token for the given IOV message, and places it
-in the <a class="reference internal" href="#gssapi.raw.ext_dce.IOVBufferType.mic_token" title="gssapi.raw.ext_dce.IOVBufferType.mic_token"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IOVBufferType.mic_token</span></code></a> buffer in the IOV.  This method
+in the <a class="reference internal" href="gssapi.raw.ext_dce.IOVBufferType.mic_token.html#gssapi.raw.ext_dce.IOVBufferType.mic_token" title="gssapi.raw.ext_dce.IOVBufferType.mic_token"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IOVBufferType.mic_token</span></code></a> buffer in the IOV.  This method
 operates entirely in-place, and returns nothing.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This modifies the input <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a>.</p>
+<p>This modifies the input <a class="reference internal" href="gssapi.raw.ext_dce.IOV.html#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a>.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
-<li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
+<li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="gssapi.raw.ext_dce.IOV.html#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
 <li><p><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – the desired Quality of Protection
 (or None for the default QoP)</p></li>
 </ul>
@@ -2265,21 +2265,21 @@ operates entirely in-place, and returns nothing.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_iov_mic.get_mic_iov_length">
-<code class="sig-name descname">get_mic_iov_length</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">qop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_iov_mic.get_mic_iov_length" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_mic_iov_length</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">qop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_iov_mic.get_mic_iov_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Allocate space for the MIC buffer in the given IOV message.</p>
 <p>This method allocates space for the MIC token buffer
-(<a class="reference internal" href="#gssapi.raw.ext_dce.IOVBufferType.mic_token" title="gssapi.raw.ext_dce.IOVBufferType.mic_token"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IOVBufferType.mic_token</span></code></a>) in the given IOV message.</p>
+(<a class="reference internal" href="gssapi.raw.ext_dce.IOVBufferType.mic_token.html#gssapi.raw.ext_dce.IOVBufferType.mic_token" title="gssapi.raw.ext_dce.IOVBufferType.mic_token"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IOVBufferType.mic_token</span></code></a>) in the given IOV message.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>This modifies the input <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a>.</p>
+<p>This modifies the input <a class="reference internal" href="gssapi.raw.ext_dce.IOV.html#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a>.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
-<li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
+<li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="gssapi.raw.ext_dce.IOV.html#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
 <li><p><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – the desired Quality of Protection
 (or None for the default QoP)</p></li>
 </ul>
@@ -2290,18 +2290,18 @@ operates entirely in-place, and returns nothing.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_iov_mic.verify_mic_iov">
-<code class="sig-name descname">verify_mic_iov</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em>, <em class="sig-param">qop=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_iov_mic.verify_mic_iov" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">verify_mic_iov</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">context</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">qop</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_iov_mic.verify_mic_iov" title="Permalink to this definition">¶</a></dt>
 <dd><p>Verify that the MIC matches the data in the given IOV message.</p>
 <p>This method verifies that the MIC token in the MIC buffer
-(<a class="reference internal" href="#gssapi.raw.ext_dce.IOVBufferType.mic_token" title="gssapi.raw.ext_dce.IOVBufferType.mic_token"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IOVBufferType.mic_token</span></code></a>) match the data buffer(s)
+(<a class="reference internal" href="gssapi.raw.ext_dce.IOVBufferType.mic_token.html#gssapi.raw.ext_dce.IOVBufferType.mic_token" title="gssapi.raw.ext_dce.IOVBufferType.mic_token"><code class="xref py py-attr docutils literal notranslate"><span class="pre">IOVBufferType.mic_token</span></code></a>) match the data buffer(s)
 in the given IOV method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
-<li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
+<li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="gssapi.raw.ext_dce.IOV.html#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2320,9 +2320,9 @@ in the given IOV method.</p>
 <div class="section" id="module-gssapi.raw.ext_s4u">
 <span id="services4user-extensions"></span><h3>Services4User Extensions<a class="headerlink" href="#module-gssapi.raw.ext_s4u" title="Permalink to this headline">¶</a></h3>
 <p>Service4User Extension</p>
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_s4u.acquire_cred_impersonate_name">
-<code class="sig-name descname">acquire_cred_impersonate_name</code><span class="sig-paren">(</span><em class="sig-param">impersonator_cred</em>, <em class="sig-param">name</em>, <em class="sig-param">lifetime=None</em>, <em class="sig-param">mechs=None</em>, <em class="sig-param">usage='initiate'</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_s4u.acquire_cred_impersonate_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">acquire_cred_impersonate_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">impersonator_cred</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mechs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'initiate'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_s4u.acquire_cred_impersonate_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acquire credentials by impersonating another name.</p>
 <p>This method is one of the ways to use S4U2Self.  It acquires credentials
 by impersonating another name using a set of proxy credentials.  The
@@ -2355,9 +2355,9 @@ indefinite or not support)</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_s4u.add_cred_impersonate_name">
-<code class="sig-name descname">add_cred_impersonate_name</code><span class="sig-paren">(</span><em class="sig-param">input_cred</em>, <em class="sig-param">impersonator_cred</em>, <em class="sig-param">name</em>, <em class="sig-param">mech</em>, <em class="sig-param">usage='initiate'</em>, <em class="sig-param">init_lifetime=None</em>, <em class="sig-param">accept_lifetime=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_s4u.add_cred_impersonate_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_cred_impersonate_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_cred</span></em>, <em class="sig-param"><span class="n">impersonator_cred</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mech</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'initiate'</span></em>, <em class="sig-param"><span class="n">init_lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">accept_lifetime</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_s4u.add_cred_impersonate_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a credentials element to a credential by impersonating another name.</p>
 <p>This method is one of the ways to use S4U2Self.  It adds credentials
 to the input credentials by impersonating another name using a set of
@@ -2400,13 +2400,13 @@ may be None for indefinite or not supported)</p>
 </div>
 <div class="section" id="module-gssapi.raw.ext_password">
 <span id="acquiring-credentials-with-a-password-extensions"></span><h3>Acquiring Credentials With a Password Extensions<a class="headerlink" href="#module-gssapi.raw.ext_password" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
+<dl class="py function">
 <dt id="gssapi.raw.ext_password.acquire_cred_with_password">
-<code class="sig-name descname">acquire_cred_with_password</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">password</em>, <em class="sig-param">lifetime=None</em>, <em class="sig-param">mechs=None</em>, <em class="sig-param">usage=&quot;initiate&quot;</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_password.acquire_cred_with_password" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">acquire_cred_with_password</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">password</span></em>, <em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mechs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'initiate'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_password.acquire_cred_with_password" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acquire credentials through provided password.</p>
 <p>This function is originally from Solaris and is not documented by either
 MIT or Heimdal.</p>
-<p>In general, it functions similarly to <a class="reference internal" href="#gssapi.raw.creds.acquire_cred" title="gssapi.raw.creds.acquire_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred()</span></code></a>.</p>
+<p>In general, it functions similarly to <a class="reference internal" href="gssapi.raw.creds.acquire_cred.html#gssapi.raw.creds.acquire_cred" title="gssapi.raw.creds.acquire_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -2434,13 +2434,13 @@ indefinite or not supported)</p>
 </dl>
 </dd></dl>
 
-<span class="target" id="module-gssapi.raw.ext_password_add"></span><dl class="function">
+<span class="target" id="module-gssapi.raw.ext_password_add"></span><dl class="py function">
 <dt id="gssapi.raw.ext_password_add.add_cred_with_password">
-<code class="sig-name descname">add_cred_with_password</code><span class="sig-paren">(</span><em class="sig-param">input_cred</em>, <em class="sig-param">name</em>, <em class="sig-param">mech</em>, <em class="sig-param">password</em>, <em class="sig-param">usage='initiate'</em>, <em class="sig-param">init_lifetime=None</em>, <em class="sig-param">accept_lifetime=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_password_add.add_cred_with_password" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_cred_with_password</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_cred</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mech</span></em>, <em class="sig-param"><span class="n">password</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'initiate'</span></em>, <em class="sig-param"><span class="n">init_lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">accept_lifetime</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_password_add.add_cred_with_password" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a credential-element to a credential using provided password.</p>
 <p>This function is originally from Solaris and is not documented by either
 MIT or Heimdal.</p>
-<p>In general, it functions similarly to <a class="reference internal" href="#gssapi.raw.creds.add_cred" title="gssapi.raw.creds.add_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_cred()</span></code></a>.</p>
+<p>In general, it functions similarly to <a class="reference internal" href="gssapi.raw.creds.add_cred.html#gssapi.raw.creds.add_cred" title="gssapi.raw.creds.add_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_cred()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -2477,7 +2477,7 @@ may be None for indefinite or not supported)</p>
 </div>
 <div class="section" id="module-gssapi.raw.exceptions">
 <span id="exceptions"></span><h2>Exceptions<a class="headerlink" href="#module-gssapi.raw.exceptions" title="Permalink to this headline">¶</a></h2>
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadChannelBindingsError">
 <em class="property">exception </em><code class="sig-name descname">BadChannelBindingsError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadChannelBindingsError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2495,14 +2495,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.BadChannelBindingsError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 262144</em><a class="headerlink" href="#gssapi.raw.exceptions.BadChannelBindingsError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadMICError">
 <em class="property">exception </em><code class="sig-name descname">BadMICError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadMICError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2520,14 +2520,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.BadMICError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 393216</em><a class="headerlink" href="#gssapi.raw.exceptions.BadMICError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadMechanismError">
 <em class="property">exception </em><code class="sig-name descname">BadMechanismError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadMechanismError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2545,14 +2545,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.BadMechanismError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 65536</em><a class="headerlink" href="#gssapi.raw.exceptions.BadMechanismError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadNameError">
 <em class="property">exception </em><code class="sig-name descname">BadNameError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadNameError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2570,14 +2570,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.BadNameError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 131072</em><a class="headerlink" href="#gssapi.raw.exceptions.BadNameError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadNameTypeError">
 <em class="property">exception </em><code class="sig-name descname">BadNameTypeError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadNameTypeError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2595,14 +2595,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.BadNameTypeError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 196608</em><a class="headerlink" href="#gssapi.raw.exceptions.BadNameTypeError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadQoPError">
 <em class="property">exception </em><code class="sig-name descname">BadQoPError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadQoPError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2620,14 +2620,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.BadQoPError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 917504</em><a class="headerlink" href="#gssapi.raw.exceptions.BadQoPError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadStatusError">
 <em class="property">exception </em><code class="sig-name descname">BadStatusError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadStatusError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2645,14 +2645,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.BadStatusError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 327680</em><a class="headerlink" href="#gssapi.raw.exceptions.BadStatusError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.ContextReadError">
 <em class="property">exception </em><code class="sig-name descname">ContextReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.ContextReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.MissingContextError" title="gssapi.raw.exceptions.MissingContextError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingContextError</span></code></a></p>
@@ -2672,7 +2672,7 @@ exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.ContextWriteError">
 <em class="property">exception </em><code class="sig-name descname">ContextWriteError</code><a class="headerlink" href="#gssapi.raw.exceptions.ContextWriteError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterWriteError" title="gssapi.raw.exceptions.ParameterWriteError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterWriteError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.MissingContextError" title="gssapi.raw.exceptions.MissingContextError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingContextError</span></code></a></p>
@@ -2692,7 +2692,7 @@ exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.CredentialsReadError">
 <em class="property">exception </em><code class="sig-name descname">CredentialsReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.CredentialsReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.MissingCredentialsError" title="gssapi.raw.exceptions.MissingCredentialsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingCredentialsError</span></code></a></p>
@@ -2712,7 +2712,7 @@ exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.CredentialsWriteError">
 <em class="property">exception </em><code class="sig-name descname">CredentialsWriteError</code><a class="headerlink" href="#gssapi.raw.exceptions.CredentialsWriteError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterWriteError" title="gssapi.raw.exceptions.ParameterWriteError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterWriteError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.MissingCredentialsError" title="gssapi.raw.exceptions.MissingCredentialsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingCredentialsError</span></code></a></p>
@@ -2732,7 +2732,7 @@ exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.DuplicateCredentialsElementError">
 <em class="property">exception </em><code class="sig-name descname">DuplicateCredentialsElementError</code><a class="headerlink" href="#gssapi.raw.exceptions.DuplicateCredentialsElementError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2750,14 +2750,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.DuplicateCredentialsElementError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 1114112</em><a class="headerlink" href="#gssapi.raw.exceptions.DuplicateCredentialsElementError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.DuplicateTokenError">
 <em class="property">exception </em><code class="sig-name descname">DuplicateTokenError</code><a class="headerlink" href="#gssapi.raw.exceptions.DuplicateTokenError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
@@ -2775,14 +2775,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.DuplicateTokenError.SUPPLEMENTARY_CODE">
 <code class="sig-name descname">SUPPLEMENTARY_CODE</code><em class="property"> = 2</em><a class="headerlink" href="#gssapi.raw.exceptions.DuplicateTokenError.SUPPLEMENTARY_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.ExpiredContextError">
 <em class="property">exception </em><code class="sig-name descname">ExpiredContextError</code><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredContextError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2800,14 +2800,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.ExpiredContextError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 786432</em><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredContextError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.ExpiredCredentialsError">
 <em class="property">exception </em><code class="sig-name descname">ExpiredCredentialsError</code><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredCredentialsError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2825,14 +2825,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.ExpiredCredentialsError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 720896</em><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredCredentialsError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.ExpiredTokenError">
 <em class="property">exception </em><code class="sig-name descname">ExpiredTokenError</code><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredTokenError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
@@ -2850,14 +2850,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE">
 <code class="sig-name descname">SUPPLEMENTARY_CODE</code><em class="property"> = 4</em><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.InvalidCredentialsError">
 <em class="property">exception </em><code class="sig-name descname">InvalidCredentialsError</code><a class="headerlink" href="#gssapi.raw.exceptions.InvalidCredentialsError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2875,14 +2875,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.InvalidCredentialsError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 655360</em><a class="headerlink" href="#gssapi.raw.exceptions.InvalidCredentialsError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.InvalidTokenError">
 <em class="property">exception </em><code class="sig-name descname">InvalidTokenError</code><a class="headerlink" href="#gssapi.raw.exceptions.InvalidTokenError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2900,14 +2900,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.InvalidTokenError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 589824</em><a class="headerlink" href="#gssapi.raw.exceptions.InvalidTokenError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.MalformedParameterError">
 <em class="property">exception </em><code class="sig-name descname">MalformedParameterError</code><a class="headerlink" href="#gssapi.raw.exceptions.MalformedParameterError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2925,14 +2925,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.MalformedParameterError.CALLING_CODE">
 <code class="sig-name descname">CALLING_CODE</code><em class="property"> = 50331648</em><a class="headerlink" href="#gssapi.raw.exceptions.MalformedParameterError.CALLING_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.MechanismNameRequiredError">
 <em class="property">exception </em><code class="sig-name descname">MechanismNameRequiredError</code><a class="headerlink" href="#gssapi.raw.exceptions.MechanismNameRequiredError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2950,14 +2950,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.MechanismNameRequiredError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 1179648</em><a class="headerlink" href="#gssapi.raw.exceptions.MechanismNameRequiredError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.MissingContextError">
 <em class="property">exception </em><code class="sig-name descname">MissingContextError</code><a class="headerlink" href="#gssapi.raw.exceptions.MissingContextError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -2975,14 +2975,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.MissingContextError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 524288</em><a class="headerlink" href="#gssapi.raw.exceptions.MissingContextError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.MissingCredentialsError">
 <em class="property">exception </em><code class="sig-name descname">MissingCredentialsError</code><a class="headerlink" href="#gssapi.raw.exceptions.MissingCredentialsError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -3000,14 +3000,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.MissingCredentialsError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 458752</em><a class="headerlink" href="#gssapi.raw.exceptions.MissingCredentialsError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.NameReadError">
 <em class="property">exception </em><code class="sig-name descname">NameReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.NameReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.BadNameError" title="gssapi.raw.exceptions.BadNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.BadNameError</span></code></a></p>
@@ -3027,7 +3027,7 @@ exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.NameTypeReadError">
 <em class="property">exception </em><code class="sig-name descname">NameTypeReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.NameTypeReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.BadNameTypeError" title="gssapi.raw.exceptions.BadNameTypeError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.BadNameTypeError</span></code></a></p>
@@ -3047,7 +3047,7 @@ exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.OperationUnavailableError">
 <em class="property">exception </em><code class="sig-name descname">OperationUnavailableError</code><a class="headerlink" href="#gssapi.raw.exceptions.OperationUnavailableError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -3065,14 +3065,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.OperationUnavailableError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 1048576</em><a class="headerlink" href="#gssapi.raw.exceptions.OperationUnavailableError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.ParameterReadError">
 <em class="property">exception </em><code class="sig-name descname">ParameterReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.ParameterReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -3090,14 +3090,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.ParameterReadError.CALLING_CODE">
 <code class="sig-name descname">CALLING_CODE</code><em class="property"> = 16777216</em><a class="headerlink" href="#gssapi.raw.exceptions.ParameterReadError.CALLING_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.ParameterWriteError">
 <em class="property">exception </em><code class="sig-name descname">ParameterWriteError</code><a class="headerlink" href="#gssapi.raw.exceptions.ParameterWriteError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -3115,14 +3115,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.ParameterWriteError.CALLING_CODE">
 <code class="sig-name descname">CALLING_CODE</code><em class="property"> = 33554432</em><a class="headerlink" href="#gssapi.raw.exceptions.ParameterWriteError.CALLING_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.SupplementaryError">
 <em class="property">exception </em><code class="sig-name descname">SupplementaryError</code><a class="headerlink" href="#gssapi.raw.exceptions.SupplementaryError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -3142,7 +3142,7 @@ exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.TokenOutOfSequenceError">
 <em class="property">exception </em><code class="sig-name descname">TokenOutOfSequenceError</code><a class="headerlink" href="#gssapi.raw.exceptions.TokenOutOfSequenceError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
@@ -3162,7 +3162,7 @@ exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.TokenReadError">
 <em class="property">exception </em><code class="sig-name descname">TokenReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.TokenReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.InvalidTokenError" title="gssapi.raw.exceptions.InvalidTokenError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.InvalidTokenError</span></code></a></p>
@@ -3182,7 +3182,7 @@ exception message</p>
 </dl>
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.TokenTooEarlyError">
 <em class="property">exception </em><code class="sig-name descname">TokenTooEarlyError</code><a class="headerlink" href="#gssapi.raw.exceptions.TokenTooEarlyError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.TokenOutOfSequenceError" title="gssapi.raw.exceptions.TokenOutOfSequenceError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.TokenOutOfSequenceError</span></code></a></p>
@@ -3200,14 +3200,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.TokenTooEarlyError.SUPPLEMENTARY_CODE">
 <code class="sig-name descname">SUPPLEMENTARY_CODE</code><em class="property"> = 16</em><a class="headerlink" href="#gssapi.raw.exceptions.TokenTooEarlyError.SUPPLEMENTARY_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.TokenTooLateError">
 <em class="property">exception </em><code class="sig-name descname">TokenTooLateError</code><a class="headerlink" href="#gssapi.raw.exceptions.TokenTooLateError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.TokenOutOfSequenceError" title="gssapi.raw.exceptions.TokenOutOfSequenceError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.TokenOutOfSequenceError</span></code></a></p>
@@ -3225,14 +3225,14 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.TokenTooLateError.SUPPLEMENTARY_CODE">
 <code class="sig-name descname">SUPPLEMENTARY_CODE</code><em class="property"> = 8</em><a class="headerlink" href="#gssapi.raw.exceptions.TokenTooLateError.SUPPLEMENTARY_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="exception">
+<dl class="py exception">
 <dt id="gssapi.raw.exceptions.UnauthorizedError">
 <em class="property">exception </em><code class="sig-name descname">UnauthorizedError</code><a class="headerlink" href="#gssapi.raw.exceptions.UnauthorizedError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
@@ -3250,7 +3250,7 @@ exception message</p>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="gssapi.raw.exceptions.UnauthorizedError.ROUTINE_CODE">
 <code class="sig-name descname">ROUTINE_CODE</code><em class="property"> = 983040</em><a class="headerlink" href="#gssapi.raw.exceptions.UnauthorizedError.ROUTINE_CODE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
