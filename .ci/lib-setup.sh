@@ -78,7 +78,7 @@ setup::macos::install() {
 
 setup::windows::install() {
     # Install the right Python version and MIT Kerberos
-    choco install python"${PYENV:0:1}" --version $PYENV
+    choco install python"${PYENV:0:1}" --version $PYENV || true
     choco install mitkerberos --install-arguments "'ADDLOCAL=ALL'" || true
     PYPATH="/c/Python${PYENV:0:1}${PYENV:2:1}"
     # Update path to include them

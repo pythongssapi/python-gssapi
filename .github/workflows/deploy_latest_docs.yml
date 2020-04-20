@@ -1,0 +1,34 @@
+name: deploy latest docs
+
+on:
+  push:
+    branches:
+      - master
+      # TODO: not sure if the original was meant to mean a branch named 'infra'
+      # or any branch prefixed by 'infra/' ? The regex suggests it was the former
+      # but why there was a regex instead of direct name comparison then ?
+      - 'infra/**'
+
+jobs:
+  deploy-latest-docs:
+    runs-on: ubuntu-latest
+    name: 'deploy'
+    env:
+      DISTRO: 'fedora:latest'
+      PYTHON: 3
+      # WARNING: make sure this doesn't leak b/c IDK if GitHub logs will protect it
+      # like Travis or not. Either way I don't think this line is necessary
+      # b/c the variable should be globally available. For more info:
+      # https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Deploy
+      run: |
+        ./.ci/lib-util.sh
+        util::docker-run $DISTRO ./.ci/before-docs-deploy.sh
+
+        ./.ci/docs-deploy.sh travis_docs_build/html latest pythongssapi/python-gssapi

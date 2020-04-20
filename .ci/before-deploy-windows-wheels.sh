@@ -2,10 +2,10 @@
 
 # See before-deploy.sh for anything unexplained
 
-source ./.travis/lib-setup.sh
-source ./.travis/lib-deploy.sh
+source ./.ci/lib-setup.sh
+source ./.ci/lib-deploy.sh
 
-./.travis/build.sh
+./.ci/build.sh
 
 # Sigh, go find paths again
 PYPATH="/c/Python${PYENV:0:1}${PYENV:2:1}"

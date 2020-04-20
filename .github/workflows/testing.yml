@@ -1,0 +1,137 @@
+name: testing
+
+on:
+  pull_request:
+  push:
+    branches: master
+
+jobs:
+  debian-stable-python-3:
+    runs-on: ubuntu-latest
+    name: 'debian:stable / Python 3'
+    env:
+      DISTRO: 'debian:stable'
+      PYTHON: 3 # 3.7
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build and test gssapi
+      run: |
+        ./.github/workflows/run-on-linux.sh
+
+  debian-stable-python-3-heimdal:
+    runs-on: ubuntu-latest
+    name: 'debian:stable / Python 3 / heimdal'
+    env:
+      DISTRO: 'debian:stable'
+      PYTHON: 3
+      KRB5_VER: heimdal
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build and test gssapi
+      run: |
+        ./.github/workflows/run-on-linux.sh
+
+  centos-8-python-3:
+    runs-on: ubuntu-latest
+    name: 'centos:8 / Python 3'
+    env:
+      DISTRO: 'centos:8'
+      PYTHON: 3
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build and test gssapi
+      run: |
+        ./.github/workflows/run-on-linux.sh
+
+  fedora-latest-python-3-flake-yes:
+    runs-on: ubuntu-latest
+    name: 'fedora:latest / Python 3 / flake8'
+    env:
+      DISTRO: 'fedora:latest'
+      PYTHON: 3
+      FLAKE: yes
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build and test gssapi
+      run: |
+        ./.github/workflows/run-on-linux.sh
+
+  macos-latest-python-3-heimdal:
+    runs-on: macos-latest
+    name: 'macos-latest / Python 3.6.3 / heimdal'
+    env:
+      PYTHON: 3
+      PYENV: '3.6.3'
+      KRB5_VER: heimdal
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build and test gssapi
+      shell: bash
+      run: |
+        ./.ci/build.sh
+
+  windows-latest-python-381:
+    runs-on: windows-latest
+    name: 'windows-latest / Python 3.8.1'
+    env:
+      PYTHON: 3
+      PYENV: '3.8.1'
+      TRAVIS_OS_NAME: windows
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build and test gssapi
+      shell: bash
+      run: |
+        ./.ci/build.sh
+
+  windows-latest-python-373:
+    runs-on: windows-latest
+    name: 'windows-latest / Python 3.7.3'
+    env:
+      PYTHON: 3
+      PYENV: '3.7.3'
+      TRAVIS_OS_NAME: windows
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build and test gssapi
+      shell: bash
+      run: |
+        ./.ci/build.sh
+
+  windows-latest-python-368:
+    runs-on: windows-latest
+    name: 'windows-latest / Python 3.6.8'
+    env:
+      PYTHON: 3
+      PYENV: '3.6.8'
+      TRAVIS_OS_NAME: windows
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Build and test gssapi
+      shell: bash
+      run: |
+        ./.ci/build.sh

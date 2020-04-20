@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # set up dependencies, etc
-source ./.travis/lib-setup.sh
+source ./.ci/lib-setup.sh
 setup::install
 
 if [ x"$FLAKE" = "xyes" ]; then
