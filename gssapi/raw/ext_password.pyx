@@ -74,8 +74,11 @@ usage="initiate")
         c_usage = GSS_C_INITIATE
     elif usage == "accept":
         c_usage = GSS_C_ACCEPT
-    else:
+    elif usage == 'both':
         c_usage = GSS_C_BOTH
+    else:
+        raise ValueError(f'Invalid usage "{usage}" - permitted values are '
+                         '"initiate", "accept", and "both"')
 
     cdef gss_cred_id_t creds
     cdef gss_OID_set actual_mechs

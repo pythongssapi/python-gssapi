@@ -78,8 +78,11 @@ usage='initiate', init_lifetime=None, accept_lifetime=None)
         c_usage = GSS_C_INITIATE
     elif usage == "accept":
         c_usage = GSS_C_ACCEPT
-    else:
+    elif usage == 'both':
         c_usage = GSS_C_BOTH
+    else:
+        raise ValueError(f'Invalid usage "{usage}" - permitted values are '
+                         '"initiate", "accept", and "both"')
 
     cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(init_lifetime)
     cdef OM_uint32 input_acceptor_ttl = c_py_ttl_to_c(accept_lifetime)

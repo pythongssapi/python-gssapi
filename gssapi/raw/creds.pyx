@@ -131,8 +131,11 @@ def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
         c_usage = GSS_C_INITIATE
     elif usage == 'accept':
         c_usage = GSS_C_ACCEPT
-    else:
+    elif usage == 'both':
         c_usage = GSS_C_BOTH
+    else:
+        raise ValueError(f'Invalid usage "{usage}" - permitted values are '
+                         '"initiate", "accept", and "both"')
 
     cdef gss_cred_id_t creds
     cdef gss_OID_set actual_mechs
@@ -227,8 +230,11 @@ accept_lifetime=None, mutate_input=False)
         c_usage = GSS_C_INITIATE
     elif usage == 'accept':
         c_usage = GSS_C_ACCEPT
-    else:  # usage == 'both'
+    elif usage == 'both':
         c_usage = GSS_C_BOTH
+    else:
+        raise ValueError(f'Invalid usage "{usage}" - permitted values are '
+                         '"initiate", "accept", and "both"')
 
     cdef gss_cred_id_t raw_input_cred
     if input_cred is not None:

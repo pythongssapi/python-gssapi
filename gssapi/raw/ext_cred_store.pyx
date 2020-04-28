@@ -147,8 +147,11 @@ usage='both')
         c_usage = GSS_C_INITIATE
     elif usage == 'accept':
         c_usage = GSS_C_ACCEPT
-    else:
+    elif usage == 'both':
         c_usage = GSS_C_BOTH
+    else:
+        raise ValueError(f'Invalid usage "{usage}" - permitted values are '
+                         '"initiate", "accept", and "both"')
 
     cdef gss_key_value_set_desc *c_store
     if store is not None:
@@ -232,8 +235,11 @@ init_lifetime=None, accept_lifetime=None)
         c_usage = GSS_C_INITIATE
     elif usage == 'accept':
         c_usage = GSS_C_ACCEPT
-    else:
+    elif usage == 'both':
         c_usage = GSS_C_BOTH
+    else:
+        raise ValueError(f'Invalid usage "{usage}" - permitted values are '
+                         '"initiate", "accept", and "both"')
 
     cdef gss_name_t c_name = name.raw_name
     cdef gss_OID c_mech = &mech.raw_oid
@@ -325,8 +331,11 @@ set_default=False)
         c_usage = GSS_C_INITIATE
     elif usage == 'accept':
         c_usage = GSS_C_ACCEPT
-    else:
+    elif usage == 'both':
         c_usage = GSS_C_BOTH
+    else:
+        raise ValueError(f'Invalid usage "{usage}" - permitted values are '
+                         '"initiate", "accept", and "both"')
 
     cdef gss_key_value_set_desc *c_store
     if store is not None:
