@@ -1,0 +1,30 @@
+{
+    "name": "Deploy docs",
+    "on": { "push": { "branches": "master" }},
+    "jobs": {
+        "update-pages": {
+            "runs-on": "ubuntu-latest",
+            "steps": [
+                {
+                    "name": "Check out code",
+                    "uses": "actions/checkout@v2",
+                },
+                {
+                    "name": "Build docs",
+                    "run": "./ci/run-on-linux.sh ./ci/before-docs-deploy.sh",
+                    "env": { "DISTRO": "fedora:latest" },
+                },
+                {
+                    "name": "Deploy latest docs",
+                    "uses": "JamesIves/github-pages-deploy-action@releases/v3",
+                    "with": {
+                        "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}",
+                        "BRANCH": "gh-pages",
+                        "FOLDER": "ci_docs_build/html",
+                        "TARGET_FOLDER": "latest",
+                    },
+                },
+            ],
+        },
+    },
+}

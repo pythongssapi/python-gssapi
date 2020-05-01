@@ -8,9 +8,6 @@ Python-GSSAPI
 .. role:: bash(code)
    :language: bash
 
-.. image:: https://travis-ci.org/pythongssapi/python-gssapi.svg?branch=master
-    :target: https://travis-ci.org/pythongssapi/python-gssapi
-
 .. image:: https://badge.fury.io/gh/pythongssapi%2Fpython-gssapi.svg
     :target: http://badge.fury.io/gh/pythongssapi%2Fpython-gssapi
 

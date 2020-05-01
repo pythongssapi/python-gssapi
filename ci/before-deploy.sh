@@ -1,13 +1,9 @@
 #!/bin/bash -ex
 
-source ./.travis/lib-setup.sh
-source ./.travis/lib-deploy.sh
+source ./ci/lib-setup.sh
+source ./ci/lib-deploy.sh
 
-# build again since I can't figure out how to get travis to recognize the old
-# build in the new container.  The other alternative (besides actually solving
-# the issue) is to run the docs build and tarball generation every time.
-
-./.travis/build.sh
+./ci/build.sh
 
 setup::activate
 
@@ -17,8 +13,7 @@ yum -y install tar git
 deploy::build-docs
 
 # NB(directxman12): this is a *terrible* hack, but basically,
-# dpl (the Travis deployer) uses `twine` instead of `setup.py sdist upload`.
-# like this:
+# `twine` gets called like this:
 # - python setup.py $PYPI_DISTRIBUTIONS
 # - twine upload -r pypi dist/*
 # - [some other stuff]
@@ -44,10 +39,11 @@ mkdir ./tag_build
 
 # create and checksum the tarball
 
-if [ x"${TRAVIS_TAG#v[0-9]}" = "x${TRAVIS_TAG}" ]; then
-    PYTHON_GSSAPI_VERSION=${TRAVIS_TAG}
+tag=$(git describe --tags)
+if [ x"${tag#v[0-9]}" = "x${tag}" ]; then
+    PYTHON_GSSAPI_VERSION=${tag}
 else
-    PYTHON_GSSAPI_VERSION=${TRAVIS_TAG#v}
+    PYTHON_GSSAPI_VERSION=${tag#v}
 fi
 
 PKG_NAME_VER="python-gssapi-${PYTHON_GSSAPI_VERSION}"

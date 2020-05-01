@@ -1,0 +1,114 @@
+{
+    "name": "Build",
+    "on": {
+        "push": {
+            "branches-ignore": "gh-pages",
+            "tags-ignore": "*",
+        },
+        "pull_request": null,
+    },
+
+    "jobs": {
+        "linux": {
+            "runs-on": "ubuntu-latest",
+            "strategy": {
+                "fail-fast": false,
+                "matrix": {
+                    "name": ["debian-stable", "debian-heimdal", "centos-8",
+                             "fedora-latest"],
+                    "include": [
+                        {
+                            "name": "debian-stable",
+                            "distro": "debian:stable",
+                        },
+                        {
+                            "name": "debian-heimdal",
+                            "distro": "debian:stable",
+                            "krb5_ver": "heimdal",
+                        },
+                        {
+                            "name": "centos-8",
+                            "distro": "centos:8",
+                        },
+                        {
+                            "name": "fedora-latest",
+                            "distro": "fedora:latest",
+                            "flake": "yes",
+                        },
+                    ],
+                },
+            },
+            "steps": [
+                {
+                    "name": "Check out code",
+                    "uses": "actions/checkout@v2",
+                },
+                {
+                    "name": "Build and test gssapi",
+                    "run": "./ci/run-on-linux.sh ./ci/build.sh",
+                    "env": {
+                        "DISTRO": "${{ matrix.distro }}",
+                        "KRB5_VER": "${{ matrix.krb5_ver }}",
+                        "FLAKE": "${{ matrix.flake }}",
+                    },
+                },
+            ],
+        },
+
+        "windows": {
+            "runs-on": "windows-latest",
+            "strategy": {
+                "fail-fast": false,
+                "matrix": {
+                    "name": ["win-py-3.8", "win-py-3.7", "win-py-3.6"],
+                    "include": [
+                        {
+                            "name": "win-py-3.8",
+                            "pyenv": "3.8",
+                        },
+                        {
+                            "name": "win-py-3.7",
+                            "pyenv": "3.7",
+                        },
+                        {
+                            "name": "win-py-3.6",
+                            "pyenv": "3.6",
+                        },
+                    ],
+                },
+            },
+            "steps": [
+                {
+                    "name": "Check out code",
+                    "uses": "actions/checkout@v2",
+                },
+                {
+                    "name": "Install the right python",
+                    "uses": "actions/setup-python@v2",
+                    "with": { "python-version": "${{ matrix.pyenv }}" },
+                },
+                {
+                    "name": "Build and test gssapi",
+                    "shell": "bash",
+                    "run": "./ci/build.sh",
+                    "env": { "OS_NAME": "windows" },
+                },
+            ],
+        },
+
+        "macos-heimdal": {
+            "runs-on": "macos-latest",
+            "steps": [
+                {
+                    "name": "Check out code",
+                    "uses": "actions/checkout@v2",
+                },
+                {
+                    "name": "Build and test gssapi",
+                    "run": "./ci/build.sh",
+                    "env": { "KRB5_VER": "heimdal" },
+                },
+            ],
+        },
+    },
+}
