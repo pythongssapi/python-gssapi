@@ -7,7 +7,7 @@ deploy::build-docs() {
     pip install -e .
 
     # place in a non-standard location so that they don't get cleaned up
-    python setup.py build_sphinx --build-dir travis_docs_build
+    python setup.py build_sphinx --build-dir ci_docs_build
 
-    echo "travis_docs_build"
+    echo "docs_build"
 }

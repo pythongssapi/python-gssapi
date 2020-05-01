@@ -1,7 +1,7 @@
 #!/bin/bash -ex
 
 # set up dependencies, etc
-source ./.travis/lib-setup.sh
+source ./ci/lib-setup.sh
 setup::install
 
 if [ x"$FLAKE" = "xyes" ]; then
@@ -35,7 +35,7 @@ if [ $BUILD_RES -ne 0 ]; then
     exit $BUILD_RES
 fi
 
-if [ x"$KRB5_VER" = "xheimdal" ] || [ "$TRAVIS_OS_NAME" = "windows" ]; then
+if [ x"$KRB5_VER" = "xheimdal" ] || [ "$OS_NAME" = "windows" ]; then
     # heimdal/Windows can't run the tests yet, so just make sure it imports and exit
     python -c "import gssapi"
     exit $?

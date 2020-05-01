@@ -295,7 +295,7 @@ if sys.version_info < (3, 4):
 
 setup(
     name='gssapi',
-    version='1.6.5',
+    version='0.0.0-19',
     author='The Python GSSAPI Team',
     author_email='rharwood@redhat.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',

@@ -1,0 +1,111 @@
+{
+    "name": "Release",
+    "on": { "push": { "tags": "v*" }},
+    "jobs": {
+        "release-linux": {
+            "runs-on": "ubuntu-latest",
+            "steps": [
+                {
+                    "name": "Check out code",
+                    "uses": "actions/checkout@v2",
+                },
+                {
+                    "name": "Set things up",
+                    "run": "./ci/run-on-linux.sh ./ci/before-deploy.sh",
+                    "env": { "DISTRO": "fedora:latest" },
+                },
+                {
+                    "name": "Deploy to PyPI",
+                    "uses": "pypa/gh-action-pypi-publish@v1.1.0",
+                    "with": {
+                        "user": "rharwood",
+                        "password": "${{ secrets.pypi_password }}",
+                    },
+                },
+                {
+                    "name": "Deploy stable docs",
+                    "uses": "JamesIves/github-pages-deploy-action@releases/v3",
+                    "with": {
+                        "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}",
+                        "BRANCH": "gh-pages",
+                        "FOLDER": "ci_docs_build/html",
+                        "TARGET_FOLDER": "stable",
+                    },
+                },
+                {
+                    "name": "Create release",
+                    "uses": "actions/create-release@v1",
+                    "id": "cr",
+                    "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
+                    "with": {
+                        "tag_name": "${{ github.ref }}",
+                        "release_name": "${{ github.ref }}",
+                    },
+                },
+                {
+                    "name": "Upload release tarball",
+                    "uses": "actions/upload-release-asset@v1",
+                    "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
+                    "with": {
+                        "upload_url": "${{ steps.cr.outputs.upload_url }}",
+                        "asset_path": "tag_build/*.tar.gz",
+                    },
+                },
+                {
+                    "name": "Upload release checksum",
+                    "uses": "actions/upload-release-asset@v1",
+                    "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
+                    "with": {
+                        "upload_url": "${{ steps.cr.outputs.upload_url }}",
+                        "asset_path": "tag_build/*.sha*",
+                    },
+                },
+            ],
+        },
+
+        "release-windows": {
+            "runs-on": "windows-latest",
+            "strategy": {
+                "matrix": {
+                    "name": ["win-wheel-3.8", "win-wheel-3.7",
+                             "win-wheel-3.6"],
+                    "include": [
+                        {
+                            "name": "win-wheel-3.8",
+                            "pyenv": "3.8",
+                        },
+                        {
+                            "name": "win-wheel-3.7",
+                            "pyenv": "3.7",
+                        },
+                        {
+                            "name": "win-wheel-3.6",
+                            "pyenv": "3.6",
+                        },
+                    ],
+                },
+            },
+            "steps": [
+                {
+                    "name": "Check out code",
+                    "uses": "actions/checkout@v2",
+                },
+                {
+                    "name": "Install the right python",
+                    "uses": "actions/setup-python@v2",
+                    "with": { "python-version": "${{ matrix.pyenv }}" },
+                },
+                {
+                    "name": "Create and upload Windows wheel",
+                    "shell": "bash",
+                    "run": "./ci/release-win.sh",
+                    "env": {
+                        "OS_NAME": "windows",
+                        "TWINE_USER": "rharwood",
+                        "TWINE_PASSWORD": "${{ secrets.pypi_password }}",
+                    },
+                },
+            ],
+        },
+    },
+}
