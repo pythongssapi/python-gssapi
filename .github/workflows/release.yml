@@ -63,6 +63,50 @@
             ],
         },
 
+        "wheels-linux": {
+            "runs-on": "ubuntu-latest",
+            "strategy": {
+                "matrix": {
+                    "name": ["linux-wheel-3.8", "linux-wheel-3.7",
+                             "linux-wheel-3.6"],
+                    "include": [
+                        {
+                            "name": "linux-wheel-3.8",
+                            "pyenv": "3.8",
+                        },
+                        {
+                            "name": "linux-wheel-3.7",
+                            "pyenv": "3.7",
+                        },
+                        {
+                            "name": "linux-wheel-3.6",
+                            "pyenv": "3.6",
+                        },
+                    ],
+                },
+            },
+            "steps": [
+                {
+                    "name": "Check out code",
+                    "uses": "actions/checkout@v2",
+                },
+                {
+                    "name": "Install the right python",
+                    "uses": "actions/setup-python@v2",
+                    "with": { "python-version": "${{ matrix.pyenv }}" },
+                },
+                {
+                    "name": "Create and upload Linux wheel",
+                    "shell": "bash",
+                    "run": "./ci/release-wheel.sh",
+                    "env": {
+                        "TWINE_USER": "rharwood",
+                        "TWINE_PASSWORD": "${{ secrets.pypi_password }}",
+                    },
+                },
+            ],
+        },
+
         "release-windows": {
             "runs-on": "windows-latest",
             "strategy": {
@@ -98,7 +142,7 @@
                 {
                     "name": "Create and upload Windows wheel",
                     "shell": "bash",
-                    "run": "./ci/release-win.sh",
+                    "run": "./ci/release-wheel.sh",
                     "env": {
                         "OS_NAME": "windows",
                         "TWINE_USER": "rharwood",

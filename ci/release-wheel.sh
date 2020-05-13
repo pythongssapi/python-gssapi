@@ -5,8 +5,10 @@ source ./ci/lib-deploy.sh
 
 ./ci/build.sh
 
-# Sigh, go find paths again
-export PATH="/c/Program Files/MIT/Kerberos/bin:$PATH"
+if [ "$OS_NAME" == "windows" ]; then
+    # Sigh, go find paths again
+    export PATH="/c/Program Files/MIT/Kerberos/bin:$PATH"
+fi
 
 # build the wheel
 python -m pip install wheel
