@@ -2,7 +2,7 @@
     "name": "Release",
     "on": { "push": { "tags": "v*" }},
     "jobs": {
-        "release-linux": {
+        "release-main": {
             "runs-on": "ubuntu-latest",
             "steps": [
                 {
@@ -58,6 +58,25 @@
                     "with": {
                         "upload_url": "${{ steps.cr.outputs.upload_url }}",
                         "asset_path": "tag_build/*.sha*",
+                    },
+                },
+            ],
+        },
+
+        "release-manylinux2014": {
+            "runs-on": "ubuntu-latest",
+            "steps": [
+                {
+                    "name": "Check out code",
+                    "uses": "actions/checkout@v2",
+                },
+                {
+                    "name": "manylinux2014 build",
+                    "run": "./ci/run-on-linux.sh ./ci/manylinux2014.sh",
+                    "env": {
+                        "DISTRO": "quay.io/pypa/manylinux2014_x86_64",
+                        "TWINE_USER": "rharwood",
+                        "TWINE_PASSWORD": "${{ secrets.pypi_password }}",
                     },
                 },
             ],
