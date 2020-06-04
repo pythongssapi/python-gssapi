@@ -1399,7 +1399,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         unwrapped_message.shouldnt_be_empty()
         unwrapped_message.should_be(b'test message')
 
-    @ktu.gssapi_extension_test('dce', 'DCE (IOV/AEAD)')
+    @ktu.gssapi_extension_test('dce', 'DCE (IOV)')
     def test_basic_iov_wrap_unwrap_prealloc(self):
         init_data = b'some encrypted data'
         init_other_data = b'some other encrypted data'
@@ -1443,7 +1443,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         init_message[2].value.should_be(init_data)
         init_message[3].value.should_be(init_other_data)
 
-    @ktu.gssapi_extension_test('dce', 'DCE (IOV/AEAD)')
+    @ktu.gssapi_extension_test('dce', 'DCE (IOV)')
     def test_basic_iov_wrap_unwrap_autoalloc(self):
         init_data = b'some encrypted data'
         init_other_data = b'some other encrypted data'
@@ -1475,7 +1475,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         init_message[2].value.should_be(init_data)
         init_message[3].value.should_be(init_other_data)
 
-    @ktu.gssapi_extension_test('dce', 'DCE (IOV/AEAD)')
+    @ktu.gssapi_extension_test('dce_aead', 'DCE (AEAD)')
     def test_basic_aead_wrap_unwrap(self):
         assoc_data = b'some sig data'
         (wrapped_message, conf) = gb.wrap_aead(self.client_ctx,
@@ -1501,7 +1501,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         unwrapped_message.shouldnt_be_empty()
         unwrapped_message.should_be(b'test message')
 
-    @ktu.gssapi_extension_test('dce', 'DCE (IOV/AEAD)')
+    @ktu.gssapi_extension_test('dce_aead', 'DCE (AEAD)')
     def test_basic_aead_wrap_unwrap_no_assoc(self):
         (wrapped_message, conf) = gb.wrap_aead(self.client_ctx,
                                                b'test message')
@@ -1525,7 +1525,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         unwrapped_message.shouldnt_be_empty()
         unwrapped_message.should_be(b'test message')
 
-    @ktu.gssapi_extension_test('dce', 'DCE (IOV/AEAD)')
+    @ktu.gssapi_extension_test('dce_aead', 'DCE (AEAD)')
     def test_basic_aead_wrap_unwrap_bad_assoc_raises_error(self):
         assoc_data = b'some sig data'
         (wrapped_message, conf) = gb.wrap_aead(self.client_ctx,

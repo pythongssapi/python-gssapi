@@ -111,11 +111,17 @@ try:
 except ImportError:
     pass
 
-# optional DCE (IOV/AEAD) support
+# optional DCE (IOV) support
 try:
     from gssapi.raw.ext_dce import *  # noqa
     # optional IOV MIC support (requires DCE support)
     from gssapi.raw.ext_iov_mic import *  # noqa
+except ImportError:
+    pass
+
+# optional DCE (AEAD) support
+try:
+    from gssapi.raw.ext_dce_aead import *  # noqa
 except ImportError:
     pass
 

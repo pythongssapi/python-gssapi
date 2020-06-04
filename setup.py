@@ -133,6 +133,7 @@ for arg in _link_args:
 ENABLE_SUPPORT_DETECTION = \
     (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
 
+osx_framework_path = None
 if ENABLE_SUPPORT_DETECTION:
     import ctypes.util
 
@@ -140,6 +141,7 @@ if ENABLE_SUPPORT_DETECTION:
     main_path = ""
     if main_lib is None and osx_has_gss_framework:
         main_lib = ctypes.util.find_library('GSS')
+        osx_framework_path = main_lib
     elif os.environ.get('MINGW_PREFIX'):
         main_lib = os.environ.get('MINGW_PREFIX')+'/bin/libgss-3.dll'
     elif sys.platform == 'msys':
@@ -208,6 +210,7 @@ class GSSAPIDistribution(Distribution, object):
         if getattr(self, '_cythonized_ext_modules', None) is None:
             self._cythonized_ext_modules = cythonize(
                 self._ext_modules,
+                compile_time_env={'MACOS_FRAMEWORK_PATH': osx_framework_path},
                 language_level=2,
             )
 
@@ -336,7 +339,10 @@ setup(
         extension_file('rfc5588', 'gss_store_cred'),
         extension_file('rfc5801', 'gss_inquire_saslname_for_mech'),
         extension_file('cred_imp_exp', 'gss_import_cred'),
-        extension_file('dce', 'gss_wrap_iov'),
+        extension_file('dce',
+                       '__ApplePrivate_gss_wrap_iov' if osx_framework_path
+                       else 'gss_wrap_iov'),
+        extension_file('dce_aead', 'gss_wrap_aead'),
         extension_file('iov_mic', 'gss_get_mic_iov'),
         extension_file('ggf', 'gss_inquire_sec_context_by_oid'),
         extension_file('set_cred_opt', 'gss_set_cred_option'),
