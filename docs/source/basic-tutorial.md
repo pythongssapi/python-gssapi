@@ -43,12 +43,12 @@ Suppose we wanted to refer to an HTTP server on the current host.
 We could refer to it as a *host-based service*, or in the default
 mechanism form (in this case, for krb5):
 
-    >>> server_hostbased_name = gssapi.Name('HTTP@' + FQDN, name_type=gssapi.NameType.hostbased_service)
+    >>> server_hostbased_name = gssapi.Name(f"HTTP@{FQDN}", name_type=gssapi.NameType.hostbased_service)
     >>> server_hostbased_name
-    Name(b'HTTP@sross', <OID 1.2.840.113554.1.2.1.4>)
-    >>> server_name = gssapi.Name('HTTP/sross@')
+    Name(b'HTTP@seton.mivehind.net', <OID 1.2.840.113554.1.2.1.4>)
+    >>> server_name = gssapi.Name(f"HTTP/{FQDN}@")
     >>> server_name
-    Name(b'HTTP/sross@', None)
+    Name(b'HTTP/seton.mivehind.net@', None)
     >>>
 
 These are both effectively the same, but if we *canonicalize* both
