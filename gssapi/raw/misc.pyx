@@ -291,7 +291,10 @@ class GSSError(Exception, metaclass=GSSErrorRegistry):
                 given code
         """
 
-        msg_encoding = locale.getlocale(locale.LC_MESSAGES)[1] or 'UTF-8'
+        try:
+            msg_encoding = locale.getlocale(locale.LC_MESSAGES)[1] or 'UTF-8'
+        except AttributeError:  # Windows doesn't have LC_MESSAGES
+            msg_encoding = 'UTF-8'
 
         res = []
         try:
