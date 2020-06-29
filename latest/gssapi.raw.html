@@ -1102,7 +1102,7 @@ a string in dotted form</p>
 
 <span class="target" id="module-gssapi.raw.misc"></span><dl class="py exception">
 <dt id="gssapi.raw.misc.GSSError">
-<em class="property">exception </em><code class="sig-name descname">GSSError</code><a class="headerlink" href="#gssapi.raw.misc.GSSError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">GSSError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.GSSError" title="Permalink to this definition">¶</a></dt>
 <dd><p>A GSSAPI Error</p>
 <p>This Exception represents an error returned from the GSSAPI
 C bindings.  It contains the major and minor status codes
@@ -1175,7 +1175,7 @@ or minor status code (False)</p></li>
 
 <dl class="py class">
 <dt id="gssapi.raw.misc.GSSErrorRegistry">
-<em class="property">class </em><code class="sig-name descname">GSSErrorRegistry</code><a class="headerlink" href="#gssapi.raw.misc.GSSErrorRegistry" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">GSSErrorRegistry</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">bases</span></em>, <em class="sig-param"><span class="n">attributes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.misc.GSSErrorRegistry" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
@@ -1232,7 +1232,7 @@ the given mechanism.</p>
 
 <span class="target" id="module-gssapi.raw.types"></span><dl class="py class">
 <dt id="gssapi.raw.types.AddressType">
-<em class="property">class </em><code class="sig-name descname">AddressType</code><a class="headerlink" href="#gssapi.raw.types.AddressType" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">AddressType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.AddressType" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Channel Bindings Address Types</p>
 <p>This <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> represents the various address
 types used with the <a class="reference internal" href="gssapi.raw.chan_bindings.ChannelBindings.html#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChannelBindings</span></code></a> structure.</p>
@@ -1241,8 +1241,13 @@ to their C counterparts.  There is no value for
 <code class="docutils literal notranslate"><span class="pre">GSS_C_AF_UNSPEC</span></code>, since this is represented
 by <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.appletalk">
-<code class="sig-name descname">appletalk</code><em class="property"> = 16</em><a class="headerlink" href="#gssapi.raw.types.AddressType.appletalk" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.AddressType.local">
+<code class="sig-name descname">local</code><em class="property"> = 1</em><a class="headerlink" href="#gssapi.raw.types.AddressType.local" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.AddressType.ip">
+<code class="sig-name descname">ip</code><em class="property"> = 2</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ip" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1251,13 +1256,8 @@ by <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.bisync">
-<code class="sig-name descname">bisync</code><em class="property"> = 17</em><a class="headerlink" href="#gssapi.raw.types.AddressType.bisync" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.ccitt">
-<code class="sig-name descname">ccitt</code><em class="property"> = 10</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ccitt" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.AddressType.pup">
+<code class="sig-name descname">pup</code><em class="property"> = 4</em><a class="headerlink" href="#gssapi.raw.types.AddressType.pup" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1266,8 +1266,33 @@ by <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt id="gssapi.raw.types.AddressType.xerox_ns">
+<code class="sig-name descname">xerox_ns</code><em class="property"> = 6</em><a class="headerlink" href="#gssapi.raw.types.AddressType.xerox_ns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.AddressType.nbs">
+<code class="sig-name descname">nbs</code><em class="property"> = 7</em><a class="headerlink" href="#gssapi.raw.types.AddressType.nbs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.AddressType.ecma">
+<code class="sig-name descname">ecma</code><em class="property"> = 8</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ecma" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.datakit">
 <code class="sig-name descname">datakit</code><em class="property"> = 9</em><a class="headerlink" href="#gssapi.raw.types.AddressType.datakit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.AddressType.ccitt">
+<code class="sig-name descname">ccitt</code><em class="property"> = 10</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ccitt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.AddressType.ibm_sna">
+<code class="sig-name descname">ibm_sna</code><em class="property"> = 11</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ibm_sna" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1281,13 +1306,8 @@ by <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.dss">
-<code class="sig-name descname">dss</code><em class="property"> = 18</em><a class="headerlink" href="#gssapi.raw.types.AddressType.dss" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.ecma">
-<code class="sig-name descname">ecma</code><em class="property"> = 8</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ecma" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.AddressType.lat">
+<code class="sig-name descname">lat</code><em class="property"> = 14</em><a class="headerlink" href="#gssapi.raw.types.AddressType.lat" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1296,33 +1316,18 @@ by <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.ibm_sna">
-<code class="sig-name descname">ibm_sna</code><em class="property"> = 11</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ibm_sna" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.AddressType.appletalk">
+<code class="sig-name descname">appletalk</code><em class="property"> = 16</em><a class="headerlink" href="#gssapi.raw.types.AddressType.appletalk" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.ip">
-<code class="sig-name descname">ip</code><em class="property"> = 2</em><a class="headerlink" href="#gssapi.raw.types.AddressType.ip" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.AddressType.bisync">
+<code class="sig-name descname">bisync</code><em class="property"> = 17</em><a class="headerlink" href="#gssapi.raw.types.AddressType.bisync" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.lat">
-<code class="sig-name descname">lat</code><em class="property"> = 14</em><a class="headerlink" href="#gssapi.raw.types.AddressType.lat" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.local">
-<code class="sig-name descname">local</code><em class="property"> = 1</em><a class="headerlink" href="#gssapi.raw.types.AddressType.local" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.nbs">
-<code class="sig-name descname">nbs</code><em class="property"> = 7</em><a class="headerlink" href="#gssapi.raw.types.AddressType.nbs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.null">
-<code class="sig-name descname">null</code><em class="property"> = 255</em><a class="headerlink" href="#gssapi.raw.types.AddressType.null" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.AddressType.dss">
+<code class="sig-name descname">dss</code><em class="property"> = 18</em><a class="headerlink" href="#gssapi.raw.types.AddressType.dss" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1331,25 +1336,20 @@ by <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.pup">
-<code class="sig-name descname">pup</code><em class="property"> = 4</em><a class="headerlink" href="#gssapi.raw.types.AddressType.pup" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt id="gssapi.raw.types.AddressType.x25">
 <code class="sig-name descname">x25</code><em class="property"> = 21</em><a class="headerlink" href="#gssapi.raw.types.AddressType.x25" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.AddressType.xerox_ns">
-<code class="sig-name descname">xerox_ns</code><em class="property"> = 6</em><a class="headerlink" href="#gssapi.raw.types.AddressType.xerox_ns" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.AddressType.null">
+<code class="sig-name descname">null</code><em class="property"> = 255</em><a class="headerlink" href="#gssapi.raw.types.AddressType.null" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="gssapi.raw.types.GenericFlagSet">
-<em class="property">class </em><code class="sig-name descname">GenericFlagSet</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">GenericFlagSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flags</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>A set backed by a 32-bit integer</p>
 <p>This is a set backed by a 32 bit integer.
 the members are integers where only one
@@ -1358,23 +1358,13 @@ bit is set.</p>
 as well as traditional “flag set” operations,
 such as bitwise AND, OR, and XOR.</p>
 <dl class="py attribute">
-<dt id="gssapi.raw.types.GenericFlagSet.MAX_VAL">
-<code class="sig-name descname">MAX_VAL</code><em class="property"> = 2147483648</em><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.MAX_VAL" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.GenericFlagSet.v">
+<code class="sig-name descname">v</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.v" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt id="gssapi.raw.types.GenericFlagSet.a">
 <code class="sig-name descname">a</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.a" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="gssapi.raw.types.GenericFlagSet.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.add" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="gssapi.raw.types.GenericFlagSet.discard">
-<code class="sig-name descname">discard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.discard" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1383,15 +1373,27 @@ such as bitwise AND, OR, and XOR.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.GenericFlagSet.v">
-<code class="sig-name descname">v</code><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.v" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.GenericFlagSet.MAX_VAL">
+<code class="sig-name descname">MAX_VAL</code><em class="property"> = 2147483648</em><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.MAX_VAL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="gssapi.raw.types.GenericFlagSet.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an element.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="gssapi.raw.types.GenericFlagSet.discard">
+<code class="sig-name descname">discard</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.GenericFlagSet.discard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an element.  Do not raise an exception if absent.</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt id="gssapi.raw.types.IntEnumFlagSet">
-<em class="property">class </em><code class="sig-name descname">IntEnumFlagSet</code><a class="headerlink" href="#gssapi.raw.types.IntEnumFlagSet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">IntEnumFlagSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">enum</span></em>, <em class="sig-param"><span class="n">flags</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.IntEnumFlagSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>A set backed by a 32-bit integer with enum members</p>
 <p>This class is a <a class="reference internal" href="#gssapi.raw.types.GenericFlagSet" title="gssapi.raw.types.GenericFlagSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericFlagSet</span></code></a> where the returned
 members are values in an <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a>.</p>
@@ -1462,7 +1464,7 @@ types (to be used with <a class="reference internal" href="gssapi.raw.names.impo
 
 <dl class="py class">
 <dt id="gssapi.raw.types.RequirementFlag">
-<em class="property">class </em><code class="sig-name descname">RequirementFlag</code><a class="headerlink" href="#gssapi.raw.types.RequirementFlag" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">RequirementFlag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.types.RequirementFlag" title="Permalink to this definition">¶</a></dt>
 <dd><p>GSSAPI Requirement Flags</p>
 <p>This <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.IntEnum" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></a> represents flags used with the
 <a class="reference internal" href="gssapi.raw.sec_contexts.SecurityContext.html#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a>-related methods (e.g.
@@ -1470,38 +1472,8 @@ types (to be used with <a class="reference internal" href="gssapi.raw.names.impo
 <p>The numbers behind the values correspond directly
 to their C counterparts.</p>
 <dl class="py attribute">
-<dt id="gssapi.raw.types.RequirementFlag.anonymity">
-<code class="sig-name descname">anonymity</code><em class="property"> = 64</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.anonymity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.RequirementFlag.confidentiality">
-<code class="sig-name descname">confidentiality</code><em class="property"> = 16</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.confidentiality" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.RequirementFlag.dce_style">
-<code class="sig-name descname">dce_style</code><em class="property"> = 4096</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.dce_style" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.delegate_to_peer">
 <code class="sig-name descname">delegate_to_peer</code><em class="property"> = 1</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.delegate_to_peer" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.RequirementFlag.extended_error">
-<code class="sig-name descname">extended_error</code><em class="property"> = 16384</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.extended_error" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.RequirementFlag.identify">
-<code class="sig-name descname">identify</code><em class="property"> = 8192</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.identify" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gssapi.raw.types.RequirementFlag.integrity">
-<code class="sig-name descname">integrity</code><em class="property"> = 32</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.integrity" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1510,8 +1482,28 @@ to their C counterparts.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt id="gssapi.raw.types.RequirementFlag.replay_detection">
+<code class="sig-name descname">replay_detection</code><em class="property"> = 4</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.replay_detection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt id="gssapi.raw.types.RequirementFlag.out_of_sequence_detection">
 <code class="sig-name descname">out_of_sequence_detection</code><em class="property"> = 8</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.out_of_sequence_detection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.RequirementFlag.confidentiality">
+<code class="sig-name descname">confidentiality</code><em class="property"> = 16</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.confidentiality" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.RequirementFlag.integrity">
+<code class="sig-name descname">integrity</code><em class="property"> = 32</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.integrity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.RequirementFlag.anonymity">
+<code class="sig-name descname">anonymity</code><em class="property"> = 64</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.anonymity" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1520,13 +1512,23 @@ to their C counterparts.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.RequirementFlag.replay_detection">
-<code class="sig-name descname">replay_detection</code><em class="property"> = 4</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.replay_detection" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.RequirementFlag.transferable">
+<code class="sig-name descname">transferable</code><em class="property"> = 256</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.transferable" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.types.RequirementFlag.transferable">
-<code class="sig-name descname">transferable</code><em class="property"> = 256</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.transferable" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.types.RequirementFlag.dce_style">
+<code class="sig-name descname">dce_style</code><em class="property"> = 4096</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.dce_style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.RequirementFlag.identify">
+<code class="sig-name descname">identify</code><em class="property"> = 8192</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.identify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.types.RequirementFlag.extended_error">
+<code class="sig-name descname">extended_error</code><em class="property"> = 16384</em><a class="headerlink" href="#gssapi.raw.types.RequirementFlag.extended_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2009,20 +2011,20 @@ previously exported by <a class="reference internal" href="#gssapi.raw.ext_cred_
 
 <dl class="py class">
 <dt id="gssapi.raw.ext_dce.IOVBufferType">
-<em class="property">class </em><code class="sig-name descname">IOVBufferType</code><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">IOVBufferType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType" title="Permalink to this definition">¶</a></dt>
 <dd><p>IOV Buffer Types</p>
 <p>This IntEnum represent GSSAPI IOV buffer
 types to be used with the IOV methods.</p>
 <p>The numbers behind the values correspond directly
 to their C counterparts.</p>
 <dl class="py attribute">
-<dt id="gssapi.raw.ext_dce.IOVBufferType.data">
-<code class="sig-name descname">data</code><em class="property"> = 1</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.data" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.ext_dce.IOVBufferType.empty">
+<code class="sig-name descname">empty</code><em class="property"> = 0</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.empty" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.ext_dce.IOVBufferType.empty">
-<code class="sig-name descname">empty</code><em class="property"> = 0</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.empty" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.ext_dce.IOVBufferType.data">
+<code class="sig-name descname">data</code><em class="property"> = 1</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2036,8 +2038,8 @@ to their C counterparts.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.ext_dce.IOVBufferType.mic_token">
-<code class="sig-name descname">mic_token</code><em class="property"> = 12</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.mic_token" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.ext_dce.IOVBufferType.trailer">
+<code class="sig-name descname">trailer</code><em class="property"> = 7</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.trailer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2046,18 +2048,18 @@ to their C counterparts.</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.ext_dce.IOVBufferType.sign_only">
-<code class="sig-name descname">sign_only</code><em class="property"> = 11</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.sign_only" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
 <dt id="gssapi.raw.ext_dce.IOVBufferType.stream">
 <code class="sig-name descname">stream</code><em class="property"> = 10</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.stream" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gssapi.raw.ext_dce.IOVBufferType.trailer">
-<code class="sig-name descname">trailer</code><em class="property"> = 7</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.trailer" title="Permalink to this definition">¶</a></dt>
+<dt id="gssapi.raw.ext_dce.IOVBufferType.sign_only">
+<code class="sig-name descname">sign_only</code><em class="property"> = 11</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.sign_only" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="gssapi.raw.ext_dce.IOVBufferType.mic_token">
+<code class="sig-name descname">mic_token</code><em class="property"> = 12</em><a class="headerlink" href="#gssapi.raw.ext_dce.IOVBufferType.mic_token" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2482,7 +2484,7 @@ may be None for indefinite or not supported)</p>
 <span id="exceptions"></span><h2>Exceptions<a class="headerlink" href="#module-gssapi.raw.exceptions" title="Permalink to this headline">¶</a></h2>
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadChannelBindingsError">
-<em class="property">exception </em><code class="sig-name descname">BadChannelBindingsError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadChannelBindingsError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">BadChannelBindingsError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.BadChannelBindingsError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2507,7 +2509,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadMICError">
-<em class="property">exception </em><code class="sig-name descname">BadMICError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadMICError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">BadMICError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.BadMICError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2532,7 +2534,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadMechanismError">
-<em class="property">exception </em><code class="sig-name descname">BadMechanismError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadMechanismError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">BadMechanismError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.BadMechanismError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2557,7 +2559,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadNameError">
-<em class="property">exception </em><code class="sig-name descname">BadNameError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadNameError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">BadNameError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.BadNameError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2582,7 +2584,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadNameTypeError">
-<em class="property">exception </em><code class="sig-name descname">BadNameTypeError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadNameTypeError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">BadNameTypeError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.BadNameTypeError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2607,7 +2609,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadQoPError">
-<em class="property">exception </em><code class="sig-name descname">BadQoPError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadQoPError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">BadQoPError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.BadQoPError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2632,7 +2634,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.BadStatusError">
-<em class="property">exception </em><code class="sig-name descname">BadStatusError</code><a class="headerlink" href="#gssapi.raw.exceptions.BadStatusError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">BadStatusError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.BadStatusError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2657,7 +2659,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.ContextReadError">
-<em class="property">exception </em><code class="sig-name descname">ContextReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.ContextReadError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">ContextReadError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.ContextReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.MissingContextError" title="gssapi.raw.exceptions.MissingContextError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingContextError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2677,7 +2679,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.ContextWriteError">
-<em class="property">exception </em><code class="sig-name descname">ContextWriteError</code><a class="headerlink" href="#gssapi.raw.exceptions.ContextWriteError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">ContextWriteError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.ContextWriteError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterWriteError" title="gssapi.raw.exceptions.ParameterWriteError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterWriteError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.MissingContextError" title="gssapi.raw.exceptions.MissingContextError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingContextError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2697,7 +2699,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.CredentialsReadError">
-<em class="property">exception </em><code class="sig-name descname">CredentialsReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.CredentialsReadError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">CredentialsReadError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.CredentialsReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.MissingCredentialsError" title="gssapi.raw.exceptions.MissingCredentialsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingCredentialsError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2717,7 +2719,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.CredentialsWriteError">
-<em class="property">exception </em><code class="sig-name descname">CredentialsWriteError</code><a class="headerlink" href="#gssapi.raw.exceptions.CredentialsWriteError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">CredentialsWriteError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.CredentialsWriteError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterWriteError" title="gssapi.raw.exceptions.ParameterWriteError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterWriteError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.MissingCredentialsError" title="gssapi.raw.exceptions.MissingCredentialsError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.MissingCredentialsError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2737,7 +2739,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.DuplicateCredentialsElementError">
-<em class="property">exception </em><code class="sig-name descname">DuplicateCredentialsElementError</code><a class="headerlink" href="#gssapi.raw.exceptions.DuplicateCredentialsElementError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">DuplicateCredentialsElementError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.DuplicateCredentialsElementError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2762,7 +2764,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.DuplicateTokenError">
-<em class="property">exception </em><code class="sig-name descname">DuplicateTokenError</code><a class="headerlink" href="#gssapi.raw.exceptions.DuplicateTokenError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">DuplicateTokenError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.DuplicateTokenError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2787,7 +2789,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.ExpiredContextError">
-<em class="property">exception </em><code class="sig-name descname">ExpiredContextError</code><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredContextError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">ExpiredContextError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredContextError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2812,7 +2814,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.ExpiredCredentialsError">
-<em class="property">exception </em><code class="sig-name descname">ExpiredCredentialsError</code><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredCredentialsError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">ExpiredCredentialsError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredCredentialsError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2837,7 +2839,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.ExpiredTokenError">
-<em class="property">exception </em><code class="sig-name descname">ExpiredTokenError</code><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredTokenError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">ExpiredTokenError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.ExpiredTokenError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2862,7 +2864,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.InvalidCredentialsError">
-<em class="property">exception </em><code class="sig-name descname">InvalidCredentialsError</code><a class="headerlink" href="#gssapi.raw.exceptions.InvalidCredentialsError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">InvalidCredentialsError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.InvalidCredentialsError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2887,7 +2889,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.InvalidTokenError">
-<em class="property">exception </em><code class="sig-name descname">InvalidTokenError</code><a class="headerlink" href="#gssapi.raw.exceptions.InvalidTokenError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">InvalidTokenError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.InvalidTokenError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2912,7 +2914,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.MalformedParameterError">
-<em class="property">exception </em><code class="sig-name descname">MalformedParameterError</code><a class="headerlink" href="#gssapi.raw.exceptions.MalformedParameterError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">MalformedParameterError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.MalformedParameterError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2937,7 +2939,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.MechanismNameRequiredError">
-<em class="property">exception </em><code class="sig-name descname">MechanismNameRequiredError</code><a class="headerlink" href="#gssapi.raw.exceptions.MechanismNameRequiredError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">MechanismNameRequiredError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.MechanismNameRequiredError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2962,7 +2964,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.MissingContextError">
-<em class="property">exception </em><code class="sig-name descname">MissingContextError</code><a class="headerlink" href="#gssapi.raw.exceptions.MissingContextError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">MissingContextError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.MissingContextError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -2987,7 +2989,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.MissingCredentialsError">
-<em class="property">exception </em><code class="sig-name descname">MissingCredentialsError</code><a class="headerlink" href="#gssapi.raw.exceptions.MissingCredentialsError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">MissingCredentialsError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.MissingCredentialsError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3012,7 +3014,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.NameReadError">
-<em class="property">exception </em><code class="sig-name descname">NameReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.NameReadError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">NameReadError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.NameReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.BadNameError" title="gssapi.raw.exceptions.BadNameError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.BadNameError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3032,7 +3034,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.NameTypeReadError">
-<em class="property">exception </em><code class="sig-name descname">NameTypeReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.NameTypeReadError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">NameTypeReadError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.NameTypeReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.BadNameTypeError" title="gssapi.raw.exceptions.BadNameTypeError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.BadNameTypeError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3052,7 +3054,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.OperationUnavailableError">
-<em class="property">exception </em><code class="sig-name descname">OperationUnavailableError</code><a class="headerlink" href="#gssapi.raw.exceptions.OperationUnavailableError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">OperationUnavailableError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.OperationUnavailableError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3077,7 +3079,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.ParameterReadError">
-<em class="property">exception </em><code class="sig-name descname">ParameterReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.ParameterReadError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">ParameterReadError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.ParameterReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3102,7 +3104,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.ParameterWriteError">
-<em class="property">exception </em><code class="sig-name descname">ParameterWriteError</code><a class="headerlink" href="#gssapi.raw.exceptions.ParameterWriteError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">ParameterWriteError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.ParameterWriteError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3127,7 +3129,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.SupplementaryError">
-<em class="property">exception </em><code class="sig-name descname">SupplementaryError</code><a class="headerlink" href="#gssapi.raw.exceptions.SupplementaryError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">SupplementaryError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.SupplementaryError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3147,7 +3149,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.TokenOutOfSequenceError">
-<em class="property">exception </em><code class="sig-name descname">TokenOutOfSequenceError</code><a class="headerlink" href="#gssapi.raw.exceptions.TokenOutOfSequenceError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">TokenOutOfSequenceError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.TokenOutOfSequenceError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.SupplementaryError" title="gssapi.raw.exceptions.SupplementaryError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.SupplementaryError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3167,7 +3169,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.TokenReadError">
-<em class="property">exception </em><code class="sig-name descname">TokenReadError</code><a class="headerlink" href="#gssapi.raw.exceptions.TokenReadError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">TokenReadError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.TokenReadError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError" title="gssapi.raw.exceptions.ParameterReadError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.ParameterReadError</span></code></a>, <a class="reference internal" href="#gssapi.raw.exceptions.InvalidTokenError" title="gssapi.raw.exceptions.InvalidTokenError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.InvalidTokenError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3187,7 +3189,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.TokenTooEarlyError">
-<em class="property">exception </em><code class="sig-name descname">TokenTooEarlyError</code><a class="headerlink" href="#gssapi.raw.exceptions.TokenTooEarlyError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">TokenTooEarlyError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.TokenTooEarlyError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.TokenOutOfSequenceError" title="gssapi.raw.exceptions.TokenOutOfSequenceError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.TokenOutOfSequenceError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3212,7 +3214,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.TokenTooLateError">
-<em class="property">exception </em><code class="sig-name descname">TokenTooLateError</code><a class="headerlink" href="#gssapi.raw.exceptions.TokenTooLateError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">TokenTooLateError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.TokenTooLateError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.exceptions.TokenOutOfSequenceError" title="gssapi.raw.exceptions.TokenOutOfSequenceError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.exceptions.TokenOutOfSequenceError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
@@ -3237,7 +3239,7 @@ exception message</p>
 
 <dl class="py exception">
 <dt id="gssapi.raw.exceptions.UnauthorizedError">
-<em class="property">exception </em><code class="sig-name descname">UnauthorizedError</code><a class="headerlink" href="#gssapi.raw.exceptions.UnauthorizedError" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><code class="sig-name descname">UnauthorizedError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maj_code</span></em>, <em class="sig-param"><span class="n">min_code</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.exceptions.UnauthorizedError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><code class="xref py py-class docutils literal notranslate"><span class="pre">gssapi.raw.misc.GSSError</span></code></a></p>
 <p>Create a new GSSError.</p>
 <p>This method creates a new GSSError,
