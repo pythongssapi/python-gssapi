@@ -1,15 +1,18 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Common Values for Credentials Store Extensions &mdash; Python-GSSAPI 1.6.5 documentation</title>
+  <title>Common Values for Credentials Store Extensions &mdash; Python-GSSAPI 1.6.7 documentation</title>
   
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
 
   
   
@@ -17,7 +20,9 @@
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tutorials" href="tutorials.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Python-GSSAPI
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Python-GSSAPI
           
 
           
@@ -60,7 +61,7 @@
             
             
               <div class="version">
-                1.6.5
+                1.6.7
               </div>
             
           
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -107,6 +109,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -145,7 +148,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="otherdoc.html">Other Documentation</a> &raquo;</li>
         
@@ -182,8 +185,8 @@ store extension with a number of keywords.</p>
 <div class="section" id="client-keytab">
 <h3>client_keytab<a class="headerlink" href="#client-keytab" title="Permalink to this headline">¶</a></h3>
 <p>The <cite>client_keytab</cite> keyword can be used in a credential store when it is used
-with the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
-<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions to indicate a custom
+with the <code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code> /
+<code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code> functions to indicate a custom
 location for a keytab containing client keys.  It is not used in the context
 of calls used to store credentials.</p>
 <p>The value is a string in the form <strong>type:residual</strong> where <strong>type</strong> can be any
@@ -194,8 +197,8 @@ then the type is defaulted to <cite>FILE</cite>.</p>
 <div class="section" id="keytab">
 <h3>keytab<a class="headerlink" href="#keytab" title="Permalink to this headline">¶</a></h3>
 <p>The <cite>keytab</cite> keyword can be used in a credential store when it is used with
-the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
-<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions to indicate a custom
+the <code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code> /
+<code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code> functions to indicate a custom
 location for a keytab containing service keys.  It is not used in the context
 of calls used to store credentials.</p>
 <p>The value is a string in the form <strong>type:residual</strong> where <strong>type</strong> can be any
@@ -207,9 +210,9 @@ then the type is defaulted to <cite>FILE</cite>.</p>
 <h3>ccache<a class="headerlink" href="#ccache" title="Permalink to this headline">¶</a></h3>
 <p>The <cite>ccache</cite> keyword can be used to reference a specific credential storage.
 It can be used both to indicate the source of existing credentials for the
-<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
-<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions, as well as the
-destination storage for the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.store_cred_into" title="gssapi.raw.ext_cred_store.store_cred_into"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.store_cred_into()</span></code></a>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code> /
+<code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code> functions, as well as the
+destination storage for the <code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.store_cred_into()</span></code>
 function.</p>
 <p>The value is a string in the form <strong>type:residual</strong> where <strong>type</strong> can be any
 credential cache storage type understood by the implementation and
@@ -221,8 +224,8 @@ refer to the MIT krb5 documentation for more details.</p>
 <div class="section" id="rcache">
 <h3>rcache<a class="headerlink" href="#rcache" title="Permalink to this headline">¶</a></h3>
 <p>The <cite>rcache</cite> keyword can be used to reference a custom replay cache storage.
-It is used only with the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
-<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions for credentials used
+It is used only with the <code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code> /
+<code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code> functions for credentials used
 to accept context establishments, not to initiate contexts.</p>
 <p>The value is a string in the form <strong>type:residual</strong> where <strong>type</strong> can be any
 replay cache storage type understood by the implementation and <strong>residual</strong> is
@@ -258,11 +261,19 @@ version.</p>
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2014, The Python-GSSAPI team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -273,7 +284,6 @@ version.</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
