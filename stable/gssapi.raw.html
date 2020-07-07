@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Low-Level API &mdash; Python-GSSAPI 1.6.7 documentation</title>
+  <title>Low-Level API &mdash; Python-GSSAPI 1.6.8 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.6.7
+                1.6.8
               </div>
             
           
@@ -98,7 +98,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-rfcs-and-extensions">Additional RFCs and Extensions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5588"><strong>RFC 5588</strong> (GSS-API Extension for Storing Delegated Credentials)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#credential-store-extensions">Credential Store Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_cred_store">Credential Store Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc6680"><strong>RFC 6680</strong> (GSS-API Naming Extensions)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_cred_imp_exp">Credentials Import-Export Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_dce">DCE (IOV/AEAD) Extensions</a></li>
@@ -1628,8 +1628,133 @@ the default credentials for the given store.</p></li>
 </dd></dl>
 
 </div>
-<div class="section" id="credential-store-extensions">
-<h3>Credential Store Extensions<a class="headerlink" href="#credential-store-extensions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-gssapi.raw.ext_cred_store">
+<span id="credential-store-extensions"></span><h3>Credential Store Extensions<a class="headerlink" href="#module-gssapi.raw.ext_cred_store" title="Permalink to this headline">¶</a></h3>
+<p>Credential Store Extension</p>
+<dl class="py function">
+<dt id="gssapi.raw.ext_cred_store.acquire_cred_from">
+<code class="sig-name descname">acquire_cred_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">store</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mechs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'both'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_store.acquire_cred_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquire credentials from the given store.</p>
+<p>This method acquires credentials from the store specified by the
+given credential store information.</p>
+<p>The credential store information is a dictionary containing
+mechanisms-specific keys and values pointing to a credential store
+or stores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – the credential store information pointing to the
+credential store from which to acquire the credentials.
+See <a class="reference internal" href="credstore.html"><span class="doc">Common Values for Credentials Store Extensions</span></a> for valid values</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials,
+or None for the default name</p></li>
+<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – the desired lifetime of the credentials, or None
+for indefinite</p></li>
+<li><p><strong>mechs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – the desired mechanisms to be used with these
+credentials, or None for the default set</p></li>
+<li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
+‘initiate’, or ‘accept’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the acquired credentials and information about</dt><dd><p>them</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>AcquireCredResult</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="gssapi.raw.ext_cred_store.add_cred_from">
+<code class="sig-name descname">add_cred_from</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">store</span></em>, <em class="sig-param"><span class="n">input_creds</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">mech</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'both'</span></em>, <em class="sig-param"><span class="n">init_lifetime</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">accept_lifetime</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_store.add_cred_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquire credentials to add to the current set from the given store.</p>
+<p>This method works like <a class="reference internal" href="#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred_from()</span></code></a>, except that it
+adds the acquired credentials for a single mechanism to a copy of
+the current set, instead of creating a new set for multiple mechanisms.
+Unlike <a class="reference internal" href="gssapi.raw.creds.acquire_cred.html#gssapi.raw.creds.acquire_cred" title="gssapi.raw.creds.acquire_cred"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred()</span></code></a>, you cannot pass None for the desired name or
+mechanism.</p>
+<p>The credential store information is a dictionary containing
+mechanisms-specific keys and values pointing to a credential store
+or stores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – the store into which to store the credentials,
+or None for the default store.
+See <a class="reference internal" href="credstore.html"><span class="doc">Common Values for Credentials Store Extensions</span></a> for valid values</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials</p></li>
+<li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired mechanism to be used with these
+credentials</p></li>
+<li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
+‘initiate’, or ‘accept’</p></li>
+<li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – the desired initiate lifetime of the
+credentials, or None for indefinite</p></li>
+<li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – the desired accept lifetime of the
+credentials, or None for indefinite</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the new credentials set and information about</dt><dd><p>it</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>AcquireCredResult</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="gssapi.raw.ext_cred_store.store_cred_into">
+<code class="sig-name descname">store_cred_into</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">store</span></em>, <em class="sig-param"><span class="n">creds</span></em>, <em class="sig-param"><span class="n">usage</span><span class="o">=</span><span class="default_value">'both'</span></em>, <em class="sig-param"><span class="n">mech</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">overwrite</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">set_default</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_cred_store.store_cred_into" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store credentials into the given store.</p>
+<p>This method stores the given credentials into the store specified
+by the given store information.  They may then be retrieved later using
+<a class="reference internal" href="#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">acquire_cred_from()</span></code></a> or <a class="reference internal" href="#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_cred_from()</span></code></a>.</p>
+<p>The credential store information is a dictionary containing
+mechanisms-specific keys and values pointing to a credential store
+or stores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – the store into which to store the credentials,
+or None for the default store.
+See <a class="reference internal" href="credstore.html"><span class="doc">Common Values for Credentials Store Extensions</span></a> for valid values</p></li>
+<li><p><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to store</p></li>
+<li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – the usage to store the credentials with – either
+‘both’, ‘initiate’, or ‘accept’</p></li>
+<li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechansim to associate with the stored credentials</p></li>
+<li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether or not to overwrite existing credentials
+stored with the same name, etc</p></li>
+<li><p><strong>set_default</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – whether or not to set these credentials as
+the default credentials for the given store.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the results of the credential storing operation</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>StoreCredResult</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 <div class="section" id="module-gssapi.raw.ext_rfc6680">
 <span id="rfc-6680-gss-api-naming-extensions"></span><h3><span class="target" id="index-2"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc6680.html"><strong>RFC 6680</strong></a> (GSS-API Naming Extensions)<a class="headerlink" href="#module-gssapi.raw.ext_rfc6680" title="Permalink to this headline">¶</a></h3>

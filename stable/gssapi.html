@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>High-Level API &mdash; Python-GSSAPI 1.6.7 documentation</title>
+  <title>High-Level API &mdash; Python-GSSAPI 1.6.8 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.6.7
+                1.6.8
               </div>
             
           
@@ -473,7 +473,7 @@ with the credentials, or None for the default set</p></li>
 ‘initiate’, or ‘accept’</p></li>
 <li><p><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – the credential store information pointing to the
 credential store from which to acquire the credentials,
-or None for the default store (<em>requires the cred_store extension</em>)</p></li>
+or None for the default store (<em>requires the <a class="reference internal" href="gssapi.raw.html#module-gssapi.raw.ext_cred_store" title="gssapi.raw.ext_cred_store">Credential Store Extension</a></em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -506,7 +506,7 @@ or None for the default store (<em>requires the cred_store extension</em>)</p></
 credentials store.  If the default store is used, support for
 <span class="target" id="index-0"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc5588.html"><strong>RFC 5588</strong></a> is required.  Otherwise, support for the credentials
 store extension is required.</p>
-<p><em>requires the <a class="reference external" href="https://tools.ietf.org/html/rfc5588.html">RFC 5588</a> extension</em> or <em>requires the cred_store extension</em></p>
+<p><em>requires the <a class="reference external" href="https://tools.ietf.org/html/rfc5588.html">RFC 5588</a> extension</em> or <em>requires the <a class="reference internal" href="gssapi.raw.html#module-gssapi.raw.ext_cred_store" title="gssapi.raw.ext_cred_store">Credential Store Extension</a></em></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -647,7 +647,7 @@ mechanism.</p>
 impersonate the given name using the impersonator credentials
 (<em>requires the <a class="reference internal" href="gssapi.raw.html#module-gssapi.raw.ext_s4u" title="gssapi.raw.ext_s4u">Service4User Extension</a></em>).</p>
 <p>If the <cite>store</cite> argument is used, the credentials will be acquired
-from the given credential store (<em>requires the cred_store extension</em>).
+from the given credential store (<em>requires the <a class="reference internal" href="gssapi.raw.html#module-gssapi.raw.ext_cred_store" title="gssapi.raw.ext_cred_store">Credential Store Extension</a></em>).
 Otherwise, the credentials are acquired from the default store.</p>
 <p>The credential store information is a dictionary containing
 mechanisms-specific keys and values pointing to a credential store
@@ -672,7 +672,7 @@ the given name, or None to not acquire normally
 (<em>requires the <a class="reference internal" href="gssapi.raw.html#module-gssapi.raw.ext_s4u" title="gssapi.raw.ext_s4u">Service4User Extension</a></em>)</p></li>
 <li><p><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – the credential store information pointing to the
 credential store from which to acquire the credentials,
-or None for the default store (<em>requires the cred_store extension</em>)</p></li>
+or None for the default store (<em>requires the <a class="reference internal" href="gssapi.raw.html#module-gssapi.raw.ext_cred_store" title="gssapi.raw.ext_cred_store">Credential Store Extension</a></em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
