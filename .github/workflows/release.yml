@@ -43,9 +43,12 @@
                     },
                 },
                 {
-                    "name": "Ugh",
-                    "id": "ugh",
-                    "run": "echo \"::set-output name=basename::`ls tag_build/*.tar.gz | awk -F/ '{print $2}'`\""
+                    "id": "tarball",
+                    "run": "echo \"::set-output name=tarball::`ls tag_build/*.tar.gz | awk -F/ '{print $2}'`\""
+                },
+                {
+                    "id": "checksum",
+                    "run": "echo \"::set-output name=checksum::`ls tag_build/*.sha512sum | awk -F/ '{print $2}'`\""
                 },
                 {
                     "name": "Upload release tarball",
@@ -53,8 +56,8 @@
                     "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
                     "with": {
                         "upload_url": "${{ steps.cr.outputs.upload_url }}",
-                        "asset_path": "tag_build/${{ steps.ugh.outputs.basename }}",
-                        "asset_name": "${{ steps.ugh.outputs.basename }}",
+                        "asset_path": "tag_build/${{ steps.tarball.outputs.tarball }}",
+                        "asset_name": "${{ steps.tarball.outputs.tarball }}",
                         "asset_content_type": "application/octet-stream",
                     },
                 },
@@ -64,8 +67,8 @@
                     "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
                     "with": {
                         "upload_url": "${{ steps.cr.outputs.upload_url }}",
-                        "asset_path": "tag_build/${{ steps.ugh.outputs.basename }}.sha512sum",
-                        "asset_name": "${{ steps.ugh.outputs.basename }}.sha512sum",
+                        "asset_path": "tag_build/${{ steps.checksum.outputs.checksum }}",
+                        "asset_name": "${{ steps.checksum.outputs.checksum }}",
                         "asset_content_type": "text/plain",
                     },
                 },
