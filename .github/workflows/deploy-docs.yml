@@ -12,7 +12,7 @@
                 {
                     "name": "Build docs",
                     "run": "./ci/run-on-linux.sh ./ci/before-docs-deploy.sh",
-                    "env": { "DISTRO": "fedora:latest" },
+                    "env": { "DISTRO": "fedora:31" },
                 },
                 {
                     "name": "Deploy latest docs",

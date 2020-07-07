@@ -15,7 +15,7 @@
                 "fail-fast": false,
                 "matrix": {
                     "name": ["debian-stable", "debian-heimdal", "centos-8",
-                             "fedora-latest"],
+                             "fedora-31"],
                     "include": [
                         {
                             "name": "debian-stable",
@@ -31,8 +31,8 @@
                             "distro": "centos:8",
                         },
                         {
-                            "name": "fedora-latest",
-                            "distro": "fedora:latest",
+                            "name": "fedora-31",
+                            "distro": "fedora:31",
                             "flake": "yes",
                         },
                     ],
