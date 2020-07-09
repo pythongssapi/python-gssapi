@@ -60,6 +60,7 @@ class RequirementFlag(IntEnum, metaclass=ExtendableEnum):
     anonymity = GSS_C_ANON_FLAG
     protection_ready = GSS_C_PROT_READY_FLAG
     transferable = GSS_C_TRANS_FLAG
+    ok_as_delegate = GSS_C_DELEG_POLICY_FLAG
 
 
 class AddressType(IntEnum, metaclass=ExtendableEnum):

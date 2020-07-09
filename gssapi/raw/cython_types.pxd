@@ -105,6 +105,7 @@ cdef extern from "python_gssapi.h":
     OM_uint32 GSS_C_ANON_FLAG
     OM_uint32 GSS_C_TRANS_FLAG
     OM_uint32 GSS_C_PROT_READY_FLAG
+    OM_uint32 GSS_C_DELEG_POLICY_FLAG
 
     # address types
     OM_uint32 GSS_C_AF_UNSPEC
