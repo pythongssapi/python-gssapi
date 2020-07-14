@@ -38,7 +38,7 @@ Basic
 
 * Python 3.6+ (older releases support older versions, but are unsupported)
 
-* the `six` and `decorator` python packages
+* the `decorator` python package
 
 Compiling from Scratch
 ----------------------

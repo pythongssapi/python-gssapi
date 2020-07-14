@@ -11,12 +11,8 @@ import collections
 import copy
 import numbers
 import operator
-import six
 
-if six.PY2:
-    from collections import MutableSet
-else:
-    from collections.abc import MutableSet
+from collections.abc import MutableSet
 
 
 class NameType(object):

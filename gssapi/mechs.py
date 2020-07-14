@@ -1,5 +1,3 @@
-import six
-
 from gssapi.raw import oids as roids
 from gssapi._utils import import_gssapi_extension
 from gssapi.raw import misc as rmisc
@@ -45,11 +43,7 @@ class Mechanism(roids.OID):
         return rfc5587.inquire_attrs_for_mech(self)
 
     def __str__(self):
-        if issubclass(str, six.text_type):
-            # Python 3 -- we should return unicode
-            return self._bytes_desc().decode(_utils._get_encoding())
-        else:
-            return self._bytes_desc()
+        return self._bytes_desc().decode(_utils._get_encoding())
 
     def __unicode__(self):
         return self._bytes_desc().decode(_utils._get_encoding())
@@ -59,7 +53,7 @@ class Mechanism(roids.OID):
         if rfc5801 is not None and self._saslname and self._saslname.mech_name:
             base = self._saslname.mech_name
 
-        if isinstance(base, six.text_type):
+        if isinstance(base, str):
             base = base.encode(_utils._get_encoding())
 
         return base
@@ -156,7 +150,7 @@ class Mechanism(roids.OID):
         if rfc5801 is None:
             raise NotImplementedError("Your GSSAPI implementation does not "
                                       "have support for RFC 5801")
-        if isinstance(name, six.text_type):
+        if isinstance(name, str):
             name = name.encode(_utils._get_encoding())
 
         m = rfc5801.inquire_mech_for_saslname(name)

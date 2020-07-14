@@ -2,7 +2,6 @@ flake8
 nose
 parameterized
 shouldbe
-six
 Cython
 k5test
 decorator

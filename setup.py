@@ -288,10 +288,7 @@ long_desc = re.sub(r'\.\. role:: \w+\(code\)\s*\n\s*.+', '',
 
 install_requires = [
     'decorator',
-    'six >= 1.4.0'
 ]
-if sys.version_info < (3, 4):
-    install_requires.append('enum34')
 
 setup(
     name='gssapi',

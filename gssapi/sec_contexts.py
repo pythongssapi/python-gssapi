@@ -1,5 +1,3 @@
-import six
-
 from gssapi.raw import sec_contexts as rsec_contexts
 from gssapi.raw import message as rmessage
 from gssapi.raw import named_tuples as tuples
@@ -11,8 +9,8 @@ from gssapi.names import Name
 from gssapi.creds import Credentials
 
 
-@six.add_metaclass(_utils.CheckLastError)
-class SecurityContext(rsec_contexts.SecurityContext):
+class SecurityContext(rsec_contexts.SecurityContext,
+                      metaclass=_utils.CheckLastError):
     """A GSSAPI Security Context
 
     This class represents a GSSAPI security context that may be used

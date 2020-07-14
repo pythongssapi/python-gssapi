@@ -5,7 +5,6 @@ import sys
 import pickle
 
 import should_be.all  # noqa
-import six
 from parameterized import parameterized
 
 from gssapi import creds as gsscreds
@@ -388,10 +387,10 @@ class MechsTestCase(_GSSAPIKerberosTestCase):
             # Note that some mechanisms don't have SASL names or SASL
             # descriptions; in this case, GSSAPI returns empty strings.
             if mech.sasl_name:
-                mech.sasl_name.should_be_a(six.text_type)
+                mech.sasl_name.should_be_a(str)
 
             if mech.description:
-                mech.description.should_be_a(six.text_type)
+                mech.description.should_be_a(str)
 
             cmp_mech = gssmechs.Mechanism.from_sasl_name(mech.sasl_name)
             str(cmp_mech).should_be(str(mech))
@@ -467,8 +466,8 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
             gb.NameType.hostbased_service)
 
         princ_str = SERVICE_PRINCIPAL.decode('utf-8') + '@'
-        six.text_type(canonical_name).should_be(princ_str)
-        krb_name.should_be_a(six.text_type)
+        str(canonical_name).should_be(princ_str)
+        krb_name.should_be_a(str)
         krb_name.should_be(princ_str)
 
     @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
@@ -526,9 +525,9 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
     def test_to_unicode(self):
         name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
 
-        name_str = six.text_type(name)
+        name_str = str(name)
 
-        name_str.should_be_a(six.text_type)
+        name_str.should_be_a(str)
         name_str.should_be(SERVICE_PRINCIPAL.decode(gssutils._get_encoding()))
 
     def test_to_bytes(self):

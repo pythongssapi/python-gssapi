@@ -10,15 +10,10 @@ from gssapi.raw.misc import GSSError
 from gssapi.raw import types as gssapi_types
 from gssapi.raw.named_tuples import IOVUnwrapResult, WrapResult, UnwrapResult
 from collections import namedtuple
+from collections.abc import Sequence
 
 from enum import IntEnum
-import six
 from gssapi.raw._enum_extensions import ExtendableEnum
-
-if six.PY2:
-    from collections import Sequence
-else:
-    from collections.abc import Sequence
 
 
 cdef extern from "python_gssapi_ext.h":

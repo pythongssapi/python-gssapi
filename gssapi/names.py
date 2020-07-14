@@ -1,14 +1,9 @@
-import six
-
 from gssapi.raw import names as rname
 from gssapi.raw import NameType
 from gssapi.raw import named_tuples as tuples
 from gssapi import _utils
 
-if six.PY2:
-    from collections import MutableMapping, Iterable
-else:
-    from collections.abc import MutableMapping, Iterable
+from collections.abc import MutableMapping, Iterable
 
 
 rname_rfc6680 = _utils.import_gssapi_extension('rfc6680')
@@ -69,7 +64,7 @@ class Name(rname.Name):
         elif isinstance(base, rname.Name):
             base_name = base
         else:
-            if isinstance(base, six.text_type):
+            if isinstance(base, str):
                 base = base.encode(_utils._get_encoding())
 
             base_name = rname.import_name(base, name_type)
@@ -107,12 +102,7 @@ class Name(rname.Name):
             self._attr_obj = None
 
     def __str__(self):
-        if issubclass(str, six.text_type):
-            # Python 3 -- we should return unicode
-            return bytes(self).decode(_utils._get_encoding())
-        else:
-            # Python 2 -- we should return a string
-            return self.__bytes__()
+        return bytes(self).decode(_utils._get_encoding())
 
     def __unicode__(self):
         # Python 2 -- someone asked for unicode
@@ -324,7 +314,7 @@ class _NameAttributeMapping(MutableMapping):
         self._name = name
 
     def __getitem__(self, key):
-        if isinstance(key, six.text_type):
+        if isinstance(key, str):
             key = key.encode(_utils._get_encoding())
 
         res = rname_rfc6680.get_name_attribute(self._name, key)
@@ -334,7 +324,7 @@ class _NameAttributeMapping(MutableMapping):
                                              res.complete)
 
     def __setitem__(self, key, value):
-        if isinstance(key, six.text_type):
+        if isinstance(key, str):
             key = key.encode(_utils._get_encoding())
 
         rname_rfc6680.delete_name_attribute(self._name, key)
@@ -348,7 +338,7 @@ class _NameAttributeMapping(MutableMapping):
         else:
             complete = False
 
-        if (isinstance(value, (six.string_types, bytes)) or
+        if (isinstance(value, (str, bytes)) or
                 not isinstance(value, Iterable)):
             # NB(directxman12): this allows us to easily assign a single
             # value, since that's a common case
@@ -358,7 +348,7 @@ class _NameAttributeMapping(MutableMapping):
                                              complete=complete)
 
     def __delitem__(self, key):
-        if isinstance(key, six.text_type):
+        if isinstance(key, str):
             key = key.encode(_utils._get_encoding())
 
         rname_rfc6680.delete_name_attribute(self._name, key)

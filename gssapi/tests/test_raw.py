@@ -3,7 +3,6 @@ import os
 import socket
 import unittest
 
-import six
 import should_be.all  # noqa
 
 import gssapi.raw as gb
@@ -11,10 +10,7 @@ import gssapi.raw.misc as gbmisc
 import k5test.unit as ktu
 import k5test as kt
 
-if six.PY2:
-    from collections import Set
-else:
-    from collections.abc import Set
+from collections.abc import Set
 
 
 TARGET_SERVICE_NAME = b'host'
