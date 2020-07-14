@@ -32,11 +32,11 @@ Basic
 -----
 
 * A working implementation of GSSAPI (such as from MIT Kerberos)
-  which includes header files
+  which supports delegation and includes header files
 
 * a C compiler (such as GCC)
 
-* either the `enum34` Python package or Python 3.4+
+* Python 3.6+ (older releases support older versions, but are unsupported)
 
 * the `six` and `decorator` python packages
 
@@ -48,9 +48,9 @@ To compile from scratch, you will need Cython >= 0.21.1.
 For Running the Tests
 ---------------------
 
-* the `nose` package (for tests)
+* the `nose` package
 
-* the `shouldbe` package (for tests)
+* the `shouldbe` package
 
 * the `k5test` package
 
