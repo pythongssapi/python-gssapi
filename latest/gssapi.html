@@ -1212,6 +1212,29 @@ values registered by imported mechanisms.</p>
 to their C counterparts.</p>
 </dd></dl>
 
+<p>The <code class="docutils literal notranslate"><span class="pre">ok_as_delegate</span></code> flag corresponds to the C level flag
+<code class="docutils literal notranslate"><span class="pre">GSS_C_DELEG_POLICY_FLAG</span></code>. This flag is similar to <code class="docutils literal notranslate"><span class="pre">delegate_to_peer</span></code>
+except it only delegates if the KDC delegation policies for the service
+principal allow it to use delegation. This is typically used on Microsoft
+domain environments to control whether constrained or unconstrained delegation
+is allowed for a service principal. By setting this flag, the delegation
+process follows the same behaviour as delegation on SSPI/Windows.</p>
+<p>Here are the four cases when either of these flags are set or not.</p>
+<dl class="simple">
+<dt>Neither flag set</dt><dd><p>No delegation occurs.</p>
+</dd>
+<dt>delegate_to_peer</dt><dd><p>Always try to delegate regardless of the KDC delegation policies.
+<code class="docutils literal notranslate"><span class="pre">delegate_to_peer</span></code> is set in the return flags if successful.</p>
+</dd>
+<dt>ok_as_delegate</dt><dd><p>Try to delegate but only if the KDC trusts the service principal for
+delegation. <code class="docutils literal notranslate"><span class="pre">delegate_to_peer</span></code> and <code class="docutils literal notranslate"><span class="pre">ok_as_delegate</span></code> are set in the
+return flags if successful.</p>
+</dd>
+<dt>delegate_to_peer | ok_as_delegate</dt><dd><p>Acts like <code class="docutils literal notranslate"><span class="pre">delegate_to_peer</span></code> being set but will also set
+<code class="docutils literal notranslate"><span class="pre">ok_as_delegate</span></code> in the return flags if the service principal was trusted
+for delegation by the KDC.</p>
+</dd>
+</dl>
 <dl class="py class">
 <dt id="gssapi.AddressType">
 <em class="property">class </em><code class="sig-name descname">AddressType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.AddressType" title="Permalink to this definition">¶</a></dt>
