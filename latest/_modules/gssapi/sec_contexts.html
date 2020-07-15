@@ -153,9 +153,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for gssapi.sec_contexts</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">six</span>
-
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">sec_contexts</span> <span class="k">as</span> <span class="n">rsec_contexts</span>
+<span></span><span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">sec_contexts</span> <span class="k">as</span> <span class="n">rsec_contexts</span>
 <span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">message</span> <span class="k">as</span> <span class="n">rmessage</span>
 <span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
 <span class="kn">from</span> <span class="nn">gssapi.raw.types</span> <span class="kn">import</span> <span class="n">RequirementFlag</span><span class="p">,</span> <span class="n">IntEnumFlagSet</span>
@@ -166,8 +164,8 @@
 <span class="kn">from</span> <span class="nn">gssapi.creds</span> <span class="kn">import</span> <span class="n">Credentials</span>
 
 
-<div class="viewcode-block" id="SecurityContext"><a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext">[docs]</a><span class="nd">@six</span><span class="o">.</span><span class="n">add_metaclass</span><span class="p">(</span><span class="n">_utils</span><span class="o">.</span><span class="n">CheckLastError</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">SecurityContext</span><span class="p">(</span><span class="n">rsec_contexts</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">):</span>
+<div class="viewcode-block" id="SecurityContext"><a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext">[docs]</a><span class="k">class</span> <span class="nc">SecurityContext</span><span class="p">(</span><span class="n">rsec_contexts</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">,</span>
+                      <span class="n">metaclass</span><span class="o">=</span><span class="n">_utils</span><span class="o">.</span><span class="n">CheckLastError</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A GSSAPI Security Context</span>
 
 <span class="sd">    This class represents a GSSAPI security context that may be used</span>

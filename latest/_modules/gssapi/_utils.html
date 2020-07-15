@@ -156,7 +156,6 @@
 <span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">types</span>
 
-<span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">import</span> <span class="nn">decorator</span> <span class="k">as</span> <span class="nn">deco</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
@@ -258,12 +257,12 @@
 <span class="k">def</span> <span class="nf">_encode_dict</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Encodes any relevant strings in a dict&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">enc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">text_type</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">_ENCODING</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">x</span>
 
-    <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">enc</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">enc</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">d</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">enc</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">enc</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
 
 <span class="c1"># in case of Python 3, just use exception chaining</span>
@@ -286,10 +285,7 @@
         <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__DEFER_STEP_ERRORS__</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span> <span class="o">=</span> <span class="n">e</span>
             <span class="c1"># skip the &quot;return func&quot; line above in the traceback</span>
-            <span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY2</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_last_tb</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tb_next</span><span class="o">.</span><span class="n">tb_next</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span><span class="o">.</span><span class="n">__traceback__</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="o">.</span><span class="n">tb_next</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span><span class="o">.</span><span class="n">__traceback__</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="o">.</span><span class="n">tb_next</span>
 
             <span class="k">return</span> <span class="n">e</span><span class="o">.</span><span class="n">token</span>
         <span class="k">else</span><span class="p">:</span>
@@ -307,18 +303,8 @@
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY2</span><span class="p">:</span>
-                <span class="n">six</span><span class="o">.</span><span class="n">reraise</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span><span class="p">,</span>
-                            <span class="bp">self</span><span class="o">.</span><span class="n">_last_tb</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># NB(directxman12): not using six.reraise in Python 3 leads</span>
-                <span class="c1">#                   to cleaner tracebacks, and raise x is valid</span>
-                <span class="c1">#                   syntax in Python 3 (unlike raise x, y, z)</span>
-                <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span>
+            <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span>
         <span class="k">finally</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY2</span><span class="p">:</span>
-                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_tb</span>  <span class="c1"># in case of cycles, break glass</span>
-
             <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
