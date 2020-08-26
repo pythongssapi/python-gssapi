@@ -37,8 +37,9 @@ def get_output(*args, **kwargs):
 
 
 # get the compile and link args
+posix = os.name != 'nt'
 link_args, compile_args = [
-    shlex.split(os.environ[e]) if e in os.environ else None
+    shlex.split(os.environ[e], posix=posix) if e in os.environ else None
     for e in ['GSSAPI_LINKER_ARGS', 'GSSAPI_COMPILER_ARGS']
 ]
 
