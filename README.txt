@@ -22,7 +22,7 @@ Documentation for the latest released version (including pre-release versions)
 can be found at
 `https://pythongssapi.github.io/python-gssapi/stable <https://pythongssapi.github.io/python-gssapi/stable>`_.
 
-Documentation for the latest commit on master can be found at
+Documentation for the latest commit on main can be found at
 `https://pythongssapi.github.io/python-gssapi/latest <https://pythongssapi.github.io/python-gssapi/latest>`_.
 
 Requirements
