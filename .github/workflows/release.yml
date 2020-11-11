@@ -79,9 +79,17 @@
             "runs-on": "windows-latest",
             "strategy": {
                 "matrix": {
-                    "name": ["win-wheel-3.8", "win-wheel-3.7",
-                             "win-wheel-3.6"],
+                    "name": [
+                        "win-wheel-3.9",
+                        "win-wheel-3.8",
+                        "win-wheel-3.7",
+                        "win-wheel-3.6",
+                    ],
                     "include": [
+                        {
+                            "name": "win-wheel-3.9",
+                            "pyenv": "3.9",
+                        },
                         {
                             "name": "win-wheel-3.8",
                             "pyenv": "3.8",

@@ -60,8 +60,17 @@
             "strategy": {
                 "fail-fast": false,
                 "matrix": {
-                    "name": ["win-py-3.8", "win-py-3.7", "win-py-3.6"],
+                    "name": [
+                        "win-py-3.9",
+                        "win-py-3.8",
+                        "win-py-3.7",
+                        "win-py-3.6",
+                    ],
                     "include": [
+                        {
+                            "name": "win-py-3.9",
+                            "pyenv": "3.9",
+                        },
                         {
                             "name": "win-py-3.8",
                             "pyenv": "3.8",
