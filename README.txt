@@ -168,10 +168,10 @@ The Team
 
 (GitHub usernames in parentheses)
 
-* Solly Ross (@directxman12)
-* Robbie Harwood (@frozencemetery)
-* Simo Sorce (@simo5)
-* Hugh Cole-Baker (@sigmaris)
+* Robbie Harwood (@frozencemetery) - current maintainer and developer
+* Simo Sorce (@simo5) - developer
+* Solly Ross (@directxman12) - author emeritus
+* Hugh Cole-Baker (@sigmaris) - author emeritus
 
 Get Involved
 ============
