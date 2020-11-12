@@ -12,7 +12,7 @@
                 {
                     "name": "Set things up",
                     "run": "./ci/run-on-linux.sh ./ci/before-deploy.sh",
-                    "env": { "DISTRO": "fedora:31" },
+                    "env": { "DISTRO": "fedora:latest" },
                 },
                 {
                     "name": "Deploy to PyPI",
