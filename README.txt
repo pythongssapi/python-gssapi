@@ -50,8 +50,6 @@ For Running the Tests
 
 * the `nose` package
 
-* the `shouldbe` package
-
 * the `k5test` package
 
 To install test dependencies using pip:

@@ -4,7 +4,6 @@ import socket
 import sys
 import pickle
 
-import should_be.all  # noqa
 from parameterized import parameterized
 
 from gssapi import creds as gsscreds
@@ -125,9 +124,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
                  usage='both')
     def test_acquire_by_init(self, str_name, kwargs):
         creds = gsscreds.Credentials(name=self.name, **kwargs)
-
-        creds.lifetime.should_be_an_integer()
-
+        self.assertIsInstance(creds.lifetime, int)
         del creds
 
     @exist_perms(lifetime=30, mechs=[gb.MechType.kerberos],
@@ -135,18 +132,12 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
     def test_acquire_by_method(self, str_name, kwargs):
         cred_resp = gsscreds.Credentials.acquire(name=self.name,
                                                  **kwargs)
+        self.assertIsNotNone(cred_resp)
 
-        cred_resp.shouldnt_be_none()
-
-        (creds, actual_mechs, ttl) = cred_resp
-
-        creds.shouldnt_be_none()
-        creds.should_be_a(gsscreds.Credentials)
-
-        actual_mechs.shouldnt_be_empty()
-        actual_mechs.should_include(gb.MechType.kerberos)
-
-        ttl.should_be_an_integer()
+        creds, actual_mechs, ttl = cred_resp
+        self.assertIsInstance(creds, gsscreds.Credentials)
+        self.assertIn(gb.MechType.kerberos, actual_mechs)
+        self.assertIsInstance(ttl, int)
 
         del creds
 
@@ -171,16 +162,16 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         server_ctx.step(client_token)
 
         deleg_creds = server_ctx.delegated_creds
-        deleg_creds.shouldnt_be_none()
+        self.assertIsNotNone(deleg_creds)
 
         store_res = deleg_creds.store(usage='initiate', set_default=True,
                                       overwrite=True)
-        store_res.usage.should_be('initiate')
-        store_res.mechs.should_include(gb.MechType.kerberos)
+        self.assertEqual(store_res.usage, "initiate")
+        self.assertIn(gb.MechType.kerberos, store_res.mechs)
 
         reacquired_creds = gsscreds.Credentials(name=deleg_creds.name,
                                                 usage='initiate')
-        reacquired_creds.shouldnt_be_none()
+        self.assertIsNotNone(reacquired_creds)
 
     @ktu.gssapi_extension_test('cred_store', 'credentials store')
     def test_store_into_acquire_from(self):
@@ -197,21 +188,19 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
                                              usage='initiate')
 
         store_res = initial_creds.store(store, overwrite=True)
-
-        store_res.mechs.shouldnt_be_none()
-        store_res.mechs.shouldnt_be_empty()
-        store_res.usage.should_be('initiate')
+        self.assertIsNotNone(store_res.mechs)
+        self.assertGreater(len(store_res.mechs), 0)
+        self.assertEqual(store_res.usage, "initiate")
 
         name = gssnames.Name(princ_name)
         retrieved_creds = gsscreds.Credentials(name=name, store=store)
-
-        retrieved_creds.shouldnt_be_none()
+        self.assertIsNotNone(retrieved_creds)
 
     def test_create_from_other(self):
         raw_creds = gb.acquire_cred(None, usage='accept').creds
 
         high_level_creds = gsscreds.Credentials(raw_creds)
-        high_level_creds.usage.should_be('accept')
+        self.assertEqual(high_level_creds.usage, "accept")
 
     @true_false_perms('name', 'lifetime', 'usage', 'mechs')
     def test_inquire(self, str_name, kwargs):
@@ -219,25 +208,24 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         resp = creds.inquire(**kwargs)
 
         if kwargs['name']:
-            resp.name.should_be(self.name)
+            self.assertEqual(resp.name, self.name)
         else:
-            resp.name.should_be_none()
+            self.assertIsNone(resp.name)
 
         if kwargs['lifetime']:
-            resp.lifetime.should_be_an_integer()
+            self.assertIsInstance(resp.lifetime, int)
         else:
-            resp.lifetime.should_be_none()
+            self.assertIsNone(resp.lifetime)
 
         if kwargs['usage']:
-            resp.usage.should_be('both')
+            self.assertEqual(resp.usage, "both")
         else:
-            resp.usage.should_be_none()
+            self.assertIsNone(resp.usage)
 
         if kwargs['mechs']:
-            resp.mechs.shouldnt_be_empty()
-            resp.mechs.should_include(gb.MechType.kerberos)
+            self.assertIn(gb.MechType.kerberos, resp.mechs)
         else:
-            resp.mechs.should_be_none()
+            self.assertIsNone(resp.mechs)
 
     @true_false_perms('name', 'init_lifetime', 'accept_lifetime', 'usage')
     def test_inquire_by_mech(self, str_name, kwargs):
@@ -245,33 +233,31 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         resp = creds.inquire_by_mech(mech=gb.MechType.kerberos, **kwargs)
 
         if kwargs['name']:
-            resp.name.should_be(self.name)
+            self.assertEqual(resp.name, self.name)
         else:
-            resp.name.should_be_none()
+            self.assertIsNone(resp.name)
 
         if kwargs['init_lifetime']:
-            resp.init_lifetime.should_be_an_integer()
+            self.assertIsInstance(resp.init_lifetime, int)
         else:
-            resp.init_lifetime.should_be_none()
+            self.assertIsNone(resp.init_lifetime)
 
         if kwargs['accept_lifetime']:
-            resp.accept_lifetime.should_be_an_integer()
+            self.assertIsInstance(resp.accept_lifetime, int)
         else:
-            resp.accept_lifetime.should_be_none()
+            self.assertIsNone(resp.accept_lifetime)
 
         if kwargs['usage']:
-            resp.usage.should_be('both')
+            self.assertEqual(resp.usage, "both")
         else:
-            resp.usage.should_be_none()
+            self.assertIsNone(resp.usage)
 
     def test_add(self):
         input_creds = gsscreds.Credentials(gb.Creds())
         name = gssnames.Name(SERVICE_PRINCIPAL)
         new_creds = input_creds.add(name, gb.MechType.kerberos,
                                     usage='initiate')
-
-        new_creds.shouldnt_be_none()
-        new_creds.should_be_a(gsscreds.Credentials)
+        self.assertIsInstance(new_creds, gsscreds.Credentials)
 
     @ktu.gssapi_extension_test('cred_store', 'credentials store')
     def test_store_into_add_from(self):
@@ -288,24 +274,21 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
                                              usage='initiate')
 
         store_res = initial_creds.store(store, overwrite=True)
-
-        store_res.mechs.shouldnt_be_none()
-        store_res.mechs.shouldnt_be_empty()
-        store_res.usage.should_be('initiate')
+        self.assertIsNotNone(store_res.mechs)
+        self.assertGreater(len(store_res.mechs), 0)
+        self.assertEqual(store_res.usage, "initiate")
 
         name = gssnames.Name(princ_name)
         input_creds = gsscreds.Credentials(gb.Creds())
         retrieved_creds = input_creds.add(name, gb.MechType.kerberos,
                                           store=store)
-
-        retrieved_creds.shouldnt_be_none()
-        retrieved_creds.should_be_a(gsscreds.Credentials)
+        self.assertIsInstance(retrieved_creds, gsscreds.Credentials)
 
     @ktu.gssapi_extension_test('cred_imp_exp', 'credentials import-export')
     def test_export(self):
         creds = gsscreds.Credentials(name=self.name)
         token = creds.export()
-        token.should_be_a(bytes)
+        self.assertIsInstance(token, bytes)
 
     @ktu.gssapi_extension_test('cred_imp_exp', 'credentials import-export')
     def test_import_by_init(self):
@@ -313,8 +296,8 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         token = creds.export()
         imported_creds = gsscreds.Credentials(token=token)
 
-        imported_creds.lifetime.should_be(creds.lifetime)
-        imported_creds.name.should_be(creds.name)
+        self.assertEqual(imported_creds.lifetime, creds.lifetime)
+        self.assertEqual(imported_creds.name, creds.name)
 
     @ktu.gssapi_extension_test('cred_imp_exp', 'credentials import-export')
     def test_pickle_unpickle(self):
@@ -322,8 +305,8 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
         pickled_creds = pickle.dumps(creds)
         unpickled_creds = pickle.loads(pickled_creds)
 
-        unpickled_creds.lifetime.should_be(creds.lifetime)
-        unpickled_creds.name.should_be(creds.name)
+        self.assertEqual(unpickled_creds.lifetime, creds.lifetime)
+        self.assertEqual(unpickled_creds.name, creds.name)
 
     @exist_perms(lifetime=30, mechs=[gb.MechType.kerberos],
                  usage='initiate')
@@ -343,9 +326,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
                                                 acceptor_creds=server_creds)
 
         imp_creds = server_creds.impersonate(server_ctx_resp[1], **kwargs)
-
-        imp_creds.shouldnt_be_none()
-        imp_creds.should_be_a(gsscreds.Credentials)
+        self.assertIsInstance(imp_creds, gsscreds.Credentials)
 
     @ktu.gssapi_extension_test('s4u', 'S4U')
     def test_add_with_impersonate(self):
@@ -364,9 +345,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
                                     gb.MechType.kerberos,
                                     impersonator=server_creds,
                                     usage='initiate')
-
-        new_creds.shouldnt_be(None)
-        new_creds.should_be_a(gsscreds.Credentials)
+        self.assertIsInstance(new_creds, gsscreds.Credentials)
 
 
 class MechsTestCase(_GSSAPIKerberosTestCase):
@@ -374,26 +353,26 @@ class MechsTestCase(_GSSAPIKerberosTestCase):
         mechs = gssmechs.Mechanism.all_mechs()
         for mech in mechs:
             s = str(mech)
-            s.shouldnt_be_empty()
+            self.assertGreater(len(s), 0)
 
     @ktu.gssapi_extension_test('rfc5801', 'RFC 5801: SASL Names')
     def test_sasl_properties(self):
         mechs = gssmechs.Mechanism.all_mechs()
         for mech in mechs:
             s = str(mech)
-            s.shouldnt_be_empty()
-            s.should_be_a(str)
+            self.assertGreater(len(s), 0)
+            self.assertIsInstance(s, str)
 
             # Note that some mechanisms don't have SASL names or SASL
             # descriptions; in this case, GSSAPI returns empty strings.
             if mech.sasl_name:
-                mech.sasl_name.should_be_a(str)
+                self.assertIsInstance(mech.sasl_name, str)
 
             if mech.description:
-                mech.description.should_be_a(str)
+                self.assertIsInstance(mech.description, str)
 
             cmp_mech = gssmechs.Mechanism.from_sasl_name(mech.sasl_name)
-            str(cmp_mech).should_be(str(mech))
+            self.assertEqual(str(cmp_mech), str(mech))
 
     @ktu.gssapi_extension_test('rfc5587', 'RFC 5587: Mech Inquiry')
     def test_mech_inquiry(self):
@@ -413,9 +392,9 @@ class MechsTestCase(_GSSAPIKerberosTestCase):
                 from_desired = list(from_desired)
                 from_except = list(from_except)
 
-                (len(from_desired) + len(from_except)).should_be(c)
-                from_desired.should_include(mech)
-                from_except.shouldnt_include(mech)
+                self.assertEqual(len(from_desired) + len(from_except), c)
+                self.assertIn(mech, from_desired)
+                self.assertNotIn(mech, from_except)
 
             for attr in known_attrs:
                 from_desired = g_M_from_attrs(desired_attrs=[attr])
@@ -424,7 +403,7 @@ class MechsTestCase(_GSSAPIKerberosTestCase):
                 from_desired = list(from_desired)
                 from_except = list(from_except)
 
-                (len(from_desired) + len(from_except)).should_be(c)
+                self.assertEqual(len(from_desired) + len(from_except), c)
 
 
 class NamesTestCase(_GSSAPIKerberosTestCase):
@@ -432,18 +411,16 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         raw_name = gb.import_name(SERVICE_PRINCIPAL)
         high_level_name = gssnames.Name(raw_name)
 
-        bytes(high_level_name).should_be(SERVICE_PRINCIPAL)
+        self.assertEqual(bytes(high_level_name), SERVICE_PRINCIPAL)
 
     def test_create_from_name_no_type(self):
         name = gssnames.Name(SERVICE_PRINCIPAL)
-
-        name.shouldnt_be_none()
+        self.assertIsNotNone(name)
 
     def test_create_from_name_and_type(self):
         name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
-
-        name.shouldnt_be_none()
-        name.name_type.should_be(gb.NameType.kerberos_principal)
+        self.assertIsNotNone(name)
+        self.assertEqual(name.name_type, gb.NameType.kerberos_principal)
 
     def test_create_from_token(self):
         name1 = gssnames.Name(TARGET_SERVICE_NAME,
@@ -451,8 +428,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         exported_name = name1.canonicalize(gb.MechType.kerberos).export()
         name2 = gssnames.Name(token=exported_name)
 
-        name2.shouldnt_be_none()
-        name2.name_type.should_be(gb.NameType.kerberos_principal)
+        self.assertEqual(name2.name_type, gb.NameType.kerberos_principal)
 
     @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     def test_display_as(self):
@@ -466,9 +442,9 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
             gb.NameType.hostbased_service)
 
         princ_str = SERVICE_PRINCIPAL.decode('utf-8') + '@'
-        str(canonical_name).should_be(princ_str)
-        krb_name.should_be_a(str)
-        krb_name.should_be(princ_str)
+        self.assertEqual(str(canonical_name), princ_str)
+        self.assertIsInstance(krb_name, str)
+        self.assertEqual(krb_name, princ_str)
 
     @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     def test_create_from_composite_token_no_attrs(self):
@@ -478,7 +454,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
             gb.MechType.kerberos).export(composite=True)
         name2 = gssnames.Name(token=exported_name, composite=True)
 
-        name2.shouldnt_be_none()
+        self.assertIsNotNone(name2)
 
     @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     @ktu.krb_plugin_test('authdata', 'greet_client')
@@ -501,43 +477,35 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         # name2 = name2_raw.canonicalize(gb.MechType.kerberos)
 
         name2 = gssnames.Name(token=exported_name)
+        self.assertIsNotNone(name2)
 
-        name2.shouldnt_be_none()
-
-        name2.attributes['urn:greet:greeting'].values.should_be(
-            set([b'some val']))
-        name2.attributes['urn:greet:greeting'].complete.should_be_true()
-        name2.attributes['urn:greet:greeting'].authenticated.should_be_false()
+        ugg = name2.attributes["urn:greet:greeting"]
+        self.assertEqual(ugg.values, set([b"some val"]))
+        self.assertTrue(ugg.complete)
+        self.assertFalse(ugg.authenticated)
 
     def test_to_str(self):
         name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
 
         name_str = str(name)
 
-        name_str.should_be_a(str)
         if sys.version_info[0] == 2:
             target_val = SERVICE_PRINCIPAL
         else:
             target_val = SERVICE_PRINCIPAL.decode(gssutils._get_encoding())
 
-        name_str.should_be(target_val)
+        self.assertEqual(name_str, target_val)
 
     def test_to_unicode(self):
         name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
-
-        name_str = str(name)
-
-        name_str.should_be_a(str)
-        name_str.should_be(SERVICE_PRINCIPAL.decode(gssutils._get_encoding()))
+        self.assertEqual(str(name),
+                         SERVICE_PRINCIPAL.decode(gssutils._get_encoding()))
 
     def test_to_bytes(self):
         name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
 
         # NB(directxman12): bytes only calles __bytes__ on Python 3+
-        name_bytes = name.__bytes__()
-
-        name_bytes.should_be_a(bytes)
-        name_bytes.should_be(SERVICE_PRINCIPAL)
+        self.assertEqual(name.__bytes__(), SERVICE_PRINCIPAL)
 
     def test_compare(self):
         name1 = gssnames.Name(SERVICE_PRINCIPAL)
@@ -545,29 +513,29 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         name3 = gssnames.Name(TARGET_SERVICE_NAME,
                               gb.NameType.hostbased_service)
 
-        name1.should_be(name2)
-        name1.shouldnt_be(name3)
+        self.assertEqual(name1, name2)
+        self.assertNotEqual(name1, name3)
 
     def test_canoncialize_and_export(self):
         name = gssnames.Name(SERVICE_PRINCIPAL, gb.NameType.kerberos_principal)
         canonical_name = name.canonicalize(gb.MechType.kerberos)
         exported_name = canonical_name.export()
 
-        exported_name.should_be_a(bytes)
+        self.assertIsInstance(exported_name, bytes)
 
     def test_canonicalize(self):
         name = gssnames.Name(TARGET_SERVICE_NAME,
                              gb.NameType.hostbased_service)
 
         canonicalized_name = name.canonicalize(gb.MechType.kerberos)
-        canonicalized_name.should_be_a(gssnames.Name)
-        bytes(canonicalized_name).should_be(SERVICE_PRINCIPAL + b'@')
+        self.assertIsInstance(canonicalized_name, gssnames.Name)
+        self.assertEqual(bytes(canonicalized_name), SERVICE_PRINCIPAL + b"@")
 
     def test_copy(self):
         name1 = gssnames.Name(SERVICE_PRINCIPAL)
         name2 = copy.copy(name1)
 
-        name1.should_be(name2)
+        self.assertEqual(name1, name2)
 
     # NB(directxman12): we don't test display_name_ext because the krb5 mech
     # doesn't actually implement it
@@ -576,14 +544,12 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
     def test_is_mech_name(self):
         name = gssnames.Name(TARGET_SERVICE_NAME,
                              gb.NameType.hostbased_service)
-
-        name.is_mech_name.should_be_false()
+        self.assertFalse(name.is_mech_name)
 
         canon_name = name.canonicalize(gb.MechType.kerberos)
-
-        canon_name.is_mech_name.should_be_true()
-        canon_name.mech.should_be_a(gb.OID)
-        canon_name.mech.should_be(gb.MechType.kerberos)
+        self.assertTrue(canon_name.is_mech_name)
+        self.assertIsInstance(canon_name.mech, gb.OID)
+        self.assertEqual(canon_name.mech, gb.MechType.kerberos)
 
     @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     def test_export_name_composite_no_attrs(self):
@@ -592,7 +558,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         canon_name = name.canonicalize(gb.MechType.kerberos)
         exported_name = canon_name.export(composite=True)
 
-        exported_name.should_be_a(bytes)
+        self.assertIsInstance(exported_name, bytes)
 
     @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     @ktu.krb_plugin_test('authdata', 'greet_client')
@@ -603,7 +569,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         canon_name.attributes['urn:greet:greeting'] = b'some val'
         exported_name = canon_name.export(composite=True)
 
-        exported_name.should_be_a(bytes)
+        self.assertIsInstance(exported_name, bytes)
 
     @ktu.gssapi_extension_test('rfc6680', 'RFC 6680')
     @ktu.krb_plugin_test('authdata', 'greet_client')
@@ -613,20 +579,17 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         canon_name = name.canonicalize(gb.MechType.kerberos)
 
         canon_name.attributes['urn:greet:greeting'] = (b'some val', True)
-        canon_name.attributes['urn:greet:greeting'].values.should_be(
-            set([b'some val']))
-        canon_name.attributes['urn:greet:greeting'].complete.should_be_true()
-        (canon_name.attributes['urn:greet:greeting'].authenticated
-            .should_be_false())
+        ugg = canon_name.attributes["urn:greet:greeting"]
+        self.assertEqual(ugg.values, set([b"some val"]))
+        self.assertTrue(ugg.complete)
+        self.assertFalse(ugg.authenticated)
 
         del canon_name.attributes['urn:greet:greeting']
 
         # NB(directxman12): for some reason, the greet:greeting handler plugin
-        # doesn't properly delete itself -- it just clears the value
-        # If we try to get its value now, we segfault (due to an issue with
-        # greet:greeting's delete).  Instead, just try setting the value again
-        # canon_name.attributes.should_be_empty(), which would normally give
-        # an error.
+        # doesn't properly delete itself -- it just clears the value.  If we
+        # try to get its value now, we segfault (due to an issue with
+        # greet:greeting's delete).  Instead, just set the value again.
         canon_name.attributes['urn:greet:greeting'] = b'some other val'
 
 
@@ -655,7 +618,7 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
     def test_create_from_other(self):
         raw_client_ctx, raw_server_ctx = self._create_completed_contexts()
         high_level_ctx = gssctx.SecurityContext(raw_client_ctx)
-        high_level_ctx.target_name.should_be(self.target_name)
+        self.assertEqual(high_level_ctx.target_name, self.target_name)
 
     @exist_perms(lifetime=30, flags=[],
                  mech=gb.MechType.kerberos,
@@ -664,30 +627,28 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         client_ctx = gssctx.SecurityContext(name=self.target_name,
                                             creds=self.client_creds,
                                             **kwargs)
-        client_ctx.usage.should_be('initiate')
+        self.assertEqual(client_ctx.usage, "initiate")
 
         client_ctx = self._create_client_ctx(**kwargs)
-        client_ctx.usage.should_be('initiate')
+        self.assertEqual(client_ctx.usage, "initiate")
 
     def test_create_new_accept(self):
         server_ctx = gssctx.SecurityContext(creds=self.server_creds)
-        server_ctx.usage.should_be('accept')
+        self.assertEqual(server_ctx.usage, "accept")
 
     def test_init_throws_error_on_invalid_args(self):
-        def create_sec_context():
-            gssctx.SecurityContext(usage='accept', name=self.target_name)
-
-        create_sec_context.should_raise(TypeError)
+        self.assertRaises(TypeError, gssctx.SecurityContext, usage='accept',
+                          name=self.target_name)
 
     def _create_completed_contexts(self):
         client_ctx = self._create_client_ctx(lifetime=400)
 
         client_token = client_ctx.step()
-        client_token.should_be_a(bytes)
+        self.assertIsInstance(client_token, bytes)
 
         server_ctx = gssctx.SecurityContext(creds=self.server_creds)
         server_token = server_ctx.step(client_token)
-        server_token.should_be_a(bytes)
+        self.assertIsInstance(server_token, bytes)
 
         client_ctx.step(server_token)
 
@@ -696,33 +657,32 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
     def test_complete_on_partially_completed(self):
         client_ctx = self._create_client_ctx()
         client_tok = client_ctx.step()
-        client_ctx.complete.should_be_false()
+        self.assertFalse(client_ctx.complete)
 
         server_ctx = gssctx.SecurityContext(creds=self.server_creds)
         server_tok = server_ctx.step(client_tok)
 
         client_ctx.step(server_tok)
-
-        client_ctx.complete.should_be_true()
-        server_ctx.complete.should_be_true()
+        self.assertTrue(client_ctx.complete)
+        self.assertTrue(server_ctx.complete)
 
     def test_initiate_accept_steps(self):
         client_ctx, server_ctx = self._create_completed_contexts()
 
         # KDC may allow for clockskew by increasing acceptor context lifetime
-        server_ctx.lifetime.should_be_at_most(400 + 300)
-        server_ctx.initiator_name.should_be(client_ctx.initiator_name)
-        server_ctx.mech.should_be_a(gb.OID)
-        server_ctx.actual_flags.should_be_a(gb.IntEnumFlagSet)
-        server_ctx.locally_initiated.should_be_false()
-        server_ctx.complete.should_be_true()
+        self.assertLessEqual(server_ctx.lifetime, 400 + 300)
+        self.assertEqual(server_ctx.initiator_name, client_ctx.initiator_name)
+        self.assertIsInstance(server_ctx.mech, gb.OID)
+        self.assertIsInstance(server_ctx.actual_flags, gb.IntEnumFlagSet)
+        self.assertFalse(server_ctx.locally_initiated)
+        self.assertTrue(server_ctx.complete)
 
-        client_ctx.lifetime.should_be_at_most(400)
-        client_ctx.target_name.should_be(self.target_name)
-        client_ctx.mech.should_be_a(gb.OID)
-        client_ctx.actual_flags.should_be_a(gb.IntEnumFlagSet)
-        client_ctx.locally_initiated.should_be_true()
-        client_ctx.complete.should_be_true()
+        self.assertLessEqual(client_ctx.lifetime, 400)
+        self.assertEqual(client_ctx.target_name, self.target_name)
+        self.assertIsInstance(client_ctx.mech, gb.OID)
+        self.assertIsInstance(client_ctx.actual_flags, gb.IntEnumFlagSet)
+        self.assertTrue(client_ctx.locally_initiated)
+        self.assertTrue(client_ctx.complete)
 
     def test_channel_bindings(self):
         bdgs = gb.ChannelBindings(application_data=b'abcxyz',
@@ -734,12 +694,12 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
                                              channel_bindings=bdgs)
 
         client_token = client_ctx.step()
-        client_token.should_be_a(bytes)
+        self.assertIsInstance(client_token, bytes)
 
         server_ctx = gssctx.SecurityContext(creds=self.server_creds,
                                             channel_bindings=bdgs)
         server_token = server_ctx.step(client_token)
-        server_token.should_be_a(bytes)
+        self.assertIsInstance(server_token, bytes)
 
         client_ctx.step(server_token)
 
@@ -753,68 +713,66 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
                                              channel_bindings=bdgs)
 
         client_token = client_ctx.step()
-        client_token.should_be_a(bytes)
+        self.assertIsInstance(client_token, bytes)
 
         bdgs.acceptor_address = b'127.0.1.0'
         server_ctx = gssctx.SecurityContext(creds=self.server_creds,
                                             channel_bindings=bdgs)
-        server_ctx.step.should_raise(gb.BadChannelBindingsError, client_token)
+        self.assertRaises(gb.BadChannelBindingsError, server_ctx.step,
+                          client_token)
 
     def test_export_create_from_token(self):
         client_ctx, server_ctx = self._create_completed_contexts()
         token = client_ctx.export()
-
-        token.should_be_a(bytes)
+        self.assertIsInstance(token, bytes)
 
         imported_ctx = gssctx.SecurityContext(token=token)
-
-        imported_ctx.usage.should_be('initiate')
-        imported_ctx.target_name.should_be(self.target_name)
+        self.assertEqual(imported_ctx.usage, "initiate")
+        self.assertEqual(imported_ctx.target_name, self.target_name)
 
     def test_pickle_unpickle(self):
         client_ctx, server_ctx = self._create_completed_contexts()
         pickled_ctx = pickle.dumps(client_ctx)
 
         unpickled_ctx = pickle.loads(pickled_ctx)
-
-        unpickled_ctx.should_be_a(gssctx.SecurityContext)
-        unpickled_ctx.usage.should_be('initiate')
-        unpickled_ctx.target_name.should_be(self.target_name)
+        self.assertIsInstance(unpickled_ctx, gssctx.SecurityContext)
+        self.assertEqual(unpickled_ctx.usage, "initiate")
+        self.assertEqual(unpickled_ctx.target_name, self.target_name)
 
     def test_encrypt_decrypt(self):
         client_ctx, server_ctx = self._create_completed_contexts()
 
         encrypted_msg = client_ctx.encrypt(b'test message')
-        encrypted_msg.should_be_a(bytes)
+        self.assertIsInstance(encrypted_msg, bytes)
 
         decrypted_msg = server_ctx.decrypt(encrypted_msg)
-        decrypted_msg.should_be_a(bytes)
-        decrypted_msg.should_be(b'test message')
+        self.assertIsInstance(decrypted_msg, bytes)
+        self.assertEqual(decrypted_msg, b"test message")
 
     def test_encrypt_decrypt_throws_error_on_no_encryption(self):
         client_ctx, server_ctx = self._create_completed_contexts()
 
         wrap_res = client_ctx.wrap(b'test message', False)
-        wrap_res.should_be_a(gb.WrapResult)
-        wrap_res.encrypted.should_be_false()
-        wrap_res.message.should_be_a(bytes)
+        self.assertIsInstance(wrap_res, gb.WrapResult)
+        self.assertFalse(wrap_res.encrypted)
+        self.assertIsInstance(wrap_res.message, bytes)
 
-        server_ctx.decrypt.should_raise(excs.EncryptionNotUsed,
-                                        wrap_res.message)
+        self.assertRaises(excs.EncryptionNotUsed, server_ctx.decrypt,
+                          wrap_res.message)
 
     def test_wrap_unwrap(self):
         client_ctx, server_ctx = self._create_completed_contexts()
 
         wrap_res = client_ctx.wrap(b'test message', True)
-        wrap_res.should_be_a(gb.WrapResult)
-        wrap_res.encrypted.should_be_true()
-        wrap_res.message.should_be_a(bytes)
+        self.assertIsInstance(wrap_res, gb.WrapResult)
+        self.assertTrue(wrap_res.encrypted)
+        self.assertIsInstance(wrap_res.message, bytes)
 
         unwrap_res = server_ctx.unwrap(wrap_res.message)
-        unwrap_res.should_be_a(gb.UnwrapResult)
-        unwrap_res.message.should_be_a(bytes)
-        unwrap_res.message.should_be(b'test message')
-        unwrap_res.encrypted.should_be_true()
+        self.assertIsInstance(unwrap_res, gb.UnwrapResult)
+        self.assertIsInstance(unwrap_res.message, bytes)
+        self.assertEqual(unwrap_res.message, b"test message")
+        self.assertTrue(unwrap_res.encrypted)
 
     def test_get_wrap_size_limit(self):
         client_ctx, server_ctx = self._create_completed_contexts()
@@ -822,27 +780,25 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
         with_conf = client_ctx.get_wrap_size_limit(100)
         without_conf = client_ctx.get_wrap_size_limit(100, encrypted=True)
 
-        with_conf.should_be_an_integer()
-        without_conf.should_be_an_integer()
-
-        with_conf.should_be_at_most(100)
-        without_conf.should_be_at_most(100)
+        self.assertIsInstance(with_conf, int)
+        self.assertIsInstance(without_conf, int)
+        self.assertLessEqual(with_conf, 100)
+        self.assertLessEqual(without_conf, 100)
 
     def test_get_signature(self):
         client_ctx, server_ctx = self._create_completed_contexts()
         mic_token = client_ctx.get_signature(b'some message')
 
-        mic_token.should_be_a(bytes)
-        mic_token.shouldnt_be_empty()
+        self.assertIsInstance(mic_token, bytes)
+        self.assertGreater(len(mic_token), 0)
 
     def test_verify_signature_raise(self):
         client_ctx, server_ctx = self._create_completed_contexts()
         mic_token = client_ctx.get_signature(b'some message')
-
         server_ctx.verify_signature(b'some message', mic_token)
 
-        server_ctx.verify_signature.should_raise(gb.GSSError,
-                                                 b'other message', mic_token)
+        self.assertRaises(gb.GSSError, server_ctx.verify_signature,
+                          b"other message", mic_token)
 
     @ktu.krb_minversion_test("1.11", "returning tokens")
     def test_defer_step_error_on_method(self):
@@ -852,13 +808,14 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
                                              channel_bindings=bdgs)
 
         client_token = client_ctx.step()
-        client_token.should_be_a(bytes)
+        self.assertIsInstance(client_token, bytes)
 
         bdgs.application_data = b'defuvw'
         server_ctx = gssctx.SecurityContext(creds=self.server_creds,
                                             channel_bindings=bdgs)
-        server_ctx.step(client_token).should_be_a(bytes)
-        server_ctx.encrypt.should_raise(gb.BadChannelBindingsError, b'test')
+        self.assertIsInstance(server_ctx.step(client_token), bytes)
+        self.assertRaises(gb.BadChannelBindingsError, server_ctx.encrypt,
+                          b"test")
 
     @ktu.krb_minversion_test("1.11", "returning tokens")
     def test_defer_step_error_on_complete_property_access(self):
@@ -868,14 +825,12 @@ class SecurityContextTestCase(_GSSAPIKerberosTestCase):
                                              channel_bindings=bdgs)
 
         client_token = client_ctx.step()
-        client_token.should_be_a(bytes)
+        self.assertIsInstance(client_token, bytes)
 
         bdgs.application_data = b'defuvw'
         server_ctx = gssctx.SecurityContext(creds=self.server_creds,
                                             channel_bindings=bdgs)
-        server_ctx.step(client_token).should_be_a(bytes)
+        self.assertIsInstance(server_ctx.step(client_token), bytes)
 
-        def check_complete():
-            return server_ctx.complete
-
-        check_complete.should_raise(gb.BadChannelBindingsError)
+        self.assertRaises(gb.BadChannelBindingsError,
+                          lambda: server_ctx.complete)
