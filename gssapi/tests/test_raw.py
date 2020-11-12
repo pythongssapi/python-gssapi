@@ -58,7 +58,6 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
     def test_indicate_mechs(self):
         mechs = gb.indicate_mechs()
         self.assertIsInstance(mechs, set)
-        self.assertGreater(len(mechs), 0)
         self.assertIn(gb.MechType.kerberos, mechs)
 
     def test_import_name(self):
@@ -320,56 +319,63 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
     @ktu.gssapi_extension_test('s4u', 'S4U')
     def test_add_cred_impersonate_name(self):
-        target_name = gb.import_name(TARGET_SERVICE_NAME,
-                                     gb.NameType.hostbased_service)
-        client_ctx_resp = gb.init_sec_context(target_name)
-        client_token = client_ctx_resp[3]
-        del client_ctx_resp  # free all the things (except the token)!
-
         server_name = gb.import_name(SERVICE_PRINCIPAL,
                                      gb.NameType.kerberos_principal)
-        server_creds = gb.acquire_cred(server_name, usage='both')[0]
-        server_ctx_resp = gb.accept_sec_context(client_token,
-                                                acceptor_creds=server_creds)
+
+        password = self.realm.password('user')
+        self.realm.kinit(self.realm.user_princ, password=password,
+                         flags=["-f"])
+        name = gb.import_name(b"user", gb.NameType.kerberos_principal)
+        client_creds = gb.acquire_cred(name, usage="initiate").creds
+        cctx_res = gb.init_sec_context(
+            server_name, creds=client_creds,
+            flags=gb.RequirementFlag.delegate_to_peer)
+
+        self.realm.kinit(SERVICE_PRINCIPAL.decode("utf-8"), flags=["-k"])
+        server_creds = gb.acquire_cred(server_name, usage="both").creds
+        sctx_res = gb.accept_sec_context(cctx_res.token, server_creds)
+        self.assertTrue(gb.inquire_context(sctx_res.context).complete)
 
         input_creds = gb.Creds()
         imp_resp = gb.add_cred_impersonate_name(input_creds,
-                                                server_creds,
-                                                server_ctx_resp[1],
+                                                sctx_res.delegated_creds,
+                                                server_name,
                                                 gb.MechType.kerberos)
         self.assertIsNotNone(imp_resp)
-
-        new_creds, actual_mechs, output_init_ttl, output_accept_ttl = imp_resp
-        self.assertIsInstance(new_creds, gb.Creds)
-        self.assertIn(gb.MechType.kerberos, actual_mechs)
-        self.assertIsInstance(output_init_ttl, int)
-        self.assertIsInstance(output_accept_ttl, int)
+        self.assertIsInstance(imp_resp, gb.AddCredResult)
+        self.assertIsInstance(imp_resp.creds, gb.Creds)
+        self.assertIn(gb.MechType.kerberos, imp_resp.mechs)
+        self.assertIsInstance(imp_resp.init_lifetime, int)
+        self.assertGreater(imp_resp.init_lifetime, 0)
+        self.assertIsInstance(imp_resp.accept_lifetime, int)
+        self.assertEqual(imp_resp.accept_lifetime, 0)
 
     @ktu.gssapi_extension_test('s4u', 'S4U')
     def test_acquire_creds_impersonate_name(self):
-        target_name = gb.import_name(TARGET_SERVICE_NAME,
-                                     gb.NameType.hostbased_service)
-        client_ctx_resp = gb.init_sec_context(target_name)
-        client_token = client_ctx_resp[3]
-        del client_ctx_resp  # free all the things (except the token)!
-
         server_name = gb.import_name(SERVICE_PRINCIPAL,
                                      gb.NameType.kerberos_principal)
-        server_creds = gb.acquire_cred(server_name, usage='both')[0]
-        server_ctx_resp = gb.accept_sec_context(client_token,
-                                                acceptor_creds=server_creds)
 
-        imp_resp = gb.acquire_cred_impersonate_name(server_creds,
-                                                    server_ctx_resp[1])
-        self.assertIsNotNone(imp_resp)
+        password = self.realm.password('user')
+        self.realm.kinit(self.realm.user_princ, password=password,
+                         flags=["-f"])
+        name = gb.import_name(b'user', gb.NameType.kerberos_principal)
+        client_creds = gb.acquire_cred(name, usage="initiate").creds
+        cctx_res = gb.init_sec_context(
+            server_name, creds=client_creds,
+            flags=gb.RequirementFlag.delegate_to_peer)
 
-        imp_creds, actual_mechs, output_ttl = imp_resp
-        self.assertIsInstance(imp_creds, gb.Creds)
-        self.assertIn(gb.MechType.kerberos, actual_mechs)
-        self.assertIsInstance(output_ttl, int)
+        self.realm.kinit(SERVICE_PRINCIPAL.decode("utf-8"), flags=["-k"])
+        server_creds = gb.acquire_cred(server_name, usage='both').creds
+        sctx_res = gb.accept_sec_context(cctx_res.token, server_creds)
+        self.assertTrue(gb.inquire_context(sctx_res.context).complete)
 
-        # no need to explicitly release any more -- we can just rely on
-        # __dealloc__ (b/c cython)
+        imp_resp = gb.acquire_cred_impersonate_name(sctx_res.delegated_creds,
+                                                    server_name)
+        self.assertIsInstance(imp_resp, gb.AcquireCredResult)
+        self.assertIsInstance(imp_resp.creds, gb.Creds)
+        self.assertIn(gb.MechType.kerberos, imp_resp.mechs)
+        self.assertIsInstance(imp_resp.lifetime, int)
+        self.assertGreater(imp_resp.lifetime, 0)
 
     @ktu.gssapi_extension_test('s4u', 'S4U')
     @ktu.krb_minversion_test('1.11',

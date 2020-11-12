@@ -312,39 +312,49 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
                  usage='initiate')
     @ktu.gssapi_extension_test('s4u', 'S4U')
     def test_impersonate(self, str_name, kwargs):
-        target_name = gssnames.Name(TARGET_SERVICE_NAME,
-                                    gb.NameType.hostbased_service)
-        # TODO(directxman12): make this use the high-level SecurityContext
-        client_ctx_resp = gb.init_sec_context(target_name)
-        client_token = client_ctx_resp[3]
-        del client_ctx_resp  # free everything but the token
+        server_name = gssnames.Name(SERVICE_PRINCIPAL,
+                                    gb.NameType.kerberos_principal)
 
-        server_name = self.name
-        server_creds = gsscreds.Credentials(name=server_name,
-                                            usage='both')
-        server_ctx_resp = gb.accept_sec_context(client_token,
-                                                acceptor_creds=server_creds)
+        password = self.realm.password("user")
+        self.realm.kinit(self.realm.user_princ, password=password,
+                         flags=["-f"])
+        client_ctx = gssctx.SecurityContext(
+            name=server_name, flags=gb.RequirementFlag.delegate_to_peer)
+        client_token = client_ctx.step()
 
-        imp_creds = server_creds.impersonate(server_ctx_resp[1], **kwargs)
+        self.realm.kinit(SERVICE_PRINCIPAL.decode("utf-8"), flags=["-k"])
+        server_creds = gsscreds.Credentials(usage="both")
+        server_ctx = gssctx.SecurityContext(creds=server_creds)
+        server_ctx.step(client_token)
+        self.assertTrue(server_ctx.complete)
+
+        imp_creds = server_ctx.delegated_creds.impersonate(server_name,
+                                                           **kwargs)
         self.assertIsInstance(imp_creds, gsscreds.Credentials)
 
     @ktu.gssapi_extension_test('s4u', 'S4U')
     def test_add_with_impersonate(self):
-        target_name = gssnames.Name(TARGET_SERVICE_NAME,
-                                    gb.NameType.hostbased_service)
-        client_ctx = gssctx.SecurityContext(name=target_name)
+        server_name = gssnames.Name(SERVICE_PRINCIPAL,
+                                    gb.NameType.kerberos_principal)
+
+        password = self.realm.password("user")
+        self.realm.kinit(self.realm.user_princ, password=password,
+                         flags=["-f"])
+        client_ctx = gssctx.SecurityContext(
+            name=server_name, flags=gb.RequirementFlag.delegate_to_peer)
         client_token = client_ctx.step()
 
-        server_creds = gsscreds.Credentials(usage='both')
-        server_ctx = gssctx.SecurityContext(creds=server_creds, usage='accept')
+        self.realm.kinit(SERVICE_PRINCIPAL.decode("utf-8"), flags=["-k"])
+        server_creds = gsscreds.Credentials(usage="both")
+        server_ctx = gssctx.SecurityContext(creds=server_creds)
         server_ctx.step(client_token)
+        self.assertTrue(server_ctx.complete)
 
         # use empty creds to test here
         input_creds = gsscreds.Credentials(gb.Creds())
-        new_creds = input_creds.add(server_ctx.initiator_name,
-                                    gb.MechType.kerberos,
-                                    impersonator=server_creds,
-                                    usage='initiate')
+        new_creds = input_creds.add(
+            server_name, gb.MechType.kerberos,
+            impersonator=server_ctx.delegated_creds, usage='initiate')
         self.assertIsInstance(new_creds, gsscreds.Credentials)
 
 
