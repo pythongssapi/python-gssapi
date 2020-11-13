@@ -4,7 +4,10 @@
     "jobs": {
         "update-pages": {
             "runs-on": "ubuntu-latest",
-            "container": "fedora:latest",
+            "container": {
+                "image": "fedora:latest",
+                "options": "-htest.box",
+            },
             "steps": [
                 {
                     "name": "Check out code",
