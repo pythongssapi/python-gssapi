@@ -11,6 +11,10 @@
     "jobs": {
         "linux": {
             "runs-on": "ubuntu-latest",
+            "container": {
+                "image": "${{ matrix.distro }}",
+                "options": "-htest.box",
+            },
             "strategy": {
                 "fail-fast": false,
                 "matrix": {
@@ -45,9 +49,8 @@
                 },
                 {
                     "name": "Build and test gssapi",
-                    "run": "./ci/run-on-linux.sh ./ci/build.sh",
+                    "run": "./ci/build.sh",
                     "env": {
-                        "DISTRO": "${{ matrix.distro }}",
                         "KRB5_VER": "${{ matrix.krb5_ver }}",
                         "FLAKE": "${{ matrix.flake }}",
                     },

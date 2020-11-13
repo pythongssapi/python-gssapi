@@ -4,6 +4,7 @@
     "jobs": {
         "update-pages": {
             "runs-on": "ubuntu-latest",
+            "container": "fedora-latest",
             "steps": [
                 {
                     "name": "Check out code",
@@ -11,8 +12,7 @@
                 },
                 {
                     "name": "Build docs",
-                    "run": "./ci/run-on-linux.sh ./ci/before-docs-deploy.sh",
-                    "env": { "DISTRO": "fedora:latest" },
+                    "run": "./ci/before-docs-deploy.sh",
                 },
                 {
                     "name": "Deploy latest docs",
