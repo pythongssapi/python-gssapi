@@ -4,7 +4,7 @@
     "jobs": {
         "update-pages": {
             "runs-on": "ubuntu-latest",
-            "container": "fedora-latest",
+            "container": "fedora:latest",
             "steps": [
                 {
                     "name": "Check out code",
