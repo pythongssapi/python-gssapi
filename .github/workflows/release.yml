@@ -4,10 +4,6 @@
     "jobs": {
         "release-linux": {
             "runs-on": "ubuntu-latest",
-            "container": {
-                "image": "fedora:latest",
-                "options": "-htest.box",
-            },
             "steps": [
                 {
                     "name": "Check out code",
@@ -15,7 +11,8 @@
                 },
                 {
                     "name": "Set things up",
-                    "run": "./ci/before-deploy.sh",
+                    "env": { "DISTRO": "fedora:latest" },
+                    "run": "./ci/run-on-linux.sh ./ci/before-deploy.sh",
                 },
                 {
                     "name": "Deploy to PyPI",
