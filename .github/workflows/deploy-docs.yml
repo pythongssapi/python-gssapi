@@ -11,6 +11,7 @@
                 },
                 {
                     "name": "Build docs",
+                    "env": { "DISTRO": "fedora:latest" },
                     "run": "./ci/run-on-linux.sh ./ci/before-docs-deploy.sh",
                 },
                 {
