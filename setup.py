@@ -165,6 +165,11 @@ if ENABLE_SUPPORT_DETECTION:
             # To support Heimdal on Debian, read the linker path.
             if opt.startswith('-Wl,/'):
                 main_path = opt[4:] + "/"
+        if main_path == "":
+            for d in library_dirs:
+                if os.path.exists(os.path.join(d, main_lib)):
+                    main_path = d
+                    break
 
     if main_lib is None:
         raise Exception("Could not find main GSSAPI shared library.  Please "
