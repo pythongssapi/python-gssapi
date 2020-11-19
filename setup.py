@@ -37,6 +37,7 @@ def get_output(*args, **kwargs):
 
 
 # get the compile and link args
+kc = "krb5-config"
 posix = os.name != 'nt'
 link_args, compile_args = [
     shlex.split(os.environ[e], posix=posix) if e in os.environ else None
@@ -71,6 +72,26 @@ if os.name == 'nt':
     except ValueError:
         cygwinccompiler.get_msvcr = lambda *a, **kw: []
 
+if sys.platform.startswith("freebsd"):
+    # FreeBSD does $PATH backward, for our purposes.  That is, the package
+    # manager's version of the software is in /usr/local, which is in PATH
+    # *after* the version in /usr.  We prefer the package manager's version
+    # because the Heimdal in base is truly ancient, but this can be overridden
+    # - either in the "normal" fashion by putting something in PATH in front
+    # of it, or by removing /usr/local from PATH.
+
+    bins = []
+    for b in os.environ["PATH"].split(":"):
+        p = f"{b}/krb5-config"
+        if not os.path.exists(p):
+            continue
+        bins.append(p)
+
+    if len(bins) > 1 and bins[0] == "/usr/bin/krb5-config" and \
+       "/usr/local/bin/krb5-config" in bins:
+        kc = "/usr/local/bin/krb5-config"
+    print(f"Detected: {kc}")
+
 if link_args is None:
     if osx_has_gss_framework:
         link_args = ['-framework', 'GSS']
@@ -85,7 +106,7 @@ if link_args is None:
     elif os.environ.get('MINGW_PREFIX'):
         link_args = ['-lgss']
     else:
-        link_args = shlex.split(get_output('krb5-config --libs gssapi'))
+        link_args = shlex.split(get_output(f"{kc} --libs gssapi"))
 
 if compile_args is None:
     if osx_has_gss_framework:
@@ -98,14 +119,14 @@ if compile_args is None:
     elif os.environ.get('MINGW_PREFIX'):
         compile_args = ['-fPIC']
     else:
-        compile_args = shlex.split(get_output('krb5-config --cflags gssapi'))
+        compile_args = shlex.split(get_output(f"{kc} --cflags gssapi"))
 
 # add in the extra workarounds for different include structures
 if winkrb_path:
     prefix = winkrb_path
 else:
     try:
-        prefix = get_output('krb5-config gssapi --prefix')
+        prefix = get_output(f"{kc} gssapi --prefix")
     except Exception:
         print("WARNING: couldn't find krb5-config; assuming prefix of %s"
               % str(sys.prefix))
