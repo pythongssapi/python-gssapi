@@ -195,7 +195,7 @@ if ENABLE_SUPPORT_DETECTION:
     if main_lib is None:
         raise Exception("Could not find main GSSAPI shared library.  Please "
                         "try setting GSSAPI_MAIN_LIB yourself or setting "
-                        "ENABLE_SUPPORT_DETECTION to 'false'")
+                        "GSSAPI_SUPPORT_DETECT to 'false'")
 
     GSSAPI_LIB = ctypes.CDLL(os.path.join(main_path, main_lib))
 
