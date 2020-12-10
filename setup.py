@@ -327,7 +327,7 @@ install_requires = [
 
 setup(
     name='gssapi',
-    version='1.6.11',
+    version='1.6.12',
     author='The Python GSSAPI Team',
     author_email='rharwood@redhat.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
