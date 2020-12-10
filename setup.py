@@ -162,6 +162,14 @@ if ENABLE_SUPPORT_DETECTION:
     main_path = ""
     if main_lib is None and osx_has_gss_framework:
         main_lib = ctypes.util.find_library('GSS')
+        if not main_lib:
+            # https://github.com/pythongssapi/python-gssapi/issues/235
+            # CPython has a bug on Big Sur where find_library will fail to
+            # find the library path of shared frameworks.  This has been fixed
+            # in newer versions but we have this fallback in case an older
+            # version is still in use.  This fix is expected to be included in
+            # 3.8.8 and 3.9.2.
+            main_lib = '/System/Library/Frameworks/GSS.framework/GSS'
     elif os.environ.get('MINGW_PREFIX'):
         main_lib = os.environ.get('MINGW_PREFIX')+'/bin/libgss-3.dll'
     elif sys.platform == 'msys':
