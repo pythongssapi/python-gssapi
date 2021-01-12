@@ -68,6 +68,16 @@ Easy Way
 
     $ pip install gssapi
 
+You can also use a specific Kerberos library by defining the `GSSAPI_*`
+environment variables:
+
+.. code-block:: bash
+
+    $ export PATH=/path/to/where/krb5-config/is:$PATH
+    $ export GSSAPI_LINKER_ARGS="$(krb5-config --libs gssapi)"
+    $ export GSSAPI_COMPILER_ARGS="$(krb5-config --cflags gssapi)"
+    $ export GSSAPI_MAIN_LIB="/path/to/where/libgss{{api,-3}.dll,api.{so,dylib}}/is"
+
 From the Git Repo
 -----------------
 
