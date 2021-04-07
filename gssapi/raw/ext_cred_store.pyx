@@ -18,6 +18,7 @@ from gssapi.raw.named_tuples import AddCredResult, AcquireCredResult
 from gssapi.raw.named_tuples import StoreCredResult
 from gssapi.raw.misc import GSSError
 
+from gssapi import _utils
 
 cdef extern from "python_gssapi_ext.h":
     ctypedef struct gss_key_value_element_desc:
@@ -82,8 +83,16 @@ cdef gss_key_value_set_desc* c_create_key_value_set(dict values) except NULL:
                           "key-value set elements")
 
     for (i, (k, v)) in enumerate(values.items()):
-        res.elements[i].key = k
-        res.elements[i].value = v
+        if isinstance(k, str):
+            k1 = k.encode(_utils._get_encoding())
+            res.elements[i].key = k1
+        else:
+            res.elements[i].key = k
+        if isinstance(v, str):
+            v1 = v.encode(_utils._get_encoding())
+            res.elements[i].value = v1
+        else:
+            res.elements[i].value = v
 
     return res
 
