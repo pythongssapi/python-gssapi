@@ -309,7 +309,7 @@ class GSSError(Exception, metaclass=GSSErrorRegistry):
                 msg, ctx, cont = _display_status(code, is_maj,
                                                  message_context=ctx)
                 res.append(msg.decode(msg_encoding))
-            except ValueError:
+            except ValueError as e:
                 res.append(u'{0}  Decoding code: {1}'.format(e, code))
                 cont = False
 
