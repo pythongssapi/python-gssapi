@@ -1,0 +1,7 @@
+{
+    "daysUntilStale": 28,
+    "daysUntilClose": 14,
+    "staleLabel": "stale",
+    "markComment": false,
+    "only": "pulls",
+}
