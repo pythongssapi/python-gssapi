@@ -66,6 +66,10 @@
                         "win-py-3.7",
                         "win-py-3.6",
                     ],
+                    "arch": [
+                        "x64",
+                        "x86"
+                    ],
                     "include": [
                         {
                             "name": "win-py-3.9",
@@ -94,7 +98,10 @@
                 {
                     "name": "Install the right python",
                     "uses": "actions/setup-python@v2",
-                    "with": { "python-version": "${{ matrix.pyenv }}" },
+                    "with": {
+                        "python-version": "${{ matrix.pyenv }}",
+                        "architecture": "${{ matrix.arch }}"
+                    },
                 },
                 {
                     "name": "Build and test gssapi",

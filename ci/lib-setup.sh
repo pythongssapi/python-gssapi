@@ -64,11 +64,19 @@ setup::macos::install() {
 setup::windows::install() {
     CHINST="choco install --no-progress --yes --ignore-detected-reboot --allow-downgrade"
 
+    # Install the 32bit version if Python is 32bit
+    if python -c "assert __import__('sys').maxsize <= 2**32"; then
+        CHINST="$CHINST --x86"
+        PF="Program Files (x86)"
+    else
+        PF="Program Files"
+    fi
+
     # Install MIT Kerberos.  choco will fail despite the installation working.
     $CHINST mitkerberos --install-arguments "'ADDLOCAL=ALL'" || true
 
     # Update path to include it
-    export PATH="/c/Program Files/MIT/Kerberos/bin:$PATH"
+    export PATH="/c/$PF/MIT/Kerberos/bin:$PATH"
 
     python -m pip install --upgrade pip
 }
