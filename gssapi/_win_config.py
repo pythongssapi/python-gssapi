@@ -8,6 +8,7 @@ down the import tree.
 
 import os
 import shutil
+import sys
 import ctypes
 
 #: Path to normal KfW installed bin folder
@@ -22,7 +23,10 @@ KFW_DL = "https://web.mit.edu/KERBEROS/dist"
 def kfw_available():
     """Return if the main GSSAPI DLL for KfW can be loaded"""
     try:  # to load the main GSSAPI DLL
-        ctypes.WinDLL('gssapi64.dll')
+        if sys.maxsize > 2**32:
+            ctypes.WinDLL('gssapi64.dll')
+        else:
+            ctypes.WinDLL('gssapi32.dll')
     except OSError:  # DLL is not in PATH
         return False
     else:  # DLL is in PATH, everything should work

@@ -39,6 +39,11 @@ def get_output(*args, **kwargs):
 # get the compile and link args
 kc = "krb5-config"
 posix = os.name != 'nt'
+
+# Per https://docs.python.org/3/library/platform.html#platform.architecture
+# this is the preferred way of determining "64-bitness".
+is64bit = sys.maxsize > 2**32
+
 link_args, compile_args = [
     shlex.split(os.environ[e], posix=posix) if e in os.environ else None
     for e in ['GSSAPI_LINKER_ARGS', 'GSSAPI_COMPILER_ARGS']
@@ -97,7 +102,7 @@ if link_args is None:
         link_args = ['-framework', 'GSS']
     elif winkrb_path:
         _libs = os.path.join(
-            winkrb_path, 'lib', 'amd64' if sys.maxsize > 2 ** 32 else 'i386'
+            winkrb_path, 'lib', 'amd64' if is64bit else 'i386'
         )
         link_args = (
             ['-L%s' % _libs]
@@ -114,8 +119,9 @@ if compile_args is None:
     elif winkrb_path:
         compile_args = [
             '-I%s' % os.path.join(winkrb_path, 'include'),
-            '-DMS_WIN64'
         ]
+        if is64bit:
+            compile_args.append('-DMS_WIN64')
     elif os.environ.get('MINGW_PREFIX'):
         compile_args = ['-fPIC']
     else:
@@ -174,10 +180,7 @@ if ENABLE_SUPPORT_DETECTION:
         main_lib = os.environ.get('MINGW_PREFIX')+'/bin/libgss-3.dll'
     elif sys.platform == 'msys':
         # Plain msys, not running in MINGW_PREFIX. Try to get the lib from one
-        _main_lib = (
-            '/mingw%d/bin/libgss-3.dll'
-            % (64 if sys.maxsize > 2 ** 32 else 32)
-        )
+        _main_lib = f'/mingw{64 if is64bit else 32}/bin/libgss-3.dll'
         if os.path.exists(_main_lib):
             main_lib = _main_lib
             os.environ['PATH'] += os.pathsep + os.path.dirname(main_lib)
