@@ -62,6 +62,10 @@ class RequirementFlag(IntEnum, metaclass=ExtendableEnum):
     # support it will ignore it.
     ok_as_delegate = 32768
 
+    # GSS_C_CHANNEL_BOUND_FLAG, implemented in MIT krb5-1.19
+    # See draft-ietf-kitten-channel-bound-flag-04
+    channel_bound = 2048
+
 
 class AddressType(IntEnum, metaclass=ExtendableEnum):
     """
