@@ -6,7 +6,8 @@ source ./ci/lib-deploy.sh
 ./ci/build.sh
 
 # Sigh, go find paths again
-export PATH="/c/Program Files/MIT/Kerberos/bin:$PATH"
+export PATH="/c/Program Files/MIT/Kerberos/bin:"\
+   "/c/Program Files (x86)/MIT/Kerberos/bin:$PATH"
 
 # build the wheel
 python -m pip install wheel
