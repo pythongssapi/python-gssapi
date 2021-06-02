@@ -38,11 +38,18 @@ def get_output(*args, **kwargs):
 
 # get the compile and link args
 kc = "krb5-config"
+autodetect_kc = True
 posix = os.name != 'nt'
 
 # Per https://docs.python.org/3/library/platform.html#platform.architecture
 # this is the preferred way of determining "64-bitness".
 is64bit = sys.maxsize > 2**32
+
+kc_env = 'GSSAPI_KRB5CONFIG'
+if kc_env in os.environ:
+    kc = os.environ[kc_env]
+    autodetect_kc = False
+    print(f"Using {kc} from env")
 
 link_args, compile_args = [
     shlex.split(os.environ[e], posix=posix) if e in os.environ else None
@@ -77,7 +84,7 @@ if os.name == 'nt':
     except ValueError:
         cygwinccompiler.get_msvcr = lambda *a, **kw: []
 
-if sys.platform.startswith("freebsd"):
+if sys.platform.startswith("freebsd") and autodetect_kc:
     # FreeBSD does $PATH backward, for our purposes.  That is, the package
     # manager's version of the software is in /usr/local, which is in PATH
     # *after* the version in /usr.  We prefer the package manager's version
