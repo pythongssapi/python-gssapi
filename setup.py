@@ -346,7 +346,7 @@ setup(
     long_description=long_desc,
     license='LICENSE.txt',
     url="https://github.com/pythongssapi/python-gssapi",
-    python_requires=">=3.6.*",
+    python_requires=">=3.6",
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python',
