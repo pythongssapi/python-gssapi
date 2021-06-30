@@ -1,13 +1,6 @@
 #!/bin/bash -e
 
-source ./ci/lib-setup.sh
-source ./ci/lib-deploy.sh
-
-./ci/build.sh
-
-# Sigh, go find paths again
-export PATH="/c/Program Files/MIT/Kerberos/bin:"\
-   "/c/Program Files (x86)/MIT/Kerberos/bin:$PATH"
+source ./ci/build.sh
 
 # build the wheel
 python -m pip install wheel
