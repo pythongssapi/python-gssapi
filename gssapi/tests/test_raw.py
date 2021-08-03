@@ -1304,7 +1304,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         self.assertEqual(init_message[2].value, init_data)
         self.assertEqual(init_message[3].value, init_other_data)
 
-    @ktu.gssapi_extension_test('dce', 'DCE (IOV/AEAD)')
+    @ktu.gssapi_extension_test('dce', 'DCE (IOV)')
     def test_basic_iov_wrap_unwrap_autoalloc(self):
         init_data = b'some encrypted data'
         init_other_data = b'some other encrypted data'
@@ -1334,7 +1334,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         self.assertEqual(init_message[2].value, init_data)
         self.assertEqual(init_message[3].value, init_other_data)
 
-    @ktu.gssapi_extension_test('dce', 'DCE (IOV/AEAD)')
+    @ktu.gssapi_extension_test('dce_aead', 'DCE (AEAD)')
     def test_basic_aead_wrap_unwrap(self):
         assoc_data = b'some sig data'
         wrapped_message, conf = gb.wrap_aead(self.client_ctx, b"test message",
@@ -1353,7 +1353,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         self.assertIsInstance(qop, int)
         self.assertGreaterEqual(qop, 0)
 
-    @ktu.gssapi_extension_test('dce', 'DCE (IOV/AEAD)')
+    @ktu.gssapi_extension_test('dce_aead', 'DCE (AEAD)')
     def test_basic_aead_wrap_unwrap_no_assoc(self):
         wrapped_message, conf = gb.wrap_aead(self.client_ctx, b"test message")
         self.assertIsInstance(wrapped_message, bytes)
@@ -1370,7 +1370,7 @@ class TestWrapUnwrap(_GSSAPIKerberosTestCase):
         self.assertIsInstance(qop, int)
         self.assertGreaterEqual(qop, 0)
 
-    @ktu.gssapi_extension_test('dce', 'DCE (IOV/AEAD)')
+    @ktu.gssapi_extension_test('dce_aead', 'DCE (AEAD)')
     def test_basic_aead_wrap_unwrap_bad_assoc_raises_error(self):
         assoc_data = b'some sig data'
         wrapped_message, conf = gb.wrap_aead(self.client_ctx, b"test message",

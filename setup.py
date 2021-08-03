@@ -122,7 +122,7 @@ if link_args is None:
 
 if compile_args is None:
     if osx_has_gss_framework:
-        compile_args = ['-framework', 'GSS', '-DOSX_HAS_GSS_FRAMEWORK']
+        compile_args = ['-DOSX_HAS_GSS_FRAMEWORK']
     elif winkrb_path:
         compile_args = [
             '-I%s' % os.path.join(winkrb_path, 'include'),
@@ -382,7 +382,10 @@ setup(
         extension_file('rfc5588', 'gss_store_cred'),
         extension_file('rfc5801', 'gss_inquire_saslname_for_mech'),
         extension_file('cred_imp_exp', 'gss_import_cred'),
-        extension_file('dce', 'gss_wrap_iov'),
+        extension_file('dce',
+                       '__ApplePrivate_gss_wrap_iov' if osx_has_gss_framework
+                       else 'gss_wrap_iov'),
+        extension_file('dce_aead', 'gss_wrap_aead'),
         extension_file('iov_mic', 'gss_get_mic_iov'),
         extension_file('ggf', 'gss_inquire_sec_context_by_oid'),
         extension_file('set_cred_opt', 'gss_set_cred_option'),
