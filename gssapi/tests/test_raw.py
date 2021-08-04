@@ -1,4 +1,6 @@
 import copy
+import ctypes
+import ctypes.util
 import os
 import socket
 import unittest
@@ -28,6 +30,7 @@ class _GSSAPIKerberosTestCase(kt.KerberosTestCase):
 
         cls.USER_PRINC = cls.realm.user_princ.split('@')[0].encode("UTF-8")
         cls.ADMIN_PRINC = cls.realm.admin_princ.split('@')[0].encode("UTF-8")
+        cls.KRB5_LIB_PATH = os.environ.get("GSSAPI_KRB5_MAIN_LIB", None)
 
     @classmethod
     def _init_env(cls):
@@ -905,6 +908,316 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         invalid_oid = gb.OID.from_int_seq("1.2.3.4.5.6.7.8.9")
         self.assertRaises(gb.GSSError, gb.set_cred_option, invalid_oid,
                           orig_cred, b"\x00")
+
+    @ktu.gssapi_extension_test('krb5', 'Kerberos Extensions')
+    def test_krb5_ccache_name(self):
+        new_ccache = os.path.join(self.realm.tmpdir, 'ccache-new')
+        new_env = self.realm.env.copy()
+        new_env['KRB5CCNAME'] = new_ccache
+        self.realm.kinit(self.realm.user_princ,
+                         password=self.realm.password('user'),
+                         env=new_env)
+
+        old_ccache = gb.krb5_ccache_name(new_ccache.encode('utf-8'))
+        try:
+            self.assertEqual(old_ccache.decode('utf-8'), self.realm.ccache)
+
+            cred_resp = gb.acquire_cred().creds
+
+            princ_name = gb.inquire_cred(cred_resp, name=True).name
+            name = gb.display_name(princ_name, name_type=False).name
+            self.assertEqual(name, self.realm.user_princ.encode('utf-8'))
+
+            changed_ccache = gb.krb5_ccache_name(old_ccache)
+            self.assertEqual(changed_ccache.decode('utf-8'), new_ccache)
+
+        finally:
+            # Ensure original behaviour is back for other tests
+            gb.krb5_ccache_name(None)
+
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        client_resp = gb.init_sec_context(target_name, creds=cred_resp)
+        client_ctx = client_resp[0]
+        client_token = client_resp[3]
+
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_resp = gb.accept_sec_context(client_token,
+                                            acceptor_creds=server_creds)
+        server_ctx = server_resp[0]
+        server_token = server_resp[3]
+
+        gb.init_sec_context(target_name, context=client_ctx,
+                            input_token=server_token)
+        initiator = gb.inquire_context(server_ctx,
+                                       initiator_name=True).initiator_name
+        initiator_name = gb.display_name(initiator, name_type=False).name
+
+        self.assertEqual(initiator_name, self.realm.user_princ.encode('utf-8'))
+
+    @ktu.gssapi_extension_test('krb5', 'Kerberos Extensions')
+    def test_krb5_export_lucid_sec_context(self):
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        ctx_resp = gb.init_sec_context(target_name)
+
+        client_token1 = ctx_resp[3]
+        client_ctx = ctx_resp[0]
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_resp = gb.accept_sec_context(client_token1,
+                                            acceptor_creds=server_creds)
+        server_ctx = server_resp[0]
+        server_tok = server_resp[3]
+
+        client_resp2 = gb.init_sec_context(target_name,
+                                           context=client_ctx,
+                                           input_token=server_tok)
+        ctx = client_resp2[0]
+
+        self.assertRaises(gb.GSSError, gb.krb5_export_lucid_sec_context,
+                          ctx, 0)
+
+        initiator_info = gb.krb5_export_lucid_sec_context(ctx, 1)
+        self.assertTrue(isinstance(initiator_info, gb.Krb5LucidContextV1))
+        self.assertEqual(initiator_info.version, 1)
+        self.assertTrue(initiator_info.is_initiator)
+        self.assertTrue(isinstance(initiator_info.endtime, int))
+        self.assertTrue(isinstance(initiator_info.send_seq, int))
+        self.assertTrue(isinstance(initiator_info.recv_seq, int))
+        self.assertEqual(initiator_info.protocol, 1)
+        self.assertEqual(initiator_info.rfc1964_kd, None)
+        self.assertTrue(isinstance(initiator_info.cfx_kd, gb.CfxKeyData))
+        self.assertTrue(isinstance(initiator_info.cfx_kd.ctx_key_type, int))
+        self.assertTrue(isinstance(initiator_info.cfx_kd.ctx_key, bytes))
+        self.assertTrue(isinstance(initiator_info.cfx_kd.acceptor_subkey_type,
+                                   int))
+        self.assertTrue(isinstance(initiator_info.cfx_kd.acceptor_subkey,
+                                   bytes))
+
+        acceptor_info = gb.krb5_export_lucid_sec_context(server_ctx, 1)
+        self.assertTrue(isinstance(acceptor_info, gb.Krb5LucidContextV1))
+        self.assertEqual(acceptor_info.version, 1)
+        self.assertFalse(acceptor_info.is_initiator)
+        self.assertTrue(isinstance(acceptor_info.endtime, int))
+        self.assertTrue(isinstance(acceptor_info.send_seq, int))
+        self.assertTrue(isinstance(acceptor_info.recv_seq, int))
+        self.assertEqual(acceptor_info.protocol, 1)
+        self.assertEqual(acceptor_info.rfc1964_kd, None)
+        self.assertTrue(isinstance(acceptor_info.cfx_kd, gb.CfxKeyData))
+        self.assertTrue(isinstance(acceptor_info.cfx_kd.ctx_key_type, int))
+        self.assertTrue(isinstance(acceptor_info.cfx_kd.ctx_key, bytes))
+        self.assertTrue(isinstance(acceptor_info.cfx_kd.acceptor_subkey_type,
+                                   int))
+        self.assertTrue(isinstance(acceptor_info.cfx_kd.acceptor_subkey,
+                                   bytes))
+
+        self.assertEqual(initiator_info.endtime, acceptor_info.endtime)
+        self.assertEqual(initiator_info.send_seq, acceptor_info.recv_seq)
+        self.assertEqual(initiator_info.recv_seq, acceptor_info.send_seq)
+        self.assertEqual(initiator_info.cfx_kd.ctx_key_type,
+                         acceptor_info.cfx_kd.ctx_key_type)
+        self.assertEqual(initiator_info.cfx_kd.ctx_key,
+                         acceptor_info.cfx_kd.ctx_key)
+        self.assertEqual(initiator_info.cfx_kd.acceptor_subkey_type,
+                         acceptor_info.cfx_kd.acceptor_subkey_type)
+        self.assertEqual(initiator_info.cfx_kd.acceptor_subkey,
+                         acceptor_info.cfx_kd.acceptor_subkey)
+
+    @ktu.gssapi_extension_test('krb5', 'Kerberos Extensions')
+    def test_krb5_extract_authtime_from_sec_context(self):
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        ctx_resp = gb.init_sec_context(target_name)
+
+        client_token1 = ctx_resp[3]
+        client_ctx = ctx_resp[0]
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_resp = gb.accept_sec_context(client_token1,
+                                            acceptor_creds=server_creds)
+        server_ctx = server_resp[0]
+        server_tok = server_resp[3]
+
+        client_resp2 = gb.init_sec_context(target_name,
+                                           context=client_ctx,
+                                           input_token=server_tok)
+        ctx = client_resp2[0]
+
+        client_authtime = gb.krb5_extract_authtime_from_sec_context(ctx)
+        server_authtime = gb.krb5_extract_authtime_from_sec_context(server_ctx)
+
+        self.assertTrue(isinstance(client_authtime, int))
+        self.assertTrue(isinstance(server_authtime, int))
+        self.assertEqual(client_authtime, server_authtime)
+
+    @ktu.gssapi_extension_test('krb5', 'Kerberos Extensions')
+    def test_krb5_extract_authz_data_from_sec_context(self):
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        client_token = gb.init_sec_context(target_name)[3]
+
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_ctx = gb.accept_sec_context(client_token,
+                                           acceptor_creds=server_creds)[0]
+
+        # KRB5_AUTHDATA_IF_RELEVANT = 1
+        authz_data = gb.krb5_extract_authz_data_from_sec_context(server_ctx, 1)
+        self.assertTrue(isinstance(authz_data, bytes))
+
+    @ktu.gssapi_extension_test('krb5', 'Kerberos Extensions')
+    def test_krb5_import_cred(self):
+        # Ensuring we match the krb5 library to the GSSAPI library is a thorny
+        # problem.  Avoid it by requiring test suite users to explicitly
+        # enable this test.
+        if not self.KRB5_LIB_PATH:
+            self.skipTest("Env var GSSAPI_KRB5_MAIN_LIB not defined")
+
+        creds = gb.Creds()
+
+        # Should fail if only creds are specified
+        self.assertRaises(ValueError, gb.krb5_import_cred, creds)
+
+        new_ccache = os.path.join(self.realm.tmpdir, 'ccache-new')
+        new_env = self.realm.env.copy()
+        new_env['KRB5CCNAME'] = new_ccache
+        self.realm.kinit(self.realm.user_princ,
+                         password=self.realm.password('user'),
+                         env=new_env)
+
+        krb5 = ctypes.CDLL(self.KRB5_LIB_PATH)
+        krb5_ctx = ctypes.c_void_p()
+        krb5.krb5_init_context(ctypes.byref(krb5_ctx))
+        try:
+            ccache_ptr = ctypes.c_void_p()
+            err = krb5.krb5_cc_resolve(krb5_ctx, new_ccache.encode('utf-8'),
+                                       ctypes.byref(ccache_ptr))
+            self.assertEqual(err, 0)
+
+            try:
+                gb.krb5_import_cred(creds, cache=ccache_ptr.value)
+
+                # Creds will be invalid once the cc is closed so do this now
+                target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                             gb.NameType.hostbased_service)
+                client_resp = gb.init_sec_context(target_name, creds=creds)
+
+            finally:
+                krb5.krb5_cc_close(krb5_ctx, ccache_ptr)
+        finally:
+            krb5.krb5_free_context(krb5_ctx)
+
+        client_ctx = client_resp[0]
+        client_token = client_resp[3]
+
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_resp = gb.accept_sec_context(client_token,
+                                            acceptor_creds=server_creds)
+        server_ctx = server_resp[0]
+        server_token = server_resp[3]
+
+        gb.init_sec_context(target_name, context=client_ctx,
+                            input_token=server_token)
+        initiator = gb.inquire_context(server_ctx,
+                                       initiator_name=True).initiator_name
+        initiator_name = gb.display_name(initiator, name_type=False).name
+
+        self.assertEqual(initiator_name, self.realm.user_princ.encode('utf-8'))
+
+    @ktu.gssapi_extension_test('krb5', 'Kerberos Extensions')
+    def test_krb5_get_tkt_flags(self):
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        ctx_resp = gb.init_sec_context(target_name)
+
+        client_token1 = ctx_resp[3]
+        client_ctx = ctx_resp[0]
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name)[0]
+        server_resp = gb.accept_sec_context(client_token1,
+                                            acceptor_creds=server_creds)
+        server_ctx = server_resp[0]
+        server_tok = server_resp[3]
+
+        client_resp2 = gb.init_sec_context(target_name,
+                                           context=client_ctx,
+                                           input_token=server_tok)
+        client_ctx = client_resp2[0]
+
+        client_flags = gb.krb5_get_tkt_flags(client_ctx)
+        server_flags = gb.krb5_get_tkt_flags(server_ctx)
+        self.assertTrue(isinstance(client_flags, int))
+        self.assertTrue(isinstance(server_flags, int))
+        self.assertEqual(client_flags, server_flags)
+
+    @ktu.gssapi_extension_test('krb5', 'Kerberos Extensions')
+    def test_krb5_set_allowable_enctypes(self):
+        krb5_mech = gb.OID.from_int_seq("1.2.840.113554.1.2.2")
+        AES_128 = 0x11
+        AES_256 = 0x12
+
+        new_ccache = os.path.join(self.realm.tmpdir, 'ccache-new')
+        new_env = self.realm.env.copy()
+        new_env['KRB5CCNAME'] = new_ccache
+        self.realm.kinit(self.realm.user_princ,
+                         password=self.realm.password('user'),
+                         env=new_env)
+
+        gb.krb5_ccache_name(new_ccache.encode('utf-8'))
+        try:
+            creds = gb.acquire_cred(usage='initiate',
+                                    mechs=[krb5_mech]).creds
+        finally:
+            gb.krb5_ccache_name(None)
+
+        gb.krb5_set_allowable_enctypes(creds, [AES_128])
+
+        target_name = gb.import_name(TARGET_SERVICE_NAME,
+                                     gb.NameType.hostbased_service)
+        server_name = gb.import_name(SERVICE_PRINCIPAL,
+                                     gb.NameType.kerberos_principal)
+        server_creds = gb.acquire_cred(server_name, usage='accept',
+                                       mechs=[krb5_mech])[0]
+
+        # Will fail because the client only offers AES128
+        ctx_resp = gb.init_sec_context(target_name, creds=creds)
+        client_token1 = ctx_resp[3]
+        client_ctx = ctx_resp[0]
+        gb.krb5_set_allowable_enctypes(server_creds, [AES_256])
+        self.assertRaises(gb.GSSError, gb.accept_sec_context, client_token1,
+                          acceptor_creds=server_creds)
+
+        gb.krb5_set_allowable_enctypes(server_creds, [AES_128, AES_256])
+        ctx_resp = gb.init_sec_context(target_name, creds=creds)
+        client_token1 = ctx_resp[3]
+        client_ctx = ctx_resp[0]
+
+        server_resp = gb.accept_sec_context(client_token1,
+                                            acceptor_creds=server_creds)
+        server_ctx = server_resp[0]
+        server_tok = server_resp[3]
+
+        client_resp2 = gb.init_sec_context(target_name,
+                                           context=client_ctx,
+                                           input_token=server_tok)
+        ctx = client_resp2[0]
+
+        initiator_info = gb.krb5_export_lucid_sec_context(ctx, 1)
+        acceptor_info = gb.krb5_export_lucid_sec_context(server_ctx, 1)
+        self.assertEqual(AES_128, initiator_info.cfx_kd.ctx_key_type)
+        self.assertEqual(initiator_info.cfx_kd.ctx_key_type,
+                         initiator_info.cfx_kd.acceptor_subkey_type)
+        self.assertEqual(acceptor_info.cfx_kd.ctx_key_type,
+                         acceptor_info.cfx_kd.acceptor_subkey_type)
 
 
 class TestIntEnumFlagSet(unittest.TestCase):

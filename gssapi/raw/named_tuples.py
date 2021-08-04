@@ -136,3 +136,19 @@ class InquireSASLNameResult(NamedTuple):
     sasl_mech_name: bytes  #: The SASL name
     mech_name: bytes  #: The mechanism name
     mech_description: bytes  #: The mechanism description
+
+
+class Rfc1964KeyData(NamedTuple):
+    """Security context key data based on RFC1964."""
+    sign_alg: int  #: Signing algorithm identifier
+    seal_alg: int  #: Sealing algorithm identifier
+    key_type: int  #: Key encryption type identifier
+    key: bytes  #: Encryption key data
+
+
+class CfxKeyData(NamedTuple):
+    """Securty context key data."""
+    ctx_key_type: int  #: Context key encryption type identifier
+    ctx_key: bytes  #: Context key data - session or sub-session key
+    acceptor_subkey_type: Optional[int]  #: Acceptor key enc type identifier
+    acceptor_subkey: Optional[bytes]  #: Acceptor key data

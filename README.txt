@@ -165,6 +165,8 @@ In addition to RFC 2743/2744, Python-GSSAPI also has support for:
 
 * GGF Extensions
 
+* Kerberos specific extensions
+
 The Team
 ========
 

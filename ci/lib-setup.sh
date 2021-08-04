@@ -12,6 +12,8 @@ setup::debian::install() {
     else
         apt-get -y install krb5-{user,kdc,admin-server,multidev} libkrb5-dev \
                 gss-ntlmssp
+
+        export GSSAPI_KRB5_MAIN_LIB="/usr/lib/x86_64-linux-gnu/libkrb5.so"
     fi
 
     apt-get -y install gcc virtualenv python3-{virtualenv,dev} cython3
@@ -46,6 +48,7 @@ setup::fedora::install() {
 setup::rh::install() {
     setup::rh::yuminst krb5-{devel,libs,server,workstation} \
                        which gcc findutils gssntlmssp
+    export GSSAPI_KRB5_MAIN_LIB="/usr/lib64/libkrb5.so"
 
     if [ -f /etc/fedora-release ]; then
         setup::fedora::install

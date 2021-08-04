@@ -125,6 +125,12 @@ try:
 except ImportError:
     pass
 
+# optional KRB5 specific extension support
+try:
+    from gssapi.raw.ext_krb5 import *  # noqa
+except ImportError:
+    pass
+
 # optional RFC 6680 support
 try:
     from gssapi.raw.ext_rfc6680 import *  # noqa
