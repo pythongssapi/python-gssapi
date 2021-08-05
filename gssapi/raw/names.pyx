@@ -75,15 +75,15 @@ def import_name(name not None, OID name_type=None):
 
     Args:
         name (bytes): the string version of the name
-        name_type (NameType): the type of this name
+        name_type (~gssapi.NameType): the type of this name
 
     Returns:
         Name: the GSSAPI version of the name
 
     Raises:
-        BadNameTypeError
-        BadNameError
-        BadMechanismError
+        ~gssapi.exceptions.BadNameTypeError
+        ~gssapi.exceptions.BadNameError
+        ~gssapi.exceptions.BadMechanismError
     """
 
     cdef gss_OID nt
@@ -124,14 +124,14 @@ def display_name(Name name not None, name_type=True):
     returned name type will be ``None``).
 
     Args:
-        name (Name): the name in question
+        name (~gssapi.raw.names.Name): the name in question
         name_type (bool): whether or not to retrieve the name type
 
     Returns:
         DisplayNameResult: the text part of the name and its type
 
     Raises:
-        BadNameError
+        ~gssapi.exceptions.BadNameError
     """
 
     # GSS_C_EMPTY_BUFFER
@@ -177,15 +177,15 @@ def compare_name(Name name1=None, Name name2=None):
     see if they are equivalent.
 
     Args:
-        name1 (Name): the first name to compare
-        name2 (Name): the second name to compare
+        name1 (~gssapi.raw.names.Name): the first name to compare
+        name2 (~gssapi.raw.names.Name): the second name to compare
 
     Returns:
         bool: whether or not the names are equal
 
     Raises:
-        BadNameTypeError
-        BadNameError
+        ~gssapi.exceptions.BadNameTypeError
+        ~gssapi.exceptions.BadNameError
     """
 
     # check for either value being None
@@ -219,15 +219,15 @@ def export_name(Name name not None):
     by :func:`canonicalize_name` or :func:`accept_sec_context`.
 
     Args:
-        name (Name): the name to export
+        name (~gssapi.raw.names.Name): the name to export
 
     Returns:
         bytes: the exported name
 
     Raises:
-        MechanismNameRequiredError
-        BadNameTypeError
-        BadNameError
+        ~gssapi.exceptions.MechanismNameRequiredError
+        ~gssapi.exceptions.BadNameTypeError
+        ~gssapi.exceptions.BadNameError
     """
 
     # GSS_C_EMPTY_BUFFER
@@ -256,17 +256,17 @@ def canonicalize_name(Name name not None, OID mech not None):
     a full form name specific to a mechanism.
 
     Args:
-        name (Name): the name to canonicalize
-        mech (MechType): the mechanism type to use to
+        name (~gssapi.raw.names.Name): the name to canonicalize
+        mech (~gssapi.MechType): the mechanism type to use to
             canonicalize the name
 
     Returns:
         Name: a canonicalized version of the input name
 
     Raises:
-        BadMechanismError
-        BadNameTypeError
-        BadNameError
+        ~gssapi.exceptions.BadMechanismError
+        ~gssapi.exceptions.BadNameTypeError
+        ~gssapi.exceptions.BadNameError
     """
 
     cdef gss_name_t canonicalized_name
@@ -292,13 +292,13 @@ def duplicate_name(Name name not None):
     Duplicate a GSSAPI name.
 
     Args:
-        name (Name): the name to duplicate
+        name (~gssapi.raw.names.Name): the name to duplicate
 
     Returns:
         Name: a duplicate of the input name
 
     Raises:
-        BadNameError
+        ~gssapi.exceptions.BadNameError
     """
 
     cdef gss_name_t new_name
@@ -328,10 +328,10 @@ def release_name(Name name not None):
         automatically freed by Python.
 
     Args:
-        name (Name): the name in question
+        name (~gssapi.raw.names.Name): the name in question
 
     Raises:
-        BadNameError
+        ~gssapi.exceptions.BadNameError
     """
 
     cdef OM_uint32 maj_stat, min_stat

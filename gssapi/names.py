@@ -91,9 +91,9 @@ class Name(rname.Name):
         name type.
 
         Raises:
-            BadNameTypeError
-            BadNameError
-            BadMechanismError
+            ~gssapi.exceptions.BadNameTypeError
+            ~gssapi.exceptions.BadNameError
+            ~gssapi.exceptions.BadMechanismError
         """
 
         if rname_rfc6680 is not None:
@@ -137,14 +137,14 @@ class Name(rname.Name):
         :requires-ext:`rfc6680`
 
         Args:
-            name_type (OID): the :class:`NameType` to use to display the given
-                name
+            name_type (~gssapi.OID): the :class:`NameType` to use to display
+                the given name
 
         Returns:
             str: the displayed name
 
         Raises:
-            OperationUnavailableError
+            ~gssapi.exceptions.OperationUnavailableError
         """
 
         if rname_rfc6680 is None:
@@ -189,9 +189,9 @@ class Name(rname.Name):
             bytes: the exported name in token form
 
         Raises:
-            MechanismNameRequiredError
-            BadNameTypeError
-            BadNameError
+            ~gssapi.exceptions.MechanismNameRequiredError
+            ~gssapi.exceptions.BadNameTypeError
+            ~gssapi.exceptions.BadNameError
         """
 
         if composite:
@@ -211,15 +211,15 @@ class Name(rname.Name):
         to the given mechanism.
 
         Args:
-            mech (OID): the :class:`MechType` to use
+            mech (~gssapi.OID): the :class:`MechType` to use
 
         Returns:
             Name: the canonicalized name
 
         Raises:
-            BadMechanismError
-            BadNameTypeError
-            BadNameError
+            ~gssapi.exceptions.BadMechanismError
+            ~gssapi.exceptions.BadNameTypeError
+            ~gssapi.exceptions.BadNameError
         """
 
         return type(self)(rname.canonicalize_name(self, mech))
@@ -249,7 +249,7 @@ class Name(rname.Name):
                 fields set to None
 
         Raises:
-            GSSError
+            ~gssapi.exceptions.GSSError
         """
 
         if rname_rfc6680 is None:

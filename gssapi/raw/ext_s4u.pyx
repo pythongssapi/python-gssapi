@@ -53,11 +53,11 @@ mechs=None, usage='initiate')
     Args:
         impersonator_cred (Cred): the credentials with permissions to
             impersonate the target name
-        name (Name): the name to impersonate
+        name (~gssapi.raw.names.Name): the name to impersonate
         lifetime (int): the lifetime for the credentials (or None for
             indefinite)
-        mechs ([MechType]): the desired mechanisms for which the credentials
-            should work (or None for the default set)
+        mechs (~gssapi.MechType): the desired mechanisms for which the
+            credentials should work (or None for the default set)
         usage (str): the usage type for the credentials: may be
             'initiate', 'accept', or 'both'
 
@@ -67,7 +67,7 @@ mechs=None, usage='initiate')
         indefinite or not support)
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_OID_set desired_mechs
@@ -135,8 +135,8 @@ usage='initiate', init_lifetime=None, accept_lifetime=None)
             credentials
         impersonator_cred (Cred): the credentials with permissions to
             impersonate the target name
-        name (Name): the name to impersonate
-        mech (MechType): the desired mechanism.  Note that this is both
+        name (~gssapi.raw.names.Name): the name to impersonate
+        mech (~gssapi.MechType): the desired mechanism.  Note that this is both
             singular and required, unlike acquireCredImpersonateName
         usage (str): the usage type for the credentials: may be
             'initiate', 'accept', or 'both'
@@ -153,7 +153,7 @@ usage='initiate', init_lifetime=None, accept_lifetime=None)
         may be None for indefinite or not supported)
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(init_lifetime)

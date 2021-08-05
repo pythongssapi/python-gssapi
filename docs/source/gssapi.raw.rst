@@ -77,10 +77,31 @@ The following is a list of GSSAPI extensions supported by the low-level API.
     be compiled, and will simply not be available in the :mod:`gssapi.raw`
     namespace.
 
+:rfc:`4178` (GSS-API Negotiation Mechanism)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_rfc4178
+    :members:
+    :undoc-members:
+
+:rfc:`5587` (GSS-API Extension for Mech Attributes)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_rfc5587
+    :members:
+    :undoc-members:
+
 :rfc:`5588` (GSS-API Extension for Storing Delegated Credentials)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. automodule:: gssapi.raw.ext_rfc5588
+    :members:
+    :undoc-members:
+
+:rfc:`5801` (GSS-API SASL Extensions)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_rfc5801
     :members:
     :undoc-members:
 
@@ -127,6 +148,13 @@ IOV MIC Extensions
     :members:
     :undoc-members:
 
+Global Grid Forum (GGF) Extensions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_ggf
+    :members:
+    :undoc-members:
+
 Services4User Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -142,6 +170,20 @@ Acquiring Credentials With a Password Extensions
     :undoc-members:
 
 .. automodule:: gssapi.raw.ext_password_add
+    :members:
+    :undoc-members:
+
+Other Extensions
+~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_set_cred_opt
+    :members:
+    :undoc-members:
+
+Results
+-------
+
+.. automodule:: gssapi.raw.named_tuples
     :members:
     :undoc-members:
 

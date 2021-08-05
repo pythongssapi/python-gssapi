@@ -90,12 +90,12 @@ def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
     be specified.
 
     Args:
-        name (Name): the name for which to acquire the credentials (or None
-            for the "no name" functionality)
+        name (~gssapi.raw.names.Name): the name for which to acquire the
+            credentials (or None for the "no name" functionality)
         lifetime (int): the lifetime for the credentials (or None for
             indefinite)
-        mechs ([MechType]): the desired mechanisms for which the credentials
-            should work, or None for the default set
+        mechs (~gssapi.MechType): the desired mechanisms for which the
+            credentials should work, or None for the default set
         usage (str): the usage type for the credentials: may be
             'initiate', 'accept', or 'both'
 
@@ -105,11 +105,11 @@ def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
         indefinite or not supported)
 
     Raises:
-        BadMechanismError
-        BadNameTypeError
-        BadNameError
-        ExpiredCredentialsError
-        MissingCredentialsError
+        ~gssapi.exceptions.BadMechanismError
+        ~gssapi.exceptions.BadNameTypeError
+        ~gssapi.exceptions.BadNameError
+        ~gssapi.exceptions.ExpiredCredentialsError
+        ~gssapi.exceptions.MissingCredentialsError
     """
 
     cdef gss_OID_set desired_mechs
@@ -176,7 +176,7 @@ def release_cred(Creds creds not None):
         creds (Creds): the credentials in question
 
     Raises:
-        MissingCredentialsError
+        ~gssapi.exceptions.MissingCredentialsError
     """
 
     cdef OM_uint32 maj_stat, min_stat
@@ -200,8 +200,9 @@ accept_lifetime=None, mutate_input=False)
     Args:
         input_cred (Cred): the set of credentials to which to add the new
             credentials
-        name (Name): name of principal to acquire a credential for
-        mech (MechType): the desired security mechanism (required).
+        name (~gssapi.raw.names.Name): name of principal to acquire a
+            credential for
+        mech (~gssapi.MechType): the desired security mechanism (required).
         usage (str): usage type for credentials.  Possible values:
             'initiate' (default), 'accept', 'both' (failsafe).
         init_lifetime (int): lifetime of credentials for use in initiating
@@ -218,12 +219,12 @@ accept_lifetime=None, mutate_input=False)
         be set to None if mutate_input is set to True.
 
     Raises:
-        BadMechanismError
-        BadNameTypeError
-        BadNameError
-        DuplicateCredentialsElementError
-        ExpiredCredentialsError
-        MissingCredentialsError
+        ~gssapi.exceptions.BadMechanismError
+        ~gssapi.exceptions.BadNameTypeError
+        ~gssapi.exceptions.BadNameError
+        ~gssapi.exceptions.DuplicateCredentialsElementError
+        ~gssapi.exceptions.ExpiredCredentialsError
+        ~gssapi.exceptions.MissingCredentialsError
     """
     cdef gss_cred_usage_t c_usage
     if usage == 'initiate':
@@ -297,9 +298,9 @@ def inquire_cred(Creds creds not None, name=True, lifetime=True, usage=True,
             with unused fields set to None
 
     Raises:
-        MissingCredentialsError
-        InvalidCredentialsError
-        ExpiredCredentialsError
+        ~gssapi.exceptions.MissingCredentialsError
+        ~gssapi.exceptions.InvalidCredentialsError
+        ~gssapi.exceptions.ExpiredCredentialsError
     """
 
     # TODO(directxman12): add docs
@@ -371,7 +372,7 @@ accept_lifetime=True, usage=True)
 
     Args:
         creds (Creds): the credentials to inspect
-        mech (OID): the desired mechanism
+        mech (~gssapi.OID): the desired mechanism
         name (bool): get the Name associated with the credentials
         init_lifetime (bool): get the initiator TTL for the credentials
         accept_lifetime (bool): get the acceptor TTL for the credentials
@@ -382,8 +383,8 @@ accept_lifetime=True, usage=True)
             with unused fields set to None
 
     Raises:
-        MissingCredentialsError
-        InvalidCredentialsError
+        ~gssapi.exceptions.MissingCredentialsError
+        ~gssapi.exceptions.InvalidCredentialsError
     """
 
     # TODO(directxman12): add docs

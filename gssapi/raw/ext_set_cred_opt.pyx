@@ -42,7 +42,8 @@ def set_cred_option(OID desired_aspect not None, Creds creds=None, value=None):
     credentials.
 
     Args:
-        desired_aspect (OID): the desired aspect of the Credential to set.
+        desired_aspect (~gssapi.OID): the desired aspect of the Credential to
+            set.
         cred_handle (Creds): the Credentials to set, or None to create a new
             credential.
         value (bytes): the value to set on the desired aspect of the Credential
@@ -52,7 +53,7 @@ def set_cred_option(OID desired_aspect not None, Creds creds=None, value=None):
         Creds: The output credential.
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_buffer_desc value_buffer

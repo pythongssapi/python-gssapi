@@ -36,7 +36,8 @@ set_default=False)
         creds (Creds): the credentials to store
         usage (str): the usage to store the credentials with -- either
             'both', 'initiate', or 'accept'
-        mech (OID): the mechansim to associate with the stored credentials
+        mech (~gssapi.OID): the mechansim to associate with the stored
+            credentials
         overwrite (bool): whether or not to overwrite existing credentials
             stored with the same name, etc
         set_default (bool): whether or not to set these credentials as
@@ -46,11 +47,11 @@ set_default=False)
         StoreCredResult: the results of the credential storing operation
 
     Raises:
-        GSSError
-        ExpiredCredentialsError
-        MissingCredentialsError
-        OperationUnavailableError
-        DuplicateCredentialsElementError
+        ~gssapi.exceptions.GSSError
+        ~gssapi.exceptions.ExpiredCredentialsError
+        ~gssapi.exceptions.MissingCredentialsError
+        ~gssapi.exceptions.OperationUnavailableError
+        ~gssapi.exceptions.DuplicateCredentialsElementError
     """
     cdef gss_OID desired_mech
     if mech is not None:

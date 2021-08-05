@@ -22,9 +22,11 @@ cdef class ChannelBindings:
                  acceptor_address=None, application_data=None):
         """
         Args:
-            initiator_address_type (AddressType): the initiator address type
+            initiator_address_type (~gssapi.AddressType): the initiator address
+                type
             initiator_address (bytes): the initiator address
-            acceptor_address_type (AddressType):  the acceptor address type
+            acceptor_address_type (~gssapi.AddressType):  the acceptor address
+                type
             acceptor_address (bytes): the acceptor address
             application_data (bytes): additional application-specific data
         """

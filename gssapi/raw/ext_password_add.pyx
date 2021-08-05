@@ -48,8 +48,8 @@ usage='initiate', init_lifetime=None, accept_lifetime=None)
 
     Args:
         input_cred (Creds): the credentials to add to
-        name (Name): the name to acquire credentials for
-        mech (MechType): the desired mechanism.  Note that this is both
+        name (~gssapi.raw.names.Name): the name to acquire credentials for
+        mech (~gssapi.MechType): the desired mechanism.  Note that this is both
             singular and required
         password (bytes): the password used to acquire credentialss with
         usage (str): the usage type for the credentials: may be
@@ -67,7 +67,7 @@ usage='initiate', init_lifetime=None, accept_lifetime=None)
         may be None for indefinite or not supported)
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_buffer_desc password_buffer = gss_buffer_desc(len(password),

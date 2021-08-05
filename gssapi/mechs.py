@@ -121,13 +121,13 @@ class Mechanism(roids.OID):
         Get a generator of mechanisms that may be able to process the name
 
         Args:
-            name (Name): a name to inquire about
+            name (~gssapi.names.Name): a name to inquire about
 
         Returns:
             [Mechanism]: a set of mechanisms which support this name
 
         Raises:
-            GSSError
+            ~gssapi.exceptions.GSSError
         """
         return (cls(mech) for mech in rmisc.inquire_mechs_for_name(name))
 
@@ -143,7 +143,7 @@ class Mechanism(roids.OID):
             Mechanism: the desired mechanism
 
         Raises:
-            GSSError
+            ~gssapi.exceptions.GSSError
 
         :requires-ext:`rfc5801`
         """
@@ -173,7 +173,7 @@ class Mechanism(roids.OID):
             [Mechanism]: A set of mechanisms having the desired features.
 
         Raises:
-            GSSError
+            ~gssapi.exceptions.GSSError
 
         :requires-ext:`rfc5587`
         """

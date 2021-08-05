@@ -60,13 +60,13 @@ def inquire_names_for_mech(OID mech not None):
     the given mechanism.
 
     Args:
-        mech (OID): the mechanism in question
+        mech (~gssapi.OID): the mechanism in question
 
     Returns:
         list: the name type OIDs supported by the given mechanism
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_OID_set name_types
@@ -91,13 +91,13 @@ def inquire_mechs_for_name(Name name not None):
     process the given name.
 
     Args:
-        name (Name): the name in question
+        name (~gssapi.raw.names.Name): the name in question
 
     Returns:
         list: the mechanism OIDs able to process the given name
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_OID_set mech_types
@@ -129,8 +129,8 @@ def _display_status(unsigned int error_code, bint is_major_code,
         error_code (int): The error code in question
         is_major_code (bool): is this a major code (True) or a
             minor code (False)
-        mech (MechType): The mechanism type that returned this error code
-            (defaults to None, for the default mechanism)
+        mech (~gssapi.MechType): The mechanism type that returned this error
+            code (defaults to None, for the default mechanism)
         message_context (int): The context for this call -- this is used when
             multiple messages are available (defaults to 0)
 

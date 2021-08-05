@@ -37,11 +37,11 @@ class Credentials(rcreds.Creds):
     :meth:`acquire` method.
 
     Raises:
-        BadMechanismError
-        BadNameTypeError
-        BadNameError
-        ExpiredCredentialsError
-        MissingCredentialsError
+        ~gssapi.exceptions.BadMechanismError
+        ~gssapi.exceptions.BadNameTypeError
+        ~gssapi.exceptions.BadNameError
+        ~gssapi.exceptions.ExpiredCredentialsError
+        ~gssapi.exceptions.MissingCredentialsError
     """
 
     __slots__ = ()
@@ -108,8 +108,8 @@ class Credentials(rcreds.Creds):
         extension.
 
         Args:
-            name (Name): the name associated with the credentials,
-                or None for the default name
+            name (~gssapi.names.Name): the name associated with the
+                credentials, or None for the default name
             lifetime (int): the desired lifetime of the credentials, or None
                 for indefinite
             mechs (list): the desired :class:`MechType` OIDs to be used
@@ -125,11 +125,11 @@ class Credentials(rcreds.Creds):
                 them
 
         Raises:
-            BadMechanismError
-            BadNameTypeError
-            BadNameError
-            ExpiredCredentialsError
-            MissingCredentialsError
+            ~gssapi.exceptions.BadMechanismError
+            ~gssapi.exceptions.BadNameTypeError
+            ~gssapi.exceptions.BadNameError
+            ~gssapi.exceptions.ExpiredCredentialsError
+            ~gssapi.exceptions.MissingCredentialsError
         """
 
         if store is None:
@@ -166,7 +166,7 @@ class Credentials(rcreds.Creds):
                 or None for the default store.
             usage (str): the usage to store the credentials with -- either
                 'both', 'initiate', or 'accept'
-            mech (OID): the :class:`MechType` to associate with the
+            mech (~gssapi.OID): the :class:`MechType` to associate with the
                 stored credentials
             overwrite (bool): whether or not to overwrite existing credentials
                 stored with the same name, etc
@@ -177,11 +177,11 @@ class Credentials(rcreds.Creds):
             StoreCredResult: the results of the credential storing operation
 
         Raises:
-            GSSError
-            ExpiredCredentialsError
-            MissingCredentialsError
-            OperationUnavailableError
-            DuplicateCredentialsElementError
+            ~gssapi.exceptions.GSSError
+            ~gssapi.exceptions.ExpiredCredentialsError
+            ~gssapi.exceptions.MissingCredentialsError
+            ~gssapi.exceptions.OperationUnavailableError
+            ~gssapi.exceptions.DuplicateCredentialsElementError
         """
 
         if store is None:
@@ -212,7 +212,7 @@ class Credentials(rcreds.Creds):
         :requires-ext:`s4u`
 
         Args:
-            name (Name): the name to impersonate
+            name (~gssapi.names.Name): the name to impersonate
             lifetime (int): the desired lifetime of the new credentials,
                 or None for indefinite
             mechs (list): the desired :class:`MechType` OIDs for the new
@@ -251,9 +251,9 @@ class Credentials(rcreds.Creds):
                 with None used when the corresponding argument was False
 
         Raises:
-            MissingCredentialsError
-            InvalidCredentialsError
-            ExpiredCredentialsError
+            ~gssapi.exceptions.MissingCredentialsError
+            ~gssapi.exceptions.InvalidCredentialsError
+            ~gssapi.exceptions.ExpiredCredentialsError
         """
 
         res = rcreds.inquire_cred(self, name, lifetime, usage, mechs)
@@ -274,7 +274,8 @@ class Credentials(rcreds.Creds):
         about them.
 
         Args:
-            mech (OID): the mechanism for which to retrive the information
+            mech (~gssapi.OID): the mechanism for which to retrive the
+                information
             name (bool): get the name associated with the credentials
             init_lifetime (bool): get the remaining initiate lifetime for
                 the credentials
@@ -327,10 +328,10 @@ class Credentials(rcreds.Creds):
         `impersonator` argument.
 
         Args:
-            name (Name): the name associated with the
+            name (~gssapi.names.Name): the name associated with the
                 credentials
-            mech (OID): the desired :class:`MechType` to be used with the
-                credentials
+            mech (~gssapi.OID): the desired :class:`MechType` to be used with
+                the credentials
             usage (str): the usage for the credentials -- either 'both',
                 'initiate', or 'accept'
             init_lifetime (int): the desired initiate lifetime of the
@@ -349,12 +350,12 @@ class Credentials(rcreds.Creds):
                 and the newly acquired ones.
 
         Raises:
-            BadMechanismError
-            BadNameTypeError
-            BadNameError
-            DuplicateCredentialsElementError
-            ExpiredCredentialsError
-            MissingCredentialsError
+            ~gssapi.exceptions.BadMechanismError
+            ~gssapi.exceptions.BadNameTypeError
+            ~gssapi.exceptions.BadNameError
+            ~gssapi.exceptions.DuplicateCredentialsElementError
+            ~gssapi.exceptions.ExpiredCredentialsError
+            ~gssapi.exceptions.MissingCredentialsError
         """
 
         if store is not None and impersonator is not None:

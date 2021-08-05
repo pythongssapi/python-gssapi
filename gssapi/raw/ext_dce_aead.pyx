@@ -31,7 +31,8 @@ def wrap_aead(SecurityContext context not None, bytes message not None,
     and outputs and AEAD message.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (bytes): the message to wrap or encrypt
         associated (bytes): associated data to go with the message
         confidential (bool): whether or not to encrypt the message (True),
@@ -41,10 +42,10 @@ def wrap_aead(SecurityContext context not None, bytes message not None,
 
     Returns:
         WrapResult: the wrapped/encrypted total message, and whether or not
-            encryption was actually used
+        encryption was actually used
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef int conf_req = confidential
@@ -87,16 +88,17 @@ def unwrap_aead(SecurityContext context not None, bytes message not None,
     data, and returns an unwrapped/decrypted message.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (bytes): the AEAD message to unwrap or decrypt
         associated (bytes): associated data that goes with the message
 
     Returns:
         UnwrapResult: the unwrapped/decrypted message, whether or on
-            encryption was used, and the QoP used
+        encryption was used, and the QoP used
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_buffer_desc input_buffer = gss_buffer_desc(len(message), message)

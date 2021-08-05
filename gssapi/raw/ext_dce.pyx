@@ -322,7 +322,8 @@ def wrap_iov(SecurityContext context not None, IOV message not None,
         This modifies the input :class:`IOV`.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (IOV): an :class:`IOV` containing the message
         confidential (bool): whether or not to encrypt the message (True),
             or just wrap it with a MIC (False)
@@ -333,7 +334,7 @@ def wrap_iov(SecurityContext context not None, IOV message not None,
         bool: whether or not confidentiality was actually used
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef int conf_req = confidential
@@ -376,15 +377,16 @@ def unwrap_iov(SecurityContext context not None, IOV message not None):
         This modifies the input :class:`IOV`.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (IOV): an :class:`IOV` containing the message
 
     Returns:
         IOVUnwrapResult: whether or not confidentiality was used,
-            and the QoP used.
+        and the QoP used.
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef int conf_used
@@ -421,15 +423,16 @@ def wrap_iov_length(SecurityContext context not None, IOV message not None,
         This modifies the input :class:`IOV`.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (IOV): an :class:`IOV` containing the message
 
     Returns:
         WrapResult: a list of :class:IOVBuffer` objects, and whether or not
-            encryption was actually used
+        encryption was actually used
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef int conf_req = confidential

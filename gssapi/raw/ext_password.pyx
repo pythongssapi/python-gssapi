@@ -40,12 +40,12 @@ usage="initiate")
     In general, it functions similarly to :func:`acquire_cred`.
 
     Args:
-        name (Name): the name to acquire credentials for
+        name (~gssapi.raw.names.Name): the name to acquire credentials for
         password (bytes): the password used to acquire credentialss with
         lifetime (int): the lifetime for the credentials (or None for
             indefinite)
-        mechs ([MechType]): the desired mechanisms for which the credentials
-            should work (or None for the default set)
+        mechs (~gssapi.MechType): the desired mechanisms for which the
+            credentials should work (or None for the default set)
         usage (str): usage type for credentials.  Possible values:
             'initiate' (default), 'accept', 'both' (failsafe).
 
@@ -55,7 +55,7 @@ usage="initiate")
         indefinite or not supported)
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_buffer_desc password_buffer = gss_buffer_desc(len(password),

@@ -28,14 +28,14 @@ def inquire_saslname_for_mech(OID mech not None):
     the mech name, and the mech description.
 
     Args:
-        mech (OID): Mechanism to inquire about
+        mech (~gssapi.OID): Mechanism to inquire about
 
     Returns:
         InquireSASLNameResult: the results of inquiry; a mech's SASL name,
-            name, and description.
+        name, and description.
 
     Raises:
-        GSSError: an unknown failure occurred
+        ~gssapi.exceptions.GSSError: an unknown failure occurred
     """
     cdef OM_uint32 maj_stat, min_stat
     cdef gss_buffer_desc sasl_mech_name
@@ -72,10 +72,10 @@ def inquire_mech_for_saslname(bytes sasl_name not None):
         sasl_name (bytes): SASL name of the mechanism
 
     Returns:
-        OID: the mechanism with corresponding SASL name.
+        ~gssapi.OID: the mechanism with corresponding SASL name.
 
     Raises:
-        GSSError: An unknown failure occurred
+        ~gssapi.exceptions.GSSError: An unknown failure occurred
     """
     cdef OM_uint32 maj_stat, min_stat
     cdef gss_buffer_desc sn

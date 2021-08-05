@@ -143,9 +143,13 @@ Extensions
 
 In addition to RFC 2743/2744, Python-GSSAPI also has support for:
 
+* RFC 4178 (GSS-API Negotiation Mechanism)
+
 * RFC 5587 (Extended GSS Mechanism Inquiry APIs)
 
 * RFC 5588 (GSS-API Extension for Storing Delegated Credentials)
+
+* RFC 5801 (GSS-API SASL Extensions)
 
 * (Additional) Credential Store Extension
 

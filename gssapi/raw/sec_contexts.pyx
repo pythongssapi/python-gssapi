@@ -129,12 +129,13 @@ flags=None, lifetime=None, channel_bindings=None, input_token=None)
         This changes the input context!
 
     Args:
-        target_name (Name): the target for the security context
+        target_name (~gssapi.raw.names.Name): the target for the security
+            context
         creds (Creds): the credentials to use to initiate the context,
             or None to use the default credentials
-        context (SecurityContext): the security context to update, or
-            None to create a new context
-        mech (MechType): the mechanism type for this security context,
+        context (~gssapi.raw.sec_contexts.SecurityContext): the security
+            context to update, or None to create a new context
+        mech (~gssapi.MechType): the mechanism type for this security context,
             or None for the default mechanism type
         flags (list): the flags to request for the security context, or
             None to use the default set: mutual_authentication and
@@ -155,18 +156,18 @@ flags=None, lifetime=None, channel_bindings=None, input_token=None)
         initiation.
 
     Raises:
-        InvalidTokenError
-        InvalidCredentialsError
-        MissingCredentialsError
-        ExpiredCredentialsError
-        BadChannelBindingsError
-        BadMICError
-        ExpiredTokenError
-        DuplicateTokenError
-        MissingContextError
-        BadNameTypeError
-        BadNameError
-        BadMechanismError
+        ~gssapi.exceptions.InvalidTokenError
+        ~gssapi.exceptions.InvalidCredentialsError
+        ~gssapi.exceptions.MissingCredentialsError
+        ~gssapi.exceptions.ExpiredCredentialsError
+        ~gssapi.exceptions.BadChannelBindingsError
+        ~gssapi.exceptions.BadMICError
+        ~gssapi.exceptions.ExpiredTokenError
+        ~gssapi.exceptions.DuplicateTokenError
+        ~gssapi.exceptions.MissingContextError
+        ~gssapi.exceptions.BadNameTypeError
+        ~gssapi.exceptions.BadNameError
+        ~gssapi.exceptions.BadMechanismError
     """
 
     cdef gss_OID mech_oid
@@ -265,8 +266,8 @@ channel_bindings=None)
         input_token (bytes): the token sent by the context initiator
         acceptor_creds (Creds): the credentials to be used to accept the
             context (or None to use the default credentials)
-        context (SecurityContext): the security context to update
-            (or None to create a new security context object)
+        context (~gssapi.raw.sec_contexts.SecurityContext): the security
+            context to update (or None to create a new security context object)
         channel_bindings (ChannelBindings): The channel bindings (or None for
             no channel bindings)
 
@@ -279,16 +280,16 @@ channel_bindings=None)
             exchanges are needed to finalize the security context.
 
     Raises:
-        InvalidTokenError
-        InvalidCredentialsError
-        MissingCredentialsError
-        ExpiredCredentialsError
-        BadChannelBindingsError
-        MissingContextError
-        BadMICError
-        ExpiredTokenError
-        DuplicateTokenError
-        BadMechanismError
+        ~gssapi.exceptions.InvalidTokenError
+        ~gssapi.exceptions.InvalidCredentialsError
+        ~gssapi.exceptions.MissingCredentialsError
+        ~gssapi.exceptions.ExpiredCredentialsError
+        ~gssapi.exceptions.BadChannelBindingsError
+        ~gssapi.exceptions.MissingContextError
+        ~gssapi.exceptions.BadMICError
+        ~gssapi.exceptions.ExpiredTokenError
+        ~gssapi.exceptions.DuplicateTokenError
+        ~gssapi.exceptions.BadMechanismError
     """
 
     cdef gss_channel_bindings_t bdng
@@ -386,7 +387,8 @@ lifetime=True, mech=True, flags=True, locally_init=True, complete=True)
         the target name may be ``None`` if it would have been ``GSS_C_NO_NAME``
 
     Args:
-        context (SecurityContext): the context in question
+        context (~gssapi.raw.sec_contexts.SecurityContext): the context in
+            question
 
     Returns:
         InquireContextResult: the initiator name, the target name, the TTL
@@ -395,7 +397,7 @@ lifetime=True, mech=True, flags=True, locally_init=True, complete=True)
             and whether or not the context is currently fully established
 
     Raises:
-        MissingContextError
+        ~gssapi.exceptions.MissingContextError
     """
 
     cdef gss_name_t output_init_name
@@ -498,14 +500,15 @@ def context_time(SecurityContext context not None):
     give a result of 0.
 
     Args:
-        context (SecurityContext): the security context in question
+        context (~gssapi.raw.sec_contexts.SecurityContext): the security
+            context in question
 
     Returns:
         int: the number of seconds for which the context will be valid
 
     Raises:
-        ExpiredContextError
-        MissingContextError
+        ~gssapi.exceptions.ExpiredContextError
+        ~gssapi.exceptions.MissingContextError
     """
 
     cdef OM_uint32 ttl
@@ -536,13 +539,13 @@ def process_context_token(SecurityContext context not None, token):
         This method has been essentially deprecated by :rfc:`2744`.
 
     Args:
-        context (SecurityContext): the security context against which
-            to process the token
+        context (~gssapi.raw.sec_contexts.SecurityContext): the security
+            context against which to process the token
         token (bytes): the token to process
 
     Raises:
-        InvalidTokenError
-        MissingContextError
+        ~gssapi.exceptions.InvalidTokenError
+        ~gssapi.exceptions.MissingContextError
     """
 
     cdef gss_buffer_desc token_buffer = gss_buffer_desc(len(token), token)
@@ -567,10 +570,10 @@ def import_sec_context(token not None):
     :func:`export_sec_context`.
 
     Raises:
-        MissingContextError
-        InvalidTokenError
-        OperationUnavailableError
-        UnauthorizedError
+        ~gssapi.exceptions.MissingContextError
+        ~gssapi.exceptions.InvalidTokenError
+        ~gssapi.exceptions.OperationUnavailableError
+        ~gssapi.exceptions.UnauthorizedError
     """
 
     cdef gss_buffer_desc token_buffer = gss_buffer_desc(len(token), token)
@@ -602,15 +605,16 @@ def export_sec_context(SecurityContext context not None):
     Warning: this modifies the input context
 
     Args:
-        context (SecurityContext): the context to send to another process
+        context (~gssapi.raw.sec_contexts.SecurityContext): the context to send
+            to another process
 
     Returns:
         bytes: the output token to be imported
 
     Raises:
-        ExpiredContextError
-        MissingContextError
-        OperationUnavailableError
+        ~gssapi.exceptions.ExpiredContextError
+        ~gssapi.exceptions.MissingContextError
+        ~gssapi.exceptions.OperationUnavailableError
     """
 
     cdef gss_buffer_desc output_token = gss_buffer_desc(0, NULL)
@@ -644,7 +648,8 @@ def delete_sec_context(SecurityContext context not None, local_only=True):
         objects will automatically be freed by Python.
 
     Args:
-        context (SecurityContext): the security context in question
+        context (~gssapi.raw.sec_contexts.SecurityContext): the security
+            context in question
         local_only (bool): should we request local deletion (True), or also
             remote deletion (False), in which case a token is also returned
 
@@ -653,7 +658,7 @@ def delete_sec_context(SecurityContext context not None, local_only=True):
             this is None, but bytes for compatibility.
 
     Raises:
-        MissingContextError
+        ~gssapi.exceptions.MissingContextError
     """
 
     cdef OM_uint32 maj_stat, min_stat

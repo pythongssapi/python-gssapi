@@ -47,14 +47,14 @@ def inquire_cred_by_oid(Creds cred_handle not None,
 
     Args:
         cred_handle (Creds): the Credentials to query
-        desired_aspect (OID): the desired aspect of the Credentials to inquire
-            about.
+        desired_aspect (~gssapi.OID): the desired aspect of the Credentials
+            to inquire about.
 
     Returns:
         list: A list of zero or more pieces of data (as bytes objects)
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_buffer_set_t *data_set_ptr = NULL
@@ -96,15 +96,16 @@ def inquire_sec_context_by_oid(SecurityContext context not None,
     encryption keys.
 
     Args:
-        context (SecurityContext): the Security Context to query
-        desired_aspect (OID): the desired aspect of the Security Context to
-            inquire about.
+        context (~gssapi.raw.sec_contexts.SecurityContext): the Security
+            Context to query
+        desired_aspect (~gssapi.OID): the desired aspect of the Security
+            Context to inquire about.
 
     Returns:
         list: A list of zero or more pieces of data (as bytes objects)
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_buffer_set_t *data_set_ptr = NULL
@@ -150,18 +151,18 @@ def set_sec_context_option(OID desired_aspect not None,
     sender handle.
 
     Args:
-        desired_aspect (OID): the desired aspect of the Security Context to set
-            the value for.
-        context (SecurityContext): the Security Context to set, or None to
-            create a new context.
+        desired_aspect (~gssapi.OID): the desired aspect of the Security
+            Context to set the value for.
+        context (~gssapi.raw.sec_contexts.SecurityContext): the Security
+            Context to set, or None to create a new context.
         value (bytes): the value to set on the desired aspect of the Security
             Context or None to send GSS_C_EMPTY_BUFFER.
 
     Returns:
-        SecurityContext: The output security context.
+        ~gssapi.raw.sec_contexts.SecurityContext: The output security context.
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_buffer_desc value_buffer

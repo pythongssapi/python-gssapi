@@ -54,7 +54,8 @@ def get_mic(SecurityContext context not None, message, qop=None):
     together.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (bytes): the message for which to generate the MIC
         qop (int): the requested Quality of Protection
             (or None to use the default)
@@ -63,9 +64,9 @@ def get_mic(SecurityContext context not None, message, qop=None):
         bytes: the generated MIC token
 
     Raises:
-        ExpiredContextError
-        MissingContextError
-        BadQoPError
+        ~gssapi.exceptions.ExpiredContextError
+        ~gssapi.exceptions.MissingContextError
+        ~gssapi.exceptions.BadQoPError
     """
 
     cdef gss_buffer_desc message_buffer = gss_buffer_desc(len(message),
@@ -99,7 +100,8 @@ def verify_mic(SecurityContext context not None, message, token):
     be raised.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (bytes): the message in question
         token (bytes): the MIC token in question
 
@@ -107,14 +109,14 @@ def verify_mic(SecurityContext context not None, message, token):
         int: the QoP used.
 
     Raises:
-        InvalidTokenError
-        BadMICError
-        DuplicateTokenError
-        ExpiredTokenError
-        TokenTooLateError
-        TokenTooEarlyError
-        ExpiredContextError
-        MissingContextError
+        ~gssapi.exceptions.InvalidTokenError
+        ~gssapi.exceptions.BadMICError
+        ~gssapi.exceptions.DuplicateTokenError
+        ~gssapi.exceptions.ExpiredTokenError
+        ~gssapi.exceptions.TokenTooLateError
+        ~gssapi.exceptions.TokenTooEarlyError
+        ~gssapi.exceptions.ExpiredContextError
+        ~gssapi.exceptions.MissingContextError
     """
 
     cdef gss_buffer_desc message_buffer = gss_buffer_desc(len(message),
@@ -145,7 +147,8 @@ def wrap_size_limit(SecurityContext context not None, OM_uint32 output_size,
     the given maximum wrapped/encrypted message size.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         output_size (int): the maximum desired wrapped/encrypted message size
         confidential (bool): whether or not confidentiality is being used
         qop (int): the QoP that will be when you actually call wrap
@@ -155,9 +158,9 @@ def wrap_size_limit(SecurityContext context not None, OM_uint32 output_size,
         int: the maximum unencrypted/unwrapped message size
 
     Raises:
-        MissingContextError
-        ExpiredContextError
-        BadQoPError
+        ~gssapi.exceptions.MissingContextError
+        ~gssapi.exceptions.ExpiredContextError
+        ~gssapi.exceptions.BadQoPError
     """
 
     cdef int conf_req = confidential
@@ -187,7 +190,8 @@ def wrap(SecurityContext context not None, message, confidential=True,
     of confidential) with the given Quality of Protection.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (bytes): the message to wrap or encrypt
         confidential (bool): whether or not to encrypt the message (True),
             or just wrap it with a MIC (False)
@@ -199,9 +203,9 @@ def wrap(SecurityContext context not None, message, confidential=True,
             encryption was actually used
 
     Raises:
-        ExpiredContextError
-        MissingContextError
-        BadQoPError
+        ~gssapi.exceptions.ExpiredContextError
+        ~gssapi.exceptions.MissingContextError
+        ~gssapi.exceptions.BadQoPError
     """
 
     cdef int conf_req = confidential
@@ -236,7 +240,8 @@ def unwrap(SecurityContext context not None, message):
     on whether the sender used confidentiality.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (bytes): the message to unwrap/decrypt
 
     Returns:
@@ -244,14 +249,14 @@ def unwrap(SecurityContext context not None, message):
             encryption was used, and the QoP used
 
     Raises:
-        InvalidTokenError
-        BadMICError
-        DuplicateTokenError
-        ExpiredTokenError
-        TokenTooLateError
-        TokenTooEarlyError
-        ExpiredContextError
-        MissingContextError
+        ~gssapi.exceptions.InvalidTokenError
+        ~gssapi.exceptions.BadMICError
+        ~gssapi.exceptions.DuplicateTokenError
+        ~gssapi.exceptions.ExpiredTokenError
+        ~gssapi.exceptions.TokenTooLateError
+        ~gssapi.exceptions.TokenTooEarlyError
+        ~gssapi.exceptions.ExpiredContextError
+        ~gssapi.exceptions.MissingContextError
     """
 
     cdef gss_buffer_desc input_buffer = gss_buffer_desc(len(message), message)

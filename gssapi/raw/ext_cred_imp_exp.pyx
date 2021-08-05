@@ -36,7 +36,7 @@ def export_cred(Creds creds not None):
         bytes: the exported token representing the given credentials object
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     # GSS_C_EMPTY_BUFFER
@@ -70,7 +70,7 @@ def import_cred(token not None):
         Creds: the imported credentials object
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_buffer_desc token_buffer = gss_buffer_desc(len(token), token)

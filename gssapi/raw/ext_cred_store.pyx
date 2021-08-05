@@ -120,8 +120,8 @@ usage='both')
         store (dict): the credential store information pointing to the
             credential store from which to acquire the credentials.
             See :doc:`credstore` for valid values
-        name (Name): the name associated with the credentials,
-            or None for the default name
+        name (~gssapi.raw.names.Name): the name associated with the
+            credentials, or None for the default name
         lifetime (int): the desired lifetime of the credentials, or None
             for indefinite
         mechs (list): the desired mechanisms to be used with these
@@ -131,10 +131,10 @@ usage='both')
 
     Returns:
         AcquireCredResult: the acquired credentials and information about
-            them
+        them
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_OID_set desired_mechs
@@ -218,8 +218,8 @@ init_lifetime=None, accept_lifetime=None)
         store (dict): the store into which to store the credentials,
             or None for the default store.
             See :doc:`credstore` for valid values
-        name (Name): the name associated with the credentials
-        mech (OID): the desired mechanism to be used with these
+        name (~gssapi.raw.names.Name): the name associated with the credentials
+        mech (~gssapi.OID): the desired mechanism to be used with these
             credentials
         usage (str): the usage for these credentials -- either 'both',
             'initiate', or 'accept'
@@ -230,10 +230,10 @@ init_lifetime=None, accept_lifetime=None)
 
     Returns:
         AcquireCredResult: the new credentials set and information about
-            it
+        it
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef OM_uint32 input_initiator_ttl = c_py_ttl_to_c(init_lifetime)
@@ -316,7 +316,8 @@ set_default=False)
         creds (Creds): the credentials to store
         usage (str): the usage to store the credentials with -- either
             'both', 'initiate', or 'accept'
-        mech (OID): the mechansim to associate with the stored credentials
+        mech (~gssapi.OID): the mechansim to associate with the stored
+            credentials
         overwrite (bool): whether or not to overwrite existing credentials
             stored with the same name, etc
         set_default (bool): whether or not to set these credentials as
@@ -326,7 +327,7 @@ set_default=False)
         StoreCredResult: the results of the credential storing operation
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_OID desired_mech

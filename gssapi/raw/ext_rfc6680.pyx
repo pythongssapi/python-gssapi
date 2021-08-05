@@ -46,16 +46,16 @@ def display_name_ext(Name name not None, OID name_type not None):
     will be raised.
 
     Args:
-        name (Name): the name to display
-        name_type (OID): the name type (see NameType) to use to
+        name (~gssapi.raw.names.Name): the name to display
+        name_type (~gssapi.OID): the name type (see NameType) to use to
             display the given name
 
     Returns:
         bytes: the displayed name
 
     Raises:
-        OperationUnavailableError: the given name could not be displayed
-            using the given name type
+        ~gssapi.exceptions.OperationUnavailableError: the given name could not
+            be displayed using the given name type
     """
 
     # GSS_C_EMPTY_BUFFER
@@ -85,7 +85,7 @@ def inquire_name(Name name not None, mech_name=True, attrs=True):
     a mechanism name, the associated mechansim is returned as well.
 
     Args:
-        name (Name): the name about which to inquire
+        name (~gssapi.raw.names.Name): the name about which to inquire
         mech_name (bool): whether or not to retrieve if this name
             is a mech_name (and the associate mechanism)
         attrs (bool): whether or not to retrieve the attribute name list
@@ -96,7 +96,7 @@ def inquire_name(Name name not None, mech_name=True, attrs=True):
             the associated mechanism if it is a Mechanism Name
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef int *name_is_mn_ptr = NULL
@@ -156,15 +156,15 @@ def set_name_attribute(Name name not None, attr not None, value not None,
     used in between calls to "clear" the values.
 
     Args:
-        name (Name): the Name on which to set the attribute
+        name (~gssapi.raw.names.Name): the Name on which to set the attribute
         attr (bytes): the name of the attribute
         value (list): a list of bytes objects to use as the value(s)
         complete (bool): whether or not to mark this attribute's value
             set as being "complete"
 
     Raises:
-        OperationUnavailableError: the given attribute name is unknown
-            or could not be set
+        ~gssapi.exceptions.OperationUnavailableError: the given attribute name
+            is unknown or could not be set
     """
 
     cdef gss_buffer_desc attr_buff = gss_buffer_desc(len(attr), attr)
@@ -201,18 +201,18 @@ def get_name_attribute(Name name not None, attr not None, more=None):
     multiple calls to retrieve multiple values).
 
     Args:
-        name (Name): the Name from which to get the attribute
+        name (~gssapi.raw.names.Name): the Name from which to get the attribute
         attr (bytes): the name of the attribute
 
     Returns:
         GetNameAttributeResult: the raw version of the value(s),
-            the human-readable version of the value(s), whether
-            or not the attribute was authenticated, and whether or
-            not the attribute's value set was marked as complete
+        the human-readable version of the value(s), whether
+        or not the attribute was authenticated, and whether or
+        not the attribute's value set was marked as complete
 
     Raises:
-        OperationUnavailableError: the given attribute is unknown
-            or unset
+        ~gssapi.exceptions.OperationUnavailableError: the given attribute is
+            unknown or unset
     """
     cdef gss_buffer_desc attr_buff = gss_buffer_desc(len(attr), attr)
 
@@ -261,12 +261,12 @@ def delete_name_attribute(Name name not None, attr not None):
     Note that the removal of certain attributes may not be allowed.
 
     Args:
-        name (Name): the name to remove the attribute from
+        name (~gssapi.raw.names.Name): the name to remove the attribute from
         attr (bytes): the name of the attribute
 
     Raises:
-        OperationUnavailableError
-        UnauthorizedError
+        ~gssapi.exceptions.OperationUnavailableError
+        ~gssapi.exceptions.UnauthorizedError
     """
 
     cdef gss_buffer_desc attr_buff = gss_buffer_desc(len(attr), attr)
@@ -296,13 +296,13 @@ def export_name_composite(Name name not None):
         using the normal export name type.
 
     Args:
-        name (Name): the name to export
+        name (~gssapi.raw.names.Name): the name to export
 
     Returns:
         bytes: the exported composite name
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_buffer_desc res = gss_buffer_desc(0, NULL)

@@ -45,13 +45,17 @@ def get_mic_iov(SecurityContext context not None, IOV message not None,
         This modifies the input :class:`IOV`.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (IOV): the :class:`IOV` containing the message
         qop (int): the desired Quality of Protection
             (or None for the default QoP)
 
+    Returns:
+        None
+
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_qop_t qop_req = qop if qop is not None else GSS_C_QOP_DEFAULT
@@ -84,13 +88,17 @@ def get_mic_iov_length(SecurityContext context not None, IOV message not None,
         This modifies the input :class:`IOV`.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (IOV): the :class:`IOV` containing the message
         qop (int): the desired Quality of Protection
             (or None for the default QoP)
 
+    Returns:
+        None
+
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_qop_t qop_req = qop if qop is not None else GSS_C_QOP_DEFAULT
@@ -121,14 +129,15 @@ def verify_mic_iov(SecurityContext context not None, IOV message not None,
     in the given IOV method.
 
     Args:
-        context (SecurityContext): the current security context
+        context (~gssapi.raw.sec_contexts.SecurityContext): the current
+            security context
         message (IOV): the :class:`IOV` containing the message
 
     Returns:
         int: the QoP used to generate the MIC token
 
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_iov_buffer_desc *res_arr = message.__cvalue__()

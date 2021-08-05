@@ -146,9 +146,9 @@ class SecurityContext(rsec_contexts.SecurityContext,
             bytes: the message signature
 
         Raises:
-            ExpiredContextError
-            MissingContextError
-            BadQoPError
+            ~gssapi.exceptions.ExpiredContextError
+            ~gssapi.exceptions.MissingContextError
+            ~gssapi.exceptions.BadQoPError
         """
 
         # TODO(directxman12): check flags?
@@ -168,14 +168,14 @@ class SecurityContext(rsec_contexts.SecurityContext,
             mic (bytes): the signature to verify
 
         Raises:
-            BadMICError: the signature was not valid
-            InvalidTokenError
-            DuplicateTokenError
-            ExpiredTokenError
-            TokenTooLateError
-            TokenTooEarlyError
-            ExpiredContextError
-            MissingContextError
+            ~gssapi.exceptions.BadMICError: the signature was not valid
+            ~gssapi.exceptions.InvalidTokenError
+            ~gssapi.exceptions.DuplicateTokenError
+            ~gssapi.exceptions.ExpiredTokenError
+            ~gssapi.exceptions.TokenTooLateError
+            ~gssapi.exceptions.TokenTooEarlyError
+            ~gssapi.exceptions.ExpiredContextError
+            ~gssapi.exceptions.MissingContextError
         """
 
         return rmessage.verify_mic(self, message, mic)
@@ -195,9 +195,9 @@ class SecurityContext(rsec_contexts.SecurityContext,
                 (e.g. whether encryption was used succesfully)
 
         Raises:
-            ExpiredContextError
-            MissingContextError
-            BadQoPError
+            ~gssapi.exceptions.ExpiredContextError
+            ~gssapi.exceptions.MissingContextError
+            ~gssapi.exceptions.BadQoPError
         """
 
         return rmessage.wrap(self, message, encrypt)
@@ -216,14 +216,14 @@ class SecurityContext(rsec_contexts.SecurityContext,
                 (e.g. wheter encryption was used)
 
         Raises:
-            InvalidTokenError
-            BadMICError
-            DuplicateTokenError
-            ExpiredTokenError
-            TokenTooLateError
-            TokenTooEarlyError
-            ExpiredContextError
-            MissingContextError
+            ~gssapi.exceptions.InvalidTokenError
+            ~gssapi.exceptions.BadMICError
+            ~gssapi.exceptions.DuplicateTokenError
+            ~gssapi.exceptions.ExpiredTokenError
+            ~gssapi.exceptions.TokenTooLateError
+            ~gssapi.exceptions.TokenTooEarlyError
+            ~gssapi.exceptions.ExpiredContextError
+            ~gssapi.exceptions.MissingContextError
         """
 
         return rmessage.unwrap(self, message)
@@ -244,10 +244,11 @@ class SecurityContext(rsec_contexts.SecurityContext,
             bytes: the encrypted message
 
         Raises:
-            EncryptionNotUsed: the encryption could not be used
-            ExpiredContextError
-            MissingContextError
-            BadQoPError
+            ~gssapi.exceptions.EncryptionNotUsed: the encryption could not be
+                used
+            ~gssapi.exceptions.ExpiredContextError
+            ~gssapi.exceptions.MissingContextError
+            ~gssapi.exceptions.BadQoPError
         """
 
         res = self.wrap(message, encrypt=True)
@@ -273,15 +274,16 @@ class SecurityContext(rsec_contexts.SecurityContext,
             bytes: the decrypted message
 
         Raises:
-            EncryptionNotUsed: encryption was expected, but not used
-            InvalidTokenError
-            BadMICError
-            DuplicateTokenError
-            ExpiredTokenError
-            TokenTooLateError
-            TokenTooEarlyError
-            ExpiredContextError
-            MissingContextError
+            ~gssapi.exceptions.EncryptionNotUsed: encryption was expected, but
+                not used
+            ~gssapi.exceptions.InvalidTokenError
+            ~gssapi.exceptions.BadMICError
+            ~gssapi.exceptions.DuplicateTokenError
+            ~gssapi.exceptions.ExpiredTokenError
+            ~gssapi.exceptions.TokenTooLateError
+            ~gssapi.exceptions.TokenTooEarlyError
+            ~gssapi.exceptions.ExpiredContextError
+            ~gssapi.exceptions.MissingContextError
         """
 
         res = self.unwrap(message)
@@ -311,9 +313,9 @@ class SecurityContext(rsec_contexts.SecurityContext,
             int: the maximum input message size
 
         Raises:
-            MissingContextError
-            ExpiredContextError
-            BadQoPError
+            ~gssapi.exceptions.MissingContextError
+            ~gssapi.exceptions.ExpiredContextError
+            ~gssapi.exceptions.BadQoPError
         """
 
         return rmessage.wrap_size_limit(self, desired_output_size,
@@ -332,8 +334,8 @@ class SecurityContext(rsec_contexts.SecurityContext,
             token (bytes): the token to process
 
         Raises:
-            InvalidTokenError
-            MissingContextError
+            ~gssapi.exceptions.InvalidTokenError
+            ~gssapi.exceptions.MissingContextError
         """
 
         rsec_contexts.process_context_token(self, token)
@@ -348,9 +350,9 @@ class SecurityContext(rsec_contexts.SecurityContext,
             bytes: the exported security context
 
         Raises:
-            ExpiredContextError
-            MissingContextError
-            OperationUnavailableError
+            ~gssapi.exceptions.ExpiredContextError
+            ~gssapi.exceptions.MissingContextError
+            ~gssapi.exceptions.OperationUnavailableError
         """
 
         return rsec_contexts.export_sec_context(self)
@@ -383,7 +385,7 @@ class SecurityContext(rsec_contexts.SecurityContext,
                 fields set to None
 
         Raises:
-            MissingContextError
+            ~gssapi.exceptions.MissingContextError
         """
         if not kwargs:
             default_val = True
@@ -499,18 +501,18 @@ class SecurityContext(rsec_contexts.SecurityContext,
             bytes: the output token to send to the other participant
 
         Raises:
-            InvalidTokenError
-            InvalidCredentialsError
-            MissingCredentialsError
-            ExpiredCredentialsError
-            BadChannelBindingsError
-            BadMICError
-            ExpiredTokenError: (initiate only)
-            DuplicateTokenError
-            MissingContextError
-            BadNameTypeError: (initiate only)
-            BadNameError: (initiate only)
-            BadMechanismError
+            ~gssapi.exceptions.InvalidTokenError
+            ~gssapi.exceptions.InvalidCredentialsError
+            ~gssapi.exceptions.MissingCredentialsError
+            ~gssapi.exceptions.ExpiredCredentialsError
+            ~gssapi.exceptions.BadChannelBindingsError
+            ~gssapi.exceptions.BadMICError
+            ~gssapi.exceptions.ExpiredTokenError: (initiate only)
+            ~gssapi.exceptions.DuplicateTokenError
+            ~gssapi.exceptions.MissingContextError
+            ~gssapi.exceptions.BadNameTypeError: (initiate only)
+            ~gssapi.exceptions.BadNameError: (initiate only)
+            ~gssapi.exceptions.BadMechanismError
         """
 
         if self.usage == 'accept':

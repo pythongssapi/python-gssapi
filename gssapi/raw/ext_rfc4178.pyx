@@ -24,11 +24,13 @@ def set_neg_mechs(Creds cred_handle not None, mech_set not None):
 
     Args:
         cred_handle (Creds): credentials to set negotiable mechanisms for
-        mech_set ([MechType]): negotiable mechanisms to be set
+        mech_set (~gssapi.MechType): negotiable mechanisms to be set
+
     Returns:
         None
+
     Raises:
-        GSSError
+        ~gssapi.exceptions.GSSError
     """
 
     cdef gss_OID_set negotiable_mechs = c_get_mech_oid_set(mech_set)
