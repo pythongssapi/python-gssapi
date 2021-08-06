@@ -1996,7 +1996,7 @@ previously exported by <a class="reference internal" href="#gssapi.raw.ext_cred_
 <dd><p>A GSSAPI IOV</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gssapi.raw.ext_dce.IOV.AUTO_ALLOC_BUFFERS">
-<span class="sig-name descname"><span class="pre">AUTO_ALLOC_BUFFERS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{&lt;IOVBufferType.header:</span> <span class="pre">2&gt;,</span> <span class="pre">&lt;IOVBufferType.trailer:</span> <span class="pre">7&gt;,</span> <span class="pre">&lt;IOVBufferType.padding:</span> <span class="pre">9&gt;,</span> <span class="pre">&lt;IOVBufferType.mic_token:</span> <span class="pre">12&gt;}</span></em><a class="headerlink" href="#gssapi.raw.ext_dce.IOV.AUTO_ALLOC_BUFFERS" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">AUTO_ALLOC_BUFFERS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{IOVBufferType.header,</span> <span class="pre">IOVBufferType.trailer,</span> <span class="pre">IOVBufferType.padding,</span> <span class="pre">IOVBufferType.mic_token}</span></em><a class="headerlink" href="#gssapi.raw.ext_dce.IOV.AUTO_ALLOC_BUFFERS" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2067,36 +2067,6 @@ to their C counterparts.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="gssapi.raw.ext_dce.unwrap_aead">
-<span class="sig-name descname"><span class="pre">unwrap_aead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">associated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.unwrap_aead" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unwrap/Decrypt an AEAD message.</p>
-<p>This method takes an encrpyted/wrapped AEAD message and some associated
-data, and returns an unwrapped/decrypted message.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
-<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the AEAD message to unwrap or decrypt</p></li>
-<li><p><strong>associated</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – associated data that goes with the message</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>the unwrapped/decrypted message, whether or on</dt><dd><p>encryption was used, and the QoP used</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>UnwrapResult</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="gssapi.raw.ext_dce.unwrap_iov">
 <span class="sig-name descname"><span class="pre">unwrap_iov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.unwrap_iov" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unwrap/Decrypt an IOV message.</p>
@@ -2130,40 +2100,6 @@ entire IOV message, while the latter should be empty.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>IOVUnwrapResult</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="gssapi.raw.ext_dce.wrap_aead">
-<span class="sig-name descname"><span class="pre">wrap_aead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">associated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidential</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce.wrap_aead" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrap/Encrypt an AEAD message.</p>
-<p>This method takes an input message and associated data,
-and outputs and AEAD message.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
-<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the message to wrap or encrypt</p></li>
-<li><p><strong>associated</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – associated data to go with the message</p></li>
-<li><p><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to encrypt the message (True),
-or just wrap it with a MIC (False)</p></li>
-<li><p><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the desired Quality of Protection
-(or None for the default QoP)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>the wrapped/encrypted total message, and whether or not</dt><dd><p>encryption was actually used</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>WrapResult</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2230,6 +2166,70 @@ buffer(s) so that padding lengths can be appropriately computed.</p>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><dl class="simple">
 <dt>a list of :class:IOVBuffer` objects, and whether or not</dt><dd><p>encryption was actually used</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>WrapResult</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-gssapi.raw.ext_dce_aead"></span><dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_dce_aead.unwrap_aead">
+<span class="sig-name descname"><span class="pre">unwrap_aead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">associated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce_aead.unwrap_aead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unwrap/Decrypt an AEAD message.</p>
+<p>This method takes an encrpyted/wrapped AEAD message and some associated
+data, and returns an unwrapped/decrypted message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the AEAD message to unwrap or decrypt</p></li>
+<li><p><strong>associated</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – associated data that goes with the message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the unwrapped/decrypted message, whether or on</dt><dd><p>encryption was used, and the QoP used</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>UnwrapResult</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_dce_aead.wrap_aead">
+<span class="sig-name descname"><span class="pre">wrap_aead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">associated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidential</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_dce_aead.wrap_aead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrap/Encrypt an AEAD message.</p>
+<p>This method takes an input message and associated data,
+and outputs and AEAD message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the message to wrap or encrypt</p></li>
+<li><p><strong>associated</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – associated data to go with the message</p></li>
+<li><p><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to encrypt the message (True),
+or just wrap it with a MIC (False)</p></li>
+<li><p><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the desired Quality of Protection
+(or None for the default QoP)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>the wrapped/encrypted total message, and whether or not</dt><dd><p>encryption was actually used</p>
 </dd>
 </dl>
 </p>

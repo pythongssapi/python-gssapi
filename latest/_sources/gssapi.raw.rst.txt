@@ -116,6 +116,10 @@ DCE (IOV/AEAD) Extensions
     :members:
     :undoc-members:
 
+.. automodule:: gssapi.raw.ext_dce_aead
+    :members:
+    :undoc-members:
+
 IOV MIC Extensions
 ~~~~~~~~~~~~~~~~~~
 
