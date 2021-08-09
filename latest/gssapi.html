@@ -259,8 +259,8 @@ incorrect results in the case of canonicalized names.</p>
 <p><em>requires the <a class="reference external" href="https://tools.ietf.org/html/rfc6680.html">RFC 6680</a> extension</em></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name_type</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="gssapi.NameType.html#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameType</span></code></a> to use to display the given
-name</p>
+<dd class="field-odd"><p><strong>name_type</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the <a class="reference internal" href="gssapi.NameType.html#gssapi.NameType" title="gssapi.NameType"><code class="xref py py-class docutils literal notranslate"><span class="pre">NameType</span></code></a> to use to display
+the given name</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the displayed name</p>
@@ -440,8 +440,8 @@ extension.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials,
-or None for the default name</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the
+credentials, or None for the default name</p></li>
 <li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the desired lifetime of the credentials, or None
 for indefinite</p></li>
 <li><p><strong>mechs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – the desired <a class="reference internal" href="gssapi.MechType.html#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> OIDs to be used
@@ -461,7 +461,7 @@ or None for the default store (<em>requires the <a class="reference internal" hr
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AcquireCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.raw.html#gssapi.raw.named_tuples.AcquireCredResult" title="gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -503,7 +503,7 @@ the default credentials for the given store.</p></li>
 <dd class="field-even"><p>the results of the credential storing operation</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>StoreCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.raw.html#gssapi.raw.named_tuples.StoreCredResult" title="gssapi.raw.named_tuples.StoreCredResult">StoreCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -568,7 +568,7 @@ may only support ‘initiate’.</p></li>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>InquireCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.raw.html#gssapi.raw.named_tuples.InquireCredResult" title="gssapi.raw.named_tuples.InquireCredResult">InquireCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -589,7 +589,8 @@ about them.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechanism for which to retrive the information</p></li>
+<li><p><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechanism for which to retrive the
+information</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – get the name associated with the credentials</p></li>
 <li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – get the remaining initiate lifetime for
 the credentials</p></li>
@@ -606,7 +607,7 @@ the credentials</p></li>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>InquireCredByMechResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.raw.html#gssapi.raw.named_tuples.InquireCredByMechResult" title="gssapi.raw.named_tuples.InquireCredByMechResult">InquireCredByMechResult</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -636,8 +637,8 @@ or stores.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the
 credentials</p></li>
-<li><p><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired <a class="reference internal" href="gssapi.MechType.html#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> to be used with the
-credentials</p></li>
+<li><p><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired <a class="reference internal" href="gssapi.MechType.html#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> to be used with
+the credentials</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the usage for the credentials – either ‘both’,
 ‘initiate’, or ‘accept’</p></li>
 <li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the desired initiate lifetime of the
@@ -806,7 +807,7 @@ encrypting it.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>WrapResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.raw.html#gssapi.raw.named_tuples.WrapResult" title="gssapi.raw.named_tuples.WrapResult">WrapResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -836,7 +837,7 @@ verifying the signature along the way.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>UnwrapResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.raw.html#gssapi.raw.named_tuples.UnwrapResult" title="gssapi.raw.named_tuples.UnwrapResult">UnwrapResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -874,7 +875,8 @@ the encrypted message directly.</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed" title="gssapi.exceptions.EncryptionNotUsed"><strong>EncryptionNotUsed</strong></a> – the encryption could not be used</p></li>
+<li><p><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed" title="gssapi.exceptions.EncryptionNotUsed"><strong>EncryptionNotUsed</strong></a> – the encryption could not be
+    used</p></li>
 <li><p><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError" title="gssapi.exceptions.ExpiredContextError"><strong>ExpiredContextError</strong></a> – </p></li>
 <li><p><a class="reference internal" href="#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><strong>MissingContextError</strong></a> – </p></li>
 <li><p><a class="reference internal" href="#gssapi.exceptions.BadQoPError" title="gssapi.exceptions.BadQoPError"><strong>BadQoPError</strong></a> – </p></li>
@@ -904,7 +906,8 @@ message directly.</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed" title="gssapi.exceptions.EncryptionNotUsed"><strong>EncryptionNotUsed</strong></a> – encryption was expected, but not used</p></li>
+<li><p><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed" title="gssapi.exceptions.EncryptionNotUsed"><strong>EncryptionNotUsed</strong></a> – encryption was expected, but
+    not used</p></li>
 <li><p><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError" title="gssapi.exceptions.InvalidTokenError"><strong>InvalidTokenError</strong></a> – </p></li>
 <li><p><a class="reference internal" href="#gssapi.exceptions.BadMICError" title="gssapi.exceptions.BadMICError"><strong>BadMICError</strong></a> – </p></li>
 <li><p><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError" title="gssapi.exceptions.DuplicateTokenError"><strong>DuplicateTokenError</strong></a> – </p></li>

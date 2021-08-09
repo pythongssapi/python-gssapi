@@ -102,16 +102,22 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-rfcs-and-extensions">Additional RFCs and Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc4178"><strong>RFC 4178</strong> (GSS-API Negotiation Mechanism)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5587"><strong>RFC 5587</strong> (GSS-API Extension for Mech Attributes)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5588"><strong>RFC 5588</strong> (GSS-API Extension for Storing Delegated Credentials)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5801"><strong>RFC 5801</strong> (GSS-API SASL Extensions)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_cred_store">Credential Store Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc6680"><strong>RFC 6680</strong> (GSS-API Naming Extensions)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_cred_imp_exp">Credentials Import-Export Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_dce">DCE (IOV/AEAD) Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_iov_mic">IOV MIC Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_ggf">Global Grid Forum (GGF) Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_s4u">Services4User Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_password">Acquiring Credentials With a Password Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_set_cred_opt">Other Extensions</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gssapi.raw.named_tuples">Results</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-gssapi.raw.exceptions">Exceptions</a></li>
 </ul>
 </li>
@@ -289,7 +295,7 @@ returned name type will be <code class="docutils literal notranslate"><span clas
 <dd class="field-even"><p>the text part of the name and its type</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>DisplayNameResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayNameResult" title="gssapi.raw.named_tuples.DisplayNameResult">DisplayNameResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.BadNameError" title="gssapi.exceptions.BadNameError"><strong>BadNameError</strong></a> – </p>
@@ -415,12 +421,12 @@ be specified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name for which to acquire the credentials (or None
-for the “no name” functionality)</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name for which to acquire the
+credentials (or None for the “no name” functionality)</p></li>
 <li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the lifetime for the credentials (or None for
 indefinite)</p></li>
-<li><p><strong>mechs</strong> (<em>[</em><a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a><em>]</em>) – the desired mechanisms for which the credentials
-should work, or None for the default set</p></li>
+<li><p><strong>mechs</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired mechanisms for which the
+credentials should work, or None for the default set</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the usage type for the credentials: may be
 ‘initiate’, ‘accept’, or ‘both’</p></li>
 </ul>
@@ -431,7 +437,7 @@ with which they may be used, and their actual lifetime (or None for
 indefinite or not supported)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AcquireCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult" title="gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -456,7 +462,8 @@ and new credential), or to add a new element to an existing credential.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input_cred</strong> (<em>Cred</em>) – the set of credentials to which to add the new
 credentials</p></li>
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – name of principal to acquire a credential for</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – name of principal to acquire a
+credential for</p></li>
 <li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired security mechanism (required).</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – usage type for credentials.  Possible values:
 ‘initiate’ (default), ‘accept’, ‘both’ (failsafe).</p></li>
@@ -475,7 +482,7 @@ either indefinite or not supported).  Note that the credentials may
 be set to None if mutate_input is set to True.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AddCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult" title="gssapi.raw.named_tuples.AddCredResult">AddCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -513,7 +520,7 @@ be set to None if mutate_input is set to True.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>InquireCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult" title="gssapi.raw.named_tuples.InquireCredResult">InquireCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -551,7 +558,7 @@ to <a class="reference internal" href="#gssapi.raw.creds.inquire_cred" title="gs
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>InquireCredByMechResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult" title="gssapi.raw.named_tuples.InquireCredByMechResult">InquireCredByMechResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -609,8 +616,8 @@ existing security context object.</p>
 <li><p><strong>input_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the token sent by the context initiator</p></li>
 <li><p><strong>acceptor_creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to be used to accept the
 context (or None to use the default credentials)</p></li>
-<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security context to update
-(or None to create a new security context object)</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security
+context to update (or None to create a new security context object)</p></li>
 <li><p><strong>channel_bindings</strong> (<a class="reference internal" href="#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><em>ChannelBindings</em></a>) – The channel bindings (or None for
 no channel bindings)</p></li>
 </ul>
@@ -627,7 +634,7 @@ exchanges are needed to finalize the security context.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AcceptSecContextResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult" title="gssapi.raw.named_tuples.AcceptSecContextResult">AcceptSecContextResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -655,7 +662,8 @@ security context will remain valid.  An expired context will
 give a result of 0.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security context in question</p>
+<dd class="field-odd"><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security
+context in question</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the number of seconds for which the context will be valid</p>
@@ -688,7 +696,8 @@ objects will automatically be freed by Python.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security context in question</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security
+context in question</p></li>
 <li><p><strong>local_only</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – should we request local deletion (True), or also
 remote deletion (False), in which case a token is also returned</p></li>
 </ul>
@@ -719,7 +728,8 @@ with <a class="reference internal" href="#gssapi.raw.sec_contexts.import_sec_con
 <p>Warning: this modifies the input context</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the context to send to another process</p>
+<dd class="field-odd"><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the context to send
+to another process</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the output token to be imported</p>
@@ -771,11 +781,12 @@ of the last call, as well as the input token received from the acceptor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>target_name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the target for the security context</p></li>
+<li><p><strong>target_name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the target for the security
+context</p></li>
 <li><p><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to use to initiate the context,
 or None to use the default credentials</p></li>
-<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security context to update, or
-None to create a new context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security
+context to update, or None to create a new context</p></li>
 <li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the mechanism type for this security context,
 or None for the default mechanism type</p></li>
 <li><p><strong>flags</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – the flags to request for the security context, or
@@ -798,7 +809,7 @@ indefinite), and whether or not more calls are needed to finish the
 initiation.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>InitSecContextResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult" title="gssapi.raw.named_tuples.InitSecContextResult">InitSecContextResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -832,7 +843,8 @@ flags, and its current state (open vs closed).</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the context in question</p>
+<dd class="field-odd"><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the context in
+question</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><dl class="simple">
@@ -844,7 +856,7 @@ and whether or not the context is currently fully established</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>InquireContextResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult" title="gssapi.raw.named_tuples.InquireContextResult">InquireContextResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.MissingContextError" title="gssapi.exceptions.MissingContextError"><strong>MissingContextError</strong></a> – </p>
@@ -869,8 +881,8 @@ initiator know of the error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security context against which
-to process the token</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security
+context against which to process the token</p></li>
 <li><p><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the token to process</p></li>
 </ul>
 </dd>
@@ -894,7 +906,8 @@ together.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the message for which to generate the MIC</p></li>
 <li><p><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the requested Quality of Protection
 (or None to use the default)</p></li>
@@ -925,7 +938,8 @@ on whether the sender used confidentiality.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the message to unwrap/decrypt</p></li>
 </ul>
 </dd>
@@ -937,7 +951,7 @@ on whether the sender used confidentiality.</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>UnwrapResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult" title="gssapi.raw.named_tuples.UnwrapResult">UnwrapResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -964,7 +978,8 @@ be raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the message in question</p></li>
 <li><p><strong>token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the MIC token in question</p></li>
 </ul>
@@ -999,7 +1014,8 @@ of confidential) with the given Quality of Protection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the message to wrap or encrypt</p></li>
 <li><p><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to encrypt the message (True),
 or just wrap it with a MIC (False)</p></li>
@@ -1015,7 +1031,7 @@ or just wrap it with a MIC (False)</p></li>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>WrapResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult" title="gssapi.raw.named_tuples.WrapResult">WrapResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -1036,7 +1052,8 @@ the given maximum wrapped/encrypted message size.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>output_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the maximum desired wrapped/encrypted message size</p></li>
 <li><p><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not confidentiality is being used</p></li>
 <li><p><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the QoP that will be when you actually call wrap
@@ -1201,7 +1218,7 @@ Note that if unknown mechanims are found, those will be skipped.</p>
 process the given name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name in question</p>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name in question</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the mechanism OIDs able to process the given name</p>
@@ -1210,7 +1227,7 @@ process the given name.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><strong>GSSError</strong></a> – </p>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -1232,7 +1249,7 @@ the given mechanism.</p>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="#gssapi.raw.misc.GSSError" title="gssapi.raw.misc.GSSError"><strong>GSSError</strong></a> – </p>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -1543,9 +1560,11 @@ to their C counterparts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>initiator_address_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.AddressType" title="gssapi.AddressType"><em>AddressType</em></a>) – the initiator address type</p></li>
+<li><p><strong>initiator_address_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.AddressType" title="gssapi.AddressType"><em>AddressType</em></a>) – the initiator address
+type</p></li>
 <li><p><strong>initiator_address</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the initiator address</p></li>
-<li><p><strong>acceptor_address_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.AddressType" title="gssapi.AddressType"><em>AddressType</em></a>) – the acceptor address type</p></li>
+<li><p><strong>acceptor_address_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.AddressType" title="gssapi.AddressType"><em>AddressType</em></a>) – the acceptor address
+type</p></li>
 <li><p><strong>acceptor_address</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the acceptor address</p></li>
 <li><p><strong>application_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – additional application-specific data</p></li>
 </ul>
@@ -1590,8 +1609,108 @@ by your particularly GSSAPI implementation.  In this case, they will not
 be compiled, and will simply not be available in the <a class="reference internal" href="#module-gssapi.raw" title="gssapi.raw"><code class="xref py py-mod docutils literal notranslate"><span class="pre">gssapi.raw</span></code></a>
 namespace.</p>
 </div>
+<div class="section" id="module-gssapi.raw.ext_rfc4178">
+<span id="rfc-4178-gss-api-negotiation-mechanism"></span><h3><span class="target" id="index-1"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc4178.html"><strong>RFC 4178</strong></a> (GSS-API Negotiation Mechanism)<a class="headerlink" href="#module-gssapi.raw.ext_rfc4178" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_rfc4178.set_neg_mechs">
+<span class="sig-name descname"><span class="pre">set_neg_mechs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">cred_handle</span> <span class="pre">not</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">mech_set</span> <span class="pre">not</span> <span class="pre">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc4178.set_neg_mechs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify the set of security mechanisms that may be negotiated with
+the credential identified by cred_handle.
+If more than one mechanism is specified in mech_set, the order in
+which those mechanisms are specified implies a relative preference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cred_handle</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – credentials to set negotiable mechanisms for</p></li>
+<li><p><strong>mech_set</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – negotiable mechanisms to be set</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-gssapi.raw.ext_rfc5587">
+<span id="rfc-5587-gss-api-extension-for-mech-attributes"></span><h3><span class="target" id="index-2"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc5587.html"><strong>RFC 5587</strong></a> (GSS-API Extension for Mech Attributes)<a class="headerlink" href="#module-gssapi.raw.ext_rfc5587" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_rfc5587.display_mech_attr">
+<span class="sig-name descname"><span class="pre">display_mech_attr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc5587.display_mech_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>display_mech_attrs(attr)
+Returns information about attributes in human readable form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>attr</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – Mechanism attribute to retrive names and
+descriptions of</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the results of displaying the attribute; mech name,
+short description, and long description.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult" title="gssapi.raw.named_tuples.DisplayAttrResult">DisplayAttrResult</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_rfc5587.indicate_mechs_by_attrs">
+<span class="sig-name descname"><span class="pre">indicate_mechs_by_attrs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desired_mech_attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">except_mech_attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical_mech_attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc5587.indicate_mechs_by_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a set of mechanisms that have the specified attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>desired_mech_attrs</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – Attributes that the output mechs MUST
+offer</p></li>
+<li><p><strong>except_mech_attrs</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – Attributes that the output mechs MUST
+NOT offer</p></li>
+<li><p><strong>critical_mech_attrs</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – Attributes that the output mechs
+MUST understand and offer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a set of mechs which satisfy the given criteria</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType">MechType</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_rfc5587.inquire_attrs_for_mech">
+<span class="sig-name descname"><span class="pre">inquire_attrs_for_mech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mech</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc5587.inquire_attrs_for_mech" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the set of attrs supported and known by a mechanism.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – Mechanism to inquire about</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the results of inquiry; a mech’s attributes and
+known attributes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.InquireAttrsResult" title="gssapi.raw.named_tuples.InquireAttrsResult">InquireAttrsResult</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="module-gssapi.raw.ext_rfc5588">
-<span id="rfc-5588-gss-api-extension-for-storing-delegated-credentials"></span><h3><span class="target" id="index-1"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc5588.html"><strong>RFC 5588</strong></a> (GSS-API Extension for Storing Delegated Credentials)<a class="headerlink" href="#module-gssapi.raw.ext_rfc5588" title="Permalink to this headline">¶</a></h3>
+<span id="rfc-5588-gss-api-extension-for-storing-delegated-credentials"></span><h3><span class="target" id="index-3"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc5588.html"><strong>RFC 5588</strong></a> (GSS-API Extension for Storing Delegated Credentials)<a class="headerlink" href="#module-gssapi.raw.ext_rfc5588" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="gssapi.raw.ext_rfc5588.store_cred">
 <span class="sig-name descname"><span class="pre">store_cred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">creds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'both'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mech</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc5588.store_cred" title="Permalink to this definition">¶</a></dt>
@@ -1604,7 +1723,8 @@ They may then be retrieved later using <a class="reference internal" href="gssap
 <li><p><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to store</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the usage to store the credentials with – either
 ‘both’, ‘initiate’, or ‘accept’</p></li>
-<li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechansim to associate with the stored credentials</p></li>
+<li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechansim to associate with the stored
+credentials</p></li>
 <li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to overwrite existing credentials
 stored with the same name, etc</p></li>
 <li><p><strong>set_default</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to set these credentials as
@@ -1615,7 +1735,7 @@ the default credentials for the given store.</p></li>
 <dd class="field-even"><p>the results of the credential storing operation</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>StoreCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.StoreCredResult" title="gssapi.raw.named_tuples.StoreCredResult">StoreCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -1625,6 +1745,51 @@ the default credentials for the given store.</p></li>
 <li><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><strong>OperationUnavailableError</strong></a> – </p></li>
 <li><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.DuplicateCredentialsElementError" title="gssapi.exceptions.DuplicateCredentialsElementError"><strong>DuplicateCredentialsElementError</strong></a> – </p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-gssapi.raw.ext_rfc5801">
+<span id="rfc-5801-gss-api-sasl-extensions"></span><h3><span class="target" id="index-4"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc5801.html"><strong>RFC 5801</strong></a> (GSS-API SASL Extensions)<a class="headerlink" href="#module-gssapi.raw.ext_rfc5801" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_rfc5801.inquire_mech_for_saslname">
+<span class="sig-name descname"><span class="pre">inquire_mech_for_saslname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sasl_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc5801.inquire_mech_for_saslname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the OID for the mech specified by SASL name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sasl_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – SASL name of the mechanism</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the mechanism with corresponding SASL name.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID">OID</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – An unknown failure occurred</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_rfc5801.inquire_saslname_for_mech">
+<span class="sig-name descname"><span class="pre">inquire_saslname_for_mech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mech</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc5801.inquire_saslname_for_mech" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets information about a specified mech, including the SASL name,
+the mech name, and the mech description.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – Mechanism to inquire about</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the results of inquiry; a mech’s SASL name,
+name, and description.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult" title="gssapi.raw.named_tuples.InquireSASLNameResult">InquireSASLNameResult</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – an unknown failure occurred</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1648,8 +1813,8 @@ or stores.</p>
 <li><p><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – the credential store information pointing to the
 credential store from which to acquire the credentials.
 See <a class="reference internal" href="credstore.html"><span class="doc">Common Values for Credentials Store Extensions</span></a> for valid values</p></li>
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials,
-or None for the default name</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name associated with the
+credentials, or None for the default name</p></li>
 <li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the desired lifetime of the credentials, or None
 for indefinite</p></li>
 <li><p><strong>mechs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – the desired mechanisms to be used with these
@@ -1659,14 +1824,11 @@ credentials, or None for the default set</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>the acquired credentials and information about</dt><dd><p>them</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>the acquired credentials and information about
+them</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AcquireCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult" title="gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -1692,7 +1854,7 @@ or stores.</p>
 <li><p><strong>store</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – the store into which to store the credentials,
 or None for the default store.
 See <a class="reference internal" href="credstore.html"><span class="doc">Common Values for Credentials Store Extensions</span></a> for valid values</p></li>
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the credentials</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name associated with the credentials</p></li>
 <li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired mechanism to be used with these
 credentials</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
@@ -1704,14 +1866,11 @@ credentials, or None for indefinite</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>the new credentials set and information about</dt><dd><p>it</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>the new credentials set and information about
+it</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AcquireCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult" title="gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -1738,7 +1897,8 @@ See <a class="reference internal" href="credstore.html"><span class="doc">Common
 <li><p><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to store</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the usage to store the credentials with – either
 ‘both’, ‘initiate’, or ‘accept’</p></li>
-<li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechansim to associate with the stored credentials</p></li>
+<li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechansim to associate with the stored
+credentials</p></li>
 <li><p><strong>overwrite</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to overwrite existing credentials
 stored with the same name, etc</p></li>
 <li><p><strong>set_default</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to set these credentials as
@@ -1749,7 +1909,7 @@ the default credentials for the given store.</p></li>
 <dd class="field-even"><p>the results of the credential storing operation</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>StoreCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.StoreCredResult" title="gssapi.raw.named_tuples.StoreCredResult">StoreCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -1759,7 +1919,7 @@ the default credentials for the given store.</p></li>
 
 </div>
 <div class="section" id="module-gssapi.raw.ext_rfc6680">
-<span id="rfc-6680-gss-api-naming-extensions"></span><h3><span class="target" id="index-2"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc6680.html"><strong>RFC 6680</strong></a> (GSS-API Naming Extensions)<a class="headerlink" href="#module-gssapi.raw.ext_rfc6680" title="Permalink to this headline">¶</a></h3>
+<span id="rfc-6680-gss-api-naming-extensions"></span><h3><span class="target" id="index-5"></span><a class="rfc reference external" href="https://tools.ietf.org/html/rfc6680.html"><strong>RFC 6680</strong></a> (GSS-API Naming Extensions)<a class="headerlink" href="#module-gssapi.raw.ext_rfc6680" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="gssapi.raw.ext_rfc6680.delete_name_attribute">
 <span class="sig-name descname"><span class="pre">delete_name_attribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_rfc6680.delete_name_attribute" title="Permalink to this definition">¶</a></dt>
@@ -1772,7 +1932,7 @@ operation instead of an ‘add’ operation).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to remove the attribute from</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to remove the attribute from</p></li>
 <li><p><strong>attr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the name of the attribute</p></li>
 </ul>
 </dd>
@@ -1795,7 +1955,7 @@ will be raised.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to display</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to display</p></li>
 <li><p><strong>name_type</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the name type (see NameType) to use to
 display the given name</p></li>
 </ul>
@@ -1807,8 +1967,8 @@ display the given name</p></li>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)">bytes</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><strong>OperationUnavailableError</strong></a> – the given name could not be displayed
-    using the given name type</p>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><strong>OperationUnavailableError</strong></a> – the given name could not
+    be displayed using the given name type</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1829,7 +1989,7 @@ using the normal export name type.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to export</p>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to export</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the exported composite name</p>
@@ -1855,25 +2015,22 @@ multiple calls to retrieve multiple values).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the Name from which to get the attribute</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the Name from which to get the attribute</p></li>
 <li><p><strong>attr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the name of the attribute</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>the raw version of the value(s),</dt><dd><p>the human-readable version of the value(s), whether
+<dd class="field-even"><p>the raw version of the value(s),
+the human-readable version of the value(s), whether
 or not the attribute was authenticated, and whether or
 not the attribute’s value set was marked as complete</p>
 </dd>
-</dl>
-</p>
-</dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>GetNameAttributeResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult" title="gssapi.raw.named_tuples.GetNameAttributeResult">GetNameAttributeResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><strong>OperationUnavailableError</strong></a> – the given attribute is unknown
-    or unset</p>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><strong>OperationUnavailableError</strong></a> – the given attribute is
+    unknown or unset</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1889,7 +2046,7 @@ a mechanism name, the associated mechansim is returned as well.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name about which to inquire</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name about which to inquire</p></li>
 <li><p><strong>mech_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to retrieve if this name
 is a mech_name (and the associate mechanism)</p></li>
 <li><p><strong>attrs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to retrieve the attribute name list</p></li>
@@ -1904,7 +2061,7 @@ the associated mechanism if it is a Mechanism Name</p>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>InquireNameResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult" title="gssapi.raw.named_tuples.InquireNameResult">InquireNameResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -1925,7 +2082,7 @@ used in between calls to “clear” the values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the Name on which to set the attribute</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the Name on which to set the attribute</p></li>
 <li><p><strong>attr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the name of the attribute</p></li>
 <li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – a list of bytes objects to use as the value(s)</p></li>
 <li><p><strong>complete</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to mark this attribute’s value
@@ -1933,8 +2090,8 @@ set as being “complete”</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><strong>OperationUnavailableError</strong></a> – the given attribute name is unknown
-    or could not be set</p>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.OperationUnavailableError" title="gssapi.exceptions.OperationUnavailableError"><strong>OperationUnavailableError</strong></a> – the given attribute name
+    is unknown or could not be set</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2087,19 +2244,17 @@ entire IOV message, while the latter should be empty.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – an <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>whether or not confidentiality was used,</dt><dd><p>and the QoP used.</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>whether or not confidentiality was used,
+and the QoP used.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>IOVUnwrapResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.IOVUnwrapResult" title="gssapi.raw.named_tuples.IOVUnwrapResult">IOVUnwrapResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2123,7 +2278,8 @@ trailer buffers).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – an <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
 <li><p><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to encrypt the message (True),
 or just wrap it with a MIC (False)</p></li>
@@ -2159,19 +2315,17 @@ buffer(s) so that padding lengths can be appropriately computed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – an <a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>a list of :class:IOVBuffer` objects, and whether or not</dt><dd><p>encryption was actually used</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>a list of :class:IOVBuffer` objects, and whether or not
+encryption was actually used</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>WrapResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult" title="gssapi.raw.named_tuples.WrapResult">WrapResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2188,20 +2342,18 @@ data, and returns an unwrapped/decrypted message.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the AEAD message to unwrap or decrypt</p></li>
 <li><p><strong>associated</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – associated data that goes with the message</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>the unwrapped/decrypted message, whether or on</dt><dd><p>encryption was used, and the QoP used</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>the unwrapped/decrypted message, whether or on
+encryption was used, and the QoP used</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>UnwrapResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult" title="gssapi.raw.named_tuples.UnwrapResult">UnwrapResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2218,7 +2370,8 @@ and outputs and AEAD message.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the message to wrap or encrypt</p></li>
 <li><p><strong>associated</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – associated data to go with the message</p></li>
 <li><p><strong>confidential</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – whether or not to encrypt the message (True),
@@ -2228,14 +2381,11 @@ or just wrap it with a MIC (False)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>the wrapped/encrypted total message, and whether or not</dt><dd><p>encryption was actually used</p>
-</dd>
-</dl>
-</p>
+<dd class="field-even"><p>the wrapped/encrypted total message, and whether or not
+encryption was actually used</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>WrapResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult" title="gssapi.raw.named_tuples.WrapResult">WrapResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2260,14 +2410,18 @@ operates entirely in-place, and returns nothing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="gssapi.raw.ext_dce.IOV.html#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
 <li><p><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the desired Quality of Protection
 (or None for the default QoP)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -2285,14 +2439,18 @@ operates entirely in-place, and returns nothing.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="gssapi.raw.ext_dce.IOV.html#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
 <li><p><strong>qop</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the desired Quality of Protection
 (or None for the default QoP)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
 </dd>
 </dl>
 </dd></dl>
@@ -2307,7 +2465,8 @@ in the given IOV method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> (<a class="reference internal" href="gssapi.html#gssapi.sec_contexts.SecurityContext" title="gssapi.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current security context</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
 <li><p><strong>message</strong> (<a class="reference internal" href="#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><em>IOV</em></a>) – the <a class="reference internal" href="gssapi.raw.ext_dce.IOV.html#gssapi.raw.ext_dce.IOV" title="gssapi.raw.ext_dce.IOV"><code class="xref py py-class docutils literal notranslate"><span class="pre">IOV</span></code></a> containing the message</p></li>
 </ul>
 </dd>
@@ -2316,6 +2475,105 @@ in the given IOV method.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-gssapi.raw.ext_ggf">
+<span id="global-grid-forum-ggf-extensions"></span><h3>Global Grid Forum (GGF) Extensions<a class="headerlink" href="#module-gssapi.raw.ext_ggf" title="Permalink to this headline">¶</a></h3>
+<p>GGF Extensions</p>
+<p>GGF provides extended credential and security context inquiry that allows
+application to retrieve more information about the client’s credentials and
+security context. One common use case is to use
+<a class="reference internal" href="#gssapi.raw.ext_ggf.inquire_sec_context_by_oid" title="gssapi.raw.ext_ggf.inquire_sec_context_by_oid"><code class="xref py py-meth docutils literal notranslate"><span class="pre">inquire_sec_context_by_oid()</span></code></a> to retrieve the “session” key that is
+required by the SMB protocol for signing and encrypting a message.</p>
+<p>Draft IETF document for these extensions can be found at
+<a class="reference external" href="https://tools.ietf.org/html/draft-engert-ggf-gss-extensions-00">https://tools.ietf.org/html/draft-engert-ggf-gss-extensions-00</a></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_ggf.inquire_cred_by_oid">
+<span class="sig-name descname"><span class="pre">inquire_cred_by_oid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cred_handle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_aspect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_ggf.inquire_cred_by_oid" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method inspects a <a class="reference internal" href="gssapi.raw.creds.Creds.html#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><code class="xref py py-class docutils literal notranslate"><span class="pre">Creds</span></code></a> object for information
+specific to a particular desired aspect as an OID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cred_handle</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the Credentials to query</p></li>
+<li><p><strong>desired_aspect</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired aspect of the Credentials
+to inquire about.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of zero or more pieces of data (as bytes objects)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_ggf.inquire_sec_context_by_oid">
+<span class="sig-name descname"><span class="pre">inquire_sec_context_by_oid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_aspect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_ggf.inquire_sec_context_by_oid" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method inspects a <a class="reference internal" href="gssapi.raw.sec_contexts.SecurityContext.html#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a> object for information
+specific to a particular desired aspect as an OID.</p>
+<p>This method can be used with the GSS_KRB5_INQ_SSPI_SESSION_KEY_OID OID to
+retrieve the required key that is used to derive the SMB/SAMBA signing and
+encryption keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the Security
+Context to query</p></li>
+<li><p><strong>desired_aspect</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired aspect of the Security
+Context to inquire about.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of zero or more pieces of data (as bytes objects)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_ggf.set_sec_context_option">
+<span class="sig-name descname"><span class="pre">set_sec_context_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desired_aspect</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_ggf.set_sec_context_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is used to set a value for a specific OID of a
+<a class="reference internal" href="gssapi.raw.sec_contexts.SecurityContext.html#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SecurityContext</span></code></a> object. The OID and value to pass in depends on
+the mech the SecurityContext backs.</p>
+<p>An example of how this can be used would be to reset the NTLM crypto engine
+used in gss-ntlmssp. The OID that controls this value is
+‘1.3.6.1.4.1.7165.655.1.3’ and it takes it a byte value that represents
+an int32 where 1 resets the verifier handle and any other int resets the
+sender handle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>desired_aspect</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired aspect of the Security
+Context to set the value for.</p></li>
+<li><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the Security
+Context to set, or None to create a new context.</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the value to set on the desired aspect of the Security
+Context or None to send GSS_C_EMPTY_BUFFER.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output security context.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext">SecurityContext</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2339,11 +2597,11 @@ impersonator credentials must have a usage of ‘both’ or ‘initiate’.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>impersonator_cred</strong> (<em>Cred</em>) – the credentials with permissions to
 impersonate the target name</p></li>
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to impersonate</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to impersonate</p></li>
 <li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the lifetime for the credentials (or None for
 indefinite)</p></li>
-<li><p><strong>mechs</strong> (<em>[</em><a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a><em>]</em>) – the desired mechanisms for which the credentials
-should work (or None for the default set)</p></li>
+<li><p><strong>mechs</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired mechanisms for which the
+credentials should work (or None for the default set)</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the usage type for the credentials: may be
 ‘initiate’, ‘accept’, or ‘both’</p></li>
 </ul>
@@ -2354,7 +2612,7 @@ with which they may be used, and their actual lifetime (or None for
 indefinite or not support)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AcquireCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult" title="gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2377,7 +2635,7 @@ proxy credentials.  The impersonator credentials must have a usage of
 credentials</p></li>
 <li><p><strong>impersonator_cred</strong> (<em>Cred</em>) – the credentials with permissions to
 impersonate the target name</p></li>
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to impersonate</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to impersonate</p></li>
 <li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired mechanism.  Note that this is both
 singular and required, unlike acquireCredImpersonateName</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the usage type for the credentials: may be
@@ -2396,7 +2654,7 @@ used, the actual initiator TTL, and the actual acceptor TTL (the TTLs
 may be None for indefinite or not supported)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AddCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult" title="gssapi.raw.named_tuples.AddCredResult">AddCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2417,12 +2675,12 @@ MIT or Heimdal.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to acquire credentials for</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to acquire credentials for</p></li>
 <li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the password used to acquire credentialss with</p></li>
 <li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the lifetime for the credentials (or None for
 indefinite)</p></li>
-<li><p><strong>mechs</strong> (<em>[</em><a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a><em>]</em>) – the desired mechanisms for which the credentials
-should work (or None for the default set)</p></li>
+<li><p><strong>mechs</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired mechanisms for which the
+credentials should work (or None for the default set)</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – usage type for credentials.  Possible values:
 ‘initiate’ (default), ‘accept’, ‘both’ (failsafe).</p></li>
 </ul>
@@ -2433,7 +2691,7 @@ with which they may be used, and their actual lifetime (or None for
 indefinite or not supported)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AcquireCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult" title="gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2452,7 +2710,7 @@ MIT or Heimdal.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>input_cred</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to add to</p></li>
-<li><p><strong>name</strong> (<a class="reference internal" href="gssapi.html#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to acquire credentials for</p></li>
+<li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to acquire credentials for</p></li>
 <li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.MechType" title="gssapi.MechType"><em>MechType</em></a>) – the desired mechanism.  Note that this is both
 singular and required</p></li>
 <li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the password used to acquire credentialss with</p></li>
@@ -2472,7 +2730,7 @@ used, the actual initiator TTL, and the actual acceptor TTL (the TTLs
 may be None for indefinite or not supported)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>AddCredResult</p>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult" title="gssapi.raw.named_tuples.AddCredResult">AddCredResult</a></p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
@@ -2481,6 +2739,545 @@ may be None for indefinite or not supported)</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-gssapi.raw.ext_set_cred_opt">
+<span id="other-extensions"></span><h3>Other Extensions<a class="headerlink" href="#module-gssapi.raw.ext_set_cred_opt" title="Permalink to this headline">¶</a></h3>
+<p>gss_set_cred_option</p>
+<p>Provides a way to set options on a credential based on the OID specified. A
+common use case is to set the GSS_KRB5_CRED_NO_CI_FLAGS_X on a Kerberos
+credential. This is used for interoperability with Microsoft’s SSPI.</p>
+<p>Note this function is commonly lumped with the GGF extensions but they are not
+part of the GGF IETF draft so it’s separated into it’s own file.</p>
+<p>Closest draft IETF document for the gss_set_cred_option can be found at
+<a class="reference external" href="https://tools.ietf.org/html/draft-williams-kitten-channel-bound-flag-01">https://tools.ietf.org/html/draft-williams-kitten-channel-bound-flag-01</a></p>
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_set_cred_opt.set_cred_option">
+<span class="sig-name descname"><span class="pre">set_cred_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desired_aspect</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">creds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_set_cred_opt.set_cred_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is used to set options of a <a class="reference internal" href="gssapi.raw.creds.Creds.html#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><code class="xref py py-class docutils literal notranslate"><span class="pre">Creds</span></code></a> object based on
+an OID key. The options that can be set depends on the mech the credentials
+were created with.</p>
+<p>An example of how this can be used would be to set the
+GSS_KRB5_CRED_NO_CI_FLAGS_X on a Kerberos credential. The OID string for
+this flag is ‘1.2.752.43.13.29’ and it requires no value to be set. This
+must be set before the SecurityContext was initialised with the
+credentials.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>desired_aspect</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired aspect of the Credential to
+set.</p></li>
+<li><p><strong>cred_handle</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the Credentials to set, or None to create a new
+credential.</p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a>) – the value to set on the desired aspect of the Credential
+or None to send GSS_C_EMPTY_BUFFER.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output credential.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds">Creds</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-gssapi.raw.named_tuples">
+<span id="results"></span><h2>Results<a class="headerlink" href="#module-gssapi.raw.named_tuples" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcquireCredResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">AcquireCredResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">creds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Creds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mechs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#AcquireCredResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.AcquireCredResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Credential result when acquiring a GSSAPI credential.</p>
+<p>Create new instance of AcquireCredResult(creds, mechs, lifetime)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcquireCredResult.creds">
+<span class="sig-name descname"><span class="pre">creds</span></span><em class="property"><span class="pre">:</span> <span class="pre">Creds</span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcquireCredResult.creds" title="Permalink to this definition">¶</a></dt>
+<dd><p>GSSAPI credentials that were acquired</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcquireCredResult.mechs">
+<span class="sig-name descname"><span class="pre">mechs</span></span><em class="property"><span class="pre">:</span> <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcquireCredResult.mechs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set of mechs the cred is for</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcquireCredResult.lifetime">
+<span class="sig-name descname"><span class="pre">lifetime</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcquireCredResult.lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of seconds for which the cred will remain valid</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InquireCredResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Name</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usage</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mechs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#InquireCredResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about the credential.</p>
+<p>Create new instance of InquireCredResult(name, lifetime, usage, mechs)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredResult.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Name</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredResult.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The principal associated with the credential</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredResult.lifetime">
+<span class="sig-name descname"><span class="pre">lifetime</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredResult.lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of seconds which the cred is valid for</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredResult.usage">
+<span class="sig-name descname"><span class="pre">usage</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredResult.usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>How the credential can be used</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredResult.mechs">
+<span class="sig-name descname"><span class="pre">mechs</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredResult.mechs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set of mechs the cred is for</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredByMechResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InquireCredByMechResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Name</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_lifetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_lifetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usage</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#InquireCredByMechResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredByMechResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about the credential for a specific mechanism.</p>
+<p>Create new instance of InquireCredByMechResult(name, init_lifetime, accept_lifetime, usage)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredByMechResult.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Name</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredByMechResult.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The principal associated with the credential</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredByMechResult.init_lifetime">
+<span class="sig-name descname"><span class="pre">init_lifetime</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredByMechResult.init_lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time valid for initiation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredByMechResult.accept_lifetime">
+<span class="sig-name descname"><span class="pre">accept_lifetime</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredByMechResult.accept_lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time valid for accepting</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredByMechResult.usage">
+<span class="sig-name descname"><span class="pre">usage</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredByMechResult.usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>How the credential can be used</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AddCredResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">AddCredResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">creds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Creds</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mechs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_lifetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">accept_lifetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#AddCredResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.AddCredResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result of adding to a GSSAPI credential.</p>
+<p>Create new instance of AddCredResult(creds, mechs, init_lifetime, accept_lifetime)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AddCredResult.creds">
+<span class="sig-name descname"><span class="pre">creds</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Creds</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AddCredResult.creds" title="Permalink to this definition">¶</a></dt>
+<dd><p>The credential that was generated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AddCredResult.mechs">
+<span class="sig-name descname"><span class="pre">mechs</span></span><em class="property"><span class="pre">:</span> <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AddCredResult.mechs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set of mechs the cred is for</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AddCredResult.init_lifetime">
+<span class="sig-name descname"><span class="pre">init_lifetime</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.AddCredResult.init_lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time valid for initiation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AddCredResult.accept_lifetime">
+<span class="sig-name descname"><span class="pre">accept_lifetime</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.AddCredResult.accept_lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time valid for accepting</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.DisplayNameResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">DisplayNameResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#DisplayNameResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.DisplayNameResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Textual representation of a GSSAPI name.</p>
+<p>Create new instance of DisplayNameResult(name, name_type)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.DisplayNameResult.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.DisplayNameResult.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The representation of the GSSAPI name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.DisplayNameResult.name_type">
+<span class="sig-name descname"><span class="pre">name_type</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.DisplayNameResult.name_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of GSSAPI name</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.WrapResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">WrapResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">encrypted</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#WrapResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.WrapResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapped message result.</p>
+<p>Create new instance of WrapResult(message, encrypted)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.WrapResult.message">
+<span class="sig-name descname"><span class="pre">message</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.WrapResult.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>The wrapped message</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.WrapResult.encrypted">
+<span class="sig-name descname"><span class="pre">encrypted</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.WrapResult.encrypted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the message is encrypted and not just signed</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.UnwrapResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">UnwrapResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">encrypted</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">qop</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#UnwrapResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.UnwrapResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unwrapped message result.</p>
+<p>Create new instance of UnwrapResult(message, encrypted, qop)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.UnwrapResult.message">
+<span class="sig-name descname"><span class="pre">message</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.UnwrapResult.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>The unwrapped message</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.UnwrapResult.encrypted">
+<span class="sig-name descname"><span class="pre">encrypted</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.UnwrapResult.encrypted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the message was encrypted and not just signed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.UnwrapResult.qop">
+<span class="sig-name descname"><span class="pre">qop</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.UnwrapResult.qop" title="Permalink to this definition">¶</a></dt>
+<dd><p>The quality of protection applied to the message</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcceptSecContextResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">AcceptSecContextResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">SecurityContext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initiator_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mech</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">OID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">RequirementFlag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">delegated_creds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Creds</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">more_steps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#AcceptSecContextResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.AcceptSecContextResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result when accepting a security context by an initiator.</p>
+<p>Create new instance of AcceptSecContextResult(context, initiator_name, mech, token, flags, lifetime, delegated_creds, more_steps)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcceptSecContextResult.context">
+<span class="sig-name descname"><span class="pre">context</span></span><em class="property"><span class="pre">:</span> <span class="pre">SecurityContext</span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcceptSecContextResult.context" title="Permalink to this definition">¶</a></dt>
+<dd><p>The acceptor security context</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcceptSecContextResult.initiator_name">
+<span class="sig-name descname"><span class="pre">initiator_name</span></span><em class="property"><span class="pre">:</span> <span class="pre">Name</span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcceptSecContextResult.initiator_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The authenticated name of the initiator</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcceptSecContextResult.mech">
+<span class="sig-name descname"><span class="pre">mech</span></span><em class="property"><span class="pre">:</span> <span class="pre">OID</span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcceptSecContextResult.mech" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mechanism with which the context was established</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcceptSecContextResult.token">
+<span class="sig-name descname"><span class="pre">token</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcceptSecContextResult.token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Token to be returned to the initiator</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcceptSecContextResult.flags">
+<span class="sig-name descname"><span class="pre">flags</span></span><em class="property"><span class="pre">:</span> <span class="pre">RequirementFlag</span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcceptSecContextResult.flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Services requested by the initiator</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcceptSecContextResult.lifetime">
+<span class="sig-name descname"><span class="pre">lifetime</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcceptSecContextResult.lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seconds for which the context is valid for</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcceptSecContextResult.delegated_creds">
+<span class="sig-name descname"><span class="pre">delegated_creds</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Creds</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcceptSecContextResult.delegated_creds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delegated credentials</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.AcceptSecContextResult.more_steps">
+<span class="sig-name descname"><span class="pre">more_steps</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.AcceptSecContextResult.more_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>More input is required to complete the exchange</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InitSecContextResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InitSecContextResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">SecurityContext</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mech</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">OID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">RequirementFlag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">more_steps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#InitSecContextResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.InitSecContextResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result when initiating a security context</p>
+<p>Create new instance of InitSecContextResult(context, mech, flags, token, lifetime, more_steps)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InitSecContextResult.context">
+<span class="sig-name descname"><span class="pre">context</span></span><em class="property"><span class="pre">:</span> <span class="pre">SecurityContext</span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InitSecContextResult.context" title="Permalink to this definition">¶</a></dt>
+<dd><p>The initiator security context</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InitSecContextResult.mech">
+<span class="sig-name descname"><span class="pre">mech</span></span><em class="property"><span class="pre">:</span> <span class="pre">OID</span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InitSecContextResult.mech" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mechanism used in the security context</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InitSecContextResult.flags">
+<span class="sig-name descname"><span class="pre">flags</span></span><em class="property"><span class="pre">:</span> <span class="pre">RequirementFlag</span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InitSecContextResult.flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Services available for the context</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InitSecContextResult.token">
+<span class="sig-name descname"><span class="pre">token</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InitSecContextResult.token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Token to be sent to the acceptor</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InitSecContextResult.lifetime">
+<span class="sig-name descname"><span class="pre">lifetime</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.InitSecContextResult.lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seconds for which the context is valid for</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InitSecContextResult.more_steps">
+<span class="sig-name descname"><span class="pre">more_steps</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.InitSecContextResult.more_steps" title="Permalink to this definition">¶</a></dt>
+<dd><p>More input is required to complete the exchange</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireContextResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InquireContextResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initiator_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Name</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Name</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifetime</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mech</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">RequirementFlag</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">locally_init</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complete</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#InquireContextResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.InquireContextResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about the security context.</p>
+<p>Create new instance of InquireContextResult(initiator_name, target_name, lifetime, mech, flags, locally_init, complete)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireContextResult.initiator_name">
+<span class="sig-name descname"><span class="pre">initiator_name</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Name</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireContextResult.initiator_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the initiator</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireContextResult.target_name">
+<span class="sig-name descname"><span class="pre">target_name</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Name</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireContextResult.target_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the acceptor</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireContextResult.lifetime">
+<span class="sig-name descname"><span class="pre">lifetime</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireContextResult.lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time valid for the security context</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireContextResult.mech">
+<span class="sig-name descname"><span class="pre">mech</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireContextResult.mech" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mech used to create the security context</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireContextResult.flags">
+<span class="sig-name descname"><span class="pre">flags</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">RequirementFlag</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireContextResult.flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Services available for the context</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireContextResult.locally_init">
+<span class="sig-name descname"><span class="pre">locally_init</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireContextResult.locally_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context was initiated locally</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireContextResult.complete">
+<span class="sig-name descname"><span class="pre">complete</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireContextResult.complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context has been established and ready to use</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.StoreCredResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">StoreCredResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mechs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">usage</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#StoreCredResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.StoreCredResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Result of the credential storing operation.</p>
+<p>Create new instance of StoreCredResult(mechs, usage)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.StoreCredResult.mechs">
+<span class="sig-name descname"><span class="pre">mechs</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.StoreCredResult.mechs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mechs that were stored in the credential store</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.StoreCredResult.usage">
+<span class="sig-name descname"><span class="pre">usage</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.StoreCredResult.usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>How the credential can be used</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.IOVUnwrapResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">IOVUnwrapResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encrypted</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">qop</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#IOVUnwrapResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.IOVUnwrapResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unwrapped IOV message result.</p>
+<p>Create new instance of IOVUnwrapResult(encrypted, qop)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.IOVUnwrapResult.encrypted">
+<span class="sig-name descname"><span class="pre">encrypted</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.IOVUnwrapResult.encrypted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the message was encrypted and not just signed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.IOVUnwrapResult.qop">
+<span class="sig-name descname"><span class="pre">qop</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.IOVUnwrapResult.qop" title="Permalink to this definition">¶</a></dt>
+<dd><p>The quality of protection applied to the message</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireNameResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InquireNameResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_mech_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mech</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">OID</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#InquireNameResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.InquireNameResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about a GSSAPI Name.</p>
+<p>Create new instance of InquireNameResult(attrs, is_mech_name, mech)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireNameResult.attrs">
+<span class="sig-name descname"><span class="pre">attrs</span></span><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireNameResult.attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set of attribute names</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireNameResult.is_mech_name">
+<span class="sig-name descname"><span class="pre">is_mech_name</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireNameResult.is_mech_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name is a mechanism name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireNameResult.mech">
+<span class="sig-name descname"><span class="pre">mech</span></span><em class="property"><span class="pre">:</span> <span class="pre">OID</span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireNameResult.mech" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mechanism if is_name_mech is True</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.GetNameAttributeResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">GetNameAttributeResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display_values</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">authenticated</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">complete</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#GetNameAttributeResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.GetNameAttributeResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>GSSAPI Name attribute values.</p>
+<p>Create new instance of GetNameAttributeResult(values, display_values, authenticated, complete)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.GetNameAttributeResult.values">
+<span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="pre">:</span> <span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.GetNameAttributeResult.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw values</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.GetNameAttributeResult.display_values">
+<span class="sig-name descname"><span class="pre">display_values</span></span><em class="property"><span class="pre">:</span> <span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.GetNameAttributeResult.display_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Human-readable values</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.GetNameAttributeResult.authenticated">
+<span class="sig-name descname"><span class="pre">authenticated</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.GetNameAttributeResult.authenticated" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attribute has been authenticated</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.GetNameAttributeResult.complete">
+<span class="sig-name descname"><span class="pre">complete</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.GetNameAttributeResult.complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attribute value is marked as complete</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireAttrsResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InquireAttrsResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mech_attrs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">known_mech_attrs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#InquireAttrsResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.InquireAttrsResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set of attributes supported and known by a mechanism.</p>
+<p>Create new instance of InquireAttrsResult(mech_attrs, known_mech_attrs)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireAttrsResult.mech_attrs">
+<span class="sig-name descname"><span class="pre">mech_attrs</span></span><em class="property"><span class="pre">:</span> <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireAttrsResult.mech_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mechanisms attributes</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireAttrsResult.known_mech_attrs">
+<span class="sig-name descname"><span class="pre">known_mech_attrs</span></span><em class="property"><span class="pre">:</span> <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">OID</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireAttrsResult.known_mech_attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Known attributes of the mechanism</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.DisplayAttrResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">DisplayAttrResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">short_desc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">long_desc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#DisplayAttrResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.DisplayAttrResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Information about an attribute.</p>
+<p>Create new instance of DisplayAttrResult(name, short_desc, long_desc)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.DisplayAttrResult.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.DisplayAttrResult.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mechanism name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.DisplayAttrResult.short_desc">
+<span class="sig-name descname"><span class="pre">short_desc</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.DisplayAttrResult.short_desc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Short description of the mechanism</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.DisplayAttrResult.long_desc">
+<span class="sig-name descname"><span class="pre">long_desc</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.DisplayAttrResult.long_desc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Long description of the mechanism</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireSASLNameResult">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">InquireSASLNameResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sasl_mech_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mech_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mech_description</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#InquireSASLNameResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.InquireSASLNameResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>SASL informmation about a GSSAPI Name.</p>
+<p>Create new instance of InquireSASLNameResult(sasl_mech_name, mech_name, mech_description)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireSASLNameResult.sasl_mech_name">
+<span class="sig-name descname"><span class="pre">sasl_mech_name</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireSASLNameResult.sasl_mech_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The SASL name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireSASLNameResult.mech_name">
+<span class="sig-name descname"><span class="pre">mech_name</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireSASLNameResult.mech_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mechanism name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireSASLNameResult.mech_description">
+<span class="sig-name descname"><span class="pre">mech_description</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireSASLNameResult.mech_description" title="Permalink to this definition">¶</a></dt>
+<dd><p>The mechanism description</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-gssapi.raw.exceptions">
 <span id="exceptions"></span><h2>Exceptions<a class="headerlink" href="#module-gssapi.raw.exceptions" title="Permalink to this headline">¶</a></h2>

@@ -199,11 +199,11 @@
 <span class="sd">    :meth:`acquire` method.</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        BadMechanismError</span>
-<span class="sd">        BadNameTypeError</span>
-<span class="sd">        BadNameError</span>
-<span class="sd">        ExpiredCredentialsError</span>
-<span class="sd">        MissingCredentialsError</span>
+<span class="sd">        ~gssapi.exceptions.BadMechanismError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameError</span>
+<span class="sd">        ~gssapi.exceptions.ExpiredCredentialsError</span>
+<span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
@@ -270,8 +270,8 @@
 <span class="sd">        extension.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (Name): the name associated with the credentials,</span>
-<span class="sd">                or None for the default name</span>
+<span class="sd">            name (~gssapi.names.Name): the name associated with the</span>
+<span class="sd">                credentials, or None for the default name</span>
 <span class="sd">            lifetime (int): the desired lifetime of the credentials, or None</span>
 <span class="sd">                for indefinite</span>
 <span class="sd">            mechs (list): the desired :class:`MechType` OIDs to be used</span>
@@ -287,11 +287,11 @@
 <span class="sd">                them</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            BadMechanismError</span>
-<span class="sd">            BadNameTypeError</span>
-<span class="sd">            BadNameError</span>
-<span class="sd">            ExpiredCredentialsError</span>
-<span class="sd">            MissingCredentialsError</span>
+<span class="sd">            ~gssapi.exceptions.BadMechanismError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameError</span>
+<span class="sd">            ~gssapi.exceptions.ExpiredCredentialsError</span>
+<span class="sd">            ~gssapi.exceptions.MissingCredentialsError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">store</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -328,7 +328,7 @@
 <span class="sd">                or None for the default store.</span>
 <span class="sd">            usage (str): the usage to store the credentials with -- either</span>
 <span class="sd">                &#39;both&#39;, &#39;initiate&#39;, or &#39;accept&#39;</span>
-<span class="sd">            mech (OID): the :class:`MechType` to associate with the</span>
+<span class="sd">            mech (~gssapi.OID): the :class:`MechType` to associate with the</span>
 <span class="sd">                stored credentials</span>
 <span class="sd">            overwrite (bool): whether or not to overwrite existing credentials</span>
 <span class="sd">                stored with the same name, etc</span>
@@ -339,11 +339,11 @@
 <span class="sd">            StoreCredResult: the results of the credential storing operation</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            GSSError</span>
-<span class="sd">            ExpiredCredentialsError</span>
-<span class="sd">            MissingCredentialsError</span>
-<span class="sd">            OperationUnavailableError</span>
-<span class="sd">            DuplicateCredentialsElementError</span>
+<span class="sd">            ~gssapi.exceptions.GSSError</span>
+<span class="sd">            ~gssapi.exceptions.ExpiredCredentialsError</span>
+<span class="sd">            ~gssapi.exceptions.MissingCredentialsError</span>
+<span class="sd">            ~gssapi.exceptions.OperationUnavailableError</span>
+<span class="sd">            ~gssapi.exceptions.DuplicateCredentialsElementError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">store</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -374,7 +374,7 @@
 <span class="sd">        :requires-ext:`s4u`</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (Name): the name to impersonate</span>
+<span class="sd">            name (~gssapi.names.Name): the name to impersonate</span>
 <span class="sd">            lifetime (int): the desired lifetime of the new credentials,</span>
 <span class="sd">                or None for indefinite</span>
 <span class="sd">            mechs (list): the desired :class:`MechType` OIDs for the new</span>
@@ -413,9 +413,9 @@
 <span class="sd">                with None used when the corresponding argument was False</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            MissingCredentialsError</span>
-<span class="sd">            InvalidCredentialsError</span>
-<span class="sd">            ExpiredCredentialsError</span>
+<span class="sd">            ~gssapi.exceptions.MissingCredentialsError</span>
+<span class="sd">            ~gssapi.exceptions.InvalidCredentialsError</span>
+<span class="sd">            ~gssapi.exceptions.ExpiredCredentialsError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="n">rcreds</span><span class="o">.</span><span class="n">inquire_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">lifetime</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">mechs</span><span class="p">)</span>
@@ -436,7 +436,8 @@
 <span class="sd">        about them.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            mech (OID): the mechanism for which to retrive the information</span>
+<span class="sd">            mech (~gssapi.OID): the mechanism for which to retrive the</span>
+<span class="sd">                information</span>
 <span class="sd">            name (bool): get the name associated with the credentials</span>
 <span class="sd">            init_lifetime (bool): get the remaining initiate lifetime for</span>
 <span class="sd">                the credentials</span>
@@ -489,10 +490,10 @@
 <span class="sd">        `impersonator` argument.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name (Name): the name associated with the</span>
+<span class="sd">            name (~gssapi.names.Name): the name associated with the</span>
 <span class="sd">                credentials</span>
-<span class="sd">            mech (OID): the desired :class:`MechType` to be used with the</span>
-<span class="sd">                credentials</span>
+<span class="sd">            mech (~gssapi.OID): the desired :class:`MechType` to be used with</span>
+<span class="sd">                the credentials</span>
 <span class="sd">            usage (str): the usage for the credentials -- either &#39;both&#39;,</span>
 <span class="sd">                &#39;initiate&#39;, or &#39;accept&#39;</span>
 <span class="sd">            init_lifetime (int): the desired initiate lifetime of the</span>
@@ -511,12 +512,12 @@
 <span class="sd">                and the newly acquired ones.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            BadMechanismError</span>
-<span class="sd">            BadNameTypeError</span>
-<span class="sd">            BadNameError</span>
-<span class="sd">            DuplicateCredentialsElementError</span>
-<span class="sd">            ExpiredCredentialsError</span>
-<span class="sd">            MissingCredentialsError</span>
+<span class="sd">            ~gssapi.exceptions.BadMechanismError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameError</span>
+<span class="sd">            ~gssapi.exceptions.DuplicateCredentialsElementError</span>
+<span class="sd">            ~gssapi.exceptions.ExpiredCredentialsError</span>
+<span class="sd">            ~gssapi.exceptions.MissingCredentialsError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">store</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">impersonator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

@@ -253,9 +253,9 @@
 <span class="sd">        name type.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            BadNameTypeError</span>
-<span class="sd">            BadNameError</span>
-<span class="sd">            BadMechanismError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameError</span>
+<span class="sd">            ~gssapi.exceptions.BadMechanismError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">rname_rfc6680</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -299,14 +299,14 @@
 <span class="sd">        :requires-ext:`rfc6680`</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name_type (OID): the :class:`NameType` to use to display the given</span>
-<span class="sd">                name</span>
+<span class="sd">            name_type (~gssapi.OID): the :class:`NameType` to use to display</span>
+<span class="sd">                the given name</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            str: the displayed name</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            OperationUnavailableError</span>
+<span class="sd">            ~gssapi.exceptions.OperationUnavailableError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">rname_rfc6680</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -351,9 +351,9 @@
 <span class="sd">            bytes: the exported name in token form</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            MechanismNameRequiredError</span>
-<span class="sd">            BadNameTypeError</span>
-<span class="sd">            BadNameError</span>
+<span class="sd">            ~gssapi.exceptions.MechanismNameRequiredError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">composite</span><span class="p">:</span>
@@ -373,15 +373,15 @@
 <span class="sd">        to the given mechanism.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            mech (OID): the :class:`MechType` to use</span>
+<span class="sd">            mech (~gssapi.OID): the :class:`MechType` to use</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Name: the canonicalized name</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            BadMechanismError</span>
-<span class="sd">            BadNameTypeError</span>
-<span class="sd">            BadNameError</span>
+<span class="sd">            ~gssapi.exceptions.BadMechanismError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">            ~gssapi.exceptions.BadNameError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">canonicalize_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">))</span></div>
@@ -411,7 +411,7 @@
 <span class="sd">                fields set to None</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            GSSError</span>
+<span class="sd">            ~gssapi.exceptions.GSSError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">rname_rfc6680</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
