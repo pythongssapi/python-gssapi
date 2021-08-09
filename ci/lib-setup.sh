@@ -8,7 +8,10 @@ setup::debian::install() {
     apt-get update
 
     if [ x"$KRB5_VER" = "xheimdal" ]; then
-        apt-get -y install heimdal-dev
+        apt-get -y install heimdal-{clients,dev,kdc}
+
+        export GSSAPI_KRB5_MAIN_LIB="/usr/lib/x86_64-linux-gnu/libkrb5.so.26"
+        export PATH="/usr/lib/heimdal-servers:${PATH}"
     else
         apt-get -y install krb5-{user,kdc,admin-server,multidev} libkrb5-dev \
                 gss-ntlmssp
@@ -62,6 +65,13 @@ setup::macos::install() {
     python3 -m virtualenv -p $(which python3) .venv
     source .venv/bin/activate
     pip install --install-option='--no-cython-compile' cython
+
+    export GSSAPI_KRB5_MAIN_LIB="/System/Library/PrivateFrameworks/Heimdal.framework/Heimdal"
+
+    # macOS's Heimdal version is buggy, it will only use KRB5_KTNAME if the
+    # env var was set when GSSAPI creates the context. Setting it here to any
+    # value solves that problem for CI.
+    export KRB5_KTNAME=initial
 }
 
 setup::windows::install() {

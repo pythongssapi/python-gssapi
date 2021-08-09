@@ -36,8 +36,8 @@ if [ $BUILD_RES -ne 0 ]; then
 fi
 
 # Only call exit on failures so we can source this script
-if [ x"$KRB5_VER" = "xheimdal" ] || [ "$OS_NAME" = "windows" ]; then
-    # heimdal/Windows can't run the tests yet, so just make sure it imports and exit
+if [ "$OS_NAME" = "windows" ]; then
+    # Windows can't run the tests yet, so just make sure it imports and exit
     python -c "import gssapi" || exit $?
 else
     python setup.py nosetests --verbosity=3 || exit $?
