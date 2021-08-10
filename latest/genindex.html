@@ -203,6 +203,10 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.chan_bindings.ChannelBindings.acceptor_address_type">acceptor_address_type (ChannelBindings attribute)</a>
 </li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey">acceptor_subkey (CfxKeyData attribute)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey_type">acceptor_subkey_type (CfxKeyData attribute)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.AcceptSecContextResult">AcceptSecContextResult (class in gssapi.raw.named_tuples)</a>
 </li>
       <li><a href="gssapi.html#gssapi.creds.Credentials.acquire">acquire() (Credentials class method)</a>
@@ -305,6 +309,10 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType.ccitt">ccitt (AddressType attribute)</a>
 </li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd">cfx_kd (Krb5LucidContextV1 attribute)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.CfxKeyData">CfxKeyData (class in gssapi.raw.named_tuples)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.RequirementFlag.channel_bound">channel_bound (RequirementFlag attribute)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.chan_bindings.ChannelBindings">ChannelBindings (class in gssapi.raw.chan_bindings)</a>
@@ -354,6 +362,10 @@
 </li>
       </ul></li>
       <li><a href="gssapi.raw.html#gssapi.raw.creds.Creds">Creds (class in gssapi.raw.creds)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.CfxKeyData.ctx_key">ctx_key (CfxKeyData attribute)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.CfxKeyData.ctx_key_type">ctx_key_type (CfxKeyData attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -434,6 +446,8 @@
 </li>
       </ul></li>
       <li><a href="gssapi.html#gssapi.exceptions.EncryptionNotUsed">EncryptionNotUsed</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.endtime">endtime (Krb5LucidContextV1 attribute)</a>
 </li>
       <li><a href="gssapi.html#gssapi.exceptions.ExpiredContextError">ExpiredContextError</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.ExpiredContextError">[1]</a>
 </li>
@@ -611,6 +625,13 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    gssapi.raw.ext_krb5
+
+      <ul>
+        <li><a href="gssapi.raw.html#module-gssapi.raw.ext_krb5">module</a>
+</li>
+      </ul></li>
       <li>
     gssapi.raw.ext_password
 
@@ -861,6 +882,8 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType.ip">ip (AddressType attribute)</a>
 </li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.is_initiator">is_initiator (Krb5LucidContextV1 attribute)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.InquireNameResult.is_mech_name">is_mech_name (InquireNameResult attribute)</a>
 
       <ul>
@@ -875,11 +898,35 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.html#gssapi.MechType.kerberos">kerberos (MechType attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.types.MechType.kerberos">[1]</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.html#gssapi.NameType.kerberos_principal">kerberos_principal (NameType attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.types.NameType.kerberos_principal">[1]</a>
 </li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.Rfc1964KeyData.key">key (Rfc1964KeyData attribute)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.Rfc1964KeyData.key_type">key_type (Rfc1964KeyData attribute)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.InquireAttrsResult.known_mech_attrs">known_mech_attrs (InquireAttrsResult attribute)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.krb5_ccache_name">krb5_ccache_name() (in module gssapi.raw.ext_krb5)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.krb5_export_lucid_sec_context">krb5_export_lucid_sec_context() (in module gssapi.raw.ext_krb5)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.krb5_extract_authtime_from_sec_context">krb5_extract_authtime_from_sec_context() (in module gssapi.raw.ext_krb5)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.krb5_extract_authz_data_from_sec_context">krb5_extract_authz_data_from_sec_context() (in module gssapi.raw.ext_krb5)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.krb5_get_tkt_flags">krb5_get_tkt_flags() (in module gssapi.raw.ext_krb5)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.krb5_import_cred">krb5_import_cred() (in module gssapi.raw.ext_krb5)</a>
+</li>
+      <li><a href="gssapi.html#gssapi.NameType.krb5_nt_principal_name">krb5_nt_principal_name (NameType attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.types.NameType.krb5_nt_principal_name">[1]</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.krb5_set_allowable_enctypes">krb5_set_allowable_enctypes() (in module gssapi.raw.ext_krb5)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContext">Krb5LucidContext (class in gssapi.raw.ext_krb5)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1">Krb5LucidContextV1 (class in gssapi.raw.ext_krb5)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1023,6 +1070,8 @@
 </li>
         <li><a href="gssapi.raw.html#module-gssapi.raw.ext_iov_mic">gssapi.raw.ext_iov_mic</a>
 </li>
+        <li><a href="gssapi.raw.html#module-gssapi.raw.ext_krb5">gssapi.raw.ext_krb5</a>
+</li>
         <li><a href="gssapi.raw.html#module-gssapi.raw.ext_password">gssapi.raw.ext_password</a>
 </li>
         <li><a href="gssapi.raw.html#module-gssapi.raw.ext_password_add">gssapi.raw.ext_password_add</a>
@@ -1150,13 +1199,15 @@
 </li>
       <li><a href="gssapi.html#gssapi.exceptions.ParameterWriteError">ParameterWriteError</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.ParameterWriteError">[1]</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.raw.html#gssapi.raw.sec_contexts.process_context_token">process_context_token() (in module gssapi.raw.sec_contexts)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.html#gssapi.sec_contexts.SecurityContext.process_token">process_token() (SecurityContext method)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.RequirementFlag.protection_ready">protection_ready (RequirementFlag attribute)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol">protocol (Krb5LucidContextV1 attribute)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType.pup">pup (AddressType attribute)</a>
 </li>
@@ -1178,6 +1229,8 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.recv_seq">recv_seq (Krb5LucidContextV1 attribute)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.creds.release_cred">release_cred() (in module gssapi.raw.creds)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.names.release_name">release_name() (in module gssapi.raw.names)</a>
@@ -1207,6 +1260,10 @@
         <li><a href="gssapi.raw.html#index-5">RFC 6680</a>
 </li>
       </ul></li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd">rfc1964_kd (Krb5LucidContextV1 attribute)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.Rfc1964KeyData">Rfc1964KeyData (class in gssapi.raw.named_tuples)</a>
+</li>
       <li><a href="gssapi.html#gssapi.exceptions.BadChannelBindingsError.ROUTINE_CODE">ROUTINE_CODE (BadChannelBindingsError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.BadChannelBindingsError.ROUTINE_CODE">[1]</a>
 
       <ul>
@@ -1251,12 +1308,16 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.InquireSASLNameResult.sasl_mech_name">sasl_mech_name (InquireSASLNameResult attribute)</a>
 </li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.Rfc1964KeyData.seal_alg">seal_alg (Rfc1964KeyData attribute)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.sec_contexts.SecurityContext">SecurityContext (class in gssapi.raw.sec_contexts)</a>
 
       <ul>
         <li><a href="gssapi.html#gssapi.sec_contexts.SecurityContext">(class in gssapi.sec_contexts)</a>
 </li>
       </ul></li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.send_seq">send_seq (Krb5LucidContextV1 attribute)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_set_cred_opt.set_cred_option">set_cred_option() (in module gssapi.raw.ext_set_cred_opt)</a>
 </li>
       <li><a href="gssapi.html#gssapi.set_encoding">set_encoding() (in module gssapi)</a>
@@ -1269,12 +1330,14 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.DisplayAttrResult.short_desc">short_desc (DisplayAttrResult attribute)</a>
 </li>
+      <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.Rfc1964KeyData.sign_alg">sign_alg (Rfc1964KeyData attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.sign_only">sign_only (IOVBufferType attribute)</a>
 </li>
       <li><a href="gssapi.html#gssapi.sec_contexts.SecurityContext.step">step() (SecurityContext method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.html#gssapi.creds.Credentials.store">store() (Credentials method)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_rfc5588.store_cred">store_cred() (in module gssapi.raw.ext_rfc5588)</a>
@@ -1382,6 +1445,8 @@
       <li><a href="gssapi.raw.html#gssapi.raw.ext_iov_mic.verify_mic_iov">verify_mic_iov() (in module gssapi.raw.ext_iov_mic)</a>
 </li>
       <li><a href="gssapi.html#gssapi.sec_contexts.SecurityContext.verify_signature">verify_signature() (SecurityContext method)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.version">version (Krb5LucidContextV1 attribute)</a>
 </li>
   </ul></td>
 </tr></table>

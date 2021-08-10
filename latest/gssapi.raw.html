@@ -114,6 +114,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_ggf">Global Grid Forum (GGF) Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_s4u">Services4User Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_password">Acquiring Credentials With a Password Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_krb5">Kerberos Specific Extensions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_set_cred_opt">Other Extensions</a></li>
 </ul>
 </li>
@@ -1455,6 +1456,11 @@ types (to be used with <a class="reference internal" href="gssapi.raw.names.impo
 <dd></dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.types.NameType.krb5_nt_principal_name">
+<span class="sig-name descname"><span class="pre">krb5_nt_principal_name</span></span><em class="property"> <span class="pre">=</span> <span class="pre">&lt;OID</span> <span class="pre">1.2.840.113554.1.2.2.1&gt;</span></em><a class="headerlink" href="#gssapi.raw.types.NameType.krb5_nt_principal_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="gssapi.raw.types.NameType.machine_uid">
 <span class="sig-name descname"><span class="pre">machine_uid</span></span><em class="property"> <span class="pre">=</span> <span class="pre">&lt;OID</span> <span class="pre">1.2.840.113554.1.2.1.2&gt;</span></em><a class="headerlink" href="#gssapi.raw.types.NameType.machine_uid" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -2739,6 +2745,351 @@ may be None for indefinite or not supported)</p>
 </dd></dl>
 
 </div>
+<div class="section" id="module-gssapi.raw.ext_krb5">
+<span id="kerberos-specific-extensions"></span><h3>Kerberos Specific Extensions<a class="headerlink" href="#module-gssapi.raw.ext_krb5" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContext">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Krb5LucidContext</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContext" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base container returned by <a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_export_lucid_sec_context" title="gssapi.raw.ext_krb5.krb5_export_lucid_sec_context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">krb5_export_lucid_sec_context()</span></code></a> when
+an unknown version was requested.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Krb5LucidContextV1</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kerberos context data returned by <a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_export_lucid_sec_context" title="gssapi.raw.ext_krb5.krb5_export_lucid_sec_context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">krb5_export_lucid_sec_context()</span></code></a>
+when version 1 was requested.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd">
+<span class="sig-name descname"><span class="pre">cfx_kd</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key data for protocol 1 (RFC4121)</p>
+<p>This will be set when <a class="reference internal" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol" title="gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol"><code class="xref py py-attr docutils literal notranslate"><span class="pre">protocol</span></code></a> is <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the RFC4121 key data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData" title="gssapi.raw.named_tuples.CfxKeyData">CfxKeyData</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.endtime">
+<span class="sig-name descname"><span class="pre">endtime</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.endtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expiration time of the context</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the expiration time of the context</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.is_initiator">
+<span class="sig-name descname"><span class="pre">is_initiator</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.is_initiator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whether the context was the initiator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> when the exported context was the
+initiator</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol">
+<span class="sig-name descname"><span class="pre">protocol</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol" title="Permalink to this definition">¶</a></dt>
+<dd><p>The protocol number</p>
+<p>If the protocol number is 0 then <a class="reference internal" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd" title="gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd"><code class="xref py py-attr docutils literal notranslate"><span class="pre">rfc1964_kd</span></code></a> is set and
+<a class="reference internal" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd" title="gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd"><code class="xref py py-attr docutils literal notranslate"><span class="pre">cfx_kd</span></code></a> is <cite>None</cite>. If the protocol number is 1 then the opposite
+is true.</p>
+<p>Protocol 0 refers to RFC1964 and 1 refers to RFC4121.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the protocol number</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.recv_seq">
+<span class="sig-name descname"><span class="pre">recv_seq</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.recv_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver sequence number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the receiver sequence number</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd">
+<span class="sig-name descname"><span class="pre">rfc1964_kd</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keydata for protocol 0 (RFC1964)</p>
+<p>This will be set when <a class="reference internal" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol" title="gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol"><code class="xref py py-attr docutils literal notranslate"><span class="pre">protocol</span></code></a> is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the RFC1964 key data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData" title="gssapi.raw.named_tuples.Rfc1964KeyData">Rfc1964KeyData</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.send_seq">
+<span class="sig-name descname"><span class="pre">send_seq</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.send_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sender sequence number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the sender sequence number</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.version">
+<span class="sig-name descname"><span class="pre">version</span></span><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>The structure version number</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the structure version number</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Optional[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.krb5_ccache_name">
+<span class="sig-name descname"><span class="pre">krb5_ccache_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_krb5.krb5_ccache_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the default Kerberos Protocol credentials cache name.</p>
+<p>This method sets the default credentials cache name for use by he Kerberos
+mechanism. The default credentials cache is used by
+<a class="reference internal" href="#gssapi.raw.creds.acquire_cred" title="gssapi.raw.creds.acquire_cred"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acquire_cred()</span></code></a> to create a GSS-API credential. It
+is also used by <a class="reference internal" href="#gssapi.raw.sec_contexts.init_sec_context" title="gssapi.raw.sec_contexts.init_sec_context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init_sec_context()</span></code></a> when
+<cite>GSS_C_NO_CREDENTIAL</cite> is specified.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Heimdal does not return the old name when called. It also does not
+reset the ccache lookup behaviour when setting to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The return value may not be thread safe.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><em>bytes</em></a><em>]</em>) – the name to set as the new thread specific
+ccache name. Set to <code class="docutils literal notranslate"><span class="pre">None</span></code> to revert back to getting the ccache
+from the config/environment settings.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the old name that was previously set</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)">bytes</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.krb5_export_lucid_sec_context">
+<span class="sig-name descname"><span class="pre">krb5_export_lucid_sec_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_krb5.krb5_export_lucid_sec_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retuns a non-opaque version of the internal context info.</p>
+<p>Gets information about the Kerberos security context passed in. Currently
+only version 1 is known and supported by this library.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The context handle must not be used again by the caller after this
+call.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<em>(</em><a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
+<li><p><strong>version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the output structure version to export.  Currently
+only 1 is supported.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the non-opaque version context info</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.ext_krb5.Krb5LucidContext" title="gssapi.raw.ext_krb5.Krb5LucidContext">Krb5LucidContext</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.krb5_extract_authtime_from_sec_context">
+<span class="sig-name descname"><span class="pre">krb5_extract_authtime_from_sec_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_krb5.krb5_extract_authtime_from_sec_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the auth time for the security context.</p>
+<p>Gets the auth time for the established security context.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Heimdal can only get the authtime on the acceptor security context.
+MIT is able to get the authtime on both initiators and acceptors.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>context</strong> (<em>(</em><a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the authtime</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.krb5_extract_authz_data_from_sec_context">
+<span class="sig-name descname"><span class="pre">krb5_extract_authz_data_from_sec_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ad_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_krb5.krb5_extract_authz_data_from_sec_context" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts Kerberos authorization data.</p>
+<p>Extracts authorization data that may be stored within the context.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only operates on acceptor contexts.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> (<em>(</em><a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the current
+security context</p></li>
+<li><p><strong>ad_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the type of data to extract</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the raw authz data from the sec context</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)">bytes</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.krb5_get_tkt_flags">
+<span class="sig-name descname"><span class="pre">krb5_get_tkt_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_krb5.krb5_get_tkt_flags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return ticket flags for the kerberos ticket.</p>
+<p>Return the ticket flags for the kerberos ticket received when
+authenticating the initiator.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Heimdal can only get the tkt flags on the acceptor security context.
+MIT is able to get the tkt flags on initators and acceptors.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>context</strong> (<a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><em>SecurityContext</em></a>) – the security
+context</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the ticket flags for the received kerberos ticket</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.krb5_import_cred">
+<span class="sig-name descname"><span class="pre">krb5_import_cred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cred_handle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keytab_principal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keytab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_krb5.krb5_import_cred" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Krb5 credentials into GSSAPI credential.</p>
+<p>Imports the krb5 credentials (either or both of the keytab and cache) into
+the GSSAPI credential so it can be used within GSSAPI. The ccache is
+copied by reference and thus shared, so if the credential is destroyed,
+all users of cred_handle will fail.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cred_handle</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credential handle to import into</p></li>
+<li><p><strong>cache</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the krb5_ccache address pointer, as an int, to import
+from</p></li>
+<li><p><strong>keytab_principal</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the krb5_principal address pointer, as an int,
+of the credential to import</p></li>
+<li><p><strong>keytab</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – the krb5_keytab address pointer, as an int, of the
+keytab to import</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="gssapi.raw.ext_krb5.krb5_set_allowable_enctypes">
+<span class="sig-name descname"><span class="pre">krb5_set_allowable_enctypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cred_handle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ktypes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gssapi.raw.ext_krb5.krb5_set_allowable_enctypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Limits the keys that can be exported.</p>
+<p>Called by a context initiator after acquiring the creds but before calling
+<a class="reference internal" href="#gssapi.raw.sec_contexts.init_sec_context" title="gssapi.raw.sec_contexts.init_sec_context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">init_sec_context()</span></code></a> to restrict the set of
+enctypes which will be negotiated during context establisment to those in
+the provided list.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The cred_handle should not be <code class="docutils literal notranslate"><span class="pre">GSS_C_NO_CREDENTIAL</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cred_hande</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credential handle</p></li>
+<li><p><strong>ktypes</strong> (<em>List</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>]</em>) – list of enctypes allowed</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gssapi.html#gssapi.exceptions.GSSError" title="gssapi.exceptions.GSSError"><strong>GSSError</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="module-gssapi.raw.ext_set_cred_opt">
 <span id="other-extensions"></span><h3>Other Extensions<a class="headerlink" href="#module-gssapi.raw.ext_set_cred_opt" title="Permalink to this headline">¶</a></h3>
 <p>gss_set_cred_option</p>
@@ -3274,6 +3625,68 @@ or None to send GSS_C_EMPTY_BUFFER.</p></li>
 <dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireSASLNameResult.mech_description">
 <span class="sig-name descname"><span class="pre">mech_description</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireSASLNameResult.mech_description" title="Permalink to this definition">¶</a></dt>
 <dd><p>The mechanism description</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.Rfc1964KeyData">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Rfc1964KeyData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sign_alg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">seal_alg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#Rfc1964KeyData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.Rfc1964KeyData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Security context key data based on RFC1964.</p>
+<p>Create new instance of Rfc1964KeyData(sign_alg, seal_alg, key_type, key)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.Rfc1964KeyData.sign_alg">
+<span class="sig-name descname"><span class="pre">sign_alg</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.Rfc1964KeyData.sign_alg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Signing algorithm identifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.Rfc1964KeyData.seal_alg">
+<span class="sig-name descname"><span class="pre">seal_alg</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.Rfc1964KeyData.seal_alg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sealing algorithm identifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.Rfc1964KeyData.key_type">
+<span class="sig-name descname"><span class="pre">key_type</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.Rfc1964KeyData.key_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key encryption type identifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.Rfc1964KeyData.key">
+<span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.Rfc1964KeyData.key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encryption key data</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.CfxKeyData">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">CfxKeyData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx_key_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ctx_key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceptor_subkey_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">acceptor_subkey</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/named_tuples.html#CfxKeyData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.named_tuples.CfxKeyData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Securty context key data.</p>
+<p>Create new instance of CfxKeyData(ctx_key_type, ctx_key, acceptor_subkey_type, acceptor_subkey)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.CfxKeyData.ctx_key_type">
+<span class="sig-name descname"><span class="pre">ctx_key_type</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.CfxKeyData.ctx_key_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context key encryption type identifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.CfxKeyData.ctx_key">
+<span class="sig-name descname"><span class="pre">ctx_key</span></span><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.CfxKeyData.ctx_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Context key data - session or sub-session key</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey_type">
+<span class="sig-name descname"><span class="pre">acceptor_subkey_type</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acceptor key enc type identifier</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey">
+<span class="sig-name descname"><span class="pre">acceptor_subkey</span></span><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><span class="pre">bytes</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acceptor key data</p>
 </dd></dl>
 
 </dd></dl>

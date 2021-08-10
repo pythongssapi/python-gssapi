@@ -173,6 +173,13 @@ Acquiring Credentials With a Password Extensions
     :members:
     :undoc-members:
 
+Kerberos Specific Extensions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: gssapi.raw.ext_krb5
+    :members:
+    :undoc-members:
+
 Other Extensions
 ~~~~~~~~~~~~~~~~
 
