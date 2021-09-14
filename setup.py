@@ -339,7 +339,7 @@ setup(
     name='gssapi',
     version='1.7.0',
     author='The Python GSSAPI Team',
-    author_email='rharwood@redhat.com',
+    author_email='jborean93@gmail.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
               'gssapi.tests'],
     description='Python GSSAPI Wrapper',
