@@ -61,6 +61,7 @@
                 "fail-fast": false,
                 "matrix": {
                     "name": [
+                        "win-py-3.10-dev",
                         "win-py-3.9",
                         "win-py-3.8",
                         "win-py-3.7",
@@ -71,6 +72,10 @@
                         "x86"
                     ],
                     "include": [
+                        {
+                            "name": "win-py-3.10-dev",
+                            "pyenv": "3.10-dev",
+                        },
                         {
                             "name": "win-py-3.9",
                             "pyenv": "3.9",

@@ -80,6 +80,7 @@
             "strategy": {
                 "matrix": {
                     "name": [
+                        "win-wheel-3.10-dev",
                         "win-wheel-3.9",
                         "win-wheel-3.8",
                         "win-wheel-3.7",
@@ -90,6 +91,10 @@
                         "x86"
                     ],
                     "include": [
+                        {
+                            "name": "win-wheel-3.10-dev",
+                            "pyenv": "3.10-dev",
+                        },
                         {
                             "name": "win-wheel-3.9",
                             "pyenv": "3.9",
