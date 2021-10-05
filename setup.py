@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 from __future__ import print_function
 
-from setuptools import setup
-from setuptools import Distribution
-from setuptools.command.sdist import sdist
-from setuptools.extension import Extension
 import subprocess
 import platform
 import re
@@ -12,6 +8,17 @@ import sys
 import os
 import shutil
 import shlex
+
+# Enables the vendored distutils in setuptools over the stdlib one to avoid
+# the deprecation warning. Must be done before importing setuptools,
+# setuptools also must be imported before distutils.
+# https://github.com/pypa/setuptools/blob/main/docs/deprecated/distutils-legacy.rst
+os.environ['SETUPTOOLS_USE_DISTUTILS'] = 'local'
+
+from setuptools import setup  # noqa: E402
+from setuptools import Distribution  # noqa: E402
+from setuptools.command.sdist import sdist  # noqa: E402
+from setuptools.extension import Extension  # noqa: E402
 
 
 SKIP_CYTHON_FILE = '__dont_use_cython__.txt'
