@@ -1,7 +1,0 @@
-# TODO: This is marked as deprecated - migrate to https://github.com/actions/stale
-# https://github.com/marketplace/actions/stale-for-actions
-daysUntilStale: 28
-daysUntilClose: 14
-staleLabel: stale
-markComment: 'false'
-only: pulls
