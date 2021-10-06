@@ -973,6 +973,8 @@ method call or property lookup on the context.
 <span class="k">try</span><span class="p">:</span>
     <span class="k">while</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">complete</span><span class="p">:</span>
         <span class="n">output_token</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">input_token</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">output_token</span><span class="p">:</span>
+            <span class="k">break</span>
         <span class="n">input_token</span> <span class="o">=</span> <span class="n">send_and_receive</span><span class="p">(</span><span class="n">output_token</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">GSSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
      <span class="n">handle_the_issue</span><span class="p">()</span>

@@ -552,6 +552,8 @@
 <span class="sd">           try:</span>
 <span class="sd">               while not ctx.complete:</span>
 <span class="sd">                   output_token = ctx.step(input_token)</span>
+<span class="sd">                   if not output_token:</span>
+<span class="sd">                       break</span>
 <span class="sd">                   input_token = send_and_receive(output_token)</span>
 <span class="sd">           except GSSError as e:</span>
 <span class="sd">                handle_the_issue()</span>
