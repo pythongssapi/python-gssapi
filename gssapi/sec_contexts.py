@@ -481,6 +481,8 @@ class SecurityContext(rsec_contexts.SecurityContext,
            try:
                while not ctx.complete:
                    output_token = ctx.step(input_token)
+                   if not output_token:
+                       break
                    input_token = send_and_receive(output_token)
            except GSSError as e:
                 handle_the_issue()
