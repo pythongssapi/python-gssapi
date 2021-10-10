@@ -1,4 +1,4 @@
-workflow-dispatchname: Stale pull request handler
+name: Stale pull request handler
 on:
   schedule:
   - cron: 0 0 * * *
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/stale@main
+    - uses: actions/stale@4.0.0
       id: stale
       with:
         days-before-stale: -1
