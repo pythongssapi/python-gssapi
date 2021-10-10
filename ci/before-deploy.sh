@@ -19,7 +19,7 @@ mv .venv .venv_saved
 
 # for the tarball upload
 # clean up
-git clean -Xdf --exclude .venv
+git clean -Xdf
 
 # restore the saved "dist"/".venv" directory
 mv dist_saved dist
