@@ -48,5 +48,22 @@ fi
 
 PKG_NAME_VER="python-gssapi-${PYTHON_GSSAPI_VERSION}"
 
-tar -czvf ./tag_build/${PKG_NAME_VER}.tar.gz --exclude='dist' --exclude='tag_build' --exclude='.git' --exclude='travis_docs_build' --exclude='.git' --transform "s,^\.,${PKG_NAME_VER}," .
+tar -cvf ./tag_build/${PKG_NAME_VER}.tar \
+    --exclude='dist' \
+    --exclude='tag_build' \
+    --exclude='.git' \
+    --exclude='travis_docs_build' \
+    --exclude='README.rst' \
+    --transform="s,^\.,${PKG_NAME_VER}," .
+
+# --transform clobbers symlink so add it last using Python
+python - << EOF
+import tarfile
+
+with tarfile.open("tag_build/${PKG_NAME_VER}.tar", mode="a:") as tf:
+    tf.add("README.rst", arcname="${PKG_NAME_VER}/README.rst")
+EOF
+
+gzip ./tag_build/${PKG_NAME_VER}.tar
+
 sha512sum --binary ./tag_build/${PKG_NAME_VER}.tar.gz > ./tag_build/${PKG_NAME_VER}.sha512sum
