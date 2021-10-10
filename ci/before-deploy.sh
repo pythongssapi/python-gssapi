@@ -12,26 +12,18 @@ yum -y install tar git
 # build the docs
 deploy::build-docs
 
-# NB(directxman12): this is a *terrible* hack, but basically,
-# `twine` gets called like this:
-# - python setup.py $PYPI_DISTRIBUTIONS
-# - twine upload -r pypi dist/*
-# - [some other stuff]
-#
-# so if we set $PYPI_DISTRIBUTIONS to something harmless, like `check`,
-# and then build the dist ourselves (and save it from the cleanup),
-# dpl will upload that
-
-# build the sdist
+# build the sdist and save the dirs before the clean
 python setup.py sdist
 mv dist dist_saved
+mv .venv .venv_saved
 
 # for the tarball upload
 # clean up
-git clean -Xdf
+git clean -Xdf --exclude .venv
 
-# restore the saved "dist" directory
+# restore the saved "dist"/".venv" directory
 mv dist_saved dist
+mv .venv_saved .venv
 
 # make the dir
 rm -rf ./tag_build || true
@@ -53,6 +45,7 @@ tar -cvf ./tag_build/${PKG_NAME_VER}.tar \
     --exclude='tag_build' \
     --exclude='.git' \
     --exclude='travis_docs_build' \
+    --exclude='.venv' \
     --exclude='README.rst' \
     --transform="s,^\.,${PKG_NAME_VER}," .
 
@@ -67,3 +60,4 @@ EOF
 gzip ./tag_build/${PKG_NAME_VER}.tar
 
 sha512sum --binary ./tag_build/${PKG_NAME_VER}.tar.gz > ./tag_build/${PKG_NAME_VER}.sha512sum
+
