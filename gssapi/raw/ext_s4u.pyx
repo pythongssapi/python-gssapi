@@ -55,7 +55,7 @@ mechs=None, usage='initiate')
             impersonate the target name
         name (~gssapi.raw.names.Name): the name to impersonate
         lifetime (int): the lifetime for the credentials (or None for
-            indefinite)
+            indefinite), in seconds
         mechs (~gssapi.MechType): the desired mechanisms for which the
             credentials should work (or None for the default set)
         usage (str): the usage type for the credentials: may be
@@ -64,7 +64,7 @@ mechs=None, usage='initiate')
     Returns:
         AcquireCredResult: the resulting credentials, the actual mechanisms
         with which they may be used, and their actual lifetime (or None for
-        indefinite or not support)
+        indefinite or not support), in seconds
 
     Raises:
         ~gssapi.exceptions.GSSError
@@ -142,10 +142,10 @@ usage='initiate', init_lifetime=None, accept_lifetime=None)
             'initiate', 'accept', or 'both'
         init_lifetime (int): the lifetime for the credentials to remain
             valid when using them to initiate security contexts (or None for
-            indefinite)
+            indefinite), in seconds
         accept_lifetime (int): the lifetime for the credentials to remain
             valid when using them to accept security contexts (or None for
-            indefinite)
+            indefinite), in seconds
 
     Returns:
         AddCredResult: the actual mechanisms with which the credentials may be

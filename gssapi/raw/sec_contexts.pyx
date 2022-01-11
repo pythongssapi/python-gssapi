@@ -142,7 +142,7 @@ flags=None, lifetime=None, channel_bindings=None, input_token=None)
             out_of_sequence_detection.  This may also be an
             :class:`IntEnumFlagSet`
         lifetime (int): the request lifetime of the security context (a value
-            of 0 or None means indefinite)
+            of 0 or None means indefinite), in seconds
         channel_bindings (ChannelBindings): The channel bindings (or None for
             no channel bindings)
         input_token (bytes): the token to use to update the security context,
@@ -152,8 +152,8 @@ flags=None, lifetime=None, channel_bindings=None, input_token=None)
         InitSecContextResult: the output security context, the actual mech
         type, the actual flags used, the output token to send to the acceptor,
         the actual lifetime of the context (or None if not supported or
-        indefinite), and whether or not more calls are needed to finish the
-        initiation.
+        indefinite) in seconds, and whether or not more calls are needed to
+        finish the initiation.
 
     Raises:
         ~gssapi.exceptions.InvalidTokenError
@@ -274,8 +274,8 @@ channel_bindings=None)
     Returns:
         AcceptSecContextResult: the resulting security context, the initiator
             name, the mechanism being used, the output token, the flags in use,
-            the lifetime of the context (or None for indefinite or not
-            supported), the delegated credentials (valid only if the
+            the lifetime (in seconds) of the context (or None for indefinite
+            or not supported), the delegated credentials (valid only if the
             delegate_to_peer flag is set), and whether or not further token
             exchanges are needed to finalize the security context.
 

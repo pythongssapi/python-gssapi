@@ -74,7 +74,7 @@ class Credentials(rcreds.Creds):
 
     @property
     def lifetime(self):
-        """Get the remaining lifetime of these credentials"""
+        """Get the remaining lifetime of these credentials, in seconds"""
         return self.inquire(name=False, lifetime=True,
                             usage=False, mechs=False).lifetime
 
@@ -110,8 +110,8 @@ class Credentials(rcreds.Creds):
         Args:
             name (~gssapi.names.Name): the name associated with the
                 credentials, or None for the default name
-            lifetime (int): the desired lifetime of the credentials, or None
-                for indefinite
+            lifetime (int): the desired lifetime of the credentials in seconds,
+                or None for indefinite
             mechs (list): the desired :class:`MechType` OIDs to be used
                 with the credentials, or None for the default set
             usage (str): the usage for the credentials -- either 'both',
@@ -213,8 +213,8 @@ class Credentials(rcreds.Creds):
 
         Args:
             name (~gssapi.names.Name): the name to impersonate
-            lifetime (int): the desired lifetime of the new credentials,
-                or None for indefinite
+            lifetime (int): the desired lifetime of the new credentials
+                in seconds, or None for indefinite
             mechs (list): the desired :class:`MechType` OIDs for the new
                 credentials
             usage (str): the desired usage for the new credentials -- either
@@ -243,6 +243,7 @@ class Credentials(rcreds.Creds):
         Args:
             name (bool): get the name associated with the credentials
             lifetime (bool): get the remaining lifetime for the credentials
+                in seconds
             usage (bool): get the usage for the credentials
             mechs (bool): get the mechanisms associated with the credentials
 
@@ -278,9 +279,9 @@ class Credentials(rcreds.Creds):
                 information
             name (bool): get the name associated with the credentials
             init_lifetime (bool): get the remaining initiate lifetime for
-                the credentials
+                the credentials in seconds
             accept_lifetime (bool): get the remaining accept lifetime for
-                the credentials
+                the credentials in seconds
             usage (bool): get the usage for the credentials
 
         Returns:
@@ -335,9 +336,9 @@ class Credentials(rcreds.Creds):
             usage (str): the usage for the credentials -- either 'both',
                 'initiate', or 'accept'
             init_lifetime (int): the desired initiate lifetime of the
-                credentials, or None for indefinite
+                credentials in seconds, or None for indefinite
             accept_lifetime (int): the desired accept lifetime of the
-                credentials, or None for indefinite
+                credentialsin seconds , or None for indefinite
             impersonator (Credentials): the credentials to use to impersonate
                 the given name, or None to not acquire normally
                 (:requires-ext:`s4u`)

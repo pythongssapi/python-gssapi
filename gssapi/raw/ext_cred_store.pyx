@@ -122,8 +122,8 @@ usage='both')
             See :doc:`credstore` for valid values
         name (~gssapi.raw.names.Name): the name associated with the
             credentials, or None for the default name
-        lifetime (int): the desired lifetime of the credentials, or None
-            for indefinite
+        lifetime (int): the desired lifetime of the credentials in seconds,
+            or None for indefinite
         mechs (list): the desired mechanisms to be used with these
             credentials, or None for the default set
         usage (str): the usage for these credentials -- either 'both',
@@ -224,9 +224,9 @@ init_lifetime=None, accept_lifetime=None)
         usage (str): the usage for these credentials -- either 'both',
             'initiate', or 'accept'
         init_lifetime (int): the desired initiate lifetime of the
-            credentials, or None for indefinite
+            credentials in seconds, or None for indefinite
         accept_lifetime (int): the desired accept lifetime of the
-            credentials, or None for indefinite
+            credentials in seconds, or None for indefinite
 
     Returns:
         AcquireCredResult: the new credentials set and information about

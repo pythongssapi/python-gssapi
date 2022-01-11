@@ -43,7 +43,7 @@ usage="initiate")
         name (~gssapi.raw.names.Name): the name to acquire credentials for
         password (bytes): the password used to acquire credentialss with
         lifetime (int): the lifetime for the credentials (or None for
-            indefinite)
+            indefinite), in seconds
         mechs (~gssapi.MechType): the desired mechanisms for which the
             credentials should work (or None for the default set)
         usage (str): usage type for credentials.  Possible values:
@@ -52,7 +52,7 @@ usage="initiate")
     Returns:
         AcquireCredResult: the resulting credentials, the actual mechanisms
         with which they may be used, and their actual lifetime (or None for
-        indefinite or not supported)
+        indefinite or not supported), in seconds
 
     Raises:
         ~gssapi.exceptions.GSSError

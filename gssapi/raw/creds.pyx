@@ -92,8 +92,8 @@ def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
     Args:
         name (~gssapi.raw.names.Name): the name for which to acquire the
             credentials (or None for the "no name" functionality)
-        lifetime (int): the lifetime for the credentials (or None for
-            indefinite)
+        lifetime (int): the lifetime in seconds for the credentials
+            (or None for indefinite)
         mechs (~gssapi.MechType): the desired mechanisms for which the
             credentials should work, or None for the default set
         usage (str): the usage type for the credentials: may be
@@ -101,8 +101,8 @@ def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
 
     Returns:
         AcquireCredResult: the resulting credentials, the actual mechanisms
-        with which they may be used, and their actual lifetime (or None for
-        indefinite or not supported)
+        with which they may be used, and their actual lifetime in seconds
+        (or None for indefinite or not supported)
 
     Raises:
         ~gssapi.exceptions.BadMechanismError
@@ -206,9 +206,9 @@ accept_lifetime=None, mutate_input=False)
         usage (str): usage type for credentials.  Possible values:
             'initiate' (default), 'accept', 'both' (failsafe).
         init_lifetime (int): lifetime of credentials for use in initiating
-            security contexts (None for indefinite)
+            security contexts in seconds (None for indefinite)
         accept_lifetime (int): lifetime of credentials for use in accepting
-            security contexts (None for indefinite)
+            security contexts in seconds (None for indefinite)
         mutate_input (bool): whether to mutate the input credentials (True)
             or produce a new set of credentials (False).  Defaults to False
 
@@ -289,7 +289,7 @@ def inquire_cred(Creds creds not None, name=True, lifetime=True, usage=True,
     Args:
         creds (Creds): the credentials to inspect
         name (bool): get the Name associated with the credentials
-        lifetime (bool): get the TTL for the credentials
+        lifetime (bool): get the TTL for the credentials (in seconds)
         usage (bool): get the usage type of the credentials
         mechs (bool): the mechanims used with the credentials
 
@@ -375,7 +375,9 @@ accept_lifetime=True, usage=True)
         mech (~gssapi.OID): the desired mechanism
         name (bool): get the Name associated with the credentials
         init_lifetime (bool): get the initiator TTL for the credentials
+            (in seconds)
         accept_lifetime (bool): get the acceptor TTL for the credentials
+            (in seconds)
         usage (bool): get the usage type of the credentials
 
     Returns:

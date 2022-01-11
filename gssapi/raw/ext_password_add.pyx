@@ -56,10 +56,10 @@ usage='initiate', init_lifetime=None, accept_lifetime=None)
             'initiate', 'accept', or 'both'
         init_lifetime (int): the lifetime for the credentials to remain valid
             when using them to initiate security contexts (or None for
-            indefinite)
+            indefinite), in seconds
         accept_lifetime (int): the lifetime for the credentials to remain
             valid when using them to accept security contexts (or None for
-            indefinite)
+            indefinite), in seconds
 
     Returns:
         AddCredResult: the actual mechanisms with which the credentials may be

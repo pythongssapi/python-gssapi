@@ -373,7 +373,8 @@ class SecurityContext(rsec_contexts.SecurityContext,
         Args:
             initiator_name (bool): get the initiator name for this context
             target_name (bool): get the target name for this context
-            lifetime (bool): get the remaining lifetime for this context
+            lifetime (bool): get the remaining lifetime (in seconds) for this
+                context
             mech (bool): get the :class:`MechType` used by this context
             flags (bool): get the flags set on this context
             locally_init (bool): get whether this context was locally initiated
