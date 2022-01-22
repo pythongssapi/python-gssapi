@@ -13,7 +13,8 @@ import shlex
 # the deprecation warning. Must be done before importing setuptools,
 # setuptools also must be imported before distutils.
 # https://github.com/pypa/setuptools/blob/main/docs/deprecated/distutils-legacy.rst
-os.environ['SETUPTOOLS_USE_DISTUTILS'] = 'local'
+if 'SETUPTOOLS_USE_DISTUTILS' not in os.environ:
+    os.environ['SETUPTOOLS_USE_DISTUTILS'] = 'local'
 
 from setuptools import setup  # noqa: E402
 from setuptools import Distribution  # noqa: E402
