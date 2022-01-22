@@ -79,7 +79,7 @@ def inquire_name(Name name not None, mech_name=True, attrs=True):
     inquire_name(name, mech_name=True, attrs=True)
     Get information about a Name.
 
-    This method retrives information about the given name, including
+    This method retrieves information about the given name, including
     the set of attribute names for the given name, as well as whether or
     not the name is a mechanism name.  Additionally, if the given name is
     a mechanism name, the associated mechansim is returned as well.

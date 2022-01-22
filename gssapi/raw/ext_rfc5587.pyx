@@ -117,7 +117,7 @@ def display_mech_attr(OID attr):
     Returns information about attributes in human readable form.
 
     Args:
-        attr (~gssapi.OID): Mechanism attribute to retrive names and
+        attr (~gssapi.OID): Mechanism attribute to retrieve names and
             descriptions of
 
     Returns:

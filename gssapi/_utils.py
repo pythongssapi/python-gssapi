@@ -120,7 +120,7 @@ def catch_and_return_token(func, self, *args, **kwargs):
     catch and save their :python:`GSSError` exceptions and
     instead return the result token attached to the exception.
 
-    The exception can be later retrived through :python:`_last_err`
+    The exception can be later retrieved through :python:`_last_err`
     (and :python:`_last_tb` when Python 2 is in use).
     """
 

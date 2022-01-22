@@ -56,7 +56,7 @@ def inquire_names_for_mech(OID mech not None):
     inquire_names_for_mech(mech)
     Get the name types supported by a mechanism.
 
-    This method retrives the different name types supported by
+    This method retrieves the different name types supported by
     the given mechanism.
 
     Args:
@@ -252,7 +252,7 @@ class GSSError(Exception, metaclass=GSSErrorRegistry):
         Create a new GSSError.
 
         This method creates a new GSSError,
-        retrieves the releated human-readable
+        retrieves the related human-readable
         string messages, and uses the results to construct an
         exception message
 

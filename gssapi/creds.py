@@ -274,7 +274,7 @@ class Credentials(rcreds.Creds):
         about them.
 
         Args:
-            mech (~gssapi.OID): the mechanism for which to retrive the
+            mech (~gssapi.OID): the mechanism for which to retrieve the
                 information
             name (bool): get the name associated with the credentials
             init_lifetime (bool): get the remaining initiate lifetime for
