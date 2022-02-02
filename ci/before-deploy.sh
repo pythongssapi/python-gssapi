@@ -57,7 +57,8 @@ with tarfile.open("tag_build/${PKG_NAME_VER}.tar", mode="a:") as tf:
     tf.add("README.rst", arcname="${PKG_NAME_VER}/README.rst")
 EOF
 
-gzip ./tag_build/${PKG_NAME_VER}.tar
+pushd ./tag_build
+gzip ${PKG_NAME_VER}.tar
 
-sha512sum --binary ./tag_build/${PKG_NAME_VER}.tar.gz > ./tag_build/${PKG_NAME_VER}.sha512sum
-
+sha512sum --binary ${PKG_NAME_VER}.tar.gz > ${PKG_NAME_VER}.sha512sum
+popd
