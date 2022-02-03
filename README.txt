@@ -48,8 +48,6 @@ To compile from scratch, you will need Cython >= 0.21.1.
 For Running the Tests
 ---------------------
 
-* the `nose` package
-
 * the `k5test` package
 
 To install test dependencies using pip:
