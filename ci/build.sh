@@ -40,5 +40,5 @@ if [ "$OS_NAME" = "windows" ]; then
     # Windows can't run the tests yet, so just make sure it imports and exit
     python -c "import gssapi" || exit $?
 else
-    python setup.py nosetests --verbosity=3 || exit $?
+    python -m unittest -v || exit $?
 fi

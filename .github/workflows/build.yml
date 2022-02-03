@@ -14,7 +14,7 @@ jobs:
         name:
         - debian-stable
         - debian-heimdal
-        - centos-8
+        - centos-stream-8
         - fedora-latest
         include:
         - name: debian-stable
@@ -22,8 +22,8 @@ jobs:
         - name: debian-heimdal
           distro: debian:stable
           krb5_ver: heimdal
-        - name: centos-8
-          distro: centos:8
+        - name: centos-stream-8
+          distro: quay.io/centos/centos:stream8
         - name: fedora-latest
           distro: fedora:latest
           flake: 'yes'

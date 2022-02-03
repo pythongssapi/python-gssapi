@@ -1,5 +1,4 @@
 flake8
-nose
 parameterized
 Cython
 k5test
