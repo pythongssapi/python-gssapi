@@ -11,20 +11,6 @@ cdef inline bint c_compare_oids(gss_OID a, gss_OID b):
 
 
 cdef class OID:
-    """
-    A GSSAPI OID
-
-    A new OID may be created by passing the `elements` argument
-    to the constructor.  The `elements` argument should be a
-    `bytes` consisting of the BER-encoded values in the OID.
-
-    To retrive the underlying bytes, use the :func:`bytes`
-    function in Python 3 or the :meth:`__bytes__` method directly
-    in Python 2.
-
-    This object is hashable, and may be compared using equality
-    operators.
-    """
     # defined in pxd
     # cdef gss_OID_desc raw_oid = NULL
     # cdef bint _free_on_dealloc = NULL
@@ -73,28 +59,6 @@ cdef class OID:
 
     @classmethod
     def from_int_seq(cls, integer_sequence):
-        """
-        from_int_seq(integer_sequence)
-        Create a OID from a sequence of integers.
-
-        This method creates an OID from a sequence of integers.
-        The sequence can either be in dotted form as a string,
-        or in list form.
-
-        This method is not for BER-encoded byte strings, which
-        can be passed directly to the OID constructor.
-
-        Args:
-            integer_sequence: either a list of integers or
-                a string in dotted form
-
-        Returns:
-            OID: the OID represented by the given integer sequence
-
-        Raises:
-            ValueError: the sequence is less than two elements long
-        """
-
         if isinstance(integer_sequence, str):
             integer_sequence = integer_sequence.split('.')
 

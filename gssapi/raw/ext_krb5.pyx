@@ -105,10 +105,6 @@ cdef extern from "python_gssapi_krb5.h":
 
 
 cdef class Krb5LucidContext:
-    """
-    The base container returned by :meth:`krb5_export_lucid_sec_context` when
-    an unknown version was requested.
-    """
     # defined in pxd
     # cdef void *raw_ctx
 
@@ -124,18 +120,9 @@ cdef class Krb5LucidContext:
 
 
 cdef class Krb5LucidContextV1(Krb5LucidContext):
-    """
-    Kerberos context data returned by :meth:`krb5_export_lucid_sec_context`
-    when version 1 was requested.
-    """
 
     @property
     def version(self) -> typing.Optional[int]:
-        """The structure version number
-
-        Returns:
-            Optional[int]: the structure version number
-        """
         cdef gss_krb5_lucid_context_v1_t *ctx = NULL
 
         if self.raw_ctx:
@@ -144,12 +131,6 @@ cdef class Krb5LucidContextV1(Krb5LucidContext):
 
     @property
     def is_initiator(self) -> typing.Optional[bool]:
-        """Whether the context was the initiator
-
-        Returns:
-            Optional[bool]: ``True`` when the exported context was the
-            initiator
-        """
         cdef gss_krb5_lucid_context_v1_t *ctx = NULL
 
         if self.raw_ctx:
@@ -158,11 +139,6 @@ cdef class Krb5LucidContextV1(Krb5LucidContext):
 
     @property
     def endtime(self) -> typing.Optional[int]:
-        """Expiration time of the context
-
-        Returns:
-            Optional[int]: the expiration time of the context
-        """
         cdef gss_krb5_lucid_context_v1_t *ctx = NULL
 
         if self.raw_ctx:
@@ -171,11 +147,6 @@ cdef class Krb5LucidContextV1(Krb5LucidContext):
 
     @property
     def send_seq(self) -> typing.Optional[int]:
-        """Sender sequence number
-
-        Returns:
-            Optional[int]: the sender sequence number
-        """
         cdef gss_krb5_lucid_context_v1_t *ctx = NULL
 
         if self.raw_ctx:
@@ -184,11 +155,6 @@ cdef class Krb5LucidContextV1(Krb5LucidContext):
 
     @property
     def recv_seq(self) -> typing.Optional[int]:
-        """Receiver sequence number
-
-        Returns:
-            Optional[int]: the receiver sequence number
-        """
         cdef gss_krb5_lucid_context_v1_t *ctx = NULL
 
         if self.raw_ctx:
@@ -197,17 +163,6 @@ cdef class Krb5LucidContextV1(Krb5LucidContext):
 
     @property
     def protocol(self) -> typing.Optional[int]:
-        """The protocol number
-
-        If the protocol number is 0 then :attr:`rfc1964_kd` is set and
-        :attr:`cfx_kd` is `None`. If the protocol number is 1 then the opposite
-        is true.
-
-        Protocol 0 refers to RFC1964 and 1 refers to RFC4121.
-
-        Returns:
-            Optional[int]: the protocol number
-        """
         cdef gss_krb5_lucid_context_v1_t *ctx = NULL
 
         if self.raw_ctx:
@@ -216,13 +171,6 @@ cdef class Krb5LucidContextV1(Krb5LucidContext):
 
     @property
     def rfc1964_kd(self) -> typing.Optional[Rfc1964KeyData]:
-        """Keydata for protocol 0 (RFC1964)
-
-        This will be set when :attr:`protocol` is ``0``.
-
-        Returns:
-            Optional[Rfc1964KeyData]: the RFC1964 key data
-        """
         cdef gss_krb5_lucid_context_v1_t *ctx = NULL
 
         if self.raw_ctx != NULL and self.protocol == 0:
@@ -235,13 +183,6 @@ cdef class Krb5LucidContextV1(Krb5LucidContext):
 
     @property
     def cfx_kd(self) -> typing.Optional[CfxKeyData]:
-        """Key data for protocol 1 (RFC4121)
-
-        This will be set when :attr:`protocol` is ``1``.
-
-        Returns:
-            Optional[CfxKeyData]: the RFC4121 key data
-        """
         cdef gss_krb5_lucid_context_v1_t *ctx = NULL
 
         if self.raw_ctx != NULL and self.protocol == 1:
@@ -267,34 +208,6 @@ gsstypes.NameType.krb5_nt_principal_name = c_make_oid(
 
 
 def krb5_ccache_name(const unsigned char[:] name):
-    """
-    krb5_ccache_name(name)
-    Set the default Kerberos Protocol credentials cache name.
-
-    This method sets the default credentials cache name for use by he Kerberos
-    mechanism. The default credentials cache is used by
-    :meth:`~gssapi.raw.creds.acquire_cred` to create a GSS-API credential. It
-    is also used by :meth:`~gssapi.raw.sec_contexts.init_sec_context` when
-    `GSS_C_NO_CREDENTIAL` is specified.
-
-    Note:
-        Heimdal does not return the old name when called. It also does not
-        reset the ccache lookup behaviour when setting to ``None``.
-
-    Note:
-        The return value may not be thread safe.
-
-    Args:
-        name (Optional[bytes]): the name to set as the new thread specific
-            ccache name. Set to ``None`` to revert back to getting the ccache
-            from the config/environment settings.
-
-    Returns:
-        bytes: the old name that was previously set
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     cdef const char *name_ptr = NULL
     if name is not None and len(name):
         name_ptr = <const char*>&name[0]
@@ -317,29 +230,6 @@ def krb5_ccache_name(const unsigned char[:] name):
 
 def krb5_export_lucid_sec_context(SecurityContext context not None,
                                   OM_uint32 version):
-    """
-    krb5_export_lucid_sec_context(context, version)
-    Retuns a non-opaque version of the internal context info.
-
-    Gets information about the Kerberos security context passed in. Currently
-    only version 1 is known and supported by this library.
-
-    Note:
-        The context handle must not be used again by the caller after this
-        call.
-
-    Args:
-        context ((~gssapi.raw.sec_contexts.SecurityContext): the current
-            security context
-        version (int): the output structure version to export.  Currently
-            only 1 is supported.
-
-    Returns:
-        Krb5LucidContext: the non-opaque version context info
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     info = {
         1: Krb5LucidContextV1,
     }.get(version, Krb5LucidContext)()
@@ -358,26 +248,6 @@ def krb5_export_lucid_sec_context(SecurityContext context not None,
 
 
 def krb5_extract_authtime_from_sec_context(SecurityContext context not None):
-    """
-    krb5_extract_authtime_from_sec_context(context)
-    Get the auth time for the security context.
-
-    Gets the auth time for the established security context.
-
-    Note:
-        Heimdal can only get the authtime on the acceptor security context.
-        MIT is able to get the authtime on both initiators and acceptors.
-
-    Args:
-        context ((~gssapi.raw.sec_contexts.SecurityContext): the current
-            security context
-
-    Returns:
-        int: the authtime
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     # In Heimdal, authtime is time_t which is either a 4 or 8 byte int.  By
     # passing in a uint64_t reference, there should be enough space for GSSAPI
     # to store the data in either situation. Coming back to Python it will be
@@ -398,26 +268,6 @@ def krb5_extract_authtime_from_sec_context(SecurityContext context not None):
 
 def krb5_extract_authz_data_from_sec_context(SecurityContext context not None,
                                              ad_type):
-    """
-    krb5_extract_authz_data_from_sec_context(context, ad_type)
-    Extracts Kerberos authorization data.
-
-    Extracts authorization data that may be stored within the context.
-
-    Note:
-        Only operates on acceptor contexts.
-
-    Args:
-        context ((~gssapi.raw.sec_contexts.SecurityContext): the current
-            security context
-        ad_type (int): the type of data to extract
-
-    Returns:
-        bytes: the raw authz data from the sec context
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     # GSS_C_EMPTY_BUFFER
     cdef gss_buffer_desc ad_data = gss_buffer_desc(0, NULL)
     cdef int ad_type_val = <int>ad_type
@@ -441,31 +291,6 @@ def krb5_extract_authz_data_from_sec_context(SecurityContext context not None,
 
 def krb5_import_cred(Creds cred_handle not None, cache=None,
                      keytab_principal=None, keytab=None):
-    """
-    krb5_import_cred(cred_handle, cache=None, keytab_principal=None, \
-    keytab=None)
-    Import Krb5 credentials into GSSAPI credential.
-
-    Imports the krb5 credentials (either or both of the keytab and cache) into
-    the GSSAPI credential so it can be used within GSSAPI. The ccache is
-    copied by reference and thus shared, so if the credential is destroyed,
-    all users of cred_handle will fail.
-
-    Args:
-        cred_handle (Creds): the credential handle to import into
-        cache (int): the krb5_ccache address pointer, as an int, to import
-            from
-        keytab_principal (int): the krb5_principal address pointer, as an int,
-            of the credential to import
-        keytab (int): the krb5_keytab address pointer, as an int, of the
-            keytab to import
-
-    Returns:
-        None
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     cdef void *cache_ptr = NULL
     if cache is not None and cache:
         cache_ptr = <void *>(<uintptr_t>cache)
@@ -491,27 +316,6 @@ def krb5_import_cred(Creds cred_handle not None, cache=None,
 
 
 def krb5_get_tkt_flags(SecurityContext context not None):
-    """
-    krb5_get_tkt_flags(context)
-    Return ticket flags for the kerberos ticket.
-
-    Return the ticket flags for the kerberos ticket received when
-    authenticating the initiator.
-
-    Note:
-        Heimdal can only get the tkt flags on the acceptor security context.
-        MIT is able to get the tkt flags on initators and acceptors.
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the security
-            context
-
-    Returns:
-        int: the ticket flags for the received kerberos ticket
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     cdef OM_uint32 maj_stat, min_stat
     cdef uint32_t ticket_flags = 0
 
@@ -527,28 +331,6 @@ def krb5_get_tkt_flags(SecurityContext context not None):
 
 def krb5_set_allowable_enctypes(Creds cred_handle not None,
                                 ktypes):
-    """
-    krb5_set_allowable_enctypes(cred_handle, ktypes)
-    Limits the keys that can be exported.
-
-    Called by a context initiator after acquiring the creds but before calling
-    :meth:`~gssapi.raw.sec_contexts.init_sec_context` to restrict the set of
-    enctypes which will be negotiated during context establisment to those in
-    the provided list.
-
-    Warning:
-        The cred_handle should not be ``GSS_C_NO_CREDENTIAL``.
-
-    Args:
-        cred_hande (Creds): the credential handle
-        ktypes (List[int]): list of enctypes allowed
-
-    Returns:
-        None
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     cdef OM_uint32 maj_stat, min_stat
 
     # This shouldn't ever happen but it's here to satisfy compiler warnings

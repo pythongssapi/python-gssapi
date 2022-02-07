@@ -75,9 +75,6 @@ cdef extern from "python_gssapi.h":
 
 
 cdef class SecurityContext:
-    """
-    A GSSAPI Security Context
-    """
     # defined in pxd
     # cdef gss_ctx_id_t raw_ctx
 
@@ -115,61 +112,6 @@ def init_sec_context(Name target_name not None, Creds creds=None,
                      flags=None, lifetime=None,
                      ChannelBindings channel_bindings=None,
                      input_token=None):
-    """
-    init_sec_context(target_name, creds=None, context=None, mech=None, \
-flags=None, lifetime=None, channel_bindings=None, input_token=None)
-    Initiate a GSSAPI security context.
-
-    This method initiates a GSSAPI security context, targeting the given
-    target name.  To create a basic context, just provide the target name.
-    Further calls used to update the context should pass in the output context
-    of the last call, as well as the input token received from the acceptor.
-
-    Warning:
-        This changes the input context!
-
-    Args:
-        target_name (~gssapi.raw.names.Name): the target for the security
-            context
-        creds (Creds): the credentials to use to initiate the context,
-            or None to use the default credentials
-        context (~gssapi.raw.sec_contexts.SecurityContext): the security
-            context to update, or None to create a new context
-        mech (~gssapi.MechType): the mechanism type for this security context,
-            or None for the default mechanism type
-        flags (list): the flags to request for the security context, or
-            None to use the default set: mutual_authentication and
-            out_of_sequence_detection.  This may also be an
-            :class:`IntEnumFlagSet`
-        lifetime (int): the request lifetime of the security context (a value
-            of 0 or None means indefinite)
-        channel_bindings (ChannelBindings): The channel bindings (or None for
-            no channel bindings)
-        input_token (bytes): the token to use to update the security context,
-            or None if you are creating a new context
-
-    Returns:
-        InitSecContextResult: the output security context, the actual mech
-        type, the actual flags used, the output token to send to the acceptor,
-        the actual lifetime of the context (or None if not supported or
-        indefinite), and whether or not more calls are needed to finish the
-        initiation.
-
-    Raises:
-        ~gssapi.exceptions.InvalidTokenError
-        ~gssapi.exceptions.InvalidCredentialsError
-        ~gssapi.exceptions.MissingCredentialsError
-        ~gssapi.exceptions.ExpiredCredentialsError
-        ~gssapi.exceptions.BadChannelBindingsError
-        ~gssapi.exceptions.BadMICError
-        ~gssapi.exceptions.ExpiredTokenError
-        ~gssapi.exceptions.DuplicateTokenError
-        ~gssapi.exceptions.MissingContextError
-        ~gssapi.exceptions.BadNameTypeError
-        ~gssapi.exceptions.BadNameError
-        ~gssapi.exceptions.BadMechanismError
-    """
-
     cdef gss_OID mech_oid
     if mech is not None:
         mech_oid = &mech.raw_oid
@@ -249,49 +191,6 @@ flags=None, lifetime=None, channel_bindings=None, input_token=None)
 def accept_sec_context(input_token not None, Creds acceptor_creds=None,
                        SecurityContext context=None,
                        ChannelBindings channel_bindings=None):
-    """
-    accept_sec_context(input_token, acceptor_creds=None, context=None, \
-channel_bindings=None)
-    Accept a GSSAPI security context.
-
-    This method accepts a GSSAPI security context using a token sent by the
-    initiator, using the given credentials.  It can either be used to accept a
-    security context and create a new security context object, or to update an
-    existing security context object.
-
-    Warning:
-        This changes the input context!
-
-    Args:
-        input_token (bytes): the token sent by the context initiator
-        acceptor_creds (Creds): the credentials to be used to accept the
-            context (or None to use the default credentials)
-        context (~gssapi.raw.sec_contexts.SecurityContext): the security
-            context to update (or None to create a new security context object)
-        channel_bindings (ChannelBindings): The channel bindings (or None for
-            no channel bindings)
-
-    Returns:
-        AcceptSecContextResult: the resulting security context, the initiator
-            name, the mechanism being used, the output token, the flags in use,
-            the lifetime of the context (or None for indefinite or not
-            supported), the delegated credentials (valid only if the
-            delegate_to_peer flag is set), and whether or not further token
-            exchanges are needed to finalize the security context.
-
-    Raises:
-        ~gssapi.exceptions.InvalidTokenError
-        ~gssapi.exceptions.InvalidCredentialsError
-        ~gssapi.exceptions.MissingCredentialsError
-        ~gssapi.exceptions.ExpiredCredentialsError
-        ~gssapi.exceptions.BadChannelBindingsError
-        ~gssapi.exceptions.MissingContextError
-        ~gssapi.exceptions.BadMICError
-        ~gssapi.exceptions.ExpiredTokenError
-        ~gssapi.exceptions.DuplicateTokenError
-        ~gssapi.exceptions.BadMechanismError
-    """
-
     cdef gss_channel_bindings_t bdng
     if channel_bindings is not None:
         bdng = channel_bindings.__cvalue__()
@@ -374,32 +273,6 @@ channel_bindings=None)
 def inquire_context(SecurityContext context not None, initiator_name=True,
                     target_name=True, lifetime=True, mech=True,
                     flags=True, locally_init=True, complete=True):
-    """
-    inquire_context(context, initiator_name=True, target_name=True, \
-lifetime=True, mech=True, flags=True, locally_init=True, complete=True)
-    Get information about a security context.
-
-    This method obtains information about a security context, including
-    the initiator and target names, as well as the TTL, mech,
-    flags, and its current state (open vs closed).
-
-    Note:
-        the target name may be ``None`` if it would have been ``GSS_C_NO_NAME``
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the context in
-            question
-
-    Returns:
-        InquireContextResult: the initiator name, the target name, the TTL
-            (can be None for indefinite or not supported), the mech type, the
-            flags, whether or not the context was locally initiated,
-            and whether or not the context is currently fully established
-
-    Raises:
-        ~gssapi.exceptions.MissingContextError
-    """
-
     cdef gss_name_t output_init_name
     cdef gss_name_t *init_name_ptr = NULL
     if initiator_name:
@@ -491,26 +364,6 @@ lifetime=True, mech=True, flags=True, locally_init=True, complete=True)
 
 
 def context_time(SecurityContext context not None):
-    """
-    context_time(context)
-    Get the amount of time for which the given context will remain valid.
-
-    This method determines the amount of time for which the given
-    security context will remain valid.  An expired context will
-    give a result of 0.
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the security
-            context in question
-
-    Returns:
-        int: the number of seconds for which the context will be valid
-
-    Raises:
-        ~gssapi.exceptions.ExpiredContextError
-        ~gssapi.exceptions.MissingContextError
-    """
-
     cdef OM_uint32 ttl
 
     cdef OM_uint32 maj_stat, min_stat
@@ -524,30 +377,6 @@ def context_time(SecurityContext context not None):
 
 
 def process_context_token(SecurityContext context not None, token):
-    """
-    process_context_token(context, token)
-    Process a token asynchronously.
-
-    This method provides a way to process a token, even if the
-    given security context is not expecting one.  For example,
-    if the initiator has the initSecContext return that the context
-    is complete, but the acceptor is unable to accept the context,
-    and wishes to send a token to the initiator, letting the
-    initiator know of the error.
-
-    Warning:
-        This method has been essentially deprecated by :rfc:`2744`.
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the security
-            context against which to process the token
-        token (bytes): the token to process
-
-    Raises:
-        ~gssapi.exceptions.InvalidTokenError
-        ~gssapi.exceptions.MissingContextError
-    """
-
     cdef gss_buffer_desc token_buffer = gss_buffer_desc(len(token), token)
 
     cdef OM_uint32 maj_stat, min_stat
@@ -561,21 +390,6 @@ def process_context_token(SecurityContext context not None, token):
 
 
 def import_sec_context(token not None):
-    """
-    import_sec_context(token)
-    Import a context from another process.
-
-    This method imports a security context established in another process
-    by reading the specified token which was output by
-    :func:`export_sec_context`.
-
-    Raises:
-        ~gssapi.exceptions.MissingContextError
-        ~gssapi.exceptions.InvalidTokenError
-        ~gssapi.exceptions.OperationUnavailableError
-        ~gssapi.exceptions.UnauthorizedError
-    """
-
     cdef gss_buffer_desc token_buffer = gss_buffer_desc(len(token), token)
 
     cdef gss_ctx_id_t ctx
@@ -594,29 +408,6 @@ def import_sec_context(token not None):
 
 
 def export_sec_context(SecurityContext context not None):
-    """
-    export_sec_context(context)
-    Export a context for use in another process.
-
-    This method exports a security context, deactivating in the current process
-    and creating a token which can then be imported into another process
-    with :func:`import_sec_context`.
-
-    Warning: this modifies the input context
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the context to send
-            to another process
-
-    Returns:
-        bytes: the output token to be imported
-
-    Raises:
-        ~gssapi.exceptions.ExpiredContextError
-        ~gssapi.exceptions.MissingContextError
-        ~gssapi.exceptions.OperationUnavailableError
-    """
-
     cdef gss_buffer_desc output_token = gss_buffer_desc(0, NULL)
 
     cdef OM_uint32 maj_stat, min_stat
@@ -634,33 +425,6 @@ def export_sec_context(SecurityContext context not None):
 
 
 def delete_sec_context(SecurityContext context not None, local_only=True):
-    """
-    delete_sec_context(context, local_only=True)
-    Delete a GSSAPI security context.
-
-    This method deletes a GSSAPI security context,
-    returning an output token to send to the other
-    holder of the security context to notify them
-    of the deletion.
-
-    Note:
-        This method generally should not be used.  :class:`SecurityContext`
-        objects will automatically be freed by Python.
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the security
-            context in question
-        local_only (bool): should we request local deletion (True), or also
-            remote deletion (False), in which case a token is also returned
-
-    Returns:
-        bytes: the output token (if remote deletion is requested).  Generally
-            this is None, but bytes for compatibility.
-
-    Raises:
-        ~gssapi.exceptions.MissingContextError
-    """
-
     cdef OM_uint32 maj_stat, min_stat
     # GSS_C_EMPTY_BUFFER
     cdef gss_buffer_desc output_token = gss_buffer_desc(0, NULL)

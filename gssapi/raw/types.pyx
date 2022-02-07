@@ -16,13 +16,6 @@ from collections.abc import MutableSet
 
 
 class NameType(object):
-    """
-    GSSAPI Name Types
-
-    This enum-like object represents GSSAPI name
-    types (to be used with :func:`import_name`, etc)
-    """
-
     # mech-agnostic name types
     hostbased_service = c_make_oid(GSS_C_NT_HOSTBASED_SERVICE)
     # NB(directxman12): skip GSS_C_NT_HOSTBASED_SERVICE_X since it's deprecated
@@ -36,17 +29,6 @@ class NameType(object):
 
 
 class RequirementFlag(IntEnum, metaclass=ExtendableEnum):
-    """
-    GSSAPI Requirement Flags
-
-    This :class:`~enum.IntEnum` represents flags used with the
-    :class:`SecurityContext`-related methods (e.g.
-    :func:`init_sec_context`)
-
-    The numbers behind the values correspond directly
-    to their C counterparts.
-    """
-
     delegate_to_peer = GSS_C_DELEG_FLAG
     mutual_authentication = GSS_C_MUTUAL_FLAG
     replay_detection = GSS_C_REPLAY_FLAG
@@ -68,18 +50,6 @@ class RequirementFlag(IntEnum, metaclass=ExtendableEnum):
 
 
 class AddressType(IntEnum, metaclass=ExtendableEnum):
-    """
-    GSSAPI Channel Bindings Address Types
-
-    This :class:`~enum.IntEnum` represents the various address
-    types used with the :class:`ChannelBindings` structure.
-
-    The numbers behind the values correspond directly
-    to their C counterparts.  There is no value for
-    ``GSS_C_AF_UNSPEC``, since this is represented
-    by ``None``.
-    """
-
     # unspecified = GSS_C_AF_UNSPEC  # None --> GSS_C_AF_UNSPEC
     local = GSS_C_AF_LOCAL
     ip = GSS_C_AF_INET
@@ -105,28 +75,12 @@ class AddressType(IntEnum, metaclass=ExtendableEnum):
 
 
 class MechType(object):
-    """
-    GSSAPI Mechanism Types
-
-    This enum-like object contains any mechanism :class:`OID`
-    values registered by imported mechanisms.
-    """
     pass
 
     # these are added in by the individual mechanism files on import
 
 
 class GenericFlagSet(MutableSet):
-    """A set backed by a 32-bit integer
-
-    This is a set backed by a 32 bit integer.
-    the members are integers where only one
-    bit is set.
-
-    The class supports normal set operations,
-    as well as traditional "flag set" operations,
-    such as bitwise AND, OR, and XOR.
-    """
 
     __slots__ = '_val'
     MAX_VAL = 1 << 31
@@ -221,14 +175,6 @@ class GenericFlagSet(MutableSet):
 
 
 class IntEnumFlagSet(GenericFlagSet):
-    """A set backed by a 32-bit integer with enum members
-
-    This class is a :class:`GenericFlagSet` where the returned
-    members are values in an :class:`~enum.IntEnum`.
-
-    It functions exactly like a `GenericFlagSet`, except that
-    it also supports bitwise operations with the enum values.
-    """
 
     __slots__ = ('_val', '_enum')
 

@@ -32,25 +32,6 @@ cdef extern from "python_gssapi_ext.h":
 
 def indicate_mechs_by_attrs(desired_mech_attrs=None, except_mech_attrs=None,
                             critical_mech_attrs=None):
-    """
-    indicate_mechs_by_attrs(desired_mech_attrs=None, except_mech_attrs=None,\
-    critical_mech_attrs=None)
-    Get a set of mechanisms that have the specified attributes.
-
-    Args:
-        desired_mech_attrs (~gssapi.OID): Attributes that the output mechs MUST
-            offer
-        except_mech_attrs (~gssapi.OID): Attributes that the output mechs MUST
-            NOT offer
-        critical_mech_attrs (~gssapi.OID): Attributes that the output mechs
-            MUST understand and offer
-
-    Returns:
-        ~gssapi.MechType: a set of mechs which satisfy the given criteria
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     cdef OM_uint32 maj_stat, min_stat
     cdef gss_OID_set desired_attrs = GSS_C_NO_OID_SET
     cdef gss_OID_set except_attrs = GSS_C_NO_OID_SET
@@ -78,20 +59,6 @@ def indicate_mechs_by_attrs(desired_mech_attrs=None, except_mech_attrs=None,
 
 
 def inquire_attrs_for_mech(OID mech):
-    """
-    inquire_attrs_for_mech(mech)
-    Gets the set of attrs supported and known by a mechanism.
-
-    Args:
-        mech (~gssapi.MechType): Mechanism to inquire about
-
-    Returns:
-        InquireAttrsResult: the results of inquiry; a mech's attributes and
-        known attributes
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     cdef OM_uint32 maj_stat, min_stat
     cdef gss_OID m = GSS_C_NO_OID
     cdef gss_OID_set mech_attrs = GSS_C_NO_OID_SET
@@ -112,21 +79,6 @@ def inquire_attrs_for_mech(OID mech):
 
 
 def display_mech_attr(OID attr):
-    """
-    display_mech_attrs(attr)
-    Returns information about attributes in human readable form.
-
-    Args:
-        attr (~gssapi.OID): Mechanism attribute to retrive names and
-            descriptions of
-
-    Returns:
-        DisplayAttrResult: the results of displaying the attribute; mech name,
-        short description, and long description.
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
     cdef OM_uint32 maj_stat, min_stat
     cdef gss_OID a = GSS_C_NO_OID
     cdef gss_buffer_desc name

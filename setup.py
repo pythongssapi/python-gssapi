@@ -349,6 +349,10 @@ setup(
     author_email='jborean93@gmail.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
               'gssapi.tests'],
+    package_data={
+        "gssapi": ["py.typed"],
+        "gssapi.raw": ["*.pyi"],
+    },
     description='Python GSSAPI Wrapper',
     long_description=long_desc,
     license='LICENSE.txt',

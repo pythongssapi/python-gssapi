@@ -1,10 +1,13 @@
+
+import typing as t
+
 from gssapi.raw import names as rname
 from gssapi.raw import NameType
 from gssapi.raw import named_tuples as tuples
+from gssapi.raw import oids as roids
 from gssapi import _utils
 
 from collections.abc import MutableMapping, Iterable
-
 
 rname_rfc6680 = _utils.import_gssapi_extension('rfc6680')
 rname_rfc6680_comp_oid = _utils.import_gssapi_extension('rfc6680_comp_oid')
@@ -35,8 +38,13 @@ class Name(rname.Name):
 
     __slots__ = ('_attr_obj')
 
-    def __new__(cls, base=None, name_type=None, token=None,
-                composite=False):
+    def __new__(
+        cls,
+        base: t.Optional[t.Union[rname.Name, bytes, str]] = None,
+        name_type: t.Optional[roids.OID] = None,
+        token: t.Optional[bytes] = None,
+        composite: bool = False,
+    ) -> "Name":
         if token is not None:
             if composite:
                 if rname_rfc6680 is None:
@@ -67,11 +75,19 @@ class Name(rname.Name):
             if isinstance(base, str):
                 base = base.encode(_utils._get_encoding())
 
-            base_name = rname.import_name(base, name_type)
+            base_name = rname.import_name(
+                base,  # type: ignore[arg-type]
+                name_type)
 
-        return super(Name, cls).__new__(cls, base_name)
+        return t.cast("Name", super(Name, cls).__new__(cls, base_name))
 
-    def __init__(self, base=None, name_type=None, token=None, composite=False):
+    def __init__(
+        self,
+        base: t.Optional[t.Union[rname.Name, bytes, str]] = None,
+        name_type: t.Optional[roids.OID] = None,
+        token: t.Optional[bytes] = None,
+        composite: bool = False,
+    ) -> None:
         """
         The constructor can be used to "import" a name from a human readable
         representation, or from a token, and can also be used to convert a
@@ -96,28 +112,34 @@ class Name(rname.Name):
             ~gssapi.exceptions.BadMechanismError
         """
 
+        self._attr_obj: t.Optional[_NameAttributeMapping]
+
         if rname_rfc6680 is not None:
             self._attr_obj = _NameAttributeMapping(self)
         else:
             self._attr_obj = None
 
-    def __str__(self):
+    def __str__(self) -> str:
         return bytes(self).decode(_utils._get_encoding())
 
-    def __unicode__(self):
+    def __unicode__(self) -> str:
         # Python 2 -- someone asked for unicode
         return self.__bytes__().decode(_utils._get_encoding())
 
-    def __bytes__(self):
+    def __bytes__(self) -> bytes:
         # Python 3 -- someone asked for bytes
         return rname.display_name(self, name_type=False).name
 
-    def display_as(self, name_type):
+    def display_as(
+        self,
+        name_type: roids.OID,
+    ) -> str:
         """
         Display this name as the given name type.
 
         This method attempts to display the current :class:`Name`
-        using the syntax of the given :class:`NameType`, if possible.
+        using the syntax of the given :class:`~gssapi.raw.types.NameType`, if
+        possible.
 
         Warning:
 
@@ -137,8 +159,8 @@ class Name(rname.Name):
         :requires-ext:`rfc6680`
 
         Args:
-            name_type (~gssapi.OID): the :class:`NameType` to use to display
-                the given name
+            name_type (~gssapi.OID): the :class:`~gssapi.raw.types.NameType` to
+                use to display the given name
 
         Returns:
             str: the displayed name
@@ -155,11 +177,14 @@ class Name(rname.Name):
             _utils._get_encoding())
 
     @property
-    def name_type(self):
-        """The :class:`NameType` of this name"""
+    def name_type(self) -> t.Optional[roids.OID]:
+        """The :class:`~gssapi.raw.types.NameType` of this name"""
         return rname.display_name(self, name_type=True).name_type
 
-    def __eq__(self, other):
+    def __eq__(
+        self,
+        other: object,
+    ) -> bool:
         if not isinstance(other, rname.Name):
             # maybe something else can compare this
             # to other classes, but we certainly can't
@@ -167,15 +192,21 @@ class Name(rname.Name):
         else:
             return rname.compare_name(self, other)
 
-    def __ne__(self, other):
+    def __ne__(
+        self,
+        other: object,
+    ) -> bool:
         return not self.__eq__(other)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         disp_res = rname.display_name(self, name_type=True)
-        return "Name({name}, {name_type})".format(name=disp_res.name,
-                                                  name_type=disp_res.name_type)
+        return "Name({name!r}, {name_type})".format(
+            name=disp_res.name, name_type=disp_res.name_type)
 
-    def export(self, composite=False):
+    def export(
+        self,
+        composite: bool = False,
+    ) -> bytes:
         """Export this name as a token.
 
         This method exports the name into a byte string which can then be
@@ -204,7 +235,10 @@ class Name(rname.Name):
         else:
             return rname.export_name(self)
 
-    def canonicalize(self, mech):
+    def canonicalize(
+        self,
+        mech: roids.OID
+    ) -> "Name":
         """Canonicalize a name with respect to a mechanism.
 
         This method returns a new :class:`Name` that is canonicalized according
@@ -224,13 +258,19 @@ class Name(rname.Name):
 
         return type(self)(rname.canonicalize_name(self, mech))
 
-    def __copy__(self):
+    def __copy__(self) -> "Name":
         return type(self)(rname.duplicate_name(self))
 
-    def __deepcopy__(self, memo):
+    def __deepcopy__(
+        self,
+        memo: t.Dict,
+    ) -> "Name":
         return type(self)(rname.duplicate_name(self))
 
-    def _inquire(self, **kwargs):
+    def _inquire(
+        self,
+        **kwargs: t.Any,
+    ) -> tuples.InquireNameResult:
         """Inspect this name for information.
 
         This method inspects the name for information.
@@ -269,20 +309,20 @@ class Name(rname.Name):
                                           attrs=attrs)
 
     @property
-    def is_mech_name(self):
+    def is_mech_name(self) -> bool:
         """Whether or not this name is a mechanism name
         (:requires-ext:`rfc6680`)
         """
         return self._inquire(mech_name=True).is_mech_name
 
     @property
-    def mech(self):
+    def mech(self) -> roids.OID:
         """The mechanism associated with this name (:requires-ext:`rfc6680`)
         """
         return self._inquire(mech_name=True).mech
 
     @property
-    def attributes(self):
+    def attributes(self) -> t.Optional["_NameAttributeMapping"]:
         """The attributes of this name (:requires-ext:`rfc6680`)
 
         The attributes are presenting in the form of a
@@ -310,31 +350,48 @@ class Name(rname.Name):
 class _NameAttributeMapping(MutableMapping):
 
     """Provides dict-like access to RFC 6680 Name attributes."""
-    def __init__(self, name):
+    def __init__(
+        self,
+        name: Name,
+    ) -> None:
         self._name = name
 
-    def __getitem__(self, key):
+    def __getitem__(
+        self,
+        key: t.Union[bytes, str],
+    ) -> tuples.GetNameAttributeResult:
         if isinstance(key, str):
             key = key.encode(_utils._get_encoding())
 
-        res = rname_rfc6680.get_name_attribute(self._name, key)
-        return tuples.GetNameAttributeResult(frozenset(res.values),
-                                             frozenset(res.display_values),
+        res = rname_rfc6680.get_name_attribute(  # type: ignore[union-attr]
+            self._name, key)
+        res = t.cast(tuples.GetNameAttributeResult, res)
+
+        return tuples.GetNameAttributeResult(list(res.values),
+                                             list(res.display_values),
                                              res.authenticated,
                                              res.complete)
 
-    def __setitem__(self, key, value):
+    def __setitem__(
+        self,
+        key: t.Union[bytes, str],
+        value: t.Union[
+            tuples.GetNameAttributeResult, t.Tuple[bytes, bool], bytes
+        ],
+    ) -> None:
         if isinstance(key, str):
             key = key.encode(_utils._get_encoding())
 
-        rname_rfc6680.delete_name_attribute(self._name, key)
+        rname_rfc6680.delete_name_attribute(  # type: ignore[union-attr]
+            self._name, key)
 
+        attr_value: t.List[bytes]
         if isinstance(value, tuples.GetNameAttributeResult):
             complete = value.complete
-            value = value.values
+            attr_value = value.values
         elif isinstance(value, tuple) and len(value) == 2:
-            complete = value[1]
-            value = value[0]
+            complete = t.cast(bool, value[1])
+            attr_value = [t.cast(bytes, value[0])]
         else:
             complete = False
 
@@ -342,19 +399,23 @@ class _NameAttributeMapping(MutableMapping):
                 not isinstance(value, Iterable)):
             # NB(directxman12): this allows us to easily assign a single
             # value, since that's a common case
-            value = [value]
+            attr_value = [value]
 
-            rname_rfc6680.set_name_attribute(self._name, key, value,
-                                             complete=complete)
+        rname_rfc6680.set_name_attribute(  # type: ignore[union-attr]
+            self._name, key, attr_value, complete=complete)
 
-    def __delitem__(self, key):
+    def __delitem__(
+        self,
+        key: t.Union[bytes, str],
+    ) -> None:
         if isinstance(key, str):
             key = key.encode(_utils._get_encoding())
 
-        rname_rfc6680.delete_name_attribute(self._name, key)
+        rname_rfc6680.delete_name_attribute(  # type: ignore[union-attr]
+            self._name, key)
 
-    def __iter__(self):
+    def __iter__(self) -> t.Iterator[bytes]:
         return iter(self._name._inquire(attrs=True).attrs)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self._name._inquire(attrs=True).attrs)
