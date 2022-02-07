@@ -35,41 +35,6 @@ def add_cred_with_password(Creds input_cred not None, Name name not None,
                            OID mech not None, password not None,
                            usage="initiate", init_lifetime=None,
                            accept_lifetime=None):
-
-    """
-    add_cred_with_password(input_cred, name, mech, password, \
-usage='initiate', init_lifetime=None, accept_lifetime=None)
-    Add a credential-element to a credential using provided password.
-
-    This function is originally from Solaris and is not documented by either
-    MIT or Heimdal.
-
-    In general, it functions similarly to :func:`add_cred`.
-
-    Args:
-        input_cred (Creds): the credentials to add to
-        name (~gssapi.raw.names.Name): the name to acquire credentials for
-        mech (~gssapi.MechType): the desired mechanism.  Note that this is both
-            singular and required
-        password (bytes): the password used to acquire credentialss with
-        usage (str): the usage type for the credentials: may be
-            'initiate', 'accept', or 'both'
-        init_lifetime (int): the lifetime for the credentials to remain valid
-            when using them to initiate security contexts (or None for
-            indefinite)
-        accept_lifetime (int): the lifetime for the credentials to remain
-            valid when using them to accept security contexts (or None for
-            indefinite)
-
-    Returns:
-        AddCredResult: the actual mechanisms with which the credentials may be
-        used, the actual initiator TTL, and the actual acceptor TTL (the TTLs
-        may be None for indefinite or not supported)
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
-
     cdef gss_buffer_desc password_buffer = gss_buffer_desc(len(password),
                                                            password)
 

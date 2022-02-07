@@ -24,7 +24,7 @@ FQDN = (
 SERVICE_PRINCIPAL = TARGET_SERVICE_NAME + b'/' + FQDN
 
 # disable error deferring to catch errors immediately
-gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = False
+gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = False  # type: ignore
 
 
 class _GSSAPIKerberosTestCase(kt.KerberosTestCase):

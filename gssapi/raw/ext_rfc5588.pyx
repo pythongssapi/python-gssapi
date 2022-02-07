@@ -24,35 +24,6 @@ cdef extern from "python_gssapi.h":
 
 def store_cred(Creds creds not None, usage='both', OID mech=None,
                bint overwrite=False, bint set_default=False):
-    """
-    store_cred(creds, usage='both', mech=None, overwrite=False, \
-set_default=False)
-    Store credentials into the default store.
-
-    This method stores the given credentials into the default store.
-    They may then be retrieved later using :func:`acquire_cred`.
-
-    Args:
-        creds (Creds): the credentials to store
-        usage (str): the usage to store the credentials with -- either
-            'both', 'initiate', or 'accept'
-        mech (~gssapi.OID): the mechansim to associate with the stored
-            credentials
-        overwrite (bool): whether or not to overwrite existing credentials
-            stored with the same name, etc
-        set_default (bool): whether or not to set these credentials as
-            the default credentials for the given store.
-
-    Returns:
-        StoreCredResult: the results of the credential storing operation
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-        ~gssapi.exceptions.ExpiredCredentialsError
-        ~gssapi.exceptions.MissingCredentialsError
-        ~gssapi.exceptions.OperationUnavailableError
-        ~gssapi.exceptions.DuplicateCredentialsElementError
-    """
     cdef gss_OID desired_mech
     if mech is not None:
         desired_mech = &mech.raw_oid

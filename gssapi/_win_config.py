@@ -19,21 +19,32 @@ KFW_BIN = os.path.join(
 #: Download location for KfW
 KFW_DL = "https://web.mit.edu/KERBEROS/dist"
 
+# Mypy needs to run on both Win and non-Win so the missing attribute will fire
+# on non-Win and Win will fire with unused ignore. Instead just cache the attr
+# by name and use it as needed.
+ADD_DLL_DIR = getattr(os, "add_dll_directory", None)
+CTYPES_WIN_DLL = getattr(ctypes, "WinDLL", ctypes.CDLL)
 
-def kfw_available():
+
+def _add_dll_directory(path: str) -> None:
+    if ADD_DLL_DIR:
+        ADD_DLL_DIR(path)
+
+
+def kfw_available() -> bool:
     """Return if the main GSSAPI DLL for KfW can be loaded"""
     try:  # to load the main GSSAPI DLL
         if sys.maxsize > 2**32:
-            ctypes.WinDLL('gssapi64.dll')
+            CTYPES_WIN_DLL('gssapi64.dll')
         else:
-            ctypes.WinDLL('gssapi32.dll')
+            CTYPES_WIN_DLL('gssapi32.dll')
     except OSError:  # DLL is not in PATH
         return False
     else:  # DLL is in PATH, everything should work
         return True
 
 
-def error_not_found():
+def error_not_found() -> None:
     """Raise an OSError detailing that KfW is missing and how to get it"""
     raise OSError(
         "Could not find KfW installation. Please download and install "
@@ -43,7 +54,7 @@ def error_not_found():
     )
 
 
-def configure_windows():
+def configure_windows() -> None:
     """
     Validate that KfW appears to be installed correctly and add it to the
     DLL directories/PATH if necessary. In the case that it can't be located,
@@ -54,7 +65,7 @@ def configure_windows():
 
     if os.path.exists(KFW_BIN):  # In standard location
         try:  # to use Python 3.8's DLL handling
-            os.add_dll_directory(KFW_BIN)
+            _add_dll_directory(KFW_BIN)
         except AttributeError:  # <3.8, use PATH
             os.environ['PATH'] += os.pathsep + KFW_BIN
         if kfw_available():
@@ -64,7 +75,7 @@ def configure_windows():
     kinit_path = shutil.which('kinit')  # KfW provided binary
     if kinit_path:  # Non-standard install location
         try:  # Most likely >=3.8, otherwise it would have been found already
-            os.add_dll_directory(os.path.dirname(kinit_path))
+            _add_dll_directory(os.path.dirname(kinit_path))
         except AttributeError:  # <3.8, corrupted installation?
             pass
         else:

@@ -3,11 +3,6 @@ from libc.stdlib cimport calloc, free
 from gssapi.raw.cython_types cimport *
 
 cdef class ChannelBindings:
-    """GSSAPI Channel Bindings
-
-    This class represents a set of GSSAPI channel bindings.
-    """
-
     # defined in pxd file
     # cdef public object initiator_address_type
     # cdef public bytes initiator_address
@@ -20,17 +15,6 @@ cdef class ChannelBindings:
     def __init__(ChannelBindings self, initiator_address_type=None,
                  initiator_address=None, acceptor_address_type=None,
                  acceptor_address=None, application_data=None):
-        """
-        Args:
-            initiator_address_type (~gssapi.AddressType): the initiator address
-                type
-            initiator_address (bytes): the initiator address
-            acceptor_address_type (~gssapi.AddressType):  the acceptor address
-                type
-            acceptor_address (bytes): the acceptor address
-            application_data (bytes): additional application-specific data
-        """
-
         self.initiator_address_type = initiator_address_type
         self.initiator_address = initiator_address
 

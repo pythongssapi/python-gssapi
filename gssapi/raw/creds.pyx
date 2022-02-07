@@ -56,9 +56,6 @@ cdef extern from "python_gssapi.h":
 
 
 cdef class Creds:
-    """
-    GSSAPI Credentials
-    """
     # defined in pxd
     # cdef gss_cred_id_t raw_creds
 
@@ -81,37 +78,6 @@ cdef class Creds:
 
 
 def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
-    """
-    acquire_cred(name=None, lifetime=None, mechs=None, usage='both')
-    Get GSSAPI credentials for the given name and mechanisms.
-
-    This method gets GSSAPI credentials corresponding to the given name
-    and mechanims.  The desired TTL and usage for the the credential may also
-    be specified.
-
-    Args:
-        name (~gssapi.raw.names.Name): the name for which to acquire the
-            credentials (or None for the "no name" functionality)
-        lifetime (int): the lifetime for the credentials (or None for
-            indefinite)
-        mechs (~gssapi.MechType): the desired mechanisms for which the
-            credentials should work, or None for the default set
-        usage (str): the usage type for the credentials: may be
-            'initiate', 'accept', or 'both'
-
-    Returns:
-        AcquireCredResult: the resulting credentials, the actual mechanisms
-        with which they may be used, and their actual lifetime (or None for
-        indefinite or not supported)
-
-    Raises:
-        ~gssapi.exceptions.BadMechanismError
-        ~gssapi.exceptions.BadNameTypeError
-        ~gssapi.exceptions.BadNameError
-        ~gssapi.exceptions.ExpiredCredentialsError
-        ~gssapi.exceptions.MissingCredentialsError
-    """
-
     cdef gss_OID_set desired_mechs
     if mechs is not None:
         desired_mechs = c_get_mech_oid_set(mechs)
@@ -162,23 +128,6 @@ def acquire_cred(Name name=None, lifetime=None, mechs=None, usage='both'):
 
 
 def release_cred(Creds creds not None):
-    """
-    release_cred(creds)
-    Release GSSAPI Credentials.
-
-    This method releases GSSAPI credentials.
-
-    Warning:
-        This method is deprecated.  Credentials are
-        automatically freed by Python.
-
-    Args:
-        creds (Creds): the credentials in question
-
-    Raises:
-        ~gssapi.exceptions.MissingCredentialsError
-    """
-
     cdef OM_uint32 maj_stat, min_stat
     maj_stat = gss_release_cred(&min_stat, &creds.raw_creds)
     if maj_stat != GSS_S_COMPLETE:
@@ -189,43 +138,6 @@ def release_cred(Creds creds not None):
 def add_cred(Creds input_cred, Name name not None, OID mech not None,
              usage='initiate', init_lifetime=None,
              accept_lifetime=None, mutate_input=False):
-    """
-    add_cred(input_cred, name, mech, usage='initiate', init_lifetime=None, \
-accept_lifetime=None, mutate_input=False)
-    Add a credential element to a credential.
-
-    This method can be used to either compose two credentials (i.e., original
-    and new credential), or to add a new element to an existing credential.
-
-    Args:
-        input_cred (Cred): the set of credentials to which to add the new
-            credentials
-        name (~gssapi.raw.names.Name): name of principal to acquire a
-            credential for
-        mech (~gssapi.MechType): the desired security mechanism (required).
-        usage (str): usage type for credentials.  Possible values:
-            'initiate' (default), 'accept', 'both' (failsafe).
-        init_lifetime (int): lifetime of credentials for use in initiating
-            security contexts (None for indefinite)
-        accept_lifetime (int): lifetime of credentials for use in accepting
-            security contexts (None for indefinite)
-        mutate_input (bool): whether to mutate the input credentials (True)
-            or produce a new set of credentials (False).  Defaults to False
-
-    Returns:
-        AddCredResult: the actual mechanisms with which the credentials may be
-        used, the actual initiator TTL, and the actual acceptor TTL (None for
-        either indefinite or not supported).  Note that the credentials may
-        be set to None if mutate_input is set to True.
-
-    Raises:
-        ~gssapi.exceptions.BadMechanismError
-        ~gssapi.exceptions.BadNameTypeError
-        ~gssapi.exceptions.BadNameError
-        ~gssapi.exceptions.DuplicateCredentialsElementError
-        ~gssapi.exceptions.ExpiredCredentialsError
-        ~gssapi.exceptions.MissingCredentialsError
-    """
     cdef gss_cred_usage_t c_usage
     if usage == 'initiate':
         c_usage = GSS_C_INITIATE
@@ -280,29 +192,6 @@ accept_lifetime=None, mutate_input=False)
 
 def inquire_cred(Creds creds not None, name=True, lifetime=True, usage=True,
                  mechs=True):
-    """
-    inquire_cred(creds, name=True, lifetime=True, usage=True, mechs=True)
-    Inspect credentials for information.
-
-    This method inspects a :class:`Creds` object for information.
-
-    Args:
-        creds (Creds): the credentials to inspect
-        name (bool): get the Name associated with the credentials
-        lifetime (bool): get the TTL for the credentials
-        usage (bool): get the usage type of the credentials
-        mechs (bool): the mechanims used with the credentials
-
-    Returns:
-        InquireCredResult: the information about the credentials,
-            with unused fields set to None
-
-    Raises:
-        ~gssapi.exceptions.MissingCredentialsError
-        ~gssapi.exceptions.InvalidCredentialsError
-        ~gssapi.exceptions.ExpiredCredentialsError
-    """
-
     # TODO(directxman12): add docs
     cdef gss_name_t res_name
     cdef gss_name_t *res_name_ptr = NULL
@@ -361,32 +250,6 @@ def inquire_cred(Creds creds not None, name=True, lifetime=True, usage=True,
 def inquire_cred_by_mech(Creds creds not None, OID mech not None,
                          name=True, init_lifetime=True,
                          accept_lifetime=True, usage=True):
-    """
-    inquire_cred_by_mech(creds, mech, name=True, init_lifetime=True, \
-accept_lifetime=True, usage=True)
-    Inspect credentials for mechanism-specific information.
-
-    This method inspects a :class:`Creds` object for information
-    specific to a particular mechanism.  It functions similarly
-    to :func:`inquire_cred`.
-
-    Args:
-        creds (Creds): the credentials to inspect
-        mech (~gssapi.OID): the desired mechanism
-        name (bool): get the Name associated with the credentials
-        init_lifetime (bool): get the initiator TTL for the credentials
-        accept_lifetime (bool): get the acceptor TTL for the credentials
-        usage (bool): get the usage type of the credentials
-
-    Returns:
-        InquireCredByMechResult: the information about the credentials,
-            with unused fields set to None
-
-    Raises:
-        ~gssapi.exceptions.MissingCredentialsError
-        ~gssapi.exceptions.InvalidCredentialsError
-    """
-
     # TODO(directxman12): add docs
     cdef gss_name_t res_name
     cdef gss_name_t *res_name_ptr = NULL

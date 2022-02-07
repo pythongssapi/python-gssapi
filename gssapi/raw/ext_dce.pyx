@@ -71,16 +71,6 @@ cdef extern from "python_gssapi_ext.h":
 
 
 class IOVBufferType(IntEnum, metaclass=ExtendableEnum):
-    """
-    IOV Buffer Types
-
-    This IntEnum represent GSSAPI IOV buffer
-    types to be used with the IOV methods.
-
-    The numbers behind the values correspond directly
-    to their C counterparts.
-    """
-
     empty = GSS_IOV_BUFFER_TYPE_EMPTY
     data = GSS_IOV_BUFFER_TYPE_DATA
     header = GSS_IOV_BUFFER_TYPE_HEADER
@@ -95,7 +85,6 @@ IOVBuffer = namedtuple('IOVBuffer', ['type', 'allocate', 'value'])
 
 
 cdef class IOV:
-    """A GSSAPI IOV"""
     # defined in ext_dce.pxd
 
     # cdef int iov_len
@@ -308,35 +297,6 @@ cdef class IOV:
 
 def wrap_iov(SecurityContext context not None, IOV message not None,
              confidential=True, qop=None):
-    """
-    wrap_iov(context, message, confidential=True, qop=None)
-    Wrap/Encrypt an IOV message.
-
-    This method wraps or encrypts an IOV message.  The allocate
-    parameter of the :class:`IOVBuffer` objects in the :class:`IOV`
-    indicates whether or not that particular buffer should be
-    automatically allocated (for use with padding, header, and
-    trailer buffers).
-
-    Warning:
-        This modifies the input :class:`IOV`.
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the current
-            security context
-        message (IOV): an :class:`IOV` containing the message
-        confidential (bool): whether or not to encrypt the message (True),
-            or just wrap it with a MIC (False)
-        qop (int): the desired Quality of Protection
-            (or None for the default QoP)
-
-    Returns:
-        bool: whether or not confidentiality was actually used
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
-
     cdef int conf_req = confidential
     cdef gss_qop_t qop_req = qop if qop is not None else GSS_C_QOP_DEFAULT
     cdef int conf_used
@@ -357,38 +317,6 @@ def wrap_iov(SecurityContext context not None, IOV message not None,
 
 
 def unwrap_iov(SecurityContext context not None, IOV message not None):
-    """
-    unwrap_iov(context, message)
-    Unwrap/Decrypt an IOV message.
-
-    This method uwraps or decrypts an IOV message.  The allocate
-    parameter of the :class:`IOVBuffer` objects in the :class:`IOV`
-    indicates whether or not that particular buffer should be
-    automatically allocated (for use with padding, header, and
-    trailer buffers).
-
-    As a special case, you may pass an entire IOV message
-    as a single 'stream'.  In this case, pass a buffer type
-    of :attr:`IOVBufferType.stream` followed by a buffer type of
-    :attr:`IOVBufferType.data`.  The former should contain the
-    entire IOV message, while the latter should be empty.
-
-    Warning:
-        This modifies the input :class:`IOV`.
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the current
-            security context
-        message (IOV): an :class:`IOV` containing the message
-
-    Returns:
-        IOVUnwrapResult: whether or not confidentiality was used,
-        and the QoP used.
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
-
     cdef int conf_used
     cdef gss_qop_t qop_used
     cdef gss_iov_buffer_desc *res_arr = message.__cvalue__()
@@ -408,33 +336,6 @@ def unwrap_iov(SecurityContext context not None, IOV message not None):
 
 def wrap_iov_length(SecurityContext context not None, IOV message not None,
                     confidential=True, qop=None):
-    """
-    wrap_iov_length(context, message, confidential=True, qop=None)
-    Appropriately size padding, trailer, and header IOV buffers.
-
-    This method sets the length values on the IOV buffers.  You
-    should already have data provided for the data (and sign-only)
-    buffer(s) so that padding lengths can be appropriately computed.
-
-    In Python terms, this will result in an appropriately sized
-    `bytes` object consisting of all zeros.
-
-    Warning:
-        This modifies the input :class:`IOV`.
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the current
-            security context
-        message (IOV): an :class:`IOV` containing the message
-
-    Returns:
-        WrapResult: a list of :class:IOVBuffer` objects, and whether or not
-        encryption was actually used
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
-
     cdef int conf_req = confidential
     cdef gss_qop_t qop_req = qop if qop is not None else GSS_C_QOP_DEFAULT
     cdef int conf_used

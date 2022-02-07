@@ -29,35 +29,6 @@ cdef extern from "python_gssapi_ext.h":
 
 def acquire_cred_with_password(Name name not None, password not None,
                                lifetime=None, mechs=None, usage="initiate"):
-    """
-    acquire_cred_with_password(name, password, lifetime=None, mechs=None, \
-usage="initiate")
-    Acquire credentials through provided password.
-
-    This function is originally from Solaris and is not documented by either
-    MIT or Heimdal.
-
-    In general, it functions similarly to :func:`acquire_cred`.
-
-    Args:
-        name (~gssapi.raw.names.Name): the name to acquire credentials for
-        password (bytes): the password used to acquire credentialss with
-        lifetime (int): the lifetime for the credentials (or None for
-            indefinite)
-        mechs (~gssapi.MechType): the desired mechanisms for which the
-            credentials should work (or None for the default set)
-        usage (str): usage type for credentials.  Possible values:
-            'initiate' (default), 'accept', 'both' (failsafe).
-
-    Returns:
-        AcquireCredResult: the resulting credentials, the actual mechanisms
-        with which they may be used, and their actual lifetime (or None for
-        indefinite or not supported)
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
-
     cdef gss_buffer_desc password_buffer = gss_buffer_desc(len(password),
                                                            password)
 

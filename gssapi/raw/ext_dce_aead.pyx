@@ -23,31 +23,6 @@ cdef extern from "python_gssapi_ext.h":
 
 def wrap_aead(SecurityContext context not None, bytes message not None,
               bytes associated=None, confidential=True, qop=None):
-    """
-    wrap_aead(context, message, associated=None, confidential=True, qop=None)
-    Wrap/Encrypt an AEAD message.
-
-    This method takes an input message and associated data,
-    and outputs and AEAD message.
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the current
-            security context
-        message (bytes): the message to wrap or encrypt
-        associated (bytes): associated data to go with the message
-        confidential (bool): whether or not to encrypt the message (True),
-            or just wrap it with a MIC (False)
-        qop (int): the desired Quality of Protection
-            (or None for the default QoP)
-
-    Returns:
-        WrapResult: the wrapped/encrypted total message, and whether or not
-        encryption was actually used
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
-
     cdef int conf_req = confidential
     cdef gss_qop_t qop_req = qop if qop is not None else GSS_C_QOP_DEFAULT
     cdef gss_buffer_desc message_buffer = gss_buffer_desc(len(message),
@@ -80,27 +55,6 @@ def wrap_aead(SecurityContext context not None, bytes message not None,
 
 def unwrap_aead(SecurityContext context not None, bytes message not None,
                 bytes associated=None):
-    """
-    unwrap_aead(context, message, associated=None)
-    Unwrap/Decrypt an AEAD message.
-
-    This method takes an encrpyted/wrapped AEAD message and some associated
-    data, and returns an unwrapped/decrypted message.
-
-    Args:
-        context (~gssapi.raw.sec_contexts.SecurityContext): the current
-            security context
-        message (bytes): the AEAD message to unwrap or decrypt
-        associated (bytes): associated data that goes with the message
-
-    Returns:
-        UnwrapResult: the unwrapped/decrypted message, whether or on
-        encryption was used, and the QoP used
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
-
     cdef gss_buffer_desc input_buffer = gss_buffer_desc(len(message), message)
 
     cdef gss_buffer_t assoc_buffer_ptr = GSS_C_NO_BUFFER

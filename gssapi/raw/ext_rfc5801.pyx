@@ -22,21 +22,6 @@ cdef extern from "python_gssapi_ext.h":
 
 
 def inquire_saslname_for_mech(OID mech not None):
-    """
-    inquire_saslname_for_mech(mech)
-    Gets information about a specified mech, including the SASL name,
-    the mech name, and the mech description.
-
-    Args:
-        mech (~gssapi.OID): Mechanism to inquire about
-
-    Returns:
-        InquireSASLNameResult: the results of inquiry; a mech's SASL name,
-        name, and description.
-
-    Raises:
-        ~gssapi.exceptions.GSSError: an unknown failure occurred
-    """
     cdef OM_uint32 maj_stat, min_stat
     cdef gss_buffer_desc sasl_mech_name
     cdef gss_buffer_desc mech_name
@@ -64,19 +49,6 @@ def inquire_saslname_for_mech(OID mech not None):
 
 
 def inquire_mech_for_saslname(bytes sasl_name not None):
-    """
-    inquire_mech_for_saslname(sasl_name)
-    Gets the OID for the mech specified by SASL name.
-
-    Args:
-        sasl_name (bytes): SASL name of the mechanism
-
-    Returns:
-        ~gssapi.OID: the mechanism with corresponding SASL name.
-
-    Raises:
-        ~gssapi.exceptions.GSSError: An unknown failure occurred
-    """
     cdef OM_uint32 maj_stat, min_stat
     cdef gss_buffer_desc sn
     cdef gss_OID m

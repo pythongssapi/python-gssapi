@@ -26,6 +26,12 @@ if [ x"$FLAKE" = "xyes" ]; then
     fi
 fi
 
+python -m mypy .
+MYPY_RES=$?
+if [ $MYPY_RES -ne 0 ]; then
+    exit $MYPY_RES
+fi
+
 # always build in-place so that Sphinx can find the modules
 python setup.py build_ext --inplace $EXTRA_BUILDEXT
 BUILD_RES=$?

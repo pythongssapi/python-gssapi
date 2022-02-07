@@ -1,14 +1,18 @@
 import sys
 import types
+import typing as t
 
 import decorator as deco
 
-from typing import Optional
-
 from gssapi.raw.misc import GSSError
 
+if t.TYPE_CHECKING:
+    from gssapi.sec_contexts import SecurityContext
 
-def import_gssapi_extension(name):
+
+def import_gssapi_extension(
+    name: str,
+) -> t.Optional[types.ModuleType]:
     """Import a GSSAPI extension module
 
     This method imports a GSSAPI extension module based
@@ -31,20 +35,10 @@ def import_gssapi_extension(name):
         return None
 
 
-def flag_property(flag):
-    def setter(self, val):
-        if val:
-            self.flags.add(flag)
-        else:
-            self.flags.discard(flag)
-
-    def getter(self):
-        return flag in self.flags
-
-    return property(getter, setter)
-
-
-def inquire_property(name: str, doc: Optional[str] = None):
+def inquire_property(
+    name: str,
+    doc: t.Optional[str] = None
+) -> property:
     """Creates a property based on an inquire result
 
     This method creates a property that calls the
@@ -58,7 +52,7 @@ def inquire_property(name: str, doc: Optional[str] = None):
         property: the created property
     """
 
-    def inquire_property(self):
+    def inquire_property(self: "SecurityContext") -> t.Any:
         if not self._started:
             msg = (f"Cannot read {name} from a security context whose "
                    "establishment has not yet been started.")
@@ -73,7 +67,7 @@ def inquire_property(name: str, doc: Optional[str] = None):
 _ENCODING = 'UTF-8'
 
 
-def _get_encoding():
+def _get_encoding() -> str:
     """Gets the current encoding used for strings.
 
     This value is used to encode and decode string
@@ -85,7 +79,9 @@ def _get_encoding():
     return _ENCODING
 
 
-def set_encoding(enc):
+def set_encoding(
+    enc: str,
+) -> None:
     """Sets the current encoding used for strings
 
     This value is used to encode and decode string
@@ -99,9 +95,11 @@ def set_encoding(enc):
     _ENCODING = enc
 
 
-def _encode_dict(d):
+def _encode_dict(
+    d: t.Dict[t.Union[bytes, str], t.Union[bytes, str]],
+) -> t.Dict[bytes, bytes]:
     """Encodes any relevant strings in a dict"""
-    def enc(x):
+    def enc(x: t.Union[bytes, str]) -> bytes:
         if isinstance(x, str):
             return x.encode(_ENCODING)
         else:
@@ -112,7 +110,12 @@ def _encode_dict(d):
 
 # in case of Python 3, just use exception chaining
 @deco.decorator
-def catch_and_return_token(func, self, *args, **kwargs):
+def catch_and_return_token(
+    func: t.Callable,
+    self: "SecurityContext",
+    *args: t.Any,
+    **kwargs: t.Any,
+) -> t.Optional[bytes]:
     """Optionally defer exceptions and return a token instead
 
     When `__DEFER_STEP_ERRORS__` is set on the implementing class
@@ -127,10 +130,12 @@ def catch_and_return_token(func, self, *args, **kwargs):
     try:
         return func(self, *args, **kwargs)
     except GSSError as e:
-        if e.token is not None and self.__DEFER_STEP_ERRORS__:
+        defer_step_errors = getattr(self, '__DEFER_STEP_ERRORS__', False)
+        if e.token is not None and defer_step_errors:
             self._last_err = e
             # skip the "return func" line above in the traceback
-            self._last_err.__traceback__ = e.__traceback__.tb_next
+            tb = e.__traceback__.tb_next  # type: ignore[union-attr]
+            self._last_err.__traceback__ = tb
 
             return e.token
         else:
@@ -138,7 +143,12 @@ def catch_and_return_token(func, self, *args, **kwargs):
 
 
 @deco.decorator
-def check_last_err(func, self, *args, **kwargs):
+def check_last_err(
+    func: t.Callable,
+    self: "SecurityContext",
+    *args: t.Any,
+    **kwargs: t.Any,
+) -> t.Any:
     """Check and raise deferred errors before running the function
 
     This method checks :python:`_last_err` before running the wrapped
@@ -154,16 +164,6 @@ def check_last_err(func, self, *args, **kwargs):
     else:
         return func(self, *args, **kwargs)
 
-    @deco.decorator
-    def check_last_err(func, self, *args, **kwargs):
-        if self._last_err is not None:
-            try:
-                raise self._last_err
-            finally:
-                self._last_err = None
-        else:
-            return func(self, *args, **kwargs)
-
 
 class CheckLastError(type):
     """Check for a deferred error on all methods
@@ -174,7 +174,12 @@ class CheckLastError(type):
     Additionally, it enabled `__DEFER_STEP_ERRORS__` by default.
     """
 
-    def __new__(cls, name, parents, attrs):
+    def __new__(
+        cls,
+        name: str,
+        parents: t.Tuple[t.Type],
+        attrs: t.Dict[str, t.Any],
+    ) -> "CheckLastError":
         attrs['__DEFER_STEP_ERRORS__'] = True
 
         for attr_name in attrs:

@@ -31,14 +31,6 @@ cdef extern from "python_gssapi.h":
 
 
 def indicate_mechs():
-    """
-    indicate_mechs()
-    Get the currently supported mechanisms.
-
-    This method retrieves the currently supported GSSAPI mechanisms.
-    Note that if unknown mechanims are found, those will be skipped.
-    """
-
     cdef gss_OID_set mech_set
 
     cdef OM_uint32 maj_stat, min_stat
@@ -52,23 +44,6 @@ def indicate_mechs():
 
 
 def inquire_names_for_mech(OID mech not None):
-    """
-    inquire_names_for_mech(mech)
-    Get the name types supported by a mechanism.
-
-    This method retrives the different name types supported by
-    the given mechanism.
-
-    Args:
-        mech (~gssapi.OID): the mechanism in question
-
-    Returns:
-        list: the name type OIDs supported by the given mechanism
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
-
     cdef gss_OID_set name_types
 
     cdef OM_uint32 maj_stat, min_stat
@@ -83,23 +58,6 @@ def inquire_names_for_mech(OID mech not None):
 
 
 def inquire_mechs_for_name(Name name not None):
-    """
-    inquire_mechs_for_name(name)
-    List the mechanisms which can process a name.
-
-    This method lists the mechanisms which may be able to
-    process the given name.
-
-    Args:
-        name (~gssapi.raw.names.Name): the name in question
-
-    Returns:
-        list: the mechanism OIDs able to process the given name
-
-    Raises:
-        ~gssapi.exceptions.GSSError
-    """
-
     cdef gss_OID_set mech_types
 
     cdef OM_uint32 maj_stat, min_stat
@@ -115,33 +73,6 @@ def inquire_mechs_for_name(Name name not None):
 
 def _display_status(unsigned int error_code, bint is_major_code,
                     OID mech=None, unsigned int message_context=0):
-    """
-    Display a string message for a GSSAPI error code.
-
-    This method displays a message for a corresponding GSSAPI error code.
-    Since some error codes might have multiple messages, a context parameter
-    may be passed to indicate where in the series of messages we currently are
-    (this is the second item in the return value tuple).  Additionally, the
-    third item in the return value tuple indicates whether or not more
-    messages are available.
-
-    Args:
-        error_code (int): The error code in question
-        is_major_code (bool): is this a major code (True) or a
-            minor code (False)
-        mech (~gssapi.MechType): The mechanism type that returned this error
-            code (defaults to None, for the default mechanism)
-        message_context (int): The context for this call -- this is used when
-            multiple messages are available (defaults to 0)
-
-    Returns:
-        (bytes, int, bool): the message, the new message context, and
-            whether or not to call again for further messages
-
-    Raises:
-       ValueError
-    """
-
     cdef int status_type
     cdef gss_OID c_mech_type
 
@@ -223,15 +154,6 @@ class GSSErrorRegistry(type):
 # NB(directxman12): this needs to be here (and not in another file)
 #                   so that display_status can use it
 class GSSError(Exception, metaclass=GSSErrorRegistry):
-    """
-    A GSSAPI Error
-
-    This Exception represents an error returned from the GSSAPI
-    C bindings.  It contains the major and minor status codes
-    returned by the method which caused the error, and can
-    generate human-readable string messages from the error
-    codes
-    """
 
     MESSAGE = u"Major ({maj_stat}): {maj_str}, Minor ({min_stat}): {min_str}"
 
@@ -248,20 +170,6 @@ class GSSError(Exception, metaclass=GSSErrorRegistry):
         return (calling_code, routine_code, supplementary_code)
 
     def __init__(self, maj_code, min_code, token=None):
-        """
-        Create a new GSSError.
-
-        This method creates a new GSSError,
-        retrieves the releated human-readable
-        string messages, and uses the results to construct an
-        exception message
-
-        Args:
-            maj_code (int): the major code associated with this error
-            min_code (int): the minor code associated with this error
-            token (bytes): an error token associated with the error
-        """
-
         self.maj_code = maj_code
         self.min_code = min_code
 
@@ -275,22 +183,6 @@ class GSSError(Exception, metaclass=GSSErrorRegistry):
         super(GSSError, self).__init__(self.gen_message())
 
     def get_all_statuses(self, code, is_maj):
-        """
-        Retrieve all messages for a status code.
-
-        This method retrieves all human-readable messages
-        available for the given status code.
-
-        Args:
-            code (int): the status code in question
-            is_maj (bool): whether this is a major status code (True)
-                or minor status code (False)
-
-        Returns:
-            [bytes]: A list of string messages associated with the
-                given code
-        """
-
         try:
             msg_encoding = locale.getlocale(locale.LC_MESSAGES)[1] or 'UTF-8'
         except AttributeError:  # Windows doesn't have LC_MESSAGES
@@ -316,16 +208,6 @@ class GSSError(Exception, metaclass=GSSErrorRegistry):
         return res
 
     def gen_message(self):
-        """
-        Retrieves all messages for this error's status codes
-
-        This method retrieves all messages for this error's status codes,
-        and forms them into a string for use as an exception message
-
-        Returns:
-            bytes: a string for use as this error's message
-        """
-
         maj_statuses = self.get_all_statuses(self.maj_code, True)
         min_statuses = self.get_all_statuses(self.min_code, False)
 

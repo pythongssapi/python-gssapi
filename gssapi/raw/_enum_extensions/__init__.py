@@ -1,16 +1,27 @@
+import typing as t
+
 from enum import EnumMeta
 
 
-_extra_values = {}
+_extra_values: t.Dict[str, t.Dict[str, t.Any]] = {}
 
 
-def register_value(cl_str, name, value):
+def register_value(
+    cl_str: str,
+    name: str,
+    value: t.Any,
+) -> None:
     _extra_values[cl_str] = _extra_values.get(cl_str, {})
     _extra_values[cl_str][name] = value
 
 
 class ExtendableEnum(EnumMeta):
-    def __new__(metacl, name, bases, classdict):
+    def __new__(
+        metacl,
+        name: str,
+        bases: t.Tuple[t.Type],
+        classdict: t.Dict[str, t.Any],
+    ) -> "ExtendableEnum":
         extra_vals = _extra_values.get(name)
 
         if extra_vals is not None:

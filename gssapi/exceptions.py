@@ -1,3 +1,5 @@
+import typing as t
+
 from gssapi.raw.exceptions import *  # noqa
 from gssapi.raw.misc import GSSError  # noqa
 
@@ -15,7 +17,11 @@ class GeneralError(Exception):
     MAJOR_MESSAGE = "General error"
     FMT_STR = "{maj}: {min}."
 
-    def __init__(self, minor_message, **kwargs):
+    def __init__(
+        self,
+        minor_message: str,
+        **kwargs: str,
+    ) -> None:
         maj_str = self.MAJOR_MESSAGE.format(**kwargs)
         err_str = self.FMT_STR.format(maj=maj_str, min=minor_message)
         super(GeneralError, self).__init__(err_str)
@@ -30,7 +36,12 @@ class EncryptionNotUsed(GeneralError):
     """An Error indicating that encryption was requested, but not used"""
     MAJOR_MESSAGE = "Confidentiality was requested, but not used"
 
-    def __init__(self, minor_message, unwrapped_message=None, **kwargs):
+    def __init__(
+        self,
+        minor_message: str,
+        unwrapped_message: t.Optional[bytes] = None,
+        **kwargs: str,
+    ) -> None:
         super(EncryptionNotUsed, self).__init__(minor_message, **kwargs)
 
         self.unwrapped_message = unwrapped_message
