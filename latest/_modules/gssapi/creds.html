@@ -162,7 +162,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lifetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get the remaining lifetime of these credentials&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Get the remaining lifetime of these credentials, in seconds&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">inquire</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">usage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">lifetime</span><span class="p">)</span>
@@ -209,8 +209,8 @@
 <span class="sd">        Args:</span>
 <span class="sd">            name (~gssapi.names.Name): the name associated with the</span>
 <span class="sd">                credentials, or None for the default name</span>
-<span class="sd">            lifetime (int): the desired lifetime of the credentials, or None</span>
-<span class="sd">                for indefinite</span>
+<span class="sd">            lifetime (int): the desired lifetime of the credentials in seconds,</span>
+<span class="sd">                or None for indefinite</span>
 <span class="sd">            mechs (list): the desired :class:`MechType` OIDs to be used</span>
 <span class="sd">                with the credentials, or None for the default set</span>
 <span class="sd">            usage (str): the usage for the credentials -- either &#39;both&#39;,</span>
@@ -325,8 +325,8 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            name (~gssapi.names.Name): the name to impersonate</span>
-<span class="sd">            lifetime (int): the desired lifetime of the new credentials,</span>
-<span class="sd">                or None for indefinite</span>
+<span class="sd">            lifetime (int): the desired lifetime of the new credentials in</span>
+<span class="sd">                seconds, or None for indefinite</span>
 <span class="sd">            mechs (list): the desired :class:`MechType` OIDs for the new</span>
 <span class="sd">                credentials</span>
 <span class="sd">            usage (str): the desired usage for the new credentials -- either</span>
@@ -398,13 +398,13 @@
 <span class="sd">        about them.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            mech (~gssapi.OID): the mechanism for which to retrive the</span>
+<span class="sd">            mech (~gssapi.OID): the mechanism for which to retrieve the</span>
 <span class="sd">                information</span>
 <span class="sd">            name (bool): get the name associated with the credentials</span>
 <span class="sd">            init_lifetime (bool): get the remaining initiate lifetime for</span>
-<span class="sd">                the credentials</span>
+<span class="sd">                the credentials in seconds</span>
 <span class="sd">            accept_lifetime (bool): get the remaining accept lifetime for</span>
-<span class="sd">                the credentials</span>
+<span class="sd">                the credentials in seconds</span>
 <span class="sd">            usage (bool): get the usage for the credentials</span>
 
 <span class="sd">        Returns:</span>
@@ -468,9 +468,9 @@
 <span class="sd">            usage (str): the usage for the credentials -- either &#39;both&#39;,</span>
 <span class="sd">                &#39;initiate&#39;, or &#39;accept&#39;</span>
 <span class="sd">            init_lifetime (int): the desired initiate lifetime of the</span>
-<span class="sd">                credentials, or None for indefinite</span>
+<span class="sd">                credentials in seconds, or None for indefinite</span>
 <span class="sd">            accept_lifetime (int): the desired accept lifetime of the</span>
-<span class="sd">                credentials, or None for indefinite</span>
+<span class="sd">                credentials in seconds, or None for indefinite</span>
 <span class="sd">            impersonator (Credentials): the credentials to use to impersonate</span>
 <span class="sd">                the given name, or None to not acquire normally</span>
 <span class="sd">                (:requires-ext:`s4u`)</span>

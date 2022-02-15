@@ -97,8 +97,8 @@
 <div class="viewcode-block" id="InquireCredByMechResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireCredByMechResult">[docs]</a><span class="k">class</span> <span class="nc">InquireCredByMechResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Information about the credential for a specific mechanism.&quot;&quot;&quot;</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Name&quot;</span><span class="p">]</span>  <span class="c1">#: The principal associated with the credential</span>
-    <span class="n">init_lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Time valid for initiation</span>
-    <span class="n">accept_lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Time valid for accepting</span>
+    <span class="n">init_lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Time valid for initiation, in seconds</span>
+    <span class="n">accept_lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Time valid for accepting, in seconds</span>
     <span class="n">usage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>  <span class="c1">#: How the credential can be used</span></div>
 
 
@@ -106,8 +106,8 @@
     <span class="sd">&quot;&quot;&quot;Result of adding to a GSSAPI credential.&quot;&quot;&quot;</span>
     <span class="n">creds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Creds&quot;</span><span class="p">]</span>  <span class="c1">#: The credential that was generated</span>
     <span class="n">mechs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>  <span class="c1">#: Set of mechs the cred is for</span>
-    <span class="n">init_lifetime</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Time valid for initiation</span>
-    <span class="n">accept_lifetime</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Time valid for accepting</span></div>
+    <span class="n">init_lifetime</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Time valid for initiation, in seconds</span>
+    <span class="n">accept_lifetime</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Time valid for accepting, in seconds</span></div>
 
 
 <div class="viewcode-block" id="DisplayNameResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.DisplayNameResult">[docs]</a><span class="k">class</span> <span class="nc">DisplayNameResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
@@ -155,7 +155,7 @@
     <span class="sd">&quot;&quot;&quot;Information about the security context.&quot;&quot;&quot;</span>
     <span class="n">initiator_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Name&quot;</span><span class="p">]</span>  <span class="c1">#: Name of the initiator</span>
     <span class="n">target_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Name&quot;</span><span class="p">]</span>  <span class="c1">#: Name of the acceptor</span>
-    <span class="n">lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Time valid for the security context</span>
+    <span class="n">lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Time valid for the security context, in seconds</span>
     <span class="n">mech</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>  <span class="c1">#: Mech used to create the security context</span>
     <span class="n">flags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RequirementFlag</span><span class="p">]</span>  <span class="c1">#: Services available for the context</span>
     <span class="n">locally_init</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>  <span class="c1">#: Context was initiated locally</span>

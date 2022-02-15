@@ -134,8 +134,8 @@
 <span class="sd">            None to use the default set: mutual_authentication and</span>
 <span class="sd">            out_of_sequence_detection.  This may also be an</span>
 <span class="sd">            :class:`IntEnumFlagSet`</span>
-<span class="sd">        lifetime (int): the request lifetime of the security context (a value</span>
-<span class="sd">            of 0 or None means indefinite)</span>
+<span class="sd">        lifetime (int): the request lifetime of the security context in seconds</span>
+<span class="sd">            (a value of 0 or None means indefinite)</span>
 <span class="sd">        channel_bindings (ChannelBindings): The channel bindings (or None for</span>
 <span class="sd">            no channel bindings)</span>
 <span class="sd">        input_token (bytes): the token to use to update the security context,</span>
@@ -144,8 +144,8 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        InitSecContextResult: the output security context, the actual mech</span>
 <span class="sd">        type, the actual flags used, the output token to send to the acceptor,</span>
-<span class="sd">        the actual lifetime of the context (or None if not supported or</span>
-<span class="sd">        indefinite), and whether or not more calls are needed to finish the</span>
+<span class="sd">        the actual lifetime of the context in seconds (or None if not supported</span>
+<span class="sd">        or indefinite), and whether or not more calls are needed to finish the</span>
 <span class="sd">        initiation.</span>
 
 <span class="sd">    Raises:</span>
@@ -192,7 +192,7 @@
 <span class="sd">    Returns:</span>
 <span class="sd">        AcceptSecContextResult: the resulting security context, the initiator</span>
 <span class="sd">        name, the mechanism being used, the output token, the flags in use,</span>
-<span class="sd">        the lifetime of the context (or None for indefinite or not</span>
+<span class="sd">        the lifetime of the context in seconds (or None for indefinite or not</span>
 <span class="sd">        supported), the delegated credentials (valid only if the</span>
 <span class="sd">        delegate_to_peer flag is set), and whether or not further token</span>
 <span class="sd">        exchanges are needed to finalize the security context.</span>

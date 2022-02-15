@@ -601,8 +601,8 @@ be specified.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name for which to acquire the
 credentials (or None for the “no name” functionality)</p></li>
-<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime for the credentials (or None for
-indefinite)</p></li>
+<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime in seconds for the credentials (or None
+for indefinite)</p></li>
 <li><p><strong>mechs</strong> (<a class="reference internal" href="#gssapi.raw.types.MechType" title="gssapi.raw.types.MechType"><em>MechType</em></a>) – the desired mechanisms for which
 the credentials should work, or None for the default set</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the usage type for the credentials: may be
@@ -611,8 +611,8 @@ the credentials should work, or None for the default set</p></li>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the resulting credentials, the actual mechanisms
-with which they may be used, and their actual lifetime (or None for
-indefinite or not supported)</p>
+with which they may be used, and their actual lifetime in seconds (or
+None for indefinite or not supported)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult" title="gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></p>
@@ -647,9 +647,9 @@ credential for</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – usage type for credentials.  Possible values:
 ‘initiate’ (default), ‘accept’, ‘both’ (failsafe).</p></li>
 <li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – lifetime of credentials for use in initiating
-security contexts (None for indefinite)</p></li>
+security contexts in seconds (None for indefinite)</p></li>
 <li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – lifetime of credentials for use in accepting
-security contexts (None for indefinite)</p></li>
+security contexts in seconds (None for indefinite)</p></li>
 <li><p><strong>mutate_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – whether to mutate the input credentials (True)
 or produce a new set of credentials (False).  Defaults to False</p></li>
 </ul>
@@ -721,8 +721,10 @@ to <a class="reference internal" href="#gssapi.raw.creds.inquire_cred" title="gs
 <li><p><strong>creds</strong> (<a class="reference internal" href="#gssapi.raw.creds.Creds" title="gssapi.raw.creds.Creds"><em>Creds</em></a>) – the credentials to inspect</p></li>
 <li><p><strong>mech</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the desired mechanism</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the Name associated with the credentials</p></li>
-<li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the initiator TTL for the credentials</p></li>
-<li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the acceptor TTL for the credentials</p></li>
+<li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the initiator TTL for the credentials (in
+seconds)</p></li>
+<li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the acceptor TTL for the credentials (in
+seconds)</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the usage type of the credentials</p></li>
 </ul>
 </dd>
@@ -799,7 +801,7 @@ no channel bindings)</p></li>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the resulting security context, the initiator
 name, the mechanism being used, the output token, the flags in use,
-the lifetime of the context (or None for indefinite or not
+the lifetime of the context in seconds (or None for indefinite or not
 supported), the delegated credentials (valid only if the
 delegate_to_peer flag is set), and whether or not further token
 exchanges are needed to finalize the security context.</p>
@@ -964,8 +966,8 @@ context, or None for the default mechanism type</p></li>
 None to use the default set: mutual_authentication and
 out_of_sequence_detection.  This may also be an
 <a class="reference internal" href="gssapi.raw.types.IntEnumFlagSet.html#gssapi.raw.types.IntEnumFlagSet" title="gssapi.raw.types.IntEnumFlagSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnumFlagSet</span></code></a></p></li>
-<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the request lifetime of the security context (a value
-of 0 or None means indefinite)</p></li>
+<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the request lifetime of the security context in seconds
+(a value of 0 or None means indefinite)</p></li>
 <li><p><strong>channel_bindings</strong> (<a class="reference internal" href="#gssapi.raw.chan_bindings.ChannelBindings" title="gssapi.raw.chan_bindings.ChannelBindings"><em>ChannelBindings</em></a>) – The channel bindings (or None for
 no channel bindings)</p></li>
 <li><p><strong>input_token</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – the token to use to update the security context,
@@ -975,8 +977,8 @@ or None if you are creating a new context</p></li>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the output security context, the actual mech
 type, the actual flags used, the output token to send to the acceptor,
-the actual lifetime of the context (or None if not supported or
-indefinite), and whether or not more calls are needed to finish the
+the actual lifetime of the context in seconds (or None if not supported
+or indefinite), and whether or not more calls are needed to finish the
 initiation.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
@@ -1254,7 +1256,7 @@ security context</p></li>
 <p>A new OID may be created by passing the <cite>elements</cite> argument
 to the constructor.  The <cite>elements</cite> argument should be a
 <cite>bytes</cite> consisting of the BER-encoded values in the OID.</p>
-<p>To retrive the underlying bytes, use the <code class="xref py py-func docutils literal notranslate"><span class="pre">bytes()</span></code>
+<p>To retrieve the underlying bytes, use the <code class="xref py py-func docutils literal notranslate"><span class="pre">bytes()</span></code>
 function in Python 3.</p>
 <p>This object is hashable, and may be compared using equality
 operators.</p>
@@ -1401,7 +1403,7 @@ values registered by imported mechanisms.</p>
 <p>A new OID may be created by passing the <cite>elements</cite> argument
 to the constructor.  The <cite>elements</cite> argument should be a
 <cite>bytes</cite> consisting of the BER-encoded values in the OID.</p>
-<p>To retrive the underlying bytes, use the <code class="xref py py-func docutils literal notranslate"><span class="pre">bytes()</span></code>
+<p>To retrieve the underlying bytes, use the <code class="xref py py-func docutils literal notranslate"><span class="pre">bytes()</span></code>
 function in Python 3.</p>
 <p>This object is hashable, and may be compared using equality
 operators.</p>
@@ -1471,7 +1473,7 @@ process the given name.</p>
 <span class="sig-name descname"><span class="pre">inquire_names_for_mech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mech</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/misc.html#inquire_names_for_mech"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.misc.inquire_names_for_mech" title="Permalink to this definition"></a></dt>
 <dd><p>inquire_names_for_mech(mech)
 Get the name types supported by a mechanism.</p>
-<p>This method retrives the different name types supported by
+<p>This method retrieves the different name types supported by
 the given mechanism.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1882,7 +1884,7 @@ which those mechanisms are specified implies a relative preference.</p>
 <dd><p>Returns information about attributes in human readable form.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>attr</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – Mechanism attribute to retrive names and
+<dd class="field-odd"><p><strong>attr</strong> (<a class="reference internal" href="gssapi.html#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – Mechanism attribute to retrieve names and
 descriptions of</p>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2054,8 +2056,8 @@ credential store from which to acquire the credentials.
 See <a class="reference internal" href="credstore.html"><span class="doc">Common Values for Credentials Store Extensions</span></a> for valid values</p></li>
 <li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name associated with the
 credentials, or None for the default name</p></li>
-<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired lifetime of the credentials, or None
-for indefinite</p></li>
+<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired lifetime of the credentials in seconds, or
+None for indefinite</p></li>
 <li><p><strong>mechs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – the desired mechanisms to be used with these
 credentials, or None for the default set</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
@@ -2098,10 +2100,10 @@ See <a class="reference internal" href="credstore.html"><span class="doc">Common
 credentials</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the usage for these credentials – either ‘both’,
 ‘initiate’, or ‘accept’</p></li>
-<li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired initiate lifetime of the
-credentials, or None for indefinite</p></li>
-<li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired accept lifetime of the
-credentials, or None for indefinite</p></li>
+<li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired initiate lifetime of the credentials
+in seconds, or None for indefinite</p></li>
+<li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired accept lifetime of the credentials
+in seconds, or None for indefinite</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -2278,7 +2280,7 @@ unknown or unset</p>
 <dt class="sig sig-object py" id="gssapi.raw.ext_rfc6680.inquire_name">
 <span class="sig-name descname"><span class="pre">inquire_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><span class="pre">gssapi.raw.names.Name</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mech_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/ext_rfc6680.html#inquire_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_rfc6680.inquire_name" title="Permalink to this definition"></a></dt>
 <dd><p>Get information about a Name.</p>
-<p>This method retrives information about the given name, including
+<p>This method retrieves information about the given name, including
 the set of attribute names for the given name, as well as whether or
 not the name is a mechanism name.  Additionally, if the given name is
 a mechanism name, the associated mechansim is returned as well.</p>
@@ -2854,7 +2856,7 @@ impersonator credentials must have a usage of ‘both’ or ‘initiate’.</p>
 permissions to impersonate the target name</p></li>
 <li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to impersonate</p></li>
 <li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime for the credentials (or None for
-indefinite)</p></li>
+indefinite) in seconds</p></li>
 <li><p><strong>mechs</strong> (<a class="reference internal" href="#gssapi.raw.types.MechType" title="gssapi.raw.types.MechType"><em>MechType</em></a>) – the desired mechanisms for which
 the credentials should work (or None for the default set)</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the usage type for the credentials: may be
@@ -2863,8 +2865,8 @@ the credentials should work (or None for the default set)</p></li>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the resulting credentials, the actual mechanisms
-with which they may be used, and their actual lifetime (or None for
-indefinite or not support)</p>
+with which they may be used, and their actual lifetime in seconds (or
+None for indefinite or not support)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult" title="gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></p>
@@ -2896,18 +2898,18 @@ this is both
 singular and required, unlike acquireCredImpersonateName</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the usage type for the credentials: may be
 ‘initiate’, ‘accept’, or ‘both’</p></li>
-<li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime for the credentials to remain
-valid when using them to initiate security contexts (or None for
-indefinite)</p></li>
-<li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime for the credentials to remain
-valid when using them to accept security contexts (or None for
-indefinite)</p></li>
+<li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime, in seconds, for the credentials to
+remain valid when using them to initiate security contexts (or None
+for indefinite)</p></li>
+<li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime, in seconds, for the credentials to
+remain valid when using them to accept security contexts (or None
+for indefinite)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the actual mechanisms with which the credentials may be
-used, the actual initiator TTL, and the actual acceptor TTL (the TTLs
-may be None for indefinite or not supported)</p>
+used, the actual initiator TTL in seconds, and the actual acceptor TTL
+in seconds (the TTLs may be None for indefinite or not supported)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult" title="gssapi.raw.named_tuples.AddCredResult">AddCredResult</a></p>
@@ -2934,8 +2936,8 @@ MIT or Heimdal.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.raw.names.Name" title="gssapi.raw.names.Name"><em>Name</em></a>) – the name to acquire credentials for</p></li>
 <li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – the password used to acquire credentialss with</p></li>
-<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime for the credentials (or None for
-indefinite)</p></li>
+<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime for the credentials in seconds (or None
+for indefinite)</p></li>
 <li><p><strong>mechs</strong> (<a class="reference internal" href="#gssapi.raw.types.MechType" title="gssapi.raw.types.MechType"><em>MechType</em></a>) – the desired mechanisms for which
 the credentials should work (or None for the default set)</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – usage type for credentials.  Possible values:
@@ -2944,8 +2946,8 @@ the credentials should work (or None for the default set)</p></li>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the resulting credentials, the actual mechanisms
-with which they may be used, and their actual lifetime (or None for
-indefinite or not supported)</p>
+with which they may be used, and their actual lifetime in seconds (or
+None for indefinite or not supported)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult" title="gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></p>
@@ -2973,18 +2975,18 @@ this is both singular and required</p></li>
 <li><p><strong>password</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.10)"><em>bytes</em></a>) – the password used to acquire credentialss with</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the usage type for the credentials: may be
 ‘initiate’, ‘accept’, or ‘both’</p></li>
-<li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime for the credentials to remain valid
-when using them to initiate security contexts (or None for
-indefinite)</p></li>
-<li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime for the credentials to remain
-valid when using them to accept security contexts (or None for
-indefinite)</p></li>
+<li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime, in seconds, for the credentials to
+remain valid when using them to initiate security contexts (or None
+for indefinite)</p></li>
+<li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the lifetime, in seconds, for the credentials to
+remain valid when using them to accept security contexts (or None
+for indefinite)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the actual mechanisms with which the credentials may be
-used, the actual initiator TTL, and the actual acceptor TTL (the TTLs
-may be None for indefinite or not supported)</p>
+used, the actual initiator TTL in seconds, and the actual acceptor TTL
+in seconds (the TTLs may be None for indefinite or not supported)</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult" title="gssapi.raw.named_tuples.AddCredResult">AddCredResult</a></p>
@@ -3170,7 +3172,7 @@ from the config/environment settings.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="gssapi.raw.ext_krb5.krb5_export_lucid_sec_context">
 <span class="sig-name descname"><span class="pre">krb5_export_lucid_sec_context</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext" title="gssapi.raw.sec_contexts.SecurityContext"><span class="pre">gssapi.raw.sec_contexts.SecurityContext</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#krb5_export_lucid_sec_context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.krb5_export_lucid_sec_context" title="Permalink to this definition"></a></dt>
-<dd><p>Retuns a non-opaque version of the internal context info.</p>
+<dd><p>Returns a non-opaque version of the internal context info.</p>
 <p>Gets information about the Kerberos security context passed in. Currently
 only version 1 is known and supported by this library.</p>
 <div class="admonition note">
@@ -3264,7 +3266,7 @@ authenticating the initiator.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Heimdal can only get the tkt flags on the acceptor security context.
-MIT is able to get the tkt flags on initators and acceptors.</p>
+MIT is able to get the tkt flags on initiators and acceptors.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -3459,13 +3461,13 @@ or None to send GSS_C_EMPTY_BUFFER.</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredByMechResult.init_lifetime">
 <span class="sig-name descname"><span class="pre">init_lifetime</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredByMechResult.init_lifetime" title="Permalink to this definition"></a></dt>
-<dd><p>Time valid for initiation</p>
+<dd><p>Time valid for initiation, in seconds</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireCredByMechResult.accept_lifetime">
 <span class="sig-name descname"><span class="pre">accept_lifetime</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireCredByMechResult.accept_lifetime" title="Permalink to this definition"></a></dt>
-<dd><p>Time valid for accepting</p>
+<dd><p>Time valid for accepting, in seconds</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -3496,13 +3498,13 @@ or None to send GSS_C_EMPTY_BUFFER.</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gssapi.raw.named_tuples.AddCredResult.init_lifetime">
 <span class="sig-name descname"><span class="pre">init_lifetime</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.AddCredResult.init_lifetime" title="Permalink to this definition"></a></dt>
-<dd><p>Time valid for initiation</p>
+<dd><p>Time valid for initiation, in seconds</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gssapi.raw.named_tuples.AddCredResult.accept_lifetime">
 <span class="sig-name descname"><span class="pre">accept_lifetime</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.raw.named_tuples.AddCredResult.accept_lifetime" title="Permalink to this definition"></a></dt>
-<dd><p>Time valid for accepting</p>
+<dd><p>Time valid for accepting, in seconds</p>
 </dd></dl>
 
 </dd></dl>
@@ -3688,7 +3690,7 @@ or None to send GSS_C_EMPTY_BUFFER.</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="gssapi.raw.named_tuples.InquireContextResult.lifetime">
 <span class="sig-name descname"><span class="pre">lifetime</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#gssapi.raw.named_tuples.InquireContextResult.lifetime" title="Permalink to this definition"></a></dt>
-<dd><p>Time valid for the security context</p>
+<dd><p>Time valid for the security context, in seconds</p>
 </dd></dl>
 
 <dl class="py attribute">

@@ -471,7 +471,7 @@ extension is supported (<em>requires the <a class="reference internal" href="gss
 <dl class="py property">
 <dt class="sig sig-object py" id="gssapi.creds.Credentials.lifetime">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">lifetime</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></em><a class="headerlink" href="#gssapi.creds.Credentials.lifetime" title="Permalink to this definition"></a></dt>
-<dd><p>Get the remaining lifetime of these credentials</p>
+<dd><p>Get the remaining lifetime of these credentials, in seconds</p>
 </dd></dl>
 
 <dl class="py property">
@@ -504,8 +504,8 @@ extension.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name associated with the
 credentials, or None for the default name</p></li>
-<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired lifetime of the credentials, or None
-for indefinite</p></li>
+<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired lifetime of the credentials in seconds,
+or None for indefinite</p></li>
 <li><p><strong>mechs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – the desired <a class="reference internal" href="gssapi.MechType.html#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> OIDs to be used
 with the credentials, or None for the default set</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the usage for the credentials – either ‘both’,
@@ -587,8 +587,8 @@ name using the current credentials.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (<a class="reference internal" href="#gssapi.names.Name" title="gssapi.names.Name"><em>Name</em></a>) – the name to impersonate</p></li>
-<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired lifetime of the new credentials,
-or None for indefinite</p></li>
+<li><p><strong>lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired lifetime of the new credentials in
+seconds, or None for indefinite</p></li>
 <li><p><strong>mechs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – the desired <a class="reference internal" href="gssapi.MechType.html#gssapi.MechType" title="gssapi.MechType"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechType</span></code></a> OIDs for the new
 credentials</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the desired usage for the new credentials – either
@@ -645,13 +645,13 @@ about them.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechanism for which to retrive the
+<li><p><strong>mech</strong> (<a class="reference internal" href="#gssapi.OID" title="gssapi.OID"><em>OID</em></a>) – the mechanism for which to retrieve the
 information</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the name associated with the credentials</p></li>
 <li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the remaining initiate lifetime for
-the credentials</p></li>
+the credentials in seconds</p></li>
 <li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the remaining accept lifetime for
-the credentials</p></li>
+the credentials in seconds</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – get the usage for the credentials</p></li>
 </ul>
 </dd>
@@ -695,9 +695,9 @@ the credentials</p></li>
 <li><p><strong>usage</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – the usage for the credentials – either ‘both’,
 ‘initiate’, or ‘accept’</p></li>
 <li><p><strong>init_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired initiate lifetime of the
-credentials, or None for indefinite</p></li>
+credentials in seconds, or None for indefinite</p></li>
 <li><p><strong>accept_lifetime</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – the desired accept lifetime of the
-credentials, or None for indefinite</p></li>
+credentials in seconds, or None for indefinite</p></li>
 <li><p><strong>impersonator</strong> (<a class="reference internal" href="#gssapi.creds.Credentials" title="gssapi.creds.Credentials"><em>Credentials</em></a>) – the credentials to use to impersonate
 the given name, or None to not acquire normally
 (<em>requires the <a class="reference internal" href="gssapi.raw.html#module-gssapi.raw.ext_s4u" title="gssapi.raw.ext_s4u">s4u extension</a></em>)</p></li>
