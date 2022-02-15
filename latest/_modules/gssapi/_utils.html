@@ -6,6 +6,7 @@
   <title>gssapi._utils &mdash; Python-GSSAPI 1.7.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -71,15 +72,19 @@
   <h1>Source code for gssapi._utils</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">types</span>
+<span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
 
 <span class="kn">import</span> <span class="nn">decorator</span> <span class="k">as</span> <span class="nn">deco</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
-
 <span class="kn">from</span> <span class="nn">gssapi.raw.misc</span> <span class="kn">import</span> <span class="n">GSSError</span>
 
+<span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gssapi.sec_contexts</span> <span class="kn">import</span> <span class="n">SecurityContext</span>
 
-<span class="k">def</span> <span class="nf">import_gssapi_extension</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+
+<span class="k">def</span> <span class="nf">import_gssapi_extension</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Import a GSSAPI extension module</span>
 
 <span class="sd">    This method imports a GSSAPI extension module based</span>
@@ -102,20 +107,10 @@
         <span class="k">return</span> <span class="kc">None</span>
 
 
-<span class="k">def</span> <span class="nf">flag_property</span><span class="p">(</span><span class="n">flag</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">discard</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">getter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">flag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">flags</span>
-
-    <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">getter</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">inquire_property</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">inquire_property</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">property</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Creates a property based on an inquire result</span>
 
 <span class="sd">    This method creates a property that calls the</span>
@@ -129,7 +124,7 @@
 <span class="sd">        property: the created property</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">inquire_property</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">inquire_property</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
             <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot read </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from a security context whose &quot;</span>
                    <span class="s2">&quot;establishment has not yet been started.&quot;</span><span class="p">)</span>
@@ -144,7 +139,7 @@
 <span class="n">_ENCODING</span> <span class="o">=</span> <span class="s1">&#39;UTF-8&#39;</span>
 
 
-<span class="k">def</span> <span class="nf">_get_encoding</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">_get_encoding</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Gets the current encoding used for strings.</span>
 
 <span class="sd">    This value is used to encode and decode string</span>
@@ -156,7 +151,9 @@
     <span class="k">return</span> <span class="n">_ENCODING</span>
 
 
-<div class="viewcode-block" id="set_encoding"><a class="viewcode-back" href="../../gssapi.html#gssapi.set_encoding">[docs]</a><span class="k">def</span> <span class="nf">set_encoding</span><span class="p">(</span><span class="n">enc</span><span class="p">):</span>
+<div class="viewcode-block" id="set_encoding"><a class="viewcode-back" href="../../gssapi.html#gssapi.set_encoding">[docs]</a><span class="k">def</span> <span class="nf">set_encoding</span><span class="p">(</span>
+    <span class="n">enc</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Sets the current encoding used for strings</span>
 
 <span class="sd">    This value is used to encode and decode string</span>
@@ -170,9 +167,11 @@
     <span class="n">_ENCODING</span> <span class="o">=</span> <span class="n">enc</span></div>
 
 
-<span class="k">def</span> <span class="nf">_encode_dict</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_encode_dict</span><span class="p">(</span>
+    <span class="n">d</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Encodes any relevant strings in a dict&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">enc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">enc</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">_ENCODING</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -183,7 +182,12 @@
 
 <span class="c1"># in case of Python 3, just use exception chaining</span>
 <span class="nd">@deco</span><span class="o">.</span><span class="n">decorator</span>
-<span class="k">def</span> <span class="nf">catch_and_return_token</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">catch_and_return_token</span><span class="p">(</span>
+    <span class="n">func</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Callable</span><span class="p">,</span>
+    <span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Optionally defer exceptions and return a token instead</span>
 
 <span class="sd">    When `__DEFER_STEP_ERRORS__` is set on the implementing class</span>
@@ -198,10 +202,12 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">GSSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__DEFER_STEP_ERRORS__</span><span class="p">:</span>
+        <span class="n">defer_step_errors</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;__DEFER_STEP_ERRORS__&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">defer_step_errors</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span> <span class="o">=</span> <span class="n">e</span>
             <span class="c1"># skip the &quot;return func&quot; line above in the traceback</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span><span class="o">.</span><span class="n">__traceback__</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="o">.</span><span class="n">tb_next</span>
+            <span class="n">tb</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="o">.</span><span class="n">tb_next</span>  <span class="c1"># type: ignore[union-attr]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span><span class="o">.</span><span class="n">__traceback__</span> <span class="o">=</span> <span class="n">tb</span>
 
             <span class="k">return</span> <span class="n">e</span><span class="o">.</span><span class="n">token</span>
         <span class="k">else</span><span class="p">:</span>
@@ -209,7 +215,12 @@
 
 
 <span class="nd">@deco</span><span class="o">.</span><span class="n">decorator</span>
-<span class="k">def</span> <span class="nf">check_last_err</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">check_last_err</span><span class="p">(</span>
+    <span class="n">func</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Callable</span><span class="p">,</span>
+    <span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Check and raise deferred errors before running the function</span>
 
 <span class="sd">    This method checks :python:`_last_err` before running the wrapped</span>
@@ -225,16 +236,6 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="nd">@deco</span><span class="o">.</span><span class="n">decorator</span>
-    <span class="k">def</span> <span class="nf">check_last_err</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span>
-            <span class="k">finally</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
 
 <span class="k">class</span> <span class="nc">CheckLastError</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Check for a deferred error on all methods</span>
@@ -245,7 +246,12 @@
 <span class="sd">    Additionally, it enabled `__DEFER_STEP_ERRORS__` by default.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">parents</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Type</span><span class="p">],</span>
+        <span class="n">attrs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CheckLastError&quot;</span><span class="p">:</span>
         <span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;__DEFER_STEP_ERRORS__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">for</span> <span class="n">attr_name</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>

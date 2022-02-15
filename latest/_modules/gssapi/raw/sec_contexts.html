@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gssapi.raw.sec_contexts &mdash; Python-GSSAPI 1.7.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Python-GSSAPI
+          </a>
+              <div class="version">
+                1.7.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.html">High-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.raw.html">Low-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../otherdoc.html">Other Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Python-GSSAPI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>gssapi.raw.sec_contexts</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gssapi.raw.sec_contexts</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+
+<span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.chan_bindings</span> <span class="kn">import</span> <span class="n">ChannelBindings</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.creds</span> <span class="kn">import</span> <span class="n">Creds</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.named_tuples</span> <span class="kn">import</span> <span class="p">(</span>
+        <span class="n">AcceptSecContextResult</span><span class="p">,</span>
+        <span class="n">InitSecContextResult</span><span class="p">,</span>
+        <span class="n">InquireContextResult</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.names</span> <span class="kn">import</span> <span class="n">Name</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.oids</span> <span class="kn">import</span> <span class="n">OID</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.types</span> <span class="kn">import</span> <span class="n">RequirementFlag</span>
+
+<div class="viewcode-block" id="SecurityContext"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.SecurityContext">[docs]</a><span class="k">class</span> <span class="nc">SecurityContext</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A GSSAPI Security Context</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">cpy</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;SecurityContext&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_started</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span> <span class="o">...</span></div>
+
+
+<div class="viewcode-block" id="init_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.init_sec_context">[docs]</a><span class="k">def</span> <span class="nf">init_sec_context</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
+    <span class="n">creds</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Creds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">SecurityContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">flags</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span>
+        <span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;RequirementFlag&quot;</span><span class="p">,</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;RequirementFlag&quot;</span><span class="p">]</span>
+    <span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">channel_bindings</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;ChannelBindings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">input_token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InitSecContextResult&quot;</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Initiate a GSSAPI security context.</span>
+
+<span class="sd">    This method initiates a GSSAPI security context, targeting the given</span>
+<span class="sd">    target name.  To create a basic context, just provide the target name.</span>
+<span class="sd">    Further calls used to update the context should pass in the output context</span>
+<span class="sd">    of the last call, as well as the input token received from the acceptor.</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        This changes the input context!</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target_name (~gssapi.raw.names.Name): the target for the security</span>
+<span class="sd">            context</span>
+<span class="sd">        creds (Creds): the credentials to use to initiate the context,</span>
+<span class="sd">            or None to use the default credentials</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the security</span>
+<span class="sd">            context to update, or None to create a new context</span>
+<span class="sd">        mech (~gssapi.raw.types.MechType): the mechanism type for this security</span>
+<span class="sd">            context, or None for the default mechanism type</span>
+<span class="sd">        flags (list): the flags to request for the security context, or</span>
+<span class="sd">            None to use the default set: mutual_authentication and</span>
+<span class="sd">            out_of_sequence_detection.  This may also be an</span>
+<span class="sd">            :class:`IntEnumFlagSet`</span>
+<span class="sd">        lifetime (int): the request lifetime of the security context (a value</span>
+<span class="sd">            of 0 or None means indefinite)</span>
+<span class="sd">        channel_bindings (ChannelBindings): The channel bindings (or None for</span>
+<span class="sd">            no channel bindings)</span>
+<span class="sd">        input_token (bytes): the token to use to update the security context,</span>
+<span class="sd">            or None if you are creating a new context</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        InitSecContextResult: the output security context, the actual mech</span>
+<span class="sd">        type, the actual flags used, the output token to send to the acceptor,</span>
+<span class="sd">        the actual lifetime of the context (or None if not supported or</span>
+<span class="sd">        indefinite), and whether or not more calls are needed to finish the</span>
+<span class="sd">        initiation.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.InvalidTokenError</span>
+<span class="sd">        ~gssapi.exceptions.InvalidCredentialsError</span>
+<span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
+<span class="sd">        ~gssapi.exceptions.ExpiredCredentialsError</span>
+<span class="sd">        ~gssapi.exceptions.BadChannelBindingsError</span>
+<span class="sd">        ~gssapi.exceptions.BadMICError</span>
+<span class="sd">        ~gssapi.exceptions.ExpiredTokenError</span>
+<span class="sd">        ~gssapi.exceptions.DuplicateTokenError</span>
+<span class="sd">        ~gssapi.exceptions.MissingContextError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameError</span>
+<span class="sd">        ~gssapi.exceptions.BadMechanismError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="accept_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.accept_sec_context">[docs]</a><span class="k">def</span> <span class="nf">accept_sec_context</span><span class="p">(</span>
+    <span class="n">input_token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+    <span class="n">acceptor_creds</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Creds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">SecurityContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">channel_bindings</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;ChannelBindings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AcceptSecContextResult&quot;</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Accept a GSSAPI security context.</span>
+
+<span class="sd">    This method accepts a GSSAPI security context using a token sent by the</span>
+<span class="sd">    initiator, using the given credentials.  It can either be used to accept a</span>
+<span class="sd">    security context and create a new security context object, or to update an</span>
+<span class="sd">    existing security context object.</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        This changes the input context!</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input_token (bytes): the token sent by the context initiator</span>
+<span class="sd">        acceptor_creds (Creds): the credentials to be used to accept the</span>
+<span class="sd">            context (or None to use the default credentials)</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the security</span>
+<span class="sd">            context to update (or None to create a new security context object)</span>
+<span class="sd">        channel_bindings (ChannelBindings): The channel bindings (or None for</span>
+<span class="sd">            no channel bindings)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        AcceptSecContextResult: the resulting security context, the initiator</span>
+<span class="sd">        name, the mechanism being used, the output token, the flags in use,</span>
+<span class="sd">        the lifetime of the context (or None for indefinite or not</span>
+<span class="sd">        supported), the delegated credentials (valid only if the</span>
+<span class="sd">        delegate_to_peer flag is set), and whether or not further token</span>
+<span class="sd">        exchanges are needed to finalize the security context.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.InvalidTokenError</span>
+<span class="sd">        ~gssapi.exceptions.InvalidCredentialsError</span>
+<span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
+<span class="sd">        ~gssapi.exceptions.ExpiredCredentialsError</span>
+<span class="sd">        ~gssapi.exceptions.BadChannelBindingsError</span>
+<span class="sd">        ~gssapi.exceptions.MissingContextError</span>
+<span class="sd">        ~gssapi.exceptions.BadMICError</span>
+<span class="sd">        ~gssapi.exceptions.ExpiredTokenError</span>
+<span class="sd">        ~gssapi.exceptions.DuplicateTokenError</span>
+<span class="sd">        ~gssapi.exceptions.BadMechanismError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="inquire_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.inquire_context">[docs]</a><span class="k">def</span> <span class="nf">inquire_context</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
+    <span class="n">initiator_name</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">target_name</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">lifetime</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">flags</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">locally_init</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">complete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireContextResult&quot;</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Get information about a security context.</span>
+
+<span class="sd">    This method obtains information about a security context, including</span>
+<span class="sd">    the initiator and target names, as well as the TTL, mech,</span>
+<span class="sd">    flags, and its current state (open vs closed).</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        the target name may be ``None`` if it would have been ``GSS_C_NO_NAME``</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the context in</span>
+<span class="sd">            question</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        InquireContextResult: the initiator name, the target name, the TTL</span>
+<span class="sd">        (can be None for indefinite or not supported), the mech type, the</span>
+<span class="sd">        flags, whether or not the context was locally initiated,</span>
+<span class="sd">        and whether or not the context is currently fully established</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.MissingContextError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="context_time"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.context_time">[docs]</a><span class="k">def</span> <span class="nf">context_time</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Get the amount of time for which the given context will remain valid.</span>
+
+<span class="sd">    This method determines the amount of time for which the given</span>
+<span class="sd">    security context will remain valid.  An expired context will</span>
+<span class="sd">    give a result of 0.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the security</span>
+<span class="sd">            context in question</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: the number of seconds for which the context will be valid</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.ExpiredContextError</span>
+<span class="sd">        ~gssapi.exceptions.MissingContextError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="process_context_token"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.process_context_token">[docs]</a><span class="k">def</span> <span class="nf">process_context_token</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
+    <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Process a token asynchronously.</span>
+
+<span class="sd">    This method provides a way to process a token, even if the</span>
+<span class="sd">    given security context is not expecting one.  For example,</span>
+<span class="sd">    if the initiator has the initSecContext return that the context</span>
+<span class="sd">    is complete, but the acceptor is unable to accept the context,</span>
+<span class="sd">    and wishes to send a token to the initiator, letting the</span>
+<span class="sd">    initiator know of the error.</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        This method has been essentially deprecated by :rfc:`2744`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the security</span>
+<span class="sd">            context against which to process the token</span>
+<span class="sd">        token (bytes): the token to process</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.InvalidTokenError</span>
+<span class="sd">        ~gssapi.exceptions.MissingContextError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="import_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.import_sec_context">[docs]</a><span class="k">def</span> <span class="nf">import_sec_context</span><span class="p">(</span>
+    <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SecurityContext</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Import a context from another process.</span>
+
+<span class="sd">    This method imports a security context established in another process</span>
+<span class="sd">    by reading the specified token which was output by</span>
+<span class="sd">    :func:`export_sec_context`.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.MissingContextError</span>
+<span class="sd">        ~gssapi.exceptions.InvalidTokenError</span>
+<span class="sd">        ~gssapi.exceptions.OperationUnavailableError</span>
+<span class="sd">        ~gssapi.exceptions.UnauthorizedError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="export_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.export_sec_context">[docs]</a><span class="k">def</span> <span class="nf">export_sec_context</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Export a context for use in another process.</span>
+
+<span class="sd">    This method exports a security context, deactivating in the current process</span>
+<span class="sd">    and creating a token which can then be imported into another process</span>
+<span class="sd">    with :func:`import_sec_context`.</span>
+
+<span class="sd">    Warning: this modifies the input context</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the context to send</span>
+<span class="sd">            to another process</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bytes: the output token to be imported</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.ExpiredContextError</span>
+<span class="sd">        ~gssapi.exceptions.MissingContextError</span>
+<span class="sd">        ~gssapi.exceptions.OperationUnavailableError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="delete_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.delete_sec_context">[docs]</a><span class="k">def</span> <span class="nf">delete_sec_context</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
+    <span class="n">local_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Delete a GSSAPI security context.</span>
+
+<span class="sd">    This method deletes a GSSAPI security context,</span>
+<span class="sd">    returning an output token to send to the other</span>
+<span class="sd">    holder of the security context to notify them</span>
+<span class="sd">    of the deletion.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        This method generally should not be used.  :class:`SecurityContext`</span>
+<span class="sd">        objects will automatically be freed by Python.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the security</span>
+<span class="sd">            context in question</span>
+<span class="sd">        local_only (bool): should we request local deletion (True), or also</span>
+<span class="sd">            remote deletion (False), in which case a token is also returned</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bytes: the output token (if remote deletion is requested).  Generally</span>
+<span class="sd">            this is None, but bytes for compatibility.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.MissingContextError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014, The Python-GSSAPI team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

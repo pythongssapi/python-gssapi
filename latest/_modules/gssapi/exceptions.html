@@ -6,6 +6,7 @@
   <title>gssapi.exceptions &mdash; Python-GSSAPI 1.7.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -69,7 +70,9 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.exceptions</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">gssapi.raw.exceptions</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa</span>
+<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+
+<span class="kn">from</span> <span class="nn">gssapi.raw.exceptions</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa</span>
 <span class="kn">from</span> <span class="nn">gssapi.raw.misc</span> <span class="kn">import</span> <span class="n">GSSError</span>  <span class="c1"># noqa</span>
 
 <span class="sd">&quot;&quot;&quot;High-Level API Errors</span>
@@ -86,7 +89,11 @@
     <span class="n">MAJOR_MESSAGE</span> <span class="o">=</span> <span class="s2">&quot;General error&quot;</span>
     <span class="n">FMT_STR</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{maj}</span><span class="s2">: </span><span class="si">{min}</span><span class="s2">.&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minor_message</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">minor_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">maj_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">MAJOR_MESSAGE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">err_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FMT_STR</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">maj</span><span class="o">=</span><span class="n">maj_str</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="n">minor_message</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">GeneralError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">err_str</span><span class="p">)</span></div>
@@ -101,7 +108,12 @@
     <span class="sd">&quot;&quot;&quot;An Error indicating that encryption was requested, but not used&quot;&quot;&quot;</span>
     <span class="n">MAJOR_MESSAGE</span> <span class="o">=</span> <span class="s2">&quot;Confidentiality was requested, but not used&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minor_message</span><span class="p">,</span> <span class="n">unwrapped_message</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">minor_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">unwrapped_message</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">EncryptionNotUsed</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">minor_message</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">unwrapped_message</span> <span class="o">=</span> <span class="n">unwrapped_message</span></div>

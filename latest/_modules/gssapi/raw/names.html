@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gssapi.raw.names &mdash; Python-GSSAPI 1.7.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Python-GSSAPI
+          </a>
+              <div class="version">
+                1.7.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.html">High-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.raw.html">Low-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../otherdoc.html">Other Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Python-GSSAPI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>gssapi.raw.names</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gssapi.raw.names</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+
+<span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.named_tuples</span> <span class="kn">import</span> <span class="n">DisplayNameResult</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.oids</span> <span class="kn">import</span> <span class="n">OID</span>
+
+<div class="viewcode-block" id="Name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.Name">[docs]</a><span class="k">class</span> <span class="nc">Name</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A GSSAPI Name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">cpy</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="o">...</span></div>
+
+
+<div class="viewcode-block" id="import_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.import_name">[docs]</a><span class="k">def</span> <span class="nf">import_name</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+    <span class="n">name_type</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Convert a string and a name type into a GSSAPI name.</span>
+
+<span class="sd">    This method takes a string name and a name type and converts</span>
+<span class="sd">    them into a GSSAPI :class:`Name`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (~gssapi.raw.names.Name): the string version of the name</span>
+<span class="sd">        name_type (~gssapi.raw.types.MechType): the type of this name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Name: the GSSAPI version of the name</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameError</span>
+<span class="sd">        ~gssapi.exceptions.BadMechanismError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="display_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.display_name">[docs]</a><span class="k">def</span> <span class="nf">display_name</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
+    <span class="n">name_type</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DisplayNameResult&quot;</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Convert a GSSAPI name into its components.</span>
+
+<span class="sd">    This method converts a GSSAPI :class:`Name` back into its</span>
+<span class="sd">    text form.  If ``name_type`` is True, it also attempts to</span>
+<span class="sd">    retrieve the :class:`~gssapi.raw.types.NameType` of the name (otherwise the</span>
+<span class="sd">    returned name type will be ``None``).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (~gssapi.raw.names.Name): the name in question</span>
+<span class="sd">        name_type (~gssapi.raw.types.MechType): whether or not to retrieve the</span>
+<span class="sd">            name type</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        DisplayNameResult: the text part of the name and its type</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.BadNameError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="compare_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.compare_name">[docs]</a><span class="k">def</span> <span class="nf">compare_name</span><span class="p">(</span>
+    <span class="n">name1</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
+    <span class="n">name2</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Check two GSSAPI names to see if they are the same.</span>
+
+<span class="sd">    This method compares two GSSAPI names, checking to</span>
+<span class="sd">    see if they are equivalent.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name1 (~gssapi.raw.names.Name): the first name to compare</span>
+<span class="sd">        name2 (~gssapi.raw.names.Name): the second name to compare</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: whether or not the names are equal</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="export_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.export_name">[docs]</a><span class="k">def</span> <span class="nf">export_name</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Export a GSSAPI name.</span>
+
+<span class="sd">    This method &quot;produces a canonical contigous string representation</span>
+<span class="sd">    of a mechanism name, suitable for direct comparison for use in</span>
+<span class="sd">    authorization functions&quot;.</span>
+
+<span class="sd">    The input name must be a valid GSSAPI mechanism name, as generated by</span>
+<span class="sd">    :func:`canonicalize_name` or</span>
+<span class="sd">    :func:`~gssapi.raw.sec_contexts.accept_sec_context`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (~gssapi.raw.names.Name): the name to export</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bytes: the exported name</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.MechanismNameRequiredError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="canonicalize_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.canonicalize_name">[docs]</a><span class="k">def</span> <span class="nf">canonicalize_name</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Canonicalize an arbitrary GSSAPI Name into a Mechanism Name</span>
+
+<span class="sd">    This method turns any GSSAPI name into a &quot;mechanism name&quot; --</span>
+<span class="sd">    a full form name specific to a mechanism.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (~gssapi.raw.names.Name): the name to canonicalize</span>
+<span class="sd">        mech (~gssapi.raw.types.MechType): the mechanism type to use to</span>
+<span class="sd">            canonicalize the name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Name: a canonicalized version of the input name</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.BadMechanismError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
+<span class="sd">        ~gssapi.exceptions.BadNameError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="duplicate_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.duplicate_name">[docs]</a><span class="k">def</span> <span class="nf">duplicate_name</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Duplicate a GSSAPI name.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (~gssapi.raw.names.Name): the name to duplicate</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Name: a duplicate of the input name</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.BadNameError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="release_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.release_name">[docs]</a><span class="k">def</span> <span class="nf">release_name</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Release a GSSAPI name.</span>
+
+<span class="sd">    This method frees a GSSAPI :class:`Name`.</span>
+<span class="sd">    You probably won&#39;t have to do this.</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        This method is deprecated.  Names are</span>
+<span class="sd">        automatically freed by Python.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        name (~gssapi.raw.names.Name): the name in question</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.BadNameError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014, The Python-GSSAPI team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

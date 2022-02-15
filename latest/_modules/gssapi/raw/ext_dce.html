@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gssapi.raw.ext_dce &mdash; Python-GSSAPI 1.7.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Python-GSSAPI
+          </a>
+              <div class="version">
+                1.7.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.html">High-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.raw.html">Low-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../otherdoc.html">Other Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Python-GSSAPI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>gssapi.raw.ext_dce</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gssapi.raw.ext_dce</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+
+<span class="kn">from</span> <span class="nn">gssapi.raw.ext_dce_aead</span> <span class="kn">import</span> <span class="n">wrap_aead</span><span class="p">,</span> <span class="n">unwrap_aead</span>
+
+<span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.named_tuples</span> <span class="kn">import</span> <span class="n">IOVUnwrapResult</span><span class="p">,</span> <span class="n">WrapResult</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.sec_contexts</span> <span class="kn">import</span> <span class="n">SecurityContext</span>
+
+
+<div class="viewcode-block" id="IOVBufferType"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType">[docs]</a><span class="k">class</span> <span class="nc">IOVBufferType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    IOV Buffer Types</span>
+
+<span class="sd">    This IntEnum represent GSSAPI IOV buffer</span>
+<span class="sd">    types to be used with the IOV methods.</span>
+
+<span class="sd">    The numbers behind the values correspond directly</span>
+<span class="sd">    to their C counterparts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="IOVBufferType.empty"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.empty">[docs]</a>    <span class="n">empty</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#: GSS_IOV_BUFFER_TYPE_EMPTY</span></div>
+<div class="viewcode-block" id="IOVBufferType.data"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.data">[docs]</a>    <span class="n">data</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#: GSS_IOV_BUFFER_TYPE_DATA</span></div>
+<div class="viewcode-block" id="IOVBufferType.header"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.header">[docs]</a>    <span class="n">header</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">#: GSS_IOV_BUFFER_TYPE_HEADER</span></div>
+<div class="viewcode-block" id="IOVBufferType.mech_params"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.mech_params">[docs]</a>    <span class="n">mech_params</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">#: GSS_IOV_BUFFER_TYPE_MECH_PARAMS</span></div>
+<div class="viewcode-block" id="IOVBufferType.trailer"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.trailer">[docs]</a>    <span class="n">trailer</span> <span class="o">=</span> <span class="mi">7</span> <span class="c1">#: GSS_IOV_BUFFER_TYPE_TRAILER</span></div>
+<div class="viewcode-block" id="IOVBufferType.padding"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.padding">[docs]</a>    <span class="n">padding</span> <span class="o">=</span> <span class="mi">9</span> <span class="c1">#: GSS_IOV_BUFFER_TYPE_PADDING</span></div>
+<div class="viewcode-block" id="IOVBufferType.stream"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.stream">[docs]</a>    <span class="n">stream</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#: GSS_IOV_BUFFER_TYPE_STREAM</span></div>
+<div class="viewcode-block" id="IOVBufferType.sign_only"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.sign_only">[docs]</a>    <span class="n">sign_only</span> <span class="o">=</span> <span class="mi">11</span> <span class="c1">#: GSS_IOV_BUFFER_TYPE_SIGN_ONLY</span></div>
+<div class="viewcode-block" id="IOVBufferType.mic_token"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.mic_token">[docs]</a>    <span class="n">mic_token</span> <span class="o">=</span> <span class="mi">12</span> <span class="c1">#: GSS_IOV_BUFFER_TYPE_MIC_TOKEN</span></div></div>
+
+
+<div class="viewcode-block" id="IOVBuffer"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer">[docs]</a><span class="k">class</span> <span class="nc">IOVBuffer</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">NamedTuple</span><span class="p">):</span>
+<div class="viewcode-block" id="IOVBuffer.type"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer.type">[docs]</a>    <span class="nb">type</span><span class="p">:</span> <span class="n">IOVBufferType</span></div>
+<div class="viewcode-block" id="IOVBuffer.allocate"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer.allocate">[docs]</a>    <span class="n">allocate</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span></div>
+<div class="viewcode-block" id="IOVBuffer.value"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer.value">[docs]</a>    <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="IOV"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOV">[docs]</a><span class="k">class</span> <span class="nc">IOV</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A GSSAPI IOV&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span>
+            <span class="n">IOVBuffer</span><span class="p">,</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">IOVBufferType</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]],</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">IOVBufferType</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+                <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]],</span>
+            <span class="p">],</span>
+            <span class="nb">bytes</span><span class="p">,</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">IOVBufferType</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="p">],</span>
+        <span class="n">std_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">auto_alloc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ind</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IOVBuffer</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterator</span><span class="p">[</span><span class="n">IOVBuffer</span><span class="p">]:</span> <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">item</span><span class="p">:</span> <span class="n">IOVBuffer</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__reversed__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterator</span><span class="p">[</span><span class="n">IOVBuffer</span><span class="p">]:</span> <span class="o">...</span>
+
+<div class="viewcode-block" id="IOV.index"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOV.index">[docs]</a>    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="IOV.count"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOV.count">[docs]</a>    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span></div></div>
+
+
+<div class="viewcode-block" id="wrap_iov"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.wrap_iov">[docs]</a><span class="k">def</span> <span class="nf">wrap_iov</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
+    <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Wrap/Encrypt an IOV message.</span>
+
+<span class="sd">    This method wraps or encrypts an IOV message.  The allocate</span>
+<span class="sd">    parameter of the :class:`IOVBuffer` objects in the :class:`IOV`</span>
+<span class="sd">    indicates whether or not that particular buffer should be</span>
+<span class="sd">    automatically allocated (for use with padding, header, and</span>
+<span class="sd">    trailer buffers).</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        This modifies the input :class:`IOV`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the current</span>
+<span class="sd">            security context</span>
+<span class="sd">        message (IOV): an :class:`IOV` containing the message</span>
+<span class="sd">        confidential (bool): whether or not to encrypt the miovessage (True),</span>
+<span class="sd">            or just wrap it with a MIC (False)</span>
+<span class="sd">        qop (int): the desired Quality of Protection</span>
+<span class="sd">            (or None for the default QoP)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: whether or not confidentiality was actually used</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.GSSError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="unwrap_iov"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.unwrap_iov">[docs]</a><span class="k">def</span> <span class="nf">unwrap_iov</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;IOVUnwrapResult&quot;</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Unwrap/Decrypt an IOV message.</span>
+
+<span class="sd">    This method uwraps or decrypts an IOV message.  The allocate</span>
+<span class="sd">    parameter of the :class:`IOVBuffer` objects in the :class:`IOV`</span>
+<span class="sd">    indicates whether or not that particular buffer should be</span>
+<span class="sd">    automatically allocated (for use with padding, header, and</span>
+<span class="sd">    trailer buffers).</span>
+
+<span class="sd">    As a special case, you may pass an entire IOV message</span>
+<span class="sd">    as a single &#39;stream&#39;.  In this case, pass a buffer type</span>
+<span class="sd">    of :attr:`IOVBufferType.stream` followed by a buffer type of</span>
+<span class="sd">    :attr:`IOVBufferType.data`.  The former should contain the</span>
+<span class="sd">    entire IOV message, while the latter should be empty.</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        This modifies the input :class:`IOV`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the current</span>
+<span class="sd">            security context</span>
+<span class="sd">        message (IOV): an :class:`IOV` containing the message</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        IOVUnwrapResult: whether or not confidentiality was used,</span>
+<span class="sd">        and the QoP used.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.GSSError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="wrap_iov_length"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.wrap_iov_length">[docs]</a><span class="k">def</span> <span class="nf">wrap_iov_length</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
+    <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;WrapResult&quot;</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;Appropriately size padding, trailer, and header IOV buffers.</span>
+
+<span class="sd">    This method sets the length values on the IOV buffers.  You</span>
+<span class="sd">    should already have data provided for the data (and sign-only)</span>
+<span class="sd">    buffer(s) so that padding lengths can be appropriately computed.</span>
+
+<span class="sd">    In Python terms, this will result in an appropriately sized</span>
+<span class="sd">    `bytes` object consisting of all zeros.</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        This modifies the input :class:`IOV`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        context (~gssapi.raw.sec_contexts.SecurityContext): the current</span>
+<span class="sd">            security context</span>
+<span class="sd">        message (IOV): an :class:`IOV` containing the message</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        WrapResult: a list of :class:IOVBuffer` objects, and whether or not</span>
+<span class="sd">        encryption was actually used</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.GSSError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014, The Python-GSSAPI team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

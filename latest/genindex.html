@@ -6,6 +6,7 @@
   <title>Index &mdash; Python-GSSAPI 1.7.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -155,6 +156,8 @@
         <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType">(class in gssapi.raw.types)</a>
 </li>
       </ul></li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer.allocate">allocate (IOVBuffer attribute)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.RequirementFlag.anonymity">anonymity (RequirementFlag attribute)</a>
 </li>
       <li><a href="gssapi.html#gssapi.NameType.anonymous">anonymous (NameType attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.types.NameType.anonymous">[1]</a>
@@ -170,8 +173,6 @@
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.InquireNameResult.attrs">attrs (InquireNameResult attribute)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.GetNameAttributeResult.authenticated">authenticated (GetNameAttributeResult attribute)</a>
-</li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOV.AUTO_ALLOC_BUFFERS">AUTO_ALLOC_BUFFERS (IOV attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -203,12 +204,14 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gssapi.html#gssapi.exceptions.MalformedParameterError.CALLING_CODE">CALLING_CODE (MalformedParameterError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.MalformedParameterError.CALLING_CODE">[1]</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.exceptions.GSSError.calling_code">calling_code (GSSError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.calling_code">[1]</a>
+</li>
+      <li><a href="gssapi.html#gssapi.exceptions.MalformedParameterError.CALLING_CODE">CALLING_CODE (MalformedParameterError attribute)</a>
 
       <ul>
-        <li><a href="gssapi.html#gssapi.exceptions.ParameterReadError.CALLING_CODE">(ParameterReadError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.ParameterReadError.CALLING_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.ParameterReadError.CALLING_CODE">(ParameterReadError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.ParameterWriteError.CALLING_CODE">(ParameterWriteError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.ParameterWriteError.CALLING_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.ParameterWriteError.CALLING_CODE">(ParameterWriteError attribute)</a>
 </li>
       </ul></li>
       <li><a href="gssapi.html#gssapi.names.Name.canonicalize">canonicalize() (Name method)</a>
@@ -217,7 +220,7 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType.ccitt">ccitt (AddressType attribute)</a>
 </li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd">cfx_kd (Krb5LucidContextV1 attribute)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd">cfx_kd (Krb5LucidContextV1 property)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.CfxKeyData">CfxKeyData (class in gssapi.raw.named_tuples)</a>
 </li>
@@ -323,7 +326,7 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType.dli">dli (AddressType attribute)</a>
 </li>
-      <li><a href="gssapi.raw.html#gssapi.raw.oids.OID.dotted_form">dotted_form (OID attribute)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.misc.OID.dotted_form">dotted_form (OID property)</a>, <a href="gssapi.raw.html#gssapi.raw.oids.OID.dotted_form">[1]</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType.dss">dss (AddressType attribute)</a>
 </li>
@@ -355,7 +358,7 @@
       </ul></li>
       <li><a href="gssapi.html#gssapi.exceptions.EncryptionNotUsed">EncryptionNotUsed</a>
 </li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.endtime">endtime (Krb5LucidContextV1 attribute)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.endtime">endtime (Krb5LucidContextV1 property)</a>
 </li>
       <li><a href="gssapi.html#gssapi.exceptions.ExpiredContextError">ExpiredContextError</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.ExpiredContextError">[1]</a>
 </li>
@@ -403,7 +406,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.html#gssapi.exceptions.GeneralError.FMT_STR">FMT_STR (GeneralError attribute)</a>
 </li>
-      <li><a href="gssapi.html#gssapi.OID.from_int_seq">from_int_seq() (OID method)</a>, <a href="gssapi.raw.html#gssapi.raw.oids.OID.from_int_seq">[1]</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.misc.OID.from_int_seq">from_int_seq() (OID class method)</a>, <a href="gssapi.raw.html#gssapi.raw.oids.OID.from_int_seq">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -411,13 +414,13 @@
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gssapi.html#gssapi.exceptions.GSSError.gen_message">gen_message() (GSSError method)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.gen_message">[1]</a>
+      <li><a href="gssapi.html#gssapi.exceptions.GSSError.gen_message">gen_message() (GSSError method)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.GSSError.gen_message">[1]</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.gen_message">[2]</a>
 </li>
       <li><a href="gssapi.html#gssapi.exceptions.GeneralError">GeneralError</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.GenericFlagSet">GenericFlagSet (class in gssapi.raw.types)</a>
 </li>
-      <li><a href="gssapi.html#gssapi.exceptions.GSSError.get_all_statuses">get_all_statuses() (GSSError method)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.get_all_statuses">[1]</a>
+      <li><a href="gssapi.html#gssapi.exceptions.GSSError.get_all_statuses">get_all_statuses() (GSSError method)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.GSSError.get_all_statuses">[1]</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.get_all_statuses">[2]</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.message.get_mic">get_mic() (in module gssapi.raw.message)</a>
 </li>
@@ -511,13 +514,6 @@
 </li>
       </ul></li>
       <li>
-    gssapi.raw.ext_dce_aead
-
-      <ul>
-        <li><a href="gssapi.raw.html#module-gssapi.raw.ext_dce_aead">module</a>
-</li>
-      </ul></li>
-      <li>
     gssapi.raw.ext_ggf
 
       <ul>
@@ -590,13 +586,6 @@
 </li>
       </ul></li>
       <li>
-    gssapi.raw.ext_rfc6680_comp_oid
-
-      <ul>
-        <li><a href="gssapi.raw.html#module-gssapi.raw.ext_rfc6680_comp_oid">module</a>
-</li>
-      </ul></li>
-      <li>
     gssapi.raw.ext_s4u
 
       <ul>
@@ -666,9 +655,7 @@
         <li><a href="gssapi.html#module-gssapi.sec_contexts">module</a>
 </li>
       </ul></li>
-      <li><a href="gssapi.html#gssapi.exceptions.GSSError">GSSError</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError">[1]</a>
-</li>
-      <li><a href="gssapi.raw.html#gssapi.raw.misc.GSSErrorRegistry">GSSErrorRegistry (class in gssapi.raw.misc)</a>
+      <li><a href="gssapi.html#gssapi.exceptions.GSSError">GSSError</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.GSSError">[1]</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError">[2]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -742,10 +729,10 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.creds.inquire_cred_by_mech">inquire_cred_by_mech() (in module gssapi.raw.creds)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_ggf.inquire_cred_by_oid">inquire_cred_by_oid() (in module gssapi.raw.ext_ggf)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_rfc5801.inquire_mech_for_saslname">inquire_mech_for_saslname() (in module gssapi.raw.ext_rfc5801)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.misc.inquire_mechs_for_name">inquire_mechs_for_name() (in module gssapi.raw.misc)</a>
@@ -784,13 +771,15 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOV">IOV (class in gssapi.raw.ext_dce)</a>
 </li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer">IOVBuffer (class in gssapi.raw.ext_dce)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType">IOVBufferType (class in gssapi.raw.ext_dce)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.IOVUnwrapResult">IOVUnwrapResult (class in gssapi.raw.named_tuples)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType.ip">ip (AddressType attribute)</a>
 </li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.is_initiator">is_initiator (Krb5LucidContextV1 attribute)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.is_initiator">is_initiator (Krb5LucidContextV1 property)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.InquireNameResult.is_mech_name">is_mech_name (InquireNameResult attribute)</a>
 
@@ -804,7 +793,7 @@
 <h2 id="K">K</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gssapi.html#gssapi.MechType.kerberos">kerberos (MechType attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.types.MechType.kerberos">[1]</a>
+      <li><a href="gssapi.html#gssapi.MechType.kerberos">kerberos (MechType attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.MechType.kerberos">[1]</a>, <a href="gssapi.raw.html#gssapi.raw.types.MechType.kerberos">[2]</a>
 </li>
       <li><a href="gssapi.html#gssapi.NameType.kerberos_principal">kerberos_principal (NameType attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.types.NameType.kerberos_principal">[1]</a>
 </li>
@@ -878,6 +867,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.html#gssapi.NameType.machine_uid">machine_uid (NameType attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.types.NameType.machine_uid">[1]</a>
 </li>
+      <li><a href="gssapi.raw.html#gssapi.raw.exceptions.GSSError.maj_code">maj_code (GSSError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.maj_code">[1]</a>
+</li>
       <li><a href="gssapi.html#gssapi.exceptions.EncryptionNotUsed.MAJOR_MESSAGE">MAJOR_MESSAGE (EncryptionNotUsed attribute)</a>
 
       <ul>
@@ -929,10 +920,12 @@
       <li><a href="gssapi.html#gssapi.MechType">MechType (class in gssapi)</a>
 
       <ul>
+        <li><a href="gssapi.raw.html#gssapi.raw.misc.MechType">(class in gssapi.raw.misc)</a>
+</li>
         <li><a href="gssapi.raw.html#gssapi.raw.types.MechType">(class in gssapi.raw.types)</a>
 </li>
       </ul></li>
-      <li><a href="gssapi.html#gssapi.exceptions.GSSError.MESSAGE">MESSAGE (GSSError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.MESSAGE">[1]</a>
+      <li><a href="gssapi.html#gssapi.exceptions.GSSError.MESSAGE">MESSAGE (GSSError attribute)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.UnwrapResult.message">message (UnwrapResult attribute)</a>
 
@@ -941,6 +934,8 @@
 </li>
       </ul></li>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.mic_token">mic_token (IOVBufferType attribute)</a>
+</li>
+      <li><a href="gssapi.raw.html#gssapi.raw.exceptions.GSSError.min_code">min_code (GSSError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.min_code">[1]</a>
 </li>
       <li><a href="gssapi.html#gssapi.exceptions.MissingContextError">MissingContextError</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.MissingContextError">[1]</a>
 </li>
@@ -972,8 +967,6 @@
 </li>
         <li><a href="gssapi.raw.html#module-gssapi.raw.ext_dce">gssapi.raw.ext_dce</a>
 </li>
-        <li><a href="gssapi.raw.html#module-gssapi.raw.ext_dce_aead">gssapi.raw.ext_dce_aead</a>
-</li>
         <li><a href="gssapi.raw.html#module-gssapi.raw.ext_ggf">gssapi.raw.ext_ggf</a>
 </li>
         <li><a href="gssapi.raw.html#module-gssapi.raw.ext_iov_mic">gssapi.raw.ext_iov_mic</a>
@@ -993,8 +986,6 @@
         <li><a href="gssapi.raw.html#module-gssapi.raw.ext_rfc5801">gssapi.raw.ext_rfc5801</a>
 </li>
         <li><a href="gssapi.raw.html#module-gssapi.raw.ext_rfc6680">gssapi.raw.ext_rfc6680</a>
-</li>
-        <li><a href="gssapi.raw.html#module-gssapi.raw.ext_rfc6680_comp_oid">gssapi.raw.ext_rfc6680_comp_oid</a>
 </li>
         <li><a href="gssapi.raw.html#module-gssapi.raw.ext_s4u">gssapi.raw.ext_s4u</a>
 </li>
@@ -1036,6 +1027,8 @@
       <li><a href="gssapi.html#gssapi.names.Name">Name (class in gssapi.names)</a>
 
       <ul>
+        <li><a href="gssapi.raw.html#gssapi.raw.misc.Name">(class in gssapi.raw.misc)</a>
+</li>
         <li><a href="gssapi.raw.html#gssapi.raw.names.Name">(class in gssapi.raw.names)</a>
 </li>
       </ul></li>
@@ -1082,13 +1075,15 @@
       <li><a href="gssapi.html#gssapi.OID">OID (class in gssapi)</a>
 
       <ul>
+        <li><a href="gssapi.raw.html#gssapi.raw.misc.OID">(class in gssapi.raw.misc)</a>
+</li>
         <li><a href="gssapi.raw.html#gssapi.raw.oids.OID">(class in gssapi.raw.oids)</a>
 </li>
       </ul></li>
-      <li><a href="gssapi.raw.html#gssapi.raw.types.RequirementFlag.ok_as_delegate">ok_as_delegate (RequirementFlag attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gssapi.raw.html#gssapi.raw.types.RequirementFlag.ok_as_delegate">ok_as_delegate (RequirementFlag attribute)</a>
+</li>
       <li><a href="gssapi.html#gssapi.exceptions.OperationUnavailableError">OperationUnavailableError</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.OperationUnavailableError">[1]</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType.osi_tp4">osi_tp4 (AddressType attribute)</a>
@@ -1115,7 +1110,7 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.RequirementFlag.protection_ready">protection_ready (RequirementFlag attribute)</a>
 </li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol">protocol (Krb5LucidContextV1 attribute)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol">protocol (Krb5LucidContextV1 property)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.AddressType.pup">pup (AddressType attribute)</a>
 </li>
@@ -1137,7 +1132,7 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.recv_seq">recv_seq (Krb5LucidContextV1 attribute)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.recv_seq">recv_seq (Krb5LucidContextV1 property)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.creds.release_cred">release_cred() (in module gssapi.raw.creds)</a>
 </li>
@@ -1168,44 +1163,50 @@
         <li><a href="gssapi.raw.html#index-5">RFC 6680</a>
 </li>
       </ul></li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd">rfc1964_kd (Krb5LucidContextV1 attribute)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd">rfc1964_kd (Krb5LucidContextV1 property)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.Rfc1964KeyData">Rfc1964KeyData (class in gssapi.raw.named_tuples)</a>
 </li>
-      <li><a href="gssapi.html#gssapi.exceptions.BadChannelBindingsError.ROUTINE_CODE">ROUTINE_CODE (BadChannelBindingsError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.BadChannelBindingsError.ROUTINE_CODE">[1]</a>
+      <li><a href="gssapi.html#gssapi.exceptions.BadChannelBindingsError.ROUTINE_CODE">ROUTINE_CODE (BadChannelBindingsError attribute)</a>
 
       <ul>
-        <li><a href="gssapi.html#gssapi.exceptions.BadMechanismError.ROUTINE_CODE">(BadMechanismError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.BadMechanismError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.BadMechanismError.ROUTINE_CODE">(BadMechanismError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.BadMICError.ROUTINE_CODE">(BadMICError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.BadMICError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.BadMICError.ROUTINE_CODE">(BadMICError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.BadNameError.ROUTINE_CODE">(BadNameError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.BadNameError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.BadNameError.ROUTINE_CODE">(BadNameError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.BadNameTypeError.ROUTINE_CODE">(BadNameTypeError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.BadNameTypeError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.BadNameTypeError.ROUTINE_CODE">(BadNameTypeError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.BadQoPError.ROUTINE_CODE">(BadQoPError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.BadQoPError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.BadQoPError.ROUTINE_CODE">(BadQoPError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.BadStatusError.ROUTINE_CODE">(BadStatusError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.BadStatusError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.BadStatusError.ROUTINE_CODE">(BadStatusError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.DuplicateCredentialsElementError.ROUTINE_CODE">(DuplicateCredentialsElementError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.DuplicateCredentialsElementError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.DuplicateCredentialsElementError.ROUTINE_CODE">(DuplicateCredentialsElementError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.ExpiredContextError.ROUTINE_CODE">(ExpiredContextError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.ExpiredContextError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.ExpiredContextError.ROUTINE_CODE">(ExpiredContextError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.ExpiredCredentialsError.ROUTINE_CODE">(ExpiredCredentialsError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.ExpiredCredentialsError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.ExpiredCredentialsError.ROUTINE_CODE">(ExpiredCredentialsError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.InvalidCredentialsError.ROUTINE_CODE">(InvalidCredentialsError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.InvalidCredentialsError.ROUTINE_CODE">[1]</a>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gssapi.raw.html#gssapi.raw.exceptions.GSSError.routine_code">routine_code (GSSError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.routine_code">[1]</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.InvalidTokenError.ROUTINE_CODE">(InvalidTokenError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.InvalidTokenError.ROUTINE_CODE">[1]</a>
+      <li><a href="gssapi.html#gssapi.exceptions.InvalidCredentialsError.ROUTINE_CODE">ROUTINE_CODE (InvalidCredentialsError attribute)</a>
+
+      <ul>
+        <li><a href="gssapi.html#gssapi.exceptions.InvalidTokenError.ROUTINE_CODE">(InvalidTokenError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.MechanismNameRequiredError.ROUTINE_CODE">(MechanismNameRequiredError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.MechanismNameRequiredError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.MechanismNameRequiredError.ROUTINE_CODE">(MechanismNameRequiredError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.MissingContextError.ROUTINE_CODE">(MissingContextError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.MissingContextError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.MissingContextError.ROUTINE_CODE">(MissingContextError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.MissingCredentialsError.ROUTINE_CODE">(MissingCredentialsError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.MissingCredentialsError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.MissingCredentialsError.ROUTINE_CODE">(MissingCredentialsError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.OperationUnavailableError.ROUTINE_CODE">(OperationUnavailableError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.OperationUnavailableError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.OperationUnavailableError.ROUTINE_CODE">(OperationUnavailableError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.UnauthorizedError.ROUTINE_CODE">(UnauthorizedError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.UnauthorizedError.ROUTINE_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.UnauthorizedError.ROUTINE_CODE">(UnauthorizedError attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1224,7 +1225,7 @@
         <li><a href="gssapi.html#gssapi.sec_contexts.SecurityContext">(class in gssapi.sec_contexts)</a>
 </li>
       </ul></li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.send_seq">send_seq (Krb5LucidContextV1 attribute)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.send_seq">send_seq (Krb5LucidContextV1 property)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_set_cred_opt.set_cred_option">set_cred_option() (in module gssapi.raw.ext_set_cred_opt)</a>
 </li>
@@ -1240,10 +1241,10 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.Rfc1964KeyData.sign_alg">sign_alg (Rfc1964KeyData attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.sign_only">sign_only (IOVBufferType attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="gssapi.html#gssapi.sec_contexts.SecurityContext.step">step() (SecurityContext method)</a>
 </li>
       <li><a href="gssapi.html#gssapi.creds.Credentials.store">store() (Credentials method)</a>
@@ -1258,14 +1259,18 @@
 </li>
       <li><a href="gssapi.html#gssapi.NameType.string_uid">string_uid (NameType attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.types.NameType.string_uid">[1]</a>
 </li>
-      <li><a href="gssapi.html#gssapi.exceptions.DuplicateTokenError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE (DuplicateTokenError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.DuplicateTokenError.SUPPLEMENTARY_CODE">[1]</a>
+      <li><a href="gssapi.html#gssapi.exceptions.DuplicateTokenError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE (DuplicateTokenError attribute)</a>
 
       <ul>
-        <li><a href="gssapi.html#gssapi.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE">(ExpiredTokenError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE">[1]</a>
+        <li><a href="gssapi.html#gssapi.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE">(ExpiredTokenError attribute)</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.TokenTooEarlyError.SUPPLEMENTARY_CODE">(TokenTooEarlyError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.TokenTooEarlyError.SUPPLEMENTARY_CODE">[1]</a>
+      </ul></li>
+      <li><a href="gssapi.raw.html#gssapi.raw.exceptions.GSSError.supplementary_code">supplementary_code (GSSError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.supplementary_code">[1]</a>
 </li>
-        <li><a href="gssapi.html#gssapi.exceptions.TokenTooLateError.SUPPLEMENTARY_CODE">(TokenTooLateError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.TokenTooLateError.SUPPLEMENTARY_CODE">[1]</a>
+      <li><a href="gssapi.html#gssapi.exceptions.TokenTooEarlyError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE (TokenTooEarlyError attribute)</a>
+
+      <ul>
+        <li><a href="gssapi.html#gssapi.exceptions.TokenTooLateError.SUPPLEMENTARY_CODE">(TokenTooLateError attribute)</a>
 </li>
       </ul></li>
       <li><a href="gssapi.html#gssapi.exceptions.SupplementaryError">SupplementaryError</a>, <a href="gssapi.raw.html#gssapi.raw.exceptions.SupplementaryError">[1]</a>
@@ -1285,6 +1290,8 @@
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.AcceptSecContextResult.token">token (AcceptSecContextResult attribute)</a>
 
       <ul>
+        <li><a href="gssapi.raw.html#gssapi.raw.exceptions.GSSError.token">(GSSError attribute)</a>, <a href="gssapi.raw.html#gssapi.raw.misc.GSSError.token">[1]</a>
+</li>
         <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.InitSecContextResult.token">(InitSecContextResult attribute)</a>
 </li>
       </ul></li>
@@ -1302,6 +1309,8 @@
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.types.RequirementFlag.transferable">transferable (RequirementFlag attribute)</a>
 </li>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer.type">type (IOVBuffer attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -1318,7 +1327,7 @@
         <li><a href="gssapi.html#gssapi.sec_contexts.SecurityContext.unwrap">(SecurityContext method)</a>
 </li>
       </ul></li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_dce_aead.unwrap_aead">unwrap_aead() (in module gssapi.raw.ext_dce_aead)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.unwrap_aead">unwrap_aead() (in module gssapi.raw.ext_dce)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.unwrap_iov">unwrap_iov() (in module gssapi.raw.ext_dce)</a>
 </li>
@@ -1344,6 +1353,8 @@
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer.value">value (IOVBuffer attribute)</a>
+</li>
       <li><a href="gssapi.raw.html#gssapi.raw.named_tuples.GetNameAttributeResult.values">values (GetNameAttributeResult attribute)</a>
 </li>
       <li><a href="gssapi.raw.html#gssapi.raw.message.verify_mic">verify_mic() (in module gssapi.raw.message)</a>
@@ -1354,7 +1365,7 @@
 </li>
       <li><a href="gssapi.html#gssapi.sec_contexts.SecurityContext.verify_signature">verify_signature() (SecurityContext method)</a>
 </li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.version">version (Krb5LucidContextV1 attribute)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.version">version (Krb5LucidContextV1 property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1368,7 +1379,7 @@
         <li><a href="gssapi.html#gssapi.sec_contexts.SecurityContext.wrap">(SecurityContext method)</a>
 </li>
       </ul></li>
-      <li><a href="gssapi.raw.html#gssapi.raw.ext_dce_aead.wrap_aead">wrap_aead() (in module gssapi.raw.ext_dce_aead)</a>
+      <li><a href="gssapi.raw.html#gssapi.raw.ext_dce.wrap_aead">wrap_aead() (in module gssapi.raw.ext_dce)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>

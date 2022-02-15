@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gssapi.raw.ext_set_cred_opt &mdash; Python-GSSAPI 1.7.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Python-GSSAPI
+          </a>
+              <div class="version">
+                1.7.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.html">High-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.raw.html">Low-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../otherdoc.html">Other Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Python-GSSAPI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>gssapi.raw.ext_set_cred_opt</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gssapi.raw.ext_set_cred_opt</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">gss_set_cred_option</span>
+
+<span class="sd">Provides a way to set options on a credential based on the OID specified. A</span>
+<span class="sd">common use case is to set the GSS_KRB5_CRED_NO_CI_FLAGS_X on a Kerberos</span>
+<span class="sd">credential. This is used for interoperability with Microsoft&#39;s SSPI.</span>
+
+<span class="sd">Note this function is commonly lumped with the GGF extensions but they are not</span>
+<span class="sd">part of the GGF IETF draft so it&#39;s separated into it&#39;s own file.</span>
+
+<span class="sd">Closest draft IETF document for the gss_set_cred_option can be found at</span>
+<span class="sd">https://tools.ietf.org/html/draft-williams-kitten-channel-bound-flag-01</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+
+<span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.creds</span> <span class="kn">import</span> <span class="n">Creds</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.oids</span> <span class="kn">import</span> <span class="n">OID</span>
+
+
+<div class="viewcode-block" id="set_cred_option"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_set_cred_opt.set_cred_option">[docs]</a><span class="k">def</span> <span class="nf">set_cred_option</span><span class="p">(</span>
+    <span class="n">desired_aspect</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
+    <span class="n">creds</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Creds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Creds&quot;</span><span class="p">:</span></div>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method is used to set options of a :class:`~gssapi.raw.creds.Creds`</span>
+<span class="sd">    object based on an OID key. The options that can be set depends on the mech</span>
+<span class="sd">    the credentials were created with.</span>
+
+<span class="sd">    An example of how this can be used would be to set the</span>
+<span class="sd">    GSS_KRB5_CRED_NO_CI_FLAGS_X on a Kerberos credential. The OID string for</span>
+<span class="sd">    this flag is &#39;1.2.752.43.13.29&#39; and it requires no value to be set. This</span>
+<span class="sd">    must be set before the SecurityContext was initialised with the</span>
+<span class="sd">    credentials.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        desired_aspect (~gssapi.raw.oids.OID): the desired aspect of the</span>
+<span class="sd">            Credential to set.</span>
+<span class="sd">        cred_handle (~gssapi.raw.creds.Creds): the Credentials to set, or None</span>
+<span class="sd">            to create a new credential.</span>
+<span class="sd">        value (bytes): the value to set on the desired aspect of the Credential</span>
+<span class="sd">            or None to send GSS_C_EMPTY_BUFFER.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Creds: The output credential.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ~gssapi.exceptions.GSSError</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014, The Python-GSSAPI team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gssapi.raw.exceptions &mdash; Python-GSSAPI 1.7.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Python-GSSAPI
+          </a>
+              <div class="version">
+                1.7.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.html">High-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.raw.html">Low-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../otherdoc.html">Other Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Python-GSSAPI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>gssapi.raw.exceptions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gssapi.raw.exceptions</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">gssapi.raw.misc</span> <span class="kn">import</span> <span class="n">GSSError</span>
+
+<div class="viewcode-block" id="ParameterReadError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.ParameterReadError">[docs]</a><span class="k">class</span> <span class="nc">ParameterReadError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="ParameterWriteError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.ParameterWriteError">[docs]</a><span class="k">class</span> <span class="nc">ParameterWriteError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="MalformedParameterError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.MalformedParameterError">[docs]</a><span class="k">class</span> <span class="nc">MalformedParameterError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="BadMechanismError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.BadMechanismError">[docs]</a><span class="k">class</span> <span class="nc">BadMechanismError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="BadNameError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.BadNameError">[docs]</a><span class="k">class</span> <span class="nc">BadNameError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="BadNameTypeError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.BadNameTypeError">[docs]</a><span class="k">class</span> <span class="nc">BadNameTypeError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="BadChannelBindingsError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.BadChannelBindingsError">[docs]</a><span class="k">class</span> <span class="nc">BadChannelBindingsError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="BadStatusError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.BadStatusError">[docs]</a><span class="k">class</span> <span class="nc">BadStatusError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="BadMICError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.BadMICError">[docs]</a><span class="k">class</span> <span class="nc">BadMICError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="MissingCredentialsError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.MissingCredentialsError">[docs]</a><span class="k">class</span> <span class="nc">MissingCredentialsError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="MissingContextError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.MissingContextError">[docs]</a><span class="k">class</span> <span class="nc">MissingContextError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="InvalidTokenError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.InvalidTokenError">[docs]</a><span class="k">class</span> <span class="nc">InvalidTokenError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="InvalidCredentialsError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.InvalidCredentialsError">[docs]</a><span class="k">class</span> <span class="nc">InvalidCredentialsError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="ExpiredCredentialsError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.ExpiredCredentialsError">[docs]</a><span class="k">class</span> <span class="nc">ExpiredCredentialsError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="ExpiredContextError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.ExpiredContextError">[docs]</a><span class="k">class</span> <span class="nc">ExpiredContextError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="BadQoPError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.BadQoPError">[docs]</a><span class="k">class</span> <span class="nc">BadQoPError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="UnauthorizedError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.UnauthorizedError">[docs]</a><span class="k">class</span> <span class="nc">UnauthorizedError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="OperationUnavailableError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.OperationUnavailableError">[docs]</a><span class="k">class</span> <span class="nc">OperationUnavailableError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="DuplicateCredentialsElementError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.DuplicateCredentialsElementError">[docs]</a><span class="k">class</span> <span class="nc">DuplicateCredentialsElementError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="MechanismNameRequiredError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.MechanismNameRequiredError">[docs]</a><span class="k">class</span> <span class="nc">MechanismNameRequiredError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="NameReadError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.NameReadError">[docs]</a><span class="k">class</span> <span class="nc">NameReadError</span><span class="p">(</span><span class="n">ParameterReadError</span><span class="p">,</span> <span class="n">BadNameError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="NameTypeReadError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.NameTypeReadError">[docs]</a><span class="k">class</span> <span class="nc">NameTypeReadError</span><span class="p">(</span><span class="n">ParameterReadError</span><span class="p">,</span> <span class="n">BadNameTypeError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="TokenReadError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.TokenReadError">[docs]</a><span class="k">class</span> <span class="nc">TokenReadError</span><span class="p">(</span><span class="n">ParameterReadError</span><span class="p">,</span> <span class="n">InvalidTokenError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="ContextReadError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.ContextReadError">[docs]</a><span class="k">class</span> <span class="nc">ContextReadError</span><span class="p">(</span><span class="n">ParameterReadError</span><span class="p">,</span> <span class="n">MissingContextError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="CredentialsReadError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.CredentialsReadError">[docs]</a><span class="k">class</span> <span class="nc">CredentialsReadError</span><span class="p">(</span><span class="n">ParameterReadError</span><span class="p">,</span> <span class="n">MissingCredentialsError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="ContextWriteError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.ContextWriteError">[docs]</a><span class="k">class</span> <span class="nc">ContextWriteError</span><span class="p">(</span><span class="n">ParameterWriteError</span><span class="p">,</span> <span class="n">MissingContextError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="CredentialsWriteError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.CredentialsWriteError">[docs]</a><span class="k">class</span> <span class="nc">CredentialsWriteError</span><span class="p">(</span><span class="n">ParameterWriteError</span><span class="p">,</span> <span class="n">MissingCredentialsError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="SupplementaryError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.SupplementaryError">[docs]</a><span class="k">class</span> <span class="nc">SupplementaryError</span><span class="p">(</span><span class="n">GSSError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="DuplicateTokenError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.DuplicateTokenError">[docs]</a><span class="k">class</span> <span class="nc">DuplicateTokenError</span><span class="p">(</span><span class="n">SupplementaryError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="ExpiredTokenError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.ExpiredTokenError">[docs]</a><span class="k">class</span> <span class="nc">ExpiredTokenError</span><span class="p">(</span><span class="n">SupplementaryError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="TokenOutOfSequenceError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.TokenOutOfSequenceError">[docs]</a><span class="k">class</span> <span class="nc">TokenOutOfSequenceError</span><span class="p">(</span><span class="n">SupplementaryError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="TokenTooLateError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.TokenTooLateError">[docs]</a><span class="k">class</span> <span class="nc">TokenTooLateError</span><span class="p">(</span><span class="n">TokenOutOfSequenceError</span><span class="p">):</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="TokenTooEarlyError"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.TokenTooEarlyError">[docs]</a><span class="k">class</span> <span class="nc">TokenTooEarlyError</span><span class="p">(</span><span class="n">TokenOutOfSequenceError</span><span class="p">):</span> <span class="o">...</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014, The Python-GSSAPI team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

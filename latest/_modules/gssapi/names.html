@@ -6,6 +6,7 @@
   <title>gssapi.names &mdash; Python-GSSAPI 1.7.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -69,13 +70,16 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.names</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">names</span> <span class="k">as</span> <span class="n">rname</span>
+<span></span>
+<span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+
+<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">names</span> <span class="k">as</span> <span class="n">rname</span>
 <span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">NameType</span>
 <span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
+<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">oids</span> <span class="k">as</span> <span class="n">roids</span>
 <span class="kn">from</span> <span class="nn">gssapi</span> <span class="kn">import</span> <span class="n">_utils</span>
 
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">MutableMapping</span><span class="p">,</span> <span class="n">Iterable</span>
-
 
 <span class="n">rname_rfc6680</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;rfc6680&#39;</span><span class="p">)</span>
 <span class="n">rname_rfc6680_comp_oid</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;rfc6680_comp_oid&#39;</span><span class="p">)</span>
@@ -106,8 +110,13 @@
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_attr_obj&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">composite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">rname</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name_type</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">composite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">composite</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">rname_rfc6680</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -138,11 +147,19 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="n">base</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span>
 
-            <span class="n">base_name</span> <span class="o">=</span> <span class="n">rname</span><span class="o">.</span><span class="n">import_name</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">name_type</span><span class="p">)</span>
+            <span class="n">base_name</span> <span class="o">=</span> <span class="n">rname</span><span class="o">.</span><span class="n">import_name</span><span class="p">(</span>
+                <span class="n">base</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
+                <span class="n">name_type</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Name</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="nb">super</span><span class="p">(</span><span class="n">Name</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base_name</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">composite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">base</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">rname</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">name_type</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">composite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The constructor can be used to &quot;import&quot; a name from a human readable</span>
 <span class="sd">        representation, or from a token, and can also be used to convert a</span>
@@ -167,28 +184,34 @@
 <span class="sd">            ~gssapi.exceptions.BadMechanismError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">_NameAttributeMapping</span><span class="p">]</span>
+
         <span class="k">if</span> <span class="n">rname_rfc6680</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span> <span class="o">=</span> <span class="n">_NameAttributeMapping</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="c1"># Python 2 -- someone asked for unicode</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__bytes__</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="c1"># Python 3 -- someone asked for bytes</span>
         <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">display_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
 
-<div class="viewcode-block" id="Name.display_as"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.display_as">[docs]</a>    <span class="k">def</span> <span class="nf">display_as</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="p">):</span>
+<div class="viewcode-block" id="Name.display_as"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.display_as">[docs]</a>    <span class="k">def</span> <span class="nf">display_as</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_type</span><span class="p">:</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Display this name as the given name type.</span>
 
 <span class="sd">        This method attempts to display the current :class:`Name`</span>
-<span class="sd">        using the syntax of the given :class:`NameType`, if possible.</span>
+<span class="sd">        using the syntax of the given :class:`~gssapi.raw.types.NameType`, if</span>
+<span class="sd">        possible.</span>
 
 <span class="sd">        Warning:</span>
 
@@ -208,8 +231,8 @@
 <span class="sd">        :requires-ext:`rfc6680`</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            name_type (~gssapi.OID): the :class:`NameType` to use to display</span>
-<span class="sd">                the given name</span>
+<span class="sd">            name_type (~gssapi.OID): the :class:`~gssapi.raw.types.NameType` to</span>
+<span class="sd">                use to display the given name</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            str: the displayed name</span>
@@ -226,11 +249,14 @@
             <span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span></div>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">name_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The :class:`NameType` of this name&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">name_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;The :class:`~gssapi.raw.types.NameType` of this name&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">display_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">name_type</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">rname</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
             <span class="c1"># maybe something else can compare this</span>
             <span class="c1"># to other classes, but we certainly can&#39;t</span>
@@ -238,15 +264,21 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">compare_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">disp_res</span> <span class="o">=</span> <span class="n">rname</span><span class="o">.</span><span class="n">display_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;Name(</span><span class="si">{name}</span><span class="s2">, </span><span class="si">{name_type}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">disp_res</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                                                  <span class="n">name_type</span><span class="o">=</span><span class="n">disp_res</span><span class="o">.</span><span class="n">name_type</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;Name(</span><span class="si">{name!r}</span><span class="s2">, </span><span class="si">{name_type}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">disp_res</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="n">disp_res</span><span class="o">.</span><span class="n">name_type</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Name.export"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">composite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Name.export"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">composite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Export this name as a token.</span>
 
 <span class="sd">        This method exports the name into a byte string which can then be</span>
@@ -275,7 +307,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">export_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Name.canonicalize"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.canonicalize">[docs]</a>    <span class="k">def</span> <span class="nf">canonicalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">):</span>
+<div class="viewcode-block" id="Name.canonicalize"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.canonicalize">[docs]</a>    <span class="k">def</span> <span class="nf">canonicalize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">mech</span><span class="p">:</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Canonicalize a name with respect to a mechanism.</span>
 
 <span class="sd">        This method returns a new :class:`Name` that is canonicalized according</span>
@@ -295,13 +330,19 @@
 
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">canonicalize_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">))</span></div>
 
-    <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">duplicate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memo</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__deepcopy__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">memo</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">duplicate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_inquire</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_inquire</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireNameResult</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Inspect this name for information.</span>
 
 <span class="sd">        This method inspects the name for information.</span>
@@ -340,20 +381,20 @@
                                           <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">is_mech_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_mech_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Whether or not this name is a mechanism name</span>
 <span class="sd">        (:requires-ext:`rfc6680`)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inquire</span><span class="p">(</span><span class="n">mech_name</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">is_mech_name</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">mech</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">mech</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;The mechanism associated with this name (:requires-ext:`rfc6680`)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inquire</span><span class="p">(</span><span class="n">mech_name</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mech</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_NameAttributeMapping&quot;</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;The attributes of this name (:requires-ext:`rfc6680`)</span>
 
 <span class="sd">        The attributes are presenting in the form of a</span>
@@ -381,31 +422,48 @@
 <span class="k">class</span> <span class="nc">_NameAttributeMapping</span><span class="p">(</span><span class="n">MutableMapping</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;Provides dict-like access to RFC 6680 Name attributes.&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">GetNameAttributeResult</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span>
 
-        <span class="n">res</span> <span class="o">=</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">get_name_attribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">GetNameAttributeResult</span><span class="p">(</span><span class="nb">frozenset</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">values</span><span class="p">),</span>
-                                             <span class="nb">frozenset</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">display_values</span><span class="p">),</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">get_name_attribute</span><span class="p">(</span>  <span class="c1"># type: ignore[union-attr]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">tuples</span><span class="o">.</span><span class="n">GetNameAttributeResult</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">tuples</span><span class="o">.</span><span class="n">GetNameAttributeResult</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">values</span><span class="p">),</span>
+                                             <span class="nb">list</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">display_values</span><span class="p">),</span>
                                              <span class="n">res</span><span class="o">.</span><span class="n">authenticated</span><span class="p">,</span>
                                              <span class="n">res</span><span class="o">.</span><span class="n">complete</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span>
+            <span class="n">tuples</span><span class="o">.</span><span class="n">GetNameAttributeResult</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bool</span><span class="p">],</span> <span class="nb">bytes</span>
+        <span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span>
 
-        <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">delete_name_attribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">delete_name_attribute</span><span class="p">(</span>  <span class="c1"># type: ignore[union-attr]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 
+        <span class="n">attr_value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">tuples</span><span class="o">.</span><span class="n">GetNameAttributeResult</span><span class="p">):</span>
             <span class="n">complete</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">complete</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">values</span>
+            <span class="n">attr_value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">values</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">complete</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">complete</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="nb">bool</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">attr_value</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">complete</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -413,21 +471,25 @@
                 <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)):</span>
             <span class="c1"># NB(directxman12): this allows us to easily assign a single</span>
             <span class="c1"># value, since that&#39;s a common case</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+            <span class="n">attr_value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
 
-            <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">set_name_attribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span>
-                                             <span class="n">complete</span><span class="o">=</span><span class="n">complete</span><span class="p">)</span>
+        <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">set_name_attribute</span><span class="p">(</span>  <span class="c1"># type: ignore[union-attr]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">attr_value</span><span class="p">,</span> <span class="n">complete</span><span class="o">=</span><span class="n">complete</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">key</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span>
 
-        <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">delete_name_attribute</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">delete_name_attribute</span><span class="p">(</span>  <span class="c1"># type: ignore[union-attr]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterator</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">.</span><span class="n">_inquire</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="o">.</span><span class="n">_inquire</span><span class="p">(</span><span class="n">attrs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">attrs</span><span class="p">)</span>
 </pre></div>
 

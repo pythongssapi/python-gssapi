@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gssapi.raw.types &mdash; Python-GSSAPI 1.7.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Python-GSSAPI
+          </a>
+              <div class="version">
+                1.7.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.html">High-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../gssapi.raw.html">Low-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../otherdoc.html">Other Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Python-GSSAPI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>gssapi.raw.types</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gssapi.raw.types</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numbers</span>
+<span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">MutableSet</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+
+<span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gssapi.raw.oids</span> <span class="kn">import</span> <span class="n">OID</span>
+
+
+<div class="viewcode-block" id="NameType"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType">[docs]</a><span class="k">class</span> <span class="nc">NameType</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    GSSAPI Name Types</span>
+
+<span class="sd">    This enum-like object represents GSSAPI name</span>
+<span class="sd">    types (to be used with :func:`~gssapi.raw.names.import_name`, etc)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#: GSS_C_NT_ANONYMOUS 1.3.6.1.5.6.3</span>
+<div class="viewcode-block" id="NameType.anonymous"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType.anonymous">[docs]</a>    <span class="n">anonymous</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="o">=</span> <span class="o">...</span></div>
+    <span class="c1">#: GSS_C_NT_EXPORT_NAME 1.3.6.1.5.6.4</span>
+<div class="viewcode-block" id="NameType.export"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType.export">[docs]</a>    <span class="n">export</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="o">=</span> <span class="o">...</span></div>
+    <span class="c1">#: GSS_C_NT_HOSTBASED_SERVICE 1.2.840.113554.1.2.1.4</span>
+<div class="viewcode-block" id="NameType.hostbased_service"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType.hostbased_service">[docs]</a>    <span class="n">hostbased_service</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="o">=</span> <span class="o">...</span></div>
+    <span class="c1">#: GSS_C_NT_MACHINE_UID_NAME 1.2.840.113554.1.2.1.2</span>
+<div class="viewcode-block" id="NameType.machine_uid"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType.machine_uid">[docs]</a>    <span class="n">machine_uid</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="o">=</span> <span class="o">...</span></div>
+    <span class="c1">#: GSS_C_NT_STRING_UID_NAME 1.2.840.113554.1.2.1.3</span>
+<div class="viewcode-block" id="NameType.string_uid"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType.string_uid">[docs]</a>    <span class="n">string_uid</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="o">=</span> <span class="o">...</span></div>
+    <span class="c1">#: GSS_C_NT_USER_NAME 1.2.840.113554.1.2.1.1</span>
+<div class="viewcode-block" id="NameType.user"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType.user">[docs]</a>    <span class="n">user</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="o">=</span> <span class="o">...</span></div>
+
+    <span class="c1"># Provided through optional extensions</span>
+    <span class="c1">#: GSS_C_NT_COMPOSITE_EXPORT 1.3.6.1.5.6.6</span>
+<div class="viewcode-block" id="NameType.composite_export"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType.composite_export">[docs]</a>    <span class="n">composite_export</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="o">=</span> <span class="o">...</span></div>
+    <span class="c1">#: GSS_KRB5_NT_PRINCIPAL_NAME 1.2.840.113554.1.2.2.1</span>
+<div class="viewcode-block" id="NameType.kerberos_principal"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType.kerberos_principal">[docs]</a>    <span class="n">kerberos_principal</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="o">=</span> <span class="o">...</span></div>
+    <span class="c1">#: GSS_KRB5_NT_PRINCIPAL_NAME 1.2.840.113554.1.2.2.1</span>
+<div class="viewcode-block" id="NameType.krb5_nt_principal_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.NameType.krb5_nt_principal_name">[docs]</a>    <span class="n">krb5_nt_principal_name</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="o">=</span> <span class="o">...</span></div></div>
+
+
+<div class="viewcode-block" id="RequirementFlag"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag">[docs]</a><span class="k">class</span> <span class="nc">RequirementFlag</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    GSSAPI Requirement Flags</span>
+
+<span class="sd">    This :class:`~enum.IntEnum` represents flags used with the</span>
+<span class="sd">    :class:`~gssapi.raw.sec_contexts.SecurityContext`-related methods (e.g.</span>
+<span class="sd">    :func:`~gssapi.raw.sec_contexts.init_sec_context`)</span>
+
+<span class="sd">    The numbers behind the values correspond directly</span>
+<span class="sd">    to their C counterparts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Note the values are only set here for documentation and type hints</span>
+<div class="viewcode-block" id="RequirementFlag.delegate_to_peer"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.delegate_to_peer">[docs]</a>    <span class="n">delegate_to_peer</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#: GSS_C_DELEG_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.mutual_authentication"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.mutual_authentication">[docs]</a>    <span class="n">mutual_authentication</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">#: GSS_C_MUTUAL_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.replay_detection"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.replay_detection">[docs]</a>    <span class="n">replay_detection</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1">#: GSS_C_REPLAY_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.out_of_sequence_detection"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.out_of_sequence_detection">[docs]</a>    <span class="n">out_of_sequence_detection</span> <span class="o">=</span> <span class="mi">8</span> <span class="c1">#: GSS_C_SEQUENCE_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.confidentiality"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.confidentiality">[docs]</a>    <span class="n">confidentiality</span> <span class="o">=</span> <span class="mi">16</span> <span class="c1">#: GSS_C_CONF_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.integrity"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.integrity">[docs]</a>    <span class="n">integrity</span> <span class="o">=</span> <span class="mi">32</span> <span class="c1">#: GSS_C_INTEG_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.anonymity"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.anonymity">[docs]</a>    <span class="n">anonymity</span> <span class="o">=</span> <span class="mi">64</span> <span class="c1">#: GSS_C_ANON_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.protection_ready"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.protection_ready">[docs]</a>    <span class="n">protection_ready</span> <span class="o">=</span> <span class="mi">128</span> <span class="c1">#: GSS_C_PROT_READY_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.transferable"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.transferable">[docs]</a>    <span class="n">transferable</span> <span class="o">=</span> <span class="mi">256</span> <span class="c1">#: GSS_C_TRANS_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.channel_bound"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.channel_bound">[docs]</a>    <span class="n">channel_bound</span> <span class="o">=</span> <span class="mi">2048</span> <span class="c1">#: GSS_C_CHANNEL_BOUND_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.dce_style"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.dce_style">[docs]</a>    <span class="n">dce_style</span> <span class="o">=</span> <span class="mi">4096</span> <span class="c1">#: GSS_C_DCE_STYLE</span></div>
+<div class="viewcode-block" id="RequirementFlag.identify"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.identify">[docs]</a>    <span class="n">identify</span> <span class="o">=</span> <span class="mi">8192</span> <span class="c1">#: GSS_C_IDENTIFY_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.extended_error"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.extended_error">[docs]</a>    <span class="n">extended_error</span> <span class="o">=</span> <span class="mi">16384</span> <span class="c1">#: GSS_C_EXTENDED_ERROR_FLAG</span></div>
+<div class="viewcode-block" id="RequirementFlag.ok_as_delegate"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.RequirementFlag.ok_as_delegate">[docs]</a>    <span class="n">ok_as_delegate</span> <span class="o">=</span> <span class="mi">32768</span> <span class="c1">#: GSS_C_DELEG_POLICY_FLAG</span></div></div>
+
+
+<div class="viewcode-block" id="AddressType"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType">[docs]</a><span class="k">class</span> <span class="nc">AddressType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    GSSAPI Channel Bindings Address Types</span>
+
+<span class="sd">    This :class:`~enum.IntEnum` represents the various address</span>
+<span class="sd">    types used with the :class:`~gssapi.raw.chan_bindings.ChannelBindings`</span>
+<span class="sd">    structure.</span>
+
+<span class="sd">    The numbers behind the values correspond directly</span>
+<span class="sd">    to their C counterparts.  There is no value for</span>
+<span class="sd">    ``GSS_C_AF_UNSPEC``, since this is represented</span>
+<span class="sd">    by ``None``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Note the values are only set here for documentation and type hints</span>
+<div class="viewcode-block" id="AddressType.local"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.local">[docs]</a>    <span class="n">local</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#: GSS_C_AF_LOCAL</span></div>
+<div class="viewcode-block" id="AddressType.ip"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.ip">[docs]</a>    <span class="n">ip</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1">#: GSS_C_AF_INET</span></div>
+<div class="viewcode-block" id="AddressType.arpanet"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.arpanet">[docs]</a>    <span class="n">arpanet</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1">#: GSS_C_AF_IMPLINK</span></div>
+<div class="viewcode-block" id="AddressType.pup"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.pup">[docs]</a>    <span class="n">pup</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1">#: GSS_C_AF_PUP</span></div>
+<div class="viewcode-block" id="AddressType.chaos"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.chaos">[docs]</a>    <span class="n">chaos</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#: GSS_C_AF_CHAOS</span></div>
+<div class="viewcode-block" id="AddressType.xerox_ns"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.xerox_ns">[docs]</a>    <span class="n">xerox_ns</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1">#: GSS_C_AF_NS</span></div>
+<div class="viewcode-block" id="AddressType.nbs"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.nbs">[docs]</a>    <span class="n">nbs</span> <span class="o">=</span> <span class="mi">7</span> <span class="c1">#: GSS_C_AF_NBS</span></div>
+<div class="viewcode-block" id="AddressType.ecma"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.ecma">[docs]</a>    <span class="n">ecma</span> <span class="o">=</span> <span class="mi">8</span> <span class="c1">#: GSS_C_AF_ECMA</span></div>
+<div class="viewcode-block" id="AddressType.datakit"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.datakit">[docs]</a>    <span class="n">datakit</span> <span class="o">=</span> <span class="mi">9</span> <span class="c1">#: GSS_C_AF_DATAKIT</span></div>
+<div class="viewcode-block" id="AddressType.ccitt"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.ccitt">[docs]</a>    <span class="n">ccitt</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#: GSS_C_AF_CCITT</span></div>
+<div class="viewcode-block" id="AddressType.ibm_sna"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.ibm_sna">[docs]</a>    <span class="n">ibm_sna</span> <span class="o">=</span> <span class="mi">11</span> <span class="c1">#: GSS_C_AF_SNA</span></div>
+<div class="viewcode-block" id="AddressType.decnet"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.decnet">[docs]</a>    <span class="n">decnet</span> <span class="o">=</span> <span class="mi">12</span> <span class="c1">#: GSS_C_AF_DECnet</span></div>
+<div class="viewcode-block" id="AddressType.dli"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.dli">[docs]</a>    <span class="n">dli</span> <span class="o">=</span> <span class="mi">13</span> <span class="c1">#: GSS_C_AF_DLI</span></div>
+<div class="viewcode-block" id="AddressType.lat"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.lat">[docs]</a>    <span class="n">lat</span> <span class="o">=</span> <span class="mi">14</span> <span class="c1">#: GSS_C_AF_LAT</span></div>
+<div class="viewcode-block" id="AddressType.hyperchannel"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.hyperchannel">[docs]</a>    <span class="n">hyperchannel</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1">#: GSS_C_AF_HYLINK</span></div>
+<div class="viewcode-block" id="AddressType.appletalk"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.appletalk">[docs]</a>    <span class="n">appletalk</span> <span class="o">=</span> <span class="mi">16</span> <span class="c1">#: GSS_C_AF_APPLETALK</span></div>
+<div class="viewcode-block" id="AddressType.bisync"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.bisync">[docs]</a>    <span class="n">bisync</span> <span class="o">=</span> <span class="mi">17</span> <span class="c1">#: GSS_C_AF_BSC</span></div>
+<div class="viewcode-block" id="AddressType.dss"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.dss">[docs]</a>    <span class="n">dss</span> <span class="o">=</span> <span class="mi">18</span> <span class="c1">#: GSS_C_AF_DSS</span></div>
+<div class="viewcode-block" id="AddressType.osi_tp4"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.osi_tp4">[docs]</a>    <span class="n">osi_tp4</span> <span class="o">=</span> <span class="mi">19</span> <span class="c1">#: GSS_C_AF_OSI</span></div>
+<div class="viewcode-block" id="AddressType.x25"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.x25">[docs]</a>    <span class="n">x25</span> <span class="o">=</span> <span class="mi">21</span> <span class="c1">#: GSS_C_AF_X25</span></div>
+<div class="viewcode-block" id="AddressType.null"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.AddressType.null">[docs]</a>    <span class="n">null</span> <span class="o">=</span> <span class="mi">255</span> <span class="c1">#: GSS_C_AF_NULLADDR</span></div></div>
+
+
+<div class="viewcode-block" id="MechType"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.MechType">[docs]</a><span class="k">class</span> <span class="nc">MechType</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    GSSAPI Mechanism Types</span>
+
+<span class="sd">    This enum-like object contains any mechanism :class:`~gssapi.raw.oids.OID`</span>
+<span class="sd">    values registered by imported mechanisms.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="MechType.kerberos"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.MechType.kerberos">[docs]</a>    <span class="n">kerberos</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span> <span class="c1">#: gss_mech_krb5 1.2.840.113554.1.2.2</span></div></div>
+
+
+<div class="viewcode-block" id="GenericFlagSet"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.GenericFlagSet">[docs]</a><span class="k">class</span> <span class="nc">GenericFlagSet</span><span class="p">(</span><span class="n">MutableSet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A set backed by a 32-bit integer</span>
+
+<span class="sd">    This is a set backed by a 32 bit integer.</span>
+<span class="sd">    the members are integers where only one</span>
+<span class="sd">    bit is set.</span>
+
+<span class="sd">    The class supports normal set operations,</span>
+<span class="sd">    as well as traditional &quot;flag set&quot; operations,</span>
+<span class="sd">    such as bitwise AND, OR, and XOR.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GenericFlagSet.MAX_VAL"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.GenericFlagSet.MAX_VAL">[docs]</a>    <span class="n">MAX_VAL</span><span class="p">:</span> <span class="nb">int</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">flags</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">GenericFlagSet</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">flag</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterator</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span> <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+
+<div class="viewcode-block" id="GenericFlagSet.add"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.GenericFlagSet.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">flag</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span></div>
+
+<div class="viewcode-block" id="GenericFlagSet.discard"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.GenericFlagSet.discard">[docs]</a>    <span class="k">def</span> <span class="nf">discard</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">flag</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span></div></div>
+
+
+<div class="viewcode-block" id="IntEnumFlagSet"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.IntEnumFlagSet">[docs]</a><span class="k">class</span> <span class="nc">IntEnumFlagSet</span><span class="p">(</span><span class="n">GenericFlagSet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A set backed by a 32-bit integer with enum members</span>
+
+<span class="sd">    This class is a :class:`GenericFlagSet` where the returned</span>
+<span class="sd">    members are values in an :class:`~enum.IntEnum`.</span>
+
+<span class="sd">    It functions exactly like a `GenericFlagSet`, except that</span>
+<span class="sd">    it also supports bitwise operations with the enum values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">enum</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="n">IntEnum</span><span class="p">],</span>
+        <span class="n">flags</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">GenericFlagSet</span><span class="p">,</span> <span class="n">numbers</span><span class="o">.</span><span class="n">Integral</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterator</span><span class="p">[</span><span class="n">IntEnum</span><span class="p">]:</span> <span class="o">...</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014, The Python-GSSAPI team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
