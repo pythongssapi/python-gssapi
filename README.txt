@@ -170,8 +170,9 @@ The Team
 
 (GitHub usernames in parentheses)
 
-* Robbie Harwood (@frozencemetery) - current maintainer and developer
+* Jordan Borean (@jborean93) - current maintainer and developer
 * Simo Sorce (@simo5) - developer
+* Robbie Harwood (@frozencemetery) - author emeritus
 * Solly Ross (@directxman12) - author emeritus
 * Hugh Cole-Baker (@sigmaris) - author emeritus
 

@@ -130,7 +130,7 @@ def krb5_export_lucid_sec_context(
     context: "SecurityContext",
     version: int,
 ) -> Krb5LucidContext:
-    """Retuns a non-opaque version of the internal context info.
+    """Returns a non-opaque version of the internal context info.
 
     Gets information about the Kerberos security context passed in. Currently
     only version 1 is known and supported by this library.
@@ -240,7 +240,7 @@ def krb5_get_tkt_flags(
 
     Note:
         Heimdal can only get the tkt flags on the acceptor security context.
-        MIT is able to get the tkt flags on initators and acceptors.
+        MIT is able to get the tkt flags on initiators and acceptors.
 
     Args:
         context (~gssapi.raw.sec_contexts.SecurityContext): the security

@@ -40,7 +40,7 @@ def inquire_name(
 ) -> "InquireNameResult":
     """Get information about a Name.
 
-    This method retrives information about the given name, including
+    This method retrieves information about the given name, including
     the set of attribute names for the given name, as well as whether or
     not the name is a mechanism name.  Additionally, if the given name is
     a mechanism name, the associated mechansim is returned as well.

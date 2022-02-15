@@ -8,7 +8,7 @@ class OID:
     to the constructor.  The `elements` argument should be a
     `bytes` consisting of the BER-encoded values in the OID.
 
-    To retrive the underlying bytes, use the :func:`bytes`
+    To retrieve the underlying bytes, use the :func:`bytes`
     function in Python 3.
 
     This object is hashable, and may be compared using equality
