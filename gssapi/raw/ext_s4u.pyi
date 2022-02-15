@@ -26,7 +26,7 @@ def acquire_cred_impersonate_name(
             permissions to impersonate the target name
         name (~gssapi.raw.names.Name): the name to impersonate
         lifetime (int): the lifetime for the credentials (or None for
-            indefinite)
+            indefinite) in seconds
         mechs (~gssapi.raw.types.MechType): the desired mechanisms for which
             the credentials should work (or None for the default set)
         usage (str): the usage type for the credentials: may be
@@ -34,8 +34,8 @@ def acquire_cred_impersonate_name(
 
     Returns:
         AcquireCredResult: the resulting credentials, the actual mechanisms
-        with which they may be used, and their actual lifetime (or None for
-        indefinite or not support)
+        with which they may be used, and their actual lifetime in seconds (or
+        None for indefinite or not support)
 
     Raises:
         ~gssapi.exceptions.GSSError
@@ -69,17 +69,17 @@ def add_cred_impersonate_name(
             singular and required, unlike acquireCredImpersonateName
         usage (str): the usage type for the credentials: may be
             'initiate', 'accept', or 'both'
-        init_lifetime (int): the lifetime for the credentials to remain
-            valid when using them to initiate security contexts (or None for
-            indefinite)
-        accept_lifetime (int): the lifetime for the credentials to remain
-            valid when using them to accept security contexts (or None for
-            indefinite)
+        init_lifetime (int): the lifetime, in seconds, for the credentials to
+            remain valid when using them to initiate security contexts (or None
+            for indefinite)
+        accept_lifetime (int): the lifetime, in seconds, for the credentials to
+            remain valid when using them to accept security contexts (or None
+            for indefinite)
 
     Returns:
         AddCredResult: the actual mechanisms with which the credentials may be
-        used, the actual initiator TTL, and the actual acceptor TTL (the TTLs
-        may be None for indefinite or not supported)
+        used, the actual initiator TTL in seconds, and the actual acceptor TTL
+        in seconds (the TTLs may be None for indefinite or not supported)
 
     Raises:
         ~gssapi.exceptions.GSSError

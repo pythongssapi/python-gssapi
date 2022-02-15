@@ -25,8 +25,8 @@ class InquireCredResult(NamedTuple):
 class InquireCredByMechResult(NamedTuple):
     """Information about the credential for a specific mechanism."""
     name: Optional["g.Name"]  #: The principal associated with the credential
-    init_lifetime: Optional[int]  #: Time valid for initiation
-    accept_lifetime: Optional[int]  #: Time valid for accepting
+    init_lifetime: Optional[int]  #: Time valid for initiation, in seconds
+    accept_lifetime: Optional[int]  #: Time valid for accepting, in seconds
     usage: Optional[str]  #: How the credential can be used
 
 
@@ -34,8 +34,8 @@ class AddCredResult(NamedTuple):
     """Result of adding to a GSSAPI credential."""
     creds: Optional["g.Creds"]  #: The credential that was generated
     mechs: Set[OID]  #: Set of mechs the cred is for
-    init_lifetime: int  #: Time valid for initiation
-    accept_lifetime: int  #: Time valid for accepting
+    init_lifetime: int  #: Time valid for initiation, in seconds
+    accept_lifetime: int  #: Time valid for accepting, in seconds
 
 
 class DisplayNameResult(NamedTuple):
@@ -83,7 +83,7 @@ class InquireContextResult(NamedTuple):
     """Information about the security context."""
     initiator_name: Optional["g.Name"]  #: Name of the initiator
     target_name: Optional["g.Name"]  #: Name of the acceptor
-    lifetime: Optional[int]  #: Time valid for the security context
+    lifetime: Optional[int]  #: Time valid for the security context, in seconds
     mech: Optional[OID]  #: Mech used to create the security context
     flags: Optional[RequirementFlag]  #: Services available for the context
     locally_init: Optional[bool]  #: Context was initiated locally

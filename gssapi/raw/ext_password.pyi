@@ -24,8 +24,8 @@ def acquire_cred_with_password(
     Args:
         name (~gssapi.raw.names.Name): the name to acquire credentials for
         password (bytes): the password used to acquire credentialss with
-        lifetime (int): the lifetime for the credentials (or None for
-            indefinite)
+        lifetime (int): the lifetime for the credentials in seconds (or None
+            for indefinite)
         mechs (~gssapi.raw.types.MechType): the desired mechanisms for which
             the credentials should work (or None for the default set)
         usage (str): usage type for credentials.  Possible values:
@@ -33,8 +33,8 @@ def acquire_cred_with_password(
 
     Returns:
         AcquireCredResult: the resulting credentials, the actual mechanisms
-        with which they may be used, and their actual lifetime (or None for
-        indefinite or not supported)
+        with which they may be used, and their actual lifetime in seconds (or
+        None for indefinite or not supported)
 
     Raises:
         ~gssapi.exceptions.GSSError

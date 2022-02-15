@@ -37,8 +37,8 @@ def acquire_cred(
     Args:
         name (~gssapi.raw.names.Name): the name for which to acquire the
             credentials (or None for the "no name" functionality)
-        lifetime (int): the lifetime for the credentials (or None for
-            indefinite)
+        lifetime (int): the lifetime in seconds for the credentials (or None
+            for indefinite)
         mechs (~gssapi.raw.types.MechType): the desired mechanisms for which
             the credentials should work, or None for the default set
         usage (str): the usage type for the credentials: may be
@@ -46,8 +46,8 @@ def acquire_cred(
 
     Returns:
         AcquireCredResult: the resulting credentials, the actual mechanisms
-        with which they may be used, and their actual lifetime (or None for
-        indefinite or not supported)
+        with which they may be used, and their actual lifetime in seconds (or
+        None for indefinite or not supported)
 
     Raises:
         ~gssapi.exceptions.BadMechanismError
@@ -103,9 +103,9 @@ def add_cred(
         usage (str): usage type for credentials.  Possible values:
             'initiate' (default), 'accept', 'both' (failsafe).
         init_lifetime (int): lifetime of credentials for use in initiating
-            security contexts (None for indefinite)
+            security contexts in seconds (None for indefinite)
         accept_lifetime (int): lifetime of credentials for use in accepting
-            security contexts (None for indefinite)
+            security contexts in seconds (None for indefinite)
         mutate_input (bool): whether to mutate the input credentials (True)
             or produce a new set of credentials (False).  Defaults to False
 
@@ -172,8 +172,10 @@ def inquire_cred_by_mech(
         creds (Creds): the credentials to inspect
         mech (~gssapi.OID): the desired mechanism
         name (bool): get the Name associated with the credentials
-        init_lifetime (bool): get the initiator TTL for the credentials
-        accept_lifetime (bool): get the acceptor TTL for the credentials
+        init_lifetime (bool): get the initiator TTL for the credentials (in
+            seconds)
+        accept_lifetime (bool): get the acceptor TTL for the credentials (in
+            seconds)
         usage (bool): get the usage type of the credentials
 
     Returns:

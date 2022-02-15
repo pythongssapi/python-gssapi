@@ -31,17 +31,17 @@ def add_cred_with_password(
         password (bytes): the password used to acquire credentialss with
         usage (str): the usage type for the credentials: may be
             'initiate', 'accept', or 'both'
-        init_lifetime (int): the lifetime for the credentials to remain valid
-            when using them to initiate security contexts (or None for
-            indefinite)
-        accept_lifetime (int): the lifetime for the credentials to remain
-            valid when using them to accept security contexts (or None for
-            indefinite)
+        init_lifetime (int): the lifetime, in seconds, for the credentials to
+            remain valid when using them to initiate security contexts (or None
+            for indefinite)
+        accept_lifetime (int): the lifetime, in seconds, for the credentials to
+            remain valid when using them to accept security contexts (or None
+            for indefinite)
 
     Returns:
         AddCredResult: the actual mechanisms with which the credentials may be
-        used, the actual initiator TTL, and the actual acceptor TTL (the TTLs
-        may be None for indefinite or not supported)
+        used, the actual initiator TTL in seconds, and the actual acceptor TTL
+        in seconds (the TTLs may be None for indefinite or not supported)
 
     Raises:
         ~gssapi.exceptions.GSSError

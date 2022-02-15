@@ -62,8 +62,8 @@ def init_sec_context(
             None to use the default set: mutual_authentication and
             out_of_sequence_detection.  This may also be an
             :class:`IntEnumFlagSet`
-        lifetime (int): the request lifetime of the security context (a value
-            of 0 or None means indefinite)
+        lifetime (int): the request lifetime of the security context in seconds
+            (a value of 0 or None means indefinite)
         channel_bindings (ChannelBindings): The channel bindings (or None for
             no channel bindings)
         input_token (bytes): the token to use to update the security context,
@@ -72,8 +72,8 @@ def init_sec_context(
     Returns:
         InitSecContextResult: the output security context, the actual mech
         type, the actual flags used, the output token to send to the acceptor,
-        the actual lifetime of the context (or None if not supported or
-        indefinite), and whether or not more calls are needed to finish the
+        the actual lifetime of the context in seconds (or None if not supported
+        or indefinite), and whether or not more calls are needed to finish the
         initiation.
 
     Raises:
@@ -120,7 +120,7 @@ def accept_sec_context(
     Returns:
         AcceptSecContextResult: the resulting security context, the initiator
         name, the mechanism being used, the output token, the flags in use,
-        the lifetime of the context (or None for indefinite or not
+        the lifetime of the context in seconds (or None for indefinite or not
         supported), the delegated credentials (valid only if the
         delegate_to_peer flag is set), and whether or not further token
         exchanges are needed to finalize the security context.
