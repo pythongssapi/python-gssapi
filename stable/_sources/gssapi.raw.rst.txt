@@ -25,44 +25,44 @@ Names
     Instead, they are a special form of name specific to
     a given mechanism.
 
-.. automodule:: gssapi.raw.names
+.. autoapimodule:: gssapi.raw.names
     :members:
     :undoc-members:
 
 Credentials
 ~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.creds
+.. autoapimodule:: gssapi.raw.creds
     :members:
     :undoc-members:
 
 Security Contexts
 ~~~~~~~~~~~~~~~~~
 
-.. automodule::  gssapi.raw.sec_contexts
+.. autoapimodule::  gssapi.raw.sec_contexts
     :members:
     :undoc-members:
 
-.. automodule:: gssapi.raw.message
+.. autoapimodule:: gssapi.raw.message
     :members:
     :undoc-members:
 
 Misc
 ~~~~
 
-.. automodule:: gssapi.raw.oids
+.. autoapimodule:: gssapi.raw.oids
     :members:
     :undoc-members:
 
-.. automodule:: gssapi.raw.misc
+.. autoapimodule:: gssapi.raw.misc
     :members:
     :undoc-members:
 
-.. automodule:: gssapi.raw.types
+.. autoapimodule:: gssapi.raw.types
     :members:
     :undoc-members:
 
-.. automodule:: gssapi.raw.chan_bindings
+.. autoapimodule:: gssapi.raw.chan_bindings
     :members:
     :undoc-members:
 
@@ -80,115 +80,115 @@ The following is a list of GSSAPI extensions supported by the low-level API.
 :rfc:`4178` (GSS-API Negotiation Mechanism)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_rfc4178
+.. autoapimodule:: gssapi.raw.ext_rfc4178
     :members:
     :undoc-members:
 
 :rfc:`5587` (GSS-API Extension for Mech Attributes)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_rfc5587
+.. autoapimodule:: gssapi.raw.ext_rfc5587
     :members:
     :undoc-members:
 
 :rfc:`5588` (GSS-API Extension for Storing Delegated Credentials)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_rfc5588
+.. autoapimodule:: gssapi.raw.ext_rfc5588
     :members:
     :undoc-members:
 
 :rfc:`5801` (GSS-API SASL Extensions)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_rfc5801
+.. autoapimodule:: gssapi.raw.ext_rfc5801
     :members:
     :undoc-members:
 
 Credential Store Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_cred_store
+.. autoapimodule:: gssapi.raw.ext_cred_store
     :members:
     :undoc-members:
 
 :rfc:`6680` (GSS-API Naming Extensions)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_rfc6680
-    :members:
-    :undoc-members:
-
-.. automodule:: gssapi.raw.ext_rfc6680_comp_oid
+.. autoapimodule:: gssapi.raw.ext_rfc6680
     :members:
     :undoc-members:
 
 Credentials Import-Export Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_cred_imp_exp
+.. autoapimodule:: gssapi.raw.ext_cred_imp_exp
     :members:
     :undoc-members:
 
 DCE (IOV/AEAD) Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_dce
+.. autoapimodule:: gssapi.raw.ext_dce
     :members:
     :undoc-members:
 
-.. automodule:: gssapi.raw.ext_dce_aead
-    :members:
-    :undoc-members:
+..
+    gssapi.raw.ext_dce_aead is imported with ext_dce so no need to double up.
+
 
 IOV MIC Extensions
 ~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_iov_mic
+.. autoapimodule:: gssapi.raw.ext_iov_mic
     :members:
     :undoc-members:
 
 Global Grid Forum (GGF) Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_ggf
+.. autoapimodule:: gssapi.raw.ext_ggf
     :members:
     :undoc-members:
 
 Services4User Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_s4u
+.. autoapimodule:: gssapi.raw.ext_s4u
     :members:
     :undoc-members:
 
 Acquiring Credentials With a Password Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_password
+.. autoapimodule:: gssapi.raw.ext_password
     :members:
     :undoc-members:
 
-.. automodule:: gssapi.raw.ext_password_add
+.. autoapimodule:: gssapi.raw.ext_password_add
     :members:
     :undoc-members:
 
 Kerberos Specific Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_krb5
+.. autoapimodule:: gssapi.raw.ext_krb5
     :members:
     :undoc-members:
 
 Other Extensions
 ~~~~~~~~~~~~~~~~
 
-.. automodule:: gssapi.raw.ext_set_cred_opt
+.. autoapimodule:: gssapi.raw.ext_set_cred_opt
     :members:
     :undoc-members:
 
 Results
 -------
+
+..
+    Use autoapimodule once
+    https://github.com/readthedocs/sphinx-autoapi/issues/323 is resolved.
 
 .. automodule:: gssapi.raw.named_tuples
     :members:
@@ -197,7 +197,7 @@ Results
 Exceptions
 ----------
 
-.. automodule:: gssapi.raw.exceptions
+.. autoapimodule:: gssapi.raw.exceptions
     :members:
     :undoc-members:
     :show-inheritance:
