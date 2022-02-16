@@ -15,7 +15,7 @@ deploy::build-docs
 # build the sdist and save the dirs before the clean
 python setup.py sdist
 mv dist dist_saved
-mv .venv .venv_saved
+mv .venv /tmp/.venv
 
 # for the tarball upload
 # clean up
@@ -23,7 +23,7 @@ git clean -Xdf
 
 # restore the saved "dist"/".venv" directory
 mv dist_saved dist
-mv .venv_saved .venv
+mv /tmp/.venv .venv
 
 # make the dir
 rm -rf ./tag_build || true
