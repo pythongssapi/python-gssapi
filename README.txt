@@ -74,8 +74,7 @@ After being sure to install all the requirements,
 .. code-block:: bash
 
     $ git clone https://github.com/pythongssapi/python-gssapi.git
-    $ python setup.py build
-    $ python setup.py install
+    $ pip install .
 
 Tests
 =====

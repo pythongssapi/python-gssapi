@@ -1,12 +1,7 @@
 #!/bin/bash -ex
 
-source ./ci/lib-setup.sh
-source ./ci/lib-deploy.sh
+source ./ci/lib.sh
 
-# GitHub Actions doesn't have a good concept of connected pipelines here, so
-# just rebuild rather than trying to figure it out.
-./ci/build.sh
+lib::setup::install
 
-setup::activate
-
-deploy::build-docs
+lib::deploy::build_docs

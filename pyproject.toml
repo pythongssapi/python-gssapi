@@ -1,0 +1,58 @@
+[build-system]
+requires = [
+    "Cython >= 0.29.29, < 3.0.0",  # 0.29.29 includes fixes for Python 3.11
+    "setuptools >= 40.6.0",  # Start of PEP 517 support for setuptools
+]
+build-backend = "setuptools.build_meta"
+
+[tool.mypy]
+exclude = """
+(?x)(
+  setup.py
+  | docs/
+  | build/
+)
+"""
+show_error_codes = true
+show_column_numbers = true
+disallow_any_unimported = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = "gssapi.tests.*"
+disallow_any_unimported = false
+disallow_untyped_calls = false
+disallow_untyped_defs = false
+check_untyped_defs = false
+
+[[tool.mypy.overrides]]
+module = "k5test"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "k5test.unit"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "parameterized"
+ignore_missing_imports = true
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py36,py37,py38
+
+[testenv]
+whitelist_externals=bash
+commands =
+    bash -c "source ./.travis/lib-verify.sh && verify::flake8"
+    python -m unittest
+
+deps = -r{toxinidir}/test-requirements.txt
+"""

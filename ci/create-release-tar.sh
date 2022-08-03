@@ -1,19 +1,21 @@
 #!/bin/bash -ex
 
-source ./ci/lib-setup.sh
-source ./ci/lib-deploy.sh
+source ./ci/lib.sh
 
-./ci/build.sh
-
-setup::activate
+lib::setup::install
 
 yum -y install tar git
 
-# build the docs
-deploy::build-docs
+# Git complains if this isn't owned by the user which is the case when running
+# through the run-on-linux.sh
+if [ -f /.dockerenv ]; then
+    git config --global --add safe.directory "${PWD}"
+fi
 
-# build the sdist and save the dirs before the clean
-python setup.py sdist
+# build the docs
+lib::deploy::build_docs
+
+# Save the sdist and venv dirs before the clean
 mv dist dist_saved
 mv .venv /tmp/.venv
 
@@ -31,7 +33,13 @@ mkdir ./tag_build
 
 # create and checksum the tarball
 
+set +e
 tag=$(git describe --tags)
+if [ "${?}" -ne 0 ]; then
+    tag=$(git rev-parse --short HEAD)
+fi
+set -e
+
 if [ x"${tag#v[0-9]}" = "x${tag}" ]; then
     PYTHON_GSSAPI_VERSION=${tag}
 else
@@ -44,7 +52,7 @@ tar -cvf ./tag_build/${PKG_NAME_VER}.tar \
     --exclude='dist' \
     --exclude='tag_build' \
     --exclude='.git' \
-    --exclude='travis_docs_build' \
+    --exclude='ci_docs_build' \
     --exclude='.venv' \
     --exclude='README.rst' \
     --transform="s,^\.,${PKG_NAME_VER}," .

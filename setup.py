@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-from __future__ import print_function
-
 import subprocess
 import platform
 import re
@@ -16,25 +14,8 @@ import shlex
 os.environ['SETUPTOOLS_USE_DISTUTILS'] = 'local'
 
 from setuptools import setup  # noqa: E402
-from setuptools import Distribution  # noqa: E402
-from setuptools.command.sdist import sdist  # noqa: E402
 from setuptools.extension import Extension  # noqa: E402
-
-
-SKIP_CYTHON_FILE = '__dont_use_cython__.txt'
-
-if os.path.exists(SKIP_CYTHON_FILE):
-    print("In distributed package, building from C files...", file=sys.stderr)
-    SOURCE_EXT = 'c'
-else:
-    try:
-        from Cython.Build import cythonize
-        print("Building from Cython files...", file=sys.stderr)
-        SOURCE_EXT = 'pyx'
-    except ImportError:
-        print("Cython not found, building from C files...",
-              file=sys.stderr)
-        SOURCE_EXT = 'c'
+from Cython.Build import cythonize  # noqa: E402
 
 
 def get_output(*args, **kwargs):
@@ -225,60 +206,9 @@ if ENABLE_SUPPORT_DETECTION:
     GSSAPI_LIB = ctypes.CDLL(os.path.join(main_path, main_lib))
 
 
-# add in the flag that causes us not to compile from Cython when
-# installing from an sdist
-class sdist_gssapi(sdist):
-    def run(self):
-        if not self.dry_run:
-            with open(SKIP_CYTHON_FILE, 'w') as flag_file:
-                flag_file.write('COMPILE_FROM_C_ONLY')
-
-            sdist.run(self)
-
-            os.remove(SKIP_CYTHON_FILE)
-
-
-DONT_CYTHONIZE_FOR = ('clean',)
-
-
-class GSSAPIDistribution(Distribution, object):
-    def run_command(self, command):
-        self._last_run_command = command
-        Distribution.run_command(self, command)
-
-    @property
-    def ext_modules(self):
-        if SOURCE_EXT != 'pyx':
-            return getattr(self, '_ext_modules', None)
-
-        if getattr(self, '_ext_modules', None) is None:
-            return None
-
-        if getattr(self, '_last_run_command', None) in DONT_CYTHONIZE_FOR:
-            return self._ext_modules
-
-        if getattr(self, '_cythonized_ext_modules', None) is None:
-            self._cythonized_ext_modules = cythonize(
-                self._ext_modules,
-                language_level=2,
-            )
-
-        return self._cythonized_ext_modules
-
-    @ext_modules.setter
-    def ext_modules(self, mods):
-        self._cythonized_ext_modules = None
-        self._ext_modules = mods
-
-    @ext_modules.deleter
-    def ext_modules(self):
-        del self._ext_modules
-        del self._cythonized_ext_modules
-
-
 def make_extension(name_fmt, module, **kwargs):
     """Helper method to remove the repetition in extension declarations."""
-    source = name_fmt.replace('.', '/') % module + '.' + SOURCE_EXT
+    source = name_fmt.replace('.', '/') % module + '.pyx'
     if not os.path.exists(source):
         raise OSError(source)
     return Extension(
@@ -330,7 +260,7 @@ def gssapi_modules(lst):
     # add in any present enum extension files
     res.extend(ENUM_EXTS)
 
-    return res
+    return cythonize(res, language_level=2)
 
 
 long_desc = re.sub(r'\.\. role:: \w+\(code\)\s*\n\s*.+', '',
@@ -344,7 +274,7 @@ install_requires = [
 
 setup(
     name='gssapi',
-    version='1.7.3',
+    version='1.8.0',
     author='The Python GSSAPI Team',
     author_email='jborean93@gmail.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
@@ -374,8 +304,6 @@ setup(
         'Topic :: Security',
         'Topic :: Software Development :: Libraries :: Python Modules'
     ],
-    distclass=GSSAPIDistribution,
-    cmdclass={'sdist': sdist_gssapi},
     ext_modules=gssapi_modules([
         main_file('misc'),
         main_file('exceptions'),

@@ -1,6 +1,6 @@
+build
 flake8
 parameterized
-Cython
 k5test
 decorator
 mypy==0.971
