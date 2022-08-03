@@ -73,21 +73,21 @@ jobs:
     strategy:
       matrix:
         include:
-        - os: macOS-10.15
+        - os: macOS-12
           version: cp310-macosx_x86_64
-        - os: macOS-10.15
+        - os: macOS-12
           version: cp310-macosx_arm64
-        - os: macOS-10.15
+        - os: macOS-12
           version: cp39-macosx_x86_64
-        - os: macOS-10.15
+        - os: macOS-12
           version: cp39-macosx_arm64
-        - os: macOS-10.15
+        - os: macOS-12
           version: cp38-macosx_x86_64
-        - os: macOS-10.15
+        - os: macOS-12
           version: cp38-macosx_arm64
-        - os: macOS-10.15
+        - os: macOS-12
           version: cp37-macosx_x86_64
-        - os: macOS-10.15
+        - os: macOS-12
           version: cp36-macosx_x86_64
 
         - os: windows-2019
@@ -141,7 +141,7 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v2.1.2
+      uses: pypa/cibuildwheel@v2.8.1
       env:
         CIBW_ARCHS: all
         CIBW_TEST_SKIP: '*_arm64'
