@@ -1,5 +1,6 @@
 include *.txt
 recursive-include docs *.txt
 recursive-include gssapi *.pxd
-recursive-include gssapi *.c
+recursive-include gssapi *.pyx
 recursive-include gssapi *.h
+recursive-exclude gssapi *.c

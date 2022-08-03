@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# We test Debian's cython.  el7's cython is too old, and Rawhide's virtualenv
-# doesn't work right (usrmerge bugs) so we can only test Debian's cython.
-
-setup::debian::install() {
+lib::setup::debian_install() {
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
 
@@ -19,52 +16,47 @@ setup::debian::install() {
         export GSSAPI_KRB5_MAIN_LIB="/usr/lib/x86_64-linux-gnu/libkrb5.so"
     fi
 
-    apt-get -y install gcc virtualenv python3-{virtualenv,dev} cython3
+    apt-get -y install gcc virtualenv python3-{venv,dev}
 
-    virtualenv --system-site-packages -p $(which python3) .venv
+    virtualenv -p $(which python3) .venv
     source ./.venv/bin/activate
 }
 
-setup::rh::yuminst() {
+lib::setup::rh_yuminst() {
     # yum has no update-only verb.  Also: modularity just makes this slower.
     yum -y --nogpgcheck --disablerepo=\*modul\* install $@
 }
 
-setup::centos::install() {
-    # Cython on el7 is too old - downstream patches
-    setup::rh::yuminst python3-{virtualenv,devel}
+lib::setup::centos_install() {
+    lib::setup::rh_yuminst python3-{virtualenv,devel}
     virtualenv -p $(which python3) .venv
     source ./.venv/bin/activate
-    pip install --upgrade pip # el7 pip doesn't quite work right
-    pip install --install-option='--no-cython-compile' cython
 }
 
-setup::fedora::install() {
+lib::setup::fedora_install() {
     # path to binary here in case Rawhide changes it
-    setup::rh::yuminst redhat-rpm-config \
+    lib::setup::rh_yuminst redhat-rpm-config \
         /usr/bin/virtualenv python3-{virtualenv,devel}
     virtualenv -p $(which python3) .venv
     source ./.venv/bin/activate
-    pip install --install-option='--no-cython-compile' cython
 }
 
-setup::rh::install() {
-    setup::rh::yuminst krb5-{devel,libs,server,workstation} \
+lib::setup::rh_install() {
+    lib::setup::rh_yuminst krb5-{devel,libs,server,workstation} \
                        which gcc findutils gssntlmssp
     export GSSAPI_KRB5_MAIN_LIB="/usr/lib64/libkrb5.so"
 
     if [ -f /etc/fedora-release ]; then
-        setup::fedora::install
+        lib::setup::fedora_install
     else
-        setup::centos::install
+        lib::setup::centos_install
     fi
 }
 
-setup::macos::install() {
+lib::setup::macos_install() {
     sudo pip3 install virtualenv
     python3 -m virtualenv -p $(which python3) .venv
     source .venv/bin/activate
-    pip install --install-option='--no-cython-compile' cython
 
     export GSSAPI_KRB5_MAIN_LIB="/System/Library/PrivateFrameworks/Heimdal.framework/Heimdal"
 
@@ -74,7 +66,7 @@ setup::macos::install() {
     export KRB5_KTNAME=initial
 }
 
-setup::windows::install() {
+lib::setup::windows_install() {
     CHINST="choco install --no-progress --yes --ignore-detected-reboot --allow-downgrade"
 
     # Install the 32bit version if Python is 32bit
@@ -90,32 +82,52 @@ setup::windows::install() {
 
     # Update path to include it
     export PATH="/c/$PF/MIT/Kerberos/bin:$PATH"
-
-    python -m pip install --upgrade pip
 }
 
-setup::install() {
+lib::setup::install() {
     if [ -f /etc/debian_version ]; then
-        setup::debian::install
+        lib::setup::debian_install
     elif [ -f /etc/redhat-release ]; then
-        setup::rh::install
+        lib::setup::rh_install
     elif [ "$(uname)" == "Darwin" ]; then
-        setup::macos::install
+        lib::setup::macos_install
     elif [ "$OS_NAME" == "windows" ]; then
-        setup::windows::install
+        lib::setup::windows_install
     else
         echo "Distro not found!"
         false
     fi
 
-    pip install -r test-requirements.txt
+    # Get the explicit version to force pip to install from our local dir in
+    # case this is a pre-release and/or PyPi has a later version
+    echo "Installing gssapi"
+    GSSAPI_VER="$( grep 'version=' setup.py | cut -d "'" -f2 )"
+
+    if [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then
+        DIST_LINK_PATH="$( echo "${PWD}/dist" | sed -e 's/^\///' -e 's/\//\\/g' -e 's/^./\0:/' )"
+    else
+        DIST_LINK_PATH="${PWD}/dist"
+    fi
+
+    python -m pip install gssapi=="${GSSAPI_VER}" \
+        --find-links "file://${DIST_LINK_PATH}" \
+        --verbose
+
+    echo "Installing dev dependencies"
+    python -m pip install -r test-requirements.txt
 }
 
-setup::activate() {
-    # remove (and restore) set -x to avoid log-spam the source
-    # script, which we don't care about
-    wastrace=${-//[^x]/}
-    set +x
-    source .venv/bin/activate
-    if [[ -n "$wastrace" ]]; then set -x; fi
+lib::deploy::build_docs() {
+    # the first run is for the docs build, so don't clean up
+    pip install -r docs-requirements.txt
+
+    # Don't run in root to make sure the local copies aren't imported
+    pushd docs
+
+    # place in a non-standard location so that they don't get cleaned up
+    sphinx-build source ../ci_docs_build -a -W -n
+
+    popd
+
+    echo "docs_build"
 }

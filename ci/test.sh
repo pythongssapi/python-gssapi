@@ -1,8 +1,18 @@
 #!/bin/bash -ex
 
 # set up dependencies, etc
-source ./ci/lib-setup.sh
-setup::install
+source ./ci/lib.sh
+
+if [ x"${GITHUB_ACTIONS}" = "xtrue" ]; then
+    echo "::group::Installing Requirements"
+fi
+
+lib::setup::install
+
+if [ x"${GITHUB_ACTIONS}" = "xtrue" ]; then
+    echo "::endgroup::"
+    echo "::group::Running Sanity Checks"
+fi
 
 if [ x"$FLAKE" = "xyes" ]; then
     flake8 setup.py
@@ -32,14 +42,14 @@ if [ $MYPY_RES -ne 0 ]; then
     exit $MYPY_RES
 fi
 
-# always build in-place so that Sphinx can find the modules
-python setup.py build_ext --inplace $EXTRA_BUILDEXT
-BUILD_RES=$?
-
-if [ $BUILD_RES -ne 0 ]; then
-    # if the build failed, don't run the tests
-    exit $BUILD_RES
+if [ x"${GITHUB_ACTIONS}" = "xtrue" ]; then
+    echo "::endgroup::"
+    echo "::group::Running Tests"
 fi
+
+# Ensure we don't run in the normal dir so that unittest imports our installed
+# package and not the source code
+pushd gssapi/tests
 
 # Only call exit on failures so we can source this script
 if [ "$OS_NAME" = "windows" ]; then
@@ -47,4 +57,10 @@ if [ "$OS_NAME" = "windows" ]; then
     python -c "import gssapi" || exit $?
 else
     python -m unittest -v || exit $?
+fi
+
+popd
+
+if [ x"${GITHUB_ACTIONS}" = "xtrue" ]; then
+    echo "::endgroup::"
 fi
