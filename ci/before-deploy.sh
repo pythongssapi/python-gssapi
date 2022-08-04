@@ -9,9 +9,11 @@ setup::activate
 
 yum -y install tar git
 
-# Git complains if this isn't owned by the user which causes a problem with
-# the clean operation later
-git config --local --add safe.directory "${PWD}"
+# Git complains if this isn't owned by the user which is the case when running
+# through the run-on-linux.sh
+if [ -f /.dockerenv ]; then
+    git config --global --add safe.directory "${PWD}"
+fi
 
 # build the docs
 deploy::build-docs
