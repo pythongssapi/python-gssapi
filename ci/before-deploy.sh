@@ -19,7 +19,7 @@ fi
 deploy::build-docs
 
 # build the sdist and save the dirs before the clean
-python setup.py sdist
+python -m build --sdist
 mv dist dist_saved
 mv .venv /tmp/.venv
 
@@ -37,7 +37,13 @@ mkdir ./tag_build
 
 # create and checksum the tarball
 
+set +e
 tag=$(git describe --tags)
+if [ "${?}" -ne 0 ]; then
+    tag=$(git rev-parse --short HEAD)
+fi
+set -e
+
 if [ x"${tag#v[0-9]}" = "x${tag}" ]; then
     PYTHON_GSSAPI_VERSION=${tag}
 else

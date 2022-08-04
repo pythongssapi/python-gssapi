@@ -36,7 +36,6 @@ setup::centos::install() {
     virtualenv -p $(which python3) .venv
     source ./.venv/bin/activate
     pip install --upgrade pip # el7 pip doesn't quite work right
-    pip install --install-option='--no-cython-compile' cython
 }
 
 setup::fedora::install() {
@@ -45,7 +44,6 @@ setup::fedora::install() {
         /usr/bin/virtualenv python3-{virtualenv,devel}
     virtualenv -p $(which python3) .venv
     source ./.venv/bin/activate
-    pip install --install-option='--no-cython-compile' cython
 }
 
 setup::rh::install() {
@@ -64,7 +62,6 @@ setup::macos::install() {
     sudo pip3 install virtualenv
     python3 -m virtualenv -p $(which python3) .venv
     source .venv/bin/activate
-    pip install --install-option='--no-cython-compile' cython
 
     export GSSAPI_KRB5_MAIN_LIB="/System/Library/PrivateFrameworks/Heimdal.framework/Heimdal"
 
