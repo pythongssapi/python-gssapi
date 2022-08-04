@@ -1,7 +1,7 @@
 flake8
 parameterized
-Cython
+Cython >= 0.29.29, < 3.0.0
 k5test
 decorator
-mypy
+mypy==0.971
 types-decorator

@@ -1,7 +1,8 @@
 name: Release
 on:
   push:
-    tags: v*
+    branches-to-ignore: gh-pages
+  pull_request: null
 
 jobs:
   sdist-release:
@@ -23,6 +24,7 @@ jobs:
         name: artifact
 
     - name: Deploy stable docs
+      if: startsWith(github.ref, 'refs/tags/v')
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -31,6 +33,7 @@ jobs:
         TARGET_FOLDER: stable
 
     - name: Create release
+      if: startsWith(github.ref, 'refs/tags/v')
       uses: actions/create-release@v1
       id: cr
       env:
@@ -39,13 +42,18 @@ jobs:
         tag_name: ${{ github.ref }}
         release_name: ${{ github.ref }}
 
-    - id: tarball
+    - name: Get tarball path
+      if: startsWith(github.ref, 'refs/tags/v')
+      id: tarball
       run: echo "::set-output name=tarball::`ls tag_build/*.tar.gz | awk -F/ '{print $2}'`"
 
-    - id: checksum
+    - name: Get release checksum path
+      if: startsWith(github.ref, 'refs/tags/v')
+      id: checksum
       run: echo "::set-output name=checksum::`ls tag_build/*.sha512sum | awk -F/ '{print $2}'`"
 
     - name: Upload release tarball
+      if: startsWith(github.ref, 'refs/tags/v')
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -56,6 +64,7 @@ jobs:
         asset_content_type: application/octet-stream
 
     - name: Upload release checksum
+      if: startsWith(github.ref, 'refs/tags/v')
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -155,6 +164,7 @@ jobs:
         name: artifact
 
   pypi:
+    if: startsWith(github.ref, 'refs/tags/v')
     needs:
     - wheel
 

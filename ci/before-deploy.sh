@@ -9,6 +9,10 @@ setup::activate
 
 yum -y install tar git
 
+# Git complains if this isn't owned by the user which causes a problem with
+# the clean operation later
+git config --local --add safe.directory "${PWD}"
+
 # build the docs
 deploy::build-docs
 
