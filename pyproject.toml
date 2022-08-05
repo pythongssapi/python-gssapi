@@ -2,7 +2,7 @@
 requires = [
     "Cython >= 0.29.29, < 3.0.0",  # 0.29.29 includes fixes for Python 3.11
     "setuptools >= 40.6.0",  # Start of PEP 517 support for setuptools
-    "wheel",  # Needed for Windows wheel builds as the embedded version fails
+    # "wheel",  # Needed for Windows wheel builds as the embedded version fails
 ]
 build-backend = "setuptools.build_meta"
 

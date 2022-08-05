@@ -3,7 +3,7 @@ on:
   push:
     branches-ignore: gh-pages
     tags-ignore: '*'
-  pull_request: null
+  # pull_request: null
 
 jobs:
   linux:
