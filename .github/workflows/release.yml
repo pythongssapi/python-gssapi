@@ -150,6 +150,9 @@ jobs:
         rm -r gssapi-*/
         rm gssapi-*.tar.gz
 
+    - uses: ilammy/msvc-dev-cmd@v1
+      if: startsWith(matrix.os, 'windows-')
+
     - name: Build wheel
       uses: pypa/cibuildwheel@v2.8.1
       env:
