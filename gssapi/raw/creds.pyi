@@ -94,7 +94,7 @@ def add_cred(
     and new credential), or to add a new element to an existing credential.
 
     Args:
-        input_cred (Cred): the set of credentials to which to add the new
+        input_cred (Creds): the set of credentials to which to add the new
             credentials
         name (~gssapi.raw.names.Name): name of principal to acquire a
             credential for

@@ -6,9 +6,9 @@ class OID:
 
     A new OID may be created by passing the `elements` argument
     to the constructor.  The `elements` argument should be a
-    `bytes` consisting of the BER-encoded values in the OID.
+    :class:`bytes` consisting of the BER-encoded values in the OID.
 
-    To retrieve the underlying bytes, use the :func:`bytes`
+    To retrieve the underlying bytes, use the :class:`bytes`
     function in Python 3.
 
     This object is hashable, and may be compared using equality

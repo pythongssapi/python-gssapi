@@ -24,7 +24,7 @@ class Name(rname.Name):
 
     This class may be pickled and unpickled, as well as copied.
 
-    The :func:`str` and :func:`bytes` methods may be used to retrieve the
+    The :class:`str` and :class:`bytes` methods may be used to retrieve the
     text of the name.
 
     Note:
@@ -322,13 +322,13 @@ class Name(rname.Name):
         return self._inquire(mech_name=True).mech
 
     @property
-    def attributes(self) -> t.Optional["_NameAttributeMapping"]:
+    def attributes(self) -> t.Optional[MutableMapping]:
         """The attributes of this name (:requires-ext:`rfc6680`)
 
         The attributes are presenting in the form of a
-        :class:`~collections.MutableMapping` (a dict-like object).
+        :class:`~collections.abc.MutableMapping` (a dict-like object).
 
-        Retrieved values will always be in the form of :class:`frozensets`.
+        Retrieved values will always be in the form of :class:`frozenset`.
 
         When assigning values, if iterables are used, they be considered to be
         the set of values for the given attribute.  If a non-iterable is used,
