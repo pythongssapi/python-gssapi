@@ -14,6 +14,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -78,11 +79,11 @@
     <span class="kn">from</span> <span class="nn">gssapi.raw.sec_contexts</span> <span class="kn">import</span> <span class="n">SecurityContext</span>
 
 
-<div class="viewcode-block" id="Krb5LucidContext"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContext">[docs]</a><span class="k">class</span> <span class="nc">Krb5LucidContext</span><span class="p">:</span></div>
+<div class="viewcode-block" id="Krb5LucidContext"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContext">[docs]</a><span class="k">class</span> <span class="nc">Krb5LucidContext</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The base container returned by :meth:`krb5_export_lucid_sec_context` when</span>
 <span class="sd">    an unknown version was requested.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="Krb5LucidContextV1"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1">[docs]</a><span class="k">class</span> <span class="nc">Krb5LucidContextV1</span><span class="p">(</span><span class="n">Krb5LucidContext</span><span class="p">):</span>
@@ -92,48 +93,48 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="Krb5LucidContextV1.version"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.version">[docs]</a>    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span></div>
+<div class="viewcode-block" id="Krb5LucidContextV1.version"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.version">[docs]</a>    <span class="k">def</span> <span class="nf">version</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;The structure version number</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Optional[int]: the structure version number</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="Krb5LucidContextV1.is_initiator"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.is_initiator">[docs]</a>    <span class="k">def</span> <span class="nf">is_initiator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span></div>
+<div class="viewcode-block" id="Krb5LucidContextV1.is_initiator"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.is_initiator">[docs]</a>    <span class="k">def</span> <span class="nf">is_initiator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Whether the context was the initiator</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Optional[bool]: ``True`` when the exported context was the</span>
 <span class="sd">            initiator</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="Krb5LucidContextV1.endtime"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.endtime">[docs]</a>    <span class="k">def</span> <span class="nf">endtime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span></div>
+<div class="viewcode-block" id="Krb5LucidContextV1.endtime"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.endtime">[docs]</a>    <span class="k">def</span> <span class="nf">endtime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Expiration time of the context</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Optional[int]: the expiration time of the context</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="Krb5LucidContextV1.send_seq"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.send_seq">[docs]</a>    <span class="k">def</span> <span class="nf">send_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span></div>
+<div class="viewcode-block" id="Krb5LucidContextV1.send_seq"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.send_seq">[docs]</a>    <span class="k">def</span> <span class="nf">send_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Sender sequence number</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Optional[int]: the sender sequence number</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="Krb5LucidContextV1.recv_seq"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.recv_seq">[docs]</a>    <span class="k">def</span> <span class="nf">recv_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span></div>
+<div class="viewcode-block" id="Krb5LucidContextV1.recv_seq"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.recv_seq">[docs]</a>    <span class="k">def</span> <span class="nf">recv_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Receiver sequence number</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Optional[int]: the receiver sequence number</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="Krb5LucidContextV1.protocol"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol">[docs]</a>    <span class="k">def</span> <span class="nf">protocol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span></div>
+<div class="viewcode-block" id="Krb5LucidContextV1.protocol"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol">[docs]</a>    <span class="k">def</span> <span class="nf">protocol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;The protocol number</span>
 
 <span class="sd">        If the protocol number is 0 then :attr:`rfc1964_kd` is set and</span>
@@ -144,32 +145,32 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Optional[int]: the protocol number</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="Krb5LucidContextV1.rfc1964_kd"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd">[docs]</a>    <span class="k">def</span> <span class="nf">rfc1964_kd</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Rfc1964KeyData&quot;</span><span class="p">]:</span></div>
+<div class="viewcode-block" id="Krb5LucidContextV1.rfc1964_kd"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd">[docs]</a>    <span class="k">def</span> <span class="nf">rfc1964_kd</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Rfc1964KeyData&quot;</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Keydata for protocol 0 (RFC1964)</span>
 
 <span class="sd">        This will be set when :attr:`protocol` is ``0``.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Optional[Rfc1964KeyData]: the RFC1964 key data</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
     <span class="nd">@property</span>
-<div class="viewcode-block" id="Krb5LucidContextV1.cfx_kd"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd">[docs]</a>    <span class="k">def</span> <span class="nf">cfx_kd</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;CfxKeyData&quot;</span><span class="p">]:</span></div></div>
+<div class="viewcode-block" id="Krb5LucidContextV1.cfx_kd"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd">[docs]</a>    <span class="k">def</span> <span class="nf">cfx_kd</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;CfxKeyData&quot;</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Key data for protocol 1 (RFC4121)</span>
 
 <span class="sd">        This will be set when :attr:`protocol` is ``1``.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Optional[CfxKeyData]: the RFC4121 key data</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
 
 
 <div class="viewcode-block" id="krb5_ccache_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.krb5_ccache_name">[docs]</a><span class="k">def</span> <span class="nf">krb5_ccache_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Set the default Kerberos Protocol credentials cache name.</span>
 
 <span class="sd">    This method sets the default credentials cache name for use by he Kerberos</span>
@@ -195,13 +196,13 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="krb5_export_lucid_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.krb5_export_lucid_sec_context">[docs]</a><span class="k">def</span> <span class="nf">krb5_export_lucid_sec_context</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">version</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Krb5LucidContext</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Krb5LucidContext</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Returns a non-opaque version of the internal context info.</span>
 
 <span class="sd">    Gets information about the Kerberos security context passed in. Currently</span>
@@ -222,12 +223,12 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="krb5_extract_authtime_from_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.krb5_extract_authtime_from_sec_context">[docs]</a><span class="k">def</span> <span class="nf">krb5_extract_authtime_from_sec_context</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Get the auth time for the security context.</span>
 
 <span class="sd">    Gets the auth time for the established security context.</span>
@@ -245,13 +246,13 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="krb5_extract_authz_data_from_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.krb5_extract_authz_data_from_sec_context">[docs]</a><span class="k">def</span> <span class="nf">krb5_extract_authz_data_from_sec_context</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">ad_type</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Extracts Kerberos authorization data.</span>
 
 <span class="sd">    Extracts authorization data that may be stored within the context.</span>
@@ -269,7 +270,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="krb5_import_cred"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.krb5_import_cred">[docs]</a><span class="k">def</span> <span class="nf">krb5_import_cred</span><span class="p">(</span>
@@ -277,7 +278,7 @@
     <span class="n">cache</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">keytab_principal</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">keytab</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Import Krb5 credentials into GSSAPI credential.</span>
 
 <span class="sd">    Imports the krb5 credentials (either or both of the keytab and cache) into</span>
@@ -299,12 +300,12 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="krb5_get_tkt_flags"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.krb5_get_tkt_flags">[docs]</a><span class="k">def</span> <span class="nf">krb5_get_tkt_flags</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Return ticket flags for the kerberos ticket.</span>
 
 <span class="sd">    Return the ticket flags for the kerberos ticket received when</span>
@@ -323,13 +324,13 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="krb5_set_allowable_enctypes"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_krb5.krb5_set_allowable_enctypes">[docs]</a><span class="k">def</span> <span class="nf">krb5_set_allowable_enctypes</span><span class="p">(</span>
     <span class="n">cred_handle</span><span class="p">:</span> <span class="s2">&quot;Creds&quot;</span><span class="p">,</span>
     <span class="n">ktypes</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Limits the keys that can be exported.</span>
 
 <span class="sd">    Called by a context initiator after acquiring the creds but before calling</span>
@@ -349,7 +350,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

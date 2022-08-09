@@ -14,6 +14,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -84,7 +85,7 @@
 <div class="viewcode-block" id="display_name_ext"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.display_name_ext">[docs]</a><span class="k">def</span> <span class="nf">display_name_ext</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">name_type</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Display the given Name using the given name type.</span>
 
 <span class="sd">    This method attempts to display the given Name using the syntax of</span>
@@ -102,14 +103,14 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.OperationUnavailableError: the given name could not</span>
 <span class="sd">            be displayed using the given name type</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="inquire_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.inquire_name">[docs]</a><span class="k">def</span> <span class="nf">inquire_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">mech_name</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireNameResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireNameResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Get information about a Name.</span>
 
 <span class="sd">    This method retrieves information about the given name, including</span>
@@ -130,7 +131,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="set_name_attribute"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.set_name_attribute">[docs]</a><span class="k">def</span> <span class="nf">set_name_attribute</span><span class="p">(</span>
@@ -138,7 +139,7 @@
     <span class="n">attr</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span>
     <span class="n">complete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Set the value(s) of a name attribute.</span>
 
 <span class="sd">    This method sets the value(s) of the given attribute on the given name.</span>
@@ -159,14 +160,14 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.OperationUnavailableError: the given attribute name</span>
 <span class="sd">            is unknown or could not be set</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="get_name_attribute"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.get_name_attribute">[docs]</a><span class="k">def</span> <span class="nf">get_name_attribute</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">attr</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">more</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;GetNameAttributeResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;GetNameAttributeResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Get the value(s) of a name attribute.</span>
 
 <span class="sd">    This method retrieves the value(s) of the given attribute</span>
@@ -189,13 +190,13 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.OperationUnavailableError: the given attribute is</span>
 <span class="sd">            unknown or unset</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="delete_name_attribute"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.delete_name_attribute">[docs]</a><span class="k">def</span> <span class="nf">delete_name_attribute</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">attr</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Remove an attribute from a name.</span>
 
 <span class="sd">    This method removes an attribute from a Name.  This method may be</span>
@@ -212,12 +213,12 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.OperationUnavailableError</span>
 <span class="sd">        ~gssapi.exceptions.UnauthorizedError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="export_name_composite"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.export_name_composite">[docs]</a><span class="k">def</span> <span class="nf">export_name_composite</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Export a name, preserving attribute information.</span>
 
 <span class="sd">    This method functions similarly to :func:`~gssapi.raw.names.export_name`,</span>
@@ -238,7 +239,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

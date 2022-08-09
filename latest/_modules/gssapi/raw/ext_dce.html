@@ -14,6 +14,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -163,7 +164,7 @@
     <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Wrap/Encrypt an IOV message.</span>
 
 <span class="sd">    This method wraps or encrypts an IOV message.  The allocate</span>
@@ -189,13 +190,13 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="unwrap_iov"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.unwrap_iov">[docs]</a><span class="k">def</span> <span class="nf">unwrap_iov</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;IOVUnwrapResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;IOVUnwrapResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Unwrap/Decrypt an IOV message.</span>
 
 <span class="sd">    This method uwraps or decrypts an IOV message.  The allocate</span>
@@ -224,7 +225,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="wrap_iov_length"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.wrap_iov_length">[docs]</a><span class="k">def</span> <span class="nf">wrap_iov_length</span><span class="p">(</span>
@@ -232,7 +233,7 @@
     <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;WrapResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;WrapResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Appropriately size padding, trailer, and header IOV buffers.</span>
 
 <span class="sd">    This method sets the length values on the IOV buffers.  You</span>
@@ -256,7 +257,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

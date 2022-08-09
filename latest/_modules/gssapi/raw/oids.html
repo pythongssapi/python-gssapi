@@ -14,6 +14,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -78,9 +79,9 @@
 
 <span class="sd">    A new OID may be created by passing the `elements` argument</span>
 <span class="sd">    to the constructor.  The `elements` argument should be a</span>
-<span class="sd">    `bytes` consisting of the BER-encoded values in the OID.</span>
+<span class="sd">    :class:`bytes` consisting of the BER-encoded values in the OID.</span>
 
-<span class="sd">    To retrieve the underlying bytes, use the :func:`bytes`</span>
+<span class="sd">    To retrieve the underlying bytes, use the :class:`bytes`</span>
 <span class="sd">    function in Python 3.</span>
 
 <span class="sd">    This object is hashable, and may be compared using equality</span>
@@ -97,7 +98,7 @@
 <div class="viewcode-block" id="OID.from_int_seq"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.OID.from_int_seq">[docs]</a>    <span class="k">def</span> <span class="nf">from_int_seq</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">integer_sequence</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OID&quot;</span><span class="p">:</span></div>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OID&quot;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Create a OID from a sequence of integers.</span>
 
 <span class="sd">        This method creates an OID from a sequence of integers.</span>
@@ -116,7 +117,7 @@
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ValueError: the sequence is less than two elements long</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
     <span class="nd">@property</span>
 <div class="viewcode-block" id="OID.dotted_form"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.OID.dotted_form">[docs]</a>    <span class="k">def</span> <span class="nf">dotted_form</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span></div></div>

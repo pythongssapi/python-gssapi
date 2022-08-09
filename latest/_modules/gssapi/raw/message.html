@@ -14,6 +14,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -81,7 +82,7 @@
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Generate a MIC for a message.</span>
 
 <span class="sd">    This method generates a Message Integrity Check token for the</span>
@@ -103,14 +104,14 @@
 <span class="sd">        ~gssapi.exceptions.ExpiredContextError</span>
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
 <span class="sd">        ~gssapi.exceptions.BadQoPError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="verify_mic"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.message.verify_mic">[docs]</a><span class="k">def</span> <span class="nf">verify_mic</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Verify that a MIC matches a message.</span>
 
 <span class="sd">    This method verifies that the given MIC matches the given message.</span>
@@ -135,7 +136,7 @@
 <span class="sd">        ~gssapi.exceptions.TokenTooEarlyError</span>
 <span class="sd">        ~gssapi.exceptions.ExpiredContextError</span>
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="wrap_size_limit"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.message.wrap_size_limit">[docs]</a><span class="k">def</span> <span class="nf">wrap_size_limit</span><span class="p">(</span>
@@ -143,7 +144,7 @@
     <span class="n">output_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Calculate the max message size.</span>
 
 <span class="sd">    This method calculates the unwrapped/unencrypted message size for</span>
@@ -164,7 +165,7 @@
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
 <span class="sd">        ~gssapi.exceptions.ExpiredContextError</span>
 <span class="sd">        ~gssapi.exceptions.BadQoPError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="wrap"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.message.wrap">[docs]</a><span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span>
@@ -172,7 +173,7 @@
     <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;WrapResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;WrapResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Wrap/Encrypt a message.</span>
 
 <span class="sd">    This method wraps or encrypts a message (depending on the value</span>
@@ -195,13 +196,13 @@
 <span class="sd">        ~gssapi.exceptions.ExpiredContextError</span>
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
 <span class="sd">        ~gssapi.exceptions.BadQoPError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="unwrap"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.message.unwrap">[docs]</a><span class="k">def</span> <span class="nf">unwrap</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;UnwrapResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;UnwrapResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Unwrap/Decrypt a message.</span>
 
 <span class="sd">    This method unwraps or decrypts a message, depending</span>
@@ -225,7 +226,7 @@
 <span class="sd">        ~gssapi.exceptions.TokenTooEarlyError</span>
 <span class="sd">        ~gssapi.exceptions.ExpiredContextError</span>
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -87,18 +88,18 @@
            <div itemprop="articleBody">
              
   <section id="common-values-for-credentials-store-extensions">
-<h1>Common Values for Credentials Store Extensions<a class="headerlink" href="#common-values-for-credentials-store-extensions" title="Permalink to this headline"></a></h1>
+<h1>Common Values for Credentials Store Extensions<a class="headerlink" href="#common-values-for-credentials-store-extensions" title="Permalink to this heading"></a></h1>
 <p>The credentials store extension is an extension introduced by the MIT krb5
 library implementation of GSSAPI.  It allows for finer control of credentials
 from within a GSSAPI application.  Each mechanism can define keywords to
 manipulate various aspects of their credentials for storage or retrieval
 operations.</p>
 <section id="the-krb5-mechanism-in-mit-libraries">
-<h2>The krb5 mechanism in MIT libraries<a class="headerlink" href="#the-krb5-mechanism-in-mit-libraries" title="Permalink to this headline"></a></h2>
+<h2>The krb5 mechanism in MIT libraries<a class="headerlink" href="#the-krb5-mechanism-in-mit-libraries" title="Permalink to this heading"></a></h2>
 <p>The krb5 mechanism as implemented by MIT libraries supports the credentials
 store extension with a number of keywords.</p>
 <section id="client-keytab">
-<h3>client_keytab<a class="headerlink" href="#client-keytab" title="Permalink to this headline"></a></h3>
+<h3>client_keytab<a class="headerlink" href="#client-keytab" title="Permalink to this heading"></a></h3>
 <p>The <cite>client_keytab</cite> keyword can be used in a credential store when it is used
 with the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
 <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions to indicate a custom
@@ -110,7 +111,7 @@ keytab identifier (usually something like a path).  If the string is a path,
 then the type is defaulted to <cite>FILE</cite>.</p>
 </section>
 <section id="keytab">
-<h3>keytab<a class="headerlink" href="#keytab" title="Permalink to this headline"></a></h3>
+<h3>keytab<a class="headerlink" href="#keytab" title="Permalink to this heading"></a></h3>
 <p>The <cite>keytab</cite> keyword can be used in a credential store when it is used with
 the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
 <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions to indicate a custom
@@ -122,7 +123,7 @@ keytab identifier (usually something like a path).  If the string is a path,
 then the type is defaulted to <cite>FILE</cite>.</p>
 </section>
 <section id="ccache">
-<h3>ccache<a class="headerlink" href="#ccache" title="Permalink to this headline"></a></h3>
+<h3>ccache<a class="headerlink" href="#ccache" title="Permalink to this heading"></a></h3>
 <p>The <cite>ccache</cite> keyword can be used to reference a specific credential storage.
 It can be used both to indicate the source of existing credentials for the
 <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
@@ -137,7 +138,7 @@ is defaulted to <cite>FILE</cite>.  Other commonly used types are <cite>DIR</cit
 refer to the MIT krb5 documentation for more details.</p>
 </section>
 <section id="rcache">
-<h3>rcache<a class="headerlink" href="#rcache" title="Permalink to this headline"></a></h3>
+<h3>rcache<a class="headerlink" href="#rcache" title="Permalink to this heading"></a></h3>
 <p>The <cite>rcache</cite> keyword can be used to reference a custom replay cache storage.
 It is used only with the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
 <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions for credentials used
@@ -149,7 +150,7 @@ path, then the type is defaulted to <cite>FILE</cite>.</p>
 </section>
 </section>
 <section id="the-krb5-mechanism-in-heimdal">
-<h2>The krb5 mechanism in Heimdal<a class="headerlink" href="#the-krb5-mechanism-in-heimdal" title="Permalink to this headline"></a></h2>
+<h2>The krb5 mechanism in Heimdal<a class="headerlink" href="#the-krb5-mechanism-in-heimdal" title="Permalink to this heading"></a></h2>
 <p>Heimdal has recently implemented the credential store extensions with the same
 interface as MIT krb5.  However, it is not yet present in any released
 version.</p>

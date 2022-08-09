@@ -14,6 +14,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -110,7 +111,7 @@
     <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">channel_bindings</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;ChannelBindings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">input_token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InitSecContextResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InitSecContextResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Initiate a GSSAPI security context.</span>
 
 <span class="sd">    This method initiates a GSSAPI security context, targeting the given</span>
@@ -161,7 +162,7 @@
 <span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
 <span class="sd">        ~gssapi.exceptions.BadMechanismError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="accept_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.accept_sec_context">[docs]</a><span class="k">def</span> <span class="nf">accept_sec_context</span><span class="p">(</span>
@@ -169,7 +170,7 @@
     <span class="n">acceptor_creds</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Creds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">SecurityContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">channel_bindings</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;ChannelBindings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AcceptSecContextResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AcceptSecContextResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Accept a GSSAPI security context.</span>
 
 <span class="sd">    This method accepts a GSSAPI security context using a token sent by the</span>
@@ -208,7 +209,7 @@
 <span class="sd">        ~gssapi.exceptions.ExpiredTokenError</span>
 <span class="sd">        ~gssapi.exceptions.DuplicateTokenError</span>
 <span class="sd">        ~gssapi.exceptions.BadMechanismError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="inquire_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.inquire_context">[docs]</a><span class="k">def</span> <span class="nf">inquire_context</span><span class="p">(</span>
@@ -220,7 +221,7 @@
     <span class="n">flags</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">locally_init</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">complete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireContextResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireContextResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Get information about a security context.</span>
 
 <span class="sd">    This method obtains information about a security context, including</span>
@@ -242,12 +243,12 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="context_time"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.context_time">[docs]</a><span class="k">def</span> <span class="nf">context_time</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Get the amount of time for which the given context will remain valid.</span>
 
 <span class="sd">    This method determines the amount of time for which the given</span>
@@ -264,13 +265,13 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.ExpiredContextError</span>
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="process_context_token"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.process_context_token">[docs]</a><span class="k">def</span> <span class="nf">process_context_token</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
     <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Process a token asynchronously.</span>
 
 <span class="sd">    This method provides a way to process a token, even if the</span>
@@ -291,12 +292,12 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.InvalidTokenError</span>
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="import_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.import_sec_context">[docs]</a><span class="k">def</span> <span class="nf">import_sec_context</span><span class="p">(</span>
     <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SecurityContext</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SecurityContext</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Import a context from another process.</span>
 
 <span class="sd">    This method imports a security context established in another process</span>
@@ -308,12 +309,12 @@
 <span class="sd">        ~gssapi.exceptions.InvalidTokenError</span>
 <span class="sd">        ~gssapi.exceptions.OperationUnavailableError</span>
 <span class="sd">        ~gssapi.exceptions.UnauthorizedError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="export_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.export_sec_context">[docs]</a><span class="k">def</span> <span class="nf">export_sec_context</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Export a context for use in another process.</span>
 
 <span class="sd">    This method exports a security context, deactivating in the current process</span>
@@ -333,13 +334,13 @@
 <span class="sd">        ~gssapi.exceptions.ExpiredContextError</span>
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
 <span class="sd">        ~gssapi.exceptions.OperationUnavailableError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="delete_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.delete_sec_context">[docs]</a><span class="k">def</span> <span class="nf">delete_sec_context</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
     <span class="n">local_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Delete a GSSAPI security context.</span>
 
 <span class="sd">    This method deletes a GSSAPI security context,</span>
@@ -363,7 +364,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.MissingContextError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

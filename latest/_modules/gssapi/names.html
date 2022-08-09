@@ -14,6 +14,7 @@
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -96,7 +97,7 @@
 
 <span class="sd">    This class may be pickled and unpickled, as well as copied.</span>
 
-<span class="sd">    The :func:`str` and :func:`bytes` methods may be used to retrieve the</span>
+<span class="sd">    The :class:`str` and :class:`bytes` methods may be used to retrieve the</span>
 <span class="sd">    text of the name.</span>
 
 <span class="sd">    Note:</span>
@@ -394,13 +395,13 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inquire</span><span class="p">(</span><span class="n">mech_name</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mech</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_NameAttributeMapping&quot;</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;The attributes of this name (:requires-ext:`rfc6680`)</span>
 
 <span class="sd">        The attributes are presenting in the form of a</span>
-<span class="sd">        :class:`~collections.MutableMapping` (a dict-like object).</span>
+<span class="sd">        :class:`~collections.abc.MutableMapping` (a dict-like object).</span>
 
-<span class="sd">        Retrieved values will always be in the form of :class:`frozensets`.</span>
+<span class="sd">        Retrieved values will always be in the form of :class:`frozenset`.</span>
 
 <span class="sd">        When assigning values, if iterables are used, they be considered to be</span>
 <span class="sd">        the set of values for the given attribute.  If a non-iterable is used,</span>

@@ -14,6 +14,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -90,7 +91,7 @@
 <div class="viewcode-block" id="import_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.import_name">[docs]</a><span class="k">def</span> <span class="nf">import_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">name_type</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Convert a string and a name type into a GSSAPI name.</span>
 
 <span class="sd">    This method takes a string name and a name type and converts</span>
@@ -107,13 +108,13 @@
 <span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
 <span class="sd">        ~gssapi.exceptions.BadMechanismError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="display_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.display_name">[docs]</a><span class="k">def</span> <span class="nf">display_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
     <span class="n">name_type</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DisplayNameResult&quot;</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DisplayNameResult&quot;</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Convert a GSSAPI name into its components.</span>
 
 <span class="sd">    This method converts a GSSAPI :class:`Name` back into its</span>
@@ -131,13 +132,13 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="compare_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.compare_name">[docs]</a><span class="k">def</span> <span class="nf">compare_name</span><span class="p">(</span>
     <span class="n">name1</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
     <span class="n">name2</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Check two GSSAPI names to see if they are the same.</span>
 
 <span class="sd">    This method compares two GSSAPI names, checking to</span>
@@ -153,12 +154,12 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="export_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.export_name">[docs]</a><span class="k">def</span> <span class="nf">export_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Export a GSSAPI name.</span>
 
 <span class="sd">    This method &quot;produces a canonical contigous string representation</span>
@@ -179,13 +180,13 @@
 <span class="sd">        ~gssapi.exceptions.MechanismNameRequiredError</span>
 <span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="canonicalize_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.canonicalize_name">[docs]</a><span class="k">def</span> <span class="nf">canonicalize_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
     <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Canonicalize an arbitrary GSSAPI Name into a Mechanism Name</span>
 
 <span class="sd">    This method turns any GSSAPI name into a &quot;mechanism name&quot; --</span>
@@ -203,12 +204,12 @@
 <span class="sd">        ~gssapi.exceptions.BadMechanismError</span>
 <span class="sd">        ~gssapi.exceptions.BadNameTypeError</span>
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="duplicate_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.duplicate_name">[docs]</a><span class="k">def</span> <span class="nf">duplicate_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Duplicate a GSSAPI name.</span>
 
 <span class="sd">    Args:</span>
@@ -219,12 +220,12 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="release_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.release_name">[docs]</a><span class="k">def</span> <span class="nf">release_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Release a GSSAPI name.</span>
 
 <span class="sd">    This method frees a GSSAPI :class:`Name`.</span>
@@ -239,7 +240,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 </pre></div>
 
            </div>

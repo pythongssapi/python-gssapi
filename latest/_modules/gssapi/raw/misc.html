@@ -14,6 +14,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -77,17 +78,17 @@
 <span class="kn">from</span> <span class="nn">gssapi.raw.types</span> <span class="kn">import</span> <span class="n">MechType</span>
 
 
-<div class="viewcode-block" id="indicate_mechs"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.indicate_mechs">[docs]</a><span class="k">def</span> <span class="nf">indicate_mechs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span></div>
+<div class="viewcode-block" id="indicate_mechs"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.indicate_mechs">[docs]</a><span class="k">def</span> <span class="nf">indicate_mechs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Get the currently supported mechanisms.</span>
 
 <span class="sd">    This method retrieves the currently supported GSSAPI mechanisms.</span>
 <span class="sd">    Note that if unknown mechanims are found, those will be skipped.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="inquire_names_for_mech"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.inquire_names_for_mech">[docs]</a><span class="k">def</span> <span class="nf">inquire_names_for_mech</span><span class="p">(</span>
     <span class="n">mech</span><span class="p">:</span> <span class="n">OID</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    inquire_names_for_mech(mech)</span>
 <span class="sd">    Get the name types supported by a mechanism.</span>
@@ -103,12 +104,12 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <div class="viewcode-block" id="inquire_mechs_for_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.inquire_mechs_for_name">[docs]</a><span class="k">def</span> <span class="nf">inquire_mechs_for_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span></div>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    inquire_mechs_for_name(name)</span>
 <span class="sd">    List the mechanisms which can process a name.</span>
@@ -124,7 +125,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 <span class="k">def</span> <span class="nf">_display_status</span><span class="p">(</span>
@@ -209,7 +210,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">is_maj</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span></div>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve all messages for a status code.</span>
 
@@ -224,9 +225,9 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            [str]: A list of string messages associated with the</span>
 <span class="sd">                given code</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="GSSError.gen_message"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.GSSError.gen_message">[docs]</a>    <span class="k">def</span> <span class="nf">gen_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span></div></div>
+<div class="viewcode-block" id="GSSError.gen_message"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.GSSError.gen_message">[docs]</a>    <span class="k">def</span> <span class="nf">gen_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieves all messages for this error&#39;s status codes</span>
 
@@ -235,7 +236,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            str: a string for use as this error&#39;s message</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
 </pre></div>
 
            </div>

@@ -14,6 +14,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -76,153 +77,223 @@
 <span class="kn">from</span> <span class="nn">gssapi.raw.types</span> <span class="kn">import</span> <span class="n">RequirementFlag</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">gssapi.raw</span> <span class="k">as</span> <span class="nn">g</span>
+    <span class="kn">import</span> <span class="nn">gssapi</span>
 
 
 <div class="viewcode-block" id="AcquireCredResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.AcquireCredResult">[docs]</a><span class="k">class</span> <span class="nc">AcquireCredResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Credential result when acquiring a GSSAPI credential.&quot;&quot;&quot;</span>
-    <span class="n">creds</span><span class="p">:</span> <span class="s2">&quot;g.Creds&quot;</span>  <span class="c1">#: GSSAPI credentials that were acquired</span>
-    <span class="n">mechs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>  <span class="c1">#: Set of mechs the cred is for</span>
-    <span class="n">lifetime</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Number of seconds for which the cred will remain valid</span></div>
+    <span class="c1">#: GSSAPI credentials that were acquired</span>
+    <span class="n">creds</span><span class="p">:</span> <span class="s2">&quot;gssapi.raw.creds.Creds&quot;</span>
+    <span class="c1">#: Set of mechs the cred is for</span>
+    <span class="n">mechs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>
+    <span class="c1">#: Number of seconds for which the cred will remain valid</span>
+    <span class="n">lifetime</span><span class="p">:</span> <span class="nb">int</span></div>
 
 
 <div class="viewcode-block" id="InquireCredResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireCredResult">[docs]</a><span class="k">class</span> <span class="nc">InquireCredResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Information about the credential.&quot;&quot;&quot;</span>
-    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Name&quot;</span><span class="p">]</span>  <span class="c1">#: The principal associated with the credential</span>
-    <span class="n">lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Number of seconds which the cred is valid for</span>
-    <span class="n">usage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>  <span class="c1">#: How the credential can be used</span>
-    <span class="n">mechs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]]</span>  <span class="c1">#: Set of mechs the cred is for</span></div>
+    <span class="c1">#: The principal associated with the credential</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.names.Name&quot;</span><span class="p">]</span>
+    <span class="c1">#: Number of seconds which the cred is valid for</span>
+    <span class="n">lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="c1">#: How the credential can be used</span>
+    <span class="n">usage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="c1">#: Set of mechs the cred is for</span>
+    <span class="n">mechs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]]</span></div>
 
 
 <div class="viewcode-block" id="InquireCredByMechResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireCredByMechResult">[docs]</a><span class="k">class</span> <span class="nc">InquireCredByMechResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Information about the credential for a specific mechanism.&quot;&quot;&quot;</span>
-    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Name&quot;</span><span class="p">]</span>  <span class="c1">#: The principal associated with the credential</span>
-    <span class="n">init_lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Time valid for initiation, in seconds</span>
-    <span class="n">accept_lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Time valid for accepting, in seconds</span>
-    <span class="n">usage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>  <span class="c1">#: How the credential can be used</span></div>
+    <span class="c1">#: The principal associated with the credential</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.names.Name&quot;</span><span class="p">]</span>
+    <span class="c1">#: Time valid for initiation, in seconds</span>
+    <span class="n">init_lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="c1">#: Time valid for accepting, in seconds</span>
+    <span class="n">accept_lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="c1">#: How the credential can be used</span>
+    <span class="n">usage</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="AddCredResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.AddCredResult">[docs]</a><span class="k">class</span> <span class="nc">AddCredResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Result of adding to a GSSAPI credential.&quot;&quot;&quot;</span>
-    <span class="n">creds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Creds&quot;</span><span class="p">]</span>  <span class="c1">#: The credential that was generated</span>
-    <span class="n">mechs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>  <span class="c1">#: Set of mechs the cred is for</span>
-    <span class="n">init_lifetime</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Time valid for initiation, in seconds</span>
-    <span class="n">accept_lifetime</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Time valid for accepting, in seconds</span></div>
+    <span class="c1">#: The credential that was generated</span>
+    <span class="n">creds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.creds.Creds&quot;</span><span class="p">]</span>
+    <span class="c1">#: Set of mechs the cred is for</span>
+    <span class="n">mechs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>
+    <span class="c1">#: Time valid for initiation, in seconds</span>
+    <span class="n">init_lifetime</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="c1">#: Time valid for accepting, in seconds</span>
+    <span class="n">accept_lifetime</span><span class="p">:</span> <span class="nb">int</span></div>
 
 
 <div class="viewcode-block" id="DisplayNameResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.DisplayNameResult">[docs]</a><span class="k">class</span> <span class="nc">DisplayNameResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Textual representation of a GSSAPI name.&quot;&quot;&quot;</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: The representation of the GSSAPI name</span>
-    <span class="n">name_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>  <span class="c1">#: The type of GSSAPI name</span></div>
+    <span class="c1">#: The representation of the GSSAPI name</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span>
+    <span class="c1">#: The type of GSSAPI name</span>
+    <span class="n">name_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="WrapResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.WrapResult">[docs]</a><span class="k">class</span> <span class="nc">WrapResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Wrapped message result.&quot;&quot;&quot;</span>
-    <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: The wrapped message</span>
-    <span class="n">encrypted</span><span class="p">:</span> <span class="nb">bool</span>  <span class="c1">#: Whether the message is encrypted and not just signed</span></div>
+    <span class="c1">#: The wrapped message</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span>
+    <span class="c1">#: Whether the message is encrypted and not just signed</span>
+    <span class="n">encrypted</span><span class="p">:</span> <span class="nb">bool</span></div>
 
 
 <div class="viewcode-block" id="UnwrapResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.UnwrapResult">[docs]</a><span class="k">class</span> <span class="nc">UnwrapResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Unwrapped message result.&quot;&quot;&quot;</span>
-    <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: The unwrapped message</span>
-    <span class="n">encrypted</span><span class="p">:</span> <span class="nb">bool</span>  <span class="c1">#: Whether the message was encrypted and not just signed</span>
-    <span class="n">qop</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: The quality of protection applied to the message</span></div>
+    <span class="c1">#: The unwrapped message</span>
+    <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span>
+    <span class="c1">#: Whether the message was encrypted and not just signed</span>
+    <span class="n">encrypted</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="c1">#: The quality of protection applied to the message</span>
+    <span class="n">qop</span><span class="p">:</span> <span class="nb">int</span></div>
 
 
 <div class="viewcode-block" id="AcceptSecContextResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.AcceptSecContextResult">[docs]</a><span class="k">class</span> <span class="nc">AcceptSecContextResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Result when accepting a security context by an initiator.&quot;&quot;&quot;</span>
-    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;g.SecurityContext&quot;</span>  <span class="c1">#: The acceptor security context</span>
-    <span class="n">initiator_name</span><span class="p">:</span> <span class="s2">&quot;g.Name&quot;</span>  <span class="c1">#: The authenticated name of the initiator</span>
-    <span class="n">mech</span><span class="p">:</span> <span class="n">OID</span>  <span class="c1">#: Mechanism with which the context was established</span>
-    <span class="n">token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>  <span class="c1">#: Token to be returned to the initiator</span>
-    <span class="n">flags</span><span class="p">:</span> <span class="n">RequirementFlag</span>  <span class="c1">#: Services requested by the initiator</span>
-    <span class="n">lifetime</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Seconds for which the context is valid for</span>
-    <span class="n">delegated_creds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Creds&quot;</span><span class="p">]</span>  <span class="c1">#: Delegated credentials</span>
-    <span class="n">more_steps</span><span class="p">:</span> <span class="nb">bool</span>  <span class="c1">#: More input is required to complete the exchange</span></div>
+    <span class="c1">#: The acceptor security context</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;gssapi.raw.sec_contexts.SecurityContext&quot;</span>
+    <span class="c1">#: The authenticated name of the initiator</span>
+    <span class="n">initiator_name</span><span class="p">:</span> <span class="s2">&quot;gssapi.raw.names.Name&quot;</span>
+    <span class="c1">#: Mechanism with which the context was established</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="n">OID</span>
+    <span class="c1">#: Token to be returned to the initiator</span>
+    <span class="n">token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+    <span class="c1">#: Services requested by the initiator</span>
+    <span class="n">flags</span><span class="p">:</span> <span class="n">RequirementFlag</span>
+    <span class="c1">#: Seconds for which the context is valid for</span>
+    <span class="n">lifetime</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="c1">#: Delegated credentials</span>
+    <span class="n">delegated_creds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.creds.Creds&quot;</span><span class="p">]</span>
+    <span class="c1">#: More input is required to complete the exchange</span>
+    <span class="n">more_steps</span><span class="p">:</span> <span class="nb">bool</span></div>
 
 
 <div class="viewcode-block" id="InitSecContextResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InitSecContextResult">[docs]</a><span class="k">class</span> <span class="nc">InitSecContextResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Result when initiating a security context&quot;&quot;&quot;</span>
-    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;g.SecurityContext&quot;</span>  <span class="c1">#: The initiator security context</span>
-    <span class="n">mech</span><span class="p">:</span> <span class="n">OID</span>  <span class="c1">#: Mechanism used in the security context</span>
-    <span class="n">flags</span><span class="p">:</span> <span class="n">RequirementFlag</span>  <span class="c1">#: Services available for the context</span>
-    <span class="n">token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>  <span class="c1">#: Token to be sent to the acceptor</span>
-    <span class="n">lifetime</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Seconds for which the context is valid for</span>
-    <span class="n">more_steps</span><span class="p">:</span> <span class="nb">bool</span>  <span class="c1">#: More input is required to complete the exchange</span></div>
+    <span class="c1">#: The initiator security context</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;gssapi.raw.sec_contexts.SecurityContext&quot;</span>
+    <span class="c1">#: Mechanism used in the security context</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="n">OID</span>
+    <span class="c1">#: Services available for the context</span>
+    <span class="n">flags</span><span class="p">:</span> <span class="n">RequirementFlag</span>
+    <span class="c1">#: Token to be sent to the acceptor</span>
+    <span class="n">token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+    <span class="c1">#: Seconds for which the context is valid for</span>
+    <span class="n">lifetime</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="c1">#: More input is required to complete the exchange</span>
+    <span class="n">more_steps</span><span class="p">:</span> <span class="nb">bool</span></div>
 
 
 <div class="viewcode-block" id="InquireContextResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireContextResult">[docs]</a><span class="k">class</span> <span class="nc">InquireContextResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Information about the security context.&quot;&quot;&quot;</span>
-    <span class="n">initiator_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Name&quot;</span><span class="p">]</span>  <span class="c1">#: Name of the initiator</span>
-    <span class="n">target_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;g.Name&quot;</span><span class="p">]</span>  <span class="c1">#: Name of the acceptor</span>
-    <span class="n">lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Time valid for the security context, in seconds</span>
-    <span class="n">mech</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>  <span class="c1">#: Mech used to create the security context</span>
-    <span class="n">flags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RequirementFlag</span><span class="p">]</span>  <span class="c1">#: Services available for the context</span>
-    <span class="n">locally_init</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>  <span class="c1">#: Context was initiated locally</span>
-    <span class="n">complete</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>  <span class="c1">#: Context has been established and ready to use</span></div>
+    <span class="c1">#: Name of the initiator</span>
+    <span class="n">initiator_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.names.Name&quot;</span><span class="p">]</span>
+    <span class="c1">#: Name of the acceptor</span>
+    <span class="n">target_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.names.Name&quot;</span><span class="p">]</span>
+    <span class="c1">#: Time valid for the security context, in seconds</span>
+    <span class="n">lifetime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="c1">#: Mech used to create the security context</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>
+    <span class="c1">#: Services available for the context</span>
+    <span class="n">flags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RequirementFlag</span><span class="p">]</span>
+    <span class="c1">#: Context was initiated locally</span>
+    <span class="n">locally_init</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span>
+    <span class="c1">#: Context has been established and ready to use</span>
+    <span class="n">complete</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="StoreCredResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.StoreCredResult">[docs]</a><span class="k">class</span> <span class="nc">StoreCredResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Result of the credential storing operation.&quot;&quot;&quot;</span>
-    <span class="n">mechs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>  <span class="c1">#: Mechs that were stored in the credential store</span>
-    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span>  <span class="c1">#: How the credential can be used</span></div>
+    <span class="c1">#: Mechs that were stored in the credential store</span>
+    <span class="n">mechs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>
+    <span class="c1">#: How the credential can be used</span>
+    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span></div>
 
 
 <div class="viewcode-block" id="IOVUnwrapResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.IOVUnwrapResult">[docs]</a><span class="k">class</span> <span class="nc">IOVUnwrapResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Unwrapped IOV message result.&quot;&quot;&quot;</span>
-    <span class="n">encrypted</span><span class="p">:</span> <span class="nb">bool</span>  <span class="c1">#: Whether the message was encrypted and not just signed</span>
-    <span class="n">qop</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: The quality of protection applied to the message</span></div>
+    <span class="c1">#: Whether the message was encrypted and not just signed</span>
+    <span class="n">encrypted</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="c1">#: The quality of protection applied to the message</span>
+    <span class="n">qop</span><span class="p">:</span> <span class="nb">int</span></div>
 
 
 <div class="viewcode-block" id="InquireNameResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireNameResult">[docs]</a><span class="k">class</span> <span class="nc">InquireNameResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Information about a GSSAPI Name.&quot;&quot;&quot;</span>
-    <span class="n">attrs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>  <span class="c1">#: Set of attribute names</span>
-    <span class="n">is_mech_name</span><span class="p">:</span> <span class="nb">bool</span>  <span class="c1">#: Name is a mechanism name</span>
-    <span class="n">mech</span><span class="p">:</span> <span class="n">OID</span>  <span class="c1">#: The mechanism if is_name_mech is True</span></div>
+    <span class="c1">#: Set of attribute names</span>
+    <span class="n">attrs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+    <span class="c1">#: Name is a mechanism name</span>
+    <span class="n">is_mech_name</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="c1">#: The mechanism if is_name_mech is True</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="n">OID</span></div>
 
 
 <div class="viewcode-block" id="GetNameAttributeResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.GetNameAttributeResult">[docs]</a><span class="k">class</span> <span class="nc">GetNameAttributeResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;GSSAPI Name attribute values.&quot;&quot;&quot;</span>
-    <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>  <span class="c1">#: Raw values</span>
-    <span class="n">display_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>  <span class="c1">#: Human-readable values</span>
-    <span class="n">authenticated</span><span class="p">:</span> <span class="nb">bool</span>  <span class="c1">#: Attribute has been authenticated</span>
-    <span class="n">complete</span><span class="p">:</span> <span class="nb">bool</span>  <span class="c1">#: Attribute value is marked as complete</span></div>
+    <span class="c1">#: Raw values</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+    <span class="c1">#: Human-readable values</span>
+    <span class="n">display_values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
+    <span class="c1">#: Attribute has been authenticated</span>
+    <span class="n">authenticated</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="c1">#: Attribute value is marked as complete</span>
+    <span class="n">complete</span><span class="p">:</span> <span class="nb">bool</span></div>
 
 
 <div class="viewcode-block" id="InquireAttrsResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireAttrsResult">[docs]</a><span class="k">class</span> <span class="nc">InquireAttrsResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set of attributes supported and known by a mechanism.&quot;&quot;&quot;</span>
-    <span class="n">mech_attrs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>  <span class="c1">#: The mechanisms attributes</span>
-    <span class="n">known_mech_attrs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>  <span class="c1">#: Known attributes of the mechanism</span></div>
+    <span class="c1">#: The mechanisms attributes</span>
+    <span class="n">mech_attrs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>
+    <span class="c1">#: Known attributes of the mechanism</span>
+    <span class="n">known_mech_attrs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="DisplayAttrResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.DisplayAttrResult">[docs]</a><span class="k">class</span> <span class="nc">DisplayAttrResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Information about an attribute.&quot;&quot;&quot;</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: The mechanism name</span>
-    <span class="n">short_desc</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: Short description of the mechanism</span>
-    <span class="n">long_desc</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: Long description of the mechanism</span></div>
+    <span class="c1">#: The mechanism name</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span>
+    <span class="c1">#: Short description of the mechanism</span>
+    <span class="n">short_desc</span><span class="p">:</span> <span class="nb">bytes</span>
+    <span class="c1">#: Long description of the mechanism</span>
+    <span class="n">long_desc</span><span class="p">:</span> <span class="nb">bytes</span></div>
 
 
 <div class="viewcode-block" id="InquireSASLNameResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireSASLNameResult">[docs]</a><span class="k">class</span> <span class="nc">InquireSASLNameResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;SASL informmation about a GSSAPI Name.&quot;&quot;&quot;</span>
-    <span class="n">sasl_mech_name</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: The SASL name</span>
-    <span class="n">mech_name</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: The mechanism name</span>
-    <span class="n">mech_description</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: The mechanism description</span></div>
+    <span class="c1">#: The SASL name</span>
+    <span class="n">sasl_mech_name</span><span class="p">:</span> <span class="nb">bytes</span>
+    <span class="c1">#: The mechanism name</span>
+    <span class="n">mech_name</span><span class="p">:</span> <span class="nb">bytes</span>
+    <span class="c1">#: The mechanism description</span>
+    <span class="n">mech_description</span><span class="p">:</span> <span class="nb">bytes</span></div>
 
 
 <div class="viewcode-block" id="Rfc1964KeyData"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.Rfc1964KeyData">[docs]</a><span class="k">class</span> <span class="nc">Rfc1964KeyData</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Security context key data based on RFC1964.&quot;&quot;&quot;</span>
-    <span class="n">sign_alg</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Signing algorithm identifier</span>
-    <span class="n">seal_alg</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Sealing algorithm identifier</span>
-    <span class="n">key_type</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Key encryption type identifier</span>
-    <span class="n">key</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: Encryption key data</span></div>
+    <span class="c1">#: Signing algorithm identifier</span>
+    <span class="n">sign_alg</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="c1">#: Sealing algorithm identifier</span>
+    <span class="n">seal_alg</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="c1">#: Key encryption type identifier</span>
+    <span class="n">key_type</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="c1">#: Encryption key data</span>
+    <span class="n">key</span><span class="p">:</span> <span class="nb">bytes</span></div>
 
 
 <div class="viewcode-block" id="CfxKeyData"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.CfxKeyData">[docs]</a><span class="k">class</span> <span class="nc">CfxKeyData</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Securty context key data.&quot;&quot;&quot;</span>
-    <span class="n">ctx_key_type</span><span class="p">:</span> <span class="nb">int</span>  <span class="c1">#: Context key encryption type identifier</span>
-    <span class="n">ctx_key</span><span class="p">:</span> <span class="nb">bytes</span>  <span class="c1">#: Context key data - session or sub-session key</span>
-    <span class="n">acceptor_subkey_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>  <span class="c1">#: Acceptor key enc type identifier</span>
-    <span class="n">acceptor_subkey</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>  <span class="c1">#: Acceptor key data</span></div>
+    <span class="c1">#: Context key encryption type identifier</span>
+    <span class="n">ctx_key_type</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="c1">#: Context key data - session or sub-session key</span>
+    <span class="n">ctx_key</span><span class="p">:</span> <span class="nb">bytes</span>
+    <span class="c1">#: Acceptor key enc type identifier</span>
+    <span class="n">acceptor_subkey_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="c1">#: Acceptor key data</span>
+    <span class="n">acceptor_subkey</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span></div>
 </pre></div>
 
            </div>
