@@ -3,5 +3,5 @@ parameterized
 Cython
 k5test
 decorator
-mypy
+mypy==0.971
 types-decorator
