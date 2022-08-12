@@ -284,7 +284,7 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: ci_docs_build/html
+        FOLDER: ci_docs_build
         TARGET_FOLDER: stable
 
     - name: Create release
