@@ -57,8 +57,6 @@ jobs:
           version: cp38-macosx_arm64
         - os: macOS-12
           version: cp37-macosx_x86_64
-        - os: macOS-12
-          version: cp36-macosx_x86_64
 
         - os: windows-2022
           version: cp310-win_amd64
@@ -76,10 +74,6 @@ jobs:
           version: cp37-win_amd64
         - os: windows-2022
           version: cp37-win32
-        - os: windows-2022
-          version: cp36-win_amd64
-        - os: windows-2022
-          version: cp36-win32
 
     steps:
     - name: Set up environment
@@ -136,7 +130,7 @@ jobs:
         name:
         - debian-stable
         - debian-heimdal
-        - centos-stream-8
+        - centos-stream-9
         - fedora-latest
         include:
         - name: debian-stable
@@ -144,8 +138,8 @@ jobs:
         - name: debian-heimdal
           distro: debian:stable
           krb5_ver: heimdal
-        - name: centos-stream-8
-          distro: quay.io/centos/centos:stream8
+        - name: centos-stream-9
+          distro: quay.io/centos/centos:stream9
         - name: fedora-latest
           distro: fedora:latest
           flake: 'yes'
@@ -181,7 +175,6 @@ jobs:
         - win-py-3.9
         - win-py-3.8
         - win-py-3.7
-        - win-py-3.6
         arch:
         - x64
         - x86
@@ -194,8 +187,6 @@ jobs:
           pyenv: '3.8'
         - name: win-py-3.7
           pyenv: '3.7'
-        - name: win-py-3.6
-          pyenv: '3.6'
 
     steps:
     - name: Check out code

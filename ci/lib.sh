@@ -16,34 +16,64 @@ lib::setup::debian_install() {
         export GSSAPI_KRB5_MAIN_LIB="/usr/lib/x86_64-linux-gnu/libkrb5.so"
     fi
 
-    apt-get -y install gcc virtualenv python3-{venv,dev}
+    apt-get -y install gcc python3-{venv,dev}
 
-    virtualenv -p $(which python3) .venv
+    python3 -m venv .venv
     source ./.venv/bin/activate
 }
 
-lib::setup::rh_yuminst() {
-    # yum has no update-only verb.  Also: modularity just makes this slower.
-    yum -y --nogpgcheck --disablerepo=\*modul\* install $@
+lib::setup::rh_dnfinst() {
+    # dnf has no update-only verb.  Also: modularity just makes this slower.
+    dnf -y --nogpgcheck --disablerepo=\*modul\* install $@
 }
 
 lib::setup::centos_install() {
-    lib::setup::rh_yuminst python3-{virtualenv,devel}
-    virtualenv -p $(which python3) .venv
+    lib::setup::rh_dnfinst python3-devel
+    python3 -m venv .venv
     source ./.venv/bin/activate
 }
 
 lib::setup::fedora_install() {
     # path to binary here in case Rawhide changes it
-    lib::setup::rh_yuminst redhat-rpm-config \
-        /usr/bin/virtualenv python3-{virtualenv,devel}
-    virtualenv -p $(which python3) .venv
+    lib::setup::rh_dnfinst redhat-rpm-config \
+        python3-devel
+    python3 -m venv .venv
     source ./.venv/bin/activate
 }
 
+lib::setup::gssntlmssp_install() {
+    lib::setup::rh_dnfinst dnf-plugins-core
+    dnf config-manager --set-enabled crb
+
+    lib::setup::rh_dnfinst autoconf automake gettext libtool \
+                    libunistring-devel openssl-devel zlib-devel
+
+    curl -L -s https://github.com/gssapi/gss-ntlmssp/releases/download/v1.1.0/gssntlmssp-1.1.0.tar.gz --output /tmp/gssntlmssp.tar.gz
+    tar xf /tmp/gssntlmssp.tar.gz -C /tmp
+
+    pushd /tmp/gssntlmssp-1.1.0
+
+    autoreconf -f -i
+    ./configure --with-wbclient=no --with-manpages=no
+    make
+    make install
+
+    popd
+
+    echo "gssntlmssp_v1    1.3.6.1.4.1.311.2.2.10    /usr/local/lib/gssntlmssp/gssntlmssp.so" > /etc/gss/mech.d/gssntlmssp.conf
+}
+
 lib::setup::rh_install() {
-    lib::setup::rh_yuminst krb5-{devel,libs,server,workstation} \
-                       which gcc findutils gssntlmssp
+    lib::setup::rh_dnfinst krb5-{devel,libs,server,workstation} \
+                    which gcc findutils
+
+    if grep -q 'release 9' /etc/redhat-release; then
+        # CentOS 9 Stream doesn't have a dnf package for gssntlmssp
+        lib::setup::gssntlmssp_install
+    else
+        lib::setup::rh_dnfinst gssntlmssp
+    fi
+
     export GSSAPI_KRB5_MAIN_LIB="/usr/lib64/libkrb5.so"
 
     if [ -f /etc/fedora-release ]; then
@@ -54,8 +84,7 @@ lib::setup::rh_install() {
 }
 
 lib::setup::macos_install() {
-    sudo pip3 install virtualenv
-    python3 -m virtualenv -p $(which python3) .venv
+    python3 -m venv .venv
     source .venv/bin/activate
 
     export GSSAPI_KRB5_MAIN_LIB="/System/Library/PrivateFrameworks/Heimdal.framework/Heimdal"
