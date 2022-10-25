@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>High-Level API &mdash; Python-GSSAPI 1.8.1 documentation</title>
+  <title>High-Level API &mdash; Python-GSSAPI 1.8.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -17,6 +17,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -32,7 +33,7 @@
             <a href="index.html" class="icon icon-home"> Python-GSSAPI
           </a>
               <div class="version">
-                1.8.1
+                1.8.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -45,9 +46,16 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">High-Level API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#main-classes">Main Classes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.names">Names</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.creds">Credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.names">Names</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.names.Name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.creds">Credentials</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.creds.Credentials"><code class="docutils literal notranslate"><span class="pre">Credentials</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.sec_contexts">Security Contexts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.sec_contexts.SecurityContext"><code class="docutils literal notranslate"><span class="pre">SecurityContext</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.names.Name">Name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.creds.Credentials">Credentials</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.sec_contexts.SecurityContext">SecurityContext</a></li>
@@ -55,10 +63,27 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#enums-and-helper-classes">Enums and Helper Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#exceptions">Exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.NameType">NameType</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#enums-and-helper-classes">Enums and Helper Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.NameType"><code class="docutils literal notranslate"><span class="pre">NameType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.anonymous"><code class="docutils literal notranslate"><span class="pre">NameType.anonymous</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.composite_export"><code class="docutils literal notranslate"><span class="pre">NameType.composite_export</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.export"><code class="docutils literal notranslate"><span class="pre">NameType.export</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.hostbased_service"><code class="docutils literal notranslate"><span class="pre">NameType.hostbased_service</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.kerberos_principal"><code class="docutils literal notranslate"><span class="pre">NameType.kerberos_principal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.krb5_nt_principal_name"><code class="docutils literal notranslate"><span class="pre">NameType.krb5_nt_principal_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.machine_uid"><code class="docutils literal notranslate"><span class="pre">NameType.machine_uid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.string_uid"><code class="docutils literal notranslate"><span class="pre">NameType.string_uid</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.user"><code class="docutils literal notranslate"><span class="pre">NameType.user</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.MechType"><code class="docutils literal notranslate"><span class="pre">MechType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.MechType.kerberos"><code class="docutils literal notranslate"><span class="pre">MechType.kerberos</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.RequirementFlag"><code class="docutils literal notranslate"><span class="pre">RequirementFlag</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.AddressType"><code class="docutils literal notranslate"><span class="pre">AddressType</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.OID"><code class="docutils literal notranslate"><span class="pre">OID</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.IntEnumFlagSet"><code class="docutils literal notranslate"><span class="pre">IntEnumFlagSet</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.anonymous">anonymous</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.composite_export">composite_export</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.export">export</a></li>
@@ -68,140 +93,214 @@
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.machine_uid">machine_uid</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.string_uid">string_uid</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.NameType.user">user</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.MechType">MechType</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.MechType.kerberos">kerberos</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#exceptions">Exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.GSSError"><code class="docutils literal notranslate"><span class="pre">GSSError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GSSError.MESSAGE"><code class="docutils literal notranslate"><span class="pre">GSSError.MESSAGE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GSSError.gen_message"><code class="docutils literal notranslate"><span class="pre">GSSError.gen_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GSSError.get_all_statuses"><code class="docutils literal notranslate"><span class="pre">GSSError.get_all_statuses()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.GeneralError"><code class="docutils literal notranslate"><span class="pre">GeneralError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GeneralError.MAJOR_MESSAGE"><code class="docutils literal notranslate"><span class="pre">GeneralError.MAJOR_MESSAGE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GeneralError.FMT_STR"><code class="docutils literal notranslate"><span class="pre">GeneralError.FMT_STR</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.UnknownUsageError"><code class="docutils literal notranslate"><span class="pre">UnknownUsageError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.UnknownUsageError.MAJOR_MESSAGE"><code class="docutils literal notranslate"><span class="pre">UnknownUsageError.MAJOR_MESSAGE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed"><code class="docutils literal notranslate"><span class="pre">EncryptionNotUsed</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed.MAJOR_MESSAGE"><code class="docutils literal notranslate"><span class="pre">EncryptionNotUsed.MAJOR_MESSAGE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadChannelBindingsError"><code class="docutils literal notranslate"><span class="pre">BadChannelBindingsError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadChannelBindingsError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">BadChannelBindingsError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadMICError"><code class="docutils literal notranslate"><span class="pre">BadMICError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadMICError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">BadMICError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadMechanismError"><code class="docutils literal notranslate"><span class="pre">BadMechanismError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadMechanismError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">BadMechanismError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadNameError"><code class="docutils literal notranslate"><span class="pre">BadNameError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadNameError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">BadNameError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError"><code class="docutils literal notranslate"><span class="pre">BadNameTypeError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">BadNameTypeError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadQoPError"><code class="docutils literal notranslate"><span class="pre">BadQoPError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadQoPError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">BadQoPError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadStatusError"><code class="docutils literal notranslate"><span class="pre">BadStatusError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadStatusError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">BadStatusError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ContextReadError"><code class="docutils literal notranslate"><span class="pre">ContextReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ContextWriteError"><code class="docutils literal notranslate"><span class="pre">ContextWriteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.CredentialsReadError"><code class="docutils literal notranslate"><span class="pre">CredentialsReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.CredentialsWriteError"><code class="docutils literal notranslate"><span class="pre">CredentialsWriteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError"><code class="docutils literal notranslate"><span class="pre">DuplicateCredentialsElementError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">DuplicateCredentialsElementError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError"><code class="docutils literal notranslate"><span class="pre">DuplicateTokenError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError.SUPPLEMENTARY_CODE"><code class="docutils literal notranslate"><span class="pre">DuplicateTokenError.SUPPLEMENTARY_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError"><code class="docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">ExpiredContextError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError"><code class="docutils literal notranslate"><span class="pre">ExpiredCredentialsError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">ExpiredCredentialsError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError"><code class="docutils literal notranslate"><span class="pre">ExpiredTokenError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE"><code class="docutils literal notranslate"><span class="pre">ExpiredTokenError.SUPPLEMENTARY_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError"><code class="docutils literal notranslate"><span class="pre">InvalidCredentialsError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">InvalidCredentialsError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError"><code class="docutils literal notranslate"><span class="pre">InvalidTokenError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">InvalidTokenError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MalformedParameterError"><code class="docutils literal notranslate"><span class="pre">MalformedParameterError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MalformedParameterError.CALLING_CODE"><code class="docutils literal notranslate"><span class="pre">MalformedParameterError.CALLING_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MechanismNameRequiredError"><code class="docutils literal notranslate"><span class="pre">MechanismNameRequiredError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MechanismNameRequiredError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">MechanismNameRequiredError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MissingContextError"><code class="docutils literal notranslate"><span class="pre">MissingContextError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MissingContextError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">MissingContextError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError"><code class="docutils literal notranslate"><span class="pre">MissingCredentialsError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">MissingCredentialsError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.NameReadError"><code class="docutils literal notranslate"><span class="pre">NameReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.NameTypeReadError"><code class="docutils literal notranslate"><span class="pre">NameTypeReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError"><code class="docutils literal notranslate"><span class="pre">OperationUnavailableError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">OperationUnavailableError.ROUTINE_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ParameterReadError"><code class="docutils literal notranslate"><span class="pre">ParameterReadError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ParameterReadError.CALLING_CODE"><code class="docutils literal notranslate"><span class="pre">ParameterReadError.CALLING_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ParameterWriteError"><code class="docutils literal notranslate"><span class="pre">ParameterWriteError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ParameterWriteError.CALLING_CODE"><code class="docutils literal notranslate"><span class="pre">ParameterWriteError.CALLING_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.SupplementaryError"><code class="docutils literal notranslate"><span class="pre">SupplementaryError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenOutOfSequenceError"><code class="docutils literal notranslate"><span class="pre">TokenOutOfSequenceError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenReadError"><code class="docutils literal notranslate"><span class="pre">TokenReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError"><code class="docutils literal notranslate"><span class="pre">TokenTooEarlyError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError.SUPPLEMENTARY_CODE"><code class="docutils literal notranslate"><span class="pre">TokenTooEarlyError.SUPPLEMENTARY_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError"><code class="docutils literal notranslate"><span class="pre">TokenTooLateError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError.SUPPLEMENTARY_CODE"><code class="docutils literal notranslate"><span class="pre">TokenTooLateError.SUPPLEMENTARY_CODE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.UnauthorizedError"><code class="docutils literal notranslate"><span class="pre">UnauthorizedError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.UnauthorizedError.ROUTINE_CODE"><code class="docutils literal notranslate"><span class="pre">UnauthorizedError.ROUTINE_CODE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GSSError.MESSAGE">MESSAGE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GSSError.gen_message">gen_message</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GSSError.get_all_statuses">get_all_statuses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GeneralError.MAJOR_MESSAGE">MAJOR_MESSAGE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GeneralError.FMT_STR">FMT_STR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.UnknownUsageError.MAJOR_MESSAGE">MAJOR_MESSAGE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed.MAJOR_MESSAGE">MAJOR_MESSAGE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadChannelBindingsError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadMICError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadMechanismError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadNameError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadQoPError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadStatusError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MalformedParameterError.CALLING_CODE">CALLING_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MechanismNameRequiredError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MissingContextError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ParameterReadError.CALLING_CODE">CALLING_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ParameterWriteError.CALLING_CODE">CALLING_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.UnauthorizedError.ROUTINE_CODE">ROUTINE_CODE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.set_encoding"><code class="docutils literal notranslate"><span class="pre">set_encoding()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.NameType">NameType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.MechType">MechType</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.RequirementFlag">RequirementFlag</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.AddressType">AddressType</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.OID">OID</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.IntEnumFlagSet">IntEnumFlagSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.GSSError">GSSError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GSSError.MESSAGE">MESSAGE</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GSSError.gen_message">gen_message</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GSSError.get_all_statuses">get_all_statuses</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.GeneralError">GeneralError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GeneralError.MAJOR_MESSAGE">MAJOR_MESSAGE</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.GeneralError.FMT_STR">FMT_STR</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.UnknownUsageError">UnknownUsageError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.UnknownUsageError.MAJOR_MESSAGE">MAJOR_MESSAGE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed">EncryptionNotUsed</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed.MAJOR_MESSAGE">MAJOR_MESSAGE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadChannelBindingsError">BadChannelBindingsError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadChannelBindingsError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadMICError">BadMICError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadMICError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadMechanismError">BadMechanismError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadMechanismError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadNameError">BadNameError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadNameError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError">BadNameTypeError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadQoPError">BadQoPError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadQoPError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadStatusError">BadStatusError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.BadStatusError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.GSSError">GSSError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.GeneralError">GeneralError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.UnknownUsageError">UnknownUsageError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.EncryptionNotUsed">EncryptionNotUsed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadChannelBindingsError">BadChannelBindingsError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadMICError">BadMICError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadMechanismError">BadMechanismError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadNameError">BadNameError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadNameTypeError">BadNameTypeError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadQoPError">BadQoPError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.BadStatusError">BadStatusError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ContextReadError">ContextReadError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ContextWriteError">ContextWriteError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.CredentialsReadError">CredentialsReadError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.CredentialsWriteError">CredentialsWriteError</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError">DuplicateCredentialsElementError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError">DuplicateTokenError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError">ExpiredContextError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError">ExpiredCredentialsError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError">ExpiredTokenError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError">InvalidCredentialsError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError">InvalidTokenError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MalformedParameterError">MalformedParameterError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MalformedParameterError.CALLING_CODE">CALLING_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MechanismNameRequiredError">MechanismNameRequiredError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MechanismNameRequiredError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MissingContextError">MissingContextError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MissingContextError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError">MissingCredentialsError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.DuplicateCredentialsElementError">DuplicateCredentialsElementError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.DuplicateTokenError">DuplicateTokenError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ExpiredContextError">ExpiredContextError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ExpiredCredentialsError">ExpiredCredentialsError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ExpiredTokenError">ExpiredTokenError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.InvalidCredentialsError">InvalidCredentialsError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.InvalidTokenError">InvalidTokenError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MalformedParameterError">MalformedParameterError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MechanismNameRequiredError">MechanismNameRequiredError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MissingContextError">MissingContextError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.MissingCredentialsError">MissingCredentialsError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.NameReadError">NameReadError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.NameTypeReadError">NameTypeReadError</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError">OperationUnavailableError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ParameterReadError">ParameterReadError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ParameterReadError.CALLING_CODE">CALLING_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ParameterWriteError">ParameterWriteError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.ParameterWriteError.CALLING_CODE">CALLING_CODE</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.OperationUnavailableError">OperationUnavailableError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ParameterReadError">ParameterReadError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.ParameterWriteError">ParameterWriteError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.SupplementaryError">SupplementaryError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenOutOfSequenceError">TokenOutOfSequenceError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenReadError">TokenReadError</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError">TokenTooEarlyError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError">TokenTooLateError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError.SUPPLEMENTARY_CODE">SUPPLEMENTARY_CODE</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.UnauthorizedError">UnauthorizedError</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gssapi.exceptions.UnauthorizedError.ROUTINE_CODE">ROUTINE_CODE</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenTooEarlyError">TokenTooEarlyError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.TokenTooLateError">TokenTooLateError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.exceptions.UnauthorizedError">UnauthorizedError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.set_encoding">set_encoding</a></li>
 </ul>
 </li>
@@ -225,8 +324,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>High-Level API</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">High-Level API</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/gssapi.rst.txt" rel="nofollow"> View page source</a>
       </li>

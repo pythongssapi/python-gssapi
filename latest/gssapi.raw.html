@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Low-Level API &mdash; Python-GSSAPI 1.8.1 documentation</title>
+  <title>Low-Level API &mdash; Python-GSSAPI 1.8.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -17,6 +17,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -32,7 +33,7 @@
             <a href="index.html" class="icon icon-home"> Python-GSSAPI
           </a>
               <div class="version">
-                1.8.1
+                1.8.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -46,10 +47,59 @@
 <li class="toctree-l1"><a class="reference internal" href="gssapi.html">High-Level API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Low-Level API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#core-rfc-2744">Core RFC 2744</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#names">Names</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.creds">Credentials</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.sec_contexts">Security Contexts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#names">Names</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.Name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.canonicalize_name"><code class="docutils literal notranslate"><span class="pre">canonicalize_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.compare_name"><code class="docutils literal notranslate"><span class="pre">compare_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.display_name"><code class="docutils literal notranslate"><span class="pre">display_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.duplicate_name"><code class="docutils literal notranslate"><span class="pre">duplicate_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.export_name"><code class="docutils literal notranslate"><span class="pre">export_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.import_name"><code class="docutils literal notranslate"><span class="pre">import_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.release_name"><code class="docutils literal notranslate"><span class="pre">release_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.creds">Credentials</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.creds.Creds"><code class="docutils literal notranslate"><span class="pre">Creds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.creds.acquire_cred"><code class="docutils literal notranslate"><span class="pre">acquire_cred()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.creds.add_cred"><code class="docutils literal notranslate"><span class="pre">add_cred()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.creds.inquire_cred"><code class="docutils literal notranslate"><span class="pre">inquire_cred()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.creds.inquire_cred_by_mech"><code class="docutils literal notranslate"><span class="pre">inquire_cred_by_mech()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.creds.release_cred"><code class="docutils literal notranslate"><span class="pre">release_cred()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.sec_contexts">Security Contexts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.sec_contexts.SecurityContext"><code class="docutils literal notranslate"><span class="pre">SecurityContext</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.sec_contexts.accept_sec_context"><code class="docutils literal notranslate"><span class="pre">accept_sec_context()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.sec_contexts.context_time"><code class="docutils literal notranslate"><span class="pre">context_time()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.sec_contexts.delete_sec_context"><code class="docutils literal notranslate"><span class="pre">delete_sec_context()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.sec_contexts.export_sec_context"><code class="docutils literal notranslate"><span class="pre">export_sec_context()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.sec_contexts.import_sec_context"><code class="docutils literal notranslate"><span class="pre">import_sec_context()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.sec_contexts.init_sec_context"><code class="docutils literal notranslate"><span class="pre">init_sec_context()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.sec_contexts.inquire_context"><code class="docutils literal notranslate"><span class="pre">inquire_context()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.sec_contexts.process_context_token"><code class="docutils literal notranslate"><span class="pre">process_context_token()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.message.get_mic"><code class="docutils literal notranslate"><span class="pre">get_mic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.message.unwrap"><code class="docutils literal notranslate"><span class="pre">unwrap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.message.verify_mic"><code class="docutils literal notranslate"><span class="pre">verify_mic()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.message.wrap"><code class="docutils literal notranslate"><span class="pre">wrap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.message.wrap_size_limit"><code class="docutils literal notranslate"><span class="pre">wrap_size_limit()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.oids">Misc</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.oids.OID"><code class="docutils literal notranslate"><span class="pre">OID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.misc.GSSError"><code class="docutils literal notranslate"><span class="pre">GSSError</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.misc.MechType"><code class="docutils literal notranslate"><span class="pre">MechType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.misc.Name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.misc.OID"><code class="docutils literal notranslate"><span class="pre">OID</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.misc.indicate_mechs"><code class="docutils literal notranslate"><span class="pre">indicate_mechs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.misc.inquire_mechs_for_name"><code class="docutils literal notranslate"><span class="pre">inquire_mechs_for_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.misc.inquire_names_for_mech"><code class="docutils literal notranslate"><span class="pre">inquire_names_for_mech()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.types.AddressType"><code class="docutils literal notranslate"><span class="pre">AddressType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.types.GenericFlagSet"><code class="docutils literal notranslate"><span class="pre">GenericFlagSet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.types.IntEnumFlagSet"><code class="docutils literal notranslate"><span class="pre">IntEnumFlagSet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.types.MechType"><code class="docutils literal notranslate"><span class="pre">MechType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.types.NameType"><code class="docutils literal notranslate"><span class="pre">NameType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.types.RequirementFlag"><code class="docutils literal notranslate"><span class="pre">RequirementFlag</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.chan_bindings.ChannelBindings"><code class="docutils literal notranslate"><span class="pre">ChannelBindings</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.Name">Name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.canonicalize_name">canonicalize_name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.names.compare_name">compare_name</a></li>
@@ -98,20 +148,92 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-rfcs-and-extensions">Additional RFCs and Extensions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc4178"><strong>RFC 4178</strong> (GSS-API Negotiation Mechanism)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5587"><strong>RFC 5587</strong> (GSS-API Extension for Mech Attributes)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5588"><strong>RFC 5588</strong> (GSS-API Extension for Storing Delegated Credentials)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5801"><strong>RFC 5801</strong> (GSS-API SASL Extensions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_cred_store">Credential Store Extensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc6680"><strong>RFC 6680</strong> (GSS-API Naming Extensions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_cred_imp_exp">Credentials Import-Export Extensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_dce">DCE (IOV/AEAD) Extensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_iov_mic">IOV MIC Extensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_ggf">Global Grid Forum (GGF) Extensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_s4u">Services4User Extensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_password">Acquiring Credentials With a Password Extensions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_krb5">Kerberos Specific Extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc4178"><strong>RFC 4178</strong> (GSS-API Negotiation Mechanism)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc4178.set_neg_mechs"><code class="docutils literal notranslate"><span class="pre">set_neg_mechs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5587"><strong>RFC 5587</strong> (GSS-API Extension for Mech Attributes)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc5587.display_mech_attr"><code class="docutils literal notranslate"><span class="pre">display_mech_attr()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc5587.indicate_mechs_by_attrs"><code class="docutils literal notranslate"><span class="pre">indicate_mechs_by_attrs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc5587.inquire_attrs_for_mech"><code class="docutils literal notranslate"><span class="pre">inquire_attrs_for_mech()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5588"><strong>RFC 5588</strong> (GSS-API Extension for Storing Delegated Credentials)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc5588.store_cred"><code class="docutils literal notranslate"><span class="pre">store_cred()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc5801"><strong>RFC 5801</strong> (GSS-API SASL Extensions)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc5801.inquire_mech_for_saslname"><code class="docutils literal notranslate"><span class="pre">inquire_mech_for_saslname()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc5801.inquire_saslname_for_mech"><code class="docutils literal notranslate"><span class="pre">inquire_saslname_for_mech()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_cred_store">Credential Store Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_cred_store.acquire_cred_from"><code class="docutils literal notranslate"><span class="pre">acquire_cred_from()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_cred_store.add_cred_from"><code class="docutils literal notranslate"><span class="pre">add_cred_from()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_cred_store.store_cred_into"><code class="docutils literal notranslate"><span class="pre">store_cred_into()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_rfc6680"><strong>RFC 6680</strong> (GSS-API Naming Extensions)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc6680.delete_name_attribute"><code class="docutils literal notranslate"><span class="pre">delete_name_attribute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc6680.display_name_ext"><code class="docutils literal notranslate"><span class="pre">display_name_ext()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc6680.export_name_composite"><code class="docutils literal notranslate"><span class="pre">export_name_composite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc6680.get_name_attribute"><code class="docutils literal notranslate"><span class="pre">get_name_attribute()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc6680.inquire_name"><code class="docutils literal notranslate"><span class="pre">inquire_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc6680.set_name_attribute"><code class="docutils literal notranslate"><span class="pre">set_name_attribute()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_cred_imp_exp">Credentials Import-Export Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_cred_imp_exp.export_cred"><code class="docutils literal notranslate"><span class="pre">export_cred()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_cred_imp_exp.import_cred"><code class="docutils literal notranslate"><span class="pre">import_cred()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_dce">DCE (IOV/AEAD) Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_dce.IOV"><code class="docutils literal notranslate"><span class="pre">IOV</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_dce.IOVBuffer"><code class="docutils literal notranslate"><span class="pre">IOVBuffer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_dce.IOVBufferType"><code class="docutils literal notranslate"><span class="pre">IOVBufferType</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_dce.unwrap_aead"><code class="docutils literal notranslate"><span class="pre">unwrap_aead()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_dce.unwrap_iov"><code class="docutils literal notranslate"><span class="pre">unwrap_iov()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_dce.wrap_aead"><code class="docutils literal notranslate"><span class="pre">wrap_aead()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_dce.wrap_iov"><code class="docutils literal notranslate"><span class="pre">wrap_iov()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_dce.wrap_iov_length"><code class="docutils literal notranslate"><span class="pre">wrap_iov_length()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_iov_mic">IOV MIC Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_iov_mic.get_mic_iov"><code class="docutils literal notranslate"><span class="pre">get_mic_iov()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_iov_mic.get_mic_iov_length"><code class="docutils literal notranslate"><span class="pre">get_mic_iov_length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_iov_mic.verify_mic_iov"><code class="docutils literal notranslate"><span class="pre">verify_mic_iov()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_ggf">Global Grid Forum (GGF) Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_ggf.inquire_cred_by_oid"><code class="docutils literal notranslate"><span class="pre">inquire_cred_by_oid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_ggf.inquire_sec_context_by_oid"><code class="docutils literal notranslate"><span class="pre">inquire_sec_context_by_oid()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_ggf.set_sec_context_option"><code class="docutils literal notranslate"><span class="pre">set_sec_context_option()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_s4u">Services4User Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_s4u.acquire_cred_impersonate_name"><code class="docutils literal notranslate"><span class="pre">acquire_cred_impersonate_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_s4u.add_cred_impersonate_name"><code class="docutils literal notranslate"><span class="pre">add_cred_impersonate_name()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_password">Acquiring Credentials With a Password Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_password.acquire_cred_with_password"><code class="docutils literal notranslate"><span class="pre">acquire_cred_with_password()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_password_add.add_cred_with_password"><code class="docutils literal notranslate"><span class="pre">add_cred_with_password()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_krb5">Kerberos Specific Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_krb5.Krb5LucidContext"><code class="docutils literal notranslate"><span class="pre">Krb5LucidContext</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1"><code class="docutils literal notranslate"><span class="pre">Krb5LucidContextV1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_ccache_name"><code class="docutils literal notranslate"><span class="pre">krb5_ccache_name()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_export_lucid_sec_context"><code class="docutils literal notranslate"><span class="pre">krb5_export_lucid_sec_context()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_extract_authtime_from_sec_context"><code class="docutils literal notranslate"><span class="pre">krb5_extract_authtime_from_sec_context()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_extract_authz_data_from_sec_context"><code class="docutils literal notranslate"><span class="pre">krb5_extract_authz_data_from_sec_context()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_get_tkt_flags"><code class="docutils literal notranslate"><span class="pre">krb5_get_tkt_flags()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_import_cred"><code class="docutils literal notranslate"><span class="pre">krb5_import_cred()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_set_allowable_enctypes"><code class="docutils literal notranslate"><span class="pre">krb5_set_allowable_enctypes()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-gssapi.raw.ext_set_cred_opt">Other Extensions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_set_cred_opt.set_cred_option"><code class="docutils literal notranslate"><span class="pre">set_cred_option()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc4178.set_neg_mechs">set_neg_mechs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc5587.display_mech_attr">display_mech_attr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.ext_rfc5587.indicate_mechs_by_attrs">indicate_mechs_by_attrs</a></li>
@@ -162,52 +284,154 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#results">Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-gssapi.raw.exceptions">Exceptions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#results">Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult"><code class="docutils literal notranslate"><span class="pre">AcquireCredResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult.creds"><code class="docutils literal notranslate"><span class="pre">AcquireCredResult.creds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult.mechs"><code class="docutils literal notranslate"><span class="pre">AcquireCredResult.mechs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult.lifetime"><code class="docutils literal notranslate"><span class="pre">AcquireCredResult.lifetime</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult"><code class="docutils literal notranslate"><span class="pre">InquireCredResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult.name"><code class="docutils literal notranslate"><span class="pre">InquireCredResult.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult.lifetime"><code class="docutils literal notranslate"><span class="pre">InquireCredResult.lifetime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult.usage"><code class="docutils literal notranslate"><span class="pre">InquireCredResult.usage</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult.mechs"><code class="docutils literal notranslate"><span class="pre">InquireCredResult.mechs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult"><code class="docutils literal notranslate"><span class="pre">InquireCredByMechResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult.name"><code class="docutils literal notranslate"><span class="pre">InquireCredByMechResult.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult.init_lifetime"><code class="docutils literal notranslate"><span class="pre">InquireCredByMechResult.init_lifetime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult.accept_lifetime"><code class="docutils literal notranslate"><span class="pre">InquireCredByMechResult.accept_lifetime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult.usage"><code class="docutils literal notranslate"><span class="pre">InquireCredByMechResult.usage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult"><code class="docutils literal notranslate"><span class="pre">AddCredResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult.creds"><code class="docutils literal notranslate"><span class="pre">AddCredResult.creds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult.mechs"><code class="docutils literal notranslate"><span class="pre">AddCredResult.mechs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult.init_lifetime"><code class="docutils literal notranslate"><span class="pre">AddCredResult.init_lifetime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult.accept_lifetime"><code class="docutils literal notranslate"><span class="pre">AddCredResult.accept_lifetime</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayNameResult"><code class="docutils literal notranslate"><span class="pre">DisplayNameResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayNameResult.name"><code class="docutils literal notranslate"><span class="pre">DisplayNameResult.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayNameResult.name_type"><code class="docutils literal notranslate"><span class="pre">DisplayNameResult.name_type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult"><code class="docutils literal notranslate"><span class="pre">WrapResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult.message"><code class="docutils literal notranslate"><span class="pre">WrapResult.message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult.encrypted"><code class="docutils literal notranslate"><span class="pre">WrapResult.encrypted</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult"><code class="docutils literal notranslate"><span class="pre">UnwrapResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult.message"><code class="docutils literal notranslate"><span class="pre">UnwrapResult.message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult.encrypted"><code class="docutils literal notranslate"><span class="pre">UnwrapResult.encrypted</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult.qop"><code class="docutils literal notranslate"><span class="pre">UnwrapResult.qop</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult"><code class="docutils literal notranslate"><span class="pre">AcceptSecContextResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.context"><code class="docutils literal notranslate"><span class="pre">AcceptSecContextResult.context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.initiator_name"><code class="docutils literal notranslate"><span class="pre">AcceptSecContextResult.initiator_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.mech"><code class="docutils literal notranslate"><span class="pre">AcceptSecContextResult.mech</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.token"><code class="docutils literal notranslate"><span class="pre">AcceptSecContextResult.token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.flags"><code class="docutils literal notranslate"><span class="pre">AcceptSecContextResult.flags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.lifetime"><code class="docutils literal notranslate"><span class="pre">AcceptSecContextResult.lifetime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.delegated_creds"><code class="docutils literal notranslate"><span class="pre">AcceptSecContextResult.delegated_creds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.more_steps"><code class="docutils literal notranslate"><span class="pre">AcceptSecContextResult.more_steps</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult"><code class="docutils literal notranslate"><span class="pre">InitSecContextResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.context"><code class="docutils literal notranslate"><span class="pre">InitSecContextResult.context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.mech"><code class="docutils literal notranslate"><span class="pre">InitSecContextResult.mech</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.flags"><code class="docutils literal notranslate"><span class="pre">InitSecContextResult.flags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.token"><code class="docutils literal notranslate"><span class="pre">InitSecContextResult.token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.lifetime"><code class="docutils literal notranslate"><span class="pre">InitSecContextResult.lifetime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.more_steps"><code class="docutils literal notranslate"><span class="pre">InitSecContextResult.more_steps</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult"><code class="docutils literal notranslate"><span class="pre">InquireContextResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.initiator_name"><code class="docutils literal notranslate"><span class="pre">InquireContextResult.initiator_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.target_name"><code class="docutils literal notranslate"><span class="pre">InquireContextResult.target_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.lifetime"><code class="docutils literal notranslate"><span class="pre">InquireContextResult.lifetime</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.mech"><code class="docutils literal notranslate"><span class="pre">InquireContextResult.mech</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.flags"><code class="docutils literal notranslate"><span class="pre">InquireContextResult.flags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.locally_init"><code class="docutils literal notranslate"><span class="pre">InquireContextResult.locally_init</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.complete"><code class="docutils literal notranslate"><span class="pre">InquireContextResult.complete</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.StoreCredResult"><code class="docutils literal notranslate"><span class="pre">StoreCredResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.StoreCredResult.mechs"><code class="docutils literal notranslate"><span class="pre">StoreCredResult.mechs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.StoreCredResult.usage"><code class="docutils literal notranslate"><span class="pre">StoreCredResult.usage</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.IOVUnwrapResult"><code class="docutils literal notranslate"><span class="pre">IOVUnwrapResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.IOVUnwrapResult.encrypted"><code class="docutils literal notranslate"><span class="pre">IOVUnwrapResult.encrypted</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.IOVUnwrapResult.qop"><code class="docutils literal notranslate"><span class="pre">IOVUnwrapResult.qop</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult"><code class="docutils literal notranslate"><span class="pre">InquireNameResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult.attrs"><code class="docutils literal notranslate"><span class="pre">InquireNameResult.attrs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult.is_mech_name"><code class="docutils literal notranslate"><span class="pre">InquireNameResult.is_mech_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult.mech"><code class="docutils literal notranslate"><span class="pre">InquireNameResult.mech</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult"><code class="docutils literal notranslate"><span class="pre">GetNameAttributeResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult.values"><code class="docutils literal notranslate"><span class="pre">GetNameAttributeResult.values</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult.display_values"><code class="docutils literal notranslate"><span class="pre">GetNameAttributeResult.display_values</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult.authenticated"><code class="docutils literal notranslate"><span class="pre">GetNameAttributeResult.authenticated</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult.complete"><code class="docutils literal notranslate"><span class="pre">GetNameAttributeResult.complete</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireAttrsResult"><code class="docutils literal notranslate"><span class="pre">InquireAttrsResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireAttrsResult.mech_attrs"><code class="docutils literal notranslate"><span class="pre">InquireAttrsResult.mech_attrs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireAttrsResult.known_mech_attrs"><code class="docutils literal notranslate"><span class="pre">InquireAttrsResult.known_mech_attrs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult"><code class="docutils literal notranslate"><span class="pre">DisplayAttrResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult.name"><code class="docutils literal notranslate"><span class="pre">DisplayAttrResult.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult.short_desc"><code class="docutils literal notranslate"><span class="pre">DisplayAttrResult.short_desc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult.long_desc"><code class="docutils literal notranslate"><span class="pre">DisplayAttrResult.long_desc</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult"><code class="docutils literal notranslate"><span class="pre">InquireSASLNameResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult.sasl_mech_name"><code class="docutils literal notranslate"><span class="pre">InquireSASLNameResult.sasl_mech_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult.mech_name"><code class="docutils literal notranslate"><span class="pre">InquireSASLNameResult.mech_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult.mech_description"><code class="docutils literal notranslate"><span class="pre">InquireSASLNameResult.mech_description</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData"><code class="docutils literal notranslate"><span class="pre">Rfc1964KeyData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData.sign_alg"><code class="docutils literal notranslate"><span class="pre">Rfc1964KeyData.sign_alg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData.seal_alg"><code class="docutils literal notranslate"><span class="pre">Rfc1964KeyData.seal_alg</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData.key_type"><code class="docutils literal notranslate"><span class="pre">Rfc1964KeyData.key_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData.key"><code class="docutils literal notranslate"><span class="pre">Rfc1964KeyData.key</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData"><code class="docutils literal notranslate"><span class="pre">CfxKeyData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData.ctx_key_type"><code class="docutils literal notranslate"><span class="pre">CfxKeyData.ctx_key_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData.ctx_key"><code class="docutils literal notranslate"><span class="pre">CfxKeyData.ctx_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey_type"><code class="docutils literal notranslate"><span class="pre">CfxKeyData.acceptor_subkey_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey"><code class="docutils literal notranslate"><span class="pre">CfxKeyData.acceptor_subkey</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult.creds">creds</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult.mechs">mechs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult.lifetime">lifetime</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult">InquireCredResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult.name">name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult.lifetime">lifetime</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult.usage">usage</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult.mechs">mechs</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult">InquireCredByMechResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult.name">name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult.init_lifetime">init_lifetime</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult.accept_lifetime">accept_lifetime</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult.usage">usage</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult">AddCredResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult.creds">creds</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult.mechs">mechs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult.init_lifetime">init_lifetime</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult.accept_lifetime">accept_lifetime</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayNameResult">DisplayNameResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayNameResult.name">name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayNameResult.name_type">name_type</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult">WrapResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult.message">message</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult.encrypted">encrypted</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult">UnwrapResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult.message">message</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult.encrypted">encrypted</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult.qop">qop</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult">AcceptSecContextResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.context">context</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.initiator_name">initiator_name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.mech">mech</a></li>
@@ -216,18 +440,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.lifetime">lifetime</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.delegated_creds">delegated_creds</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult.more_steps">more_steps</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult">InitSecContextResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.context">context</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.mech">mech</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.flags">flags</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.token">token</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.lifetime">lifetime</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult.more_steps">more_steps</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult">InquireContextResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.initiator_name">initiator_name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.target_name">target_name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.lifetime">lifetime</a></li>
@@ -235,62 +453,101 @@
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.flags">flags</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.locally_init">locally_init</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult.complete">complete</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.StoreCredResult">StoreCredResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.StoreCredResult.mechs">mechs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.StoreCredResult.usage">usage</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.IOVUnwrapResult">IOVUnwrapResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.IOVUnwrapResult.encrypted">encrypted</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.IOVUnwrapResult.qop">qop</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult">InquireNameResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult.attrs">attrs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult.is_mech_name">is_mech_name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult.mech">mech</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult">GetNameAttributeResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult.values">values</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult.display_values">display_values</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult.authenticated">authenticated</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult.complete">complete</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireAttrsResult">InquireAttrsResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireAttrsResult.mech_attrs">mech_attrs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireAttrsResult.known_mech_attrs">known_mech_attrs</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult">DisplayAttrResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult.name">name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult.short_desc">short_desc</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult.long_desc">long_desc</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult">InquireSASLNameResult</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult.sasl_mech_name">sasl_mech_name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult.mech_name">mech_name</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult.mech_description">mech_description</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData">Rfc1964KeyData</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData.sign_alg">sign_alg</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData.seal_alg">seal_alg</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData.key_type">key_type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData.key">key</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData">CfxKeyData</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData.ctx_key_type">ctx_key_type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData.ctx_key">ctx_key</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey_type">acceptor_subkey_type</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData.acceptor_subkey">acceptor_subkey</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-gssapi.raw.exceptions">Exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadChannelBindingsError"><code class="docutils literal notranslate"><span class="pre">BadChannelBindingsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadMICError"><code class="docutils literal notranslate"><span class="pre">BadMICError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadMechanismError"><code class="docutils literal notranslate"><span class="pre">BadMechanismError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadNameError"><code class="docutils literal notranslate"><span class="pre">BadNameError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadNameTypeError"><code class="docutils literal notranslate"><span class="pre">BadNameTypeError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadQoPError"><code class="docutils literal notranslate"><span class="pre">BadQoPError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadStatusError"><code class="docutils literal notranslate"><span class="pre">BadStatusError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.ContextReadError"><code class="docutils literal notranslate"><span class="pre">ContextReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.ContextWriteError"><code class="docutils literal notranslate"><span class="pre">ContextWriteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.CredentialsReadError"><code class="docutils literal notranslate"><span class="pre">CredentialsReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.CredentialsWriteError"><code class="docutils literal notranslate"><span class="pre">CredentialsWriteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.DuplicateCredentialsElementError"><code class="docutils literal notranslate"><span class="pre">DuplicateCredentialsElementError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.DuplicateTokenError"><code class="docutils literal notranslate"><span class="pre">DuplicateTokenError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.ExpiredContextError"><code class="docutils literal notranslate"><span class="pre">ExpiredContextError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.ExpiredCredentialsError"><code class="docutils literal notranslate"><span class="pre">ExpiredCredentialsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.ExpiredTokenError"><code class="docutils literal notranslate"><span class="pre">ExpiredTokenError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.GSSError"><code class="docutils literal notranslate"><span class="pre">GSSError</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.exceptions.GSSError.calling_code"><code class="docutils literal notranslate"><span class="pre">GSSError.calling_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.exceptions.GSSError.gen_message"><code class="docutils literal notranslate"><span class="pre">GSSError.gen_message()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.exceptions.GSSError.get_all_statuses"><code class="docutils literal notranslate"><span class="pre">GSSError.get_all_statuses()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.exceptions.GSSError.maj_code"><code class="docutils literal notranslate"><span class="pre">GSSError.maj_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.exceptions.GSSError.min_code"><code class="docutils literal notranslate"><span class="pre">GSSError.min_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.exceptions.GSSError.routine_code"><code class="docutils literal notranslate"><span class="pre">GSSError.routine_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.exceptions.GSSError.supplementary_code"><code class="docutils literal notranslate"><span class="pre">GSSError.supplementary_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gssapi.raw.exceptions.GSSError.token"><code class="docutils literal notranslate"><span class="pre">GSSError.token</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.InvalidCredentialsError"><code class="docutils literal notranslate"><span class="pre">InvalidCredentialsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.InvalidTokenError"><code class="docutils literal notranslate"><span class="pre">InvalidTokenError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.MalformedParameterError"><code class="docutils literal notranslate"><span class="pre">MalformedParameterError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.MechanismNameRequiredError"><code class="docutils literal notranslate"><span class="pre">MechanismNameRequiredError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.MissingContextError"><code class="docutils literal notranslate"><span class="pre">MissingContextError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.MissingCredentialsError"><code class="docutils literal notranslate"><span class="pre">MissingCredentialsError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.NameReadError"><code class="docutils literal notranslate"><span class="pre">NameReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.NameTypeReadError"><code class="docutils literal notranslate"><span class="pre">NameTypeReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.OperationUnavailableError"><code class="docutils literal notranslate"><span class="pre">OperationUnavailableError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.ParameterReadError"><code class="docutils literal notranslate"><span class="pre">ParameterReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.ParameterWriteError"><code class="docutils literal notranslate"><span class="pre">ParameterWriteError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.SupplementaryError"><code class="docutils literal notranslate"><span class="pre">SupplementaryError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.TokenOutOfSequenceError"><code class="docutils literal notranslate"><span class="pre">TokenOutOfSequenceError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.TokenReadError"><code class="docutils literal notranslate"><span class="pre">TokenReadError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.TokenTooEarlyError"><code class="docutils literal notranslate"><span class="pre">TokenTooEarlyError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.TokenTooLateError"><code class="docutils literal notranslate"><span class="pre">TokenTooLateError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.UnauthorizedError"><code class="docutils literal notranslate"><span class="pre">UnauthorizedError</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.AcquireCredResult">AcquireCredResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredResult">InquireCredResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireCredByMechResult">InquireCredByMechResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.AddCredResult">AddCredResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayNameResult">DisplayNameResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.WrapResult">WrapResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.UnwrapResult">UnwrapResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.AcceptSecContextResult">AcceptSecContextResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InitSecContextResult">InitSecContextResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireContextResult">InquireContextResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.StoreCredResult">StoreCredResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.IOVUnwrapResult">IOVUnwrapResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireNameResult">InquireNameResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.GetNameAttributeResult">GetNameAttributeResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireAttrsResult">InquireAttrsResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.DisplayAttrResult">DisplayAttrResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.InquireSASLNameResult">InquireSASLNameResult</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.Rfc1964KeyData">Rfc1964KeyData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.named_tuples.CfxKeyData">CfxKeyData</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadChannelBindingsError">BadChannelBindingsError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadMICError">BadMICError</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#gssapi.raw.exceptions.BadMechanismError">BadMechanismError</a></li>
@@ -356,8 +613,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Low-Level API</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Low-Level API</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/gssapi.raw.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -1261,7 +1518,7 @@ to the constructor.  The <cite>elements</cite> argument should be a
 function in Python 3.</p>
 <p>This object is hashable, and may be compared using equality
 operators.</p>
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.oids.OID.dotted_form">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dotted_form</span></span><a class="reference internal" href="_modules/gssapi/raw/oids.html#OID.dotted_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.oids.OID.dotted_form" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -1408,7 +1665,7 @@ to the constructor.  The <cite>elements</cite> argument should be a
 function in Python 3.</p>
 <p>This object is hashable, and may be compared using equality
 operators.</p>
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.misc.OID.dotted_form">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dotted_form</span></span><a class="headerlink" href="#gssapi.raw.misc.OID.dotted_form" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
@@ -3013,7 +3270,7 @@ an unknown version was requested.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Krb5LucidContextV1</span></span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#Krb5LucidContextV1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1" title="Permalink to this definition"></a></dt>
 <dd><p>Kerberos context data returned by <a class="reference internal" href="#gssapi.raw.ext_krb5.krb5_export_lucid_sec_context" title="gssapi.raw.ext_krb5.krb5_export_lucid_sec_context"><code class="xref py py-meth docutils literal notranslate"><span class="pre">krb5_export_lucid_sec_context()</span></code></a>
 when version 1 was requested.</p>
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cfx_kd</span></span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#Krb5LucidContextV1.cfx_kd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.cfx_kd" title="Permalink to this definition"></a></dt>
 <dd><p>Key data for protocol 1 (RFC4121)</p>
@@ -3028,7 +3285,7 @@ when version 1 was requested.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.endtime">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">endtime</span></span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#Krb5LucidContextV1.endtime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.endtime" title="Permalink to this definition"></a></dt>
 <dd><p>Expiration time of the context</p>
@@ -3042,7 +3299,7 @@ when version 1 was requested.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.is_initiator">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_initiator</span></span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#Krb5LucidContextV1.is_initiator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.is_initiator" title="Permalink to this definition"></a></dt>
 <dd><p>Whether the context was the initiator</p>
@@ -3057,7 +3314,7 @@ initiator</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">protocol</span></span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#Krb5LucidContextV1.protocol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.protocol" title="Permalink to this definition"></a></dt>
 <dd><p>The protocol number</p>
@@ -3075,7 +3332,7 @@ is true.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.recv_seq">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">recv_seq</span></span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#Krb5LucidContextV1.recv_seq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.recv_seq" title="Permalink to this definition"></a></dt>
 <dd><p>Receiver sequence number</p>
@@ -3089,7 +3346,7 @@ is true.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rfc1964_kd</span></span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#Krb5LucidContextV1.rfc1964_kd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.rfc1964_kd" title="Permalink to this definition"></a></dt>
 <dd><p>Keydata for protocol 0 (RFC1964)</p>
@@ -3104,7 +3361,7 @@ is true.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.send_seq">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">send_seq</span></span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#Krb5LucidContextV1.send_seq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.send_seq" title="Permalink to this definition"></a></dt>
 <dd><p>Sender sequence number</p>
@@ -3118,7 +3375,7 @@ is true.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py property">
 <dt class="sig sig-object py" id="gssapi.raw.ext_krb5.Krb5LucidContextV1.version">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">version</span></span><a class="reference internal" href="_modules/gssapi/raw/ext_krb5.html#Krb5LucidContextV1.version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gssapi.raw.ext_krb5.Krb5LucidContextV1.version" title="Permalink to this definition"></a></dt>
 <dd><p>The structure version number</p>
