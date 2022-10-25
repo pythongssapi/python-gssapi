@@ -274,7 +274,7 @@ install_requires = [
 
 setup(
     name='gssapi',
-    version='1.8.1',
+    version='1.8.2',
     author='The Python GSSAPI Team',
     author_email='jborean93@gmail.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
@@ -296,6 +296,7 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: ISC License (ISCL)',
         'Programming Language :: Python :: Implementation :: CPython',
