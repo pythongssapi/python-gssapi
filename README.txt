@@ -18,12 +18,8 @@ Python-GSSAPI provides both low-level and high level wrappers around the GSSAPI
 C libraries.  While it focuses on the Kerberos mechanism, it should also be
 useable with other GSSAPI mechanisms.
 
-Documentation for the latest released version (including pre-release versions)
-can be found at
-`https://pythongssapi.github.io/python-gssapi/stable <https://pythongssapi.github.io/python-gssapi/stable>`_.
-
-Documentation for the latest commit on main can be found at
-`https://pythongssapi.github.io/python-gssapi/latest <https://pythongssapi.github.io/python-gssapi/latest>`_.
+Documentation can be found at
+`https://pythongssapi.github.io/python-gssapi/ <https://pythongssapi.github.io/python-gssapi/>`_.
 
 Requirements
 ============
