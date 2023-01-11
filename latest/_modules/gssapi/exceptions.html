@@ -11,10 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" src="../../_static/jquery.js"></script>
+        <script integrity="sha384-lSZeSIVKp9myfKbDQ3GkN/KHjUc+mzg17VKDN4Y2kUeBSJioB9QSM639vM9fuY//" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -34,7 +33,7 @@
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +59,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
       <li class="breadcrumb-item active">gssapi.exceptions</li>
       <li class="wy-breadcrumbs-aside">
@@ -87,7 +86,7 @@
 
 <span class="c1"># non-GSS exceptions</span>
 <div class="viewcode-block" id="GeneralError"><a class="viewcode-back" href="../../gssapi.html#gssapi.exceptions.GeneralError">[docs]</a><span class="k">class</span> <span class="nc">GeneralError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A General High-Level API Error&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A General High-Level API Error&quot;&quot;&quot;</span>
     <span class="n">MAJOR_MESSAGE</span> <span class="o">=</span> <span class="s2">&quot;General error&quot;</span>
     <span class="n">FMT_STR</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{maj}</span><span class="s2">: </span><span class="si">{min}</span><span class="s2">.&quot;</span>
 
@@ -102,12 +101,12 @@
 
 
 <div class="viewcode-block" id="UnknownUsageError"><a class="viewcode-back" href="../../gssapi.html#gssapi.exceptions.UnknownUsageError">[docs]</a><span class="k">class</span> <span class="nc">UnknownUsageError</span><span class="p">(</span><span class="n">GeneralError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An Error indicating an unknown usage type&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An Error indicating an unknown usage type&quot;&quot;&quot;</span>
     <span class="n">MAJOR_MESSAGE</span> <span class="o">=</span> <span class="s2">&quot;Unable to determine </span><span class="si">{obj}</span><span class="s2"> usage&quot;</span></div>
 
 
 <div class="viewcode-block" id="EncryptionNotUsed"><a class="viewcode-back" href="../../gssapi.html#gssapi.exceptions.EncryptionNotUsed">[docs]</a><span class="k">class</span> <span class="nc">EncryptionNotUsed</span><span class="p">(</span><span class="n">GeneralError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An Error indicating that encryption was requested, but not used&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An Error indicating that encryption was requested, but not used&quot;&quot;&quot;</span>
     <span class="n">MAJOR_MESSAGE</span> <span class="o">=</span> <span class="s2">&quot;Confidentiality was requested, but not used&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>

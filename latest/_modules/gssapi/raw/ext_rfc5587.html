@@ -11,10 +11,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" src="../../../_static/jquery.js"></script>
+        <script integrity="sha384-lSZeSIVKp9myfKbDQ3GkN/KHjUc+mzg17VKDN4Y2kUeBSJioB9QSM639vM9fuY//" src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -34,7 +33,7 @@
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +59,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">gssapi.raw.ext_rfc5587</li>
       <li class="wy-breadcrumbs-aside">
@@ -84,7 +83,7 @@
     <span class="n">except_mech_attrs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">critical_mech_attrs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Get a set of mechanisms that have the specified attributes.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a set of mechanisms that have the specified attributes.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        desired_mech_attrs (~gssapi.OID): Attributes that the output mechs MUST</span>
@@ -105,7 +104,7 @@
 <div class="viewcode-block" id="inquire_attrs_for_mech"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc5587.inquire_attrs_for_mech">[docs]</a><span class="k">def</span> <span class="nf">inquire_attrs_for_mech</span><span class="p">(</span>
     <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireAttrsResult&quot;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Gets the set of attrs supported and known by a mechanism.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets the set of attrs supported and known by a mechanism.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mech (~gssapi.raw.types.MechType): Mechanism to inquire about</span>
@@ -122,7 +121,7 @@
 <div class="viewcode-block" id="display_mech_attr"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc5587.display_mech_attr">[docs]</a><span class="k">def</span> <span class="nf">display_mech_attr</span><span class="p">(</span>
     <span class="n">attr</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DisplayAttrResult&quot;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Returns information about attributes in human readable form.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns information about attributes in human readable form.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        attr (~gssapi.OID): Mechanism attribute to retrieve names and</span>

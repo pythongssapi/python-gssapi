@@ -11,10 +11,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" src="../../../_static/jquery.js"></script>
+        <script integrity="sha384-lSZeSIVKp9myfKbDQ3GkN/KHjUc+mzg17VKDN4Y2kUeBSJioB9QSM639vM9fuY//" src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -34,7 +33,7 @@
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +59,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">gssapi.raw.message</li>
       <li class="wy-breadcrumbs-aside">
@@ -84,7 +83,7 @@
     <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Generate a MIC for a message.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a MIC for a message.</span>
 
 <span class="sd">    This method generates a Message Integrity Check token for the</span>
 <span class="sd">    given message.  This can be separately trasmitted to the other</span>
@@ -113,7 +112,7 @@
     <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Verify that a MIC matches a message.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify that a MIC matches a message.</span>
 
 <span class="sd">    This method verifies that the given MIC matches the given message.</span>
 <span class="sd">    If the MIC does not match the given message, an exception will</span>
@@ -146,7 +145,7 @@
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Calculate the max message size.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the max message size.</span>
 
 <span class="sd">    This method calculates the unwrapped/unencrypted message size for</span>
 <span class="sd">    the given maximum wrapped/encrypted message size.</span>
@@ -175,7 +174,7 @@
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;WrapResult&quot;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Wrap/Encrypt a message.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrap/Encrypt a message.</span>
 
 <span class="sd">    This method wraps or encrypts a message (depending on the value</span>
 <span class="sd">    of confidential) with the given Quality of Protection.</span>
@@ -204,7 +203,7 @@
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;UnwrapResult&quot;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Unwrap/Decrypt a message.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unwrap/Decrypt a message.</span>
 
 <span class="sd">    This method unwraps or decrypts a message, depending</span>
 <span class="sd">    on whether the sender used confidentiality.</span>

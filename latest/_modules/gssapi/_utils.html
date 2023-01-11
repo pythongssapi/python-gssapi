@@ -11,10 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" src="../../_static/jquery.js"></script>
+        <script integrity="sha384-lSZeSIVKp9myfKbDQ3GkN/KHjUc+mzg17VKDN4Y2kUeBSJioB9QSM639vM9fuY//" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -34,7 +33,7 @@
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +59,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
       <li class="breadcrumb-item active">gssapi._utils</li>
       <li class="wy-breadcrumbs-aside">
@@ -87,7 +86,7 @@
 <span class="k">def</span> <span class="nf">import_gssapi_extension</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Import a GSSAPI extension module</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Import a GSSAPI extension module</span>
 
 <span class="sd">    This method imports a GSSAPI extension module based</span>
 <span class="sd">    on the name of the extension (not including the</span>
@@ -113,7 +112,7 @@
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">doc</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">property</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Creates a property based on an inquire result</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a property based on an inquire result</span>
 
 <span class="sd">    This method creates a property that calls the</span>
 <span class="sd">    :python:`_inquire` method, and return the value of the</span>
@@ -142,7 +141,7 @@
 
 
 <span class="k">def</span> <span class="nf">_get_encoding</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Gets the current encoding used for strings.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets the current encoding used for strings.</span>
 
 <span class="sd">    This value is used to encode and decode string</span>
 <span class="sd">    values like names.</span>
@@ -156,7 +155,7 @@
 <div class="viewcode-block" id="set_encoding"><a class="viewcode-back" href="../../gssapi.html#gssapi.set_encoding">[docs]</a><span class="k">def</span> <span class="nf">set_encoding</span><span class="p">(</span>
     <span class="n">enc</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Sets the current encoding used for strings</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sets the current encoding used for strings</span>
 
 <span class="sd">    This value is used to encode and decode string</span>
 <span class="sd">    values like names.</span>
@@ -172,7 +171,7 @@
 <span class="k">def</span> <span class="nf">_encode_dict</span><span class="p">(</span>
     <span class="n">d</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Encodes any relevant strings in a dict&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encodes any relevant strings in a dict&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">enc</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">_ENCODING</span><span class="p">)</span>
@@ -190,7 +189,7 @@
     <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Optionally defer exceptions and return a token instead</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Optionally defer exceptions and return a token instead</span>
 
 <span class="sd">    When `__DEFER_STEP_ERRORS__` is set on the implementing class</span>
 <span class="sd">    or instance, methods wrapped with this wrapper will</span>
@@ -223,7 +222,7 @@
     <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Check and raise deferred errors before running the function</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check and raise deferred errors before running the function</span>
 
 <span class="sd">    This method checks :python:`_last_err` before running the wrapped</span>
 <span class="sd">    function.  If present and not None, the exception will be raised</span>
@@ -240,7 +239,7 @@
 
 
 <span class="k">class</span> <span class="nc">CheckLastError</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Check for a deferred error on all methods</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check for a deferred error on all methods</span>
 
 <span class="sd">    This metaclass applies the :python:`check_last_err` decorator</span>
 <span class="sd">    to all methods not prefixed by &#39;_&#39;.</span>

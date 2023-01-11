@@ -11,10 +11,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" src="../../../_static/jquery.js"></script>
+        <script integrity="sha384-lSZeSIVKp9myfKbDQ3GkN/KHjUc+mzg17VKDN4Y2kUeBSJioB9QSM639vM9fuY//" src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -34,7 +33,7 @@
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +59,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">gssapi.raw.named_tuples</li>
       <li class="wy-breadcrumbs-aside">
@@ -82,7 +81,7 @@
 
 
 <div class="viewcode-block" id="AcquireCredResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.AcquireCredResult">[docs]</a><span class="k">class</span> <span class="nc">AcquireCredResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Credential result when acquiring a GSSAPI credential.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Credential result when acquiring a GSSAPI credential.&quot;&quot;&quot;</span>
     <span class="c1">#: GSSAPI credentials that were acquired</span>
     <span class="n">creds</span><span class="p">:</span> <span class="s2">&quot;gssapi.raw.creds.Creds&quot;</span>
     <span class="c1">#: Set of mechs the cred is for</span>
@@ -92,7 +91,7 @@
 
 
 <div class="viewcode-block" id="InquireCredResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireCredResult">[docs]</a><span class="k">class</span> <span class="nc">InquireCredResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Information about the credential.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Information about the credential.&quot;&quot;&quot;</span>
     <span class="c1">#: The principal associated with the credential</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.names.Name&quot;</span><span class="p">]</span>
     <span class="c1">#: Number of seconds which the cred is valid for</span>
@@ -104,7 +103,7 @@
 
 
 <div class="viewcode-block" id="InquireCredByMechResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireCredByMechResult">[docs]</a><span class="k">class</span> <span class="nc">InquireCredByMechResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Information about the credential for a specific mechanism.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Information about the credential for a specific mechanism.&quot;&quot;&quot;</span>
     <span class="c1">#: The principal associated with the credential</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.names.Name&quot;</span><span class="p">]</span>
     <span class="c1">#: Time valid for initiation, in seconds</span>
@@ -116,7 +115,7 @@
 
 
 <div class="viewcode-block" id="AddCredResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.AddCredResult">[docs]</a><span class="k">class</span> <span class="nc">AddCredResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Result of adding to a GSSAPI credential.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of adding to a GSSAPI credential.&quot;&quot;&quot;</span>
     <span class="c1">#: The credential that was generated</span>
     <span class="n">creds</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.creds.Creds&quot;</span><span class="p">]</span>
     <span class="c1">#: Set of mechs the cred is for</span>
@@ -128,7 +127,7 @@
 
 
 <div class="viewcode-block" id="DisplayNameResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.DisplayNameResult">[docs]</a><span class="k">class</span> <span class="nc">DisplayNameResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Textual representation of a GSSAPI name.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Textual representation of a GSSAPI name.&quot;&quot;&quot;</span>
     <span class="c1">#: The representation of the GSSAPI name</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span>
     <span class="c1">#: The type of GSSAPI name</span>
@@ -136,7 +135,7 @@
 
 
 <div class="viewcode-block" id="WrapResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.WrapResult">[docs]</a><span class="k">class</span> <span class="nc">WrapResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapped message result.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapped message result.&quot;&quot;&quot;</span>
     <span class="c1">#: The wrapped message</span>
     <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span>
     <span class="c1">#: Whether the message is encrypted and not just signed</span>
@@ -144,7 +143,7 @@
 
 
 <div class="viewcode-block" id="UnwrapResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.UnwrapResult">[docs]</a><span class="k">class</span> <span class="nc">UnwrapResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Unwrapped message result.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unwrapped message result.&quot;&quot;&quot;</span>
     <span class="c1">#: The unwrapped message</span>
     <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span>
     <span class="c1">#: Whether the message was encrypted and not just signed</span>
@@ -154,7 +153,7 @@
 
 
 <div class="viewcode-block" id="AcceptSecContextResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.AcceptSecContextResult">[docs]</a><span class="k">class</span> <span class="nc">AcceptSecContextResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Result when accepting a security context by an initiator.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result when accepting a security context by an initiator.&quot;&quot;&quot;</span>
     <span class="c1">#: The acceptor security context</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;gssapi.raw.sec_contexts.SecurityContext&quot;</span>
     <span class="c1">#: The authenticated name of the initiator</span>
@@ -174,7 +173,7 @@
 
 
 <div class="viewcode-block" id="InitSecContextResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InitSecContextResult">[docs]</a><span class="k">class</span> <span class="nc">InitSecContextResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Result when initiating a security context&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result when initiating a security context&quot;&quot;&quot;</span>
     <span class="c1">#: The initiator security context</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;gssapi.raw.sec_contexts.SecurityContext&quot;</span>
     <span class="c1">#: Mechanism used in the security context</span>
@@ -190,7 +189,7 @@
 
 
 <div class="viewcode-block" id="InquireContextResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireContextResult">[docs]</a><span class="k">class</span> <span class="nc">InquireContextResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Information about the security context.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Information about the security context.&quot;&quot;&quot;</span>
     <span class="c1">#: Name of the initiator</span>
     <span class="n">initiator_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;gssapi.raw.names.Name&quot;</span><span class="p">]</span>
     <span class="c1">#: Name of the acceptor</span>
@@ -208,7 +207,7 @@
 
 
 <div class="viewcode-block" id="StoreCredResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.StoreCredResult">[docs]</a><span class="k">class</span> <span class="nc">StoreCredResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Result of the credential storing operation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Result of the credential storing operation.&quot;&quot;&quot;</span>
     <span class="c1">#: Mechs that were stored in the credential store</span>
     <span class="n">mechs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>
     <span class="c1">#: How the credential can be used</span>
@@ -216,7 +215,7 @@
 
 
 <div class="viewcode-block" id="IOVUnwrapResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.IOVUnwrapResult">[docs]</a><span class="k">class</span> <span class="nc">IOVUnwrapResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Unwrapped IOV message result.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unwrapped IOV message result.&quot;&quot;&quot;</span>
     <span class="c1">#: Whether the message was encrypted and not just signed</span>
     <span class="n">encrypted</span><span class="p">:</span> <span class="nb">bool</span>
     <span class="c1">#: The quality of protection applied to the message</span>
@@ -224,7 +223,7 @@
 
 
 <div class="viewcode-block" id="InquireNameResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireNameResult">[docs]</a><span class="k">class</span> <span class="nc">InquireNameResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Information about a GSSAPI Name.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Information about a GSSAPI Name.&quot;&quot;&quot;</span>
     <span class="c1">#: Set of attribute names</span>
     <span class="n">attrs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
     <span class="c1">#: Name is a mechanism name</span>
@@ -234,7 +233,7 @@
 
 
 <div class="viewcode-block" id="GetNameAttributeResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.GetNameAttributeResult">[docs]</a><span class="k">class</span> <span class="nc">GetNameAttributeResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;GSSAPI Name attribute values.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;GSSAPI Name attribute values.&quot;&quot;&quot;</span>
     <span class="c1">#: Raw values</span>
     <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span>
     <span class="c1">#: Human-readable values</span>
@@ -246,7 +245,7 @@
 
 
 <div class="viewcode-block" id="InquireAttrsResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireAttrsResult">[docs]</a><span class="k">class</span> <span class="nc">InquireAttrsResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set of attributes supported and known by a mechanism.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set of attributes supported and known by a mechanism.&quot;&quot;&quot;</span>
     <span class="c1">#: The mechanisms attributes</span>
     <span class="n">mech_attrs</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]</span>
     <span class="c1">#: Known attributes of the mechanism</span>
@@ -254,7 +253,7 @@
 
 
 <div class="viewcode-block" id="DisplayAttrResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.DisplayAttrResult">[docs]</a><span class="k">class</span> <span class="nc">DisplayAttrResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Information about an attribute.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Information about an attribute.&quot;&quot;&quot;</span>
     <span class="c1">#: The mechanism name</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span>
     <span class="c1">#: Short description of the mechanism</span>
@@ -264,7 +263,7 @@
 
 
 <div class="viewcode-block" id="InquireSASLNameResult"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.InquireSASLNameResult">[docs]</a><span class="k">class</span> <span class="nc">InquireSASLNameResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;SASL informmation about a GSSAPI Name.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;SASL informmation about a GSSAPI Name.&quot;&quot;&quot;</span>
     <span class="c1">#: The SASL name</span>
     <span class="n">sasl_mech_name</span><span class="p">:</span> <span class="nb">bytes</span>
     <span class="c1">#: The mechanism name</span>
@@ -274,7 +273,7 @@
 
 
 <div class="viewcode-block" id="Rfc1964KeyData"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.Rfc1964KeyData">[docs]</a><span class="k">class</span> <span class="nc">Rfc1964KeyData</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Security context key data based on RFC1964.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Security context key data based on RFC1964.&quot;&quot;&quot;</span>
     <span class="c1">#: Signing algorithm identifier</span>
     <span class="n">sign_alg</span><span class="p">:</span> <span class="nb">int</span>
     <span class="c1">#: Sealing algorithm identifier</span>
@@ -286,7 +285,7 @@
 
 
 <div class="viewcode-block" id="CfxKeyData"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.named_tuples.CfxKeyData">[docs]</a><span class="k">class</span> <span class="nc">CfxKeyData</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Securty context key data.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Securty context key data.&quot;&quot;&quot;</span>
     <span class="c1">#: Context key encryption type identifier</span>
     <span class="n">ctx_key_type</span><span class="p">:</span> <span class="nb">int</span>
     <span class="c1">#: Context key data - session or sub-session key</span>

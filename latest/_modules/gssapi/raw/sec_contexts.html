@@ -11,10 +11,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" src="../../../_static/jquery.js"></script>
+        <script integrity="sha384-lSZeSIVKp9myfKbDQ3GkN/KHjUc+mzg17VKDN4Y2kUeBSJioB9QSM639vM9fuY//" src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -34,7 +33,7 @@
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +59,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">gssapi.raw.sec_contexts</li>
       <li class="wy-breadcrumbs-aside">
@@ -87,7 +86,7 @@
     <span class="kn">from</span> <span class="nn">gssapi.raw.types</span> <span class="kn">import</span> <span class="n">RequirementFlag</span>
 
 <div class="viewcode-block" id="SecurityContext"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.SecurityContext">[docs]</a><span class="k">class</span> <span class="nc">SecurityContext</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A GSSAPI Security Context</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -113,7 +112,7 @@
     <span class="n">channel_bindings</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;ChannelBindings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">input_token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InitSecContextResult&quot;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Initiate a GSSAPI security context.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initiate a GSSAPI security context.</span>
 
 <span class="sd">    This method initiates a GSSAPI security context, targeting the given</span>
 <span class="sd">    target name.  To create a basic context, just provide the target name.</span>
@@ -172,7 +171,7 @@
     <span class="n">context</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">SecurityContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">channel_bindings</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;ChannelBindings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AcceptSecContextResult&quot;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Accept a GSSAPI security context.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Accept a GSSAPI security context.</span>
 
 <span class="sd">    This method accepts a GSSAPI security context using a token sent by the</span>
 <span class="sd">    initiator, using the given credentials.  It can either be used to accept a</span>
@@ -223,7 +222,7 @@
     <span class="n">locally_init</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">complete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireContextResult&quot;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get information about a security context.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get information about a security context.</span>
 
 <span class="sd">    This method obtains information about a security context, including</span>
 <span class="sd">    the initiator and target names, as well as the TTL, mech,</span>
@@ -250,7 +249,7 @@
 <div class="viewcode-block" id="context_time"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.context_time">[docs]</a><span class="k">def</span> <span class="nf">context_time</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get the amount of time for which the given context will remain valid.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the amount of time for which the given context will remain valid.</span>
 
 <span class="sd">    This method determines the amount of time for which the given</span>
 <span class="sd">    security context will remain valid.  An expired context will</span>
@@ -273,7 +272,7 @@
     <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
     <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Process a token asynchronously.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process a token asynchronously.</span>
 
 <span class="sd">    This method provides a way to process a token, even if the</span>
 <span class="sd">    given security context is not expecting one.  For example,</span>
@@ -299,7 +298,7 @@
 <div class="viewcode-block" id="import_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.import_sec_context">[docs]</a><span class="k">def</span> <span class="nf">import_sec_context</span><span class="p">(</span>
     <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SecurityContext</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Import a context from another process.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Import a context from another process.</span>
 
 <span class="sd">    This method imports a security context established in another process</span>
 <span class="sd">    by reading the specified token which was output by</span>
@@ -316,7 +315,7 @@
 <div class="viewcode-block" id="export_sec_context"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.sec_contexts.export_sec_context">[docs]</a><span class="k">def</span> <span class="nf">export_sec_context</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Export a context for use in another process.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Export a context for use in another process.</span>
 
 <span class="sd">    This method exports a security context, deactivating in the current process</span>
 <span class="sd">    and creating a token which can then be imported into another process</span>
@@ -342,7 +341,7 @@
     <span class="n">context</span><span class="p">:</span> <span class="n">SecurityContext</span><span class="p">,</span>
     <span class="n">local_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Delete a GSSAPI security context.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete a GSSAPI security context.</span>
 
 <span class="sd">    This method deletes a GSSAPI security context,</span>
 <span class="sd">    returning an output token to send to the other</span>

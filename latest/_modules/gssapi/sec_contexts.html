@@ -11,10 +11,9 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" src="../../_static/jquery.js"></script>
+        <script integrity="sha384-lSZeSIVKp9myfKbDQ3GkN/KHjUc+mzg17VKDN4Y2kUeBSJioB9QSM639vM9fuY//" src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../_static/doctools.js"></script>
         <script src="../../_static/sphinx_highlight.js"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -34,7 +33,7 @@
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +59,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
       <li class="breadcrumb-item active">gssapi.sec_contexts</li>
       <li class="wy-breadcrumbs-aside">
@@ -90,7 +89,7 @@
 
 <div class="viewcode-block" id="SecurityContext"><a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext">[docs]</a><span class="k">class</span> <span class="nc">SecurityContext</span><span class="p">(</span><span class="n">rsec_contexts</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">,</span>
                       <span class="n">metaclass</span><span class="o">=</span><span class="n">_utils</span><span class="o">.</span><span class="n">CheckLastError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A GSSAPI Security Context</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A GSSAPI Security Context</span>
 
 <span class="sd">    This class represents a GSSAPI security context that may be used</span>
 <span class="sd">    with and/or returned by other GSSAPI methods.</span>
@@ -134,7 +133,7 @@
         <span class="n">channel_bindings</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rchan_bindings</span><span class="o">.</span><span class="n">ChannelBindings</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">usage</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The constructor creates a new security context, but does not begin</span>
 <span class="sd">        the initiate or accept process.</span>
 
@@ -232,7 +231,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Calculate the signature for a message.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the signature for a message.</span>
 
 <span class="sd">        This method calculates the signature (called a MIC) for</span>
 <span class="sd">        the given message, which may be then used with</span>
@@ -260,7 +259,7 @@
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
         <span class="n">mic</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Verify the signature for a message.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify the signature for a message.</span>
 
 <span class="sd">        This method verifies that a signature (generated by</span>
 <span class="sd">        :meth:`get_signature` is valid for the given message.</span>
@@ -293,7 +292,7 @@
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
         <span class="n">encrypt</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">WrapResult</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Wrap a message, optionally with encryption</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrap a message, optionally with encryption</span>
 
 <span class="sd">        This wraps a message, signing it and optionally</span>
 <span class="sd">        encrypting it.</span>
@@ -318,7 +317,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">UnwrapResult</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Unwrap a wrapped message.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Unwrap a wrapped message.</span>
 
 <span class="sd">        This method unwraps/unencrypts a wrapped message,</span>
 <span class="sd">        verifying the signature along the way.</span>
@@ -347,7 +346,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Encrypt a message.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Encrypt a message.</span>
 
 <span class="sd">        This method wraps and encrypts a message, similarly to</span>
 <span class="sd">        :meth:`wrap`.  The difference is that encryption is always</span>
@@ -380,7 +379,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Decrypt a message.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decrypt a message.</span>
 
 <span class="sd">        This method decrypts and unwraps a message, verifying the signature</span>
 <span class="sd">        along the way, similarly to :meth:`unwrap`.  The difference is that</span>
@@ -423,7 +422,7 @@
         <span class="n">desired_output_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">encrypted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Calculate the maximum message size for a given wrapped message size.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the maximum message size for a given wrapped message size.</span>
 
 <span class="sd">        This method calculates the maximum input message size for a given</span>
 <span class="sd">        maximum wrapped/encrypted message size.</span>
@@ -449,7 +448,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Process an output token asynchronously.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process an output token asynchronously.</span>
 
 <span class="sd">        This method processes an output token even when the security context</span>
 <span class="sd">        was not expecting it.</span>
@@ -468,7 +467,7 @@
         <span class="n">rsec_contexts</span><span class="o">.</span><span class="n">process_context_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SecurityContext.export"><a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Export a security context.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Export a security context.</span>
 
 <span class="sd">        This method exports a security context, allowing it to be passed</span>
 <span class="sd">        between processes.</span>
@@ -492,7 +491,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireContextResult</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Inspect the security context for information</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Inspect the security context for information</span>
 
 <span class="sd">        This method inspects the security context for information.</span>
 
@@ -547,12 +546,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lifetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;The amount of time for which this context remains valid&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The amount of time for which this context remains valid&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">rsec_contexts</span><span class="o">.</span><span class="n">context_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">delegated_creds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Credentials</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;The credentials delegated from the initiator to the acceptor</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The credentials delegated from the initiator to the acceptor</span>
 
 <span class="sd">        .. warning::</span>
 
@@ -576,7 +575,7 @@
     <span class="nd">@property</span>  <span class="c1"># type: ignore # https://github.com/python/mypy/issues/1362</span>
     <span class="nd">@_utils</span><span class="o">.</span><span class="n">check_last_err</span>
     <span class="k">def</span> <span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Whether negotiation for this context has been completed&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether negotiation for this context has been completed&quot;&quot;&quot;</span>
         <span class="c1"># NB(directxman12): MIT krb5 has a bug where it refuses to</span>
         <span class="c1">#                   inquire about partially completed contexts,</span>
         <span class="c1">#                   so we can&#39;t just use `self._inquire` generally</span>
@@ -599,7 +598,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Perform a negotation step.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform a negotation step.</span>
 
 <span class="sd">        This method performs a negotiation step based on the usage type</span>
 <span class="sd">        of this context.  If `__DEFER_STEP_ERRORS__` is set to True on</span>

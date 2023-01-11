@@ -11,10 +11,9 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+        <script integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" src="../../../_static/jquery.js"></script>
+        <script integrity="sha384-lSZeSIVKp9myfKbDQ3GkN/KHjUc+mzg17VKDN4Y2kUeBSJioB9QSM639vM9fuY//" src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
         <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -34,7 +33,7 @@
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -60,7 +59,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a></li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
       <li class="breadcrumb-item active">gssapi.raw.names</li>
       <li class="wy-breadcrumbs-aside">
@@ -79,7 +78,7 @@
     <span class="kn">from</span> <span class="nn">gssapi.raw.oids</span> <span class="kn">import</span> <span class="n">OID</span>
 
 <div class="viewcode-block" id="Name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.Name">[docs]</a><span class="k">class</span> <span class="nc">Name</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A GSSAPI Name</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -93,7 +92,7 @@
     <span class="n">name</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">name_type</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Convert a string and a name type into a GSSAPI name.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a string and a name type into a GSSAPI name.</span>
 
 <span class="sd">    This method takes a string name and a name type and converts</span>
 <span class="sd">    them into a GSSAPI :class:`Name`.</span>
@@ -116,7 +115,7 @@
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
     <span class="n">name_type</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DisplayNameResult&quot;</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Convert a GSSAPI name into its components.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a GSSAPI name into its components.</span>
 
 <span class="sd">    This method converts a GSSAPI :class:`Name` back into its</span>
 <span class="sd">    text form.  If ``name_type`` is True, it also attempts to</span>
@@ -140,7 +139,7 @@
     <span class="n">name1</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
     <span class="n">name2</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Check two GSSAPI names to see if they are the same.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check two GSSAPI names to see if they are the same.</span>
 
 <span class="sd">    This method compares two GSSAPI names, checking to</span>
 <span class="sd">    see if they are equivalent.</span>
@@ -161,7 +160,7 @@
 <div class="viewcode-block" id="export_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.export_name">[docs]</a><span class="k">def</span> <span class="nf">export_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Export a GSSAPI name.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Export a GSSAPI name.</span>
 
 <span class="sd">    This method &quot;produces a canonical contigous string representation</span>
 <span class="sd">    of a mechanism name, suitable for direct comparison for use in</span>
@@ -188,7 +187,7 @@
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
     <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Canonicalize an arbitrary GSSAPI Name into a Mechanism Name</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Canonicalize an arbitrary GSSAPI Name into a Mechanism Name</span>
 
 <span class="sd">    This method turns any GSSAPI name into a &quot;mechanism name&quot; --</span>
 <span class="sd">    a full form name specific to a mechanism.</span>
@@ -211,7 +210,7 @@
 <div class="viewcode-block" id="duplicate_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.duplicate_name">[docs]</a><span class="k">def</span> <span class="nf">duplicate_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Name</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Duplicate a GSSAPI name.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Duplicate a GSSAPI name.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        name (~gssapi.raw.names.Name): the name to duplicate</span>
@@ -227,7 +226,7 @@
 <div class="viewcode-block" id="release_name"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.names.release_name">[docs]</a><span class="k">def</span> <span class="nf">release_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Release a GSSAPI name.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Release a GSSAPI name.</span>
 
 <span class="sd">    This method frees a GSSAPI :class:`Name`.</span>
 <span class="sd">    You probably won&#39;t have to do this.</span>
