@@ -483,7 +483,7 @@ class SecurityContext(rsec_contexts.SecurityContext,
         .. warning::
 
             This value will not be preserved across picklings.  These should
-            be separately exported and transfered.
+            be separately exported and transferred.
 
         """
         return self._delegated_creds
