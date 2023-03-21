@@ -1,6 +1,7 @@
 import typing as t
 
 from gssapi.raw import chan_bindings as rchan_bindings
+from gssapi.raw import creds as rcreds
 from gssapi.raw import sec_contexts as rsec_contexts
 from gssapi.raw import message as rmessage
 from gssapi.raw import named_tuples as tuples
@@ -34,7 +35,7 @@ class SecurityContext(rsec_contexts.SecurityContext,
         base: t.Optional[rsec_contexts.SecurityContext] = None,
         token: t.Optional[bytes] = None,
         name: t.Optional[rnames.Name] = None,
-        creds: t.Optional[Credentials] = None,
+        creds: t.Optional[rcreds.Creds] = None,
         lifetime: t.Optional[int] = None,
         flags: t.Optional[int] = None,
         mech: t.Optional[roids.OID] = None,
@@ -53,7 +54,7 @@ class SecurityContext(rsec_contexts.SecurityContext,
         base: t.Optional[rsec_contexts.SecurityContext] = None,
         token: t.Optional[bytes] = None,
         name: t.Optional[rnames.Name] = None,
-        creds: t.Optional[Credentials] = None,
+        creds: t.Optional[rcreds.Creds] = None,
         lifetime: t.Optional[int] = None,
         flags: t.Optional[int] = None,
         mech: t.Optional[roids.OID] = None,
