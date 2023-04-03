@@ -30,7 +30,7 @@ Additionally, a number of extensions may be present.  All extensions
 are in modules of the form `gssapi.raw.ext_xyz`.
 
 All available functions and classes can be accessed directly from this
-module (`gssapi.raw`) -- it is unneccessary to directly import submodules.
+module (`gssapi.raw`) -- it is unnecessary to directly import submodules.
 """
 
 
