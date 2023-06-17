@@ -124,17 +124,26 @@ if compile_args is None:
 
 # add in the extra workarounds for different include structures
 if winkrb_path:
-    prefix = winkrb_path
+    prefixes = [winkrb_path]
 else:
+    prefixes = []
     try:
-        prefix = get_output(f"{kc} gssapi --prefix")
+        prefixes.append(get_output(f"{kc} gssapi --prefix"))
     except Exception:
-        print("WARNING: couldn't find krb5-config; assuming prefix of %s"
-              % str(sys.prefix))
-        prefix = sys.prefix
-gssapi_ext_h = os.path.join(prefix, 'include/gssapi/gssapi_ext.h')
-if os.path.exists(gssapi_ext_h):
-    compile_args.append("-DHAS_GSSAPI_EXT_H")
+        print("WARNING: couldn't find krb5-config to determine prefix")
+    try:
+        prefixes.append(
+            get_output("pkg-config --variable=includedir krb5-gssapi")
+        )
+    except subprocess.CalledProcessError:
+        print("WARNING: unable to find includedir using pkg-config")
+    prefixes.append(sys.prefix)
+
+for prefix in prefixes:
+    gssapi_ext_h = os.path.join(prefix, 'gssapi/gssapi_ext.h')
+    if os.path.exists(gssapi_ext_h):
+        compile_args.append("-DHAS_GSSAPI_EXT_H")
+        break
 
 # Create a define to detect msys in the headers
 if sys.platform == 'msys':
