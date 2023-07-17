@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-    "Cython >= 0.29.29, < 3.0.0",  # 0.29.29 includes fixes for Python 3.11
+    "Cython >= 0.29.29, < 4.0.0",  # 0.29.29 includes fixes for Python 3.11
     "setuptools >= 40.6.0",  # Start of PEP 517 support for setuptools
 ]
 build-backend = "setuptools.build_meta"
