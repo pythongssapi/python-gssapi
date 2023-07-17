@@ -1,6 +1,6 @@
 from gssapi.raw.cython_types cimport OM_uint32
 
-import gssapi.raw._enum_extensions as ext_registry
+from gssapi.raw import _enum_extensions as ext_registry
 
 
 cdef extern from "python_gssapi_ext.h":
