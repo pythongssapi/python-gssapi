@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v3
-    
+
     - name: Select python
       uses: actions/setup-python@v4
       with:
@@ -44,6 +44,10 @@ jobs:
       matrix:
         include:
         - os: macOS-12
+          version: cp312-macosx_x86_64
+        - os: macOS-12
+          version: cp312-macosx_arm64
+        - os: macOS-12
           version: cp311-macosx_x86_64
         - os: macOS-12
           version: cp311-macosx_arm64
@@ -62,6 +66,10 @@ jobs:
         - os: macOS-12
           version: cp37-macosx_x86_64
 
+        - os: windows-2022
+          version: cp312-win_amd64
+        - os: windows-2022
+          version: cp312-win32
         - os: windows-2022
           version: cp311-win_amd64
         - os: windows-2022
@@ -113,7 +121,7 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v2.11.1
+      uses: pypa/cibuildwheel@v2.15.0
       env:
         CIBW_ARCHS: all
         CIBW_TEST_SKIP: '*_arm64'
@@ -179,6 +187,7 @@ jobs:
       fail-fast: false
       matrix:
         name:
+        - win-py-3.12
         - win-py-3.11
         - win-py-3.10
         - win-py-3.9
@@ -188,6 +197,8 @@ jobs:
         - x64
         - x86
         include:
+        - name: win-py-3.12
+          pyenv: '3.12.0-rc.1'
         - name: win-py-3.11
           pyenv: '3.11'
         - name: win-py-3.10
