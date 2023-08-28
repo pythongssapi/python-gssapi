@@ -11,11 +11,11 @@
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -88,7 +88,9 @@
     <span class="p">)</span>
 
 
-<div class="viewcode-block" id="Creds"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.Creds">[docs]</a><span class="k">class</span> <span class="nc">Creds</span><span class="p">:</span>
+<div class="viewcode-block" id="Creds">
+<a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.Creds">[docs]</a>
+<span class="k">class</span> <span class="nc">Creds</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    GSSAPI Credentials</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -99,7 +101,10 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Creds&quot;</span><span class="p">:</span> <span class="o">...</span></div>
 
 
-<div class="viewcode-block" id="acquire_cred"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.acquire_cred">[docs]</a><span class="k">def</span> <span class="nf">acquire_cred</span><span class="p">(</span>
+
+<div class="viewcode-block" id="acquire_cred">
+<a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.acquire_cred">[docs]</a>
+<span class="k">def</span> <span class="nf">acquire_cred</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">],</span>
     <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">mechs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -135,7 +140,10 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="release_cred"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.release_cred">[docs]</a><span class="k">def</span> <span class="nf">release_cred</span><span class="p">(</span>
+
+<div class="viewcode-block" id="release_cred">
+<a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.release_cred">[docs]</a>
+<span class="k">def</span> <span class="nf">release_cred</span><span class="p">(</span>
     <span class="n">creds</span><span class="p">:</span> <span class="n">Creds</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -156,7 +164,10 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="add_cred"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.add_cred">[docs]</a><span class="k">def</span> <span class="nf">add_cred</span><span class="p">(</span>
+
+<div class="viewcode-block" id="add_cred">
+<a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.add_cred">[docs]</a>
+<span class="k">def</span> <span class="nf">add_cred</span><span class="p">(</span>
     <span class="n">input_cred</span><span class="p">:</span> <span class="n">Creds</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
@@ -202,7 +213,10 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="inquire_cred"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.inquire_cred">[docs]</a><span class="k">def</span> <span class="nf">inquire_cred</span><span class="p">(</span>
+
+<div class="viewcode-block" id="inquire_cred">
+<a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.inquire_cred">[docs]</a>
+<span class="k">def</span> <span class="nf">inquire_cred</span><span class="p">(</span>
     <span class="n">creds</span><span class="p">:</span> <span class="n">Creds</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">lifetime</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -231,7 +245,10 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<div class="viewcode-block" id="inquire_cred_by_mech"><a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.inquire_cred_by_mech">[docs]</a><span class="k">def</span> <span class="nf">inquire_cred_by_mech</span><span class="p">(</span>
+
+<div class="viewcode-block" id="inquire_cred_by_mech">
+<a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.inquire_cred_by_mech">[docs]</a>
+<span class="k">def</span> <span class="nf">inquire_cred_by_mech</span><span class="p">(</span>
     <span class="n">creds</span><span class="p">:</span> <span class="n">Creds</span><span class="p">,</span>
     <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -263,6 +280,7 @@
 <span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
 <span class="sd">        ~gssapi.exceptions.InvalidCredentialsError</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
+
 </pre></div>
 
            </div>

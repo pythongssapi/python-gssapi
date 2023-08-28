@@ -11,11 +11,11 @@
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=82e6e318"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -90,7 +90,9 @@
 <span class="n">rname_rfc6680_comp_oid</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;rfc6680_comp_oid&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Name"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name">[docs]</a><span class="k">class</span> <span class="nc">Name</span><span class="p">(</span><span class="n">rname</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
+<div class="viewcode-block" id="Name">
+<a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name">[docs]</a>
+<span class="k">class</span> <span class="nc">Name</span><span class="p">(</span><span class="n">rname</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A GSSAPI Name</span>
 
 <span class="sd">    This class represents a GSSAPI name which may be used with and/or returned</span>
@@ -207,7 +209,9 @@
         <span class="c1"># Python 3 -- someone asked for bytes</span>
         <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">display_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
 
-<div class="viewcode-block" id="Name.display_as"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.display_as">[docs]</a>    <span class="k">def</span> <span class="nf">display_as</span><span class="p">(</span>
+<div class="viewcode-block" id="Name.display_as">
+<a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.display_as">[docs]</a>
+    <span class="k">def</span> <span class="nf">display_as</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name_type</span><span class="p">:</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -253,6 +257,7 @@
         <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">display_name_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
             <span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span></div>
 
+
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">name_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The :class:`~gssapi.raw.types.NameType` of this name&quot;&quot;&quot;</span>
@@ -280,7 +285,9 @@
         <span class="k">return</span> <span class="s2">&quot;Name(</span><span class="si">{name!r}</span><span class="s2">, </span><span class="si">{name_type}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="n">disp_res</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="n">disp_res</span><span class="o">.</span><span class="n">name_type</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Name.export"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span>
+<div class="viewcode-block" id="Name.export">
+<a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.export">[docs]</a>
+    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">composite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
@@ -312,7 +319,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">export_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Name.canonicalize"><a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.canonicalize">[docs]</a>    <span class="k">def</span> <span class="nf">canonicalize</span><span class="p">(</span>
+
+<div class="viewcode-block" id="Name.canonicalize">
+<a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name.canonicalize">[docs]</a>
+    <span class="k">def</span> <span class="nf">canonicalize</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">mech</span><span class="p">:</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
@@ -334,6 +344,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">canonicalize_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">))</span></div>
+
 
     <span class="k">def</span> <span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">duplicate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
@@ -422,6 +433,7 @@
                                       <span class="s2">&quot;extensions)&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span></div>
+
 
 
 <span class="k">class</span> <span class="nc">_NameAttributeMapping</span><span class="p">(</span><span class="n">MutableMapping</span><span class="p">):</span>
