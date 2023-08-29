@@ -263,8 +263,10 @@ jobs:
 
     runs-on: ubuntu-latest
     permissions:
-      id-token: write  # Needed for OIDC publishing
-      contents: read|write  # Needed for github-pages-deploy-action and other repo write tasks
+      # Needed for OIDC publishing
+      id-token: write
+      # Needed for github-pages-deploy-action and other repo write tasks
+      contents: write
 
     steps:
     - name: Check out code
