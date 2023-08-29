@@ -263,8 +263,8 @@ jobs:
 
     runs-on: ubuntu-latest
     permissions:
-      # IMPORTANT: this permission is mandatory for trusted publishing
-      id-token: write
+      id-token: write  # Needed for OIDC publishing
+      contents: read|write  # Needed for github-pages-deploy-action and other repo write tasks
 
     steps:
     - name: Check out code
