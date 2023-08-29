@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Common Values for Credentials Store Extensions &mdash; Python-GSSAPI 1.8.3 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=82e6e318"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="tutorials.html" />
+    <link rel="prev" title="Other Documentation" href="otherdoc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Python-GSSAPI
+          </a>
+              <div class="version">
+                1.8.3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="gssapi.html">High-Level API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gssapi.raw.html">Low-Level API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="otherdoc.html">Other Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Common Values for Credentials Store Extensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-krb5-mechanism-in-mit-libraries">The krb5 mechanism in MIT libraries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#client-keytab">client_keytab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keytab">keytab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ccache">ccache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rcache">rcache</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-krb5-mechanism-in-heimdal">The krb5 mechanism in Heimdal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python-GSSAPI</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="otherdoc.html">Other Documentation</a></li>
+      <li class="breadcrumb-item active">Common Values for Credentials Store Extensions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/credstore.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="common-values-for-credentials-store-extensions">
+<h1>Common Values for Credentials Store Extensions<a class="headerlink" href="#common-values-for-credentials-store-extensions" title="Link to this heading"></a></h1>
+<p>The credentials store extension is an extension introduced by the MIT krb5
+library implementation of GSSAPI.  It allows for finer control of credentials
+from within a GSSAPI application.  Each mechanism can define keywords to
+manipulate various aspects of their credentials for storage or retrieval
+operations.</p>
+<section id="the-krb5-mechanism-in-mit-libraries">
+<h2>The krb5 mechanism in MIT libraries<a class="headerlink" href="#the-krb5-mechanism-in-mit-libraries" title="Link to this heading"></a></h2>
+<p>The krb5 mechanism as implemented by MIT libraries supports the credentials
+store extension with a number of keywords.</p>
+<section id="client-keytab">
+<h3>client_keytab<a class="headerlink" href="#client-keytab" title="Link to this heading"></a></h3>
+<p>The <cite>client_keytab</cite> keyword can be used in a credential store when it is used
+with the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
+<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions to indicate a custom
+location for a keytab containing client keys.  It is not used in the context
+of calls used to store credentials.</p>
+<p>The value is a string in the form <strong>type:residual</strong> where <strong>type</strong> can be any
+keytab storage type understood by the implementation and <strong>residual</strong> is the
+keytab identifier (usually something like a path).  If the string is a path,
+then the type is defaulted to <cite>FILE</cite>.</p>
+</section>
+<section id="keytab">
+<h3>keytab<a class="headerlink" href="#keytab" title="Link to this heading"></a></h3>
+<p>The <cite>keytab</cite> keyword can be used in a credential store when it is used with
+the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
+<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions to indicate a custom
+location for a keytab containing service keys.  It is not used in the context
+of calls used to store credentials.</p>
+<p>The value is a string in the form <strong>type:residual</strong> where <strong>type</strong> can be any
+keytab storage type understood by the implementation and <strong>residual</strong> is the
+keytab identifier (usually something like a path).  If the string is a path,
+then the type is defaulted to <cite>FILE</cite>.</p>
+</section>
+<section id="ccache">
+<h3>ccache<a class="headerlink" href="#ccache" title="Link to this heading"></a></h3>
+<p>The <cite>ccache</cite> keyword can be used to reference a specific credential storage.
+It can be used both to indicate the source of existing credentials for the
+<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
+<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions, as well as the
+destination storage for the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.store_cred_into" title="gssapi.raw.ext_cred_store.store_cred_into"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.store_cred_into()</span></code></a>
+function.</p>
+<p>The value is a string in the form <strong>type:residual</strong> where <strong>type</strong> can be any
+credential cache storage type understood by the implementation and
+<strong>residual</strong> is the ccache identifier.  If the string is a path, then the type
+is defaulted to <cite>FILE</cite>.  Other commonly used types are <cite>DIR</cite>, <cite>KEYRING</cite>,
+<cite>KCM</cite>, and <cite>MEMORY</cite>.  Each type has a different format for the <strong>residual</strong>;
+refer to the MIT krb5 documentation for more details.</p>
+</section>
+<section id="rcache">
+<h3>rcache<a class="headerlink" href="#rcache" title="Link to this heading"></a></h3>
+<p>The <cite>rcache</cite> keyword can be used to reference a custom replay cache storage.
+It is used only with the <a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.acquire_cred_from" title="gssapi.raw.ext_cred_store.acquire_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.acquire_cred_from()</span></code></a> /
+<a class="reference internal" href="gssapi.raw.html#gssapi.raw.ext_cred_store.add_cred_from" title="gssapi.raw.ext_cred_store.add_cred_from"><code class="xref py py-func docutils literal notranslate"><span class="pre">gssapi.raw.ext_cred_store.add_cred_from()</span></code></a> functions for credentials used
+to accept context establishments, not to initiate contexts.</p>
+<p>The value is a string in the form <strong>type:residual</strong> where <strong>type</strong> can be any
+replay cache storage type understood by the implementation and <strong>residual</strong> is
+the cache identifier (usually something like a path).  If the string is a
+path, then the type is defaulted to <cite>FILE</cite>.</p>
+</section>
+</section>
+<section id="the-krb5-mechanism-in-heimdal">
+<h2>The krb5 mechanism in Heimdal<a class="headerlink" href="#the-krb5-mechanism-in-heimdal" title="Link to this heading"></a></h2>
+<p>Heimdal has recently implemented the credential store extensions with the same
+interface as MIT krb5.  However, it is not yet present in any released
+version.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="otherdoc.html" class="btn btn-neutral float-left" title="Other Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2014, The Python-GSSAPI team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
