@@ -134,6 +134,43 @@ jobs:
         path: ./wheelhouse/*.whl
         name: artifact
 
+  # To catch issues like this https://github.com/pythongssapi/python-gssapi/issues/327
+  assertion_build:
+    needs:
+    - build_sdist
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download gssapi sdist
+      uses: actions/download-artifact@v3
+      with:
+        name: artifact
+        path: ./dist
+
+    - name: Compile Python with assertions
+      shell: bash
+      run: |
+        PYTHON_VERSION="3.11.5"
+        wget --quiet "https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz"
+        tar xf "Python-${PYTHON_VERSION}.tar.xz"
+        cd "Python-${PYTHON_VERSION}/"
+        ./configure --with-assertions --prefix "${PWD}/../Python-${PYTHON_VERSION}-build"
+        make
+        make install
+        cd ..
+
+        sudo apt-get update
+        DEBIAN_FRONTEND=noninteractive sudo apt-get -y install krb5-user libkrb5-dev
+
+        GSSAPI_VER="$( find ./dist -type f -name 'gssapi-*.tar.gz' -printf "%f\n" | sed -n 's/gssapi-\(.*\)\.tar\.gz/\1/p' )"
+
+        PATH="${PWD}/Python-${PYTHON_VERSION}-build/bin:${PATH}"
+        python3 -m pip install gssapi=="${GSSAPI_VER}" \
+            --find-links "file://${PWD}/dist" \
+            --verbose
+
+        python3 -c "import gssapi"
+
   linux:
     needs:
     - build_sdist
@@ -257,6 +294,7 @@ jobs:
     name: publish
 
     needs:
+    - assertion_build
     - linux
     - macos
     - windows
