@@ -181,7 +181,7 @@ if ENABLE_SUPPORT_DETECTION:
             os.environ['PATH'] += os.pathsep + os.path.dirname(main_lib)
     elif main_lib is None:
         for opt in libraries:
-            if opt.startswith('gssapi'):
+            if 'gssapi' in opt:
                 if os.name == 'nt':
                     main_lib = '%s.dll' % opt
                     if winkrb_path:
