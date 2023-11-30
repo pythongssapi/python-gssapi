@@ -12,10 +12,13 @@ import sys
 import ctypes
 
 #: Path to normal KfW installed bin folder
-KFW_BIN = os.path.join(
-    os.environ.get('ProgramFiles', r'C:\Program Files'),
-    'MIT', 'Kerberos', 'bin',
-)
+if os.environ.get("KFW_BIN_PATH_OVERRIDE"):
+    KFW_BIN = os.environ.get("KFW_BIN_PATH_OVERRIDE")
+else:
+    KFW_BIN = os.path.join(
+        os.environ.get('ProgramFiles', r'C:\Program Files'),
+        'MIT', 'Kerberos', 'bin',
+    )
 #: Download location for KfW
 KFW_DL = "https://web.mit.edu/KERBEROS/dist"
 
