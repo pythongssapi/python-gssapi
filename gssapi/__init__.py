@@ -38,3 +38,17 @@ from gssapi.sec_contexts import SecurityContext  # noqa
 from gssapi.mechs import Mechanism  # noqa
 
 from gssapi._utils import set_encoding  # noqa
+
+__all__ = [
+    'AddressType',
+    'Credentials',
+    'IntEnumFlagSet',
+    'Mechanism',
+    'MechType',
+    'Name',
+    'NameType',
+    'OID',
+    'RequirementFlag',
+    'SecurityContext',
+    'set_encoding',
+]
