@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Select python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: 3.9
 
@@ -28,9 +28,9 @@ jobs:
         GSSAPI_COMPILER_ARGS: ''
 
     - name: Upload sdist
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: artifact
+        name: artifact-sdist
         path: ./dist/*.tar.gz
 
   build_wheels:
@@ -107,9 +107,9 @@ jobs:
         echo "C:\Program Files${{ endsWith(matrix.version, '-win32') && ' (x86)' || '' }}\MIT\Kerberos\bin;$PATH" >> $GITHUB_PATH
 
     - name: Download gssapi sdist
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
-        name: artifact
+        name: artifact-sdist
         path: ./
 
     - name: Extract sdist
@@ -121,7 +121,7 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v2.15.0
+      uses: pypa/cibuildwheel@v2.16.5
       env:
         CIBW_ARCHS: all
         CIBW_TEST_SKIP: '*_arm64'
@@ -129,10 +129,10 @@ jobs:
         CIBW_BUILD_VERBOSITY: 1
 
     - name: Upload wheel
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: ./wheelhouse/*.whl
-        name: artifact
+        name: artifact-wheel-${{ matrix.version }}
 
   # To catch issues like this https://github.com/pythongssapi/python-gssapi/issues/327
   assertion_build:
@@ -142,9 +142,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download gssapi sdist
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
-        name: artifact
+        name: artifact-sdist
         path: ./dist
 
     - name: Compile Python with assertions
@@ -199,12 +199,13 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Download built project
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
-        name: artifact
+        pattern: artifact-*
+        merge-multiple: true
         path: ./dist
 
     - name: Test gssapi
@@ -249,16 +250,17 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Download built project
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
-        name: artifact
+        pattern: artifact-*
+        merge-multiple: true
         path: ./dist
 
     - name: Install the right python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.pyenv }}
         architecture: ${{ matrix.arch }}
@@ -277,12 +279,13 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Download built project
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
-        name: artifact
+        pattern: artifact-*
+        merge-multiple: true
         path: ./dist
 
     - name: Test gssapi
@@ -308,12 +311,13 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Download built project
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
-        name: artifact
+        pattern: artifact-*
+        merge-multiple: true
         path: ./dist
 
     - name: Create GitHub release artifact
@@ -330,10 +334,10 @@ jobs:
       run: echo "checksum=`ls tag_build/*.sha512sum | awk -F/ '{print $2}'`" >> $GITHUB_OUTPUT
 
     - name: Upload tagged build artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         path: tag_build/${{ steps.tarball.outputs.tarball }}
-        name: artifact
+        name: release-asset
 
     - name: Deploy stable docs
       if: startsWith(github.ref, 'refs/tags/v')
