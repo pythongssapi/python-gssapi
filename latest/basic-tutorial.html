@@ -95,21 +95,21 @@ with Kerberos 5 (“krb5” for short).</p>
 <p>This tutorial will provide a basic introduction to interacting with
 GSSAPI through Python.</p>
 <p><em>Note</em>: This file is designed to be runnable using
-[YALPT](<a class="reference external" href="https://github.com/directxman12/yalpt">https://github.com/directxman12/yalpt</a>).  You can also just
+<a class="reference external" href="https://github.com/directxman12/yalpt">YALPT</a>.  You can also just
 read it normally.</p>
 <p>To start out, we’ll import python-gssapi, and save the current FQDN
 for later:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">gssapi</span><span class="o">,</span> <span class="nn">socket</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">FQDN</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">getfqdn</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; import gssapi, socket
+&gt;&gt;&gt; FQDN = socket.getfqdn()
+&gt;&gt;&gt;
 </pre></div>
 </div>
 <p>Note that this assumes you have a KRB5 realm set up, and some relevant
-functions available in the <cite>REALM</cite> object (see gssapi-console.py in
-[gssapi_console](<a class="reference external" href="https://pypi.python.org/pypi/gssapi_console">https://pypi.python.org/pypi/gssapi_console</a>)), or
-try <cite>$ run-lit -e gssapi basic-tutorial.md</cite> when you have both
+functions available in the <code class="docutils literal notranslate"><span class="pre">REALM</span></code> object (see gssapi-console.py in
+<a class="reference external" href="https://pypi.python.org/pypi/gssapi_console">gssapi_console</a>), or
+try <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">run-lit</span> <span class="pre">-e</span> <span class="pre">gssapi</span> <span class="pre">basic-tutorial.md</span></code> when you have both
 gssapi_console and yalpt installed).  Any actions performed using the
-<cite>REALM</cite> object are not part of the GSSAPI library; the <cite>REALM</cite> object
+<code class="docutils literal notranslate"><span class="pre">REALM</span></code> object are not part of the GSSAPI library; the <code class="docutils literal notranslate"><span class="pre">REALM</span></code> object
 simply contains wrappers to krb5 commands generally run separately from
 the application using GSSAPI.</p>
 <section id="names-and-credentials">
@@ -122,25 +122,25 @@ for representing names as strings.</p>
 <p>Suppose we wanted to refer to an HTTP server on the current host.
 We could refer to it as a <em>host-based service</em>, or in the default
 mechanism form (in this case, for krb5):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server_hostbased_name</span> <span class="o">=</span> <span class="n">gssapi</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HTTP@</span><span class="si">{</span><span class="n">FQDN</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="n">gssapi</span><span class="o">.</span><span class="n">NameType</span><span class="o">.</span><span class="n">hostbased_service</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_hostbased_name</span>
-<span class="go">Name(b&#39;HTTP@seton.mivehind.net&#39;, &lt;OID 1.2.840.113554.1.2.1.4&gt;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_name</span> <span class="o">=</span> <span class="n">gssapi</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HTTP/</span><span class="si">{</span><span class="n">FQDN</span><span class="si">}</span><span class="s2">@&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_name</span>
-<span class="go">Name(b&#39;HTTP/seton.mivehind.net@&#39;, None)</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_hostbased_name = gssapi.Name(f&quot;HTTP@{FQDN}&quot;, name_type=gssapi.NameType.hostbased_service)
+&gt;&gt;&gt; server_hostbased_name
+Name(b&#39;HTTP@seton.mivehind.net&#39;, &lt;OID 1.2.840.113554.1.2.1.4&gt;)
+&gt;&gt;&gt; server_name = gssapi.Name(f&quot;HTTP/{FQDN}@&quot;)
+&gt;&gt;&gt; server_name
+Name(b&#39;HTTP/seton.mivehind.net@&#39;, None)
+&gt;&gt;&gt;
 </pre></div>
 </div>
 <p>These are both effectively the same, but if we <em>canonicalize</em> both
 names with respect to krb5, we’ll see that GSSAPI knows they’re the
 same:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server_name</span> <span class="o">==</span> <span class="n">server_hostbased_name</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_canon_name</span> <span class="o">=</span> <span class="n">server_name</span><span class="o">.</span><span class="n">canonicalize</span><span class="p">(</span><span class="n">gssapi</span><span class="o">.</span><span class="n">MechType</span><span class="o">.</span><span class="n">kerberos</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_hostbased_canon_name</span> <span class="o">=</span> <span class="n">server_hostbased_name</span><span class="o">.</span><span class="n">canonicalize</span><span class="p">(</span><span class="n">gssapi</span><span class="o">.</span><span class="n">MechType</span><span class="o">.</span><span class="n">kerberos</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_canon_name</span> <span class="o">==</span> <span class="n">server_hostbased_canon_name</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_name == server_hostbased_name
+False
+&gt;&gt;&gt; server_canon_name = server_name.canonicalize(gssapi.MechType.kerberos)
+&gt;&gt;&gt; server_hostbased_canon_name = server_hostbased_name.canonicalize(gssapi.MechType.kerberos)
+&gt;&gt;&gt; server_canon_name == server_hostbased_canon_name
+True
+&gt;&gt;&gt;
 </pre></div>
 </div>
 <p>To compare two names of different name types, you should canonicalize
@@ -154,15 +154,15 @@ of credentials may be acquired.</p>
 <p>For instance, suppose that we are writing a server, and wish to
 communicate accept connections as the ‘HTTP’ service.  We would need
 to acquire credentials as such:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">REALM</span><span class="o">.</span><span class="n">addprinc</span><span class="p">(</span><span class="s1">&#39;HTTP/</span><span class="si">%s</span><span class="s1">@</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">FQDN</span><span class="p">,</span> <span class="n">REALM</span><span class="o">.</span><span class="n">realm</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">REALM</span><span class="o">.</span><span class="n">extract_keytab</span><span class="p">(</span><span class="s1">&#39;HTTP/</span><span class="si">%s</span><span class="s1">@</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">FQDN</span><span class="p">,</span> <span class="n">REALM</span><span class="o">.</span><span class="n">realm</span><span class="p">),</span> <span class="n">REALM</span><span class="o">.</span><span class="n">keytab</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_creds</span> <span class="o">=</span> <span class="n">gssapi</span><span class="o">.</span><span class="n">Credentials</span><span class="p">(</span><span class="n">usage</span><span class="o">=</span><span class="s1">&#39;accept&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">server_name</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; REALM.addprinc(&#39;HTTP/%s@%s&#39; % (FQDN, REALM.realm))
+&gt;&gt;&gt; REALM.extract_keytab(&#39;HTTP/%s@%s&#39; % (FQDN, REALM.realm), REALM.keytab)
+&gt;&gt;&gt; server_creds = gssapi.Credentials(usage=&#39;accept&#39;, name=server_name)
+&gt;&gt;&gt;
 </pre></div>
 </div>
 <p>Note that for the krb5 mechanism, in order to acquire credentials with
 the GSSAPI, the system must already have a way to access those credentials.
-For users, this generally means that they have already performed a <cite>kinit</cite>
+For users, this generally means that they have already performed a <code class="docutils literal notranslate"><span class="pre">kinit</span></code>
 (i.e. have cached a TGT), while for services (like above), having a keytab
 is sufficient.  This process is generally performed outside the application
 using the GSSAPI.</p>
@@ -170,23 +170,23 @@ using the GSSAPI.</p>
 ‘initiate’ for initiating security contexts, or ‘both’ for
 credentials used for both initiating and accepting security contexts.</p>
 <p>Credentials also have an associated <em>name</em>, <em>lifetime</em> (which may
-be <cite>None</cite> for indefinite), and set of <em>mechanisms</em> with which the
+be <code class="docutils literal notranslate"><span class="pre">None</span></code> for indefinite), and set of <em>mechanisms</em> with which the
 credentials are usable:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server_creds</span><span class="o">.</span><span class="n">usage</span>
-<span class="go">&#39;accept&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_creds</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">server_name</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_creds</span><span class="o">.</span><span class="n">lifetime</span> <span class="ow">is</span> <span class="kc">None</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gssapi</span><span class="o">.</span><span class="n">MechType</span><span class="o">.</span><span class="n">kerberos</span> <span class="ow">in</span> <span class="n">server_creds</span><span class="o">.</span><span class="n">mechs</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gssapi</span><span class="o">.</span><span class="n">MechType</span><span class="o">.</span><span class="n">kerberos</span> <span class="ow">in</span> <span class="n">server_creds</span><span class="o">.</span><span class="n">mechs</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_creds.usage
+&#39;accept&#39;
+&gt;&gt;&gt; server_creds.name == server_name
+True
+&gt;&gt;&gt; server_creds.lifetime is None
+True
+&gt;&gt;&gt; gssapi.MechType.kerberos in server_creds.mechs
+True
+&gt;&gt;&gt; gssapi.MechType.kerberos in server_creds.mechs
+True
+&gt;&gt;&gt;
 </pre></div>
 </div>
-<p>Each of these settings is setable from the constructor as <cite>usage</cite>,
-<cite>name</cite>, <cite>lifetime</cite>, and <cite>mechs</cite>.</p>
+<p>Each of these settings is setable from the constructor as <code class="docutils literal notranslate"><span class="pre">usage</span></code>,
+<code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">lifetime</span></code>, and <code class="docutils literal notranslate"><span class="pre">mechs</span></code>.</p>
 </section>
 <section id="security-contexts">
 <h2>Security Contexts<a class="headerlink" href="#security-contexts" title="Link to this heading"></a></h2>
@@ -197,11 +197,11 @@ encryption), or both for messages exchanged between the two parties.</p>
 <p>When establishing a security context, the default credentials are
 used unless otherwise specified.  This allows applications to use
 the user’s already acquired credentials:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">client_ctx</span> <span class="o">=</span> <span class="n">gssapi</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">server_name</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;initiate&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">initial_client_token</span> <span class="o">=</span> <span class="n">client_ctx</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client_ctx</span><span class="o">.</span><span class="n">complete</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; client_ctx = gssapi.SecurityContext(name=server_name, usage=&#39;initiate&#39;)
+&gt;&gt;&gt; initial_client_token = client_ctx.step()
+&gt;&gt;&gt; client_ctx.complete
+False
+&gt;&gt;&gt;
 </pre></div>
 </div>
 <p>Just like credentials, security contexts are either initiating
@@ -209,9 +209,9 @@ contexts, or accepting contexts (they cannot be both).  Initiating
 contexts must specify at least a target name.  In this case,
 we indicate that we wish to establish a context with the HTTP server
 from above.  The http server can then accept that context:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server_ctx</span> <span class="o">=</span> <span class="n">gssapi</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">(</span><span class="n">creds</span><span class="o">=</span><span class="n">server_creds</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;accept&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">initial_server_token</span> <span class="o">=</span> <span class="n">server_ctx</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">initial_client_token</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_ctx = gssapi.SecurityContext(creds=server_creds, usage=&#39;accept&#39;)
+&gt;&gt;&gt; initial_server_token = server_ctx.step(initial_client_token)
+&gt;&gt;&gt;
 </pre></div>
 </div>
 <p>As you can see, creating an accepting security context is similar.
@@ -219,74 +219,74 @@ Here, we specify a set of accepting credentials to use, although
 this is optional (the defaults will be used if no credentials are
 specified).</p>
 <p>Let’s finish up the exchange:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server_tok</span> <span class="o">=</span> <span class="n">initial_server_token</span>
-<span class="gp">&gt;&gt;&gt;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="ow">not</span> <span class="p">(</span><span class="n">client_ctx</span><span class="o">.</span><span class="n">complete</span> <span class="ow">and</span> <span class="n">server_ctx</span><span class="o">.</span><span class="n">complete</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">client_tok</span> <span class="o">=</span> <span class="n">client_ctx</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">server_tok</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">client_tok</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="k">break</span>
-<span class="gp">... </span>    <span class="n">server_tok</span> <span class="o">=</span> <span class="n">server_ctx</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">client_tok</span><span class="p">)</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">client_ctx</span><span class="o">.</span><span class="n">complete</span> <span class="ow">and</span> <span class="n">server_ctx</span><span class="o">.</span><span class="n">complete</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_tok = initial_server_token
+&gt;&gt;&gt;
+&gt;&gt;&gt; while not (client_ctx.complete and server_ctx.complete):
+...     client_tok = client_ctx.step(server_tok)
+...     if not client_tok:
+...         break
+...     server_tok = server_ctx.step(client_tok)
+...
+&gt;&gt;&gt; client_ctx.complete and server_ctx.complete
+True
+&gt;&gt;&gt;
 </pre></div>
 </div>
-<p>We can now wrap and unwrap messages, using the <cite>wrap</cite> and <cite>unwrap</cite> methods
-on <cite>SecurityContext</cite>:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">message</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;some message here&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wrapped_message</span><span class="p">,</span> <span class="n">msg_encrypted</span> <span class="o">=</span> <span class="n">client_ctx</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">message</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">wrapped_message</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">msg_encrypted</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_ctx</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">wrapped_message</span><span class="p">)</span>
-<span class="go">UnwrapResult(message=b&#39;some message here&#39;, encrypted=True, qop=0)</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<p>We can now wrap and unwrap messages, using the <code class="docutils literal notranslate"><span class="pre">wrap</span></code> and <code class="docutils literal notranslate"><span class="pre">unwrap</span></code> methods
+on <code class="docutils literal notranslate"><span class="pre">SecurityContext</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; message = b&#39;some message here&#39;
+&gt;&gt;&gt; wrapped_message, msg_encrypted = client_ctx.wrap(message, True)
+&gt;&gt;&gt; message not in wrapped_message
+True
+&gt;&gt;&gt; msg_encrypted
+True
+&gt;&gt;&gt; server_ctx.unwrap(wrapped_message)
+UnwrapResult(message=b&#39;some message here&#39;, encrypted=True, qop=0)
+&gt;&gt;&gt;
 </pre></div>
 </div>
 <p>We can use the second parameter to control whether or not we encrypt the
 messages, or just sign them:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signed_message</span><span class="p">,</span> <span class="n">msg_encrypted</span> <span class="o">=</span> <span class="n">client_ctx</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">msg_encrypted</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">message</span> <span class="ow">in</span> <span class="n">signed_message</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_ctx</span><span class="o">.</span><span class="n">unwrap</span><span class="p">(</span><span class="n">signed_message</span><span class="p">)</span>
-<span class="go">UnwrapResult(message=b&#39;some message here&#39;, encrypted=False, qop=0)</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; signed_message, msg_encrypted = client_ctx.wrap(message, False)
+&gt;&gt;&gt; msg_encrypted
+False
+&gt;&gt;&gt; message in signed_message
+True
+&gt;&gt;&gt; server_ctx.unwrap(signed_message)
+UnwrapResult(message=b&#39;some message here&#39;, encrypted=False, qop=0)
+&gt;&gt;&gt;
 </pre></div>
 </div>
 <p>Manually passing in a second parameter and checking whether or not encryption
 was used can get tedious, so python-gssapi provides two convenience methods
-to help with this: <cite>encrypt</cite> and <cite>decrypt</cite>.  If the context is set up to use
-encryption, they will call <cite>wrap</cite> with encryption.  If not, they will
-call <cite>wrap</cite> without encryption.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">encrypted_message</span> <span class="o">=</span> <span class="n">client_ctx</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">encrypted_message</span> <span class="o">!=</span> <span class="n">message</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_ctx</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">encrypted_message</span><span class="p">)</span>
-<span class="go">b&#39;some message here&#39;</span>
-<span class="gp">&gt;&gt;&gt;</span>
+to help with this: <code class="docutils literal notranslate"><span class="pre">encrypt</span></code> and <code class="docutils literal notranslate"><span class="pre">decrypt</span></code>.  If the context is set up to use
+encryption, they will call <code class="docutils literal notranslate"><span class="pre">wrap</span></code> with encryption.  If not, they will
+call <code class="docutils literal notranslate"><span class="pre">wrap</span></code> without encryption.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; encrypted_message = client_ctx.encrypt(message)
+&gt;&gt;&gt; encrypted_message != message
+True
+&gt;&gt;&gt; server_ctx.decrypt(encrypted_message)
+b&#39;some message here&#39;
+&gt;&gt;&gt;
 </pre></div>
 </div>
-<p>Notice that if we try to use <cite>decrypt</cite> a signed message, and exception will be raised,
+<p>Notice that if we try to use <code class="docutils literal notranslate"><span class="pre">decrypt</span></code> a signed message, and exception will be raised,
 since the context was set up to use encryption (the default):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">signed_message</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">client_ctx</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">server_ctx</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">signed_message</span><span class="p">)</span>
-<span class="gt">Traceback (most recent call last):</span>
-  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
-  File <span class="nb">&quot;&lt;string&gt;&quot;</span>, line <span class="m">2</span>, in <span class="n">decrypt</span>
-  File <span class="nb">&quot;/usr/lib/python3.4/site-packages/gssapi/_utils.py&quot;</span>, line <span class="m">167</span>, in <span class="n">check_last_err</span>
-<span class="w">    </span><span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-  File <span class="nb">&quot;/usr/lib/python3.4/site-packages/gssapi/sec_contexts.py&quot;</span>, line <span class="m">295</span>, in <span class="n">decrypt</span>
-<span class="w">    </span><span class="n">unwrapped_message</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-<span class="gr">gssapi.exceptions.EncryptionNotUsed</span>: <span class="n">Confidentiality was requested, but not used: The context was established with encryption, but unwrapped message was not encrypted.</span>
-<span class="gp">&gt;&gt;&gt;</span>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; signed_message, _ = client_ctx.wrap(message, False)
+&gt;&gt;&gt; server_ctx.decrypt(signed_message)
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;&lt;string&gt;&quot;, line 2, in decrypt
+  File &quot;/usr/lib/python3.4/site-packages/gssapi/_utils.py&quot;, line 167, in check_last_err
+    return func(self, *args, **kwargs)
+  File &quot;/usr/lib/python3.4/site-packages/gssapi/sec_contexts.py&quot;, line 295, in decrypt
+    unwrapped_message=res.message)
+gssapi.exceptions.EncryptionNotUsed: Confidentiality was requested, but not used: The context was established with encryption, but unwrapped message was not encrypted.
+&gt;&gt;&gt;
 </pre></div>
 </div>
-<p>There you have it: the basics of GSSAPI.  You can use the <cite>help</cite> function
-at the interpreter, or check the [docs](<a class="reference external" href="http://pythonhosted.org/gssapi/">http://pythonhosted.org/gssapi/</a>)
+<p>There you have it: the basics of GSSAPI.  You can use the <code class="docutils literal notranslate"><span class="pre">help</span></code> function
+at the interpreter, or check the <a class="reference external" href="http://pythonhosted.org/gssapi/">docs</a>
 for more information.</p>
 </section>
 </section>
