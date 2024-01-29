@@ -1,4 +1,4 @@
+myst-parser  # For parsing markdown docs instead of rst
 Sphinx >= 1.3.1
 sphinx-autoapi
 sphinx-rtd-theme >= 0.2.5b1
-recommonmark >= 0.4.0
