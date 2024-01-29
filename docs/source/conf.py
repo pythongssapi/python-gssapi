@@ -20,8 +20,6 @@ import sys, os, re
 
 sys.path.insert(0, os.path.abspath('../custom_extensions'))
 
-from custom_recommonmark import AllCodeCommonMarkParser
-
 # -- General configuration -----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -30,6 +28,7 @@ from custom_recommonmark import AllCodeCommonMarkParser
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
+  'myst_parser',
   'sphinx.ext.autodoc',
   'sphinx.ext.intersphinx',
   'sphinx.ext.viewcode',
@@ -47,13 +46,10 @@ autoapi_file_patterns = ['*.pyi']
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
-# Parsers for different suffixes
-source_parsers = {
-    '.md': AllCodeCommonMarkParser
-}
-
 # The suffix of source filenames.
 source_suffix = ['.rst', '.md']
+
+myst_all_links_external = True
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
