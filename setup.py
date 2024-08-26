@@ -156,6 +156,7 @@ for arg in _link_args:
 ENABLE_SUPPORT_DETECTION = \
     (os.environ.get('GSSAPI_SUPPORT_DETECT', 'true').lower() == 'true')
 
+wrap_iov_symbol_name = 'gss_wrap_iov'
 if ENABLE_SUPPORT_DETECTION:
     import ctypes.util
 
@@ -204,6 +205,9 @@ if ENABLE_SUPPORT_DETECTION:
                         "GSSAPI_SUPPORT_DETECT to 'false'")
 
     GSSAPI_LIB = ctypes.CDLL(os.path.join(main_path, main_lib))
+
+    if hasattr(GSSAPI_LIB, '__ApplePrivate_gss_wrap_iov'):
+        wrap_iov_symbol_name = '__ApplePrivate_gss_wrap_iov'
 
 
 def make_extension(name_fmt, module, **kwargs):
@@ -323,9 +327,7 @@ setup(
         extension_file('rfc5588', 'gss_store_cred'),
         extension_file('rfc5801', 'gss_inquire_saslname_for_mech'),
         extension_file('cred_imp_exp', 'gss_import_cred'),
-        extension_file('dce',
-                       '__ApplePrivate_gss_wrap_iov' if osx_has_gss_framework
-                       else 'gss_wrap_iov'),
+        extension_file('dce', wrap_iov_symbol_name),
         extension_file('dce_aead', 'gss_wrap_aead'),
         extension_file('iov_mic', 'gss_get_mic_iov'),
         extension_file('ggf', 'gss_inquire_sec_context_by_oid'),
