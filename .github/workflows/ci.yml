@@ -44,6 +44,10 @@ jobs:
       matrix:
         include:
         - os: macOS-12
+          version: cp313-macosx_x86_64
+        - os: macOS-12
+          version: cp313-macosx_arm64
+        - os: macOS-12
           version: cp312-macosx_x86_64
         - os: macOS-12
           version: cp312-macosx_arm64
@@ -63,9 +67,11 @@ jobs:
           version: cp38-macosx_x86_64
         - os: macOS-12
           version: cp38-macosx_arm64
-        - os: macOS-12
-          version: cp37-macosx_x86_64
 
+        - os: windows-2022
+          version: cp313-win_amd64
+        - os: windows-2022
+          version: cp313-win32
         - os: windows-2022
           version: cp312-win_amd64
         - os: windows-2022
@@ -86,10 +92,6 @@ jobs:
           version: cp38-win_amd64
         - os: windows-2022
           version: cp38-win32
-        - os: windows-2022
-          version: cp37-win_amd64
-        - os: windows-2022
-          version: cp37-win32
 
     steps:
     - name: Set up environment
@@ -121,7 +123,7 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v2.16.5
+      uses: pypa/cibuildwheel@v2.21.0
       env:
         CIBW_ARCHS: all
         CIBW_TEST_SKIP: '*_arm64'
@@ -225,18 +227,20 @@ jobs:
       fail-fast: false
       matrix:
         name:
+        - win-py-3.13
         - win-py-3.12
         - win-py-3.11
         - win-py-3.10
         - win-py-3.9
         - win-py-3.8
-        - win-py-3.7
         arch:
         - x64
         - x86
         include:
+        - name: win-py-3.13
+          pyenv: '3.13.0-rc.2'
         - name: win-py-3.12
-          pyenv: '3.12.0-rc.1'
+          pyenv: '3.12'
         - name: win-py-3.11
           pyenv: '3.11'
         - name: win-py-3.10
@@ -245,8 +249,6 @@ jobs:
           pyenv: '3.9'
         - name: win-py-3.8
           pyenv: '3.8'
-        - name: win-py-3.7
-          pyenv: '3.7'
 
     steps:
     - name: Check out code
