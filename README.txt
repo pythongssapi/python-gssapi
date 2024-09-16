@@ -32,14 +32,14 @@ Basic
 
 * a C compiler (such as GCC)
 
-* Python 3.7+ (older releases support older versions, but are unsupported)
+* Python 3.8+ (older releases support older versions, but are unsupported)
 
 * the `decorator` python package
 
 Compiling from Scratch
 ----------------------
 
-To compile from scratch, you will need Cython >= 0.29.29 which is automatically
+To compile from scratch, you will need Cython ``>= 3.0.3, < 4.0.0`` which is automatically
 installed by pip in an isolated build virtual environment.
 
 For Running the Tests
