@@ -39,10 +39,10 @@ if kc_env in os.environ:
     autodetect_kc = False
     print(f"Using {kc} from env")
 
-link_args, compile_args = [
+link_args, compile_args = (
     shlex.split(os.environ[e], posix=posix) if e in os.environ else None
     for e in ['GSSAPI_LINKER_ARGS', 'GSSAPI_COMPILER_ARGS']
-]
+)
 
 osx_has_gss_framework = False
 if sys.platform == 'darwin':
