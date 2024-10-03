@@ -545,10 +545,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
 
         name_str = str(name)
 
-        if sys.version_info[0] == 2:
-            target_val = SERVICE_PRINCIPAL
-        else:
-            target_val = SERVICE_PRINCIPAL.decode(gssutils._get_encoding())
+        target_val = SERVICE_PRINCIPAL.decode(gssutils._get_encoding())
 
         self.assertEqual(name_str, target_val)
 
