@@ -123,7 +123,7 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v2.21.0
+      uses: pypa/cibuildwheel@v2.21.2
       env:
         CIBW_ARCHS: all
         CIBW_TEST_SKIP: '*_arm64'
@@ -238,7 +238,7 @@ jobs:
         - x86
         include:
         - name: win-py-3.13
-          pyenv: '3.13.0-rc.2'
+          pyenv: '3.13.0-rc.3'
         - name: win-py-3.12
           pyenv: '3.12'
         - name: win-py-3.11
