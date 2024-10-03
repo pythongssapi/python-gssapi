@@ -24,7 +24,7 @@ class GeneralError(Exception):
     ) -> None:
         maj_str = self.MAJOR_MESSAGE.format(**kwargs)
         err_str = self.FMT_STR.format(maj=maj_str, min=minor_message)
-        super(GeneralError, self).__init__(err_str)
+        super().__init__(err_str)
 
 
 class UnknownUsageError(GeneralError):
@@ -42,6 +42,6 @@ class EncryptionNotUsed(GeneralError):
         unwrapped_message: t.Optional[bytes] = None,
         **kwargs: str,
     ) -> None:
-        super(EncryptionNotUsed, self).__init__(minor_message, **kwargs)
+        super().__init__(minor_message, **kwargs)
 
         self.unwrapped_message = unwrapped_message

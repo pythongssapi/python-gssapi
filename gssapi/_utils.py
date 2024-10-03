@@ -28,7 +28,7 @@ def import_gssapi_extension(
     """
 
     try:
-        path = 'gssapi.raw.ext_{0}'.format(name)
+        path = f'gssapi.raw.ext_{name}'
         __import__(path)
         return sys.modules[path]
     except ImportError:
@@ -192,4 +192,4 @@ class CheckLastError(type):
             if attr_name[0] != '_':
                 attrs[attr_name] = check_last_err(attr)
 
-        return super(CheckLastError, cls).__new__(cls, name, parents, attrs)
+        return super().__new__(cls, name, parents, attrs)

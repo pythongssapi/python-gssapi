@@ -30,7 +30,7 @@ gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = False  # type: ignore
 class _GSSAPIKerberosTestCase(kt.KerberosTestCase):
     @classmethod
     def setUpClass(cls):
-        super(_GSSAPIKerberosTestCase, cls).setUpClass()
+        super().setUpClass()
         svc_princ = SERVICE_PRINCIPAL.decode("UTF-8")
 
         cls.realm.kinit(svc_princ, flags=['-k'])
@@ -58,7 +58,7 @@ class _GSSAPIKerberosTestCase(kt.KerberosTestCase):
 
     @classmethod
     def tearDownClass(cls):
-        super(_GSSAPIKerberosTestCase, cls).tearDownClass()
+        super().tearDownClass()
         cls._restore_env()
 
 
@@ -94,7 +94,7 @@ def exist_perms(**kwargs):
     perms = _perms_cycle(curr_elems.pop(), curr_elems, {})
     res = []
     for name_str, perm in perms:
-        args = dict([(k, v) for (k, v) in kwargs.items() if perm[k]])
+        args = {k: v for (k, v) in kwargs.items() if perm[k]}
         res.append((name_str, args))
 
     return parameterized.expand(res)
@@ -114,7 +114,7 @@ def true_false_perms(*all_elems_tuple):
 # NB(directxman12): the above note used to be wonderfully sarcastic
 class CredsTestCase(_GSSAPIKerberosTestCase):
     def setUp(self):
-        super(CredsTestCase, self).setUp()
+        super().setUp()
 
         svc_princ = SERVICE_PRINCIPAL.decode("UTF-8")
         self.realm.kinit(svc_princ, flags=['-k'])
@@ -182,8 +182,8 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
     @ktu.gssapi_extension_test('cred_store', 'credentials store')
     def test_store_into_acquire_from(self):
-        CCACHE = 'FILE:{tmpdir}/other_ccache'.format(tmpdir=self.realm.tmpdir)
-        KT = '{tmpdir}/other_keytab'.format(tmpdir=self.realm.tmpdir)
+        CCACHE = f'FILE:{self.realm.tmpdir}/other_ccache'
+        KT = f'{self.realm.tmpdir}/other_keytab'
         store = {'ccache': CCACHE, 'keytab': KT}
 
         princ_name = 'service/cs@' + self.realm.realm
@@ -281,8 +281,8 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
     @ktu.gssapi_extension_test('cred_store', 'credentials store')
     def test_store_into_add_from(self):
-        CCACHE = 'FILE:{tmpdir}/other_ccache'.format(tmpdir=self.realm.tmpdir)
-        KT = '{tmpdir}/other_keytab'.format(tmpdir=self.realm.tmpdir)
+        CCACHE = f'FILE:{self.realm.tmpdir}/other_ccache'
+        KT = f'{self.realm.tmpdir}/other_keytab'
         store = {'ccache': CCACHE, 'keytab': KT}
 
         princ_name = 'service_add_from/cs@' + self.realm.realm
@@ -536,7 +536,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
         self.assertIsNotNone(name2)
 
         ugg = name2.attributes["urn:greet:greeting"]
-        self.assertEqual(ugg.values, set([b"some val"]))
+        self.assertEqual(ugg.values, {b"some val"})
         self.assertTrue(ugg.complete)
         self.assertFalse(ugg.authenticated)
 
@@ -647,7 +647,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
 
         canon_name.attributes['urn:greet:greeting'] = (b'some val', True)
         ugg = canon_name.attributes["urn:greet:greeting"]
-        self.assertEqual(ugg.values, set([b"some val"]))
+        self.assertEqual(ugg.values, {b"some val"})
         self.assertTrue(ugg.complete)
         self.assertFalse(ugg.authenticated)
 
@@ -662,7 +662,7 @@ class NamesTestCase(_GSSAPIKerberosTestCase):
 
 class SecurityContextTestCase(_GSSAPIKerberosTestCase):
     def setUp(self):
-        super(SecurityContextTestCase, self).setUp()
+        super().setUp()
         gssctx.SecurityContext.__DEFER_STEP_ERRORS__ = False
         self.client_name = gssnames.Name(self.USER_PRINC)
         self.client_creds = gsscreds.Credentials(name=None,

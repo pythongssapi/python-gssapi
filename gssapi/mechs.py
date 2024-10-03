@@ -27,7 +27,7 @@ class Mechanism(roids.OID):
         elements: t.Optional[bytes] = None,
     ) -> "Mechanism":
         return t.cast("Mechanism",
-                      super(Mechanism, cls).__new__(cls, cpy, elements))
+                      super().__new__(cls, cpy, elements))
 
     @property
     def name_types(self) -> t.Set[roids.OID]:
@@ -73,7 +73,7 @@ class Mechanism(roids.OID):
         """
         base = "<Mechanism (%s)>" % self.dotted_form
         if rfc5801 is not None:
-            base = "<Mechanism %s (%s)>" % (
+            base = "<Mechanism {} ({})>".format(
                 self._saslname.mech_name.decode('UTF-8'),
                 self.dotted_form
             )
@@ -203,11 +203,11 @@ class Mechanism(roids.OID):
         :requires-ext:`rfc5587`
         """
         if isinstance(desired_attrs, roids.OID):
-            desired_attrs = set([desired_attrs])
+            desired_attrs = {desired_attrs}
         if isinstance(except_attrs, roids.OID):
-            except_attrs = set([except_attrs])
+            except_attrs = {except_attrs}
         if isinstance(critical_attrs, roids.OID):
-            critical_attrs = set([critical_attrs])
+            critical_attrs = {critical_attrs}
 
         if rfc5587 is None:
             raise NotImplementedError("Your GSSAPI implementation does not "

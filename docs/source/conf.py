@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Python-GSSAPI documentation build configuration file, created by
 # sphinx-quickstart on Tue Jul  2 19:01:09 2013.
@@ -58,8 +57,8 @@ myst_all_links_external = True
 master_doc = 'index'
 
 # General information about the project.
-project = u'Python-GSSAPI'
-copyright = u'2014, The Python-GSSAPI team'
+project = 'Python-GSSAPI'
+copyright = '2014, The Python-GSSAPI team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -103,7 +102,7 @@ version = ''
 # The full version, including alpha/beta/rc tags.
 release = ''
 
-with open(setup_py_path, mode='r') as fd:
+with open(setup_py_path) as fd:
     for line in fd:
         version_match = version_pattern.match(line)
         if version_match:
@@ -249,8 +248,8 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Python-GSSAPI.tex', u'Python-GSSAPI Documentation',
-   u'The Python-GSSAPI team', 'manual'),
+  ('index', 'Python-GSSAPI.tex', 'Python-GSSAPI Documentation',
+   'The Python-GSSAPI team', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -293,8 +292,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Python-GSSAPI', u'Python-GSSAPI Documentation',
-   u'The Python-GSSAPI team', 'Python-GSSAPI',
+  ('index', 'Python-GSSAPI', 'Python-GSSAPI Documentation',
+   'The Python-GSSAPI team', 'Python-GSSAPI',
    'One line description of project.', 'Miscellaneous'),
 ]
 

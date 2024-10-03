@@ -79,7 +79,7 @@ class Credentials(rcreds.Creds):
             base_creds = res.creds
 
         return t.cast("Credentials",
-                      super(Credentials, cls).__new__(cls, base_creds))
+                      super().__new__(cls, base_creds))
 
     @property
     def name(self) -> rnames.Name:

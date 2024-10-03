@@ -46,7 +46,7 @@ class SecurityContext(rsec_contexts.SecurityContext,
             base = rsec_contexts.import_sec_context(token)
 
         return t.cast("SecurityContext",
-                      super(SecurityContext, cls).__new__(cls, base))
+                      super().__new__(cls, base))
 
     def __init__(
         self,

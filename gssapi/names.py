@@ -1,4 +1,3 @@
-
 import typing as t
 
 from gssapi.raw import names as rname
@@ -79,7 +78,7 @@ class Name(rname.Name):
                 base,  # type: ignore[arg-type]
                 name_type)
 
-        return t.cast("Name", super(Name, cls).__new__(cls, base_name))
+        return t.cast("Name", super().__new__(cls, base_name))
 
     def __init__(
         self,
