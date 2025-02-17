@@ -6,15 +6,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gssapi.raw.misc &mdash; Python-GSSAPI 1.9.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=7ab3649f" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=c4cb232b"></script>
-      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -72,16 +72,16 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.raw.misc</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
-<span class="kn">from</span> <span class="nn">gssapi.raw.names</span> <span class="kn">import</span> <span class="n">Name</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw.oids</span> <span class="kn">import</span> <span class="n">OID</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw.types</span> <span class="kn">import</span> <span class="n">MechType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.names</span><span class="w"> </span><span class="kn">import</span> <span class="n">Name</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.oids</span><span class="w"> </span><span class="kn">import</span> <span class="n">OID</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">MechType</span>
 
 
 <div class="viewcode-block" id="indicate_mechs">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.indicate_mechs">[docs]</a>
-<span class="k">def</span> <span class="nf">indicate_mechs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">indicate_mechs</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the currently supported mechanisms.</span>
 
 <span class="sd">    This method retrieves the currently supported GSSAPI mechanisms.</span>
@@ -92,7 +92,7 @@
 
 <div class="viewcode-block" id="inquire_names_for_mech">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.inquire_names_for_mech">[docs]</a>
-<span class="k">def</span> <span class="nf">inquire_names_for_mech</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">inquire_names_for_mech</span><span class="p">(</span>
     <span class="n">mech</span><span class="p">:</span> <span class="n">OID</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -116,7 +116,7 @@
 
 <div class="viewcode-block" id="inquire_mechs_for_name">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.inquire_mechs_for_name">[docs]</a>
-<span class="k">def</span> <span class="nf">inquire_mechs_for_name</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">inquire_mechs_for_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">OID</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -138,7 +138,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_display_status</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_display_status</span><span class="p">(</span>
     <span class="n">error_code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">is_major_code</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">mech</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">MechType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -174,7 +174,7 @@
 
 <div class="viewcode-block" id="GSSError">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.GSSError">[docs]</a>
-<span class="k">class</span> <span class="nc">GSSError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GSSError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A GSSAPI Error</span>
 
@@ -211,12 +211,12 @@
 
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_parse_major_code</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_major_code</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">maj_code</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">maj_code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">min_code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
@@ -238,7 +238,7 @@
 
 <div class="viewcode-block" id="GSSError.get_all_statuses">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.GSSError.get_all_statuses">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_all_statuses</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_statuses</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">code</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">is_maj</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
@@ -262,7 +262,7 @@
 
 <div class="viewcode-block" id="GSSError.gen_message">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.exceptions.GSSError.gen_message">[docs]</a>
-    <span class="k">def</span> <span class="nf">gen_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gen_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieves all messages for this error&#39;s status codes</span>
 

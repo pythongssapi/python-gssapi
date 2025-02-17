@@ -6,15 +6,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gssapi.raw.ext_iov_mic &mdash; Python-GSSAPI 1.9.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=7ab3649f" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=c4cb232b"></script>
-      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -72,16 +72,16 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.raw.ext_iov_mic</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
 <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">gssapi.raw.ext_dce</span> <span class="kn">import</span> <span class="n">IOV</span>
-    <span class="kn">from</span> <span class="nn">gssapi.raw.sec_contexts</span> <span class="kn">import</span> <span class="n">SecurityContext</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.ext_dce</span><span class="w"> </span><span class="kn">import</span> <span class="n">IOV</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.sec_contexts</span><span class="w"> </span><span class="kn">import</span> <span class="n">SecurityContext</span>
 
 
 <div class="viewcode-block" id="get_mic_iov">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_iov_mic.get_mic_iov">[docs]</a>
-<span class="k">def</span> <span class="nf">get_mic_iov</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_mic_iov</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;IOV&quot;</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -114,7 +114,7 @@
 
 <div class="viewcode-block" id="get_mic_iov_length">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_iov_mic.get_mic_iov_length">[docs]</a>
-<span class="k">def</span> <span class="nf">get_mic_iov_length</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_mic_iov_length</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;IOV&quot;</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -147,7 +147,7 @@
 
 <div class="viewcode-block" id="verify_mic_iov">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_iov_mic.verify_mic_iov">[docs]</a>
-<span class="k">def</span> <span class="nf">verify_mic_iov</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">verify_mic_iov</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;IOV&quot;</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>

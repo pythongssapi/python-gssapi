@@ -6,15 +6,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gssapi.sec_contexts &mdash; Python-GSSAPI 1.9.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=7ab3649f" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../_static/documentation_options.js?v=c4cb232b"></script>
-      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -72,25 +72,25 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.sec_contexts</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">chan_bindings</span> <span class="k">as</span> <span class="n">rchan_bindings</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">sec_contexts</span> <span class="k">as</span> <span class="n">rsec_contexts</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">message</span> <span class="k">as</span> <span class="n">rmessage</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">names</span> <span class="k">as</span> <span class="n">rnames</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">oids</span> <span class="k">as</span> <span class="n">roids</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw.types</span> <span class="kn">import</span> <span class="n">RequirementFlag</span><span class="p">,</span> <span class="n">IntEnumFlagSet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">chan_bindings</span> <span class="k">as</span> <span class="n">rchan_bindings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">sec_contexts</span> <span class="k">as</span> <span class="n">rsec_contexts</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">message</span> <span class="k">as</span> <span class="n">rmessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">names</span> <span class="k">as</span> <span class="n">rnames</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">oids</span> <span class="k">as</span> <span class="n">roids</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">RequirementFlag</span><span class="p">,</span> <span class="n">IntEnumFlagSet</span>
 
-<span class="kn">import</span> <span class="nn">gssapi.exceptions</span> <span class="k">as</span> <span class="nn">excs</span>
-<span class="kn">from</span> <span class="nn">gssapi</span> <span class="kn">import</span> <span class="n">_utils</span>
-<span class="kn">from</span> <span class="nn">gssapi.names</span> <span class="kn">import</span> <span class="n">Name</span>
-<span class="kn">from</span> <span class="nn">gssapi.creds</span> <span class="kn">import</span> <span class="n">Credentials</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gssapi.exceptions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">excs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">_utils</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.names</span><span class="w"> </span><span class="kn">import</span> <span class="n">Name</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.creds</span><span class="w"> </span><span class="kn">import</span> <span class="n">Credentials</span>
 
 
 <div class="viewcode-block" id="SecurityContext">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext">[docs]</a>
-<span class="k">class</span> <span class="nc">SecurityContext</span><span class="p">(</span><span class="n">rsec_contexts</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">,</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SecurityContext</span><span class="p">(</span><span class="n">rsec_contexts</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">,</span>
                       <span class="n">metaclass</span><span class="o">=</span><span class="n">_utils</span><span class="o">.</span><span class="n">CheckLastError</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A GSSAPI Security Context</span>
 
@@ -105,7 +105,7 @@
 <span class="sd">    credentials object will not be preserved, however).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">base</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rsec_contexts</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -124,7 +124,7 @@
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
                       <span class="nb">super</span><span class="p">(</span><span class="n">SecurityContext</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">base</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rsec_contexts</span><span class="o">.</span><span class="n">SecurityContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -232,7 +232,7 @@
 
 <div class="viewcode-block" id="SecurityContext.get_signature">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.get_signature">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_signature</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_signature</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
@@ -262,7 +262,7 @@
 
 <div class="viewcode-block" id="SecurityContext.verify_signature">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.verify_signature">[docs]</a>
-    <span class="k">def</span> <span class="nf">verify_signature</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verify_signature</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
         <span class="n">mic</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
@@ -298,7 +298,7 @@
 
 <div class="viewcode-block" id="SecurityContext.wrap">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.wrap">[docs]</a>
-    <span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrap</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
         <span class="n">encrypt</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
@@ -327,7 +327,7 @@
 
 <div class="viewcode-block" id="SecurityContext.unwrap">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.unwrap">[docs]</a>
-    <span class="k">def</span> <span class="nf">unwrap</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unwrap</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">UnwrapResult</span><span class="p">:</span>
@@ -359,7 +359,7 @@
 
 <div class="viewcode-block" id="SecurityContext.encrypt">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.encrypt">[docs]</a>
-    <span class="k">def</span> <span class="nf">encrypt</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">encrypt</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
@@ -395,7 +395,7 @@
 
 <div class="viewcode-block" id="SecurityContext.decrypt">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.decrypt">[docs]</a>
-    <span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decrypt</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
@@ -440,7 +440,7 @@
 
 <div class="viewcode-block" id="SecurityContext.get_wrap_size_limit">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.get_wrap_size_limit">[docs]</a>
-    <span class="k">def</span> <span class="nf">get_wrap_size_limit</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_wrap_size_limit</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">desired_output_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">encrypted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -470,7 +470,7 @@
 
 <div class="viewcode-block" id="SecurityContext.process_token">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.process_token">[docs]</a>
-    <span class="k">def</span> <span class="nf">process_token</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_token</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -495,7 +495,7 @@
 
 <div class="viewcode-block" id="SecurityContext.export">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.export">[docs]</a>
-    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Export a security context.</span>
 
 <span class="sd">        This method exports a security context, allowing it to be passed</span>
@@ -517,7 +517,7 @@
                      <span class="s1">&#39;mech&#39;</span><span class="p">,</span> <span class="s1">&#39;flags&#39;</span><span class="p">,</span> <span class="s1">&#39;locally_init&#39;</span><span class="p">,</span> <span class="s1">&#39;complete&#39;</span><span class="p">)</span>
 
     <span class="nd">@_utils</span><span class="o">.</span><span class="n">check_last_err</span>
-    <span class="k">def</span> <span class="nf">_inquire</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_inquire</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireContextResult</span><span class="p">:</span>
@@ -575,12 +575,12 @@
                                            <span class="n">res</span><span class="o">.</span><span class="n">complete</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">lifetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lifetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The amount of time for which this context remains valid&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">rsec_contexts</span><span class="o">.</span><span class="n">context_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">delegated_creds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Credentials</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delegated_creds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">Credentials</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The credentials delegated from the initiator to the acceptor</span>
 
 <span class="sd">        .. warning::</span>
@@ -604,7 +604,7 @@
 
     <span class="nd">@property</span>  <span class="c1"># type: ignore # https://github.com/python/mypy/issues/1362</span>
     <span class="nd">@_utils</span><span class="o">.</span><span class="n">check_last_err</span>
-    <span class="k">def</span> <span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether negotiation for this context has been completed&quot;&quot;&quot;</span>
         <span class="c1"># NB(directxman12): MIT krb5 has a bug where it refuses to</span>
         <span class="c1">#                   inquire about partially completed contexts,</span>
@@ -626,7 +626,7 @@
 <div class="viewcode-block" id="SecurityContext.step">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.sec_contexts.SecurityContext.step">[docs]</a>
     <span class="nd">@_utils</span><span class="o">.</span><span class="n">catch_and_return_token</span>
-    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
@@ -689,7 +689,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initiator_step</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="n">token</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_acceptor_step</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_acceptor_step</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
@@ -705,7 +705,7 @@
 
         <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">token</span>
 
-    <span class="k">def</span> <span class="nf">_initiator_step</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_initiator_step</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
@@ -721,7 +721,7 @@
         <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">token</span>
 
     <span class="c1"># pickle protocol support</span>
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__reduce__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="s2">&quot;SecurityContext&quot;</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]]:</span>
         <span class="c1"># the unpickle arguments to new are (base=None, token=self.export())</span>

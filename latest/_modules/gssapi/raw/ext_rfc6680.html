@@ -6,15 +6,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gssapi.raw.ext_rfc6680 &mdash; Python-GSSAPI 1.9.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=7ab3649f" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=c4cb232b"></script>
-      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -72,20 +72,20 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.raw.ext_rfc6680</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
 <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">gssapi.raw.named_tuples</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.named_tuples</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
         <span class="n">GetNameAttributeResult</span><span class="p">,</span>
         <span class="n">InquireNameResult</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">gssapi.raw.names</span> <span class="kn">import</span> <span class="n">Name</span>
-    <span class="kn">from</span> <span class="nn">gssapi.raw.oids</span> <span class="kn">import</span> <span class="n">OID</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.names</span><span class="w"> </span><span class="kn">import</span> <span class="n">Name</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.oids</span><span class="w"> </span><span class="kn">import</span> <span class="n">OID</span>
 
 
 <div class="viewcode-block" id="display_name_ext">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.display_name_ext">[docs]</a>
-<span class="k">def</span> <span class="nf">display_name_ext</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">display_name_ext</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">name_type</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
@@ -112,7 +112,7 @@
 
 <div class="viewcode-block" id="inquire_name">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.inquire_name">[docs]</a>
-<span class="k">def</span> <span class="nf">inquire_name</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">inquire_name</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">mech_name</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -143,7 +143,7 @@
 
 <div class="viewcode-block" id="set_name_attribute">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.set_name_attribute">[docs]</a>
-<span class="k">def</span> <span class="nf">set_name_attribute</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_name_attribute</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">attr</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span>
@@ -175,7 +175,7 @@
 
 <div class="viewcode-block" id="get_name_attribute">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.get_name_attribute">[docs]</a>
-<span class="k">def</span> <span class="nf">get_name_attribute</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_name_attribute</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">attr</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
     <span class="n">more</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -208,7 +208,7 @@
 
 <div class="viewcode-block" id="delete_name_attribute">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.delete_name_attribute">[docs]</a>
-<span class="k">def</span> <span class="nf">delete_name_attribute</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_name_attribute</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
     <span class="n">attr</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -234,7 +234,7 @@
 
 <div class="viewcode-block" id="export_name_composite">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc6680.export_name_composite">[docs]</a>
-<span class="k">def</span> <span class="nf">export_name_composite</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">export_name_composite</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Export a name, preserving attribute information.</span>

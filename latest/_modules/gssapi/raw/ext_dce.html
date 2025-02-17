@@ -6,15 +6,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gssapi.raw.ext_dce &mdash; Python-GSSAPI 1.9.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=7ab3649f" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=c4cb232b"></script>
-      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -72,20 +72,20 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.raw.ext_dce</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
-<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntEnum</span>
 
-<span class="kn">from</span> <span class="nn">gssapi.raw.ext_dce_aead</span> <span class="kn">import</span> <span class="n">wrap_aead</span><span class="p">,</span> <span class="n">unwrap_aead</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.ext_dce_aead</span><span class="w"> </span><span class="kn">import</span> <span class="n">wrap_aead</span><span class="p">,</span> <span class="n">unwrap_aead</span>
 
 <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">gssapi.raw.named_tuples</span> <span class="kn">import</span> <span class="n">IOVUnwrapResult</span><span class="p">,</span> <span class="n">WrapResult</span>
-    <span class="kn">from</span> <span class="nn">gssapi.raw.sec_contexts</span> <span class="kn">import</span> <span class="n">SecurityContext</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.named_tuples</span><span class="w"> </span><span class="kn">import</span> <span class="n">IOVUnwrapResult</span><span class="p">,</span> <span class="n">WrapResult</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.sec_contexts</span><span class="w"> </span><span class="kn">import</span> <span class="n">SecurityContext</span>
 
 
 <div class="viewcode-block" id="IOVBufferType">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType">[docs]</a>
-<span class="k">class</span> <span class="nc">IOVBufferType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IOVBufferType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    IOV Buffer Types</span>
 
@@ -137,7 +137,7 @@
 
 <div class="viewcode-block" id="IOVBuffer">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer">[docs]</a>
-<span class="k">class</span> <span class="nc">IOVBuffer</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IOVBuffer</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">NamedTuple</span><span class="p">):</span>
 <div class="viewcode-block" id="IOVBuffer.type">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBuffer.type">[docs]</a>
     <span class="nb">type</span><span class="p">:</span> <span class="n">IOVBufferType</span></div>
@@ -155,10 +155,10 @@
 
 <div class="viewcode-block" id="IOV">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOV">[docs]</a>
-<span class="k">class</span> <span class="nc">IOV</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IOV</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A GSSAPI IOV&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span>
             <span class="n">IOVBuffer</span><span class="p">,</span>
@@ -177,25 +177,25 @@
         <span class="n">auto_alloc</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">ind</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IOVBuffer</span><span class="p">:</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterator</span><span class="p">[</span><span class="n">IOVBuffer</span><span class="p">]:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterator</span><span class="p">[</span><span class="n">IOVBuffer</span><span class="p">]:</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">item</span><span class="p">:</span> <span class="n">IOVBuffer</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span> <span class="o">...</span>
 
-    <span class="k">def</span> <span class="fm">__reversed__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterator</span><span class="p">[</span><span class="n">IOVBuffer</span><span class="p">]:</span> <span class="o">...</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__reversed__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Iterator</span><span class="p">[</span><span class="n">IOVBuffer</span><span class="p">]:</span> <span class="o">...</span>
 
 <div class="viewcode-block" id="IOV.index">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOV.index">[docs]</a>
-    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span></div>
@@ -203,7 +203,7 @@
 
 <div class="viewcode-block" id="IOV.count">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOV.count">[docs]</a>
-    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="o">...</span></div>
@@ -213,7 +213,7 @@
 
 <div class="viewcode-block" id="wrap_iov">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.wrap_iov">[docs]</a>
-<span class="k">def</span> <span class="nf">wrap_iov</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">wrap_iov</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -250,7 +250,7 @@
 
 <div class="viewcode-block" id="unwrap_iov">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.unwrap_iov">[docs]</a>
-<span class="k">def</span> <span class="nf">unwrap_iov</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">unwrap_iov</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;IOVUnwrapResult&quot;</span><span class="p">:</span>
@@ -288,7 +288,7 @@
 
 <div class="viewcode-block" id="wrap_iov_length">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.wrap_iov_length">[docs]</a>
-<span class="k">def</span> <span class="nf">wrap_iov_length</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">wrap_iov_length</span><span class="p">(</span>
     <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>

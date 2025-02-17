@@ -6,15 +6,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gssapi.creds &mdash; Python-GSSAPI 1.9.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=7ab3649f" />
-      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../_static/documentation_options.js?v=c4cb232b"></script>
-      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -72,15 +72,15 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.creds</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">creds</span> <span class="k">as</span> <span class="n">rcreds</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">names</span> <span class="k">as</span> <span class="n">rnames</span>
-<span class="kn">from</span> <span class="nn">gssapi.raw</span> <span class="kn">import</span> <span class="n">oids</span> <span class="k">as</span> <span class="n">roids</span>
-<span class="kn">from</span> <span class="nn">gssapi._utils</span> <span class="kn">import</span> <span class="n">import_gssapi_extension</span><span class="p">,</span> <span class="n">_encode_dict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">creds</span> <span class="k">as</span> <span class="n">rcreds</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">named_tuples</span> <span class="k">as</span> <span class="n">tuples</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">names</span> <span class="k">as</span> <span class="n">rnames</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw</span><span class="w"> </span><span class="kn">import</span> <span class="n">oids</span> <span class="k">as</span> <span class="n">roids</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi._utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">import_gssapi_extension</span><span class="p">,</span> <span class="n">_encode_dict</span>
 
-<span class="kn">from</span> <span class="nn">gssapi</span> <span class="kn">import</span> <span class="n">names</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gssapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">names</span>
 
 <span class="n">rcred_imp_exp</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;cred_imp_exp&#39;</span><span class="p">)</span>
 <span class="n">rcred_s4u</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;s4u&#39;</span><span class="p">)</span>
@@ -90,7 +90,7 @@
 
 <div class="viewcode-block" id="Credentials">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials">[docs]</a>
-<span class="k">class</span> <span class="nc">Credentials</span><span class="p">(</span><span class="n">rcreds</span><span class="o">.</span><span class="n">Creds</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Credentials</span><span class="p">(</span><span class="n">rcreds</span><span class="o">.</span><span class="n">Creds</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;GSSAPI Credentials</span>
 
 <span class="sd">    This class represents a set of GSSAPI credentials which may</span>
@@ -126,7 +126,7 @@
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
 
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">base</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rcreds</span><span class="o">.</span><span class="n">Creds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -158,28 +158,28 @@
                       <span class="nb">super</span><span class="p">(</span><span class="n">Credentials</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base_creds</span><span class="p">))</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the name associated with these credentials&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">inquire</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">mechs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">lifetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lifetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the remaining lifetime of these credentials, in seconds&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">inquire</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">usage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">lifetime</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">mechs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mechs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the mechanisms for these credentials&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">],</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">inquire</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">usage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mechs</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">usage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">usage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the usage (initiate, accept, or both) of these credentials&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">inquire</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -188,7 +188,7 @@
 <div class="viewcode-block" id="Credentials.acquire">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.acquire">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">acquire</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">acquire</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -258,7 +258,7 @@
 
 <div class="viewcode-block" id="Credentials.store">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.store">[docs]</a>
-    <span class="k">def</span> <span class="nf">store</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">store</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">store</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span>
             <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
@@ -321,7 +321,7 @@
 
 <div class="viewcode-block" id="Credentials.impersonate">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.impersonate">[docs]</a>
-    <span class="k">def</span> <span class="nf">impersonate</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">impersonate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -362,7 +362,7 @@
 
 <div class="viewcode-block" id="Credentials.inquire">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.inquire">[docs]</a>
-    <span class="k">def</span> <span class="nf">inquire</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inquire</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">lifetime</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -402,7 +402,7 @@
 
 <div class="viewcode-block" id="Credentials.inquire_by_mech">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.inquire_by_mech">[docs]</a>
-    <span class="k">def</span> <span class="nf">inquire_by_mech</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inquire_by_mech</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">mech</span><span class="p">:</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -446,7 +446,7 @@
 
 <div class="viewcode-block" id="Credentials.add">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.add">[docs]</a>
-    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span>
         <span class="n">mech</span><span class="p">:</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">,</span>
@@ -543,7 +543,7 @@
 
 <div class="viewcode-block" id="Credentials.export">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.export">[docs]</a>
-    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Export these credentials into a token</span>
 
 <span class="sd">        This method exports the current credentials to a token that can</span>
@@ -566,7 +566,7 @@
 
 
     <span class="c1"># pickle protocol support</span>
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__reduce__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="s2">&quot;Credentials&quot;</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]]:</span>
         <span class="c1"># the unpickle arguments to new are (base=None, token=self.export())</span>

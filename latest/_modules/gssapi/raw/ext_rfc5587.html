@@ -6,15 +6,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gssapi.raw.ext_rfc5587 &mdash; Python-GSSAPI 1.9.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=7ab3649f" />
-      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../../../_static/documentation_options.js?v=c4cb232b"></script>
-      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -72,16 +72,16 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.raw.ext_rfc5587</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">typing</span> <span class="k">as</span> <span class="nn">t</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
 <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">gssapi.raw.named_tuples</span> <span class="kn">import</span> <span class="n">InquireAttrsResult</span><span class="p">,</span> <span class="n">DisplayAttrResult</span>
-    <span class="kn">from</span> <span class="nn">gssapi.raw.oids</span> <span class="kn">import</span> <span class="n">OID</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.named_tuples</span><span class="w"> </span><span class="kn">import</span> <span class="n">InquireAttrsResult</span><span class="p">,</span> <span class="n">DisplayAttrResult</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi.raw.oids</span><span class="w"> </span><span class="kn">import</span> <span class="n">OID</span>
 
 
 <div class="viewcode-block" id="indicate_mechs_by_attrs">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc5587.indicate_mechs_by_attrs">[docs]</a>
-<span class="k">def</span> <span class="nf">indicate_mechs_by_attrs</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">indicate_mechs_by_attrs</span><span class="p">(</span>
     <span class="n">desired_mech_attrs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">except_mech_attrs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">critical_mech_attrs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -107,7 +107,7 @@
 
 <div class="viewcode-block" id="inquire_attrs_for_mech">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc5587.inquire_attrs_for_mech">[docs]</a>
-<span class="k">def</span> <span class="nf">inquire_attrs_for_mech</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">inquire_attrs_for_mech</span><span class="p">(</span>
     <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireAttrsResult&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets the set of attrs supported and known by a mechanism.</span>
@@ -127,7 +127,7 @@
 
 <div class="viewcode-block" id="display_mech_attr">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc5587.display_mech_attr">[docs]</a>
-<span class="k">def</span> <span class="nf">display_mech_attr</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">display_mech_attr</span><span class="p">(</span>
     <span class="n">attr</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;DisplayAttrResult&quot;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns information about attributes in human readable form.</span>
