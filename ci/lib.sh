@@ -23,8 +23,8 @@ lib::setup::debian_install() {
 }
 
 lib::setup::rh_dnfinst() {
-    # dnf has no update-only verb.  Also: modularity just makes this slower.
-    dnf -y --nogpgcheck --disablerepo=\*modul\* install $@
+    # dnf has no update-only verb.
+    dnf -y --nogpgcheck install $@
 }
 
 lib::setup::centos_install() {
