@@ -224,6 +224,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
         if kwargs['name']:
             self.assertEqual(resp.name, self.name)
+            self.assertIsInstance(resp.name, gssnames.Name)
         else:
             self.assertIsNone(resp.name)
 
@@ -250,6 +251,7 @@ class CredsTestCase(_GSSAPIKerberosTestCase):
 
         if kwargs['name']:
             self.assertEqual(resp.name, self.name)
+            self.assertIsInstance(resp.name, gssnames.Name)
         else:
             self.assertIsNone(resp.name)
 

@@ -82,9 +82,9 @@ class Credentials(rcreds.Creds):
                       super(Credentials, cls).__new__(cls, base_creds))
 
     @property
-    def name(self) -> rnames.Name:
+    def name(self) -> names.Name:
         """Get the name associated with these credentials"""
-        return t.cast(rnames.Name,
+        return t.cast(names.Name,
                       self.inquire(name=True, lifetime=False, usage=False,
                                    mechs=False).name)
 
