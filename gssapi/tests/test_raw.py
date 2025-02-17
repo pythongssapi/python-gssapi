@@ -27,7 +27,7 @@ if sys.platform == 'darwin':
 class _GSSAPIKerberosTestCase(kt.KerberosTestCase):
     @classmethod
     def setUpClass(cls):
-        super(_GSSAPIKerberosTestCase, cls).setUpClass()
+        super().setUpClass()
         svc_princ = SERVICE_PRINCIPAL.decode("UTF-8")
 
         cls.realm.kinit(svc_princ, flags=['-k'])
@@ -56,7 +56,7 @@ class _GSSAPIKerberosTestCase(kt.KerberosTestCase):
 
     @classmethod
     def tearDownClass(cls):
-        super(_GSSAPIKerberosTestCase, cls).tearDownClass()
+        super().tearDownClass()
         cls._restore_env()
 
 
@@ -449,8 +449,8 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
 
     @ktu.gssapi_extension_test('cred_store', 'credentials store')
     def test_store_cred_into_acquire_cred(self):
-        CCACHE = 'FILE:{tmpdir}/other_ccache'.format(tmpdir=self.realm.tmpdir)
-        KT = '{tmpdir}/other_keytab'.format(tmpdir=self.realm.tmpdir)
+        CCACHE = f'FILE:{self.realm.tmpdir}/other_ccache'
+        KT = f'{self.realm.tmpdir}/other_keytab'
         store = {b'ccache': CCACHE.encode('UTF-8'),
                  b'keytab': KT.encode('UTF-8')}
 
@@ -660,7 +660,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
                 known_attrs_dict[mech_attr].add(mech)
 
         for attr, expected_mechs in attrs_dict.items():
-            attrs = set([attr])
+            attrs = {attr}
 
             mechs = gb.indicate_mechs_by_attrs(attrs, None, None)
             self.assertGreater(len(mechs), 0)
@@ -673,7 +673,7 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         if self.realm.provider.lower() != 'heimdal':
             # Heimdal doesn't fully implement gss_indicate_mechs_by_attrs
             for attr, expected_mechs in known_attrs_dict.items():
-                attrs = set([attr])
+                attrs = {attr}
 
                 mechs = gb.indicate_mechs_by_attrs(None, None, attrs)
                 self.assertGreater(len(mechs), 0)
