@@ -303,7 +303,6 @@ setup(
         'Programming Language :: Python :: 3.12',
         'Programming Language :: Python :: 3.13',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: ISC License (ISCL)',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Cython',
         'Topic :: Security',
