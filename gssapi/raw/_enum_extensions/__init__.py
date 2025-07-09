@@ -33,7 +33,7 @@ class ExtendableEnum(EnumMeta):
                 else:
                     classdict[extra_name] = extra_val
 
-        return super(ExtendableEnum, metacl).__new__(
+        return super().__new__(
             metacl,
             name,
             bases,

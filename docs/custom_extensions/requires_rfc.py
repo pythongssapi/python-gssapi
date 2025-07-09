@@ -8,7 +8,7 @@ def setup(app):
     app.add_role('requires-ext', RequiresExtRole(app))
 
 
-class RequiresExtRole(object):
+class RequiresExtRole:
     def __init__(self, app):
         self.app = app
 
