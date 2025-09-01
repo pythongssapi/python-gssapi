@@ -289,6 +289,7 @@ setup(
     },
     description='Python GSSAPI Wrapper',
     long_description=long_desc,
+    long_description_content_type='text/x-rst',
     license='LICENSE.txt',
     url="https://github.com/pythongssapi/python-gssapi",
     python_requires=">=3.9",
