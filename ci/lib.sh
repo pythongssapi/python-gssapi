@@ -132,14 +132,8 @@ lib::setup::install() {
     echo "Installing gssapi"
     GSSAPI_VER="$( grep 'version=' setup.py | cut -d "'" -f2 )"
 
-    if [ "$(expr substr $(uname -s) 1 5)" == "MINGW" ]; then
-        DIST_LINK_PATH="$( echo "${PWD}/dist" | sed -e 's/^\///' -e 's/\//\\/g' -e 's/^./\0:/' )"
-    else
-        DIST_LINK_PATH="${PWD}/dist"
-    fi
-
     python -m pip install gssapi=="${GSSAPI_VER}" \
-        --find-links "file://${DIST_LINK_PATH}" \
+        --find-links dist \
         --verbose
 
     echo "Installing dev dependencies"

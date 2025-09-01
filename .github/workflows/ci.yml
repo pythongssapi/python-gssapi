@@ -11,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Select python
       uses: actions/setup-python@v5
       with:
-        python-version: 3.9
+        python-version: 3.12
 
     - name: Build sdist
       run: |
@@ -44,6 +44,12 @@ jobs:
       matrix:
         include:
         - os: macOS-13
+          version: cp314-macosx_x86_64
+          prerelease: true
+        - os: macOS-15
+          version: cp314-macosx_arm64
+          prerelease: true
+        - os: macOS-13
           version: cp313-macosx_x86_64
         - os: macOS-15
           version: cp313-macosx_arm64
@@ -63,11 +69,13 @@ jobs:
           version: cp39-macosx_x86_64
         - os: macOS-15
           version: cp39-macosx_arm64
-        - os: macOS-13
-          version: cp38-macosx_x86_64
-        - os: macOS-15
-          version: cp38-macosx_arm64
 
+        - os: windows-2022
+          version: cp314-win_amd64
+          prerelease: true
+        - os: windows-2022
+          version: cp314-win32
+          prerelease: true
         - os: windows-2022
           version: cp313-win_amd64
         - os: windows-2022
@@ -88,10 +96,6 @@ jobs:
           version: cp39-win_amd64
         - os: windows-2022
           version: cp39-win32
-        - os: windows-2022
-          version: cp38-win_amd64
-        - os: windows-2022
-          version: cp38-win32
 
     steps:
     - name: Set up environment
@@ -109,7 +113,7 @@ jobs:
         echo "C:\Program Files${{ endsWith(matrix.version, '-win32') && ' (x86)' || '' }}\MIT\Kerberos\bin;$PATH" >> $GITHUB_PATH
 
     - name: Download gssapi sdist
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: artifact-sdist
         path: ./
@@ -123,10 +127,11 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v2.22.0
+      uses: pypa/cibuildwheel@v3.1.4
       env:
         CIBW_BUILD: ${{ matrix.version }}
         CIBW_BUILD_VERBOSITY: 1
+        CIBW_PRERELEASE_PYTHONS: ${{ matrix.prerelease || 'false' }}
 
     - name: Upload wheel
       uses: actions/upload-artifact@v4
@@ -142,7 +147,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download gssapi sdist
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         name: artifact-sdist
         path: ./dist
@@ -166,7 +171,7 @@ jobs:
 
         PATH="${PWD}/Python-${PYTHON_VERSION}-build/bin:${PATH}"
         python3 -m pip install gssapi=="${GSSAPI_VER}" \
-            --find-links "file://${PWD}/dist" \
+            --find-links dist \
             --verbose
 
         python3 -c "import gssapi"
@@ -199,10 +204,10 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Download built project
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -225,18 +230,20 @@ jobs:
       fail-fast: false
       matrix:
         name:
+        - win-py-3.14
         - win-py-3.13
         - win-py-3.12
         - win-py-3.11
         - win-py-3.10
         - win-py-3.9
-        - win-py-3.8
         arch:
         - x64
         - x86
         include:
+        - name: win-py-3.14
+          pyenv: '3.14.0-rc.2'
         - name: win-py-3.13
-          pyenv: '3.13.0-rc.3'
+          pyenv: '3.13'
         - name: win-py-3.12
           pyenv: '3.12'
         - name: win-py-3.11
@@ -245,15 +252,13 @@ jobs:
           pyenv: '3.10'
         - name: win-py-3.9
           pyenv: '3.9'
-        - name: win-py-3.8
-          pyenv: '3.8'
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Download built project
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -279,10 +284,10 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Download built project
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -311,10 +316,10 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Download built project
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -347,37 +352,14 @@ jobs:
         folder: ci_docs_build
         target-folder: stable
 
-    - name: Create release
+    - name: Create release with tar artifact
       if: startsWith(github.ref, 'refs/tags/v')
-      uses: actions/create-release@v1
-      id: cr
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
-
-    - name: Upload release tarball
-      if: startsWith(github.ref, 'refs/tags/v')
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.cr.outputs.upload_url }}
-        asset_path: tag_build/${{ steps.tarball.outputs.tarball }}
-        asset_name: ${{ steps.tarball.outputs.tarball }}
-        asset_content_type: application/octet-stream
-
-    - name: Upload release checksum
-      if: startsWith(github.ref, 'refs/tags/v')
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.cr.outputs.upload_url }}
-        asset_path: tag_build/${{ steps.checksum.outputs.checksum }}
-        asset_name: ${{ steps.checksum.outputs.checksum }}
-        asset_content_type: text/plain
+        files: |
+          tag_build/${{ steps.tarball.outputs.tarball }}
+          tag_build/${{ steps.checksum.outputs.checksum }}
+        generate_release_notes: true
 
     - name: Deploy to PyPI
       if: startsWith(github.ref, 'refs/tags/v')

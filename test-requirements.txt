@@ -3,5 +3,5 @@ flake8
 parameterized
 k5test
 decorator
-mypy==0.971
+mypy==1.17.1
 types-decorator

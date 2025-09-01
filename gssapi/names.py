@@ -390,8 +390,8 @@ class _NameAttributeMapping(MutableMapping):
             complete = value.complete
             attr_value = value.values
         elif isinstance(value, tuple) and len(value) == 2:
-            complete = t.cast(bool, value[1])
-            attr_value = [t.cast(bytes, value[0])]
+            complete = value[1]
+            attr_value = [value[0]]
         else:
             complete = False
 
