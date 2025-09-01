@@ -499,7 +499,7 @@ class SecurityContext(rsec_contexts.SecurityContext,
     locally_initiated = _utils.inquire_property(
         'locally_init', 'Whether this context was locally intiated')
 
-    @property  # type: ignore # https://github.com/python/mypy/issues/1362
+    @property
     @_utils.check_last_err
     def complete(self) -> bool:
         """Whether negotiation for this context has been completed"""
