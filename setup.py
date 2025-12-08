@@ -3,6 +3,7 @@ import subprocess
 import platform
 import re
 import sys
+import sysconfig
 import os
 import shutil
 import shlex
@@ -16,6 +17,17 @@ os.environ['SETUPTOOLS_USE_DISTUTILS'] = 'local'
 from setuptools import setup  # noqa: E402
 from setuptools.extension import Extension  # noqa: E402
 from Cython.Build import cythonize  # noqa: E402
+
+
+# Enable limited API for Python 3.11+
+USE_LIMITED_API = sys.version_info >= (3, 11)
+LIMITED_API_VERSION = 0x030B0000  # Python 3.11 ABI
+
+IS_FREE_THREADED = False
+if sysconfig.get_config_var("Py_GIL_DISABLED") == 1:
+    # Free-threaded Python does not support the limited API.
+    USE_LIMITED_API = False
+    IS_FREE_THREADED = True
 
 
 def get_output(*args, **kwargs):
@@ -215,6 +227,11 @@ def make_extension(name_fmt, module, **kwargs):
     source = name_fmt.replace('.', '/') % module + '.pyx'
     if not os.path.exists(source):
         raise OSError(source)
+
+    define_macros = kwargs.pop('define_macros', [])
+    if USE_LIMITED_API:
+        define_macros.append(('Py_LIMITED_API', LIMITED_API_VERSION))
+
     return Extension(
         name_fmt % module,
         extra_link_args=link_args,
@@ -222,6 +239,8 @@ def make_extension(name_fmt, module, **kwargs):
         library_dirs=library_dirs,
         libraries=libraries,
         sources=[source],
+        define_macros=define_macros,
+        py_limited_api=USE_LIMITED_API,
         **kwargs
     )
 
@@ -264,7 +283,12 @@ def gssapi_modules(lst):
     # add in any present enum extension files
     res.extend(ENUM_EXTS)
 
-    return cythonize(res, language_level=2)
+    compiler_directives = {}
+    if IS_FREE_THREADED:
+        # Enable free-threading support in Cython
+        compiler_directives["freethreading_compatible"] = True
+
+    return cythonize(res, language_level=2, compiler_directives=compiler_directives)
 
 
 long_desc = re.sub(r'\.\. role:: \w+\(code\)\s*\n\s*.+', '',
@@ -276,9 +300,13 @@ install_requires = [
     'decorator',
 ]
 
+setup_options = {}
+if USE_LIMITED_API:
+    setup_options["bdist_wheel"] = {"py_limited_api": "cp311"}
+
 setup(
     name='gssapi',
-    version='1.10.1',
+    version='1.11.0',
     author='The Python GSSAPI Team',
     author_email='jborean93@gmail.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
@@ -304,6 +332,7 @@ setup(
         'Programming Language :: Python :: 3.12',
         'Programming Language :: Python :: 3.13',
         'Programming Language :: Python :: 3.14',
+        "Programming Language :: Python :: Free Threading :: 2 - Beta"
         'Intended Audience :: Developers',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Cython',
@@ -344,6 +373,7 @@ setup(
 
         extension_file('krb5', 'gss_krb5_ccache_name'),
     ]),
+    options=setup_options,
     keywords=['gssapi', 'security'],
     install_requires=install_requires
 )

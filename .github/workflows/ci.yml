@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Select python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: 3.12
 
@@ -28,7 +28,7 @@ jobs:
         GSSAPI_COMPILER_ARGS: ''
 
     - name: Upload sdist
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: artifact-sdist
         path: ./dist/*.tar.gz
@@ -43,47 +43,31 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - os: macOS-13
-          version: cp314-macosx_x86_64
-          prerelease: true
-        - os: macOS-15
-          version: cp314-macosx_arm64
-          prerelease: true
-        - os: macOS-13
-          version: cp313-macosx_x86_64
-        - os: macOS-15
-          version: cp313-macosx_arm64
-        - os: macOS-13
-          version: cp312-macosx_x86_64
-        - os: macOS-15
-          version: cp312-macosx_arm64
-        - os: macOS-13
+        # Free-threading does not support Limited API/Stable ABI yet
+        # 3.11+ can use the Limited API/Stable ABI
+        - os: macos-15-intel
+          version: cp314t-macosx_x86_64
+        - os: macos-15
+          version: cp314t-macosx_arm64
+
+        - os: macos-15-intel
           version: cp311-macosx_x86_64
-        - os: macOS-15
+        - os: macos-15
           version: cp311-macosx_arm64
-        - os: macOS-13
+        - os: macos-15-intel
           version: cp310-macosx_x86_64
-        - os: macOS-15
+        - os: macos-15
           version: cp310-macosx_arm64
-        - os: macOS-13
+        - os: macos-15-intel
           version: cp39-macosx_x86_64
-        - os: macOS-15
+        - os: macos-15
           version: cp39-macosx_arm64
 
         - os: windows-2022
-          version: cp314-win_amd64
-          prerelease: true
+          version: cp314t-win_amd64
         - os: windows-2022
-          version: cp314-win32
-          prerelease: true
-        - os: windows-2022
-          version: cp313-win_amd64
-        - os: windows-2022
-          version: cp313-win32
-        - os: windows-2022
-          version: cp312-win_amd64
-        - os: windows-2022
-          version: cp312-win32
+          version: cp314t-win32
+
         - os: windows-2022
           version: cp311-win_amd64
         - os: windows-2022
@@ -113,7 +97,7 @@ jobs:
         echo "C:\Program Files${{ endsWith(matrix.version, '-win32') && ' (x86)' || '' }}\MIT\Kerberos\bin;$PATH" >> $GITHUB_PATH
 
     - name: Download gssapi sdist
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
         name: artifact-sdist
         path: ./
@@ -127,14 +111,14 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v3.1.4
+      uses: pypa/cibuildwheel@v3.2.1
       env:
         CIBW_BUILD: ${{ matrix.version }}
         CIBW_BUILD_VERBOSITY: 1
         CIBW_PRERELEASE_PYTHONS: ${{ matrix.prerelease || 'false' }}
 
     - name: Upload wheel
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         path: ./wheelhouse/*.whl
         name: artifact-wheel-${{ matrix.version }}
@@ -147,7 +131,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download gssapi sdist
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
         name: artifact-sdist
         path: ./dist
@@ -204,10 +188,10 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Download built project
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -230,6 +214,7 @@ jobs:
       fail-fast: false
       matrix:
         name:
+        - win-py-3.14t
         - win-py-3.14
         - win-py-3.13
         - win-py-3.12
@@ -240,8 +225,10 @@ jobs:
         - x64
         - x86
         include:
+        - name: win-py-3.14t
+          pyenv: '3.14t'
         - name: win-py-3.14
-          pyenv: '3.14.0-rc.2'
+          pyenv: '3.14'
         - name: win-py-3.13
           pyenv: '3.13'
         - name: win-py-3.12
@@ -255,17 +242,17 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Download built project
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
         pattern: artifact-*
         merge-multiple: true
         path: ./dist
 
     - name: Install the right python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.pyenv }}
         architecture: ${{ matrix.arch }}
@@ -284,10 +271,10 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Download built project
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -316,10 +303,10 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Download built project
-      uses: actions/download-artifact@v5
+      uses: actions/download-artifact@v6
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -339,7 +326,7 @@ jobs:
       run: echo "checksum=`ls tag_build/*.sha512sum | awk -F/ '{print $2}'`" >> $GITHUB_OUTPUT
 
     - name: Upload tagged build artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         path: tag_build/${{ steps.tarball.outputs.tarball }}
         name: release-asset
