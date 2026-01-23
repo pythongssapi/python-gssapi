@@ -288,7 +288,11 @@ def gssapi_modules(lst):
         # Enable free-threading support in Cython
         compiler_directives["freethreading_compatible"] = True
 
-    return cythonize(res, language_level=2, compiler_directives=compiler_directives)
+    return cythonize(
+        res,
+        language_level=2,
+        compiler_directives=compiler_directives,
+    )
 
 
 long_desc = re.sub(r'\.\. role:: \w+\(code\)\s*\n\s*.+', '',
