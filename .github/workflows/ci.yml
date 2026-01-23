@@ -112,6 +112,13 @@ jobs:
 
         echo "C:\Program Files${{ endsWith(matrix.version, '-win32') && ' (x86)' || '' }}\MIT\Kerberos\bin;$PATH" >> $GITHUB_PATH
 
+    - name: get WinSDK info
+      if: startsWith(matrix.os, 'windows-')
+      shell: pwsh
+      run: |
+        python -m pip install setuptools
+        python -c "import setuptools.msvc as s; e = s.EnvironmentInfo('AMD64'); print(e.return_env())"
+
     - name: Download gssapi sdist
       uses: actions/download-artifact@v5
       with:
