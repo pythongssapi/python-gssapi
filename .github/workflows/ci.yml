@@ -110,7 +110,7 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v3.1.8
+      uses: pypa/cibuildwheel@v3.2.1
       env:
         CIBW_BUILD: ${{ matrix.version }}
         CIBW_BUILD_VERBOSITY: 1
