@@ -71,31 +71,7 @@ jobs:
         #   version: cp39-macosx_arm64
 
         - os: windows-2022
-          version: cp314-win_amd64
-          prerelease: true
-        - os: windows-2022
-          version: cp314-win32
-          prerelease: true
-        - os: windows-2022
-          version: cp313-win_amd64
-        - os: windows-2022
-          version: cp313-win32
-        - os: windows-2022
-          version: cp312-win_amd64
-        - os: windows-2022
-          version: cp312-win32
-        - os: windows-2022
           version: cp311-win_amd64
-        - os: windows-2022
-          version: cp311-win32
-        - os: windows-2022
-          version: cp310-win_amd64
-        - os: windows-2022
-          version: cp310-win32
-        - os: windows-2022
-          version: cp39-win_amd64
-        - os: windows-2022
-          version: cp39-win32
 
     steps:
     - name: Set up environment
@@ -134,7 +110,7 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v3.3.1
+      uses: pypa/cibuildwheel@v3.1.8
       env:
         CIBW_BUILD: ${{ matrix.version }}
         CIBW_BUILD_VERBOSITY: 1
