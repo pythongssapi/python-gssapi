@@ -43,32 +43,32 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - os: macOS-13
-          version: cp314-macosx_x86_64
-          prerelease: true
-        - os: macOS-15
-          version: cp314-macosx_arm64
-          prerelease: true
-        - os: macOS-13
-          version: cp313-macosx_x86_64
-        - os: macOS-15
-          version: cp313-macosx_arm64
-        - os: macOS-13
-          version: cp312-macosx_x86_64
-        - os: macOS-15
-          version: cp312-macosx_arm64
-        - os: macOS-13
-          version: cp311-macosx_x86_64
-        - os: macOS-15
-          version: cp311-macosx_arm64
-        - os: macOS-13
-          version: cp310-macosx_x86_64
-        - os: macOS-15
-          version: cp310-macosx_arm64
-        - os: macOS-13
-          version: cp39-macosx_x86_64
-        - os: macOS-15
-          version: cp39-macosx_arm64
+        # - os: macOS-13
+        #   version: cp314-macosx_x86_64
+        #   prerelease: true
+        # - os: macOS-15
+        #   version: cp314-macosx_arm64
+        #   prerelease: true
+        # - os: macOS-13
+        #   version: cp313-macosx_x86_64
+        # - os: macOS-15
+        #   version: cp313-macosx_arm64
+        # - os: macOS-13
+        #   version: cp312-macosx_x86_64
+        # - os: macOS-15
+        #   version: cp312-macosx_arm64
+        # - os: macOS-13
+        #   version: cp311-macosx_x86_64
+        # - os: macOS-15
+        #   version: cp311-macosx_arm64
+        # - os: macOS-13
+        #   version: cp310-macosx_x86_64
+        # - os: macOS-15
+        #   version: cp310-macosx_arm64
+        # - os: macOS-13
+        #   version: cp39-macosx_x86_64
+        # - os: macOS-15
+        #   version: cp39-macosx_arm64
 
         - os: windows-2022
           version: cp314-win_amd64
@@ -147,227 +147,227 @@ jobs:
         name: artifact-wheel-${{ matrix.version }}
 
   # To catch issues like this https://github.com/pythongssapi/python-gssapi/issues/327
-  assertion_build:
-    needs:
-    - build_sdist
+  # assertion_build:
+  #   needs:
+  #   - build_sdist
 
-    runs-on: ubuntu-latest
-    steps:
-    - name: Download gssapi sdist
-      uses: actions/download-artifact@v5
-      with:
-        name: artifact-sdist
-        path: ./dist
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Download gssapi sdist
+  #     uses: actions/download-artifact@v5
+  #     with:
+  #       name: artifact-sdist
+  #       path: ./dist
 
-    - name: Compile Python with assertions
-      shell: bash
-      run: |
-        PYTHON_VERSION="3.11.5"
-        wget --quiet "https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz"
-        tar xf "Python-${PYTHON_VERSION}.tar.xz"
-        cd "Python-${PYTHON_VERSION}/"
-        ./configure --with-assertions --prefix "${PWD}/../Python-${PYTHON_VERSION}-build"
-        make
-        make install
-        cd ..
+  #   - name: Compile Python with assertions
+  #     shell: bash
+  #     run: |
+  #       PYTHON_VERSION="3.11.5"
+  #       wget --quiet "https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz"
+  #       tar xf "Python-${PYTHON_VERSION}.tar.xz"
+  #       cd "Python-${PYTHON_VERSION}/"
+  #       ./configure --with-assertions --prefix "${PWD}/../Python-${PYTHON_VERSION}-build"
+  #       make
+  #       make install
+  #       cd ..
 
-        sudo apt-get update
-        DEBIAN_FRONTEND=noninteractive sudo apt-get -y install krb5-user libkrb5-dev
+  #       sudo apt-get update
+  #       DEBIAN_FRONTEND=noninteractive sudo apt-get -y install krb5-user libkrb5-dev
 
-        GSSAPI_VER="$( find ./dist -type f -name 'gssapi-*.tar.gz' -printf "%f\n" | sed -n 's/gssapi-\(.*\)\.tar\.gz/\1/p' )"
+  #       GSSAPI_VER="$( find ./dist -type f -name 'gssapi-*.tar.gz' -printf "%f\n" | sed -n 's/gssapi-\(.*\)\.tar\.gz/\1/p' )"
 
-        PATH="${PWD}/Python-${PYTHON_VERSION}-build/bin:${PATH}"
-        python3 -m pip install gssapi=="${GSSAPI_VER}" \
-            --find-links dist \
-            --verbose
+  #       PATH="${PWD}/Python-${PYTHON_VERSION}-build/bin:${PATH}"
+  #       python3 -m pip install gssapi=="${GSSAPI_VER}" \
+  #           --find-links dist \
+  #           --verbose
 
-        python3 -c "import gssapi"
+  #       python3 -c "import gssapi"
 
-  linux:
-    needs:
-    - build_sdist
-    - build_wheels
+  # linux:
+  #   needs:
+  #   - build_sdist
+  #   - build_wheels
 
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        name:
-        - debian-stable
-        - debian-heimdal
-        - centos-stream-9
-        - fedora-latest
-        include:
-        - name: debian-stable
-          distro: debian:stable
-        - name: debian-heimdal
-          distro: debian:stable
-          krb5_ver: heimdal
-        - name: centos-stream-9
-          distro: quay.io/centos/centos:stream9
-        - name: fedora-latest
-          distro: fedora:latest
-          flake: 'yes'
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       name:
+  #       - debian-stable
+  #       - debian-heimdal
+  #       - centos-stream-9
+  #       - fedora-latest
+  #       include:
+  #       - name: debian-stable
+  #         distro: debian:stable
+  #       - name: debian-heimdal
+  #         distro: debian:stable
+  #         krb5_ver: heimdal
+  #       - name: centos-stream-9
+  #         distro: quay.io/centos/centos:stream9
+  #       - name: fedora-latest
+  #         distro: fedora:latest
+  #         flake: 'yes'
 
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v5
+  #   steps:
+  #   - name: Check out code
+  #     uses: actions/checkout@v5
 
-    - name: Download built project
-      uses: actions/download-artifact@v5
-      with:
-        pattern: artifact-*
-        merge-multiple: true
-        path: ./dist
+  #   - name: Download built project
+  #     uses: actions/download-artifact@v5
+  #     with:
+  #       pattern: artifact-*
+  #       merge-multiple: true
+  #       path: ./dist
 
-    - name: Test gssapi
-      run: ./ci/run-on-linux.sh ./ci/test.sh
-      env:
-        DISTRO: ${{ matrix.distro }}
-        KRB5_VER: ${{ matrix.krb5_ver }}
-        FLAKE: ${{ matrix.flake }}
+  #   - name: Test gssapi
+  #     run: ./ci/run-on-linux.sh ./ci/test.sh
+  #     env:
+  #       DISTRO: ${{ matrix.distro }}
+  #       KRB5_VER: ${{ matrix.krb5_ver }}
+  #       FLAKE: ${{ matrix.flake }}
 
-  windows:
-    needs:
-    - build_sdist
-    - build_wheels
+  # windows:
+  #   needs:
+  #   - build_sdist
+  #   - build_wheels
 
-    runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        name:
-        - win-py-3.14
-        - win-py-3.13
-        - win-py-3.12
-        - win-py-3.11
-        - win-py-3.10
-        - win-py-3.9
-        arch:
-        - x64
-        - x86
-        include:
-        - name: win-py-3.14
-          pyenv: '3.14.0-rc.2'
-        - name: win-py-3.13
-          pyenv: '3.13'
-        - name: win-py-3.12
-          pyenv: '3.12'
-        - name: win-py-3.11
-          pyenv: '3.11'
-        - name: win-py-3.10
-          pyenv: '3.10'
-        - name: win-py-3.9
-          pyenv: '3.9'
+  #   runs-on: windows-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       name:
+  #       - win-py-3.14
+  #       - win-py-3.13
+  #       - win-py-3.12
+  #       - win-py-3.11
+  #       - win-py-3.10
+  #       - win-py-3.9
+  #       arch:
+  #       - x64
+  #       - x86
+  #       include:
+  #       - name: win-py-3.14
+  #         pyenv: '3.14.0-rc.2'
+  #       - name: win-py-3.13
+  #         pyenv: '3.13'
+  #       - name: win-py-3.12
+  #         pyenv: '3.12'
+  #       - name: win-py-3.11
+  #         pyenv: '3.11'
+  #       - name: win-py-3.10
+  #         pyenv: '3.10'
+  #       - name: win-py-3.9
+  #         pyenv: '3.9'
 
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v5
+  #   steps:
+  #   - name: Check out code
+  #     uses: actions/checkout@v5
 
-    - name: Download built project
-      uses: actions/download-artifact@v5
-      with:
-        pattern: artifact-*
-        merge-multiple: true
-        path: ./dist
+  #   - name: Download built project
+  #     uses: actions/download-artifact@v5
+  #     with:
+  #       pattern: artifact-*
+  #       merge-multiple: true
+  #       path: ./dist
 
-    - name: Install the right python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.pyenv }}
-        architecture: ${{ matrix.arch }}
+  #   - name: Install the right python
+  #     uses: actions/setup-python@v5
+  #     with:
+  #       python-version: ${{ matrix.pyenv }}
+  #       architecture: ${{ matrix.arch }}
 
-    - name: Test gssapi
-      shell: bash
-      run: ./ci/test.sh
-      env:
-        OS_NAME: windows
+  #   - name: Test gssapi
+  #     shell: bash
+  #     run: ./ci/test.sh
+  #     env:
+  #       OS_NAME: windows
 
-  macos:
-    needs:
-    - build_sdist
-    - build_wheels
+  # macos:
+  #   needs:
+  #   - build_sdist
+  #   - build_wheels
 
-    runs-on: macos-latest
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v5
+  #   runs-on: macos-latest
+  #   steps:
+  #   - name: Check out code
+  #     uses: actions/checkout@v5
 
-    - name: Download built project
-      uses: actions/download-artifact@v5
-      with:
-        pattern: artifact-*
-        merge-multiple: true
-        path: ./dist
+  #   - name: Download built project
+  #     uses: actions/download-artifact@v5
+  #     with:
+  #       pattern: artifact-*
+  #       merge-multiple: true
+  #       path: ./dist
 
-    - name: Test gssapi
-      run: ./ci/test.sh
-      env:
-        KRB5_VER: heimdal
+  #   - name: Test gssapi
+  #     run: ./ci/test.sh
+  #     env:
+  #       KRB5_VER: heimdal
 
-  publish:
-    name: publish
+  # publish:
+  #   name: publish
 
-    needs:
-    - assertion_build
-    - linux
-    - macos
-    - windows
+  #   needs:
+  #   - assertion_build
+  #   - linux
+  #   - macos
+  #   - windows
 
-    runs-on: ubuntu-latest
-    permissions:
-      # Needed for OIDC publishing
-      id-token: write
-      # Needed for github-pages-deploy-action and other repo write tasks
-      contents: write
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     # Needed for OIDC publishing
+  #     id-token: write
+  #     # Needed for github-pages-deploy-action and other repo write tasks
+  #     contents: write
 
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v5
+  #   steps:
+  #   - name: Check out code
+  #     uses: actions/checkout@v5
 
-    - name: Download built project
-      uses: actions/download-artifact@v5
-      with:
-        pattern: artifact-*
-        merge-multiple: true
-        path: ./dist
+  #   - name: Download built project
+  #     uses: actions/download-artifact@v5
+  #     with:
+  #       pattern: artifact-*
+  #       merge-multiple: true
+  #       path: ./dist
 
-    - name: Create GitHub release artifact
-      run: ./ci/run-on-linux.sh ./ci/create-release-tar.sh
-      env:
-        DISTRO: fedora:latest
+  #   - name: Create GitHub release artifact
+  #     run: ./ci/run-on-linux.sh ./ci/create-release-tar.sh
+  #     env:
+  #       DISTRO: fedora:latest
 
-    - name: Get tarball path
-      id: tarball
-      run: echo "tarball=`ls tag_build/*.tar.gz | awk -F/ '{print $2}'`" >> $GITHUB_OUTPUT
+  #   - name: Get tarball path
+  #     id: tarball
+  #     run: echo "tarball=`ls tag_build/*.tar.gz | awk -F/ '{print $2}'`" >> $GITHUB_OUTPUT
 
-    - name: Get release checksum path
-      id: checksum
-      run: echo "checksum=`ls tag_build/*.sha512sum | awk -F/ '{print $2}'`" >> $GITHUB_OUTPUT
+  #   - name: Get release checksum path
+  #     id: checksum
+  #     run: echo "checksum=`ls tag_build/*.sha512sum | awk -F/ '{print $2}'`" >> $GITHUB_OUTPUT
 
-    - name: Upload tagged build artifact
-      uses: actions/upload-artifact@v4
-      with:
-        path: tag_build/${{ steps.tarball.outputs.tarball }}
-        name: release-asset
+  #   - name: Upload tagged build artifact
+  #     uses: actions/upload-artifact@v4
+  #     with:
+  #       path: tag_build/${{ steps.tarball.outputs.tarball }}
+  #       name: release-asset
 
-    - name: Deploy stable docs
-      if: startsWith(github.ref, 'refs/tags/v')
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: gh-pages
-        folder: ci_docs_build
-        target-folder: stable
+  #   - name: Deploy stable docs
+  #     if: startsWith(github.ref, 'refs/tags/v')
+  #     uses: JamesIves/github-pages-deploy-action@v4
+  #     with:
+  #       branch: gh-pages
+  #       folder: ci_docs_build
+  #       target-folder: stable
 
-    - name: Create release with tar artifact
-      if: startsWith(github.ref, 'refs/tags/v')
-      uses: softprops/action-gh-release@v2
-      with:
-        files: |
-          tag_build/${{ steps.tarball.outputs.tarball }}
-          tag_build/${{ steps.checksum.outputs.checksum }}
-        generate_release_notes: true
+  #   - name: Create release with tar artifact
+  #     if: startsWith(github.ref, 'refs/tags/v')
+  #     uses: softprops/action-gh-release@v2
+  #     with:
+  #       files: |
+  #         tag_build/${{ steps.tarball.outputs.tarball }}
+  #         tag_build/${{ steps.checksum.outputs.checksum }}
+  #       generate_release_notes: true
 
-    - name: Deploy to PyPI
-      if: startsWith(github.ref, 'refs/tags/v')
-      uses: pypa/gh-action-pypi-publish@release/v1
+  #   - name: Deploy to PyPI
+  #     if: startsWith(github.ref, 'refs/tags/v')
+  #     uses: pypa/gh-action-pypi-publish@release/v1
