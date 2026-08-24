@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Select python
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
         python-version: 3.12
 
@@ -28,7 +28,7 @@ jobs:
         GSSAPI_COMPILER_ARGS: ''
 
     - name: Upload sdist
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: artifact-sdist
         path: ./dist/*.tar.gz
@@ -45,6 +45,10 @@ jobs:
         include:
         # Free-threading does not support Limited API/Stable ABI yet
         # 3.11+ can use the Limited API/Stable ABI
+        - os: macos-15-intel
+          version: cp315t-macosx_x86_64
+        - os: macos-15
+          version: cp315t-macosx_arm64
         - os: macos-15-intel
           version: cp314t-macosx_x86_64
         - os: macos-15
@@ -63,6 +67,10 @@ jobs:
         - os: macos-15
           version: cp39-macosx_arm64
 
+        - os: windows-2022
+          version: cp315t-win_amd64
+        - os: windows-2022
+          version: cp315t-win32
         - os: windows-2022
           version: cp314t-win_amd64
         - os: windows-2022
@@ -84,20 +92,26 @@ jobs:
     steps:
     - name: Set up environment
       if: startsWith(matrix.os, 'windows-')
-      shell: bash
+      shell: pwsh
       run: |
-        choco.exe install \
-          --no-progress \
-          --yes \
-          --ignore-detected-reboot \
-          --allow-downgrade \
-          --install-arguments "'ADDLOCAL=ALL'" \
-          ${{ endsWith(matrix.version, '-win32') && '--x86' || '' }} mitkerberos || true
+        $arch = '${{ endsWith(matrix.version, '-win32') && '--x86' || '' }}'
+        $chocoArgs = @(
+          'mitkerberos',
+          '--no-progress',
+          '--yes',
+          '--ignore-detected-reboot',
+          '--allow-downgrade',
+          '--install-arguments', 'ADDLOCAL=ALL'
+          if ($arch) { $arch }
+        )
+        choco.exe install @chocoArgs
 
-        echo "C:\Program Files${{ endsWith(matrix.version, '-win32') && ' (x86)' || '' }}\MIT\Kerberos\bin;$PATH" >> $GITHUB_PATH
+        'C:\Program Files${{ endsWith(matrix.version, '-win32') && ' (x86)' || '' }}\MIT\Kerberos\bin' |
+          Out-File -Append -FilePath $env:GITHUB_PATH -Encoding utf8
+        exit 0
 
     - name: Download gssapi sdist
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         name: artifact-sdist
         path: ./
@@ -111,14 +125,14 @@ jobs:
         rm gssapi-*.tar.gz
 
     - name: Build wheel
-      uses: pypa/cibuildwheel@v3.2.1
+      uses: pypa/cibuildwheel@v4.2.0
       env:
         CIBW_BUILD: ${{ matrix.version }}
         CIBW_BUILD_VERBOSITY: 1
         CIBW_PRERELEASE_PYTHONS: ${{ matrix.prerelease || 'false' }}
 
     - name: Upload wheel
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         path: ./wheelhouse/*.whl
         name: artifact-wheel-${{ matrix.version }}
@@ -131,7 +145,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download gssapi sdist
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         name: artifact-sdist
         path: ./dist
@@ -188,10 +202,10 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Download built project
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -214,6 +228,8 @@ jobs:
       fail-fast: false
       matrix:
         name:
+        - win-py-3.15t
+        - win-py-3.15
         - win-py-3.14t
         - win-py-3.14
         - win-py-3.13
@@ -225,6 +241,10 @@ jobs:
         - x64
         - x86
         include:
+        - name: win-py-3.15t
+          pyenv: '3.15t-dev'
+        - name: win-py-3.15
+          pyenv: '3.15-dev'
         - name: win-py-3.14t
           pyenv: '3.14t'
         - name: win-py-3.14
@@ -242,17 +262,17 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Download built project
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         pattern: artifact-*
         merge-multiple: true
         path: ./dist
 
     - name: Install the right python
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
         python-version: ${{ matrix.pyenv }}
         architecture: ${{ matrix.arch }}
@@ -271,10 +291,10 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Download built project
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -303,10 +323,10 @@ jobs:
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Download built project
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v8
       with:
         pattern: artifact-*
         merge-multiple: true
@@ -326,7 +346,7 @@ jobs:
       run: echo "checksum=`ls tag_build/*.sha512sum | awk -F/ '{print $2}'`" >> $GITHUB_OUTPUT
 
     - name: Upload tagged build artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         path: tag_build/${{ steps.tarball.outputs.tarball }}
         name: release-asset
@@ -341,7 +361,7 @@ jobs:
 
     - name: Create release with tar artifact
       if: startsWith(github.ref, 'refs/tags/v')
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         files: |
           tag_build/${{ steps.tarball.outputs.tarball }}

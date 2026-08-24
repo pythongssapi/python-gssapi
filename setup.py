@@ -310,7 +310,7 @@ if USE_LIMITED_API:
 
 setup(
     name='gssapi',
-    version='1.11.1',
+    version='1.12.0',
     author='The Python GSSAPI Team',
     author_email='jborean93@gmail.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
@@ -336,6 +336,7 @@ setup(
         'Programming Language :: Python :: 3.12',
         'Programming Language :: Python :: 3.13',
         'Programming Language :: Python :: 3.14',
+        'Programming Language :: Python :: 3.15',
         "Programming Language :: Python :: Free Threading :: 2 - Beta",
         'Intended Audience :: Developers',
         'Programming Language :: Python :: Implementation :: CPython',
