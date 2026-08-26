@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi.raw.ext_dce &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi.raw.ext_dce &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -86,7 +86,7 @@
 <div class="viewcode-block" id="IOVBufferType">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IOVBufferType</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    IOV Buffer Types</span>
 
 <span class="sd">    This IntEnum represent GSSAPI IOV buffer</span>
@@ -94,7 +94,7 @@
 
 <span class="sd">    The numbers behind the values correspond directly</span>
 <span class="sd">    to their C counterparts.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="IOVBufferType.empty">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOVBufferType.empty">[docs]</a>
@@ -156,7 +156,7 @@
 <div class="viewcode-block" id="IOV">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.IOV">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IOV</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A GSSAPI IOV&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""A GSSAPI IOV"""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -214,12 +214,12 @@
 <div class="viewcode-block" id="wrap_iov">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.wrap_iov">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">wrap_iov</span><span class="p">(</span>
-    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">"SecurityContext"</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrap/Encrypt an IOV message.</span>
+<span class="w">    </span><span class="sd">"""Wrap/Encrypt an IOV message.</span>
 
 <span class="sd">    This method wraps or encrypts an IOV message.  The allocate</span>
 <span class="sd">    parameter of the :class:`IOVBuffer` objects in the :class:`IOV`</span>
@@ -244,17 +244,17 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="unwrap_iov">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.unwrap_iov">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">unwrap_iov</span><span class="p">(</span>
-    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">"SecurityContext"</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;IOVUnwrapResult&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unwrap/Decrypt an IOV message.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"IOVUnwrapResult"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Unwrap/Decrypt an IOV message.</span>
 
 <span class="sd">    This method uwraps or decrypts an IOV message.  The allocate</span>
 <span class="sd">    parameter of the :class:`IOVBuffer` objects in the :class:`IOV`</span>
@@ -263,7 +263,7 @@
 <span class="sd">    trailer buffers).</span>
 
 <span class="sd">    As a special case, you may pass an entire IOV message</span>
-<span class="sd">    as a single &#39;stream&#39;.  In this case, pass a buffer type</span>
+<span class="sd">    as a single 'stream'.  In this case, pass a buffer type</span>
 <span class="sd">    of :attr:`IOVBufferType.stream` followed by a buffer type of</span>
 <span class="sd">    :attr:`IOVBufferType.data`.  The former should contain the</span>
 <span class="sd">    entire IOV message, while the latter should be empty.</span>
@@ -282,19 +282,19 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="wrap_iov_length">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_dce.wrap_iov_length">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">wrap_iov_length</span><span class="p">(</span>
-    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">"SecurityContext"</span><span class="p">,</span>
     <span class="n">message</span><span class="p">:</span> <span class="n">IOV</span><span class="p">,</span>
     <span class="n">confidential</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;WrapResult&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Appropriately size padding, trailer, and header IOV buffers.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"WrapResult"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Appropriately size padding, trailer, and header IOV buffers.</span>
 
 <span class="sd">    This method sets the length values on the IOV buffers.  You</span>
 <span class="sd">    should already have data provided for the data (and sign-only)</span>
@@ -317,7 +317,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 </pre></div>
 

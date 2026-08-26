@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi.raw.ext_rfc5588 &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi.raw.ext_rfc5588 &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -83,13 +83,13 @@
 <div class="viewcode-block" id="store_cred">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_rfc5588.store_cred">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">store_cred</span><span class="p">(</span>
-    <span class="n">creds</span><span class="p">:</span> <span class="s2">&quot;Creds&quot;</span><span class="p">,</span>
-    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span><span class="p">,</span>
-    <span class="n">mech</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">creds</span><span class="p">:</span> <span class="s2">"Creds"</span><span class="p">,</span>
+    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'both'</span><span class="p">,</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">"OID"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">set_default</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;StoreCredResult&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Store credentials into the default store.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"StoreCredResult"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Store credentials into the default store.</span>
 
 <span class="sd">    This method stores the given credentials into the default store.</span>
 <span class="sd">    They may then be retrieved later using</span>
@@ -98,7 +98,7 @@
 <span class="sd">    Args:</span>
 <span class="sd">        creds (Creds): the credentials to store</span>
 <span class="sd">        usage (str): the usage to store the credentials with -- either</span>
-<span class="sd">            &#39;both&#39;, &#39;initiate&#39;, or &#39;accept&#39;</span>
+<span class="sd">            'both', 'initiate', or 'accept'</span>
 <span class="sd">        mech (~gssapi.OID): the mechansim to associate with the stored</span>
 <span class="sd">            credentials</span>
 <span class="sd">        overwrite (bool): whether or not to overwrite existing credentials</span>
@@ -115,7 +115,7 @@
 <span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
 <span class="sd">        ~gssapi.exceptions.OperationUnavailableError</span>
 <span class="sd">        ~gssapi.exceptions.DuplicateCredentialsElementError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 </pre></div>
 

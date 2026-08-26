@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi.creds &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi.creds &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -82,16 +82,16 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">gssapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">names</span>
 
-<span class="n">rcred_imp_exp</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;cred_imp_exp&#39;</span><span class="p">)</span>
-<span class="n">rcred_s4u</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;s4u&#39;</span><span class="p">)</span>
-<span class="n">rcred_cred_store</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;cred_store&#39;</span><span class="p">)</span>
-<span class="n">rcred_rfc5588</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;rfc5588&#39;</span><span class="p">)</span>
+<span class="n">rcred_imp_exp</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">'cred_imp_exp'</span><span class="p">)</span>
+<span class="n">rcred_s4u</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">'s4u'</span><span class="p">)</span>
+<span class="n">rcred_cred_store</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">'cred_store'</span><span class="p">)</span>
+<span class="n">rcred_rfc5588</span> <span class="o">=</span> <span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">'rfc5588'</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Credentials">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Credentials</span><span class="p">(</span><span class="n">rcreds</span><span class="o">.</span><span class="n">Creds</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;GSSAPI Credentials</span>
+<span class="w">    </span><span class="sd">"""GSSAPI Credentials</span>
 
 <span class="sd">    This class represents a set of GSSAPI credentials which may</span>
 <span class="sd">    be used with and/or returned by other GSSAPI methods.</span>
@@ -122,7 +122,7 @@
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
 <span class="sd">        ~gssapi.exceptions.ExpiredCredentialsError</span>
 <span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">()</span>
 
@@ -133,20 +133,20 @@
         <span class="n">name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">mechs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span><span class="p">,</span>
+        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'both'</span><span class="p">,</span>
         <span class="n">store</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span>
             <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
         <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Credentials&quot;</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Credentials"</span><span class="p">:</span>
         <span class="c1"># TODO(directxman12): this is missing support for password</span>
         <span class="c1">#                     (non-RFC method)</span>
         <span class="k">if</span> <span class="n">base</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">base_creds</span> <span class="o">=</span> <span class="n">base</span>
         <span class="k">elif</span> <span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rcred_imp_exp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does &quot;</span>
-                                          <span class="s2">&quot;not have support for importing and &quot;</span>
-                                          <span class="s2">&quot;exporting creditials&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does "</span>
+                                          <span class="s2">"not have support for importing and "</span>
+                                          <span class="s2">"exporting creditials"</span><span class="p">)</span>
 
             <span class="n">base_creds</span> <span class="o">=</span> <span class="n">rcred_imp_exp</span><span class="o">.</span><span class="n">import_cred</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -154,33 +154,33 @@
                               <span class="n">store</span><span class="o">=</span><span class="n">store</span><span class="p">)</span>
             <span class="n">base_creds</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">creds</span>
 
-        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;Credentials&quot;</span><span class="p">,</span>
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"Credentials"</span><span class="p">,</span>
                       <span class="nb">super</span><span class="p">(</span><span class="n">Credentials</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base_creds</span><span class="p">))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">names</span><span class="o">.</span><span class="n">Name</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the name associated with these credentials&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get the name associated with these credentials"""</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">names</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">inquire</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">mechs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">lifetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the remaining lifetime of these credentials, in seconds&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get the remaining lifetime of these credentials, in seconds"""</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">inquire</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">usage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">lifetime</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mechs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the mechanisms for these credentials&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get the mechanisms for these credentials"""</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">Set</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">],</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">inquire</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">usage</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mechs</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">usage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the usage (initiate, accept, or both) of these credentials&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get the usage (initiate, accept, or both) of these credentials"""</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span>
                       <span class="bp">self</span><span class="o">.</span><span class="n">inquire</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lifetime</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">usage</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mechs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">usage</span><span class="p">)</span>
@@ -193,12 +193,12 @@
         <span class="n">name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">mechs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span><span class="p">,</span>
+        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'both'</span><span class="p">,</span>
         <span class="n">store</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span>
             <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
         <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">AcquireCredResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Acquire GSSAPI credentials</span>
+<span class="w">        </span><span class="sd">"""Acquire GSSAPI credentials</span>
 
 <span class="sd">        This method acquires credentials.  If the `store` argument is</span>
 <span class="sd">        used, the credentials will be acquired from the given</span>
@@ -219,8 +219,8 @@
 <span class="sd">                or None for indefinite</span>
 <span class="sd">            mechs (list): the desired :class:`MechType` OIDs to be used</span>
 <span class="sd">                with the credentials, or None for the default set</span>
-<span class="sd">            usage (str): the usage for the credentials -- either &#39;both&#39;,</span>
-<span class="sd">                &#39;initiate&#39;, or &#39;accept&#39;</span>
+<span class="sd">            usage (str): the usage for the credentials -- either 'both',</span>
+<span class="sd">                'initiate', or 'accept'</span>
 <span class="sd">            store (dict): the credential store information pointing to the</span>
 <span class="sd">                credential store from which to acquire the credentials,</span>
 <span class="sd">                or None for the default store (:requires-ext:`cred_store`)</span>
@@ -235,16 +235,16 @@
 <span class="sd">            ~gssapi.exceptions.BadNameError</span>
 <span class="sd">            ~gssapi.exceptions.ExpiredCredentialsError</span>
 <span class="sd">            ~gssapi.exceptions.MissingCredentialsError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">store</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">rcreds</span><span class="o">.</span><span class="n">acquire_cred</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">lifetime</span><span class="p">,</span>
                                       <span class="n">mechs</span><span class="p">,</span> <span class="n">usage</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rcred_cred_store</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does &quot;</span>
-                                          <span class="s2">&quot;not have support for manipulating &quot;</span>
-                                          <span class="s2">&quot;credential stores&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does "</span>
+                                          <span class="s2">"not have support for manipulating "</span>
+                                          <span class="s2">"credential stores"</span><span class="p">)</span>
 
             <span class="n">b_store</span> <span class="o">=</span> <span class="n">_encode_dict</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
 
@@ -263,12 +263,12 @@
         <span class="n">store</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span>
             <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
         <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span><span class="p">,</span>
+        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'both'</span><span class="p">,</span>
         <span class="n">mech</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">set_default</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">StoreCredResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store these credentials into the given store</span>
+<span class="w">        </span><span class="sd">"""Store these credentials into the given store</span>
 
 <span class="sd">        This method stores the current credentials into the specified</span>
 <span class="sd">        credentials store.  If the default store is used, support for</span>
@@ -281,7 +281,7 @@
 <span class="sd">            store (dict): the store into which to store the credentials,</span>
 <span class="sd">                or None for the default store.</span>
 <span class="sd">            usage (str): the usage to store the credentials with -- either</span>
-<span class="sd">                &#39;both&#39;, &#39;initiate&#39;, or &#39;accept&#39;</span>
+<span class="sd">                'both', 'initiate', or 'accept'</span>
 <span class="sd">            mech (~gssapi.OID): the :class:`MechType` to associate with the</span>
 <span class="sd">                stored credentials</span>
 <span class="sd">            overwrite (bool): whether or not to overwrite existing credentials</span>
@@ -298,20 +298,20 @@
 <span class="sd">            ~gssapi.exceptions.MissingCredentialsError</span>
 <span class="sd">            ~gssapi.exceptions.OperationUnavailableError</span>
 <span class="sd">            ~gssapi.exceptions.DuplicateCredentialsElementError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">store</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rcred_rfc5588</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does &quot;</span>
-                                          <span class="s2">&quot;not have support for RFC 5588&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does "</span>
+                                          <span class="s2">"not have support for RFC 5588"</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">rcred_rfc5588</span><span class="o">.</span><span class="n">store_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span>
                                             <span class="n">overwrite</span><span class="p">,</span> <span class="n">set_default</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rcred_cred_store</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does &quot;</span>
-                                          <span class="s2">&quot;not have support for manipulating &quot;</span>
-                                          <span class="s2">&quot;credential stores directly&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does "</span>
+                                          <span class="s2">"not have support for manipulating "</span>
+                                          <span class="s2">"credential stores directly"</span><span class="p">)</span>
 
             <span class="n">b_store</span> <span class="o">=</span> <span class="n">_encode_dict</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
 
@@ -326,9 +326,9 @@
         <span class="n">name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">mechs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;initiate&#39;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Credentials&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Impersonate a name using the current credentials</span>
+        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'initiate'</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Credentials"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Impersonate a name using the current credentials</span>
 
 <span class="sd">        This method acquires credentials by impersonating another</span>
 <span class="sd">        name using the current credentials.</span>
@@ -342,16 +342,16 @@
 <span class="sd">            mechs (list): the desired :class:`MechType` OIDs for the new</span>
 <span class="sd">                credentials</span>
 <span class="sd">            usage (str): the desired usage for the new credentials -- either</span>
-<span class="sd">                &#39;both&#39;, &#39;initiate&#39;, or &#39;accept&#39;.  Note that some mechanisms</span>
-<span class="sd">                may only support &#39;initiate&#39;.</span>
+<span class="sd">                'both', 'initiate', or 'accept'.  Note that some mechanisms</span>
+<span class="sd">                may only support 'initiate'.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Credentials: the new credentials impersonating the given name</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">rcred_s4u</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
-                                      <span class="s2">&quot;have support for S4U&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does not "</span>
+                                      <span class="s2">"have support for S4U"</span><span class="p">)</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="n">rcred_s4u</span><span class="o">.</span><span class="n">acquire_cred_impersonate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span>
                                                       <span class="n">lifetime</span><span class="p">,</span> <span class="n">mechs</span><span class="p">,</span>
@@ -369,7 +369,7 @@
         <span class="n">usage</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">mechs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireCredResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Inspect these credentials for information</span>
+<span class="w">        </span><span class="sd">"""Inspect these credentials for information</span>
 
 <span class="sd">        This method inspects these credentials for information about them.</span>
 
@@ -387,7 +387,7 @@
 <span class="sd">            ~gssapi.exceptions.MissingCredentialsError</span>
 <span class="sd">            ~gssapi.exceptions.InvalidCredentialsError</span>
 <span class="sd">            ~gssapi.exceptions.ExpiredCredentialsError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="n">rcreds</span><span class="o">.</span><span class="n">inquire_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">lifetime</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span> <span class="n">mechs</span><span class="p">)</span>
 
@@ -410,7 +410,7 @@
         <span class="n">accept_lifetime</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">usage</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireCredByMechResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Inspect these credentials for per-mechanism information</span>
+<span class="w">        </span><span class="sd">"""Inspect these credentials for per-mechanism information</span>
 
 <span class="sd">        This method inspects these credentials for per-mechanism information</span>
 <span class="sd">        about them.</span>
@@ -428,7 +428,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            InquireCredByMechResult: the information about the credentials,</span>
 <span class="sd">            with None used when the corresponding argument was False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="n">rcreds</span><span class="o">.</span><span class="n">inquire_cred_by_mech</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">init_lifetime</span><span class="p">,</span>
                                           <span class="n">accept_lifetime</span><span class="p">,</span> <span class="n">usage</span><span class="p">)</span>
@@ -450,15 +450,15 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">rnames</span><span class="o">.</span><span class="n">Name</span><span class="p">,</span>
         <span class="n">mech</span><span class="p">:</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">,</span>
-        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span><span class="p">,</span>
+        <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'both'</span><span class="p">,</span>
         <span class="n">init_lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">accept_lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">impersonator</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">rcreds</span><span class="o">.</span><span class="n">Creds</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">store</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span>
             <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>
         <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Credentials&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Acquire more credentials to add to the current set</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Credentials"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Acquire more credentials to add to the current set</span>
 
 <span class="sd">        This method works like :meth:`acquire`, except that it adds the</span>
 <span class="sd">        acquired credentials for a single mechanism to a copy of the current</span>
@@ -486,8 +486,8 @@
 <span class="sd">                credentials</span>
 <span class="sd">            mech (~gssapi.OID): the desired :class:`MechType` to be used with</span>
 <span class="sd">                the credentials</span>
-<span class="sd">            usage (str): the usage for the credentials -- either &#39;both&#39;,</span>
-<span class="sd">                &#39;initiate&#39;, or &#39;accept&#39;</span>
+<span class="sd">            usage (str): the usage for the credentials -- either 'both',</span>
+<span class="sd">                'initiate', or 'accept'</span>
 <span class="sd">            init_lifetime (int): the desired initiate lifetime of the</span>
 <span class="sd">                credentials in seconds, or None for indefinite</span>
 <span class="sd">            accept_lifetime (int): the desired accept lifetime of the</span>
@@ -510,17 +510,17 @@
 <span class="sd">            ~gssapi.exceptions.DuplicateCredentialsElementError</span>
 <span class="sd">            ~gssapi.exceptions.ExpiredCredentialsError</span>
 <span class="sd">            ~gssapi.exceptions.MissingCredentialsError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">store</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">impersonator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You cannot use both the `impersonator` and &#39;</span>
-                             <span class="s1">&#39;`store` arguments at the same time&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'You cannot use both the `impersonator` and '</span>
+                             <span class="s1">'`store` arguments at the same time'</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">store</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rcred_cred_store</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does &quot;</span>
-                                          <span class="s2">&quot;not have support for manipulating &quot;</span>
-                                          <span class="s2">&quot;credential stores&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does "</span>
+                                          <span class="s2">"not have support for manipulating "</span>
+                                          <span class="s2">"credential stores"</span><span class="p">)</span>
             <span class="n">b_store</span> <span class="o">=</span> <span class="n">_encode_dict</span><span class="p">(</span><span class="n">store</span><span class="p">)</span>
 
             <span class="n">res</span> <span class="o">=</span> <span class="n">rcred_cred_store</span><span class="o">.</span><span class="n">add_cred_from</span><span class="p">(</span><span class="n">b_store</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span>
@@ -528,8 +528,8 @@
                                                  <span class="n">accept_lifetime</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">impersonator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rcred_s4u</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does &quot;</span>
-                                          <span class="s2">&quot;not have support for S4U&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does "</span>
+                                          <span class="s2">"not have support for S4U"</span><span class="p">)</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">rcred_s4u</span><span class="o">.</span><span class="n">add_cred_impersonate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">impersonator</span><span class="p">,</span>
                                                       <span class="n">name</span><span class="p">,</span> <span class="n">mech</span><span class="p">,</span> <span class="n">usage</span><span class="p">,</span>
                                                       <span class="n">init_lifetime</span><span class="p">,</span>
@@ -544,7 +544,7 @@
 <div class="viewcode-block" id="Credentials.export">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.creds.Credentials.export">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">export</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Export these credentials into a token</span>
+<span class="w">        </span><span class="sd">"""Export these credentials into a token</span>
 
 <span class="sd">        This method exports the current credentials to a token that can</span>
 <span class="sd">        then be imported by passing the `token` argument to the constructor.</span>
@@ -555,12 +555,12 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            bytes: the exported credentials in token form</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">rcred_imp_exp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
-                                      <span class="s2">&quot;have support for importing and &quot;</span>
-                                      <span class="s2">&quot;exporting creditials&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does not "</span>
+                                      <span class="s2">"have support for importing and "</span>
+                                      <span class="s2">"exporting creditials"</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">rcred_imp_exp</span><span class="o">.</span><span class="n">export_cred</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
@@ -568,7 +568,7 @@
     <span class="c1"># pickle protocol support</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">__reduce__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="s2">&quot;Credentials&quot;</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]]:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Type</span><span class="p">[</span><span class="s2">"Credentials"</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]]:</span>
         <span class="c1"># the unpickle arguments to new are (base=None, token=self.export())</span>
         <span class="k">return</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">export</span><span class="p">()))</span></div>
 

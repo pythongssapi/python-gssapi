@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi.names &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi.names &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -83,14 +83,14 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">MutableMapping</span><span class="p">,</span> <span class="n">Iterable</span>
 
-<span class="n">rname_rfc6680</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;rfc6680&#39;</span><span class="p">)</span>
-<span class="n">rname_rfc6680_comp_oid</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">&#39;rfc6680_comp_oid&#39;</span><span class="p">)</span>
+<span class="n">rname_rfc6680</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">'rfc6680'</span><span class="p">)</span>
+<span class="n">rname_rfc6680_comp_oid</span> <span class="o">=</span> <span class="n">_utils</span><span class="o">.</span><span class="n">import_gssapi_extension</span><span class="p">(</span><span class="s1">'rfc6680_comp_oid'</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Name">
 <a class="viewcode-back" href="../../gssapi.html#gssapi.names.Name">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Name</span><span class="p">(</span><span class="n">rname</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A GSSAPI Name</span>
+<span class="w">    </span><span class="sd">"""A GSSAPI Name</span>
 
 <span class="sd">    This class represents a GSSAPI name which may be used with and/or returned</span>
 <span class="sd">    by other GSSAPI methods.</span>
@@ -108,11 +108,11 @@
 <span class="sd">        strings as appropriate.  If a method is listed as returning a</span>
 <span class="sd">        :class:`str` object, it will return a unicode string.</span>
 
-<span class="sd">        The encoding used will be python-gssapi&#39;s current encoding, which</span>
+<span class="sd">        The encoding used will be python-gssapi's current encoding, which</span>
 <span class="sd">        defaults to UTF-8.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_attr_obj&#39;</span><span class="p">)</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'_attr_obj'</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
@@ -120,26 +120,26 @@
         <span class="n">name_type</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">composite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Name"</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">composite</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">rname_rfc6680</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                        <span class="s2">&quot;Your GSSAPI implementation does not support RFC 6680 &quot;</span>
-                        <span class="s2">&quot;(the GSSAPI naming extensions)&quot;</span><span class="p">)</span>
+                        <span class="s2">"Your GSSAPI implementation does not support RFC 6680 "</span>
+                        <span class="s2">"(the GSSAPI naming extensions)"</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="n">rname_rfc6680_comp_oid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">base_name</span> <span class="o">=</span> <span class="n">rname</span><span class="o">.</span><span class="n">import_name</span><span class="p">(</span><span class="n">token</span><span class="p">,</span>
                                                   <span class="n">NameType</span><span class="o">.</span><span class="n">composite_export</span><span class="p">)</span>
                     <span class="n">displ_name</span> <span class="o">=</span> <span class="n">rname</span><span class="o">.</span><span class="n">display_name</span><span class="p">(</span><span class="n">base_name</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">displ_name</span><span class="o">.</span><span class="n">name_type</span> <span class="o">==</span> <span class="n">NameType</span><span class="o">.</span><span class="n">composite_export</span><span class="p">:</span>
-                        <span class="c1"># NB(directxman12): there&#39;s a bug in MIT krb5 &lt;= 1.13</span>
-                        <span class="c1"># where GSS_C_NT_COMPOSITE_EXPORT doesn&#39;t trigger</span>
+                        <span class="c1"># NB(directxman12): there's a bug in MIT krb5 &lt;= 1.13</span>
+                        <span class="c1"># where GSS_C_NT_COMPOSITE_EXPORT doesn't trigger</span>
                         <span class="c1"># immediate import logic.  However, we can just use</span>
                         <span class="c1"># the normal GSS_C_NT_EXPORT_NAME in this case.</span>
                         <span class="n">base_name</span> <span class="o">=</span> <span class="n">rname</span><span class="o">.</span><span class="n">import_name</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">NameType</span><span class="o">.</span><span class="n">export</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="c1"># NB(directxman12): some older versions of MIT krb5 don&#39;t</span>
+                    <span class="c1"># NB(directxman12): some older versions of MIT krb5 don't</span>
                     <span class="c1"># have support for the GSS_C_NT_COMPOSITE_EXPORT, but do</span>
                     <span class="c1"># support composite tokens via GSS_C_NT_EXPORT_NAME.</span>
                     <span class="n">base_name</span> <span class="o">=</span> <span class="n">rname</span><span class="o">.</span><span class="n">import_name</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">NameType</span><span class="o">.</span><span class="n">export</span><span class="p">)</span>
@@ -155,7 +155,7 @@
                 <span class="n">base</span><span class="p">,</span>  <span class="c1"># type: ignore[arg-type]</span>
                 <span class="n">name_type</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="nb">super</span><span class="p">(</span><span class="n">Name</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base_name</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">"Name"</span><span class="p">,</span> <span class="nb">super</span><span class="p">(</span><span class="n">Name</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">base_name</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -164,8 +164,8 @@
         <span class="n">token</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">composite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        The constructor can be used to &quot;import&quot; a name from a human readable</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        The constructor can be used to "import" a name from a human readable</span>
 <span class="sd">        representation, or from a token, and can also be used to convert a</span>
 <span class="sd">        low-level :class:`gssapi.raw.names.Name` object into a high-level</span>
 <span class="sd">        object.</span>
@@ -186,7 +186,7 @@
 <span class="sd">            ~gssapi.exceptions.BadNameTypeError</span>
 <span class="sd">            ~gssapi.exceptions.BadNameError</span>
 <span class="sd">            ~gssapi.exceptions.BadMechanismError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">_NameAttributeMapping</span><span class="p">]</span>
 
@@ -212,7 +212,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name_type</span><span class="p">:</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Display this name as the given name type.</span>
 
 <span class="sd">        This method attempts to display the current :class:`Name`</span>
@@ -224,7 +224,7 @@
 <span class="sd">            In MIT krb5 versions below 1.13.3, this method can segfault if</span>
 <span class="sd">            the name was not *originally* created with a `name_type` that was</span>
 <span class="sd">            not ``None`` (even in cases when a ``name_type``</span>
-<span class="sd">            is later &quot;added&quot;, such as via :meth:`canonicalize`).</span>
+<span class="sd">            is later "added", such as via :meth:`canonicalize`).</span>
 <span class="sd">            **Do not use this method unless you are sure the above</span>
 <span class="sd">            conditions can never happen in your code.**</span>
 
@@ -245,19 +245,19 @@
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ~gssapi.exceptions.OperationUnavailableError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">rname_rfc6680</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
-                                      <span class="s2">&quot;support RFC 6680 (the GSSAPI naming &quot;</span>
-                                      <span class="s2">&quot;extensions)&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does not "</span>
+                                      <span class="s2">"support RFC 6680 (the GSSAPI naming "</span>
+                                      <span class="s2">"extensions)"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">display_name_ext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
             <span class="n">_utils</span><span class="o">.</span><span class="n">_get_encoding</span><span class="p">())</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">name_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The :class:`~gssapi.raw.types.NameType` of this name&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""The :class:`~gssapi.raw.types.NameType` of this name"""</span>
         <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">display_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">name_type</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span>
@@ -266,7 +266,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">rname</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
             <span class="c1"># maybe something else can compare this</span>
-            <span class="c1"># to other classes, but we certainly can&#39;t</span>
+            <span class="c1"># to other classes, but we certainly can't</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">rname</span><span class="o">.</span><span class="n">compare_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
@@ -279,7 +279,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">disp_res</span> <span class="o">=</span> <span class="n">rname</span><span class="o">.</span><span class="n">display_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;Name(</span><span class="si">{name!r}</span><span class="s2">, </span><span class="si">{name_type}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="k">return</span> <span class="s2">"Name(</span><span class="si">{name!r}</span><span class="s2">, </span><span class="si">{name_type}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="n">disp_res</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name_type</span><span class="o">=</span><span class="n">disp_res</span><span class="o">.</span><span class="n">name_type</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Name.export">
@@ -288,7 +288,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">composite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Export this name as a token.</span>
+<span class="w">        </span><span class="sd">"""Export this name as a token.</span>
 
 <span class="sd">        This method exports the name into a byte string which can then be</span>
 <span class="sd">        imported by using the `token` argument of the constructor.</span>
@@ -304,13 +304,13 @@
 <span class="sd">            ~gssapi.exceptions.MechanismNameRequiredError</span>
 <span class="sd">            ~gssapi.exceptions.BadNameTypeError</span>
 <span class="sd">            ~gssapi.exceptions.BadNameError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">composite</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rname_rfc6680</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does &quot;</span>
-                                          <span class="s2">&quot;not support RFC 6680 (the GSSAPI &quot;</span>
-                                          <span class="s2">&quot;naming extensions)&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does "</span>
+                                          <span class="s2">"not support RFC 6680 (the GSSAPI "</span>
+                                          <span class="s2">"naming extensions)"</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">export_name_composite</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -322,8 +322,8 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">canonicalize</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">mech</span><span class="p">:</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Canonicalize a name with respect to a mechanism.</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Name"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Canonicalize a name with respect to a mechanism.</span>
 
 <span class="sd">        This method returns a new :class:`Name` that is canonicalized according</span>
 <span class="sd">        to the given mechanism.</span>
@@ -338,25 +338,25 @@
 <span class="sd">            ~gssapi.exceptions.BadMechanismError</span>
 <span class="sd">            ~gssapi.exceptions.BadNameTypeError</span>
 <span class="sd">            ~gssapi.exceptions.BadNameError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">canonicalize_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech</span><span class="p">))</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Name"</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">duplicate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__deepcopy__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">memo</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Name&quot;</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Name"</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rname</span><span class="o">.</span><span class="n">duplicate_name</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_inquire</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tuples</span><span class="o">.</span><span class="n">InquireNameResult</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Inspect this name for information.</span>
+<span class="w">        </span><span class="sd">"""Inspect this name for information.</span>
 
 <span class="sd">        This method inspects the name for information.</span>
 
@@ -375,40 +375,40 @@
 
 <span class="sd">        Raises:</span>
 <span class="sd">            ~gssapi.exceptions.GSSError</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">if</span> <span class="n">rname_rfc6680</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
-                                      <span class="s2">&quot;support RFC 6680 (the GSSAPI naming &quot;</span>
-                                      <span class="s2">&quot;extensions)&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does not "</span>
+                                      <span class="s2">"support RFC 6680 (the GSSAPI naming "</span>
+                                      <span class="s2">"extensions)"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">:</span>
             <span class="n">default_val</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">default_val</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="n">attrs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;attrs&#39;</span><span class="p">,</span> <span class="n">default_val</span><span class="p">)</span>
-        <span class="n">mech_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mech_name&#39;</span><span class="p">,</span> <span class="n">default_val</span><span class="p">)</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'attrs'</span><span class="p">,</span> <span class="n">default_val</span><span class="p">)</span>
+        <span class="n">mech_name</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'mech_name'</span><span class="p">,</span> <span class="n">default_val</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">inquire_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mech_name</span><span class="o">=</span><span class="n">mech_name</span><span class="p">,</span>
                                           <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_mech_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Whether or not this name is a mechanism name</span>
+<span class="w">        </span><span class="sd">"""Whether or not this name is a mechanism name</span>
 <span class="sd">        (:requires-ext:`rfc6680`)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inquire</span><span class="p">(</span><span class="n">mech_name</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">is_mech_name</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mech</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">roids</span><span class="o">.</span><span class="n">OID</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The mechanism associated with this name (:requires-ext:`rfc6680`)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""The mechanism associated with this name (:requires-ext:`rfc6680`)</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inquire</span><span class="p">(</span><span class="n">mech_name</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">mech</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;The attributes of this name (:requires-ext:`rfc6680`)</span>
+<span class="w">        </span><span class="sd">"""The attributes of this name (:requires-ext:`rfc6680`)</span>
 
 <span class="sd">        The attributes are presenting in the form of a</span>
 <span class="sd">        :class:`~collections.abc.MutableMapping` (a dict-like object).</span>
@@ -423,11 +423,11 @@
 <span class="sd">        Note:</span>
 <span class="sd">            String types (includes :class:`bytes`) are not considered to</span>
 <span class="sd">            be iterables in this case.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Your GSSAPI implementation does not &quot;</span>
-                                      <span class="s2">&quot;support RFC 6680 (the GSSAPI naming &quot;</span>
-                                      <span class="s2">&quot;extensions)&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Your GSSAPI implementation does not "</span>
+                                      <span class="s2">"support RFC 6680 (the GSSAPI naming "</span>
+                                      <span class="s2">"extensions)"</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_obj</span></div>
 
@@ -435,7 +435,7 @@
 
 <span class="k">class</span><span class="w"> </span><span class="nc">_NameAttributeMapping</span><span class="p">(</span><span class="n">MutableMapping</span><span class="p">):</span>
 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides dict-like access to RFC 6680 Name attributes.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Provides dict-like access to RFC 6680 Name attributes."""</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">Name</span><span class="p">,</span>
@@ -484,7 +484,7 @@
         <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">))</span> <span class="ow">or</span>
                 <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)):</span>
             <span class="c1"># NB(directxman12): this allows us to easily assign a single</span>
-            <span class="c1"># value, since that&#39;s a common case</span>
+            <span class="c1"># value, since that's a common case</span>
             <span class="n">attr_value</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
 
         <span class="n">rname_rfc6680</span><span class="o">.</span><span class="n">set_name_attribute</span><span class="p">(</span>  <span class="c1"># type: ignore[union-attr]</span>

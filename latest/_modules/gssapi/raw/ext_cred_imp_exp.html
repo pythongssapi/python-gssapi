@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi.raw.ext_cred_imp_exp &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi.raw.ext_cred_imp_exp &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -72,7 +72,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.raw.ext_cred_imp_exp</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Credentials Import/Export Extension&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Credentials Import/Export Extension"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
@@ -83,9 +83,9 @@
 <div class="viewcode-block" id="export_cred">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_cred_imp_exp.export_cred">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">export_cred</span><span class="p">(</span>
-    <span class="n">creds</span><span class="p">:</span> <span class="s2">&quot;Creds&quot;</span><span class="p">,</span>
+    <span class="n">creds</span><span class="p">:</span> <span class="s2">"Creds"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Export GSSAPI credentials.</span>
+<span class="w">    </span><span class="sd">"""Export GSSAPI credentials.</span>
 
 <span class="sd">    This method exports GSSSAPI credentials into a token</span>
 <span class="sd">    which may be transmitted between different processes.</span>
@@ -98,7 +98,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
@@ -106,8 +106,8 @@
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_cred_imp_exp.import_cred">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">import_cred</span><span class="p">(</span>
     <span class="n">token</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Creds&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Import GSSAPI credentials from a token.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Creds"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Import GSSAPI credentials from a token.</span>
 
 <span class="sd">    This method imports a credentials object from a token</span>
 <span class="sd">    previously exported by :func:`export_cred`.</span>
@@ -120,7 +120,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 </pre></div>
 

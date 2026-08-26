@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A Basic Introduction to GSSAPI &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>A Basic Introduction to GSSAPI &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -14,7 +14,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=c8897f99"></script>
+      <script src="_static/documentation_options.js?v=fe8e256b"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/js/theme.js"></script>
@@ -117,12 +117,12 @@ for representing names as strings.</p>
 <p>Suppose we wanted to refer to an HTTP server on the current host.
 We could refer to it as a <em>host-based service</em>, or in the default
 mechanism form (in this case, for krb5):</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_hostbased_name = gssapi.Name(f&quot;HTTP@{FQDN}&quot;, name_type=gssapi.NameType.hostbased_service)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_hostbased_name = gssapi.Name(f"HTTP@{FQDN}", name_type=gssapi.NameType.hostbased_service)
 &gt;&gt;&gt; server_hostbased_name
-Name(b&#39;HTTP@seton.mivehind.net&#39;, &lt;OID 1.2.840.113554.1.2.1.4&gt;)
-&gt;&gt;&gt; server_name = gssapi.Name(f&quot;HTTP/{FQDN}@&quot;)
+Name(b'HTTP@seton.mivehind.net', &lt;OID 1.2.840.113554.1.2.1.4&gt;)
+&gt;&gt;&gt; server_name = gssapi.Name(f"HTTP/{FQDN}@")
 &gt;&gt;&gt; server_name
-Name(b&#39;HTTP/seton.mivehind.net@&#39;, None)
+Name(b'HTTP/seton.mivehind.net@', None)
 &gt;&gt;&gt;
 </pre></div>
 </div>
@@ -149,9 +149,9 @@ of credentials may be acquired.</p>
 <p>For instance, suppose that we are writing a server, and wish to
 communicate accept connections as the ‘HTTP’ service.  We would need
 to acquire credentials as such:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; REALM.addprinc(&#39;HTTP/%s@%s&#39; % (FQDN, REALM.realm))
-&gt;&gt;&gt; REALM.extract_keytab(&#39;HTTP/%s@%s&#39; % (FQDN, REALM.realm), REALM.keytab)
-&gt;&gt;&gt; server_creds = gssapi.Credentials(usage=&#39;accept&#39;, name=server_name)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; REALM.addprinc('HTTP/%s@%s' % (FQDN, REALM.realm))
+&gt;&gt;&gt; REALM.extract_keytab('HTTP/%s@%s' % (FQDN, REALM.realm), REALM.keytab)
+&gt;&gt;&gt; server_creds = gssapi.Credentials(usage='accept', name=server_name)
 &gt;&gt;&gt;
 </pre></div>
 </div>
@@ -168,7 +168,7 @@ credentials used for both initiating and accepting security contexts.</p>
 be <code class="docutils literal notranslate"><span class="pre">None</span></code> for indefinite), and set of <em>mechanisms</em> with which the
 credentials are usable:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_creds.usage
-&#39;accept&#39;
+'accept'
 &gt;&gt;&gt; server_creds.name == server_name
 True
 &gt;&gt;&gt; server_creds.lifetime is None
@@ -192,7 +192,7 @@ encryption), or both for messages exchanged between the two parties.</p>
 <p>When establishing a security context, the default credentials are
 used unless otherwise specified.  This allows applications to use
 the user’s already acquired credentials:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; client_ctx = gssapi.SecurityContext(name=server_name, usage=&#39;initiate&#39;)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; client_ctx = gssapi.SecurityContext(name=server_name, usage='initiate')
 &gt;&gt;&gt; initial_client_token = client_ctx.step()
 &gt;&gt;&gt; client_ctx.complete
 False
@@ -204,7 +204,7 @@ contexts, or accepting contexts (they cannot be both).  Initiating
 contexts must specify at least a target name.  In this case,
 we indicate that we wish to establish a context with the HTTP server
 from above.  The http server can then accept that context:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_ctx = gssapi.SecurityContext(creds=server_creds, usage=&#39;accept&#39;)
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; server_ctx = gssapi.SecurityContext(creds=server_creds, usage='accept')
 &gt;&gt;&gt; initial_server_token = server_ctx.step(initial_client_token)
 &gt;&gt;&gt;
 </pre></div>
@@ -229,14 +229,14 @@ True
 </div>
 <p>We can now wrap and unwrap messages, using the <code class="docutils literal notranslate"><span class="pre">wrap</span></code> and <code class="docutils literal notranslate"><span class="pre">unwrap</span></code> methods
 on <code class="docutils literal notranslate"><span class="pre">SecurityContext</span></code>:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; message = b&#39;some message here&#39;
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; message = b'some message here'
 &gt;&gt;&gt; wrapped_message, msg_encrypted = client_ctx.wrap(message, True)
 &gt;&gt;&gt; message not in wrapped_message
 True
 &gt;&gt;&gt; msg_encrypted
 True
 &gt;&gt;&gt; server_ctx.unwrap(wrapped_message)
-UnwrapResult(message=b&#39;some message here&#39;, encrypted=True, qop=0)
+UnwrapResult(message=b'some message here', encrypted=True, qop=0)
 &gt;&gt;&gt;
 </pre></div>
 </div>
@@ -248,7 +248,7 @@ False
 &gt;&gt;&gt; message in signed_message
 True
 &gt;&gt;&gt; server_ctx.unwrap(signed_message)
-UnwrapResult(message=b&#39;some message here&#39;, encrypted=False, qop=0)
+UnwrapResult(message=b'some message here', encrypted=False, qop=0)
 &gt;&gt;&gt;
 </pre></div>
 </div>
@@ -261,7 +261,7 @@ call <code class="docutils literal notranslate"><span class="pre">wrap</span></c
 &gt;&gt;&gt; encrypted_message != message
 True
 &gt;&gt;&gt; server_ctx.decrypt(encrypted_message)
-b&#39;some message here&#39;
+b'some message here'
 &gt;&gt;&gt;
 </pre></div>
 </div>
@@ -270,11 +270,11 @@ since the context was set up to use encryption (the default):</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; signed_message, _ = client_ctx.wrap(message, False)
 &gt;&gt;&gt; server_ctx.decrypt(signed_message)
 Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
-  File &quot;&lt;string&gt;&quot;, line 2, in decrypt
-  File &quot;/usr/lib/python3.4/site-packages/gssapi/_utils.py&quot;, line 167, in check_last_err
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+  File "&lt;string&gt;", line 2, in decrypt
+  File "/usr/lib/python3.4/site-packages/gssapi/_utils.py", line 167, in check_last_err
     return func(self, *args, **kwargs)
-  File &quot;/usr/lib/python3.4/site-packages/gssapi/sec_contexts.py&quot;, line 295, in decrypt
+  File "/usr/lib/python3.4/site-packages/gssapi/sec_contexts.py", line 295, in decrypt
     unwrapped_message=res.message)
 gssapi.exceptions.EncryptionNotUsed: Confidentiality was requested, but not used: The context was established with encryption, but unwrapped message was not encrypted.
 &gt;&gt;&gt;

@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi.raw.creds &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi.raw.creds &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -88,26 +88,26 @@
 <div class="viewcode-block" id="Creds">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.Creds">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Creds</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    GSSAPI Credentials</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">cpy</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Creds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Creds&quot;</span><span class="p">:</span> <span class="o">...</span></div>
+        <span class="n">cpy</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">"Creds"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Creds"</span><span class="p">:</span> <span class="o">...</span></div>
 
 
 
 <div class="viewcode-block" id="acquire_cred">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.acquire_cred">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">acquire_cred</span><span class="p">(</span>
-    <span class="n">name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">],</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">"Name"</span><span class="p">],</span>
     <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">mechs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AcquireCredResult&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get GSSAPI credentials for the given name and mechanisms.</span>
+    <span class="n">mechs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">"OID"</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'both'</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"AcquireCredResult"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Get GSSAPI credentials for the given name and mechanisms.</span>
 
 <span class="sd">    This method gets GSSAPI credentials corresponding to the given name</span>
 <span class="sd">    and mechanims.  The desired TTL and usage for the the credential may also</span>
@@ -115,13 +115,13 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        name (~gssapi.raw.names.Name): the name for which to acquire the</span>
-<span class="sd">            credentials (or None for the &quot;no name&quot; functionality)</span>
+<span class="sd">            credentials (or None for the "no name" functionality)</span>
 <span class="sd">        lifetime (int): the lifetime in seconds for the credentials (or None</span>
 <span class="sd">            for indefinite)</span>
 <span class="sd">        mechs (~gssapi.raw.types.MechType): the desired mechanisms for which</span>
 <span class="sd">            the credentials should work, or None for the default set</span>
 <span class="sd">        usage (str): the usage type for the credentials: may be</span>
-<span class="sd">            &#39;initiate&#39;, &#39;accept&#39;, or &#39;both&#39;</span>
+<span class="sd">            'initiate', 'accept', or 'both'</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        AcquireCredResult: the resulting credentials, the actual mechanisms</span>
@@ -134,7 +134,7 @@
 <span class="sd">        ~gssapi.exceptions.BadNameError</span>
 <span class="sd">        ~gssapi.exceptions.ExpiredCredentialsError</span>
 <span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
@@ -143,7 +143,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">release_cred</span><span class="p">(</span>
     <span class="n">creds</span><span class="p">:</span> <span class="n">Creds</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    release_cred(creds)</span>
 <span class="sd">    Release GSSAPI Credentials.</span>
 
@@ -158,7 +158,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
@@ -166,14 +166,14 @@
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.add_cred">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">add_cred</span><span class="p">(</span>
     <span class="n">input_cred</span><span class="p">:</span> <span class="n">Creds</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
-    <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
-    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;initiate&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="s2">"OID"</span><span class="p">,</span>
+    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'initiate'</span><span class="p">,</span>
     <span class="n">init_lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">accept_lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">mutate_input</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AddCredResult&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a credential element to a credential.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"AddCredResult"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Add a credential element to a credential.</span>
 
 <span class="sd">    This method can be used to either compose two credentials (i.e., original</span>
 <span class="sd">    and new credential), or to add a new element to an existing credential.</span>
@@ -186,7 +186,7 @@
 <span class="sd">        mech (~gssapi.raw.types.MechType): the desired security mechanism</span>
 <span class="sd">            (required).</span>
 <span class="sd">        usage (str): usage type for credentials.  Possible values:</span>
-<span class="sd">            &#39;initiate&#39; (default), &#39;accept&#39;, &#39;both&#39; (failsafe).</span>
+<span class="sd">            'initiate' (default), 'accept', 'both' (failsafe).</span>
 <span class="sd">        init_lifetime (int): lifetime of credentials for use in initiating</span>
 <span class="sd">            security contexts in seconds (None for indefinite)</span>
 <span class="sd">        accept_lifetime (int): lifetime of credentials for use in accepting</span>
@@ -207,7 +207,7 @@
 <span class="sd">        ~gssapi.exceptions.DuplicateCredentialsElementError</span>
 <span class="sd">        ~gssapi.exceptions.ExpiredCredentialsError</span>
 <span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
@@ -219,8 +219,8 @@
     <span class="n">lifetime</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">usage</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">mechs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireCredResult&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inspect credentials for information.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"InquireCredResult"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Inspect credentials for information.</span>
 
 <span class="sd">    This method inspects a :class:`Creds` object for information.</span>
 
@@ -239,7 +239,7 @@
 <span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
 <span class="sd">        ~gssapi.exceptions.InvalidCredentialsError</span>
 <span class="sd">        ~gssapi.exceptions.ExpiredCredentialsError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
@@ -247,13 +247,13 @@
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.creds.inquire_cred_by_mech">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">inquire_cred_by_mech</span><span class="p">(</span>
     <span class="n">creds</span><span class="p">:</span> <span class="n">Creds</span><span class="p">,</span>
-    <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="s2">"OID"</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">init_lifetime</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">accept_lifetime</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">usage</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InquireCredByMechResult&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inspect credentials for mechanism-specific information.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"InquireCredByMechResult"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Inspect credentials for mechanism-specific information.</span>
 
 <span class="sd">    This method inspects a :class:`Creds` object for information</span>
 <span class="sd">    specific to a particular mechanism.  It functions similarly</span>
@@ -276,7 +276,7 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.MissingCredentialsError</span>
 <span class="sd">        ~gssapi.exceptions.InvalidCredentialsError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 </pre></div>
 

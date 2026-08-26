@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi._utils &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi._utils &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -87,11 +87,11 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">import_gssapi_extension</span><span class="p">(</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Import a GSSAPI extension module</span>
+<span class="w">    </span><span class="sd">"""Import a GSSAPI extension module</span>
 
 <span class="sd">    This method imports a GSSAPI extension module based</span>
 <span class="sd">    on the name of the extension (not including the</span>
-<span class="sd">    &#39;ext_&#39; prefix).  If the extension is not available,</span>
+<span class="sd">    'ext_' prefix).  If the extension is not available,</span>
 <span class="sd">    the method retuns None.</span>
 
 <span class="sd">    Args:</span>
@@ -99,10 +99,10 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        module: Either the extension module or None</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;gssapi.raw.ext_</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s1">'gssapi.raw.ext_</span><span class="si">{0}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="nb">__import__</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">path</span><span class="p">]</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -113,23 +113,23 @@
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">doc</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">property</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a property based on an inquire result</span>
+<span class="w">    </span><span class="sd">"""Creates a property based on an inquire result</span>
 
 <span class="sd">    This method creates a property that calls the</span>
 <span class="sd">    :python:`_inquire` method, and return the value of the</span>
 <span class="sd">    requested information.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        name (str): the name of the &#39;inquire&#39; result information</span>
+<span class="sd">        name (str): the name of the 'inquire' result information</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        property: the created property</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">inquire_property</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inquire_property</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s2">"SecurityContext"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_started</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot read </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from a security context whose &quot;</span>
-                   <span class="s2">&quot;establishment has not yet been started.&quot;</span><span class="p">)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">"Cannot read </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> from a security context whose "</span>
+                   <span class="s2">"establishment has not yet been started."</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inquire</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="kc">True</span><span class="p">}),</span> <span class="n">name</span><span class="p">)</span>
@@ -138,18 +138,18 @@
 
 
 <span class="c1"># use UTF-8 as the default encoding, like Python 3</span>
-<span class="n">_ENCODING</span> <span class="o">=</span> <span class="s1">&#39;UTF-8&#39;</span>
+<span class="n">_ENCODING</span> <span class="o">=</span> <span class="s1">'UTF-8'</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_get_encoding</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets the current encoding used for strings.</span>
+<span class="w">    </span><span class="sd">"""Gets the current encoding used for strings.</span>
 
 <span class="sd">    This value is used to encode and decode string</span>
 <span class="sd">    values like names.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: the current encoding</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_ENCODING</span>
 
 
@@ -158,14 +158,14 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">set_encoding</span><span class="p">(</span>
     <span class="n">enc</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sets the current encoding used for strings</span>
+<span class="w">    </span><span class="sd">"""Sets the current encoding used for strings</span>
 
 <span class="sd">    This value is used to encode and decode string</span>
 <span class="sd">    values like names.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        enc: the encoding to use</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">global</span> <span class="n">_ENCODING</span>
     <span class="n">_ENCODING</span> <span class="o">=</span> <span class="n">enc</span></div>
@@ -175,7 +175,7 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_encode_dict</span><span class="p">(</span>
     <span class="n">d</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Encodes any relevant strings in a dict&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Encodes any relevant strings in a dict"""</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">enc</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb">bytes</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">_ENCODING</span><span class="p">)</span>
@@ -189,11 +189,11 @@
 <span class="nd">@deco</span><span class="o">.</span><span class="n">decorator</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">catch_and_return_token</span><span class="p">(</span>
     <span class="n">func</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Callable</span><span class="p">,</span>
-    <span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="bp">self</span><span class="p">:</span> <span class="s2">"SecurityContext"</span><span class="p">,</span>
     <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Optionally defer exceptions and return a token instead</span>
+<span class="w">    </span><span class="sd">"""Optionally defer exceptions and return a token instead</span>
 
 <span class="sd">    When `__DEFER_STEP_ERRORS__` is set on the implementing class</span>
 <span class="sd">    or instance, methods wrapped with this wrapper will</span>
@@ -202,15 +202,15 @@
 
 <span class="sd">    The exception can be later retrived through :python:`_last_err`</span>
 <span class="sd">    (and :python:`_last_tb` when Python 2 is in use).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">GSSError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">defer_step_errors</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;__DEFER_STEP_ERRORS__&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">defer_step_errors</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">'__DEFER_STEP_ERRORS__'</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">defer_step_errors</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span> <span class="o">=</span> <span class="n">e</span>
-            <span class="c1"># skip the &quot;return func&quot; line above in the traceback</span>
+            <span class="c1"># skip the "return func" line above in the traceback</span>
             <span class="n">tb</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="o">.</span><span class="n">tb_next</span>  <span class="c1"># type: ignore[union-attr]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span><span class="o">.</span><span class="n">__traceback__</span> <span class="o">=</span> <span class="n">tb</span>
 
@@ -222,16 +222,16 @@
 <span class="nd">@deco</span><span class="o">.</span><span class="n">decorator</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">check_last_err</span><span class="p">(</span>
     <span class="n">func</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Callable</span><span class="p">,</span>
-    <span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
+    <span class="bp">self</span><span class="p">:</span> <span class="s2">"SecurityContext"</span><span class="p">,</span>
     <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check and raise deferred errors before running the function</span>
+<span class="w">    </span><span class="sd">"""Check and raise deferred errors before running the function</span>
 
 <span class="sd">    This method checks :python:`_last_err` before running the wrapped</span>
 <span class="sd">    function.  If present and not None, the exception will be raised</span>
 <span class="sd">    with its original traceback.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_err</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
@@ -243,21 +243,21 @@
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CheckLastError</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check for a deferred error on all methods</span>
+<span class="w">    </span><span class="sd">"""Check for a deferred error on all methods</span>
 
 <span class="sd">    This metaclass applies the :python:`check_last_err` decorator</span>
-<span class="sd">    to all methods not prefixed by &#39;_&#39;.</span>
+<span class="sd">    to all methods not prefixed by '_'.</span>
 
 <span class="sd">    Additionally, it enabled `__DEFER_STEP_ERRORS__` by default.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">parents</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Type</span><span class="p">],</span>
         <span class="n">attrs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CheckLastError&quot;</span><span class="p">:</span>
-        <span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;__DEFER_STEP_ERRORS__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"CheckLastError"</span><span class="p">:</span>
+        <span class="n">attrs</span><span class="p">[</span><span class="s1">'__DEFER_STEP_ERRORS__'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">for</span> <span class="n">attr_name</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
             <span class="n">attr</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="n">attr_name</span><span class="p">]</span>
@@ -266,7 +266,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">FunctionType</span><span class="p">):</span>
                 <span class="k">continue</span>
 
-            <span class="k">if</span> <span class="n">attr_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attr_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">'_'</span><span class="p">:</span>
                 <span class="n">attrs</span><span class="p">[</span><span class="n">attr_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">check_last_err</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">CheckLastError</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">parents</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
