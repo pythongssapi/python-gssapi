@@ -310,7 +310,7 @@ if USE_LIMITED_API:
 
 setup(
     name='gssapi',
-    version='1.12.0',
+    version='1.12.1.dev0',
     author='The Python GSSAPI Team',
     author_email='jborean93@gmail.com',
     packages=['gssapi', 'gssapi.raw', 'gssapi.raw._enum_extensions',
