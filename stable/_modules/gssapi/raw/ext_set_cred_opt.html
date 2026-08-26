@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi.raw.ext_set_cred_opt &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi.raw.ext_set_cred_opt &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -72,19 +72,19 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.raw.ext_set_cred_opt</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">gss_set_cred_option</span>
 
 <span class="sd">Provides a way to set options on a credential based on the OID specified. A</span>
 <span class="sd">common use case is to set the GSS_KRB5_CRED_NO_CI_FLAGS_X on a Kerberos</span>
-<span class="sd">credential. This is used for interoperability with Microsoft&#39;s SSPI.</span>
+<span class="sd">credential. This is used for interoperability with Microsoft's SSPI.</span>
 
 <span class="sd">Note this function is commonly lumped with the GGF extensions but they are not</span>
-<span class="sd">part of the GGF IETF draft so it&#39;s separated into it&#39;s own file.</span>
+<span class="sd">part of the GGF IETF draft so it's separated into it's own file.</span>
 
 <span class="sd">Closest draft IETF document for the gss_set_cred_option can be found at</span>
 <span class="sd">https://tools.ietf.org/html/draft-williams-kitten-channel-bound-flag-01</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
 <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
@@ -95,18 +95,18 @@
 <div class="viewcode-block" id="set_cred_option">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_set_cred_opt.set_cred_option">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">set_cred_option</span><span class="p">(</span>
-    <span class="n">desired_aspect</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
-    <span class="n">creds</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;Creds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">desired_aspect</span><span class="p">:</span> <span class="s2">"OID"</span><span class="p">,</span>
+    <span class="n">creds</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="s2">"Creds"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">value</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Creds&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Creds"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    This method is used to set options of a :class:`~gssapi.raw.creds.Creds`</span>
 <span class="sd">    object based on an OID key. The options that can be set depends on the mech</span>
 <span class="sd">    the credentials were created with.</span>
 
 <span class="sd">    An example of how this can be used would be to set the</span>
 <span class="sd">    GSS_KRB5_CRED_NO_CI_FLAGS_X on a Kerberos credential. The OID string for</span>
-<span class="sd">    this flag is &#39;1.2.752.43.13.29&#39; and it requires no value to be set. This</span>
+<span class="sd">    this flag is '1.2.752.43.13.29' and it requires no value to be set. This</span>
 <span class="sd">    must be set before the SecurityContext was initialised with the</span>
 <span class="sd">    credentials.</span>
 
@@ -123,7 +123,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 </pre></div>
 

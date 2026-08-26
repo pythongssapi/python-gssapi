@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi.raw.ext_iov_mic &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi.raw.ext_iov_mic &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -82,11 +82,11 @@
 <div class="viewcode-block" id="get_mic_iov">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_iov_mic.get_mic_iov">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_mic_iov</span><span class="p">(</span>
-    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
-    <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;IOV&quot;</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">"SecurityContext"</span><span class="p">,</span>
+    <span class="n">message</span><span class="p">:</span> <span class="s2">"IOV"</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate MIC tokens for the given IOV message.</span>
+<span class="w">    </span><span class="sd">"""Generate MIC tokens for the given IOV message.</span>
 
 <span class="sd">    This method generates a MIC token for the given IOV message, and places it</span>
 <span class="sd">    in the :attr:`~gssapi.raw.ext_dce.IOVBufferType.mic_token` buffer in the</span>
@@ -108,18 +108,18 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="get_mic_iov_length">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_iov_mic.get_mic_iov_length">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_mic_iov_length</span><span class="p">(</span>
-    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
-    <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;IOV&quot;</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">"SecurityContext"</span><span class="p">,</span>
+    <span class="n">message</span><span class="p">:</span> <span class="s2">"IOV"</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allocate space for the MIC buffer in the given IOV message.</span>
+<span class="w">    </span><span class="sd">"""Allocate space for the MIC buffer in the given IOV message.</span>
 
 <span class="sd">    This method allocates space for the MIC token buffer</span>
 <span class="sd">    (:attr:`~gssapi.raw.ext_dce.IOVBufferType.mic_token`) in the given IOV</span>
@@ -141,18 +141,18 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="verify_mic_iov">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_iov_mic.verify_mic_iov">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">verify_mic_iov</span><span class="p">(</span>
-    <span class="n">context</span><span class="p">:</span> <span class="s2">&quot;SecurityContext&quot;</span><span class="p">,</span>
-    <span class="n">message</span><span class="p">:</span> <span class="s2">&quot;IOV&quot;</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s2">"SecurityContext"</span><span class="p">,</span>
+    <span class="n">message</span><span class="p">:</span> <span class="s2">"IOV"</span><span class="p">,</span>
     <span class="n">qop</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Verify that the MIC matches the data in the given IOV message.</span>
+<span class="w">    </span><span class="sd">"""Verify that the MIC matches the data in the given IOV message.</span>
 
 <span class="sd">    This method verifies that the MIC token in the MIC buffer</span>
 <span class="sd">    (:attr:`~gssapi.raw.ext_dce.IOVBufferType.mic_token`) match the data</span>
@@ -169,7 +169,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 </pre></div>
 

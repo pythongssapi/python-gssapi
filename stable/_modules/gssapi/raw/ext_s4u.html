@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gssapi.raw.ext_s4u &mdash; Python-GSSAPI 1.11.1 documentation</title>
+  <title>gssapi.raw.ext_s4u &mdash; Python-GSSAPI 1.12.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -13,7 +13,7 @@
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=c8897f99"></script>
+      <script src="../../../_static/documentation_options.js?v=fe8e256b"></script>
       <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -72,7 +72,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for gssapi.raw.ext_s4u</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Service4User Extension&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Service4User Extension"""</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">t</span>
 
 <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">TYPE_CHECKING</span><span class="p">:</span>
@@ -85,17 +85,17 @@
 <div class="viewcode-block" id="acquire_cred_impersonate_name">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_s4u.acquire_cred_impersonate_name">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">acquire_cred_impersonate_name</span><span class="p">(</span>
-    <span class="n">impersonator_cred</span><span class="p">:</span> <span class="s2">&quot;Creds&quot;</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
+    <span class="n">impersonator_cred</span><span class="p">:</span> <span class="s2">"Creds"</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span>
     <span class="n">lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">mechs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;OID&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;initiate&#39;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AcquireCredResult&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Acquire credentials by impersonating another name.</span>
+    <span class="n">mechs</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">"OID"</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'initiate'</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"AcquireCredResult"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Acquire credentials by impersonating another name.</span>
 
 <span class="sd">    This method is one of the ways to use S4U2Self.  It acquires credentials</span>
 <span class="sd">    by impersonating another name using a set of proxy credentials.  The</span>
-<span class="sd">    impersonator credentials must have a usage of &#39;both&#39; or &#39;initiate&#39;.</span>
+<span class="sd">    impersonator credentials must have a usage of 'both' or 'initiate'.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        impersonator_cred (~gssapi.raw.creds.Creds): the credentials with</span>
@@ -106,7 +106,7 @@
 <span class="sd">        mechs (~gssapi.raw.types.MechType): the desired mechanisms for which</span>
 <span class="sd">            the credentials should work (or None for the default set)</span>
 <span class="sd">        usage (str): the usage type for the credentials: may be</span>
-<span class="sd">            &#39;initiate&#39;, &#39;accept&#39;, or &#39;both&#39;</span>
+<span class="sd">            'initiate', 'accept', or 'both'</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        AcquireCredResult: the resulting credentials, the actual mechanisms</span>
@@ -115,27 +115,27 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="add_cred_impersonate_name">
 <a class="viewcode-back" href="../../../gssapi.raw.html#gssapi.raw.ext_s4u.add_cred_impersonate_name">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">add_cred_impersonate_name</span><span class="p">(</span>
-    <span class="n">input_cred</span><span class="p">:</span> <span class="s2">&quot;Creds&quot;</span><span class="p">,</span>
-    <span class="n">impersonator_cred</span><span class="p">:</span> <span class="s2">&quot;Creds&quot;</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span>
-    <span class="n">mech</span><span class="p">:</span> <span class="s2">&quot;OID&quot;</span><span class="p">,</span>
-    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;initiate&#39;</span><span class="p">,</span>
+    <span class="n">input_cred</span><span class="p">:</span> <span class="s2">"Creds"</span><span class="p">,</span>
+    <span class="n">impersonator_cred</span><span class="p">:</span> <span class="s2">"Creds"</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s2">"Name"</span><span class="p">,</span>
+    <span class="n">mech</span><span class="p">:</span> <span class="s2">"OID"</span><span class="p">,</span>
+    <span class="n">usage</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'initiate'</span><span class="p">,</span>
     <span class="n">init_lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">accept_lifetime</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;AddCredResult&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a credentials element to a credential by impersonating another name.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"AddCredResult"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Add a credentials element to a credential by impersonating another name.</span>
 
 <span class="sd">    This method is one of the ways to use S4U2Self.  It adds credentials</span>
 <span class="sd">    to the input credentials by impersonating another name using a set of</span>
 <span class="sd">    proxy credentials.  The impersonator credentials must have a usage of</span>
-<span class="sd">    &#39;both&#39; or &#39;initiate&#39;.</span>
+<span class="sd">    'both' or 'initiate'.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        input_cred (~gssapi.raw.creds.Creds): the set of credentials to which</span>
@@ -147,7 +147,7 @@
 <span class="sd">            this is both</span>
 <span class="sd">            singular and required, unlike acquireCredImpersonateName</span>
 <span class="sd">        usage (str): the usage type for the credentials: may be</span>
-<span class="sd">            &#39;initiate&#39;, &#39;accept&#39;, or &#39;both&#39;</span>
+<span class="sd">            'initiate', 'accept', or 'both'</span>
 <span class="sd">        init_lifetime (int): the lifetime, in seconds, for the credentials to</span>
 <span class="sd">            remain valid when using them to initiate security contexts (or None</span>
 <span class="sd">            for indefinite)</span>
@@ -162,7 +162,7 @@
 
 <span class="sd">    Raises:</span>
 <span class="sd">        ~gssapi.exceptions.GSSError</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 </pre></div>
 
