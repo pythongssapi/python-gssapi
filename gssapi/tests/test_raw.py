@@ -1309,6 +1309,83 @@ class TestBaseUtilities(_GSSAPIKerberosTestCase):
         self.assertEqual(acceptor_info.cfx_kd.ctx_key_type,
                          acceptor_info.cfx_kd.acceptor_subkey_type)
 
+    @ktu.gssapi_extension_test('localname', 'Local Name')
+    def test_localname(self):
+        base_name = gb.import_name(self.USER_PRINC,
+                                   gb.NameType.kerberos_principal)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+
+        local = gb.localname(canon_name, gb.MechType.kerberos)
+        self.assertIsInstance(local, bytes)
+        self.assertGreater(len(local), 0)
+
+    @ktu.gssapi_extension_test('localname', 'Local Name')
+    def test_localname_no_mech(self):
+        base_name = gb.import_name(self.USER_PRINC,
+                                   gb.NameType.kerberos_principal)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+
+        local = gb.localname(canon_name)
+        self.assertIsInstance(local, bytes)
+        self.assertGreater(len(local), 0)
+
+    @ktu.gssapi_extension_test('localname', 'Local Name')
+    def test_userok(self):
+        base_name = gb.import_name(self.USER_PRINC,
+                                   gb.NameType.kerberos_principal)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+
+        local = gb.localname(canon_name, gb.MechType.kerberos)
+        # The user should be authorized as their own local name
+        self.assertTrue(gb.userok(canon_name, local))
+
+        # A made-up username should not be authorized
+        self.assertFalse(gb.userok(canon_name, b'not_a_real_user_name'))
+
+    @ktu.gssapi_extension_test('localname', 'Local Name')
+    def test_userok_str(self):
+        base_name = gb.import_name(self.USER_PRINC,
+                                   gb.NameType.kerberos_principal)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+
+        local = gb.localname(canon_name, gb.MechType.kerberos)
+        # userok should also accept str input
+        self.assertTrue(gb.userok(canon_name, local.decode('UTF-8')))
+
+        # A made-up str username should not be authorized
+        self.assertFalse(gb.userok(canon_name, 'not_a_real_user_name'))
+
+    @ktu.gssapi_extension_test('localname', 'Local Name')
+    def test_authorize_localname(self):
+        base_name = gb.import_name(self.USER_PRINC,
+                                   gb.NameType.kerberos_principal)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+
+        local = gb.localname(canon_name, gb.MechType.kerberos)
+        local_name = gb.import_name(local, gb.NameType.user)
+        self.assertTrue(gb.authorize_localname(canon_name, local_name))
+
+    @ktu.gssapi_extension_test('localname', 'Local Name')
+    def test_authorize_localname_fails(self):
+        base_name = gb.import_name(self.USER_PRINC,
+                                   gb.NameType.kerberos_principal)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+
+        fake_local_name = gb.import_name(b'not_a_real_user_name',
+                                         gb.NameType.user)
+        self.assertRaises(gb.GSSError, gb.authorize_localname,
+                          canon_name, fake_local_name)
+
+    @ktu.gssapi_extension_test('pname_to_uid', 'pname_to_uid')
+    def test_pname_to_uid(self):
+        base_name = gb.import_name(self.USER_PRINC,
+                                   gb.NameType.kerberos_principal)
+        canon_name = gb.canonicalize_name(base_name, gb.MechType.kerberos)
+
+        uid = gb.pname_to_uid(canon_name, gb.MechType.kerberos)
+        self.assertIsInstance(uid, int)
+        self.assertGreaterEqual(uid, 0)
+
 
 class TestIntEnumFlagSet(unittest.TestCase):
     def test_create_from_int(self):
